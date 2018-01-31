@@ -2351,7 +2351,7 @@ namespace CTIToolkit
                 return OutputEnthalpy;
             }
 
-            // Begin bisection root search procedure from Numerical Recipes in BASIC, p 193
+            // Begin bisection root search procedure from Numerical Recipes in BASIC, p 193 ? version
             double trtbis = Tlower;
             double DT = (Tupper - Tlower);
             double tmid;
