@@ -221,10 +221,10 @@ namespace CTIToolkit
                     //    UnitsVolume = pszSISPVolume;
                     //    UnitsHumidity = pszSIHumidityRatio;
 
-                    if (data.IsAltitute)
-                    {
-                        data.BarometricPressure = UnitConverter.ConvertAltitudeToKilopascal(data.Altitude);
-                    }
+                    //if (data.IsAltitute)
+                    //{
+                    //    data.BarometricPressure = UnitConverter.ConvertAltitudeToKilopascal(data.Altitude);
+                    //}
 
                     data.TemperatureWetBulb = CalculationLibrary.CalculateTemperatureWetBulbSI(data.BarometricPressure, data.RelativeHumidity / 100, data.TemperatureDryBulb);
 
@@ -242,10 +242,10 @@ namespace CTIToolkit
                     //    UnitsHumidity = pszIPHumidityRatio;
 
 
-                    if (data.IsAltitute)
-                    {
-                        data.BarometricPressure = UnitConverter.ConvertAltitudeToPsi(data.Altitude);
-                    }
+                    //if (data.IsAltitute)
+                    //{
+                    //    data.BarometricPressure = UnitConverter.ConvertAltitudeToPsi(data.Altitude);
+                    //}
 
                     data.TemperatureWetBulb = CalculationLibrary.CalculateTemperatureWetBulbIP(data.BarometricPressure, data.RelativeHumidity / 100, data.TemperatureDryBulb);
                     //data.TemperatureWetBulb = CalculationLibrary.CalculateTemperatureWetBulbIP(data);
@@ -300,10 +300,10 @@ namespace CTIToolkit
                     //UnitsVolume = pszSISPVolume;
                     //UnitsHumidity = pszSIHumidityRatio;
 
-                    if (data.IsAltitute)
-                    {
-                        data.BarometricPressure = UnitConverter.ConvertAltitudeToKilopascal(data.Altitude);
-                    }
+                    //if (data.IsAltitute)
+                    //{
+                    //    data.BarometricPressure = UnitConverter.ConvertAltitudeToKilopascal(data.Altitude);
+                    //}
 
                     CalculationLibrary.EnthalpySI(1, data);
                     //CalculationLibrary.EnthalpySI(1, 
@@ -344,10 +344,10 @@ namespace CTIToolkit
                     //UnitsHumidity = pszIPHumidityRatio;
 
 
-                    if (data.IsAltitute)
-                    {
-                        data.BarometricPressure = UnitConverter.ConvertAltitudeToPsi(data.Altitude);
-                    }
+                    //if (data.IsAltitute)
+                    //{
+                    //    data.BarometricPressure = UnitConverter.ConvertAltitudeToPsi(data.Altitude);
+                    //}
 
                     CalculationLibrary.EnthalpyIP(1, data);
 
@@ -403,6 +403,8 @@ namespace CTIToolkit
             }
             else
             {
+                data.NameValueUnitsDataTable.DataTable.Clear();
+
                 //data.BarometricPressure = truncit(data.BarometricPressure, 5);
                 data.NameValueUnitsDataTable.AddRow("Barometric Pressure", data.BarometricPressure.ToString("F4"), data.Units.BarometricPressure);
                 data.NameValueUnitsDataTable.AddRow("Altitute above MSL", data.Altitude.ToString(), data.Units.Foot);

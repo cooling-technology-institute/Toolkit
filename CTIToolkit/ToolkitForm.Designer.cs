@@ -50,7 +50,7 @@
             this.Psychrometrics_Altitude_Value = new System.Windows.Forms.TextBox();
             this.Psychrometrics_DBT_Value = new System.Windows.Forms.TextBox();
             this.Psychrometrics_WBT_Value = new System.Windows.Forms.TextBox();
-            this.TemperatureDryBulbLabel = new System.Windows.Forms.Label();
+            this.TemperatureDryBlubLabel = new System.Windows.Forms.Label();
             this.TemperatureWetBlubLabel = new System.Windows.Forms.Label();
             this.Merkel = new System.Windows.Forms.TabPage();
             this.DemandCurve = new System.Windows.Forms.TabPage();
@@ -183,7 +183,7 @@
             this.InputPropertiesGroupBox.Controls.Add(this.Psychrometrics_Altitude_Value);
             this.InputPropertiesGroupBox.Controls.Add(this.Psychrometrics_DBT_Value);
             this.InputPropertiesGroupBox.Controls.Add(this.Psychrometrics_WBT_Value);
-            this.InputPropertiesGroupBox.Controls.Add(this.TemperatureDryBulbLabel);
+            this.InputPropertiesGroupBox.Controls.Add(this.TemperatureDryBlubLabel);
             this.InputPropertiesGroupBox.Controls.Add(this.TemperatureWetBlubLabel);
             this.InputPropertiesGroupBox.Location = new System.Drawing.Point(7, 17);
             this.InputPropertiesGroupBox.Name = "InputPropertiesGroupBox";
@@ -321,12 +321,12 @@
             // 
             // TemperatureDryBulbLabel
             // 
-            this.TemperatureDryBulbLabel.Location = new System.Drawing.Point(19, 65);
-            this.TemperatureDryBulbLabel.Name = "TemperatureDryBulbLabel";
-            this.TemperatureDryBulbLabel.Size = new System.Drawing.Size(113, 13);
-            this.TemperatureDryBulbLabel.TabIndex = 1;
-            this.TemperatureDryBulbLabel.Text = "Temperature Dry Bulb:";
-            this.TemperatureDryBulbLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TemperatureDryBlubLabel.Location = new System.Drawing.Point(19, 65);
+            this.TemperatureDryBlubLabel.Name = "TemperatureDryBulbLabel";
+            this.TemperatureDryBlubLabel.Size = new System.Drawing.Size(113, 13);
+            this.TemperatureDryBlubLabel.TabIndex = 1;
+            this.TemperatureDryBlubLabel.Text = "Temperature Dry Bulb:";
+            this.TemperatureDryBlubLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // TemperatureWetBlubLabel
             // 
@@ -497,7 +497,7 @@
         private System.Windows.Forms.TextBox Psychrometrics_Altitude_Value;
         private System.Windows.Forms.TextBox Psychrometrics_DBT_Value;
         private System.Windows.Forms.TextBox Psychrometrics_WBT_Value;
-        private System.Windows.Forms.Label TemperatureDryBulbLabel;
+        private System.Windows.Forms.Label TemperatureDryBlubLabel;
         private System.Windows.Forms.Label TemperatureWetBlubLabel;
         private System.Windows.Forms.Button PsychrometricsCalculate;
         private System.Windows.Forms.TabPage Merkel;

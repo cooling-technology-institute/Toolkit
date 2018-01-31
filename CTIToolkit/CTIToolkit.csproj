@@ -49,6 +49,7 @@
     <Compile Include="NumberTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PsychrometricsInputData.cs" />
     <Compile Include="PsychrometricsData.cs" />
     <Compile Include="Units.cs" />
     <Compile Include="NameValueUnitsDataTable.cs" />
