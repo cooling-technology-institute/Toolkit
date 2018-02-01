@@ -81,9 +81,6 @@ namespace CTIToolkit
         public const double RelativeHumidityMinimum = 0.0;
         public const double RelativeHumidityMaximum = 100.0;
         public const double RelativeHumidityDefault = 42.38;
-        public const double RelativeHumidityDefaultMetric = 42.38;
-        public const double RelativeHumidityMinimumMetric = 0.0;
-        public const double RelativeHumidityMaximumMetric = 100.0;
 
         public const double EnthalpyMinimum = 0.0;
         public const double EnthalpyMaximum = 2758;
@@ -92,10 +89,17 @@ namespace CTIToolkit
 
         public const double BarometricPressureMinimum = 5.0;
         public const double BarometricPressureMaximum = 31.5;
+        public const double BarometricPressureDefault = 29.921;
+        public const double BarometricPressureMinimumDemo = 29.0;
+        public const double BarometricPressureMaximumDemo = 30.0;
+        public const double BarometricPressureDefaultDemo = 29.921;
+
         public const double BarometricPressureMinimumMetric = 16.932;
         public const double BarometricPressureMaximumMetric = 103.285;
-        public const double BarometricPressureDefault = 43.46;
-        public const double BarometricPressureDefaultMetric = 43.46;
+        public const double BarometricPressureDefaultMetric = 101.325;
+        public const double BarometricPressureMinimumMetricDemo = 98.0;
+        public const double BarometricPressureMaximumMetricDemo = 102.0;
+        public const double BarometricPressureDefaultMetricDemo = 101.325;
     }
 
     public class DataValue
@@ -205,23 +209,68 @@ namespace CTIToolkit
 
         private void SetValues()
         {
+            // convert current values between metric and standard
+            //if ((!TPropPageBase::metricflag) &&
+            //    (m_strPsychPressureUnits != L_FEET) &&
+            //    (m_strPsychPressureUnits != L_HG))
+            //{
+            //    // Avoid conversion problems at the limits
+            //    if (m_dblPsychWBT == WBT_MAX_SI)
+            //        m_dblPsychWBT = WBT_MAX_IP;
+            //    else if (m_dblPsychWBT == WBT_MIN_SI)
+            //        m_dblPsychWBT = WBT_MIN_IP;
+            //    else
+            //        m_dblPsychWBT = truncit(fnCelcToFar(m_dblPsychWBT), 2);
+
+            //    if (m_dblPsychDBT == DBT_MAX_SI)
+            //        m_dblPsychDBT = DBT_MAX_IP;
+            //    else if (m_dblPsychDBT == DBT_MIN_SI)
+            //        m_dblPsychDBT = DBT_MIN_IP;
+            //    else
+            //        m_dblPsychDBT = truncit(fnCelcToFar(m_dblPsychDBT), 2);
+
+            //    m_dblAltitude = truncit(fnMetersToFeet(m_dblAltitude), 4);
+            //}
+            //else if ((TPropPageBase::metricflag) &&
+            //    (m_strPsychPressureUnits != L_METERS) &&
+            //    (m_strPsychPressureUnits != L_KPA))
+            //{
+            //    if (m_dblPsychWBT == WBT_MAX_IP)
+            //        m_dblPsychWBT = WBT_MAX_SI;
+            //    else if (m_dblPsychWBT == WBT_MIN_IP)
+            //        m_dblPsychWBT = WBT_MIN_SI;
+            //    else
+            //        m_dblPsychWBT = truncit(fnFarToCelc(m_dblPsychWBT), 2);
+
+            //    if (m_dblPsychDBT == DBT_MAX_IP)
+            //        m_dblPsychDBT = DBT_MAX_SI;
+            //    else if (m_dblPsychDBT == DBT_MIN_IP)
+            //        m_dblPsychDBT = DBT_MIN_SI;
+            //    else
+            //        m_dblPsychDBT = truncit(fnFarToCelc(m_dblPsychDBT), 2);
+
+            //    m_dblAltitude = truncit(fnFeetToMeters(m_dblAltitude), 4);
+            //}
+
+            RelativeHumitityDataValue = new DataValue(DefaultValues.RelativeHumidityDefault, DefaultValues.RelativeHumidityMinimum, DefaultValues.RelativeHumidityMaximum, "Relative Humidity");
+
             if (IsMetric)
             {
                 if (IsDemo)
                 {
                     WetBlubTemperatureDataValue = new DataValue(DefaultValues.WetBulbTemperatureDefaultMetricDemo, DefaultValues.BulbTemperatureMinimumDemo, DefaultValues.BulbTemperatureMaximumDemo, "Wet Bulb Temperature");
                     DryBlubTemperatureDataValue = new DataValue(DefaultValues.DryBulbTemperatureDefaultMetricDemo, DefaultValues.BulbTemperatureMinimumMetricDemo, DefaultValues.BulbTemperatureMaximumMetricDemo, "Dry Bulb Temperature");
+                    BarometricPressureDataValue = new DataValue(DefaultValues.BarometricPressureDefaultMetricDemo, DefaultValues.BarometricPressureMinimumMetricDemo, DefaultValues.BarometricPressureMaximumMetricDemo, "Barometric Pressure");
                 }
                 else
                 {
                     WetBlubTemperatureDataValue = new DataValue(DefaultValues.WetBulbTemperatureDefaultMetric, DefaultValues.BulbTemperatureMinimumMetric, DefaultValues.BulbTemperatureMaximumMetric, "Wet Bulb Temperature");
                     DryBlubTemperatureDataValue = new DataValue(DefaultValues.DryBulbTemperatureDefaultMetric, DefaultValues.BulbTemperatureMinimumMetric, DefaultValues.BulbTemperatureMaximumMetric, "Dry Bulb Temperature");
+                    BarometricPressureDataValue = new DataValue(DefaultValues.BarometricPressureDefaultMetric, DefaultValues.BarometricPressureMinimumMetric, DefaultValues.BarometricPressureMaximumMetric, "Barometric Pressure");
                 }
 
                 EnthalpyDataValue = new DataValue(DefaultValues.EnthalpyDefaultMetric, DefaultValues.EnthalpyMinimum, DefaultValues.EnthalpyMaximum, "Enthalpy");
                 AltitudeDataValue = new DataValue(DefaultValues.AltitudeDefaultMetric, DefaultValues.AltitudeMinimumMetric, DefaultValues.AltitudeMaximumMetric, "Altitude");
-                BarometricPressureDataValue = new DataValue(DefaultValues.BarometricPressureDefaultMetric, DefaultValues.BarometricPressureMinimumMetric, DefaultValues.BarometricPressureMaximumMetric, "Barometric Pressure");
-                RelativeHumitityDataValue = new DataValue(DefaultValues.RelativeHumidityDefaultMetric, DefaultValues.RelativeHumidityMinimumMetric, DefaultValues.RelativeHumidityMaximumMetric, "Relative Humidity");
             }
             else
             {
@@ -229,18 +278,18 @@ namespace CTIToolkit
                 {
                     WetBlubTemperatureDataValue = new DataValue(DefaultValues.WetBulbTemperatureDefaultDemo, DefaultValues.BulbTemperatureMinimumDemo, DefaultValues.BulbTemperatureMaximumDemo, "Wet Bulb Temperature");
                     DryBlubTemperatureDataValue = new DataValue(DefaultValues.DryBulbTemperatureDefaultDemo, DefaultValues.BulbTemperatureMinimumDemo, DefaultValues.BulbTemperatureMaximumDemo, "Dry Bulb Temperature");
+                    BarometricPressureDataValue = new DataValue(DefaultValues.BarometricPressureDefaultDemo, DefaultValues.BarometricPressureMinimumDemo, DefaultValues.BarometricPressureMaximumDemo, "Barometric Pressure");
                 }
                 else
                 {
                     WetBlubTemperatureDataValue = new DataValue(DefaultValues.WetBulbTemperatureDefault, DefaultValues.BulbTemperatureMinimum, DefaultValues.BulbTemperatureMaximum, "Wet Bulb Temperature");
                     DryBlubTemperatureDataValue = new DataValue(DefaultValues.DryBulbTemperatureDefault, DefaultValues.BulbTemperatureMinimum, DefaultValues.BulbTemperatureMaximum, "Dry Bulb Temperature");
+                    BarometricPressureDataValue = new DataValue(DefaultValues.BarometricPressureDefault, DefaultValues.BarometricPressureMinimum, DefaultValues.BarometricPressureMaximum, "Barometric Pressure");
                 }
 
                 EnthalpyDataValue = new DataValue(DefaultValues.EnthalpyDefault, DefaultValues.EnthalpyMinimum, DefaultValues.EnthalpyMaximum, "Enthalpy");
                 AltitudeDataValue = new DataValue(DefaultValues.AltitudeDefault, DefaultValues.AltitudeMinimum, DefaultValues.AltitudeMaximum, "Altitude");
-                BarometricPressureDataValue = new DataValue(DefaultValues.BarometricPressureDefault, DefaultValues.BarometricPressureMinimum, DefaultValues.BarometricPressureMaximum, "Barometric Pressure");
-                RelativeHumitityDataValue = new DataValue(DefaultValues.RelativeHumidityDefault, DefaultValues.RelativeHumidityMinimum, DefaultValues.RelativeHumidityMaximum, "Relative Humidity");
             }
         }
-   }
+    }
 }

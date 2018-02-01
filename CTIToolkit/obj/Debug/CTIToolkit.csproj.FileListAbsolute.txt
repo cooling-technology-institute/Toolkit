@@ -1,1 +1,8 @@
 C:\CTI\CTIToolkit\CTIToolkit\bin\Debug\CTIToolkit.exe.config
+C:\CTI\CTIToolkit\CTIToolkit\obj\Debug\CTIToolkit.ToolkitForm.resources
+C:\CTI\CTIToolkit\CTIToolkit\obj\Debug\CTIToolkit.Properties.Resources.resources
+C:\CTI\CTIToolkit\CTIToolkit\obj\Debug\CTIToolkit.csproj.GenerateResource.Cache
+C:\CTI\CTIToolkit\CTIToolkit\bin\Debug\CTIToolkit.exe
+C:\CTI\CTIToolkit\CTIToolkit\bin\Debug\CTIToolkit.pdb
+C:\CTI\CTIToolkit\CTIToolkit\obj\Debug\CTIToolkit.exe
+C:\CTI\CTIToolkit\CTIToolkit\obj\Debug\CTIToolkit.pdb

@@ -1698,18 +1698,8 @@ namespace CTIToolkit
         //                       double Density,
         //                       double DEWPoint
         //                       )
+        // overwritten TemperatureWetBulb TemperatureDryBulb
         public static double EnthalpySI(int sat, PsychrometricsData data)
-                               //double p,
-                               //double RootEnthalpy,
-                               //ref double OutputEnthalpy,
-                               //ref double TWB,
-                               //ref double TDB,
-                               //double HumidityRatio,
-                               //double RelativeHumidity,
-                               //double SpecificVolume,
-                               //double Density,
-                               //double DEWPoint
-                               //)
         {
             double OutputEnthalpy = 0.0;
 
@@ -1721,10 +1711,8 @@ namespace CTIToolkit
             // High and low values are respectively:
             double Tlower = -18.0;
             double Tupper = 93.0;
-            double Hlower = 0.0;
-            double Hupper = 0.0;
             double hmid = 0.0;
-            double Enthalpy = 0.0;
+            double RootEnthalpy = data.Enthalpy;
 
             // Calculate low value and compare to program and tolerance limits
             data.TemperatureWetBulb = Tlower;
@@ -1732,38 +1720,41 @@ namespace CTIToolkit
             {
                 data.TemperatureDryBulb = data.TemperatureWetBulb;
             }
+
+            data.Enthalpy = 0.0;
+
             CalculatePropertiesSI(data);
 
-            if (Math.Abs(Hlower - data.Enthalpy) <= Htolerance)
+            if (Math.Abs(data.Enthalpy - RootEnthalpy) <= Htolerance)
             {
-                OutputEnthalpy = 0.0;
-                return OutputEnthalpy;
+                return 0.0;
             }
 
-            if (data.Enthalpy < Hlower)
+            if (RootEnthalpy < data.Enthalpy)
             {
-                OutputEnthalpy = -999.0; // DDP ref of range		
-                return OutputEnthalpy;
+                return -999.0; // DDP ref of range	
             }
 
             // Calculate high value and compare to program and tolerance limits
             data.TemperatureWetBulb = Tupper;
+
             if (sat == 1)
             {
                 data.TemperatureDryBulb = data.TemperatureWetBulb;
             }
+
+            data.Enthalpy = 0.0;
+
             CalculatePropertiesSI(data);
 
-            if (Math.Abs(Hupper - data.Enthalpy) <= Htolerance)
+            if (Math.Abs(data.Enthalpy - RootEnthalpy) <= Htolerance)
             {
-                OutputEnthalpy = 0.0; 
-                return OutputEnthalpy;
+                return 0.0;
             }
 
-            if (data.Enthalpy > Hupper)
+            if (RootEnthalpy > data.Enthalpy)
             {
-                OutputEnthalpy = -999.0; // DDP ref of range
-                return OutputEnthalpy;
+                return -999.0; // DDP ref of range
             }
 
             // Begin bisection root search procedure from Numerical Recipes in BASIC, p 193
@@ -1774,23 +1765,33 @@ namespace CTIToolkit
             {
                 DT = DT / 2.0;
                 tmid = trtbis + DT;
+
+                data.TemperatureWetBulb = tmid;
+
                 if (sat == 1)
+                {
                     data.TemperatureDryBulb = tmid;
+                }
+
                 CalculatePropertiesSI(data);
 
-                hmid = data.Enthalpy - Enthalpy;
+                hmid = RootEnthalpy - data.Enthalpy;
+
                 if (hmid >= 0.0)
+                {
                     trtbis = tmid;
+                }
             }
             while ((Math.Abs(DT) >= temptolerance) && (hmid != 0.0));
 
             data.TemperatureWetBulb = tmid;
+
             if (sat == 1)
             {
                 data.TemperatureDryBulb = tmid;
             }
 
-            OutputEnthalpy = Enthalpy;
+            OutputEnthalpy = data.Enthalpy;
             return OutputEnthalpy;
         }
 

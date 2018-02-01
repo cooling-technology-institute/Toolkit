@@ -17,34 +17,44 @@ namespace CTIToolkit
             PsychrometricsInputData = new PsychrometricsInputData();
             // read register for serial number and set IsDemo
             IsDemo = false;
+            CalculatePsychrometrics();
         }
 
         // wet bulb and dry bulb
         private void Psychrometrics_WBT_DBT_CheckedChanged(object sender, EventArgs e)
         {
-            PsychrometricsInputData.CalculationType = CalculationType.Psychrometrics_WBT_DBT;
+            if(Psychrometrics_WBT_DBT.Checked)
+            {
+                PsychrometricsInputData.CalculationType = CalculationType.Psychrometrics_WBT_DBT;
 
-            SwitchCalculation();
+                SwitchCalculation();
 
-            CalculatePsychrometrics();
+                CalculatePsychrometrics();
+            }
         }
 
         private void Psychrometrics_DBT_RH_CheckedChanged(object sender, EventArgs e)
         {
-            PsychrometricsInputData.CalculationType = CalculationType.Psychrometrics_DBT_RH;
+            if (Psychrometrics_DBT_RH.Checked)
+            {
+                PsychrometricsInputData.CalculationType = CalculationType.Psychrometrics_DBT_RH;
 
-            SwitchCalculation();
+                SwitchCalculation();
 
-            CalculatePsychrometrics();
+                CalculatePsychrometrics();
+            }
         }
 
         private void Psychrometrics_Enthalpy_CheckedChanged(object sender, EventArgs e)
         {
-            PsychrometricsInputData.CalculationType = CalculationType.Psychrometrics_Enthalpy;
+            if (Psychrometrics_Enthalpy.Checked)
+            {
+                PsychrometricsInputData.CalculationType = CalculationType.Psychrometrics_Enthalpy;
 
-            SwitchCalculation();
+                SwitchCalculation();
 
-            CalculatePsychrometrics();
+                CalculatePsychrometrics();
+            }
         }
 
         private void PsychrometricsCalculate_Click(object sender, EventArgs e)
@@ -181,12 +191,20 @@ namespace CTIToolkit
 
         private void Metric_CheckedChanged(object sender, EventArgs e)
         {
-            SwitchStandardMetric();
+            if(Metric.Checked)
+            {
+                SwitchStandardMetric();
+                CalculatePsychrometrics();
+            }
         }
 
         private void Standard_CheckedChanged(object sender, EventArgs e)
         {
-            SwitchStandardMetric();
+            if (Standard.Checked)
+            {
+                SwitchStandardMetric();
+                CalculatePsychrometrics();
+            }
         }
 
         private void SwitchStandardMetric()
@@ -253,12 +271,22 @@ namespace CTIToolkit
 
         private void PyschmetricsAltituteRadio_CheckedChanged(object sender, EventArgs e)
         {
-            SwitchAltitutePressure();
+            if(PyschmetricsAltituteRadio.Checked)
+            {
+                SwitchAltitutePressure();
+
+                CalculatePsychrometrics();
+            }
         }
 
         private void PyschmetricsPressureRadio_CheckedChanged(object sender, EventArgs e)
         {
-            SwitchAltitutePressure();
+            if (PyschmetricsPressureRadio.Checked)
+            {
+                SwitchAltitutePressure();
+
+                CalculatePsychrometrics();
+            }
         }
 
         private void SwitchAltitutePressure()

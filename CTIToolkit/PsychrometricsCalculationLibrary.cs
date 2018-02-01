@@ -105,109 +105,6 @@ namespace CTIToolkit
 
         public static DataTable Psychrometrics_DBT_RH_Calculation(PsychrometricsData data)
         {
-            //if (!TPropPageBase::metricflag)
-            //{
-            //    p = Altitude2PSI(m_dblAltitude);
-            //    IPWBsearch(p, TWB / 100, TDB, TWB);
-            //    CalcIPProperties(p, TWB, TDB, HumidRatio, RelHumid, Enthalpy, SpVolume, Density, DEWPoint);
-            //    UnitsTemperature = pszIPTemp;
-            //    UnitsEnthalpy = pszIPEnthrapy;
-            //    UnitsDensity = pszIPDensity;
-            //    UnitsVolume = pszIPSPVolume;
-            //    UnitsHumidity = pszIPHumidityRatio;
-            //}
-            //else
-            //{
-            //    p = Altitude2KPA(m_dblAltitude);
-            //    SIWBsearch(p, TWB / 100, TDB, TWB);
-            //    CalcSIProperties(p, TWB, TDB, HumidRatio, RelHumid, Enthalpy, SpVolume, Density, DEWPoint);
-            //    UnitsTemperature = pszSITemp;
-            //    UnitsEnthalpy = pszSIEnthrapy;
-            //    UnitsDensity = pszSIDensity;
-            //    UnitsVolume = pszSISPVolume;
-            //    UnitsHumidity = pszSIHumidityRatio;
-            //}
-
-            //RelHumid = m_dblRelHumidity;
-
-            //if ((RelHumid < 0) || (Enthalpy < 0) || (SpVolume < 0) || (HumidRatio < 0))
-            //{
-            //    AfxMessageBox("Thermodynamically impossible combination of RH & DBT", MB_ICONEXCLAMATION);
-            //}
-            //else
-            //{
-            //    int x = 0;
-            //    if (!TPropPageBase::metricflag)
-            //        strTemp.Format("%.4f", calcPressureF(p));
-            //    else
-            //        strTemp.Format("%.4f", p);
-            //    m_wndPsychResults.AddItem(x, 0, "Barometric Pressure");
-            //    m_wndPsychResults.AddItem(x, 1, strTemp);
-            //    if (!TPropPageBase::metricflag)
-            //    {
-            //        m_wndPsychResults.AddItem(x++, 2, L_HG);
-            //    }
-            //    else
-            //    {
-            //        m_wndPsychResults.AddItem(x++, 2, L_KPA);
-            //    }
-
-            //    strTemp.Format("%.2f", m_dblAltitude);
-            //    m_wndPsychResults.AddItem(x, 0, "Altitude above MSL");
-            //    m_wndPsychResults.AddItem(x, 1, strTemp);
-            //    if (!TPropPageBase::metricflag)
-            //    {
-            //        m_wndPsychResults.AddItem(x++, 2, L_FEET);
-            //    }
-            //    else
-            //    {
-            //        m_wndPsychResults.AddItem(x++, 2, L_METERS);
-            //    }
-
-            //    strTemp.Format("%.2f", TDB);
-            //    m_wndPsychResults.AddItem(x, 0, "Dry Bulb Temperature");
-            //    m_wndPsychResults.AddItem(x, 1, strTemp);
-            //    m_wndPsychResults.AddItem(x++, 2, UnitsTemperature);
-
-            //    strTemp.Format("%.2f", TWB);
-            //    m_wndPsychResults.AddItem(x, 0, "Wet Bulb Temperature");
-            //    m_wndPsychResults.AddItem(x, 1, strTemp);
-            //    m_wndPsychResults.AddItem(x++, 2, UnitsTemperature);
-
-            //    strTemp.Format("%.4f", Enthalpy);
-            //    m_wndPsychResults.AddItem(x, 0, "Enthalpy");
-            //    m_wndPsychResults.AddItem(x, 1, strTemp);
-            //    m_wndPsychResults.AddItem(x++, 2, UnitsEnthalpy);
-
-            //    strTemp.Format("%.2f", DEWPoint);
-            //    m_wndPsychResults.AddItem(x, 0, "Dew Point");
-            //    m_wndPsychResults.AddItem(x, 1, strTemp);
-            //    m_wndPsychResults.AddItem(x++, 2, UnitsTemperature);
-
-            //    strTemp.Format("%.2f", RelHumid);
-            //    m_wndPsychResults.AddItem(x, 0, "Relative Humidity");
-            //    m_wndPsychResults.AddItem(x, 1, strTemp);
-            //    m_wndPsychResults.AddItem(x++, 2, pszPercent);
-
-            //    strTemp.Format("%.5f", Density);
-            //    m_wndPsychResults.AddItem(x, 0, "Density");
-            //    m_wndPsychResults.AddItem(x, 1, strTemp);
-            //    m_wndPsychResults.AddItem(x++, 2, UnitsDensity);
-
-            //    strTemp.Format("%.5f", SpVolume);
-            //    m_wndPsychResults.AddItem(x, 0, "Specific Volume");
-            //    m_wndPsychResults.AddItem(x, 1, strTemp);
-            //    m_wndPsychResults.AddItem(x++, 2, UnitsVolume);
-
-            //    strTemp.Format("%.5f", HumidRatio);
-            //    m_wndPsychResults.AddItem(x, 0, "Humidity Ratio");
-            //    m_wndPsychResults.AddItem(x, 1, strTemp);
-            //    m_wndPsychResults.AddItem(x++, 2, UnitsHumidity);
-
-            //    m_wndPsychResults.SetColumnWidth(0, LVSCW_AUTOSIZE);
-            //    m_wndPsychResults.SetColumnWidth(1, LVSCW_AUTOSIZE);
-            //    m_wndPsychResults.SetColumnWidth(2, LVSCW_AUTOSIZE);
-            //}
             try
             {
                 if (data.IsMetric)
@@ -221,10 +118,10 @@ namespace CTIToolkit
                     //    UnitsVolume = pszSISPVolume;
                     //    UnitsHumidity = pszSIHumidityRatio;
 
-                    //if (data.IsAltitute)
-                    //{
-                    //    data.BarometricPressure = UnitConverter.ConvertAltitudeToKilopascal(data.Altitude);
-                    //}
+                    if (data.IsAltitute)
+                    {
+                        data.BarometricPressure = UnitConverter.ConvertAltitudeToKilopascal(data.Altitude);
+                    }
 
                     data.TemperatureWetBulb = CalculationLibrary.CalculateTemperatureWetBulbSI(data.BarometricPressure, data.RelativeHumidity / 100, data.TemperatureDryBulb);
 
@@ -242,10 +139,10 @@ namespace CTIToolkit
                     //    UnitsHumidity = pszIPHumidityRatio;
 
 
-                    //if (data.IsAltitute)
-                    //{
-                    //    data.BarometricPressure = UnitConverter.ConvertAltitudeToPsi(data.Altitude);
-                    //}
+                    if (data.IsAltitute)
+                    {
+                        data.BarometricPressure = UnitConverter.ConvertAltitudeToPsi(data.Altitude);
+                    }
 
                     data.TemperatureWetBulb = CalculationLibrary.CalculateTemperatureWetBulbIP(data.BarometricPressure, data.RelativeHumidity / 100, data.TemperatureDryBulb);
                     //data.TemperatureWetBulb = CalculationLibrary.CalculateTemperatureWetBulbIP(data);
@@ -265,12 +162,10 @@ namespace CTIToolkit
 
         public static DataTable Psychrometrics_Enthalpy_Calculation(PsychrometricsData data)
         {
-            data.Enthalpy = 43.46;
             data.SpecificVolume = -999;
             data.Density = -999;
             data.DewPoint = -999;
             data.TemperatureDryBulb = data.Enthalpy;
-            data.TemperatureWetBulb = 80.0;
 
             try
             {
@@ -300,10 +195,10 @@ namespace CTIToolkit
                     //UnitsVolume = pszSISPVolume;
                     //UnitsHumidity = pszSIHumidityRatio;
 
-                    //if (data.IsAltitute)
-                    //{
-                    //    data.BarometricPressure = UnitConverter.ConvertAltitudeToKilopascal(data.Altitude);
-                    //}
+                    if (data.IsAltitute)
+                    {
+                        data.BarometricPressure = UnitConverter.ConvertAltitudeToKilopascal(data.Altitude);
+                    }
 
                     CalculationLibrary.EnthalpySI(1, data);
                     //CalculationLibrary.EnthalpySI(1, 
@@ -344,10 +239,10 @@ namespace CTIToolkit
                     //UnitsHumidity = pszIPHumidityRatio;
 
 
-                    //if (data.IsAltitute)
-                    //{
-                    //    data.BarometricPressure = UnitConverter.ConvertAltitudeToPsi(data.Altitude);
-                    //}
+                    if (data.IsAltitute)
+                    {
+                        data.BarometricPressure = UnitConverter.ConvertAltitudeToPsi(data.Altitude);
+                    }
 
                     CalculationLibrary.EnthalpyIP(1, data);
 
