@@ -41,9 +41,9 @@ namespace CTIToolkit
         public Units Units { get; set; }
         public bool IsDemo { get; set; }
         public bool IsMetric { get; set; }
-        public bool IsAltitute { get; set; }
+        public bool IsElevation { get; set; }
 
-        //public PsychrometricsData(bool isMetric, bool isAltitute, bool isDemo = false)
+        //public PsychrometricsData(bool isMetric, bool isElevation, bool isDemo = false)
         public PsychrometricsData()
         {
             NameValueUnitsDataTable = new NameValueUnitsDataTable();
@@ -56,7 +56,7 @@ namespace CTIToolkit
             DewPoint = 0.0;
             IsDemo = false;
             IsMetric = false;
-            IsAltitute = true;
+            IsElevation = true;
             SetUnits();
         }
 
@@ -78,9 +78,9 @@ namespace CTIToolkit
             SetUnits();
         }
 
-        public void SetAltitute(bool value)
+        public void SetElevation(bool value)
         {
-            IsAltitute = value;
+            IsElevation = value;
         }
 
         public void SetDemo(bool value)

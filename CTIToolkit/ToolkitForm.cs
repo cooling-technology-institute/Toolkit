@@ -14,7 +14,11 @@ namespace CTIToolkit
         public ToolkitForm()
         {
             InitializeComponent();
+
             PsychrometricsInputData = new PsychrometricsInputData();
+
+            SwitchCalculation();
+
             // read register for serial number and set IsDemo
             IsDemo = false;
             CalculatePsychrometrics();
@@ -82,7 +86,7 @@ namespace CTIToolkit
                 //double outputValue = 0.0;
                 string message = string.Empty;
 
-                if (PyschmetricsAltituteRadio.Checked)
+                if (PyschmetricsElevationRadio.Checked)
                 {
                     if (!PsychrometricsInputData.AltitudeDataValue.UpdateValue(Psychrometrics_Altitude_Value.Text, out message))
                     {
@@ -139,7 +143,7 @@ namespace CTIToolkit
                     }
                 }
 
-                if (PyschmetricsAltituteRadio.Checked)
+                if (PyschmetricsElevationRadio.Checked)
                 {
                     PsychrometricsData.Altitude = PsychrometricsInputData.AltitudeDataValue.Current;
                 }
@@ -148,7 +152,7 @@ namespace CTIToolkit
                     PsychrometricsData.BarometricPressure = PsychrometricsInputData.BarometricPressureDataValue.Current;
                 }
 
-                PsychrometricsData.IsAltitute = PyschmetricsAltituteRadio.Checked;
+                PsychrometricsData.IsElevation = PyschmetricsElevationRadio.Checked;
                 PsychrometricsData.SetMetric(Metric.Checked);
 
                 if (Psychrometrics_WBT_DBT.Checked)
@@ -229,13 +233,13 @@ namespace CTIToolkit
                     PsychrometricsTemperatureDryBlubUnits.Text = "°C";
                 }
 
-                if (PyschmetricsAltituteRadio.Checked)
+                if (PyschmetricsElevationRadio.Checked)
                 {
-                    PsychrometricsAltitutePressureLabel2.Text = "m";
+                    PsychrometricsElevationPressureLabel2.Text = "m";
                 }
                 else
                 {
-                    PsychrometricsAltitutePressureLabel2.Text = "kPa";
+                    PsychrometricsElevationPressureLabel2.Text = "kPa";
                 }
             }
             else
@@ -258,22 +262,22 @@ namespace CTIToolkit
                     PsychrometricsTemperatureDryBlubUnits.Text = "°F";
                 }
 
-                if (PyschmetricsAltituteRadio.Checked)
+                if (PyschmetricsElevationRadio.Checked)
                 {
-                    PsychrometricsAltitutePressureLabel2.Text = "ft";
+                    PsychrometricsElevationPressureLabel2.Text = "ft";
                 }
                 else
                 {
-                    PsychrometricsAltitutePressureLabel2.Text = "\"Hg";
+                    PsychrometricsElevationPressureLabel2.Text = "\"Hg";
                 }
             }
         }
 
-        private void PyschmetricsAltituteRadio_CheckedChanged(object sender, EventArgs e)
+        private void PyschmetricsElevationRadio_CheckedChanged(object sender, EventArgs e)
         {
-            if(PyschmetricsAltituteRadio.Checked)
+            if(PyschmetricsElevationRadio.Checked)
             {
-                SwitchAltitutePressure();
+                SwitchElevationPressure();
 
                 CalculatePsychrometrics();
             }
@@ -283,46 +287,48 @@ namespace CTIToolkit
         {
             if (PyschmetricsPressureRadio.Checked)
             {
-                SwitchAltitutePressure();
+                SwitchElevationPressure();
 
                 CalculatePsychrometrics();
             }
         }
 
-        private void SwitchAltitutePressure()
+        private void SwitchElevationPressure()
         {
-            //PsychrometricsData.SetAltitute(PyschmetricsAltituteRadio.Checked);
+            //PsychrometricsData.SetElevation(PyschmetricsElevationRadio.Checked);
 
-            if (PyschmetricsAltituteRadio.Checked)
+            if (PyschmetricsElevationRadio.Checked)
             {
                 Psychrometrics_Altitude_Value.Text = PsychrometricsInputData.AltitudeDataValue.InputValue;
-                PsychrometricsAltitutePressureLabel1.Text = "Altitute:";
+                PsychrometricsElevationPressureLabel1.Text = "Elevation:";
                 if (Metric.Checked)
                 {
-                    PsychrometricsAltitutePressureLabel2.Text = "m";
+                    PsychrometricsElevationPressureLabel2.Text = "m";
                 }
                 else
                 {
-                    PsychrometricsAltitutePressureLabel2.Text = "ft";
+                    PsychrometricsElevationPressureLabel2.Text = "ft";
                 }
             }
             else
             {
                 Psychrometrics_Altitude_Value.Text = PsychrometricsInputData.BarometricPressureDataValue.InputValue;
-                PsychrometricsAltitutePressureLabel1.Text = "Barometric Pressure:";
+                PsychrometricsElevationPressureLabel1.Text = "Barometric Pressure:";
                 if (Metric.Checked)
                 {
-                    PsychrometricsAltitutePressureLabel2.Text = "kPa";
+                    PsychrometricsElevationPressureLabel2.Text = "kPa";
                 }
                 else
                 {
-                    PsychrometricsAltitutePressureLabel2.Text = "\"Hg";
+                    PsychrometricsElevationPressureLabel2.Text = "\"Hg";
                 }
             }
         }
 
         private void SwitchCalculation()
         {
+            string tooltip = string.Empty;
+
             if (Psychrometrics_Enthalpy.Checked)
             {
                 TemperatureWetBlubLabel.Visible = false;
@@ -377,13 +383,17 @@ namespace CTIToolkit
             }
             else
             {
-                TemperatureWetBlubLabel.Text = "Temperature Wet Bulb:";
+                TemperatureWetBlubLabel.Text = "Wet Bulb Temperature:";
                 TemperatureWetBlubLabel.TextAlign = ContentAlignment.MiddleRight;
                 Psychrometrics_WBT_Value.Text = PsychrometricsInputData.WetBlubTemperatureDataValue.InputValue;
+                tooltip = string.Format("Wet Bulb Temperature.\nValue should be between {0} and {1}.\nValue should be less than the Dry Bulb Temperature.", PsychrometricsInputData.WetBlubTemperatureDataValue.Minimum, PsychrometricsInputData.WetBlubTemperatureDataValue.Maximum);
+                toolTip1.SetToolTip(Psychrometrics_WBT_Value, tooltip);
 
-                TemperatureDryBlubLabel.Text = "Temperature Dry Bulb:";
+                TemperatureDryBlubLabel.Text = "Dry Bulb Temperature:";
                 TemperatureDryBlubLabel.TextAlign = ContentAlignment.MiddleRight;
                 Psychrometrics_DBT_Value.Text = PsychrometricsInputData.DryBlubTemperatureDataValue.InputValue;
+                tooltip = string.Format("Dry Bulb Temperature.\nValue should be between {0} and {1}.\nValue should be greater than the Web Bulb Temperature.", PsychrometricsInputData.DryBlubTemperatureDataValue.Minimum, PsychrometricsInputData.DryBlubTemperatureDataValue.Maximum);
+                toolTip1.SetToolTip(Psychrometrics_DBT_Value, tooltip);
 
                 if (Metric.Checked)
                 {
@@ -399,6 +409,11 @@ namespace CTIToolkit
         }
 
         private void Psychrometrics_WBT_Value_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

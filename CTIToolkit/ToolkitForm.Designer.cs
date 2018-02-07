@@ -28,8 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ToolkitForm));
             this.ToolkitTabControl = new System.Windows.Forms.TabControl();
             this.Psychrometrics = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Metric = new System.Windows.Forms.RadioButton();
+            this.Standard = new System.Windows.Forms.RadioButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.PsychrometricPropertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.Psychrometrics_Enthalpy = new System.Windows.Forms.RadioButton();
@@ -37,14 +42,11 @@
             this.Psychrometrics_WBT_DBT = new System.Windows.Forms.RadioButton();
             this.PsychrometricsCalculate = new System.Windows.Forms.Button();
             this.InputPropertiesGroupBox = new System.Windows.Forms.GroupBox();
-            this.PsychrometricsAltitutePressureLabel1 = new System.Windows.Forms.Label();
+            this.PsychrometricsElevationPressureLabel1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.PyschmetricsPressureRadio = new System.Windows.Forms.RadioButton();
-            this.PyschmetricsAltituteRadio = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.Metric = new System.Windows.Forms.RadioButton();
-            this.Standard = new System.Windows.Forms.RadioButton();
-            this.PsychrometricsAltitutePressureLabel2 = new System.Windows.Forms.Label();
+            this.PyschmetricsElevationRadio = new System.Windows.Forms.RadioButton();
+            this.PsychrometricsElevationPressureLabel2 = new System.Windows.Forms.Label();
             this.PsychrometricsTemperatureDryBlubUnits = new System.Windows.Forms.Label();
             this.PsychrometricsTemperatureWetBlubUnits = new System.Windows.Forms.Label();
             this.Psychrometrics_Altitude_Value = new System.Windows.Forms.TextBox();
@@ -60,6 +62,8 @@
             this.printingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printerSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.iPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.siToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,13 +71,14 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.ToolkitTabControl.SuspendLayout();
             this.Psychrometrics.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.PsychrometricPropertiesGroupBox.SuspendLayout();
             this.InputPropertiesGroupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,6 +96,7 @@
             // 
             // Psychrometrics
             // 
+            this.Psychrometrics.Controls.Add(this.groupBox1);
             this.Psychrometrics.Controls.Add(this.dataGridView1);
             this.Psychrometrics.Controls.Add(this.PsychrometricPropertiesGroupBox);
             this.Psychrometrics.Controls.Add(this.InputPropertiesGroupBox);
@@ -101,6 +107,38 @@
             this.Psychrometrics.TabIndex = 0;
             this.Psychrometrics.Text = "Psychrometrics";
             this.Psychrometrics.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.Metric);
+            this.groupBox1.Controls.Add(this.Standard);
+            this.groupBox1.Location = new System.Drawing.Point(509, 46);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(99, 79);
+            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabStop = false;
+            // 
+            // Metric
+            // 
+            this.Metric.AutoSize = true;
+            this.Metric.Location = new System.Drawing.Point(17, 50);
+            this.Metric.Name = "Metric";
+            this.Metric.Size = new System.Drawing.Size(54, 17);
+            this.Metric.TabIndex = 1;
+            this.Metric.Text = "Metric";
+            this.Metric.UseVisualStyleBackColor = true;
+            // 
+            // Standard
+            // 
+            this.Standard.AutoSize = true;
+            this.Standard.Checked = true;
+            this.Standard.Location = new System.Drawing.Point(17, 21);
+            this.Standard.Name = "Standard";
+            this.Standard.Size = new System.Drawing.Size(68, 17);
+            this.Standard.TabIndex = 0;
+            this.Standard.TabStop = true;
+            this.Standard.Text = "Standard";
+            this.Standard.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -145,7 +183,7 @@
             this.Psychrometrics_DBT_RH.Name = "Psychrometrics_DBT_RH";
             this.Psychrometrics_DBT_RH.Size = new System.Drawing.Size(234, 17);
             this.Psychrometrics_DBT_RH.TabIndex = 1;
-            this.Psychrometrics_DBT_RH.Text = "Temperature Dry Bulb and Relative Humidity";
+            this.Psychrometrics_DBT_RH.Text = "Dry Bulb Temperature and Relative Humidity";
             this.Psychrometrics_DBT_RH.UseVisualStyleBackColor = true;
             this.Psychrometrics_DBT_RH.CheckedChanged += new System.EventHandler(this.Psychrometrics_DBT_RH_CheckedChanged);
             // 
@@ -158,7 +196,7 @@
             this.Psychrometrics_WBT_DBT.Size = new System.Drawing.Size(259, 17);
             this.Psychrometrics_WBT_DBT.TabIndex = 0;
             this.Psychrometrics_WBT_DBT.TabStop = true;
-            this.Psychrometrics_WBT_DBT.Text = "Temperature Wet Bulb and Temperature Dry Bulb";
+            this.Psychrometrics_WBT_DBT.Text = "Wet Bulb Temperature and Dry Bulb Temperature";
             this.Psychrometrics_WBT_DBT.UseVisualStyleBackColor = true;
             this.Psychrometrics_WBT_DBT.CheckedChanged += new System.EventHandler(this.Psychrometrics_WBT_DBT_CheckedChanged);
             // 
@@ -174,10 +212,9 @@
             // 
             // InputPropertiesGroupBox
             // 
-            this.InputPropertiesGroupBox.Controls.Add(this.PsychrometricsAltitutePressureLabel1);
+            this.InputPropertiesGroupBox.Controls.Add(this.PsychrometricsElevationPressureLabel1);
             this.InputPropertiesGroupBox.Controls.Add(this.groupBox2);
-            this.InputPropertiesGroupBox.Controls.Add(this.groupBox1);
-            this.InputPropertiesGroupBox.Controls.Add(this.PsychrometricsAltitutePressureLabel2);
+            this.InputPropertiesGroupBox.Controls.Add(this.PsychrometricsElevationPressureLabel2);
             this.InputPropertiesGroupBox.Controls.Add(this.PsychrometricsTemperatureDryBlubUnits);
             this.InputPropertiesGroupBox.Controls.Add(this.PsychrometricsTemperatureWetBlubUnits);
             this.InputPropertiesGroupBox.Controls.Add(this.Psychrometrics_Altitude_Value);
@@ -192,20 +229,21 @@
             this.InputPropertiesGroupBox.TabStop = false;
             this.InputPropertiesGroupBox.Text = "Input Properties";
             // 
-            // PsychrometricsAltitutePressureLabel1
+            // PsychrometricsElevationPressureLabel1
             // 
-            this.PsychrometricsAltitutePressureLabel1.Location = new System.Drawing.Point(22, 91);
-            this.PsychrometricsAltitutePressureLabel1.Name = "PsychrometricsAltitutePressureLabel1";
-            this.PsychrometricsAltitutePressureLabel1.Size = new System.Drawing.Size(110, 13);
-            this.PsychrometricsAltitutePressureLabel1.TabIndex = 11;
-            this.PsychrometricsAltitutePressureLabel1.Text = "Altitute:";
-            this.PsychrometricsAltitutePressureLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.PsychrometricsElevationPressureLabel1.Location = new System.Drawing.Point(22, 91);
+            this.PsychrometricsElevationPressureLabel1.Name = "PsychrometricsElevationPressureLabel1";
+            this.PsychrometricsElevationPressureLabel1.Size = new System.Drawing.Size(110, 13);
+            this.PsychrometricsElevationPressureLabel1.TabIndex = 11;
+            this.PsychrometricsElevationPressureLabel1.Text = "Elevation:";
+            this.PsychrometricsElevationPressureLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.PyschmetricsPressureRadio);
-            this.groupBox2.Controls.Add(this.PyschmetricsAltituteRadio);
-            this.groupBox2.Location = new System.Drawing.Point(436, 29);
+            this.groupBox2.Controls.Add(this.PyschmetricsElevationRadio);
+            this.groupBox2.Location = new System.Drawing.Point(302, 29);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(164, 79);
             this.groupBox2.TabIndex = 10;
@@ -221,60 +259,26 @@
             this.PyschmetricsPressureRadio.UseVisualStyleBackColor = true;
             this.PyschmetricsPressureRadio.CheckedChanged += new System.EventHandler(this.PyschmetricsPressureRadio_CheckedChanged);
             // 
-            // PyschmetricsAltituteRadio
+            // PyschmetricsElevationRadio
             // 
-            this.PyschmetricsAltituteRadio.Checked = true;
-            this.PyschmetricsAltituteRadio.Location = new System.Drawing.Point(17, 21);
-            this.PyschmetricsAltituteRadio.Name = "PyschmetricsAltituteRadio";
-            this.PyschmetricsAltituteRadio.Size = new System.Drawing.Size(130, 17);
-            this.PyschmetricsAltituteRadio.TabIndex = 0;
-            this.PyschmetricsAltituteRadio.TabStop = true;
-            this.PyschmetricsAltituteRadio.Text = "Altitute";
-            this.PyschmetricsAltituteRadio.UseVisualStyleBackColor = true;
-            this.PyschmetricsAltituteRadio.CheckedChanged += new System.EventHandler(this.PyschmetricsAltituteRadio_CheckedChanged);
+            this.PyschmetricsElevationRadio.Checked = true;
+            this.PyschmetricsElevationRadio.Location = new System.Drawing.Point(17, 21);
+            this.PyschmetricsElevationRadio.Name = "PyschmetricsElevationRadio";
+            this.PyschmetricsElevationRadio.Size = new System.Drawing.Size(130, 17);
+            this.PyschmetricsElevationRadio.TabIndex = 0;
+            this.PyschmetricsElevationRadio.TabStop = true;
+            this.PyschmetricsElevationRadio.Text = "Elevation";
+            this.PyschmetricsElevationRadio.UseVisualStyleBackColor = true;
+            this.PyschmetricsElevationRadio.CheckedChanged += new System.EventHandler(this.PyschmetricsElevationRadio_CheckedChanged);
             // 
-            // groupBox1
+            // PsychrometricsElevationPressureLabel2
             // 
-            this.groupBox1.Controls.Add(this.Metric);
-            this.groupBox1.Controls.Add(this.Standard);
-            this.groupBox1.Location = new System.Drawing.Point(318, 29);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(99, 79);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            // 
-            // Metric
-            // 
-            this.Metric.AutoSize = true;
-            this.Metric.Location = new System.Drawing.Point(17, 50);
-            this.Metric.Name = "Metric";
-            this.Metric.Size = new System.Drawing.Size(54, 17);
-            this.Metric.TabIndex = 1;
-            this.Metric.Text = "Metric";
-            this.Metric.UseVisualStyleBackColor = true;
-            this.Metric.CheckedChanged += new System.EventHandler(this.Metric_CheckedChanged);
-            // 
-            // Standard
-            // 
-            this.Standard.AutoSize = true;
-            this.Standard.Checked = true;
-            this.Standard.Location = new System.Drawing.Point(17, 21);
-            this.Standard.Name = "Standard";
-            this.Standard.Size = new System.Drawing.Size(68, 17);
-            this.Standard.TabIndex = 0;
-            this.Standard.TabStop = true;
-            this.Standard.Text = "Standard";
-            this.Standard.UseVisualStyleBackColor = true;
-            this.Standard.CheckedChanged += new System.EventHandler(this.Standard_CheckedChanged);
-            // 
-            // PsychrometricsAltitutePressureLabel2
-            // 
-            this.PsychrometricsAltitutePressureLabel2.AutoSize = true;
-            this.PsychrometricsAltitutePressureLabel2.Location = new System.Drawing.Point(259, 91);
-            this.PsychrometricsAltitutePressureLabel2.Name = "PsychrometricsAltitutePressureLabel2";
-            this.PsychrometricsAltitutePressureLabel2.Size = new System.Drawing.Size(13, 13);
-            this.PsychrometricsAltitutePressureLabel2.TabIndex = 8;
-            this.PsychrometricsAltitutePressureLabel2.Text = "ft";
+            this.PsychrometricsElevationPressureLabel2.AutoSize = true;
+            this.PsychrometricsElevationPressureLabel2.Location = new System.Drawing.Point(259, 91);
+            this.PsychrometricsElevationPressureLabel2.Name = "PsychrometricsElevationPressureLabel2";
+            this.PsychrometricsElevationPressureLabel2.Size = new System.Drawing.Size(13, 13);
+            this.PsychrometricsElevationPressureLabel2.TabIndex = 8;
+            this.PsychrometricsElevationPressureLabel2.Text = "ft";
             // 
             // PsychrometricsTemperatureDryBlubUnits
             // 
@@ -309,6 +313,8 @@
             this.Psychrometrics_DBT_Value.Size = new System.Drawing.Size(100, 20);
             this.Psychrometrics_DBT_Value.TabIndex = 4;
             this.Psychrometrics_DBT_Value.Text = "90";
+            this.toolTip1.SetToolTip(this.Psychrometrics_DBT_Value, "Dry Bulb Temperature. Value should be between 0 and 200. \r\nThe value should be le" +
+        "ss than the Web Bulb Temperature.\r\n");
             // 
             // Psychrometrics_WBT_Value
             // 
@@ -319,13 +325,13 @@
             this.Psychrometrics_WBT_Value.Text = "80";
             this.Psychrometrics_WBT_Value.TextChanged += new System.EventHandler(this.Psychrometrics_WBT_Value_TextChanged);
             // 
-            // TemperatureDryBulbLabel
+            // TemperatureDryBlubLabel
             // 
             this.TemperatureDryBlubLabel.Location = new System.Drawing.Point(19, 65);
-            this.TemperatureDryBlubLabel.Name = "TemperatureDryBulbLabel";
+            this.TemperatureDryBlubLabel.Name = "TemperatureDryBlubLabel";
             this.TemperatureDryBlubLabel.Size = new System.Drawing.Size(113, 13);
             this.TemperatureDryBlubLabel.TabIndex = 1;
-            this.TemperatureDryBlubLabel.Text = "Temperature Dry Bulb:";
+            this.TemperatureDryBlubLabel.Text = "Dry Bulb Temperature:";
             this.TemperatureDryBlubLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // TemperatureWetBlubLabel
@@ -335,7 +341,7 @@
             this.TemperatureWetBlubLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.TemperatureWetBlubLabel.Size = new System.Drawing.Size(117, 13);
             this.TemperatureWetBlubLabel.TabIndex = 0;
-            this.TemperatureWetBlubLabel.Text = "Temperature Wet Bulb:";
+            this.TemperatureWetBlubLabel.Text = "Wet Bulb Temperature:";
             this.TemperatureWetBlubLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Merkel
@@ -370,6 +376,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenu,
+            this.settingsToolStripMenuItem,
+            this.documentationToolStripMenuItem,
             this.ViewMenu,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -405,6 +413,19 @@
             this.printerSetupToolStripMenuItem.Name = "printerSetupToolStripMenuItem";
             this.printerSetupToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.printerSetupToolStripMenuItem.Text = "Printer Setup";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // documentationToolStripMenuItem
+            // 
+            this.documentationToolStripMenuItem.Name = "documentationToolStripMenuItem";
+            this.documentationToolStripMenuItem.Size = new System.Drawing.Size(102, 20);
+            this.documentationToolStripMenuItem.Text = "Documentation";
             // 
             // ViewMenu
             // 
@@ -462,19 +483,20 @@
             this.ClientSize = new System.Drawing.Size(930, 674);
             this.Controls.Add(this.ToolkitTabControl);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ToolkitForm";
             this.Text = "Cooling Technology Institute Toolkit";
             this.ToolkitTabControl.ResumeLayout(false);
             this.Psychrometrics.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.PsychrometricPropertiesGroupBox.ResumeLayout(false);
             this.PsychrometricPropertiesGroupBox.PerformLayout();
             this.InputPropertiesGroupBox.ResumeLayout(false);
             this.InputPropertiesGroupBox.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -491,7 +513,7 @@
         private System.Windows.Forms.RadioButton Psychrometrics_DBT_RH;
         private System.Windows.Forms.RadioButton Psychrometrics_WBT_DBT;
         private System.Windows.Forms.GroupBox InputPropertiesGroupBox;
-        private System.Windows.Forms.Label PsychrometricsAltitutePressureLabel2;
+        private System.Windows.Forms.Label PsychrometricsElevationPressureLabel2;
         private System.Windows.Forms.Label PsychrometricsTemperatureDryBlubUnits;
         private System.Windows.Forms.Label PsychrometricsTemperatureWetBlubUnits;
         private System.Windows.Forms.TextBox Psychrometrics_Altitude_Value;
@@ -516,13 +538,16 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label PsychrometricsElevationPressureLabel1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton PyschmetricsPressureRadio;
+        private System.Windows.Forms.RadioButton PyschmetricsElevationRadio;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem documentationToolStripMenuItem;
+        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton Metric;
         private System.Windows.Forms.RadioButton Standard;
-        private System.Windows.Forms.Label PsychrometricsAltitutePressureLabel1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton PyschmetricsPressureRadio;
-        private System.Windows.Forms.RadioButton PyschmetricsAltituteRadio;
     }
 }
 

@@ -172,7 +172,7 @@ namespace CTIToolkit
         public CalculationType CalculationType { get; set; }
         public bool IsDemo { get; set; }
         public bool IsMetric { get; set; }
-        public bool IsAltitute { get; set; }
+        public bool IsElevation { get; set; }
 
         public DataValue EnthalpyDataValue { get; set; }
         public DataValue AltitudeDataValue { get; set; }
@@ -185,7 +185,7 @@ namespace CTIToolkit
         {
             IsDemo = false;
             IsMetric = false;
-            IsAltitute = true;
+            IsElevation = true;
             CalculationType = CalculationType.Psychrometrics_WBT_DBT;
             SetValues();
         }
@@ -196,9 +196,9 @@ namespace CTIToolkit
             SetValues();
         }
 
-        public void SetAltitute(bool value)
+        public void SetElevation(bool value)
         {
-            IsAltitute = value;
+            IsElevation = value;
         }
 
         public void SetDemo(bool value)
