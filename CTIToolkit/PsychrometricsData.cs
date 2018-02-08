@@ -18,7 +18,7 @@ namespace CTIToolkit
 
         public CalculationType CalculationType { get; set; }
  
-        public double Altitude { set; get; }
+        public double Elevation { set; get; }
         public double TemperatureWetBulb { set; get; } // TWB
         public double TemperatureDryBulb { set; get; } // TDB
 
@@ -40,10 +40,10 @@ namespace CTIToolkit
 
         public Units Units { get; set; }
         public bool IsDemo { get; set; }
-        public bool IsMetric { get; set; }
+        public bool IsInternationalSystemOfUnits_IS_ { get; set; }
         public bool IsElevation { get; set; }
 
-        //public PsychrometricsData(bool isMetric, bool isElevation, bool isDemo = false)
+        //public PsychrometricsData(bool isInternationalSystemOfUnits_IS_, bool isElevation, bool isDemo = false)
         public PsychrometricsData()
         {
             NameValueUnitsDataTable = new NameValueUnitsDataTable();
@@ -55,14 +55,14 @@ namespace CTIToolkit
             Density = 0.0;
             DewPoint = 0.0;
             IsDemo = false;
-            IsMetric = false;
+            IsInternationalSystemOfUnits_IS_ = false;
             IsElevation = true;
             SetUnits();
         }
 
         private void SetUnits()
         {
-            if (IsMetric)
+            if (IsInternationalSystemOfUnits_IS_)
             {
                 Units = new UnitsSI();
             }
@@ -72,9 +72,9 @@ namespace CTIToolkit
             }
         }
 
-        public void SetMetric(bool value)
+        public void SetInternationalSystemOfUnits_IS_(bool value)
         {
-            IsMetric = value;
+            IsInternationalSystemOfUnits_IS_ = value;
             SetUnits();
         }
 

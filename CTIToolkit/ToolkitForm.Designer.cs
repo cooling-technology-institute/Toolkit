@@ -33,8 +33,8 @@
             this.ToolkitTabControl = new System.Windows.Forms.TabControl();
             this.Psychrometrics = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.Metric = new System.Windows.Forms.RadioButton();
-            this.Standard = new System.Windows.Forms.RadioButton();
+            this.InternationalSystemOfUnits_IS_ = new System.Windows.Forms.RadioButton();
+            this.UnitedStatesCustomaryUnits_IP_ = new System.Windows.Forms.RadioButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.PsychrometricPropertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.Psychrometrics_Enthalpy = new System.Windows.Forms.RadioButton();
@@ -49,7 +49,7 @@
             this.PsychrometricsElevationPressureLabel2 = new System.Windows.Forms.Label();
             this.PsychrometricsTemperatureDryBlubUnits = new System.Windows.Forms.Label();
             this.PsychrometricsTemperatureWetBlubUnits = new System.Windows.Forms.Label();
-            this.Psychrometrics_Altitude_Value = new System.Windows.Forms.TextBox();
+            this.Psychrometrics_Elevation_Value = new System.Windows.Forms.TextBox();
             this.Psychrometrics_DBT_Value = new System.Windows.Forms.TextBox();
             this.Psychrometrics_WBT_Value = new System.Windows.Forms.TextBox();
             this.TemperatureDryBlubLabel = new System.Windows.Forms.Label();
@@ -110,35 +110,37 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.Metric);
-            this.groupBox1.Controls.Add(this.Standard);
+            this.groupBox1.Controls.Add(this.InternationalSystemOfUnits_IS_);
+            this.groupBox1.Controls.Add(this.UnitedStatesCustomaryUnits_IP_);
             this.groupBox1.Location = new System.Drawing.Point(509, 46);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(99, 79);
+            this.groupBox1.Size = new System.Drawing.Size(222, 79);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             // 
-            // Metric
+            // InternationalSystemOfUnits_IS_
             // 
-            this.Metric.AutoSize = true;
-            this.Metric.Location = new System.Drawing.Point(17, 50);
-            this.Metric.Name = "Metric";
-            this.Metric.Size = new System.Drawing.Size(54, 17);
-            this.Metric.TabIndex = 1;
-            this.Metric.Text = "Metric";
-            this.Metric.UseVisualStyleBackColor = true;
+            this.InternationalSystemOfUnits_IS_.AutoSize = true;
+            this.InternationalSystemOfUnits_IS_.Location = new System.Drawing.Point(17, 50);
+            this.InternationalSystemOfUnits_IS_.Name = "InternationalSystemOfUnits_IS_";
+            this.InternationalSystemOfUnits_IS_.Size = new System.Drawing.Size(178, 17);
+            this.InternationalSystemOfUnits_IS_.TabIndex = 1;
+            this.InternationalSystemOfUnits_IS_.Text = "International System of Units (SI)";
+            this.InternationalSystemOfUnits_IS_.UseVisualStyleBackColor = true;
+            this.UnitedStatesCustomaryUnits_IP_.CheckedChanged += new System.EventHandler(this.InternationalSystemOfUnits_IS__CheckedChanged);
             // 
-            // Standard
+            // UnitedStatesCustomaryUnits_IP_
             // 
-            this.Standard.AutoSize = true;
-            this.Standard.Checked = true;
-            this.Standard.Location = new System.Drawing.Point(17, 21);
-            this.Standard.Name = "Standard";
-            this.Standard.Size = new System.Drawing.Size(68, 17);
-            this.Standard.TabIndex = 0;
-            this.Standard.TabStop = true;
-            this.Standard.Text = "Standard";
-            this.Standard.UseVisualStyleBackColor = true;
+            this.UnitedStatesCustomaryUnits_IP_.AutoSize = true;
+            this.UnitedStatesCustomaryUnits_IP_.Checked = true;
+            this.UnitedStatesCustomaryUnits_IP_.Location = new System.Drawing.Point(17, 21);
+            this.UnitedStatesCustomaryUnits_IP_.Name = "UnitedStatesCustomaryUnits_IP_";
+            this.UnitedStatesCustomaryUnits_IP_.Size = new System.Drawing.Size(187, 17);
+            this.UnitedStatesCustomaryUnits_IP_.TabIndex = 0;
+            this.UnitedStatesCustomaryUnits_IP_.TabStop = true;
+            this.UnitedStatesCustomaryUnits_IP_.Text = "United States Customary Units (IP)";
+            this.UnitedStatesCustomaryUnits_IP_.UseVisualStyleBackColor = true;
+            this.UnitedStatesCustomaryUnits_IP_.CheckedChanged += new System.EventHandler(this.UnitedStatesCustomaryUnits_IP__CheckedChanged);
             // 
             // dataGridView1
             // 
@@ -149,7 +151,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(8, 324);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(642, 294);
+            this.dataGridView1.Size = new System.Drawing.Size(742, 294);
             this.dataGridView1.TabIndex = 3;
             // 
             // PsychrometricPropertiesGroupBox
@@ -160,7 +162,7 @@
             this.PsychrometricPropertiesGroupBox.Controls.Add(this.PsychrometricsCalculate);
             this.PsychrometricPropertiesGroupBox.Location = new System.Drawing.Point(8, 162);
             this.PsychrometricPropertiesGroupBox.Name = "PsychrometricPropertiesGroupBox";
-            this.PsychrometricPropertiesGroupBox.Size = new System.Drawing.Size(642, 145);
+            this.PsychrometricPropertiesGroupBox.Size = new System.Drawing.Size(742, 145);
             this.PsychrometricPropertiesGroupBox.TabIndex = 2;
             this.PsychrometricPropertiesGroupBox.TabStop = false;
             this.PsychrometricPropertiesGroupBox.Text = "Calculate the psychrometric properties";
@@ -202,7 +204,7 @@
             // 
             // PsychrometricsCalculate
             // 
-            this.PsychrometricsCalculate.Location = new System.Drawing.Point(548, 19);
+            this.PsychrometricsCalculate.Location = new System.Drawing.Point(648, 19);
             this.PsychrometricsCalculate.Name = "PsychrometricsCalculate";
             this.PsychrometricsCalculate.Size = new System.Drawing.Size(75, 23);
             this.PsychrometricsCalculate.TabIndex = 0;
@@ -217,14 +219,14 @@
             this.InputPropertiesGroupBox.Controls.Add(this.PsychrometricsElevationPressureLabel2);
             this.InputPropertiesGroupBox.Controls.Add(this.PsychrometricsTemperatureDryBlubUnits);
             this.InputPropertiesGroupBox.Controls.Add(this.PsychrometricsTemperatureWetBlubUnits);
-            this.InputPropertiesGroupBox.Controls.Add(this.Psychrometrics_Altitude_Value);
+            this.InputPropertiesGroupBox.Controls.Add(this.Psychrometrics_Elevation_Value);
             this.InputPropertiesGroupBox.Controls.Add(this.Psychrometrics_DBT_Value);
             this.InputPropertiesGroupBox.Controls.Add(this.Psychrometrics_WBT_Value);
             this.InputPropertiesGroupBox.Controls.Add(this.TemperatureDryBlubLabel);
             this.InputPropertiesGroupBox.Controls.Add(this.TemperatureWetBlubLabel);
             this.InputPropertiesGroupBox.Location = new System.Drawing.Point(7, 17);
             this.InputPropertiesGroupBox.Name = "InputPropertiesGroupBox";
-            this.InputPropertiesGroupBox.Size = new System.Drawing.Size(643, 130);
+            this.InputPropertiesGroupBox.Size = new System.Drawing.Size(743, 130);
             this.InputPropertiesGroupBox.TabIndex = 1;
             this.InputPropertiesGroupBox.TabStop = false;
             this.InputPropertiesGroupBox.Text = "Input Properties";
@@ -298,13 +300,13 @@
             this.PsychrometricsTemperatureWetBlubUnits.TabIndex = 6;
             this.PsychrometricsTemperatureWetBlubUnits.Text = "°F";
             // 
-            // Psychrometrics_Altitude_Value
+            // Psychrometrics_Elevation_Value
             // 
-            this.Psychrometrics_Altitude_Value.Location = new System.Drawing.Point(152, 88);
-            this.Psychrometrics_Altitude_Value.Name = "Psychrometrics_Altitude_Value";
-            this.Psychrometrics_Altitude_Value.Size = new System.Drawing.Size(100, 20);
-            this.Psychrometrics_Altitude_Value.TabIndex = 5;
-            this.Psychrometrics_Altitude_Value.Text = "0";
+            this.Psychrometrics_Elevation_Value.Location = new System.Drawing.Point(152, 88);
+            this.Psychrometrics_Elevation_Value.Name = "Psychrometrics_Elevation_Value";
+            this.Psychrometrics_Elevation_Value.Size = new System.Drawing.Size(100, 20);
+            this.Psychrometrics_Elevation_Value.TabIndex = 5;
+            this.Psychrometrics_Elevation_Value.Text = "0";
             // 
             // Psychrometrics_DBT_Value
             // 
@@ -516,7 +518,7 @@
         private System.Windows.Forms.Label PsychrometricsElevationPressureLabel2;
         private System.Windows.Forms.Label PsychrometricsTemperatureDryBlubUnits;
         private System.Windows.Forms.Label PsychrometricsTemperatureWetBlubUnits;
-        private System.Windows.Forms.TextBox Psychrometrics_Altitude_Value;
+        private System.Windows.Forms.TextBox Psychrometrics_Elevation_Value;
         private System.Windows.Forms.TextBox Psychrometrics_DBT_Value;
         private System.Windows.Forms.TextBox Psychrometrics_WBT_Value;
         private System.Windows.Forms.Label TemperatureDryBlubLabel;
@@ -546,8 +548,8 @@
         private System.Windows.Forms.ToolStripMenuItem documentationToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton Metric;
-        private System.Windows.Forms.RadioButton Standard;
+        private System.Windows.Forms.RadioButton InternationalSystemOfUnits_IS_;
+        private System.Windows.Forms.RadioButton UnitedStatesCustomaryUnits_IP_;
     }
 }
 

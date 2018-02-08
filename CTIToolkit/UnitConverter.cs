@@ -14,8 +14,8 @@ namespace CTIToolkit
         // IP = Ionization Potential 
         const double SeaLevelBasePressure = 14.696;
         const double MeterFeetConversionFactor = 0.3048;
-        const double AltitudeConversionFactor = 6.87535E-06;
-        const double AltitudePowerFactor = 5.2561;
+        const double ElevationConversionFactor = 6.87535E-06;
+        const double ElevationPowerFactor = 5.2561;
         const double CelsiusToFahrenheitAdjustment = 32.0;
         const double CelsiusToFahrenheitConversionFactor = 1.8;
         const double GallonToLiterConversionFactor = 3.785411784;
@@ -25,34 +25,34 @@ namespace CTIToolkit
         const double OneAtmosphere = 101.325;
 
         // Conversion Methods
-        public static double ConvertAltitudeToPsi(double altitude)
+        public static double ConvertElevationToBarometricPressure(double elevation)
         {
-            double psi = SeaLevelBasePressure * Math.Pow((1.0 - (AltitudeConversionFactor * altitude)), AltitudePowerFactor);
-            return psi;
+            double barometricPressure = SeaLevelBasePressure * Math.Pow((1.0 - (ElevationConversionFactor * elevation)), ElevationPowerFactor);
+            return barometricPressure;
         }
 
-        public static double ConvertPsiToAltitude(double psi)
+        public static double ConvertBarometricPressureToElevation(double barometricPressure)
         {
-            double altitude = (Math.Exp (Math.Log(psi / SeaLevelBasePressure) / AltitudePowerFactor) - 1.0) / AltitudeConversionFactor * -1.0;
-            return altitude;
+            double elevation = (Math.Exp (Math.Log(barometricPressure / SeaLevelBasePressure) / ElevationPowerFactor) - 1.0) / ElevationConversionFactor * -1.0;
+            return elevation;
         }
 
-        public static double ConvertAltitudeToKilopascal(double altitude)
+        public static double ConvertElevationToKilopascal(double elevation)
         {
-            return OneAtmosphere * Math.Pow((1.0 - (AltitudeConversionFactor * ConvertMetersToFeet(altitude))), AltitudePowerFactor);
+            return OneAtmosphere * Math.Pow((1.0 - (ElevationConversionFactor * ConvertMetersToFeet(elevation))), ElevationPowerFactor);
         }
 
-        public static double ConvertKilopascalToAltitude(double kilopascal)
+        public static double ConvertKilopascalToElevation(double kilopascal)
         {
-            return ConvertFeetToMeters((Math.Exp(Math.Log(kilopascal / OneAtmosphere) / AltitudePowerFactor) - 1.0) / (AltitudeConversionFactor * -1.0));
+            return ConvertFeetToMeters((Math.Exp(Math.Log(kilopascal / OneAtmosphere) / ElevationPowerFactor) - 1.0) / (ElevationConversionFactor * -1.0));
         }
 
-        public static double ConvertPsiToKilopascal(double psi)
+        public static double ConvertBarometricPressureToKilopascal(double barometricPressure)
         {
-            return OneAtmosphere * psi / SeaLevelBasePressure;
+            return OneAtmosphere * barometricPressure / SeaLevelBasePressure;
         }
 
-        public static double ConvertKilopascalToPsi(double kilopascal)
+        public static double ConvertKilopascalToBarometricPressure(double kilopascal)
         {
             return (kilopascal * SeaLevelBasePressure) / OneAtmosphere;
         }

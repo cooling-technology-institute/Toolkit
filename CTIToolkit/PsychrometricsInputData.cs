@@ -5,104 +5,7 @@ using System.Windows.Forms;
 
 namespace CTIToolkit
 {
-    public class DefaultValues
-    {
-        //#define WBT_MIN_IP					   (0.0)
-        //#define WBT_MAX_IP					 (200.0)
-        //#define WBT_MIN_SI					 (-18.0)
-        //#define WBT_MAX_SI					  (93.0)
-        //#define DBT_MIN_IP					   (0.0)
-        //#define DBT_MAX_IP					 (200.0)
-        //#define DBT_MIN_SI				 	 (-18.0)
-        //#define DBT_MAX_SI					  (93.0)
-        //    if (!TPropPageBase::metricflag)
-        //    {
-        //        m_strPsychWBTUnits = _T(L_DEGF);
-        //        m_strPsychDBTUnits = _T(L_DEGF);
-        //#ifndef _DEMO_VERSION
-        //        m_dblPsychDBT      = 100.;
-        //        m_dblPsychWBT      = 80.;
-        //#else
-        //        m_dblPsychDBT      = DBT_MAX_IP;
-        //        m_dblPsychWBT      = WBT_MAX_IP;
-        //#endif
-        //        m_dblAltitude      = 0;
-        //        m_dblRelHumidity   = 42.38;
-        //        m_dblEnthalpy      = 43.46;
-        //    }
-        //    else
-        //    {
-        //        m_strPsychWBTUnits = _T(L_DEGC);
-        //    m_strPsychDBTUnits = _T(L_DEGC);
-        //# ifndef _DEMO_VERSION
-        //    m_dblPsychDBT      = 37.78;
-        //        m_dblPsychWBT      = 26.67;
-        //#else
-        //        m_dblPsychDBT      = DBT_MAX_SI;
-        //        m_dblPsychWBT      = WBT_MAX_SI;
-        //#endif
-        //        m_dblAltitude      = 0;
-        //        m_dblRelHumidity   = 42.38;
-        //        m_dblEnthalpy      = 83.32;
-        //    }
-
-        public double MinimumTemperature = 0.0;
-        public double MaximumTemperature = 200.0;
-
-        public const double BulbTemperatureMinimum = 0.0;
-        public const double BulbTemperatureMaximum = 200.0;
-
-        public const double BulbTemperatureMinimumMetric = -18.0;
-        public const double BulbTemperatureMaximumMetric = 93.0;
-
-        public const double BulbTemperatureMinimumDemo = 80.0;
-        public const double BulbTemperatureMaximumDemo = 100.0;
-
-        public const double BulbTemperatureMinimumMetricDemo = 26.67;
-        public const double BulbTemperatureMaximumMetricDemo = 37.78;
-
-        public const double WetBulbTemperatureDefault = 80.0;
-        public const double WetBulbTemperatureDefaultDemo = 100.0;
-        public const double DryBulbTemperatureDefault = 80.0;
-        public const double DryBulbTemperatureDefaultDemo = 100.0;
-
-        public const double WetBulbTemperatureDefaultMetric = 26.67;
-        public const double WetBulbTemperatureDefaultMetricDemo = 26.67;
-        public const double DryBulbTemperatureDefaultMetric = 37.78;
-        public const double DryBulbTemperatureDefaultMetricDemo = 37.78;
-
-        public const double AltitudeMinimum = -1000.00;
-        public const double AltitudeMaximum = 40000.00;
-        public const double AltitudeMinimumMetric = -300.00;
-        public const double AltitudeMaximumMetric = 12200.00;
-        public const double AltitudeDefault = 0.0;
-        public const double AltitudeDefaultMetric = 0.0;
-
-        public const double RelativeHumidityMinimum = 0.0;
-        public const double RelativeHumidityMaximum = 100.0;
-        public const double RelativeHumidityDefault = 42.38;
-
-        public const double EnthalpyMinimum = 0.0;
-        public const double EnthalpyMaximum = 2758;
-        public const double EnthalpyDefault = 43.46;
-        public const double EnthalpyDefaultMetric = 83.32;
-
-        public const double BarometricPressureMinimum = 5.0;
-        public const double BarometricPressureMaximum = 31.5;
-        public const double BarometricPressureDefault = 29.921;
-        public const double BarometricPressureMinimumDemo = 29.0;
-        public const double BarometricPressureMaximumDemo = 30.0;
-        public const double BarometricPressureDefaultDemo = 29.921;
-
-        public const double BarometricPressureMinimumMetric = 16.932;
-        public const double BarometricPressureMaximumMetric = 103.285;
-        public const double BarometricPressureDefaultMetric = 101.325;
-        public const double BarometricPressureMinimumMetricDemo = 98.0;
-        public const double BarometricPressureMaximumMetricDemo = 102.0;
-        public const double BarometricPressureDefaultMetricDemo = 101.325;
-    }
-
-    public class DataValue
+    public abstract class DataValue
     {
         public double Default { get; set; }
         public double Minimum { get; set; }
@@ -112,17 +15,28 @@ namespace CTIToolkit
         public string InputMessage { get; set; }
         public string InputValue { get; set; }
         public string Format { get; set; }
+        public string ToolTipFormat { get; set; }
+        public string ToolTip { get; set; }
+        public bool IsInternationalSystemOfUnits_IS_ { get; set; }
+        public bool IsDemo { get; set; }
 
-        public DataValue(double defaultValue, double minimum, double maximum, string inputMessage, string format = "F2")
+        public DataValue()
         {
-            Default = defaultValue;
-            Minimum = minimum;
-            Maximum = maximum;
-            Current = defaultValue;
-            InputMessage = inputMessage;
-            Format = format;
-            InputValue = defaultValue.ToString(Format);
+            Default = 0.0;
+            Minimum = 0.0;
+            Maximum = 0.0;
+            Current = 0.0;
+            IsValid = false;
+            IsDemo = true;
+            IsInternationalSystemOfUnits_IS_ = false;
+            InputMessage = string.Empty;
+            InputValue = string.Empty;
+            Format = string.Empty;
+            ToolTipFormat = string.Empty;
+            ToolTip = string.Empty;
         }
+
+        public abstract void ConvertValue(bool isInternationalSystemOfUnits_IS_, bool doConversion = false);
 
         public bool UpdateValue(string input, out string message)
         {
@@ -167,33 +81,449 @@ namespace CTIToolkit
         }
     }
 
+    public class EnthalpyDataValue : DataValue
+    {
+        //DDV_MinMaxDouble(pDX, m_dblEnthalpy,0,2758,0,6030,4);
+        public const double EnthalpyMinimum = 0.0;
+        public const double EnthalpyMaximum = 2758;
+        public const double EnthalpyDefault = 43.46;
+        public const double EnthalpyDefault_InternationalSystemOfUnits_IS_ = 83.32;
+        public const double EnthalpyMinimum_InternationalSystemOfUnits_IS_ = 0.0;
+        public const double EnthalpyMaximum_InternationalSystemOfUnits_IS_ = 6030;
+        public const string EnthalpyToolTipFormat = "Enthalpy, a thermodynamic quantity equivalent to the total heat content of a system.\nValue should be between {0} and {1}.";
+
+        public EnthalpyDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        {
+            IsDemo = isDemo;
+            InputMessage = "Enthalpy";
+            Format = "F4";
+            ConvertValue(isInternationalSystemOfUnits_IS_);
+        }
+
+        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_, bool doConversion = false)
+        {
+            if (isInternationalSystemOfUnits_IS_)
+            {
+                Default = EnthalpyDefault_InternationalSystemOfUnits_IS_;
+                Minimum = EnthalpyMinimum_InternationalSystemOfUnits_IS_;
+                Maximum = EnthalpyMaximum_InternationalSystemOfUnits_IS_;
+            }
+            else
+            {
+                Default = EnthalpyDefault;
+                Minimum = EnthalpyMinimum;
+                Maximum = EnthalpyMaximum;
+            }
+
+            if(doConversion)
+            {
+                if (IsInternationalSystemOfUnits_IS_ && !isInternationalSystemOfUnits_IS_)
+                {
+                    // convert to United States Customary Units (IP)
+                }
+                else
+                {
+                    // convert to InternationalSystemOfUnits_IS
+                }
+            }
+            else
+            {
+                Current = Default;
+            }
+
+            InputValue = Current.ToString(Format);
+            ToolTip = string.Format(EnthalpyToolTipFormat, Minimum, Maximum);
+
+            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
+        }
+    }
+
+    public class ElevationDataValue : DataValue
+    {
+        public const double ElevationMinimum = -1000.00;
+        public const double ElevationMaximum = 40000.00;
+        public const double ElevationMinimumInternationalSystemOfUnits_IS_ = -300.00;
+        public const double ElevationMaximumInternationalSystemOfUnits_IS_ = 12200.00;
+        public const double ElevationDefault = 0.0;
+        public const double ElevationDefaultInternationalSystemOfUnits_IS_ = 0.0;
+        public const string ElevationToolTipFormat = "Elevation above sea level.\nValue should be between {0} and {1}.";
+
+        public ElevationDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        {
+            IsDemo = isDemo;
+            InputMessage = "Elevation";
+            Format = "F2";
+            ConvertValue(isInternationalSystemOfUnits_IS_, false);
+        }
+
+        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_, bool doConversion = false)
+        {
+            if (isInternationalSystemOfUnits_IS_)
+            {
+                Default = ElevationDefault;
+                Minimum = ElevationMinimumInternationalSystemOfUnits_IS_;
+                Maximum = ElevationMaximumInternationalSystemOfUnits_IS_;
+            }
+            else
+            {
+                Default = ElevationDefault;
+                Minimum = ElevationMinimum;
+                Maximum = ElevationMaximum;
+            }
+
+            if (doConversion)
+            {
+                if (IsInternationalSystemOfUnits_IS_ && !isInternationalSystemOfUnits_IS_)
+                {
+                    // convert to United States Customary Units (IP)
+                    Current = UnitConverter.ConvertMetersToFeet(Current);
+                }
+                else
+                {
+                    // convert to InternationalSystemOfUnits_IS
+                    Current = UnitConverter.ConvertFeetToMeters(Current);
+                }
+            }
+            else
+            {
+                Current = Default;
+            }
+
+            InputValue = Current.ToString(Format);
+            ToolTip = string.Format(ElevationToolTipFormat, Minimum, Maximum);
+
+            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
+        }
+    }
+
+    public class BarometricPressureDataValue : DataValue
+    {
+        public const double BarometricPressureDefault = 29.921;
+        public const double BarometricPressureMinimum = 5.0;
+        public const double BarometricPressureMaximum = 31.5;
+
+        public const double BarometricPressureDefaultDemo = 29.921;
+        public const double BarometricPressureMinimumDemo = 29.0;
+        public const double BarometricPressureMaximumDemo = 30.0;
+
+        public const double BarometricPressureDefault_InternationalSystemOfUnits_IS_ = 29.921;
+        public const double BarometricPressureMinimum_InternationalSystemOfUnits_IS_ = 16.932;
+        public const double BarometricPressureMaximum_InternationalSystemOfUnits_IS_ = 103.285;
+
+        public const double BarometricPressureDefault_InternationalSystemOfUnits_IS_Demo = 29.921;
+        public const double BarometricPressureMinimum_InternationalSystemOfUnits_IS_Demo = 98.0;
+        public const double BarometricPressureMaximum_InternationalSystemOfUnits_IS_Demo = 102.0;
+
+        public const string BarometricPressureToolTipFormat = "Barometric Pressure, the pressure exerted by the weight of the atmosphere.\nValue should be between {0} and {1}.";
+
+        public BarometricPressureDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        {
+            IsDemo = isDemo;
+            InputMessage = "Barometric Pressure";
+            Format = "F3";
+            ConvertValue(isInternationalSystemOfUnits_IS_);
+        }
+
+        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_, bool doConversion = false)
+        {
+            if (isInternationalSystemOfUnits_IS_)
+            {
+                if (IsDemo)
+                {
+                    Default = BarometricPressureDefault_InternationalSystemOfUnits_IS_Demo;
+                    Minimum = BarometricPressureMinimum_InternationalSystemOfUnits_IS_Demo;
+                    Maximum = BarometricPressureMaximum_InternationalSystemOfUnits_IS_Demo;
+                }
+                else
+                {
+                    Default = BarometricPressureDefault_InternationalSystemOfUnits_IS_;
+                    Minimum = BarometricPressureMinimum_InternationalSystemOfUnits_IS_;
+                    Maximum = BarometricPressureMaximum_InternationalSystemOfUnits_IS_;
+                }
+            }
+            else
+            {
+                if (IsDemo)
+                {
+                    Default = BarometricPressureMinimumDemo;
+                    Minimum = BarometricPressureMaximumDemo;
+                    Maximum = BarometricPressureDefaultDemo;
+                }
+                else
+                {
+                    Default = BarometricPressureDefault;
+                    Minimum = BarometricPressureMinimum;
+                    Maximum = BarometricPressureMaximum;
+                }
+            }
+
+            if (doConversion)
+            {
+                if (IsInternationalSystemOfUnits_IS_ && !isInternationalSystemOfUnits_IS_)
+                {
+                    // convert to United States Customary Units (IP)
+                    Current = UnitConverter.ConvertBarometricPressureToKilopascal(Current);
+                }
+                else
+                {
+                    // convert to InternationalSystemOfUnits_IS
+                    Current = UnitConverter.ConvertKilopascalToBarometricPressure(Current);
+                }
+            }
+            else
+            {
+                Current = Default;
+            }
+
+            InputValue = Current.ToString(Format);
+            ToolTip = string.Format(BarometricPressureToolTipFormat, Minimum, Maximum);
+
+            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
+        }
+    }
+
+    public class WetBlubTemperatureDataValue : DataValue
+    {
+        public const double WetBulbTemperatureDefault = 100.0;
+        public const double WetBulbTemperatureMinimum = 0.0;
+        public const double WetBulbTemperatureMaximum = 200.0;
+
+        public const double WetBulbTemperatureDefaultDemo = 90.0;
+        public const double WetBulbTemperatureMinimumDemo = 75.0;
+        public const double WetBulbTemperatureMaximumDemo = 80.0;
+
+        public const double WetBulbTemperatureDefault_InternationalSystemOfUnits_IS_ = 26.67;
+        public const double WetBulbTemperatureMinimum_InternationalSystemOfUnits_IS_ = -18.0;
+        public const double WetBulbTemperatureMaximum_InternationalSystemOfUnits_IS_ = 93.0;
+
+        public const double WetBulbTemperatureDefault_InternationalSystemOfUnits_IS_Demo = 26.67;
+        public const double WetBulbTemperatureMinimum_InternationalSystemOfUnits_IS_Demo = 24.0;
+        public const double WetBulbTemperatureMaximum_InternationalSystemOfUnits_IS_Demo = 27.0;
+
+        public const string WetBulbTemperatureToolTipFormat = "Wet Bulb Temperature (WBT).\nValue should be between {0} and {1}.\nValue should be less than the Dry Bulb Temperature.";
+
+        public WetBlubTemperatureDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        {
+            IsDemo = isDemo;
+            InputMessage = "Wet Bulb Temperature";
+            Format = "F2";
+            ConvertValue(isInternationalSystemOfUnits_IS_);
+        }
+
+        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_, bool doConversion = false)
+        {
+            if (isInternationalSystemOfUnits_IS_)
+            {
+                if (IsDemo)
+                {
+                    Default = WetBulbTemperatureDefault_InternationalSystemOfUnits_IS_Demo;
+                    Minimum = WetBulbTemperatureMinimum_InternationalSystemOfUnits_IS_Demo;
+                    Maximum = WetBulbTemperatureMaximum_InternationalSystemOfUnits_IS_Demo;
+                }
+                else
+                {
+                    Default = WetBulbTemperatureDefault_InternationalSystemOfUnits_IS_;
+                    Minimum = WetBulbTemperatureMinimum_InternationalSystemOfUnits_IS_;
+                    Maximum = WetBulbTemperatureMaximum_InternationalSystemOfUnits_IS_;
+                }
+            }
+            else
+            {
+                if (IsDemo)
+                {
+                    Default = WetBulbTemperatureDefaultDemo;
+                    Minimum = WetBulbTemperatureMinimumDemo;
+                    Maximum = WetBulbTemperatureMaximumDemo;
+                }
+                else
+                {
+                    Default = WetBulbTemperatureDefault;
+                    Minimum = WetBulbTemperatureMinimum;
+                    Maximum = WetBulbTemperatureMaximum;
+                }
+            }
+
+            if (doConversion)
+            {
+                if (IsInternationalSystemOfUnits_IS_ && !isInternationalSystemOfUnits_IS_)
+                {
+                    // convert to United States Customary Units (IP)
+                    Current = UnitConverter.ConvertCelsiusToFahrenheit(Current);
+                }
+                else
+                {
+                    // convert to InternationalSystemOfUnits_IS
+                    Current = UnitConverter.ConvertFahrenheitToCelsius(Current);
+                }
+            }
+            else
+            {
+                Current = Default;
+            }
+
+            InputValue = Current.ToString(Format);
+            ToolTip = string.Format(WetBulbTemperatureToolTipFormat, Minimum, Maximum);
+
+            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
+        }
+    }
+
+    public class DryBlubTemperatureDataValue : DataValue
+    {
+        public const double DryBulbTemperatureDefault = 100.0;
+        public const double DryBulbTemperatureMinimum = 0.0;
+        public const double DryBulbTemperatureMaximum = 200.0;
+
+        public const double DryBulbTemperatureDefaultDemo = 100.0;
+        public const double DryBulbTemperatureMinimumDemo = 75.0;
+        public const double DryBulbTemperatureMaximumDemo = 80.0;
+
+        public const double DryBulbTemperatureDefault_InternationalSystemOfUnits_IS_ = 26.67;
+        public const double DryBulbTemperatureMinimum_InternationalSystemOfUnits_IS_ = -18.0;
+        public const double DryBulbTemperatureMaximum_InternationalSystemOfUnits_IS_ = 93.0;
+
+        public const double DryBulbTemperatureDefault_InternationalSystemOfUnits_IS_Demo = 26.67;
+        public const double DryBulbTemperatureMinimum_InternationalSystemOfUnits_IS_Demo = 24.0;
+        public const double DryBulbTemperatureMaximum_InternationalSystemOfUnits_IS_Demo = 27.0;
+        public const string DryBulbTemperatureToolTipFormat = "Dry Bulb Temperature (DBT).\nValue should be between {0} and {1}.\nValue should be less than the Wet Bulb Temperature.";
+
+        public DryBlubTemperatureDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        {
+            IsDemo = isDemo;
+            InputMessage = "Dry Bulb Temperature";
+            Format = "F2";
+            ConvertValue(isInternationalSystemOfUnits_IS_);
+        }
+
+        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_, bool doConversion = false)
+        {
+            if (isInternationalSystemOfUnits_IS_)
+            {
+                if (IsDemo)
+                {
+                    Default = DryBulbTemperatureDefault_InternationalSystemOfUnits_IS_Demo;
+                    Minimum = DryBulbTemperatureMinimum_InternationalSystemOfUnits_IS_Demo;
+                    Maximum = DryBulbTemperatureMaximum_InternationalSystemOfUnits_IS_Demo;
+                }
+                else
+                {
+                    Default = DryBulbTemperatureDefault_InternationalSystemOfUnits_IS_;
+                    Minimum = DryBulbTemperatureMinimum_InternationalSystemOfUnits_IS_;
+                    Maximum = DryBulbTemperatureMaximum_InternationalSystemOfUnits_IS_;
+                }
+            }
+            else
+            {
+                if (IsDemo)
+                {
+                    Default = DryBulbTemperatureDefaultDemo;
+                    Minimum = DryBulbTemperatureMinimumDemo;
+                    Maximum = DryBulbTemperatureMaximumDemo;
+                }
+                else
+                {
+                    Default = DryBulbTemperatureDefault;
+                    Minimum = DryBulbTemperatureMinimum;
+                    Maximum = DryBulbTemperatureMaximum;
+                }
+            }
+
+            if (doConversion)
+            {
+                if (IsInternationalSystemOfUnits_IS_ && !isInternationalSystemOfUnits_IS_)
+                {
+                    // convert to United States Customary Units (IP)
+                    Current = UnitConverter.ConvertCelsiusToFahrenheit(Current);
+                }
+                else
+                {
+                    // convert to InternationalSystemOfUnits_IS
+                    Current = UnitConverter.ConvertFahrenheitToCelsius(Current);
+                }
+            }
+            else
+            {
+                Current = Default;
+            }
+
+            InputValue = Current.ToString(Format);
+            ToolTip = string.Format(DryBulbTemperatureToolTipFormat, Minimum, Maximum);
+
+            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
+        }
+    }
+
+    public class RelativeHumitityDataValue : DataValue
+    {
+        public const double RelativeHumidityMinimum = 0.0;
+        public const double RelativeHumidityMaximum = 100.0;
+        public const double RelativeHumidityDefault = 42.38;
+        public const string RelativeHumidityToolTipFormat = "Relative Humidity, the amount of water vapor present in air expressed as a percentage of the amount needed for saturation at the same temperature.\nValue should be between {0} and {1}.";
+
+        public RelativeHumitityDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        {
+            IsDemo = isDemo;
+            InputMessage = "Relative Humidity";
+            Format = "F2";
+            ConvertValue(isInternationalSystemOfUnits_IS_);
+        }
+
+        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_, bool doConversion = false)
+        {
+            Default = RelativeHumidityMinimum;
+            Minimum = RelativeHumidityMinimum;
+            Maximum = RelativeHumidityMaximum;
+
+            Current = Default;
+
+            InputValue = Current.ToString(Format);
+            ToolTip = string.Format(RelativeHumidityToolTipFormat, Minimum, Maximum);
+
+            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
+        }
+    }
+
     public class PsychrometricsInputData
     {
         public CalculationType CalculationType { get; set; }
         public bool IsDemo { get; set; }
-        public bool IsMetric { get; set; }
+        public bool IsInternationalSystemOfUnits_IS_ { get; set; }
         public bool IsElevation { get; set; }
 
-        public DataValue EnthalpyDataValue { get; set; }
-        public DataValue AltitudeDataValue { get; set; }
-        public DataValue BarometricPressureDataValue { get; set; }
-        public DataValue RelativeHumitityDataValue { get; set; }
-        public DataValue WetBlubTemperatureDataValue { get; set; }
-        public DataValue DryBlubTemperatureDataValue { get; set; }
+        public EnthalpyDataValue EnthalpyDataValue { get; set; }
+        public ElevationDataValue ElevationDataValue { get; set; }
+        public BarometricPressureDataValue BarometricPressureDataValue { get; set; }
+        public RelativeHumitityDataValue RelativeHumitityDataValue { get; set; }
+        public WetBlubTemperatureDataValue WetBlubTemperatureDataValue { get; set; }
+        public DryBlubTemperatureDataValue DryBlubTemperatureDataValue { get; set; }
 
-        public PsychrometricsInputData()
+        public PsychrometricsInputData(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
-            IsDemo = false;
-            IsMetric = false;
+            IsDemo = isDemo;
+            IsInternationalSystemOfUnits_IS_ = IsInternationalSystemOfUnits_IS_;
             IsElevation = true;
             CalculationType = CalculationType.Psychrometrics_WBT_DBT;
-            SetValues();
+            EnthalpyDataValue = new EnthalpyDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
+            ElevationDataValue = new ElevationDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
+            BarometricPressureDataValue = new BarometricPressureDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
+            RelativeHumitityDataValue = new RelativeHumitityDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
+            WetBlubTemperatureDataValue = new WetBlubTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
+            DryBlubTemperatureDataValue = new DryBlubTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
         }
 
-        public void SetMetric(bool value)
+        public bool ConvertValues(bool isInternationalSystemOfUnits_IS_)
         {
-            IsMetric = value;
-            SetValues();
+            if(IsInternationalSystemOfUnits_IS_ != isInternationalSystemOfUnits_IS_)
+            {
+                IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
+                EnthalpyDataValue.ConvertValue(IsInternationalSystemOfUnits_IS_);
+                ElevationDataValue.ConvertValue(IsInternationalSystemOfUnits_IS_);
+                BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS_);
+                WetBlubTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS_);
+                DryBlubTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS_);
+                return true;
+            }
+            return false;
         }
 
         public void SetElevation(bool value)
@@ -204,92 +534,6 @@ namespace CTIToolkit
         public void SetDemo(bool value)
         {
             IsDemo = value;
-            SetValues();
-        }
-
-        private void SetValues()
-        {
-            // convert current values between metric and standard
-            //if ((!TPropPageBase::metricflag) &&
-            //    (m_strPsychPressureUnits != L_FEET) &&
-            //    (m_strPsychPressureUnits != L_HG))
-            //{
-            //    // Avoid conversion problems at the limits
-            //    if (m_dblPsychWBT == WBT_MAX_SI)
-            //        m_dblPsychWBT = WBT_MAX_IP;
-            //    else if (m_dblPsychWBT == WBT_MIN_SI)
-            //        m_dblPsychWBT = WBT_MIN_IP;
-            //    else
-            //        m_dblPsychWBT = truncit(fnCelcToFar(m_dblPsychWBT), 2);
-
-            //    if (m_dblPsychDBT == DBT_MAX_SI)
-            //        m_dblPsychDBT = DBT_MAX_IP;
-            //    else if (m_dblPsychDBT == DBT_MIN_SI)
-            //        m_dblPsychDBT = DBT_MIN_IP;
-            //    else
-            //        m_dblPsychDBT = truncit(fnCelcToFar(m_dblPsychDBT), 2);
-
-            //    m_dblAltitude = truncit(fnMetersToFeet(m_dblAltitude), 4);
-            //}
-            //else if ((TPropPageBase::metricflag) &&
-            //    (m_strPsychPressureUnits != L_METERS) &&
-            //    (m_strPsychPressureUnits != L_KPA))
-            //{
-            //    if (m_dblPsychWBT == WBT_MAX_IP)
-            //        m_dblPsychWBT = WBT_MAX_SI;
-            //    else if (m_dblPsychWBT == WBT_MIN_IP)
-            //        m_dblPsychWBT = WBT_MIN_SI;
-            //    else
-            //        m_dblPsychWBT = truncit(fnFarToCelc(m_dblPsychWBT), 2);
-
-            //    if (m_dblPsychDBT == DBT_MAX_IP)
-            //        m_dblPsychDBT = DBT_MAX_SI;
-            //    else if (m_dblPsychDBT == DBT_MIN_IP)
-            //        m_dblPsychDBT = DBT_MIN_SI;
-            //    else
-            //        m_dblPsychDBT = truncit(fnFarToCelc(m_dblPsychDBT), 2);
-
-            //    m_dblAltitude = truncit(fnFeetToMeters(m_dblAltitude), 4);
-            //}
-
-            RelativeHumitityDataValue = new DataValue(DefaultValues.RelativeHumidityDefault, DefaultValues.RelativeHumidityMinimum, DefaultValues.RelativeHumidityMaximum, "Relative Humidity");
-
-            if (IsMetric)
-            {
-                if (IsDemo)
-                {
-                    WetBlubTemperatureDataValue = new DataValue(DefaultValues.WetBulbTemperatureDefaultMetricDemo, DefaultValues.BulbTemperatureMinimumDemo, DefaultValues.BulbTemperatureMaximumDemo, "Wet Bulb Temperature");
-                    DryBlubTemperatureDataValue = new DataValue(DefaultValues.DryBulbTemperatureDefaultMetricDemo, DefaultValues.BulbTemperatureMinimumMetricDemo, DefaultValues.BulbTemperatureMaximumMetricDemo, "Dry Bulb Temperature");
-                    BarometricPressureDataValue = new DataValue(DefaultValues.BarometricPressureDefaultMetricDemo, DefaultValues.BarometricPressureMinimumMetricDemo, DefaultValues.BarometricPressureMaximumMetricDemo, "Barometric Pressure");
-                }
-                else
-                {
-                    WetBlubTemperatureDataValue = new DataValue(DefaultValues.WetBulbTemperatureDefaultMetric, DefaultValues.BulbTemperatureMinimumMetric, DefaultValues.BulbTemperatureMaximumMetric, "Wet Bulb Temperature");
-                    DryBlubTemperatureDataValue = new DataValue(DefaultValues.DryBulbTemperatureDefaultMetric, DefaultValues.BulbTemperatureMinimumMetric, DefaultValues.BulbTemperatureMaximumMetric, "Dry Bulb Temperature");
-                    BarometricPressureDataValue = new DataValue(DefaultValues.BarometricPressureDefaultMetric, DefaultValues.BarometricPressureMinimumMetric, DefaultValues.BarometricPressureMaximumMetric, "Barometric Pressure");
-                }
-
-                EnthalpyDataValue = new DataValue(DefaultValues.EnthalpyDefaultMetric, DefaultValues.EnthalpyMinimum, DefaultValues.EnthalpyMaximum, "Enthalpy");
-                AltitudeDataValue = new DataValue(DefaultValues.AltitudeDefaultMetric, DefaultValues.AltitudeMinimumMetric, DefaultValues.AltitudeMaximumMetric, "Altitude");
-            }
-            else
-            {
-                if (IsDemo)
-                {
-                    WetBlubTemperatureDataValue = new DataValue(DefaultValues.WetBulbTemperatureDefaultDemo, DefaultValues.BulbTemperatureMinimumDemo, DefaultValues.BulbTemperatureMaximumDemo, "Wet Bulb Temperature");
-                    DryBlubTemperatureDataValue = new DataValue(DefaultValues.DryBulbTemperatureDefaultDemo, DefaultValues.BulbTemperatureMinimumDemo, DefaultValues.BulbTemperatureMaximumDemo, "Dry Bulb Temperature");
-                    BarometricPressureDataValue = new DataValue(DefaultValues.BarometricPressureDefaultDemo, DefaultValues.BarometricPressureMinimumDemo, DefaultValues.BarometricPressureMaximumDemo, "Barometric Pressure");
-                }
-                else
-                {
-                    WetBlubTemperatureDataValue = new DataValue(DefaultValues.WetBulbTemperatureDefault, DefaultValues.BulbTemperatureMinimum, DefaultValues.BulbTemperatureMaximum, "Wet Bulb Temperature");
-                    DryBlubTemperatureDataValue = new DataValue(DefaultValues.DryBulbTemperatureDefault, DefaultValues.BulbTemperatureMinimum, DefaultValues.BulbTemperatureMaximum, "Dry Bulb Temperature");
-                    BarometricPressureDataValue = new DataValue(DefaultValues.BarometricPressureDefault, DefaultValues.BarometricPressureMinimum, DefaultValues.BarometricPressureMaximum, "Barometric Pressure");
-                }
-
-                EnthalpyDataValue = new DataValue(DefaultValues.EnthalpyDefault, DefaultValues.EnthalpyMinimum, DefaultValues.EnthalpyMaximum, "Enthalpy");
-                AltitudeDataValue = new DataValue(DefaultValues.AltitudeDefault, DefaultValues.AltitudeMinimum, DefaultValues.AltitudeMaximum, "Altitude");
-            }
         }
     }
 }

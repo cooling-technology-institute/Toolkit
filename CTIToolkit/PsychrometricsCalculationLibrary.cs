@@ -28,7 +28,7 @@ namespace CTIToolkit
             //if (TPropPageBase::CheckData()) return;
 
             //double p;
-            //double altitude = m_dblAltitude;
+            //double altitude = m_dblElevation;
             //double TWB = m_dblPsychWBT;
             //double TDB = m_dblPsychDBT;
             //double HumidRatio;
@@ -40,11 +40,11 @@ namespace CTIToolkit
 
             try
             {
-                if (data.IsMetric)
+                if (data.IsInternationalSystemOfUnits_IS_)
                 {
                     // metric
                     //{
-                    //    p = Altitude2KPA(m_dblAltitude);
+                    //    p = Elevation2KPA(m_dblElevation);
                     //    CalcSIProperties(p, TWB, TDB, HumidRatio, RelHumid, Enthalpy, SpVolume, Density, DEWPoint);
                     //    UnitsTemperature = pszSITemp;
                     //    UnitsEnthalpy = pszSIEnthrapy;
@@ -56,7 +56,7 @@ namespace CTIToolkit
 
                     if (data.IsElevation)
                     {
-                        data.BarometricPressure = UnitConverter.ConvertAltitudeToKilopascal(data.Altitude);
+                        data.BarometricPressure = UnitConverter.ConvertElevationToKilopascal(data.Elevation);
                     }
 
                     CalculationLibrary.CalculatePropertiesSI(data);
@@ -69,7 +69,7 @@ namespace CTIToolkit
                 else
                 {
                     //{
-                    //    p = Altitude2PSI(m_dblAltitude);
+                    //    p = Elevation2PSI(m_dblElevation);
                     //    CalcIPProperties(p, TWB, TDB, HumidRatio, RelHumid, Enthalpy, SpVolume, Density, DEWPoint);
                     //    UnitsTemperature = pszIPTemp;
                     //    UnitsEnthalpy = pszIPEnthrapy;
@@ -82,7 +82,7 @@ namespace CTIToolkit
 
                     if (data.IsElevation)
                     {
-                        data.BarometricPressure = UnitConverter.ConvertAltitudeToPsi(data.Altitude);
+                        data.BarometricPressure = UnitConverter.ConvertElevationToBarometricPressure(data.Elevation);
                     }
 
                     CalculationLibrary.CalculatePropertiesIP(data);
@@ -107,9 +107,9 @@ namespace CTIToolkit
         {
             try
             {
-                if (data.IsMetric)
+                if (data.IsInternationalSystemOfUnits_IS_)
                 {
-                    //    p = Altitude2KPA(m_dblAltitude);
+                    //    p = Elevation2KPA(m_dblElevation);
                     //    SIWBsearch(p, TWB / 100, TDB, TWB);
                     //    CalcSIProperties(p, TWB, TDB, HumidRatio, RelHumid, Enthalpy, SpVolume, Density, DEWPoint);
                     //    UnitsTemperature = pszSITemp;
@@ -120,7 +120,7 @@ namespace CTIToolkit
 
                     if (data.IsElevation)
                     {
-                        data.BarometricPressure = UnitConverter.ConvertAltitudeToKilopascal(data.Altitude);
+                        data.BarometricPressure = UnitConverter.ConvertElevationToKilopascal(data.Elevation);
                     }
 
                     data.TemperatureWetBulb = CalculationLibrary.CalculateTemperatureWetBulbSI(data.BarometricPressure, data.RelativeHumidity / 100, data.TemperatureDryBulb);
@@ -129,7 +129,7 @@ namespace CTIToolkit
                 }
                 else
                 {
-                    //    p = Altitude2PSI(m_dblAltitude);
+                    //    p = Elevation2PSI(m_dblElevation);
                     //    IPWBsearch(p, TWB / 100, TDB, TWB);
                     //    CalcIPProperties(p, TWB, TDB, HumidRatio, RelHumid, Enthalpy, SpVolume, Density, DEWPoint);
                     //    UnitsTemperature = pszIPTemp;
@@ -141,7 +141,7 @@ namespace CTIToolkit
 
                     if (data.IsElevation)
                     {
-                        data.BarometricPressure = UnitConverter.ConvertAltitudeToPsi(data.Altitude);
+                        data.BarometricPressure = UnitConverter.ConvertElevationToBarometricPressure(data.Elevation);
                     }
 
                     data.TemperatureWetBulb = CalculationLibrary.CalculateTemperatureWetBulbIP(data.BarometricPressure, data.RelativeHumidity / 100, data.TemperatureDryBulb);
@@ -169,10 +169,10 @@ namespace CTIToolkit
 
             try
             {
-                if (data.IsMetric)
+                if (data.IsInternationalSystemOfUnits_IS_)
                 {
                     //TWB = 0;
-                    //p = Altitude2KPA(m_dblAltitude);
+                    //p = Elevation2KPA(m_dblElevation);
                     //void SIEnthalpysearch (int sat,
                     //                       double p,
                     //                       double RootEnthalpy,
@@ -197,7 +197,7 @@ namespace CTIToolkit
 
                     if (data.IsElevation)
                     {
-                        data.BarometricPressure = UnitConverter.ConvertAltitudeToKilopascal(data.Altitude);
+                        data.BarometricPressure = UnitConverter.ConvertElevationToKilopascal(data.Elevation);
                     }
 
                     CalculationLibrary.EnthalpySI(1, data);
@@ -217,7 +217,7 @@ namespace CTIToolkit
                 }
                 else
                 {
-                    //p = Altitude2PSI(m_dblAltitude);
+                    //p = Elevation2PSI(m_dblElevation);
                     //void IPEnthalpysearch (int sat,
                     //                       double p,
                     //                       double RootEnthalpy,
@@ -241,7 +241,7 @@ namespace CTIToolkit
 
                     if (data.IsElevation)
                     {
-                        data.BarometricPressure = UnitConverter.ConvertAltitudeToPsi(data.Altitude);
+                        data.BarometricPressure = UnitConverter.ConvertElevationToBarometricPressure(data.Elevation);
                     }
 
                     CalculationLibrary.EnthalpyIP(1, data);
@@ -302,12 +302,12 @@ namespace CTIToolkit
 
                 //data.BarometricPressure = truncit(data.BarometricPressure, 5);
                 data.NameValueUnitsDataTable.AddRow("Barometric Pressure", data.BarometricPressure.ToString("F4"), data.Units.BarometricPressure);
-                data.NameValueUnitsDataTable.AddRow("Elevation above MSL", data.Altitude.ToString(), data.Units.Foot);
+                data.NameValueUnitsDataTable.AddRow("Elevation above MSL", data.Elevation.ToString(), ConstantUnits.Foot);
                 data.NameValueUnitsDataTable.AddRow("Dry Bulb Temperature", data.TemperatureDryBulb.ToString("F2"), data.Units.Temperature);
                 data.NameValueUnitsDataTable.AddRow("Wet Bulb Temperature", data.TemperatureWetBulb.ToString("F2"), data.Units.Temperature);
                 data.NameValueUnitsDataTable.AddRow("Enthalpy", data.Enthalpy.ToString("F4"), data.Units.Enthalpy);
                 data.NameValueUnitsDataTable.AddRow("Dew Point", data.DewPoint.ToString("F2"), data.Units.Temperature);
-                data.NameValueUnitsDataTable.AddRow("Relative Humidity", (data.RelativeHumidity * 100.00).ToString("F2"), data.Units.Percent);
+                data.NameValueUnitsDataTable.AddRow("Relative Humidity", (data.RelativeHumidity * 100.00).ToString("F2"), ConstantUnits.Percentage);
                 data.NameValueUnitsDataTable.AddRow("Density", data.Density.ToString("F4"), data.Units.Density);
                 data.NameValueUnitsDataTable.AddRow("Specific Volume", data.SpecificVolume.ToString("F4"), data.Units.SpecificVolume);
                 data.NameValueUnitsDataTable.AddRow("Humidity Ratio", data.HumidityRatio.ToString("F4"), data.Units.HumidityRatio);

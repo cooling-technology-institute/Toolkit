@@ -1413,7 +1413,7 @@ namespace CTIToolkit
             return DEWPoint;
         }
 
-        public static double Pstd(double Z)                      /* standard atmospheric pressure */
+        public static double Pstd(double Z)                      /* UnitedStatesCustomaryUnits_IP_ atmospheric pressure */
         {
             Z /= 10000.0;
             return (.491154 * ((.547462 * Z - 7.67923) * Z + 29.9309) / (.10803 * Z + 1.0));
