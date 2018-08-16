@@ -4,18 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EB9582BB-0E47-48BF-91D3-5A36BA50800B}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{56F22FE0-37BE-4FB6-8B8B-AC7B079B7823}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CTIToolkit</RootNamespace>
-    <AssemblyName>CTIToolkit</AssemblyName>
+    <RootNamespace>CTICustomControls</RootNamespace>
+    <AssemblyName>CTICustomControls</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,69 +37,41 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="About.cs">
-      <SubType>Form</SubType>
+    <Compile Include="DoubleDataEntryTextBox.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="About.Designer.cs">
-      <DependentUpon>About.cs</DependentUpon>
+    <Compile Include="DoubleDataEntryTextBox.Designer.cs">
+      <DependentUpon>DoubleDataEntryTextBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="AssemblyInformation.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="PsychrometricsCalculationLibrary.cs" />
+    <Compile Include="PsychrometricsTabPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PsychrometricsTabPage.Designer.cs">
+      <DependentUpon>PsychrometricsTabPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ToolkitMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ToolkitMain.Designer.cs">
-      <DependentUpon>ToolkitMain.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="About.resx">
-      <DependentUpon>About.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="ToolkitMain.resx">
-      <DependentUpon>ToolkitMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <EmbeddedResource Include="DoubleDataEntryTextBox.resx">
+      <DependentUpon>DoubleDataEntryTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PsychrometricsTabPage.resx">
+      <DependentUpon>PsychrometricsTabPage.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CTICustomControls\CTICustomControls.csproj">
-      <Project>{56f22fe0-37be-4fb6-8b8b-ac7b079b7823}</Project>
-      <Name>CTICustomControls</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Units\ToolkitLibrary.csproj">
       <Project>{ef3be6e9-e07b-4a88-9264-4c7e7b2d7f05}</Project>
       <Name>ToolkitLibrary</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\CTI-Logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

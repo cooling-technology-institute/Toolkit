@@ -1,8 +1,14 @@
 C:\CTI\CTIToolkit\CTIToolkit\bin\Debug\CTIToolkit.exe.config
-C:\CTI\CTIToolkit\CTIToolkit\obj\Debug\CTIToolkit.ToolkitForm.resources
 C:\CTI\CTIToolkit\CTIToolkit\obj\Debug\CTIToolkit.Properties.Resources.resources
 C:\CTI\CTIToolkit\CTIToolkit\obj\Debug\CTIToolkit.csproj.GenerateResource.Cache
 C:\CTI\CTIToolkit\CTIToolkit\bin\Debug\CTIToolkit.exe
 C:\CTI\CTIToolkit\CTIToolkit\bin\Debug\CTIToolkit.pdb
 C:\CTI\CTIToolkit\CTIToolkit\obj\Debug\CTIToolkit.exe
 C:\CTI\CTIToolkit\CTIToolkit\obj\Debug\CTIToolkit.pdb
+C:\CTI\CTIToolkit\CTIToolkit\obj\Debug\CTIToolkit.csprojResolveAssemblyReference.cache
+C:\CTI\CTIToolkit\CTIToolkit\obj\Debug\CTIToolkit.About.resources
+C:\CTI\CTIToolkit\CTIToolkit\bin\Debug\CTICustomControls.dll
+C:\CTI\CTIToolkit\CTIToolkit\bin\Debug\Units.dll
+C:\CTI\CTIToolkit\CTIToolkit\bin\Debug\CTICustomControls.pdb
+C:\CTI\CTIToolkit\CTIToolkit\bin\Debug\Units.pdb
+C:\CTI\CTIToolkit\CTIToolkit\obj\Debug\CTIToolkit.ToolkitMain.resources

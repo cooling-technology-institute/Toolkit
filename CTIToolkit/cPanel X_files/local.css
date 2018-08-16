@@ -1,0 +1,16 @@
+body{background-color:#E6E6E6}
+
+.modern-layout .container {
+    max-width: 672px;
+}
+
+.modern-layout h2 {
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.modern-layout h3 {
+    font-size: 11px;
+    font-weight: bold;
+    padding: 0.25em;
+}
