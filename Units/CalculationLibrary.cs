@@ -1419,23 +1419,59 @@ namespace ToolkitLibrary
             return (.491154 * ((.547462 * Z - 7.67923) * Z + 29.9309) / (.10803 * Z + 1.0));
         }
 
-        public static double CalculateMerkel(double Twb, double Ran, double Apr, double LG, double Elev)  // used by demand curve
+        //public static double CalculateMerkel(double Twb, double Ran, double Apr, double LG, double elevation)  // used by demand curve
+        //{
+        //    short i;
+        //    double KaV, Ha, Haex, Hain, Hw, Tcold, Thot, Tw;
+        //    double[] X = new double[4] { 0.9, 0.6, 0.4, 0.1 };
+        //    double pressure = 14.696;
+
+        //    //	Hain = Hdbw(Twb,Wsat(Twb));  // produces 33.17 with defaults
+        //    //  Tdb = Twb + Ran;
+        //    //  Hain = CalcEnthalpyIP(14.696, Twb, Twb);
+
+        //    if (elevation != 0)
+        //    {
+        //        pressure = Pstd(elevation);
+        //    }
+        //    Hain = CalculateEnthalpy(pressure, Twb, Twb);
+        //    Haex = Hain + Ran * LG;
+        //    Tcold = Twb + Apr;
+        //    Thot = Tcold + Ran;
+        //    if (Thot >= Tboil)
+        //    {
+        //        return (999);
+        //    }
+
+        //    KaV = 0;
+        //    for (i = 0; i < 4; i++)
+        //    {
+        //        Tw = Tcold + X[i] * Ran;
+        //        //		Hw = Hdbw( Tw, Wsat(Tw) );
+        //        //      Hw = CalcEnthalpyIP(14.696, Tw, Tw);
+        //        Hw = CalculateEnthalpy(pressure, Tw, Tw);
+        //        Ha = Hain + X[i] * (Haex - Hain);
+        //        if (Hw <= Ha) return (999);
+        //        KaV += .25 / (Hw - Ha);
+        //    }
+        //    return KaV * Ran;
+        //}
+
+        public static double CalculateMerkel(MerkelData merkelData)
         {
             short i;
             double KaV, Ha, Haex, Hain, Hw, Tcold, Thot, Tw;
             double[] X = new double[4] { 0.9, 0.6, 0.4, 0.1 };
             double pressure = 14.696;
 
-            //	Hain = Hdbw(Twb,Wsat(Twb));  // produces 33.17 with defaults
-            //  Tdb = Twb + Ran;
-            //  Hain = CalcEnthalpyIP(14.696, Twb, Twb);
-
-            if (Elev != 0)
-                pressure = Pstd(Elev);
-            Hain = CalculateEnthalpy(pressure, Twb, Twb);
-            Haex = Hain + Ran * LG;
-            Tcold = Twb + Apr;
-            Thot = Tcold + Ran;
+            if (merkelData.Elevation != 0)
+            {
+                pressure = Pstd(merkelData.Elevation);
+            }
+            Hain = CalculateEnthalpy(pressure, merkelData.WetBulbTemperature, merkelData.WetBulbTemperature);
+            Haex = Hain + merkelData.Range * merkelData.WaterAirRatio;
+            Tcold = merkelData.WetBulbTemperature + merkelData.Approach;
+            Thot = Tcold + merkelData.Range;
             if (Thot >= Tboil)
             {
                 return (999);
@@ -1444,15 +1480,16 @@ namespace ToolkitLibrary
             KaV = 0;
             for (i = 0; i < 4; i++)
             {
-                Tw = Tcold + X[i] * Ran;
-                //		Hw = Hdbw( Tw, Wsat(Tw) );
-                //      Hw = CalcEnthalpyIP(14.696, Tw, Tw);
+                Tw = Tcold + X[i] * merkelData.Range;
                 Hw = CalculateEnthalpy(pressure, Tw, Tw);
                 Ha = Hain + X[i] * (Haex - Hain);
                 if (Hw <= Ha) return (999);
                 KaV += .25 / (Hw - Ha);
             }
-            return KaV * Ran;
+
+            merkelData.KaV_L = KaV * merkelData.Range;
+
+            return merkelData.KaV_L;
         }
 
         public static double KAVL(double T1, double T2, double WBT, double LG) // used by merkel calculation
@@ -1516,32 +1553,32 @@ namespace ToolkitLibrary
         }
         */
 
-        public static double Interpolate(double top, double inc, int nvals, double Twb, double Ran, double Apr, double LG, double Elev)
-        {
-            double next = 0.0;
-            double intervals;
-            double begin = CalculateMerkel(Twb, Ran, Apr, LG - inc, Elev);
+        //public static double Interpolate(double top, double inc, int nvals, double Twb, double Ran, double Apr, double LG, double Elev)
+        //{
+        //    double next = 0.0;
+        //    double intervals;
+        //    double begin = CalculateMerkel(Twb, Ran, Apr, LG - inc, Elev);
 
-            if (begin > top) return 0.0;  // Merkel returns 999 on error condition
+        //    if (begin > top) return 0.0;  // Merkel returns 999 on error condition
 
-            // determine where line crosses y-axis
-            for (double x = LG - inc; x <= LG + inc; x += 0.01)
-            {
-                next = CalculateMerkel(Twb, Ran, Apr, x, Elev);
-                if (next >= top)
-                {
-                    break;
-                }
-            }
+        //    // determine where line crosses y-axis
+        //    for (double x = LG - inc; x <= LG + inc; x += 0.01)
+        //    {
+        //        next = CalculateMerkel(Twb, Ran, Apr, x, Elev);
+        //        if (next >= top)
+        //        {
+        //            break;
+        //        }
+        //    }
 
-            // determine increment amount
-            if (nvals > 0)
-                intervals = (next - begin) / ((double)nvals);
-            else
-                intervals = (next - begin) / 99.0;
+        //    // determine increment amount
+        //    if (nvals > 0)
+        //        intervals = (next - begin) / ((double)nvals);
+        //    else
+        //        intervals = (next - begin) / 99.0;
 
-            return intervals;
-        }
+        //    return intervals;
+        //}
 
         /* from bluebook
         dbl Hdbw(dbl Tdb,dbl W)                        

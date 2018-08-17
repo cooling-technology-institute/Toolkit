@@ -32,7 +32,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.InternationalSystemOfUnits_IS_ = new System.Windows.Forms.RadioButton();
             this.UnitedStatesCustomaryUnits_IP_ = new System.Windows.Forms.RadioButton();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.PsychrometricsGridView = new System.Windows.Forms.DataGridView();
             this.PsychrometricPropertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.Psychrometrics_Enthalpy = new System.Windows.Forms.RadioButton();
             this.Psychrometrics_DBT_RH = new System.Windows.Forms.RadioButton();
@@ -53,7 +53,7 @@
             this.TemperatureWetBlubLabel = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PsychrometricsGridView)).BeginInit();
             this.PsychrometricPropertiesGroupBox.SuspendLayout();
             this.InputPropertiesGroupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -95,15 +95,15 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(10, 317);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(742, 294);
-            this.dataGridView1.TabIndex = 13;
+            this.PsychrometricsGridView.AllowUserToAddRows = false;
+            this.PsychrometricsGridView.AllowUserToDeleteRows = false;
+            this.PsychrometricsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.PsychrometricsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.PsychrometricsGridView.Location = new System.Drawing.Point(10, 317);
+            this.PsychrometricsGridView.Name = "dataGridView1";
+            this.PsychrometricsGridView.ReadOnly = true;
+            this.PsychrometricsGridView.Size = new System.Drawing.Size(742, 294);
+            this.PsychrometricsGridView.TabIndex = 13;
             // 
             // PsychrometricPropertiesGroupBox
             // 
@@ -299,14 +299,14 @@
             //this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             //this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.PsychrometricsGridView);
             this.Controls.Add(this.PsychrometricPropertiesGroupBox);
             this.Controls.Add(this.InputPropertiesGroupBox);
             this.Name = "PsychrometricsTabPage";
             this.Size = new System.Drawing.Size(767, 622);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PsychrometricsGridView)).EndInit();
             this.PsychrometricPropertiesGroupBox.ResumeLayout(false);
             this.PsychrometricPropertiesGroupBox.PerformLayout();
             this.InputPropertiesGroupBox.ResumeLayout(false);
@@ -321,7 +321,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton InternationalSystemOfUnits_IS_;
         private System.Windows.Forms.RadioButton UnitedStatesCustomaryUnits_IP_;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView PsychrometricsGridView;
         private System.Windows.Forms.GroupBox PsychrometricPropertiesGroupBox;
         private System.Windows.Forms.RadioButton Psychrometrics_Enthalpy;
         private System.Windows.Forms.RadioButton Psychrometrics_DBT_RH;

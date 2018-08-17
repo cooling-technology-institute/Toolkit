@@ -11,13 +11,13 @@ namespace ToolkitLibrary
         {
             switch (data.CalculationType)
             {
-                case CalculationType.Psychrometrics_WBT_DBT:
+                case PsychrometricsCalculationType.Psychrometrics_WBT_DBT:
                     return Psychrometrics_WBT_DBT_Calculation(data);
 
-                case CalculationType.Psychrometrics_DBT_RH:
+                case PsychrometricsCalculationType.Psychrometrics_DBT_RH:
                     return Psychrometrics_DBT_RH_Calculation(data);
 
-                case CalculationType.Psychrometrics_Enthalpy:
+                case PsychrometricsCalculationType.Psychrometrics_Enthalpy:
                     return Psychrometrics_Enthalpy_Calculation(data);
             }
             return null;

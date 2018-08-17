@@ -49,7 +49,14 @@
     <Compile Include="DoubleDataEntryTextBox.Designer.cs">
       <DependentUpon>DoubleDataEntryTextBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="MerkelCalculationLibrary.cs" />
     <Compile Include="PsychrometricsCalculationLibrary.cs" />
+    <Compile Include="MerkleTabPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MerkleTabPage.Designer.cs">
+      <DependentUpon>MerkleTabPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="PsychrometricsTabPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -62,6 +69,9 @@
   <ItemGroup>
     <EmbeddedResource Include="DoubleDataEntryTextBox.resx">
       <DependentUpon>DoubleDataEntryTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MerkleTabPage.resx">
+      <DependentUpon>MerkleTabPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PsychrometricsTabPage.resx">
       <DependentUpon>PsychrometricsTabPage.cs</DependentUpon>

@@ -18,11 +18,15 @@ namespace CTIToolkit
 
             CTICustomControls.PsychrometricsTabPage psychrometricsUserControl = new CTICustomControls.PsychrometricsTabPage();
             psychrometricsUserControl.Dock = DockStyle.Top;
-            TabPage psychrometricsTabPage = new TabPage();
+            TabPage psychrometricsTabPage = new TabPage("Psychrometrics");
             psychrometricsTabPage.Controls.Add(psychrometricsUserControl);
             tabControl1.TabPages.Add(psychrometricsTabPage);
 
-            //tabControl1.TabPages.Add(CTICustomControls.PsychrometricsTabPage);
+            CTICustomControls.MerkelTabPage merkelUserControl = new CTICustomControls.MerkelTabPage();
+            merkelUserControl.Dock = DockStyle.Top;
+            TabPage merkelTabPage = new TabPage("Merkel");
+            merkelTabPage.Controls.Add(merkelUserControl);
+            tabControl1.TabPages.Add(merkelTabPage);
         }
 
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)

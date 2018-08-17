@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 using System.Windows.Forms;
 using ToolkitLibrary;
 
@@ -103,6 +98,15 @@ namespace CTICustomControls
 
             if (PyschmetricsElevationRadio.Checked)
             {
+                double value = 0.0;
+                if (double.TryParse(Psychrometrics_Elevation_Value.Text, out value))
+                {
+                    value = UnitConverter.ConvertBarometricPressureToElevation(value);
+                }
+                else
+                {
+                    value = PsychrometricsInputData.ElevationDataValue.Default;
+                }
                 Psychrometrics_Elevation_Value.Text = PsychrometricsInputData.ElevationDataValue.InputValue;
                 PsychrometricsElevationPressureLabel1.Text = PsychrometricsInputData.ElevationDataValue.InputMessage + ":";
                 if (InternationalSystemOfUnits_IS_.Checked)
@@ -116,6 +120,17 @@ namespace CTICustomControls
             }
             else
             {
+                double value = 0.0;
+                if (double.TryParse(Psychrometrics_Elevation_Value.Text, out value))
+                {
+                    value = UnitConverter.ConvertElevationToBarometricPressure(value);
+                    value = UnitConverter.CalculatePressureFahrenheit(value);
+
+                }
+                else
+                {
+                    value = PsychrometricsInputData.BarometricPressureDataValue.Default;
+                }
                 Psychrometrics_Elevation_Value.Text = PsychrometricsInputData.BarometricPressureDataValue.InputValue;
                 PsychrometricsElevationPressureLabel1.Text = PsychrometricsInputData.BarometricPressureDataValue.InputMessage + ":";
                 if (InternationalSystemOfUnits_IS_.Checked)
@@ -214,9 +229,9 @@ namespace CTICustomControls
                 PsychrometricsData = new PsychrometricsData();
 
                 // clear data set
-                if (dataGridView1.DataSource != null)
+                if (PsychrometricsGridView.DataSource != null)
                 {
-                    dataGridView1.DataSource = null;
+                    PsychrometricsGridView.DataSource = null;
                 }
 
                 DataTable table = null;
@@ -294,22 +309,22 @@ namespace CTICustomControls
 
                 if (Psychrometrics_WBT_DBT.Checked)
                 {
-                    PsychrometricsData.CalculationType = CalculationType.Psychrometrics_WBT_DBT;
-                    PsychrometricsInputData.CalculationType = CalculationType.Psychrometrics_WBT_DBT;
+                    PsychrometricsData.CalculationType = PsychrometricsCalculationType.Psychrometrics_WBT_DBT;
+                    PsychrometricsInputData.CalculationType = PsychrometricsCalculationType.Psychrometrics_WBT_DBT;
                     PsychrometricsData.TemperatureDryBulb = PsychrometricsInputData.DryBlubTemperatureDataValue.Current;
                     PsychrometricsData.TemperatureWetBulb = PsychrometricsInputData.WetBlubTemperatureDataValue.Current;
                 }
                 else if (Psychrometrics_DBT_RH.Checked)
                 {
-                    PsychrometricsData.CalculationType = CalculationType.Psychrometrics_DBT_RH;
-                    PsychrometricsInputData.CalculationType = CalculationType.Psychrometrics_DBT_RH;
+                    PsychrometricsData.CalculationType = PsychrometricsCalculationType.Psychrometrics_DBT_RH;
+                    PsychrometricsInputData.CalculationType = PsychrometricsCalculationType.Psychrometrics_DBT_RH;
                     PsychrometricsData.RelativeHumidity = PsychrometricsInputData.RelativeHumitityDataValue.Current;
                     PsychrometricsData.TemperatureDryBulb = PsychrometricsInputData.DryBlubTemperatureDataValue.Current;
                 }
                 else if (Psychrometrics_Enthalpy.Checked)
                 {
-                    PsychrometricsData.CalculationType = CalculationType.Psychrometrics_Enthalpy;
-                    PsychrometricsInputData.CalculationType = CalculationType.Psychrometrics_Enthalpy;
+                    PsychrometricsData.CalculationType = PsychrometricsCalculationType.Psychrometrics_Enthalpy;
+                    PsychrometricsInputData.CalculationType = PsychrometricsCalculationType.Psychrometrics_Enthalpy;
                     PsychrometricsData.Enthalpy = PsychrometricsInputData.EnthalpyDataValue.Current;
                 }
 
@@ -321,7 +336,7 @@ namespace CTICustomControls
                     DataView view = new DataView(table);
 
                     // Set a DataGrid control's DataSource to the DataView.
-                    dataGridView1.DataSource = view;
+                    PsychrometricsGridView.DataSource = view;
                 }
             }
             catch (Exception exception)
@@ -373,7 +388,7 @@ namespace CTICustomControls
         {
             if (Psychrometrics_WBT_DBT.Checked)
             {
-                PsychrometricsInputData.CalculationType = CalculationType.Psychrometrics_WBT_DBT;
+                PsychrometricsInputData.CalculationType = PsychrometricsCalculationType.Psychrometrics_WBT_DBT;
 
                 SwitchCalculation();
 
@@ -386,7 +401,7 @@ namespace CTICustomControls
         {
             if (Psychrometrics_DBT_RH.Checked)
             {
-                PsychrometricsInputData.CalculationType = CalculationType.Psychrometrics_DBT_RH;
+                PsychrometricsInputData.CalculationType = PsychrometricsCalculationType.Psychrometrics_DBT_RH;
 
                 SwitchCalculation();
 
@@ -398,7 +413,7 @@ namespace CTICustomControls
         {
             if (Psychrometrics_Enthalpy.Checked)
             {
-                PsychrometricsInputData.CalculationType = CalculationType.Psychrometrics_Enthalpy;
+                PsychrometricsInputData.CalculationType = PsychrometricsCalculationType.Psychrometrics_Enthalpy;
 
                 SwitchCalculation();
 
