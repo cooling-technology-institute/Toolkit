@@ -22,9 +22,9 @@ namespace ToolkitLibrary
             ConvertValue(isInternationalSystemOfUnits_IS_, false);
         }
 
-        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_, bool doConversion = false)
+        public override void ConvertValue(bool isSI, bool doConversion = false)
         {
-            if (isInternationalSystemOfUnits_IS_)
+            if (isSI)
             {
                 Default = ElevationDefault;
                 Minimum = ElevationMinimumInternationalSystemOfUnits_IS_;
@@ -39,7 +39,7 @@ namespace ToolkitLibrary
 
             if (doConversion)
             {
-                if (IsInternationalSystemOfUnits_IS_ && !isInternationalSystemOfUnits_IS_)
+                if (IsInternationalSystemOfUnits_IS_ && !isSI)
                 {
                     // convert to United States Customary Units (IP)
                     Current = UnitConverter.ConvertMetersToFeet(Current);
@@ -58,7 +58,7 @@ namespace ToolkitLibrary
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(ElevationToolTipFormat, Minimum, Maximum);
 
-            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_IS_ = isSI;
         }
     }
 }

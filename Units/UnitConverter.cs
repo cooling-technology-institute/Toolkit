@@ -25,24 +25,24 @@ namespace ToolkitLibrary
         const double OneAtmosphere = 101.325;
 
         // Conversion Methods
-        public static double ConvertElevationToBarometricPressure(double elevation)
+        public static double ConvertElevationInFeetToBarometricPressure(double elevation)
         {
             double barometricPressure = SeaLevelBasePressure * Math.Pow((1.0 - (ElevationConversionFactor * elevation)), ElevationPowerFactor);
             return barometricPressure;
         }
 
-        public static double ConvertBarometricPressureToElevation(double barometricPressure)
+        public static double ConvertBarometricPressureToElevationInFeet(double barometricPressure)
         {
             double elevation = (Math.Exp (Math.Log(barometricPressure / SeaLevelBasePressure) / ElevationPowerFactor) - 1.0) / ElevationConversionFactor * -1.0;
             return elevation;
         }
 
-        public static double ConvertElevationToKilopascal(double elevation)
+        public static double ConvertElevationInMetersToKilopascal(double elevation)
         {
             return OneAtmosphere * Math.Pow((1.0 - (ElevationConversionFactor * ConvertMetersToFeet(elevation))), ElevationPowerFactor);
         }
 
-        public static double ConvertKilopascalToElevation(double kilopascal)
+        public static double ConvertKilopascalToElevationInMeters(double kilopascal)
         {
             return ConvertFeetToMeters((Math.Exp(Math.Log(kilopascal / OneAtmosphere) / ElevationPowerFactor) - 1.0) / (ElevationConversionFactor * -1.0));
         }

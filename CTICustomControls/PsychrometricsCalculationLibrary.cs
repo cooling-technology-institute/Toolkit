@@ -56,7 +56,7 @@ namespace ToolkitLibrary
 
                     if (data.IsElevation)
                     {
-                        data.BarometricPressure = UnitConverter.ConvertElevationToKilopascal(data.Elevation);
+                        data.BarometricPressure = UnitConverter.ConvertElevationInMetersToKilopascal(data.Elevation);
                     }
 
                     CalculationLibrary.CalculatePropertiesSI(data);
@@ -82,7 +82,7 @@ namespace ToolkitLibrary
 
                     if (data.IsElevation)
                     {
-                        data.BarometricPressure = UnitConverter.ConvertElevationToBarometricPressure(data.Elevation);
+                        data.BarometricPressure = UnitConverter.ConvertElevationInFeetToBarometricPressure(data.Elevation);
                     }
 
                     CalculationLibrary.CalculatePropertiesIP(data);
@@ -120,7 +120,7 @@ namespace ToolkitLibrary
 
                     if (data.IsElevation)
                     {
-                        data.BarometricPressure = UnitConverter.ConvertElevationToKilopascal(data.Elevation);
+                        data.BarometricPressure = UnitConverter.ConvertElevationInMetersToKilopascal(data.Elevation);
                     }
 
                     data.TemperatureWetBulb = CalculationLibrary.CalculateTemperatureWetBulbSI(data.BarometricPressure, data.RelativeHumidity / 100, data.TemperatureDryBulb);
@@ -141,7 +141,7 @@ namespace ToolkitLibrary
 
                     if (data.IsElevation)
                     {
-                        data.BarometricPressure = UnitConverter.ConvertElevationToBarometricPressure(data.Elevation);
+                        data.BarometricPressure = UnitConverter.ConvertElevationInFeetToBarometricPressure(data.Elevation);
                     }
 
                     data.TemperatureWetBulb = CalculationLibrary.CalculateTemperatureWetBulbIP(data.BarometricPressure, data.RelativeHumidity / 100, data.TemperatureDryBulb);
@@ -197,7 +197,7 @@ namespace ToolkitLibrary
 
                     if (data.IsElevation)
                     {
-                        data.BarometricPressure = UnitConverter.ConvertElevationToKilopascal(data.Elevation);
+                        data.BarometricPressure = UnitConverter.ConvertElevationInMetersToKilopascal(data.Elevation);
                     }
 
                     CalculationLibrary.EnthalpySI(1, data);
@@ -241,7 +241,7 @@ namespace ToolkitLibrary
 
                     if (data.IsElevation)
                     {
-                        data.BarometricPressure = UnitConverter.ConvertElevationToBarometricPressure(data.Elevation);
+                        data.BarometricPressure = UnitConverter.ConvertElevationInFeetToBarometricPressure(data.Elevation);
                     }
 
                     CalculationLibrary.EnthalpyIP(1, data);

@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculationLibrary.cs" />
+    <Compile Include="DemandCurveData.cs" />
+    <Compile Include="DemandCurveInputData.cs" />
     <Compile Include="WaterAirFlowRateDataValue.cs" />
     <Compile Include="ColdWaterTemperatureDataValue.cs" />
     <Compile Include="HotWaterTemperatureDataValue.cs" />

@@ -9,7 +9,7 @@ namespace ToolkitLibrary
     //Wet Bulb Temperature WBT
     //Water Flow Rate L
     //Air Flow Rate G
-    public class MerkelInputData
+    public class DemandCurveInputData
     {
         public PsychrometricsCalculationType CalculationType { get; set; }
         public bool IsDemo { get; set; }
@@ -23,7 +23,7 @@ namespace ToolkitLibrary
         public WaterAirFlowRateDataValue WaterAirFlowRateDataValue { get; set; }
         public BarometricPressureDataValue BarometricPressureDataValue { get; set; }
 
-        public MerkelInputData(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        public DemandCurveInputData(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
             IsInternationalSystemOfUnits_IS = IsInternationalSystemOfUnits_IS;

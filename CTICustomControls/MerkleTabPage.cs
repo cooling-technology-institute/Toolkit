@@ -27,7 +27,7 @@ namespace CTICustomControls
 
         private void SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_()
         {
-            if (MerkelInputData.ConvertValues(InternationalSystemOfUnits_IS_.Checked))
+            if (MerkelInputData.ConvertValues(InternationalSystemOfUnits_IS_.Checked, MerkelElevationRadio.Checked))
             {
                 SwitchCalculation();
             }
@@ -60,20 +60,32 @@ namespace CTICustomControls
         {
             string message;
 
+            if (MerkelInputData.ConvertValues(InternationalSystemOfUnits_IS_.Checked, MerkelElevationRadio.Checked))
+            {
+                SwitchCalculation();
+            }
+
             if (MerkelElevationRadio.Checked)
             {
-                double value = 0.0;
-                if (double.TryParse(Merkel_Elevation_Value.Text, out value))
-                {
-                    value = UnitConverter.ConvertBarometricPressureToElevation(value);
-                }
-                else
-                {
-                    value = MerkelInputData.ElevationDataValue.Default;
-                }
-                MerkelInputData.BarometricPressureDataValue.UpdateValue(value.ToString(), out message);
-                Merkel_Elevation_Value.Text = MerkelInputData.ElevationDataValue.InputValue;
-                MerkelElevationPressureLabel.Text = MerkelInputData.ElevationDataValue.InputMessage + ":";
+                //double value = 0.0;
+                //if (double.TryParse(Merkel_Elevation_Value.Text, out value))
+                //{
+                //    if (InternationalSystemOfUnits_IS_.Checked)
+                //    {
+                //        value = UnitConverter.ConvertKilopascalToElevationInMeters(value);
+                //    }
+                //    else
+                //    {
+                //        value = UnitConverter.ConvertBarometricPressureToElevationInFeet(value);
+                //    }
+                //}
+                //else
+                //{
+                //    value = MerkelInputData.ElevationDataValue.Default;
+                //}
+                //MerkelInputData.BarometricPressureDataValue.UpdateValue(value.ToString(), out message);
+                //Merkel_Elevation_Value.Text = MerkelInputData.ElevationDataValue.InputValue;
+                //MerkelElevationPressureLabel.Text = MerkelInputData.ElevationDataValue.InputMessage + ":";
                 if (InternationalSystemOfUnits_IS_.Checked)
                 {
                     MerkelElevationPressureUnits.Text = ConstantUnits.Meter;
@@ -85,20 +97,25 @@ namespace CTICustomControls
             }
             else
             {
-                double value = 0.0;
-                if (double.TryParse(Merkel_Elevation_Value.Text, out value))
-                {
-                    value = UnitConverter.ConvertElevationToBarometricPressure(value);
-                    value = UnitConverter.CalculatePressureFahrenheit(value);
-
-                }
-                else
-                {
-                    value = MerkelInputData.BarometricPressureDataValue.Default;
-                }
-                MerkelInputData.BarometricPressureDataValue.UpdateValue(value.ToString(), out message);
-                Merkel_Elevation_Value.Text = MerkelInputData.BarometricPressureDataValue.InputValue;
-                MerkelElevationPressureLabel.Text = MerkelInputData.BarometricPressureDataValue.InputMessage + ":";
+                //double value = 0.0;
+                //if (double.TryParse(Merkel_Elevation_Value.Text, out value))
+                //{
+                //   if (InternationalSystemOfUnits_IS_.Checked)
+                //    {
+                //        value = UnitConverter.ConvertElevationInMetersToKilopascal(value);
+                //    }
+                //    else
+                //    {
+                //        value = UnitConverter.CalculatePressureFahrenheit(UnitConverter.ConvertElevationInFeetToBarometricPressure(value));
+                //    }
+                //}
+                //else
+                //{
+                //    value = MerkelInputData.BarometricPressureDataValue.Default;
+                //}
+                //MerkelInputData.BarometricPressureDataValue.UpdateValue(value.ToString(), out message);
+                //Merkel_Elevation_Value.Text = MerkelInputData.BarometricPressureDataValue.InputValue;
+                //MerkelElevationPressureLabel.Text = MerkelInputData.BarometricPressureDataValue.InputMessage + ":";
                 if (InternationalSystemOfUnits_IS_.Checked)
                 {
                     MerkelElevationPressureUnits.Text = ConstantUnits.BarometricPressureKiloPascal;
@@ -131,6 +148,33 @@ namespace CTICustomControls
 
             Merkel_LG_Value.Text = MerkelInputData.WaterAirFlowRateDataValue.InputValue;
             toolTip1.SetToolTip(Merkel_LG_Value, MerkelInputData.WaterAirFlowRateDataValue.ToolTip);
+
+            if (MerkelElevationRadio.Checked)
+            {
+                Merkel_Elevation_Value.Text = MerkelInputData.ElevationDataValue.InputValue;
+                MerkelElevationPressureLabel.Text = MerkelInputData.ElevationDataValue.InputMessage + ":";
+                if (InternationalSystemOfUnits_IS_.Checked)
+                {
+                    MerkelElevationPressureUnits.Text = ConstantUnits.Meter;
+                }
+                else
+                {
+                    MerkelElevationPressureUnits.Text = ConstantUnits.Foot;
+                }
+            }
+            else
+            {
+                Merkel_Elevation_Value.Text = MerkelInputData.BarometricPressureDataValue.InputValue;
+                MerkelElevationPressureLabel.Text = MerkelInputData.BarometricPressureDataValue.InputMessage + ":";
+                if (InternationalSystemOfUnits_IS_.Checked)
+                {
+                    MerkelElevationPressureUnits.Text = ConstantUnits.BarometricPressureKiloPascal;
+                }
+                else
+                {
+                    MerkelElevationPressureUnits.Text = ConstantUnits.BarometricPressureInchOfMercury;
+                }
+            }
 
             if (InternationalSystemOfUnits_IS_.Checked)
             {
@@ -225,33 +269,6 @@ namespace CTICustomControls
                 MerkelData.ColdWaterTemperature = MerkelInputData.ColdWaterTemperatureDataValue.Current;
                 MerkelData.WetBulbTemperature = MerkelInputData.WetBlubTemperatureDataValue.Current;
                 MerkelData.WaterAirRatio = MerkelInputData.WaterAirFlowRateDataValue.Current;
-
-                MerkelData.Range = MerkelData.HotWaterTemperature - MerkelData.ColdWaterTemperature;
-                MerkelData.Approach = MerkelData.ColdWaterTemperature - MerkelData.WetBulbTemperature;
-
-                if (!MerkelData.IsElevation)
-                {
-                    MerkelData.Elevation = UnitConverter.ConvertBarometricPressureToElevation(MerkelData.BarometricPressure);
-                }
-
-                //double WBT = m_dblMerkelWBT;
-                //double LG = m_dblMerkelLG;
-                //double dblrange = m_dblMerkelT1 - m_dblMerkelT2;
-                //double approach = m_dblMerkelT2 - m_dblMerkelWBT;
-                //double altitude = m_dblMerkelAltitude;
-                //double T1 = m_dblMerkelT1;
-                //double T2 = m_dblMerkelT2;
-
-
-                //if (TPropPageBase::metricflag)
-                //{
-                //    WBT = fnCelcToFar(WBT);
-                //    T1 = fnCelcToFar(T1);
-                //    T2 = fnCelcToFar(T2);
-                //    dblrange = T1 - T2;
-                //    approach = T2 - WBT;
-                //    altitude = fnMetersToFeet(altitude);
-                //}
 
                 table = MerkelCalculationLibrary.MerkelCalculation(MerkelData);
 

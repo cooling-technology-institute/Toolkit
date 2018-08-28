@@ -140,9 +140,9 @@
             // 
             // MerkelElevationPressureLabel
             // 
-            this.MerkelElevationPressureLabel.Location = new System.Drawing.Point(22, 117);
+            this.MerkelElevationPressureLabel.Location = new System.Drawing.Point(12, 117);
             this.MerkelElevationPressureLabel.Name = "MerkelElevationPressureLabel";
-            this.MerkelElevationPressureLabel.Size = new System.Drawing.Size(110, 13);
+            this.MerkelElevationPressureLabel.Size = new System.Drawing.Size(132, 13);
             this.MerkelElevationPressureLabel.TabIndex = 17;
             this.MerkelElevationPressureLabel.Text = "Elevation:";
             this.MerkelElevationPressureLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -166,9 +166,9 @@
             // 
             // LGLabel
             // 
-            this.LGLabel.Location = new System.Drawing.Point(22, 145);
+            this.LGLabel.Location = new System.Drawing.Point(12, 145);
             this.LGLabel.Name = "LGLabel";
-            this.LGLabel.Size = new System.Drawing.Size(110, 13);
+            this.LGLabel.Size = new System.Drawing.Size(132, 13);
             this.LGLabel.TabIndex = 14;
             this.LGLabel.Text = "L/G:";
             this.LGLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -183,9 +183,9 @@
             // 
             // MerkelWetBulbTemperatureLabel
             // 
-            this.MerkelWetBulbTemperatureLabel.Location = new System.Drawing.Point(22, 91);
+            this.MerkelWetBulbTemperatureLabel.Location = new System.Drawing.Point(12, 91);
             this.MerkelWetBulbTemperatureLabel.Name = "MerkelWetBulbTemperatureLabel";
-            this.MerkelWetBulbTemperatureLabel.Size = new System.Drawing.Size(110, 13);
+            this.MerkelWetBulbTemperatureLabel.Size = new System.Drawing.Size(132, 13);
             this.MerkelWetBulbTemperatureLabel.TabIndex = 11;
             this.MerkelWetBulbTemperatureLabel.Text = "Wet Bulb Temperature:";
             this.MerkelWetBulbTemperatureLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -267,22 +267,22 @@
             // 
             // TemperatureColdWaterLabel
             // 
-            this.TemperatureColdWaterLabel.Location = new System.Drawing.Point(19, 65);
+            this.TemperatureColdWaterLabel.Location = new System.Drawing.Point(12, 65);
             this.TemperatureColdWaterLabel.Name = "TemperatureColdWaterLabel";
-            this.TemperatureColdWaterLabel.Size = new System.Drawing.Size(113, 13);
+            this.TemperatureColdWaterLabel.Size = new System.Drawing.Size(132, 13);
             this.TemperatureColdWaterLabel.TabIndex = 1;
             this.TemperatureColdWaterLabel.Text = "Cold Water Temperature:";
             this.TemperatureColdWaterLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // TemperatureHotWaterLabel
             // 
-            this.TemperatureHotWaterLabel.Location = new System.Drawing.Point(15, 39);
+            this.TemperatureHotWaterLabel.Location = new System.Drawing.Point(12, 39);
             this.TemperatureHotWaterLabel.Name = "TemperatureHotWaterLabel";
             this.TemperatureHotWaterLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.TemperatureHotWaterLabel.Size = new System.Drawing.Size(117, 13);
+            this.TemperatureHotWaterLabel.Size = new System.Drawing.Size(132, 13);
             this.TemperatureHotWaterLabel.TabIndex = 0;
             this.TemperatureHotWaterLabel.Text = "Hot Water Temperature:";
-            this.TemperatureHotWaterLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TemperatureHotWaterLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // MerkelCalculate
             // 

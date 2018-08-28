@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace ToolkitLibrary
 {
-    public class MerkelCalculationLibrary
+    public class DemandCurveCalculationLibrary
     {
-        public static DataTable MerkelCalculation(MerkelData data)
+        public static DataTable DemandCurveCalculation(DemandCurveData data)
         {
             try
             {
@@ -38,13 +38,13 @@ namespace ToolkitLibrary
                 MessageBox.Show(string.Format("Calculation exception: {0}", e.Message));
             }
 
-            //double WBT = m_dblMerkelWBT;
-            //double LG = m_dblMerkelLG;
-            //double dblrange = m_dblMerkelT1 - m_dblMerkelT2;
-            //double approach = m_dblMerkelT2 - m_dblMerkelWBT;
-            //double altitude = m_dblMerkelAltitude;
-            //double T1 = m_dblMerkelT1;
-            //double T2 = m_dblMerkelT2;
+            //double WBT = m_dblDemandCurveWBT;
+            //double LG = m_dblDemandCurveLG;
+            //double dblrange = m_dblDemandCurveT1 - m_dblDemandCurveT2;
+            //double approach = m_dblDemandCurveT2 - m_dblDemandCurveWBT;
+            //double altitude = m_dblDemandCurveAltitude;
+            //double T1 = m_dblDemandCurveT1;
+            //double T2 = m_dblDemandCurveT2;
 
 
             //if (TPropPageBase::metricflag)
@@ -60,12 +60,12 @@ namespace ToolkitLibrary
             data.Range = data.HotWaterTemperature - data.ColdWaterTemperature;
             data.Approach = data.ColdWaterTemperature - data.WetBulbTemperature;
 
-            CalculationLibrary.CalculateMerkel(data);
+            CalculationLibrary.CalculateDemandCurve(data);
 
-            return Merkel_CheckCalculationValues(data);
+            return DemandCurve_CheckCalculationValues(data);
         }
 
-        public static DataTable Merkel_CheckCalculationValues(MerkelData data)
+        public static DataTable DemandCurve_CheckCalculationValues(DemandCurveData data)
         {
             data.NameValueUnitsDataTable.DataTable.Clear();
 

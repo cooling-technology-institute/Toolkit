@@ -14,7 +14,7 @@ namespace ToolkitLibrary
         public const double BarometricPressureMinimumDemo = 29.0;
         public const double BarometricPressureMaximumDemo = 30.0;
 
-        public const double BarometricPressureDefault_InternationalSystemOfUnits_IS_ = 29.921;
+        public const double BarometricPressureDefault_InternationalSystemOfUnits_IS_ = 101.325;
         public const double BarometricPressureMinimum_InternationalSystemOfUnits_IS_ = 16.932;
         public const double BarometricPressureMaximum_InternationalSystemOfUnits_IS_ = 103.285;
 
@@ -32,9 +32,9 @@ namespace ToolkitLibrary
             ConvertValue(isInternationalSystemOfUnits_IS_);
         }
 
-        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_, bool doConversion = false)
+        public override void ConvertValue(bool isIS, bool doConversion = false)
         {
-            if (isInternationalSystemOfUnits_IS_)
+            if (isIS)
             {
                 if (IsDemo)
                 {
@@ -67,15 +67,15 @@ namespace ToolkitLibrary
 
             if (doConversion)
             {
-                if (IsInternationalSystemOfUnits_IS_ && !isInternationalSystemOfUnits_IS_)
+                if (IsInternationalSystemOfUnits_IS_ && !isIS)
                 {
                     // convert to United States Customary Units (IP)
-                    Current = UnitConverter.ConvertBarometricPressureToKilopascal(Current);
+                    Current = UnitConverter.ConvertCelsiusToFahrenheit(UnitConverter.ConvertKilopascalToBarometricPressure(Current));
                 }
                 else
                 {
                     // convert to InternationalSystemOfUnits_IS
-                    Current = UnitConverter.ConvertKilopascalToBarometricPressure(Current);
+                    Current = UnitConverter.ConvertFahrenheitToCelsius(UnitConverter.ConvertBarometricPressureToKilopascal(Current));
                 }
             }
             else
@@ -86,7 +86,7 @@ namespace ToolkitLibrary
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(BarometricPressureToolTipFormat, Minimum, Maximum);
 
-            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_IS_ = isIS;
         }
     }
 }

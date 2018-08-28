@@ -101,7 +101,7 @@ namespace CTICustomControls
                 double value = 0.0;
                 if (double.TryParse(Psychrometrics_Elevation_Value.Text, out value))
                 {
-                    value = UnitConverter.ConvertBarometricPressureToElevation(value);
+                    value = UnitConverter.ConvertBarometricPressureToElevationInFeet(value);
                 }
                 else
                 {
@@ -123,7 +123,7 @@ namespace CTICustomControls
                 double value = 0.0;
                 if (double.TryParse(Psychrometrics_Elevation_Value.Text, out value))
                 {
-                    value = UnitConverter.ConvertElevationToBarometricPressure(value);
+                    value = UnitConverter.ConvertElevationInFeetToBarometricPressure(value);
                     value = UnitConverter.CalculatePressureFahrenheit(value);
 
                 }

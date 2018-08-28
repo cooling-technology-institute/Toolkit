@@ -43,6 +43,12 @@ namespace ToolkitLibrary
             return IsValidValue(out message);
         }
 
+        public bool UpdateCurrentValue(double input, out string message)
+        {
+            InputValue = input.ToString();
+            return IsValidValue(out message);
+        }
+
         private bool IsValidValue(out string message)
         {
             message = string.Empty;
