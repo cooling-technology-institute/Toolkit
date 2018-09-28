@@ -16,9 +16,8 @@ namespace ToolkitLibrary
         public bool IsInternationalSystemOfUnits_IS { get; set; }
         public bool IsElevation { get; set; }
 
-        public HotWaterTemperatureDataValue HotWaterTemperatureDataValue { get; set; }
-        public ColdWaterTemperatureDataValue ColdWaterTemperatureDataValue { get; set; }
         public WetBlubTemperatureDataValue WetBlubTemperatureDataValue { get; set; }
+        public RangeDataValue RangeDataValue { get; set; }
         public ElevationDataValue ElevationDataValue { get; set; }
         public WaterAirFlowRateDataValue WaterAirFlowRateDataValue { get; set; }
         public BarometricPressureDataValue BarometricPressureDataValue { get; set; }
@@ -28,12 +27,15 @@ namespace ToolkitLibrary
             IsDemo = isDemo;
             IsInternationalSystemOfUnits_IS = IsInternationalSystemOfUnits_IS;
             IsElevation = true;
-            HotWaterTemperatureDataValue = new HotWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            ColdWaterTemperatureDataValue = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+
+            RangeDataValue = new RangeDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             WetBlubTemperatureDataValue = new WetBlubTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             ElevationDataValue = new ElevationDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             WaterAirFlowRateDataValue = new WaterAirFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             BarometricPressureDataValue = new BarometricPressureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+
+            HotWaterTemperatureDataValue = new HotWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+            ColdWaterTemperatureDataValue = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
         }
 
         public bool ConvertValues(bool isIS, bool isElevation)

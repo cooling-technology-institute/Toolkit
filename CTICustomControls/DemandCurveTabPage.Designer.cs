@@ -49,6 +49,12 @@
             System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series21 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series22 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series23 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series24 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.DemandCurveCalculate = new System.Windows.Forms.Button();
             this.DemandCurveDataFileLabel = new System.Windows.Forms.Label();
@@ -71,18 +77,18 @@
             this.SaveButton = new System.Windows.Forms.Button();
             this.InputPropertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.DesignPointGroupBox = new System.Windows.Forms.GroupBox();
+            this.LG_Value = new System.Windows.Forms.TextBox();
             this.LGlabel = new System.Windows.Forms.Label();
             this.TowerOrFillCharacteristicsGroupBox = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Max_label = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.Min_Label = new System.Windows.Forms.Label();
             this.Slope_Value = new System.Windows.Forms.TextBox();
             this.Slopelabel = new System.Windows.Forms.Label();
             this.C_Value = new System.Windows.Forms.TextBox();
             this.Clabel = new System.Windows.Forms.Label();
             this.ThermalDesignConditionsGroupBox = new System.Windows.Forms.GroupBox();
-            this.LG_Value = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.Max_label = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.Min_Label = new System.Windows.Forms.Label();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -298,6 +304,13 @@
             this.DesignPointGroupBox.TabStop = false;
             this.DesignPointGroupBox.Text = "Design Point";
             // 
+            // LG_Value
+            // 
+            this.LG_Value.Location = new System.Drawing.Point(59, 17);
+            this.LG_Value.Name = "LG_Value";
+            this.LG_Value.Size = new System.Drawing.Size(100, 20);
+            this.LG_Value.TabIndex = 2;
+            // 
             // LGlabel
             // 
             this.LGlabel.AutoSize = true;
@@ -323,6 +336,38 @@
             this.TowerOrFillCharacteristicsGroupBox.TabIndex = 21;
             this.TowerOrFillCharacteristicsGroupBox.TabStop = false;
             this.TowerOrFillCharacteristicsGroupBox.Text = "Tower orFill Characteristics";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(245, 40);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 7;
+            // 
+            // Max_label
+            // 
+            this.Max_label.AutoSize = true;
+            this.Max_label.Location = new System.Drawing.Point(187, 42);
+            this.Max_label.Name = "Max_label";
+            this.Max_label.Size = new System.Drawing.Size(54, 13);
+            this.Max_label.TabIndex = 6;
+            this.Max_label.Text = "Maximum:";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(244, 13);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 5;
+            // 
+            // Min_Label
+            // 
+            this.Min_Label.AutoSize = true;
+            this.Min_Label.Location = new System.Drawing.Point(187, 16);
+            this.Min_Label.Name = "Min_Label";
+            this.Min_Label.Size = new System.Drawing.Size(51, 13);
+            this.Min_Label.TabIndex = 4;
+            this.Min_Label.Text = "Minimum:";
             // 
             // Slope_Value
             // 
@@ -374,45 +419,6 @@
             this.ThermalDesignConditionsGroupBox.TabIndex = 20;
             this.ThermalDesignConditionsGroupBox.TabStop = false;
             this.ThermalDesignConditionsGroupBox.Text = "Thermal Design Conditions";
-            // 
-            // LG_Value
-            // 
-            this.LG_Value.Location = new System.Drawing.Point(59, 17);
-            this.LG_Value.Name = "LG_Value";
-            this.LG_Value.Size = new System.Drawing.Size(100, 20);
-            this.LG_Value.TabIndex = 2;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(245, 40);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 7;
-            // 
-            // Max_label
-            // 
-            this.Max_label.AutoSize = true;
-            this.Max_label.Location = new System.Drawing.Point(187, 42);
-            this.Max_label.Name = "Max_label";
-            this.Max_label.Size = new System.Drawing.Size(54, 13);
-            this.Max_label.TabIndex = 6;
-            this.Max_label.Text = "Maximum:";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(244, 13);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 5;
-            // 
-            // Min_Label
-            // 
-            this.Min_Label.AutoSize = true;
-            this.Min_Label.Location = new System.Drawing.Point(187, 16);
-            this.Min_Label.Name = "Min_Label";
-            this.Min_Label.Size = new System.Drawing.Size(51, 13);
-            this.Min_Label.TabIndex = 4;
-            this.Min_Label.Text = "Minimum:";
             // 
             // chart1
             // 
@@ -565,6 +571,30 @@
             series18.IsVisibleInLegend = false;
             series18.Legend = "Legend1";
             series18.Name = "Series18";
+            series19.ChartArea = "ChartArea1";
+            series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series19.Legend = "Legend1";
+            series19.Name = "Series19";
+            series20.ChartArea = "ChartArea1";
+            series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series20.Legend = "Legend1";
+            series20.Name = "Series20";
+            series21.ChartArea = "ChartArea1";
+            series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series21.Legend = "Legend1";
+            series21.Name = "Series21";
+            series22.ChartArea = "ChartArea1";
+            series22.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series22.Legend = "Legend1";
+            series22.Name = "Series22";
+            series23.ChartArea = "ChartArea1";
+            series23.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series23.Legend = "Legend1";
+            series23.Name = "Series23";
+            series24.ChartArea = "ChartArea1";
+            series24.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series24.Legend = "Legend1";
+            series24.Name = "Series24";
             this.chart1.Series.Add(series1);
             this.chart1.Series.Add(series2);
             this.chart1.Series.Add(series3);
@@ -583,6 +613,12 @@
             this.chart1.Series.Add(series16);
             this.chart1.Series.Add(series17);
             this.chart1.Series.Add(series18);
+            this.chart1.Series.Add(series19);
+            this.chart1.Series.Add(series20);
+            this.chart1.Series.Add(series21);
+            this.chart1.Series.Add(series22);
+            this.chart1.Series.Add(series23);
+            this.chart1.Series.Add(series24);
             this.chart1.Size = new System.Drawing.Size(711, 300);
             this.chart1.TabIndex = 16;
             this.chart1.Text = "chart1";

@@ -58,6 +58,7 @@
     <Compile Include="BarometricPressureDataValue.cs" />
     <Compile Include="DryBlubTemperatureDataValue.cs" />
     <Compile Include="RelativeHumitityDataValue.cs" />
+    <Compile Include="RangeDataValue.cs" />
     <Compile Include="WetBlubTemperatureDataValue.cs" />
     <Compile Include="PsychrometricsInputData.cs" />
     <Compile Include="UnitConverter.cs" />
