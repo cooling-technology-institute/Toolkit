@@ -33,9 +33,6 @@ namespace ToolkitLibrary
             ElevationDataValue = new ElevationDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             WaterAirFlowRateDataValue = new WaterAirFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             BarometricPressureDataValue = new BarometricPressureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-
-            HotWaterTemperatureDataValue = new HotWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            ColdWaterTemperatureDataValue = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
         }
 
         public bool ConvertValues(bool isIS, bool isElevation)
@@ -45,8 +42,6 @@ namespace ToolkitLibrary
             if (IsInternationalSystemOfUnits_IS != isIS)
             {
                 IsInternationalSystemOfUnits_IS = isIS;
-                HotWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
-                ColdWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
                 WaterAirFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
                 ElevationDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
                 WetBlubTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
