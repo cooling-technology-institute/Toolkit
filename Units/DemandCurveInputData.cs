@@ -4,11 +4,6 @@ using System.Text;
 
 namespace ToolkitLibrary
 {
-    //Hot Water Temperature HWT
-    //Cold Water Temperature CWT
-    //Wet Bulb Temperature WBT
-    //Water Flow Rate L
-    //Air Flow Rate G
     public class DemandCurveInputData
     {
         public PsychrometricsCalculationType CalculationType { get; set; }
@@ -21,6 +16,10 @@ namespace ToolkitLibrary
         public ElevationDataValue ElevationDataValue { get; set; }
         public WaterAirFlowRateDataValue WaterAirFlowRateDataValue { get; set; }
         public BarometricPressureDataValue BarometricPressureDataValue { get; set; }
+        public C1DataValue C1DataValue { get; set; }
+        public SlopeDataValue SlopeDataValue { get; set; }
+        public MinimumDataValue MinimumDataValue { get; set; }
+        public MaximumDataValue MaximumDataValue { get; set; }
 
         public DemandCurveInputData(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
@@ -28,11 +27,15 @@ namespace ToolkitLibrary
             IsInternationalSystemOfUnits_IS = IsInternationalSystemOfUnits_IS;
             IsElevation = true;
 
-            RangeDataValue = new RangeDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             WetBlubTemperatureDataValue = new WetBlubTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+            RangeDataValue = new RangeDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             ElevationDataValue = new ElevationDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            WaterAirFlowRateDataValue = new WaterAirFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             BarometricPressureDataValue = new BarometricPressureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+            C1DataValue = new C1DataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+            SlopeDataValue = new SlopeDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+            MinimumDataValue = new MinimumDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+            MaximumDataValue = new MaximumDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+            WaterAirFlowRateDataValue = new WaterAirFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
         }
 
         public bool ConvertValues(bool isIS, bool isElevation)

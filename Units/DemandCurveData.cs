@@ -6,7 +6,7 @@ namespace ToolkitLibrary
 {
     public class DemandCurveData
     {
-        public NameValueUnitsDataTable NameValueUnitsDataTable { get; set; }
+        public DataTable DataTable { get; set; }
 
         public double CurveC1 { set; get; }
         public double CurveC2 { set; get; }
@@ -38,13 +38,13 @@ namespace ToolkitLibrary
             IsInternationalSystemOfUnits_IS_ = false;
             IsElevation = true;
 
-#ifdef _DEMO_VERSION
-            CurveC1 = 2.0;
-            CurveC2 = (-0.75);
-#else
+//#ifdef _DEMO_VERSION
+//            CurveC1 = 2.0;
+//            CurveC2 = (-0.75);
+//#else
             CurveC1 = 0;
             CurveC2 = 0;
-#endif
+//#endif
             WaterAirRatio = 1.0;
             BarometricPressure = 0.0;
             Elevation = 0;
@@ -62,7 +62,7 @@ namespace ToolkitLibrary
                 Range = 18;
             }
 
-            NameValueUnitsDataTable = new NameValueUnitsDataTable();
+            DataTable = new DataTable();
 
             SetUnits();
         }

@@ -7,8 +7,21 @@ namespace ToolkitLibrary
 {
     public class DemandCurveCalculationLibrary
     {
-        public static DataTable DemandCurveCalculation(DemandCurveData data)
+        const int INDEX_TARGETAPPROACH = 18;
+        const int INDEX_USERAPPROACH = 19;
+        const int INDEX_COEF = 20;
+        const int INDEX_LG = 21;
+        const int INDEX_KAVL = 22;
+
+        double[] InitialApproachXValues = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100 };
+        List<double> ApproachXValues { get; set; }
+        double TargetApproach { get; set; }
+
+        public DataTable DemandCurveCalculation(DemandCurveData data)
         {
+            TargetApproach = 0;
+            ApproachXValues = new List<double>();
+
             try
             {
                 if (data.IsInternationalSystemOfUnits_IS_)
@@ -28,45 +41,43 @@ namespace ToolkitLibrary
                     }
                 }
 
-                double dX = wndGraph.GetSeries(0).XScreenToValue(X);
-                double dY = m_wndGraph.GetSeries(0).YScreenToValue(Y);
+                data.DataTable.Clear();
 
-                data.Approach = GetExactApproach(data.WetBulbTemperature, data.Range, dX, ALTC, dY);
+                DataColumn dataColumn = new DataColumn();
+                dataColumn.ColumnName = "X";
+                dataColumn.DataType = Type.GetType("System.Double");
+                data.DataTable.Columns.Add(dataColumn);
+                for (int i = 1; i <= INDEX_KAVL; i++)
+                {
+                    dataColumn = new DataColumn();
+                    dataColumn.ColumnName = string.Format("Y{0}", i);
+                    dataColumn.DataType = Type.GetType("System.Double");
+                    data.DataTable.Columns.Add(dataColumn);
+                }
+
+                InitializeApproachList(data);
+                CalculateApproach(data);
+                CalculateApproaches(data);
             }
             catch (Exception e)
             {
                 MessageBox.Show(string.Format("Calculation exception: {0}", e.Message));
             }
 
-            //CalculationLibrary.CalculateDemandCurve(data);
-
-            return DemandCurve_CheckCalculationValues(data);
+            return data.DataTable;
         }
 
-        public static DataTable DemandCurve_CheckCalculationValues(DemandCurveData data)
+        void InitializeApproachList(DemandCurveData data)
         {
-            data.NameValueUnitsDataTable.DataTable.Clear();
-
-            //data.BarometricPressure = truncit(data.BarometricPressure, 5);
-            data.NameValueUnitsDataTable.AddRow("KaV/L", data.KaV_L.ToString("F5"), string.Empty);
-
-            return data.NameValueUnitsDataTable.DataTable;
-        }
-
-        List<double> InitializeApproachList(double webBulbTemperatrue, double range, double elevation)
-        {
-            double[] approachListValue = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100 };
-            List<double> approachList = new List<double>();
-
             MerkelData merkelData = new MerkelData()
             {
-                WetBulbTemperature = webBulbTemperatrue,
-                Range = range,
-                Elevation = elevation,
+                WetBulbTemperature = data.WetBulbTemperature,
+                Range = data.Range,
+                Elevation = data.Elevation,
                 WaterAirRatio = 0.1
             };
 
-            foreach (double approachValue in approachListValue)
+            foreach (double approachValue in InitialApproachXValues)
             {
                 merkelData.Approach = approachValue;
 
@@ -74,10 +85,112 @@ namespace ToolkitLibrary
 
                 if ((KaVL > 0.1) && (KaVL < 5.0))
                 {
-                    approachList.Add(approachValue);
+                    ApproachXValues.Add(approachValue);
                 }
             }
-            return approachList;
+        }
+
+        void CalculateApproach(DemandCurveData data)
+        {
+            MerkelData merkelData = new MerkelData()
+            {
+                WetBulbTemperature = data.WetBulbTemperature,
+                Range = data.Range,
+                Elevation = data.Elevation,
+                WaterAirRatio = data.WaterAirRatio
+            };
+
+            if ((data.WaterAirRatio >= 0.1) && (data.WaterAirRatio <= 5.0))
+            {
+                if (data.CurveC1 != 0.0 && data.CurveC2 != 0.0)
+                {
+                    data.KaV_L = Math.Round((data.CurveC1 * Math.Pow(data.WaterAirRatio, data.CurveC2)), 5, MidpointRounding.ToEven);
+                    data.Approach = GetExactApproach(merkelData);
+
+                    if ((data.KaV_L < .01) || (data.KaV_L > 5.0))
+                    {
+                        data.KaV_L = 0.0;
+                        data.Approach = 0;
+                    }
+
+                    if (TargetApproach >= 100)
+                    {
+                        data.Approach = 0;
+                    }
+
+                    if (!data.IsInternationalSystemOfUnits_IS_)
+                    {
+                        data.Approach *= 5.0 / 9.0;
+                    }
+                }
+            }
+        }
+
+        void CalculateApproaches(DemandCurveData data)
+        {
+            MerkelData merkelData = new MerkelData()
+            {
+                WetBulbTemperature = data.WetBulbTemperature,
+                Range = data.Range,
+                Elevation = data.Elevation,
+                WaterAirRatio = data.WaterAirRatio
+            };
+
+            double kaVL = 0;
+            double maxVal = 5.0;   // for kavl
+            double minVal = 0.01;  // for kavl
+            double min4Lg = 999.0;
+            double dLG = 0.0;
+            double sDLG = 0.0;
+
+            for (double waterAirRatio = 0.1; waterAirRatio < 5.0; waterAirRatio += .05)
+			{
+                DataRow dataRow = data.DataTable.NewRow();
+
+                for (int i = 0; i <= INDEX_USERAPPROACH; i++)
+				{
+                    if (ApproachXValues[i] > 0.0001)
+					{
+                        merkelData.WaterAirRatio = data.WaterAirRatio;
+                        merkelData.Approach = 0.1;
+
+                        merkelData.Approach = ApproachXValues[i];
+                        if (!data.IsInternationalSystemOfUnits_IS_)
+                        {
+                            merkelData.Approach *= 1.8;
+                        }
+
+                        kaVL = CalculationLibrary.CalculateMerkel(merkelData);
+
+                        // ddp
+                        if ((kaVL < minVal ) || (kaVL >= maxVal ))
+						{
+							double dInterp;
+							for (dInterp = waterAirRatio; ((kaVL < minVal ) || (kaVL >= maxVal )) && (dInterp > .1); dInterp -= 0.0002)
+							{
+                                merkelData.WaterAirRatio = dInterp;
+                                kaVL = CalculationLibrary.CalculateMerkel(merkelData);
+							}
+							sDLG = dInterp;
+                            ApproachXValues[i] = 0;  //DDP This is the last point
+						}
+						else
+						{
+							sDLG = kaVL;
+						}
+
+						if ((min4Lg > kaVL) && (kaVL > .1))
+                        {
+                            min4Lg = kaVL;
+                        }
+
+                        dataRow[string.Format("Y{0}", i + 1)] = sDLG;
+                    }
+                }
+
+                dataRow["X"] = waterAirRatio;
+                data.DataTable.Rows.Add(dataRow);
+            }
         }
 
         void SaveDataFiles()
@@ -142,10 +255,10 @@ namespace ToolkitLibrary
             //    //---------------------------------------------------------------------
             //    strSection = "Demand Curve Data";
             //    GetPrivateProfileString(strSection, "CurveC1", "0.0", szValue, 256, m_strDataName);
-            //    m_dblCurveC1 = atof(szValue);
+            //    data.CurveC1 = atof(szValue);
 
             //    GetPrivateProfileString(strSection, "CurveC2", "0.0", szValue, 256, m_strDataName);
-            //    m_dblCurveC2 = atof(szValue);
+            //    data.CurveC2 = atof(szValue);
 
             //    GetPrivateProfileString(strSection, "Altitude", "0.0", szValue, 256, m_strDataName);
             //    m_dblAltitude = atof(szValue);
@@ -154,7 +267,7 @@ namespace ToolkitLibrary
             //    m_dblKavl = atof(szValue);
 
             //    GetPrivateProfileString(strSection, "Lg", "0.0", szValue, 256, m_strDataName);
-            //    m_dblLg = atof(szValue);
+            //    data.WaterAirRatio = atof(szValue);
 
             //    GetPrivateProfileString(strSection, "CurveMin", "0.5", szValue, 256, m_strDataName);
             //    m_dblCurveMin = atof(szValue);
@@ -235,10 +348,10 @@ namespace ToolkitLibrary
             //    //---------------------------------------------------------------------
             //    strSection = "Demand Curve Data";
 
-            //    strTemp.Format("%.04f", m_dblCurveC1);
+            //    strTemp.Format("%.04f", data.CurveC1);
             //    WritePrivateProfileString(strSection, "CurveC1", strTemp, m_strDataName);
 
-            //    strTemp.Format("%.04f", m_dblCurveC2);
+            //    strTemp.Format("%.04f", data.CurveC2);
             //    WritePrivateProfileString(strSection, "CurveC2", strTemp, m_strDataName);
 
             //    strTemp.Format("%.04f", m_dblAltitude);
@@ -247,7 +360,7 @@ namespace ToolkitLibrary
             //    strTemp.Format("%.04f", m_dblKavl);
             //    WritePrivateProfileString(strSection, "Kavl", strTemp, m_strDataName);
 
-            //    strTemp.Format("%.04f", m_dblLg);
+            //    strTemp.Format("%.04f", data.WaterAirRatio);
             //    WritePrivateProfileString(strSection, "Lg", strTemp, m_strDataName);
 
             //    strTemp.Format("%.04f", m_dblCurveMin);
@@ -290,8 +403,8 @@ namespace ToolkitLibrary
             //{
             //    UpdateData(true);
 
-            //    double dX = m_wndGraph.GetSeries(0).XScreenToValue(X);
-            //    double dY = m_wndGraph.GetSeries(0).YScreenToValue(Y);
+            //    double dX = m_DynamicCurveChart.GetSeries(0).XScreenToValue(X);
+            //    double dY = m_DynamicCurveChart.GetSeries(0).YScreenToValue(Y);
 
             //    double WBTC;
             //    double ALTC;
@@ -324,86 +437,91 @@ namespace ToolkitLibrary
         {
             //const MSG* msg = GetCurrentMessage();
             //POINT pt = msg->pt;
-            //m_wndGraph.ScreenToClient(&pt);
+            //m_DynamicCurveChart.ScreenToClient(&pt);
             //int approach = findApproach(pt.x, pt.y);
             //setapp(approach, false);
             //OnCurveButtonRecalc();
         }
 
-        double GetExactApproach(double dblCurveWBT, double dblCurveRange, double dblLg, double dblAltitude, double dblKaVl)
+        double GetExactApproach(MerkelData merkelData)
         {
-            //double dblApproach;
-            //double dblDelta = 1.0;
+            double approach;
+            double delta = 1.0;
 
-            ////---------------------------------------------------------------------
-            //// Find approach within .001
-            ////---------------------------------------------------------------------
-            //for (dblApproach = 0.0; dblApproach < 100.0; dblApproach += dblDelta)
-            //{
-            //    double kavl = Merkel(dblCurveWBT, dblCurveRange, dblApproach, dblLg, dblAltitude);
+            //---------------------------------------------------------------------
+            // Find approach within .001
+            //---------------------------------------------------------------------
+            for (approach = 0.0; approach < 100.0; approach += delta)
+            {
+                merkelData.Approach = approach;
+                double kavl = CalculationLibrary.CalculateMerkel(merkelData);
 
-            //    if (dblDelta > 0.9)
-            //    {
-            //        if (kavl < dblKaVl)
-            //        {
-            //            dblDelta = -0.001;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        if (kavl >= dblKaVl)
-            //        {
-            //            dblApproach = truncit(dblApproach, 3);
-            //            break;
-            //        }
-            //    }
-            //}
-            //return dblApproach;
-        }
-
-        int FindApproach(long X, long Y)
-        {
-            int approach = 0;
-            //int curveIndex = 0;
-            //double distance = 5000.0;
-            //double dX = m_wndGraph.GetSeries(0).XScreenToValue(X);
-            //double dY = m_wndGraph.GetSeries(0).YScreenToValue(Y);
-            //for (int x = 0; x < m_wndGraph.GetSeriesCount(); x++)
-            //{
-            //    CSeries cs;
-            //    CValueList cx;
-            //    CValueList cy;
-
-            //    //---------------------------------------------------------------------
-            //    // Find only approach lines
-            //    //---------------------------------------------------------------------
-            //    if (m_wndGraph.GetSeries(x).GetTitle() == "C" || m_wndGraph.GetSeries(x).GetTitle() == "L/G")
-            //    {
-            //        break;
-            //    }
-
-            //    cs = m_wndGraph.GetSeries(x);
-            //    cx = cs.GetXValues();
-            //    cy = cs.GetYValues();
-
-            //    //---------------------------------------------------------------------
-            //    // Find the closest approach line index
-            //    //---------------------------------------------------------------------
-            //    for (int y = 0; y < cx.GetCount(); y++)
-            //    {
-            //        double xc = cx.GetValue(y);
-            //        double yc = cy.GetValue(y);
-            //        double delta = abs(xc - dX) + abs(yc - dY);
-            //        if (distance > delta)
-            //        {
-            //            distance = delta;
-            //            curveIndex = x;
-            //        }
-            //    }
-            //}
-            //approach = curveIndex;
+                if (delta > 0.9)
+                {
+                    if (kavl < merkelData.KaV_L)
+                    {
+                        delta = -0.001;
+                    }
+                    else
+                    {
+                        break; // calculation error?
+                    }
+                }
+                else
+                {
+                    if (kavl >= merkelData.KaV_L)
+                    {
+                        approach = Math.Round(approach, 3, MidpointRounding.ToEven);
+                        break;
+                    }
+                }
+            }
             return approach;
         }
+
+        //int FindApproach(long X, long Y)
+        //{
+        //    int approach = 0;
+        //    int curveIndex = 0;
+        //    double distance = 5000.0;
+        //    double dX = m_DynamicCurveChart.GetSeries(0).XScreenToValue(X);
+        //    double dY = m_DynamicCurveChart.GetSeries(0).YScreenToValue(Y);
+        //    for (int x = 0; x < m_DynamicCurveChart.GetSeriesCount(); x++)
+        //    {
+        //        CSeries cs;
+        //        CValueList cx;
+        //        CValueList cy;
+
+        //        //---------------------------------------------------------------------
+        //        // Find only approach lines
+        //        //---------------------------------------------------------------------
+        //        if (m_DynamicCurveChart.GetSeries(x).GetTitle() == "C" || m_DynamicCurveChart.GetSeries(x).GetTitle() == "L/G")
+        //        {
+        //            break;
+        //        }
+
+        //        cs = m_DynamicCurveChart.GetSeries(x);
+        //        cx = cs.GetXValues();
+        //        cy = cs.GetYValues();
+
+        //        //---------------------------------------------------------------------
+        //        // Find the closest approach line index
+        //        //---------------------------------------------------------------------
+        //        for (int y = 0; y < cx.GetCount(); y++)
+        //        {
+        //            double xc = cx.GetValue(y);
+        //            double yc = cy.GetValue(y);
+        //            double delta = abs(xc - dX) + abs(yc - dY);
+        //            if (distance > delta)
+        //            {
+        //                distance = delta;
+        //                curveIndex = x;
+        //            }
+        //        }
+        //    }
+        //    approach = curveIndex;
+        //    return approach;
+        //}
 
         void OnFilePrintPreview()
         {
@@ -413,7 +531,7 @@ namespace ToolkitLibrary
             //    wndPrintFrame.ShowWindow(SW_NORMAL);
             //    wndPrintView.ShowWindow(SW_NORMAL);
             //    wndPrintFrame.m_bPrintPreview = TRUE;
-            //    wndPrintView.m_fnPrintPreview(tp.m_csDescription, m_dblCurveRange, m_dblCurveWBT, m_dblAltitude, m_dblCurveC1, m_dblCurveC2, m_dblKavl, m_dblLg, INDEX_TARGETAPPROACH, INDEX_USERAPPROACH, &m_wndGraph);
+            //    wndPrintView.m_fnPrintPreview(tp.m_csDescription, m_dblCurveRange, m_dblCurveWBT, m_dblAltitude, data.CurveC1, data.CurveC2, m_dblKavl, data.WaterAirRatio, INDEX_TARGETAPPROACH, INDEX_USERAPPROACH, &m_DynamicCurveChart);
             //}
         }
 
@@ -422,7 +540,7 @@ namespace ToolkitLibrary
             //TPrint tp;
             //if (tp.DoModal() == IDOK)
             //{
-            //    wndPrintView.m_fnPrint(tp.m_csDescription, m_dblCurveRange, m_dblCurveWBT, m_dblAltitude, m_dblCurveC1, m_dblCurveC2, m_dblKavl, m_dblLg, INDEX_TARGETAPPROACH, INDEX_USERAPPROACH, &m_wndGraph);
+            //    wndPrintView.m_fnPrint(tp.m_csDescription, m_dblCurveRange, m_dblCurveWBT, m_dblAltitude, data.CurveC1, data.CurveC2, m_dblKavl, data.WaterAirRatio, INDEX_TARGETAPPROACH, INDEX_USERAPPROACH, &m_DynamicCurveChart);
             //}
         }
 
@@ -435,7 +553,7 @@ namespace ToolkitLibrary
 		      //  {
 			     //   double	dLG;
 			     //   double  sDLG;
-			     //   double  prev_kavl;
+			     //   double  prevKaVL;
 			     //   double  incAmount = 0.0;
 			     //   int		iIndex;
 			     //   double	dTempRange;
@@ -454,98 +572,98 @@ namespace ToolkitLibrary
 			     //   //---------------------------------------------------------------------
 			     //   // Clean up graph
 			     //   //---------------------------------------------------------------------
-			     //   m_wndGraph.RemoveAllSeries();
+			     //   m_DynamicCurveChart.RemoveAllSeries();
 
 			     //   //---------------------------------------------------------------------
 			     //   // Setup the graph appearance
 			     //   //---------------------------------------------------------------------
-			     //   m_wndGraph.GetWalls().SetBackColor(0x0);  // black
-			     //   m_wndGraph.GetPanel().GetGradient().SetStartColor(0x0);
-			     //   m_wndGraph.GetPanel().GetGradient().SetEndColor(0x0);
-			     //   m_wndGraph.GetPanel().GetGradient().SetVisible(true);
-			     //   m_wndGraph.GetAspect().SetView3D(false);
-			     //   m_wndGraph.SetDragMode(dmManual);
+			     //   m_DynamicCurveChart.GetWalls().SetBackColor(0x0);  // black
+			     //   m_DynamicCurveChart.GetPanel().GetGradient().SetStartColor(0x0);
+			     //   m_DynamicCurveChart.GetPanel().GetGradient().SetEndColor(0x0);
+			     //   m_DynamicCurveChart.GetPanel().GetGradient().SetVisible(true);
+			     //   m_DynamicCurveChart.GetAspect().SetView3D(false);
+			     //   m_DynamicCurveChart.SetDragMode(dmManual);
 
 			     //   // Standard approach curve pen
 			     //   color = 0xFFFF;  // bright yellow
 
-			     //   m_wndGraph.GetLegend().SetVisible(false);
+			     //   m_DynamicCurveChart.GetLegend().SetVisible(false);
 
-			     //   m_wndGraph.GetAxis().GetLeft().SetMinMax(.1, 10);
-			     //   m_wndGraph.GetAxis().GetRight().SetMinMax(.1, 10);
-			     //   m_wndGraph.GetAxis().GetTop().SetMinMax(.1, 10);
+			     //   m_DynamicCurveChart.GetAxis().GetLeft().SetMinMax(.1, 10);
+			     //   m_DynamicCurveChart.GetAxis().GetRight().SetMinMax(.1, 10);
+			     //   m_DynamicCurveChart.GetAxis().GetTop().SetMinMax(.1, 10);
         //#ifdef _NEW_GRAPH_LIMITS
-			     //   m_wndGraph.GetAxis().GetBottom().SetMinMax(LG_MIN_IP, LG_MAX_IP);
+			     //   m_DynamicCurveChart.GetAxis().GetBottom().SetMinMax(LG_MIN_IP, LG_MAX_IP);
         //#else
-			     //   m_wndGraph.GetAxis().GetBottom().SetMinMax(.1, 10);
+			     //   m_DynamicCurveChart.GetAxis().GetBottom().SetMinMax(.1, 10);
         //#endif
 
-			     //   m_wndGraph.GetAxis().GetLeft().SetLogarithmic(true);
-			     //   m_wndGraph.GetAxis().GetRight().SetLogarithmic(true);
-			     //   m_wndGraph.GetAxis().GetTop().SetLogarithmic(true);
-			     //   m_wndGraph.GetAxis().GetBottom().SetLogarithmic(true);
+			     //   m_DynamicCurveChart.GetAxis().GetLeft().SetLogarithmic(true);
+			     //   m_DynamicCurveChart.GetAxis().GetRight().SetLogarithmic(true);
+			     //   m_DynamicCurveChart.GetAxis().GetTop().SetLogarithmic(true);
+			     //   m_DynamicCurveChart.GetAxis().GetBottom().SetLogarithmic(true);
 
-			     //   m_wndGraph.GetAxis().GetLeft().GetMinorTicks().SetColor(  0xCCCCCC );
-			     //   m_wndGraph.GetAxis().GetRight().GetMinorTicks().SetColor( 0xCCCCCC );
-			     //   m_wndGraph.GetAxis().GetTop().GetMinorTicks().SetColor(   0xCCCCCC );
-			     //   m_wndGraph.GetAxis().GetBottom().GetMinorTicks().SetColor(0xCCCCCC );
+			     //   m_DynamicCurveChart.GetAxis().GetLeft().GetMinorTicks().SetColor(  0xCCCCCC );
+			     //   m_DynamicCurveChart.GetAxis().GetRight().GetMinorTicks().SetColor( 0xCCCCCC );
+			     //   m_DynamicCurveChart.GetAxis().GetTop().GetMinorTicks().SetColor(   0xCCCCCC );
+			     //   m_DynamicCurveChart.GetAxis().GetBottom().GetMinorTicks().SetColor(0xCCCCCC );
 
 			     //   // grid color
-			     //   m_wndGraph.GetAxis().GetLeft().GetGridPen().SetColor(  0x777777);
-			     //   m_wndGraph.GetAxis().GetRight().GetGridPen().SetColor( 0x777777 );
-			     //   m_wndGraph.GetAxis().GetTop().GetGridPen().SetColor(   0x777777 );
-			     //   m_wndGraph.GetAxis().GetBottom().GetGridPen().SetColor(0x777777 );
+			     //   m_DynamicCurveChart.GetAxis().GetLeft().GetGridPen().SetColor(  0x777777);
+			     //   m_DynamicCurveChart.GetAxis().GetRight().GetGridPen().SetColor( 0x777777 );
+			     //   m_DynamicCurveChart.GetAxis().GetTop().GetGridPen().SetColor(   0x777777 );
+			     //   m_DynamicCurveChart.GetAxis().GetBottom().GetGridPen().SetColor(0x777777 );
 
 			     //   // Axis color
-			     //   m_wndGraph.GetAxis().GetLeft().GetAxisPen().SetColor(  0xE4E4E4 );
-			     //   m_wndGraph.GetAxis().GetRight().GetAxisPen().SetColor( 0xE4E4E4 );
-			     //   m_wndGraph.GetAxis().GetTop().GetAxisPen().SetColor(   0xE4E4E4 );
-			     //   m_wndGraph.GetAxis().GetBottom().GetAxisPen().SetColor(0xE4E4E4 );
+			     //   m_DynamicCurveChart.GetAxis().GetLeft().GetAxisPen().SetColor(  0xE4E4E4 );
+			     //   m_DynamicCurveChart.GetAxis().GetRight().GetAxisPen().SetColor( 0xE4E4E4 );
+			     //   m_DynamicCurveChart.GetAxis().GetTop().GetAxisPen().SetColor(   0xE4E4E4 );
+			     //   m_DynamicCurveChart.GetAxis().GetBottom().GetAxisPen().SetColor(0xE4E4E4 );
 
 			     //   // grid text
-			     //   m_wndGraph.GetAxis().GetLeft().GetTitle().GetFont().SetColor(0xFFFFFF);
-			     //   m_wndGraph.GetAxis().GetBottom().GetTitle().GetFont().SetColor(0xFFFFFF);
+			     //   m_DynamicCurveChart.GetAxis().GetLeft().GetTitle().GetFont().SetColor(0xFFFFFF);
+			     //   m_DynamicCurveChart.GetAxis().GetBottom().GetTitle().GetFont().SetColor(0xFFFFFF);
 
 			     //   // axis labels
-			     //   m_wndGraph.GetAxis().GetLeft().GetLabels().GetFont().SetColor(0xFFFFFF);
-			     //   m_wndGraph.GetAxis().GetBottom().GetLabels().GetFont().SetColor(0xFFFFFF);
+			     //   m_DynamicCurveChart.GetAxis().GetLeft().GetLabels().GetFont().SetColor(0xFFFFFF);
+			     //   m_DynamicCurveChart.GetAxis().GetBottom().GetLabels().GetFont().SetColor(0xFFFFFF);
 
 			     //   // set major axis to solid lines - psSolid
-			     //   m_wndGraph.GetAxis().GetLeft().GetGridPen().SetStyle(  psSolid );
-			     //   m_wndGraph.GetAxis().GetRight().GetGridPen().SetStyle( psSolid );
-			     //   m_wndGraph.GetAxis().GetTop().GetGridPen().SetStyle(   psSolid );
-			     //   m_wndGraph.GetAxis().GetBottom().GetGridPen().SetStyle(psSolid );
+			     //   m_DynamicCurveChart.GetAxis().GetLeft().GetGridPen().SetStyle(  psSolid );
+			     //   m_DynamicCurveChart.GetAxis().GetRight().GetGridPen().SetStyle( psSolid );
+			     //   m_DynamicCurveChart.GetAxis().GetTop().GetGridPen().SetStyle(   psSolid );
+			     //   m_DynamicCurveChart.GetAxis().GetBottom().GetGridPen().SetStyle(psSolid );
 
-			     //   m_wndGraph.GetAxis().GetLeft().GetGridPen().SetWidth(  1 );
-			     //   m_wndGraph.GetAxis().GetRight().GetGridPen().SetWidth( 1 );
-			     //   m_wndGraph.GetAxis().GetTop().GetGridPen().SetWidth(   1 );
-			     //   m_wndGraph.GetAxis().GetBottom().GetGridPen().SetWidth(1 );
+			     //   m_DynamicCurveChart.GetAxis().GetLeft().GetGridPen().SetWidth(  1 );
+			     //   m_DynamicCurveChart.GetAxis().GetRight().GetGridPen().SetWidth( 1 );
+			     //   m_DynamicCurveChart.GetAxis().GetTop().GetGridPen().SetWidth(   1 );
+			     //   m_DynamicCurveChart.GetAxis().GetBottom().GetGridPen().SetWidth(1 );
 
-			     //   m_wndGraph.GetAxis().GetTop().GetLabels().SetAngle(90);
-			     //   m_wndGraph.GetAxis().GetBottom().GetLabels().SetAngle(90);
+			     //   m_DynamicCurveChart.GetAxis().GetTop().GetLabels().SetAngle(90);
+			     //   m_DynamicCurveChart.GetAxis().GetBottom().GetLabels().SetAngle(90);
 
-			     //   m_wndGraph.GetAxis().GetLeft().GetLabels().GetFont().SetSize(6);
-			     //   m_wndGraph.GetAxis().GetRight().GetLabels().GetFont().SetSize(6);
-			     //   m_wndGraph.GetAxis().GetTop().GetLabels().GetFont().SetSize(6);
-			     //   m_wndGraph.GetAxis().GetBottom().GetLabels().GetFont().SetSize(6);
+			     //   m_DynamicCurveChart.GetAxis().GetLeft().GetLabels().GetFont().SetSize(6);
+			     //   m_DynamicCurveChart.GetAxis().GetRight().GetLabels().GetFont().SetSize(6);
+			     //   m_DynamicCurveChart.GetAxis().GetTop().GetLabels().GetFont().SetSize(6);
+			     //   m_DynamicCurveChart.GetAxis().GetBottom().GetLabels().GetFont().SetSize(6);
 
-			     //   m_wndGraph.GetAxis().GetLeft().SetAutomaticMinimum(true);
-			     //   m_wndGraph.GetAxis().GetRight().SetAutomaticMinimum(true);
-			     //   m_wndGraph.GetAxis().GetTop().SetAutomaticMinimum(true);
-			     //   m_wndGraph.GetAxis().GetBottom().SetAutomaticMinimum(true);
+			     //   m_DynamicCurveChart.GetAxis().GetLeft().SetAutomaticMinimum(true);
+			     //   m_DynamicCurveChart.GetAxis().GetRight().SetAutomaticMinimum(true);
+			     //   m_DynamicCurveChart.GetAxis().GetTop().SetAutomaticMinimum(true);
+			     //   m_DynamicCurveChart.GetAxis().GetBottom().SetAutomaticMinimum(true);
 
-			     //   m_wndGraph.GetAxis().GetLeft().SetAutomaticMaximum(true);
-			     //   m_wndGraph.GetAxis().GetRight().SetAutomaticMaximum(true);
-			     //   m_wndGraph.GetAxis().GetTop().SetAutomaticMaximum(true);
-			     //   m_wndGraph.GetAxis().GetBottom().SetAutomaticMaximum(true);
+			     //   m_DynamicCurveChart.GetAxis().GetLeft().SetAutomaticMaximum(true);
+			     //   m_DynamicCurveChart.GetAxis().GetRight().SetAutomaticMaximum(true);
+			     //   m_DynamicCurveChart.GetAxis().GetTop().SetAutomaticMaximum(true);
+			     //   m_DynamicCurveChart.GetAxis().GetBottom().SetAutomaticMaximum(true);
 
-			     //   m_wndGraph.GetAxis().GetLeft().GetTitle().SetCaption("KaV/L");
-			     //   m_wndGraph.GetAxis().GetBottom().GetTitle().SetCaption("L/G");
+			     //   m_DynamicCurveChart.GetAxis().GetLeft().GetTitle().SetCaption("KaV/L");
+			     //   m_DynamicCurveChart.GetAxis().GetBottom().GetTitle().SetCaption("L/G");
 
-			     //   m_wndGraph.GetAxis().GetLeft().GetTitle().GetFont().SetSize(10);
-			     //   m_wndGraph.GetAxis().GetBottom().GetTitle().GetFont().SetSize(10);
-			     //   m_wndGraph.GetAxis().GetLeft().GetTitle().GetFont().SetBold(true);
-			     //   m_wndGraph.GetAxis().GetBottom().GetTitle().GetFont().SetBold(true);
+			     //   m_DynamicCurveChart.GetAxis().GetLeft().GetTitle().GetFont().SetSize(10);
+			     //   m_DynamicCurveChart.GetAxis().GetBottom().GetTitle().GetFont().SetSize(10);
+			     //   m_DynamicCurveChart.GetAxis().GetLeft().GetTitle().GetFont().SetBold(true);
+			     //   m_DynamicCurveChart.GetAxis().GetBottom().GetTitle().GetFont().SetBold(true);
 
 			     //   //---------------------------------------------------------------------
 			     //   // if metric, convert to english units before calculating
@@ -586,12 +704,12 @@ namespace ToolkitLibrary
 			     //   //---------------------------------------------------------------------
 			     //   // Calculate the Target Approach
 			     //   //---------------------------------------------------------------------
-			     //   if ((m_dblLg >= dLG_MIN) && (m_dblLg <= dLG_MAX))
+			     //   if ((data.WaterAirRatio >= dLG_MIN) && (data.WaterAirRatio <= dLG_MAX))
 			     //   {
-				    //    if (m_dblCurveC1 && m_dblCurveC2)
+				    //    if (data.CurveC1 && data.CurveC2)
 				    //    {
-					   //     m_dblKavl = truncit((m_dblCurveC1 * pow( m_dblLg, m_dblCurveC2 )), 5);
-					   //     m_dblTargetApproach = m_fnGetExactApproach(m_dblCurveWBT, m_dblCurveRange, m_dblLg, m_dblAltitude, m_dblKavl);
+					   //     m_dblKavl = truncit((data.CurveC1 * pow( data.WaterAirRatio, data.CurveC2 )), 5);
+					   //     m_dblTargetApproach = m_fnGetExactApproach(m_dblCurveWBT, m_dblCurveRange, data.WaterAirRatio, m_dblAltitude, m_dblKavl);
 
 					   //     if ((m_dblKavl < .01) || (m_dblKavl > maxVal))
 					   //     {
@@ -619,44 +737,44 @@ namespace ToolkitLibrary
 			     //   //---------------------------------------------------------------------
 			     //   for (iIndex = 0; iIndex < 18; iIndex++)
 			     //   {
-				    //    m_wndGraph.AddSeries(scLine);
+				    //    m_DynamicCurveChart.AddSeries(scLine);
 				    //    strTitle.Format("%i", (int)App[iIndex]);
-				    //    m_wndGraph.GetSeries(iIndex).SetTitle(strTitle);
+				    //    m_DynamicCurveChart.GetSeries(iIndex).SetTitle(strTitle);
 			     //   }
 
 			     //   //---------------------------------------------------------------------
 			     //   // User and target Approach Curves
 			     //   //---------------------------------------------------------------------
-			     //   m_wndGraph.AddSeries(scLine);
+			     //   m_DynamicCurveChart.AddSeries(scLine);
 			     //   strTitle.Format("%.3f", m_dblTargetApproach);
-			     //   m_wndGraph.GetSeries(INDEX_TARGETAPPROACH).SetTitle(strTitle);
+			     //   m_DynamicCurveChart.GetSeries(INDEX_TARGETAPPROACH).SetTitle(strTitle);
 			     //   App[INDEX_TARGETAPPROACH] = m_dblTargetApproach;
 
-			     //   m_wndGraph.AddSeries(scLine);
+			     //   m_DynamicCurveChart.AddSeries(scLine);
 			     //   strTitle.Format("%.3f", m_dblUserApproach);
-			     //   m_wndGraph.GetSeries(INDEX_USERAPPROACH).SetTitle(strTitle);
+			     //   m_DynamicCurveChart.GetSeries(INDEX_USERAPPROACH).SetTitle(strTitle);
 			     //   App[INDEX_USERAPPROACH] = m_dblUserApproach;
 
 			     //   //---------------------------------------------------------------------
 			     //   // Characteristic Line
 			     //   //---------------------------------------------------------------------
-			     //   m_wndGraph.AddSeries(scLine);
+			     //   m_DynamicCurveChart.AddSeries(scLine);
 			     //   strTitle = "C";
-			     //   m_wndGraph.GetSeries(INDEX_COEF).SetTitle(strTitle);
+			     //   m_DynamicCurveChart.GetSeries(INDEX_COEF).SetTitle(strTitle);
 
 			     //   //---------------------------------------------------------------------
 			     //   // L/G Line
 			     //   //---------------------------------------------------------------------
-			     //   m_wndGraph.AddSeries(scLine);
+			     //   m_DynamicCurveChart.AddSeries(scLine);
 			     //   strTitle = "L/G";
-			     //   m_wndGraph.GetSeries(INDEX_LG).SetTitle(strTitle);
+			     //   m_DynamicCurveChart.GetSeries(INDEX_LG).SetTitle(strTitle);
 
 			     //   //---------------------------------------------------------------------
 			     //   // KAVL Line
 			     //   //---------------------------------------------------------------------
-			     //   m_wndGraph.AddSeries(scLine);
+			     //   m_DynamicCurveChart.AddSeries(scLine);
 			     //   strTitle = "KaV/L";
-			     //   m_wndGraph.GetSeries(INDEX_KAVL).SetTitle(strTitle);
+			     //   m_DynamicCurveChart.GetSeries(INDEX_KAVL).SetTitle(strTitle);
 
 			
 			     //   //---------------------------------------------------------------------
@@ -671,7 +789,7 @@ namespace ToolkitLibrary
 					   //     {
 						  //      dTempRange = m_dblCurveWBT + (1.8 * (double)iIndex);
             
-						  //      if (iIndex > 0) prev_kavl = kavl;
+						  //      if (iIndex > 0) prevKaVL = kavl;
 						
 						  //      if (TPropPageBase::metricflag)
 						  //      {
@@ -714,11 +832,11 @@ namespace ToolkitLibrary
 							 //       {
 								//        case INDEX_TARGETAPPROACH:
 								//        case INDEX_USERAPPROACH:
-								//	        m_wndGraph.GetSeries(iIndex).AddXY(sDLG, kavl, NULL, 0x0099FF);
+								//	        m_DynamicCurveChart.GetSeries(iIndex).AddXY(sDLG, kavl, NULL, 0x0099FF);
 								//	        break;
 
 								//        default:
-								//	        m_wndGraph.GetSeries(iIndex).AddXY(sDLG, kavl, NULL, color);
+								//	        m_DynamicCurveChart.GetSeries(iIndex).AddXY(sDLG, kavl, NULL, color);
 								//	        break;
 							 //       }
 						  //      }
@@ -729,17 +847,17 @@ namespace ToolkitLibrary
 			     //   //---------------------------------------------------------------------
 			     //   // Draw Fill Line
 			     //   //---------------------------------------------------------------------
-			     //   if ((m_dblCurveC1 != 0) && (m_dblCurveC2 != 0) && coef)
+			     //   if ((data.CurveC1 != 0) && (data.CurveC2 != 0) && coef)
 			     //   {        
 				    //    for (dLG = m_dblCurveMin; dLG <= m_dblCurveMax; dLG += .05)
 				    //    {
 					   //     if ((dLG >= m_dblCurveMin) && (dLG <= m_dblCurveMax))
 					   //     {
-						  //      double dblK = m_dblCurveC1 * pow(dLG, m_dblCurveC2);
+						  //      double dblK = data.CurveC1 * pow(dLG, data.CurveC2);
 
 						  //      if ((dblK >= min4Lg) && (dblK <= maxVal))
 						  //      {
-							 //       m_wndGraph.GetSeries(INDEX_COEF).AddXY(dLG, dblK, NULL, 0x0099FF);	
+							 //       m_DynamicCurveChart.GetSeries(INDEX_COEF).AddXY(dLG, dblK, NULL, 0x0099FF);	
 						  //      }
 					   //     }
 				    //    }
@@ -748,10 +866,10 @@ namespace ToolkitLibrary
 			     //   //---------------------------------------------------------------------
 			     //   // Draw L/G line
 			     //   //---------------------------------------------------------------------
-			     //   if (m_dblLg > dLG_MIN && m_dblLg <= dLG_MAX && Lg)
+			     //   if (data.WaterAirRatio > dLG_MIN && data.WaterAirRatio <= dLG_MAX && Lg)
 			     //   {
-				    //    m_wndGraph.GetSeries(INDEX_LG).AddXY(m_dblLg, min4Lg, NULL, 0x0099FF);
-				    //    m_wndGraph.GetSeries(INDEX_LG).AddXY(m_dblLg, maxVal, NULL, 0x0099FF);
+				    //    m_DynamicCurveChart.GetSeries(INDEX_LG).AddXY(data.WaterAirRatio, min4Lg, NULL, 0x0099FF);
+				    //    m_DynamicCurveChart.GetSeries(INDEX_LG).AddXY(data.WaterAirRatio, maxVal, NULL, 0x0099FF);
 			     //   }
 
 			     //   //---------------------------------------------------------------------
@@ -759,8 +877,8 @@ namespace ToolkitLibrary
 			     //   //---------------------------------------------------------------------
 			     //   if (m_bShowKaVLLine && (m_dblKavl > 0.1) && (m_dblKavl <= maxVal))
 			     //   {
-				    //    m_wndGraph.GetSeries(INDEX_KAVL).AddXY(0.1, m_dblKavl, NULL, 0x0099FF);
-				    //    m_wndGraph.GetSeries(INDEX_KAVL).AddXY(5.0, m_dblKavl, NULL, 0x0099FF);
+				    //    m_DynamicCurveChart.GetSeries(INDEX_KAVL).AddXY(0.1, m_dblKavl, NULL, 0x0099FF);
+				    //    m_DynamicCurveChart.GetSeries(INDEX_KAVL).AddXY(5.0, m_dblKavl, NULL, 0x0099FF);
 			     //   }
 
 			     //   //---------------------------------------------------------------------
@@ -813,18 +931,18 @@ namespace ToolkitLibrary
 //            DDX_Text(pDX, IDC_CURVE_STATIC_ALTITUDE_UNITS, m_strAltitude);
 //            DDX_Text(pDX, IDC_CURVE_STATIC_RANGE_UNITS, m_strRange);
 //            DDX_Text(pDX, IDC_CURVE_STATIC_WBT_UNITS, m_strWBT);
-//            DDX_Control(pDX, IDC_TCHART_GRAPH, m_wndGraph);
+//            DDX_Control(pDX, IDC_TCHART_GRAPH, m_DynamicCurveChart);
 //            //}}AFX_DATA_MAP
 
 //            //---------------------------------------------------------------------
 //            // Minmax values
 //            //---------------------------------------------------------------------
-//            DDX_Text(pDX, IDC_EDIT_CURVE_LG, m_dblLg);
+//            DDX_Text(pDX, IDC_EDIT_CURVE_LG, data.WaterAirRatio);
 //# ifdef _NEW_GRAPH_LIMITS
-//            DDV_MinMaxDouble(pDX, m_dblLg, LG_MIN_IP, LG_MAX_IP,
+//            DDV_MinMaxDouble(pDX, data.WaterAirRatio, LG_MIN_IP, LG_MAX_IP,
 //                LG_MIN_SI, LG_MAX_SI, 2);
 //#else
-//            DDV_MinMaxDouble(pDX, m_dblLg, LG_P3_MIN_IP, LG_P3_MAX_IP,
+//            DDV_MinMaxDouble(pDX, data.WaterAirRatio, LG_P3_MIN_IP, LG_P3_MAX_IP,
 //                LG_P3_MIN_SI, LG_P3_MAX_SI, 2);
 //#endif // _NEW_GRAPH_LIMITS
 //            DDX_Text(pDX, IDC_CURVE_EDIT_WBT, m_dblCurveWBT);
@@ -832,10 +950,10 @@ namespace ToolkitLibrary
 //                WBT_MIN_SI, WBT_MAX_SI, 2);
 //            DDX_Text(pDX, IDC_CURVE_EDIT_RANGE, m_dblCurveRange);
 //            DDV_MinMaxDouble(pDX, m_dblCurveRange, .1, 160, .2, 88.9, 2);
-//            DDX_Text(pDX, IDC_EDIT_CURVE_C1, m_dblCurveC1);
-//            DDV_MinMaxDouble(pDX, m_dblCurveC1, 0, 10, 0, 10, 2);
-//            DDX_Text(pDX, IDC_EDIT_CURVE_C2, m_dblCurveC2);
-//            DDV_MinMaxDouble(pDX, m_dblCurveC2, -2, 0, -2, 0, 2);
+//            DDX_Text(pDX, IDC_EDIT_CURVE_C1, data.CurveC1);
+//            DDV_MinMaxDouble(pDX, data.CurveC1, 0, 10, 0, 10, 2);
+//            DDX_Text(pDX, IDC_EDIT_CURVE_C2, data.CurveC2);
+//            DDV_MinMaxDouble(pDX, data.CurveC2, -2, 0, -2, 0, 2);
 
 //            //---------------------------------------------------------------------
 //            // Get and Validate Altitude or Barometric Pressure.
@@ -1020,13 +1138,13 @@ namespace ToolkitLibrary
 //            // Set Default input values
 //            //---------------------------------------------------------------------
 //# ifdef _DEMO_VERSION
-//            m_dblCurveC1 = 2.0;
-//            m_dblCurveC2 = (-0.75);
+//            data.CurveC1 = 2.0;
+//            data.CurveC2 = (-0.75);
 //#else
-//            m_dblCurveC1 = 0;
-//            m_dblCurveC2 = 0;
+//            data.CurveC1 = 0;
+//            data.CurveC2 = 0;
 //#endif
-//            m_dblLg = 1.0;
+//            data.WaterAirRatio = 1.0;
 //            m_dblAltitude = 0;
 //            m_dblKavl = 0;
 //            m_dblCurveMin = 0.5;
@@ -1101,7 +1219,7 @@ namespace ToolkitLibrary
             //m_dblKavl = 0; // clear value
             //m_dblTargetApproach = 0; // clear value
             //GetDlgItem(IDC_EDIT_CURVE_KAVL)->SetWindowText("");
-            //m_wndGraph.RemoveAllSeries();
+            //m_DynamicCurveChart.RemoveAllSeries();
         }
 
         bool OnInitDialog()
@@ -1116,13 +1234,13 @@ namespace ToolkitLibrary
 //#endif
 
 //            SetHelpID(Demand_Curve_Help);
-//            AddSzControl(m_wndGraph, cdxCSizingDialog::mdResize, cdxCSizingDialog::mdResize);
+//            AddSzControl(m_DynamicCurveChart, cdxCSizingDialog::mdResize, cdxCSizingDialog::mdResize);
 
-//            if (m_wndGraph.GetHeader().GetText().Count() > 0)
+//            if (m_DynamicCurveChart.GetHeader().GetText().Count() > 0)
 //            {
-//                m_wndGraph.GetHeader().GetText().Remove(0);
+//                m_DynamicCurveChart.GetHeader().GetText().Remove(0);
 //            }
-//            m_wndGraph.GetPanel().SetColor(0xFFFFFF);
+//            m_DynamicCurveChart.GetPanel().SetColor(0xFFFFFF);
 
 //            CSpinButtonCtrl* pSpin = (CSpinButtonCtrl*)GetDlgItem(IDC_EDIT_MIN);
 //            m_SpinMin.SetBuddy((CWnd*)pSpin);
@@ -1132,8 +1250,8 @@ namespace ToolkitLibrary
 //            UpdateUnits();
 //            UpdateData(false);
 //            OnCurveButtonRecalc();
-//            m_wndGraph.GetAxis().GetLeft().SetIncrement(.75);
-//            m_wndGraph.GetAxis().GetBottom().SetIncrement(.5);
+//            m_DynamicCurveChart.GetAxis().GetLeft().SetIncrement(.75);
+//            m_DynamicCurveChart.GetAxis().GetBottom().SetIncrement(.5);
 
 //            //
 //            // Get list of data Files
@@ -1177,7 +1295,7 @@ namespace ToolkitLibrary
             //m_dblUserApproach = 0.0;
             ////{{AFX_DATA_INIT(TPropPageThree)
             //m_dblKavl = 0.0;
-            //m_dblLg = 1.0;
+            //data.WaterAirRatio = 1.0;
             //m_dblCurveMax = 0.0;
             //m_dblCurveMin = 0.0;
             //m_dblAltitude = 0.0;

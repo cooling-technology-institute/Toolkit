@@ -2,12 +2,19 @@
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using ToolkitLibrary;
 
 namespace CTICustomControls
 {
-    public partial class DemandCurveTabPage: UserControl
+    public partial class DemandCurveTabPage : UserControl
     {
+        const int INDEX_TARGETAPPROACH = 18;
+        const int INDEX_USERAPPROACH = 19;
+        const int INDEX_COEF = 20;
+        const int INDEX_LG = 21;
+        const int INDEX_KAVL = 22;
+
         private DemandCurveInputData DemandCurveInputData { get; set; }
         private DemandCurveData DemandCurveData { get; set; }
         private bool IsDemo { get; set; }
@@ -19,74 +26,35 @@ namespace CTICustomControls
 
             DemandCurveInputData = new DemandCurveInputData(IsDemo, IsInternationalSystemOfUnits_IS_);
 
+            InitializeData();
+
             SwitchCalculation();
 
             CalculateDemandCurve();
-
         }
 
-        private void SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_()
+        private void InitializeData()
         {
-            if (DemandCurveInputData.ConvertValues(InternationalSystemOfUnits_IS_.Checked, DemandCurveElevationRadio.Checked))
-            {
-                SwitchCalculation();
-            }
-
-            if (InternationalSystemOfUnits_IS_.Checked)
-            {
-                if (DemandCurveElevationRadio.Checked)
-                {
-                    DemandCurveElevationPressureUnits.Text = ConstantUnits.Meter;
-                }
-                else
-                {
-                    DemandCurveElevationPressureUnits.Text = ConstantUnits.BarometricPressureKiloPascal;
-                }
-            }
-            else
-            {
-                if (DemandCurveElevationRadio.Checked)
-                {
-                    DemandCurveElevationPressureUnits.Text = ConstantUnits.Foot;
-                }
-                else
-                {
-                    DemandCurveElevationPressureUnits.Text = ConstantUnits.BarometricPressureInchOfMercury;
-                }
-            }
+            DemandCurve_Wet_Bulb_Value.Text = DemandCurveInputData.WetBlubTemperatureDataValue.Current.ToString();
+            DemandCurve_Range_Value.Text = DemandCurveInputData.RangeDataValue.Current.ToString();
+            DemandCurve_Elevation_Value.Text = DemandCurveInputData.ElevationDataValue.Current.ToString();
+            DemandCurve_C_C1_Value.Text = DemandCurveInputData.C1DataValue.Current.ToString();
+            DemandCurve_Slope_C2_Value.Text = DemandCurveInputData.SlopeDataValue.Current.ToString();
+            DemandCurve_Minimum_Value.Text = DemandCurveInputData.MinimumDataValue.Current.ToString();
+            DemandCurve_Maximum_Value.Text = DemandCurveInputData.MaximumDataValue.Current.ToString();
+            DemandCurve_LG_Value.Text = DemandCurveInputData.WaterAirFlowRateDataValue.Current.ToString();
         }
 
         private void SwitchElevationPressure()
         {
-            string message;
-
-            if (DemandCurveInputData.ConvertValues(InternationalSystemOfUnits_IS_.Checked, DemandCurveElevationRadio.Checked))
+            if (DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_IS_, DemandCurveElevationRadio.Checked))
             {
                 SwitchCalculation();
             }
 
             if (DemandCurveElevationRadio.Checked)
             {
-                //double value = 0.0;
-                //if (double.TryParse(DemandCurve_Elevation_Value.Text, out value))
-                //{
-                //    if (InternationalSystemOfUnits_IS_.Checked)
-                //    {
-                //        value = UnitConverter.ConvertKilopascalToElevationInMeters(value);
-                //    }
-                //    else
-                //    {
-                //        value = UnitConverter.ConvertBarometricPressureToElevationInFeet(value);
-                //    }
-                //}
-                //else
-                //{
-                //    value = DemandCurveInputData.ElevationDataValue.Default;
-                //}
-                //DemandCurveInputData.BarometricPressureDataValue.UpdateValue(value.ToString(), out message);
-                //DemandCurve_Elevation_Value.Text = DemandCurveInputData.ElevationDataValue.InputValue;
-                //DemandCurveElevationPressureLabel.Text = DemandCurveInputData.ElevationDataValue.InputMessage + ":";
-                if (InternationalSystemOfUnits_IS_.Checked)
+                if (IsInternationalSystemOfUnits_IS_)
                 {
                     DemandCurveElevationPressureUnits.Text = ConstantUnits.Meter;
                 }
@@ -97,26 +65,7 @@ namespace CTICustomControls
             }
             else
             {
-                //double value = 0.0;
-                //if (double.TryParse(DemandCurve_Elevation_Value.Text, out value))
-                //{
-                //   if (InternationalSystemOfUnits_IS_.Checked)
-                //    {
-                //        value = UnitConverter.ConvertElevationInMetersToKilopascal(value);
-                //    }
-                //    else
-                //    {
-                //        value = UnitConverter.CalculatePressureFahrenheit(UnitConverter.ConvertElevationInFeetToBarometricPressure(value));
-                //    }
-                //}
-                //else
-                //{
-                //    value = DemandCurveInputData.BarometricPressureDataValue.Default;
-                //}
-                //DemandCurveInputData.BarometricPressureDataValue.UpdateValue(value.ToString(), out message);
-                //DemandCurve_Elevation_Value.Text = DemandCurveInputData.BarometricPressureDataValue.InputValue;
-                //DemandCurveElevationPressureLabel.Text = DemandCurveInputData.BarometricPressureDataValue.InputMessage + ":";
-                if (InternationalSystemOfUnits_IS_.Checked)
+                if (IsInternationalSystemOfUnits_IS_)
                 {
                     DemandCurveElevationPressureUnits.Text = ConstantUnits.BarometricPressureKiloPascal;
                 }
@@ -131,16 +80,6 @@ namespace CTICustomControls
         {
             string tooltip = string.Empty;
 
-            DemandCurveDataFileLabel.Text = DemandCurveInputData.HotWaterTemperatureDataValue.InputMessage + ":";
-            DemandCurveDataFileLabel.TextAlign = ContentAlignment.MiddleRight;
-            DemandCurveDataFile_Value.Text = DemandCurveInputData.HotWaterTemperatureDataValue.InputValue;
-            toolTip1.SetToolTip(DemandCurveDataFile_Value, DemandCurveInputData.HotWaterTemperatureDataValue.ToolTip);
-
-            TemperatureColdWaterLabel.Text = DemandCurveInputData.ColdWaterTemperatureDataValue.InputMessage + ":";
-            TemperatureColdWaterLabel.TextAlign = ContentAlignment.MiddleRight;
-            DemandCurve_CWT_Value.Text = DemandCurveInputData.ColdWaterTemperatureDataValue.InputValue;
-            toolTip1.SetToolTip(DemandCurve_CWT_Value, DemandCurveInputData.ColdWaterTemperatureDataValue.ToolTip);
-
             DemandCurveWetBulbTemperatureLabel.Text = DemandCurveInputData.WetBlubTemperatureDataValue.InputMessage + ":";
             DemandCurveWetBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
             DemandCurve_Wet_Bulb_Value.Text = DemandCurveInputData.WetBlubTemperatureDataValue.InputValue;
@@ -153,7 +92,7 @@ namespace CTICustomControls
             {
                 DemandCurve_Elevation_Value.Text = DemandCurveInputData.ElevationDataValue.InputValue;
                 DemandCurveElevationPressureLabel.Text = DemandCurveInputData.ElevationDataValue.InputMessage + ":";
-                if (InternationalSystemOfUnits_IS_.Checked)
+                if (IsInternationalSystemOfUnits_IS_)
                 {
                     DemandCurveElevationPressureUnits.Text = ConstantUnits.Meter;
                 }
@@ -166,7 +105,7 @@ namespace CTICustomControls
             {
                 DemandCurve_Elevation_Value.Text = DemandCurveInputData.BarometricPressureDataValue.InputValue;
                 DemandCurveElevationPressureLabel.Text = DemandCurveInputData.BarometricPressureDataValue.InputMessage + ":";
-                if (InternationalSystemOfUnits_IS_.Checked)
+                if (IsInternationalSystemOfUnits_IS_)
                 {
                     DemandCurveElevationPressureUnits.Text = ConstantUnits.BarometricPressureKiloPascal;
                 }
@@ -176,16 +115,12 @@ namespace CTICustomControls
                 }
             }
 
-            if (InternationalSystemOfUnits_IS_.Checked)
+            if (IsInternationalSystemOfUnits_IS_)
             {
-                DemandCurveTemperatureHotWaterUnits.Text = ConstantUnits.TemperatureCelsius;
-                DemandCurveTemperatureColdWaterUnits.Text = ConstantUnits.TemperatureCelsius;
                 DemandCurveTemperatureWebBulbUnits.Text = ConstantUnits.TemperatureCelsius;
             }
             else
             {
-                DemandCurveTemperatureHotWaterUnits.Text = ConstantUnits.TemperatureFahrenheit;
-                DemandCurveTemperatureColdWaterUnits.Text = ConstantUnits.TemperatureFahrenheit;
                 DemandCurveTemperatureWebBulbUnits.Text = ConstantUnits.TemperatureFahrenheit;
             }
         }
@@ -196,15 +131,49 @@ namespace CTICustomControls
             {
                 DemandCurveData = new DemandCurveData();
 
-                // clear data set
-                if (DemandCurveGridView.DataSource != null)
-                {
-                    DemandCurveGridView.DataSource = null;
-                }
+                //DynamicCurveChart.ChartAreas[0].AxisX.Minimum = 0.1;
+                //DynamicCurveChart.ChartAreas[0].AxisX.Maximum = 10;
+                //DynamicCurveChart.ChartAreas[0].AxisX.IsLogarithmic = true;
+                //DynamicCurveChart.ChartAreas[0].AxisX.MajorTickMark.LineColor = Color.FromArgb(0xCC, 0xCC, 0xCC);
+                //DynamicCurveChart.ChartAreas[0].AxisX.LineColor = Color.FromArgb(0x77, 0x77, 0x77);
+                //DynamicCurveChart.ChartAreas[0].AxisX.TitleForeColor = Color.FromArgb(0x77, 0x77, 0x77);
+                //DynamicCurveChart.ChartAreas[0].AxisY.Title = "KaV/L";
+                ////m_wndGraph.GetAxis().GetLeft().GetGridPen().SetStyle(psSolid);
+                ////m_wndGraph.GetAxis().GetLeft().GetGridPen().SetWidth(1);
+                ////m_wndGraph.GetAxis().GetTop().GetLabels().SetAngle(90);
+                ////m_wndGraph.GetAxis().GetLeft().GetLabels().GetFont().SetSize(6);
+                ////m_wndGraph.GetAxis().GetLeft().SetAutomaticMinimum(true);
+                ////m_wndGraph.GetAxis().GetLeft().SetAutomaticMaximum(true);
+                ////m_wndGraph.GetAxis().GetLeft().GetTitle().GetFont().SetSize(10);
+                ////m_wndGraph.GetAxis().GetLeft().GetTitle().GetFont().SetBold(true);
 
-                DataTable table = null;
+                //DynamicCurveChart.ChartAreas[0].AxisY.Minimum = 0.1;
+                //DynamicCurveChart.ChartAreas[0].AxisY.Maximum = 10;
+                //DynamicCurveChart.ChartAreas[0].AxisY.IsLogarithmic = true;
+                //DynamicCurveChart.ChartAreas[0].AxisY.MajorTickMark.LineColor = Color.FromArgb(0xCC, 0xCC, 0xCC);
+                //DynamicCurveChart.ChartAreas[0].AxisY.LineColor = Color.FromArgb(0x77, 0x77, 0x77);
+                //DynamicCurveChart.ChartAreas[0].AxisY.TitleForeColor = Color.FromArgb(0x77, 0x77, 0x77);
+                //DynamicCurveChart.ChartAreas[0].AxisY.Title = "L/G";
+
+                // clear data set
+                //if (DemandCurveGridView.DataSource != null)
+                //{
+                //    DemandCurveGridView.DataSource = null;
+                //}
 
                 string message = string.Empty;
+
+                if (!DemandCurveInputData.WetBlubTemperatureDataValue.UpdateValue(DemandCurve_Wet_Bulb_Value.Text, out message))
+                {
+                    MessageBox.Show(message);
+                    return;
+                }
+
+                if (!DemandCurveInputData.RangeDataValue.UpdateValue(DemandCurve_Range_Value.Text, out message))
+                {
+                    MessageBox.Show(message);
+                    return;
+                }
 
                 if (DemandCurveElevationRadio.Checked)
                 {
@@ -223,19 +192,25 @@ namespace CTICustomControls
                     }
                 }
 
-                if (!DemandCurveInputData.ColdWaterTemperatureDataValue.UpdateValue(DemandCurve_CWT_Value.Text, out message))
+                if (!DemandCurveInputData.C1DataValue.UpdateValue(DemandCurve_C_C1_Value.Text, out message))
                 {
                     MessageBox.Show(message);
                     return;
                 }
 
-                if (!DemandCurveInputData.HotWaterTemperatureDataValue.UpdateValue(DemandCurveDataFile_Value.Text, out message))
+                if (!DemandCurveInputData.SlopeDataValue.UpdateValue(DemandCurve_Slope_C2_Value.Text, out message))
                 {
                     MessageBox.Show(message);
                     return;
                 }
 
-                if (!DemandCurveInputData.WetBlubTemperatureDataValue.UpdateValue(DemandCurve_Wet_Bulb_Value.Text, out message))
+                if (!DemandCurveInputData.MinimumDataValue.UpdateValue(DemandCurve_Minimum_Value.Text, out message))
+                {
+                    MessageBox.Show(message);
+                    return;
+                }
+
+                if (!DemandCurveInputData.MaximumDataValue.UpdateValue(DemandCurve_Maximum_Value.Text, out message))
                 {
                     MessageBox.Show(message);
                     return;
@@ -247,12 +222,12 @@ namespace CTICustomControls
                     return;
                 }
 
-                if (DemandCurveInputData.HotWaterTemperatureDataValue.Current < DemandCurveInputData.ColdWaterTemperatureDataValue.Current)
-                {
-                    MessageBox.Show("The Hot Water Temperature value must be greater than the Cold Water Temperature value");
-                    return;
-                }
 
+                DemandCurveData.IsElevation = DemandCurveElevationRadio.Checked;
+                DemandCurveData.SetInternationalSystemOfUnits_IS_(IsInternationalSystemOfUnits_IS_);
+
+                DemandCurveData.WetBulbTemperature = DemandCurveInputData.WetBlubTemperatureDataValue.Current;
+                DemandCurveData.Range = DemandCurveInputData.RangeDataValue.Current;
                 if (DemandCurveElevationRadio.Checked)
                 {
                     DemandCurveData.Elevation = DemandCurveInputData.ElevationDataValue.Current;
@@ -262,28 +237,41 @@ namespace CTICustomControls
                     DemandCurveData.BarometricPressure = DemandCurveInputData.BarometricPressureDataValue.Current;
                 }
 
-                DemandCurveData.IsElevation = DemandCurveElevationRadio.Checked;
-                DemandCurveData.SetInternationalSystemOfUnits_IS_(InternationalSystemOfUnits_IS_.Checked);
+                DemandCurveData.CurveC1 = DemandCurveInputData.C1DataValue.Current;
+                DemandCurveData.CurveC2 = DemandCurveInputData.SlopeDataValue.Current;
+                DemandCurveData.CurveMinimum = DemandCurveInputData.MinimumDataValue.Current;
+                DemandCurveData.CurveMaximum = DemandCurveInputData.MaximumDataValue.Current;
 
-                DemandCurveData.HotWaterTemperature = DemandCurveInputData.HotWaterTemperatureDataValue.Current;
-                DemandCurveData.ColdWaterTemperature = DemandCurveInputData.ColdWaterTemperatureDataValue.Current;
-                DemandCurveData.WetBulbTemperature = DemandCurveInputData.WetBlubTemperatureDataValue.Current;
-                DemandCurveData.WaterAirRatio = DemandCurveInputData.WaterAirFlowRateDataValue.Current;
+                DynamicCurveChart.Series.Clear();
 
-                table = DemandCurveCalculationLibrary.DemandCurveCalculation(DemandCurveData);
-
-                if (table != null)
+                for (int i = 1; i <= INDEX_KAVL; i++)
                 {
-                    // Create a DataView using the DataTable.
-                    DataView view = new DataView(table);
+                    Series series = DynamicCurveChart.Series.Add(string.Format("Series{0}", i));
+                    series.ChartType = SeriesChartType.Line;
+                    series.XValueMember = "X";
+                    series.YValueMembers = string.Format("Y{0}", i);
+                }
 
-                    // Set a DataGrid control's DataSource to the DataView.
-                    DemandCurveGridView.DataSource = view;
+                new DemandCurveCalculationLibrary().DemandCurveCalculation(DemandCurveData);
+
+                if (DemandCurveData.DataTable != null && DemandCurveData.DataTable.Rows != null && DemandCurveData.DataTable.Rows.Count > 0)
+                {
+                    DynamicCurveChart.ChartAreas[0].AxisX.IsLogarithmic = true;
+                    DynamicCurveChart.ChartAreas[0].AxisY.IsLogarithmic = true;
+
+                    DynamicCurveChart.DataSource = DemandCurveData.DataTable;
+
+                    DynamicCurveChart.DataBind();
+                }
+                else
+                {
+                    DynamicCurveChart.ChartAreas[0].AxisX.IsLogarithmic = false;
+                    DynamicCurveChart.ChartAreas[0].AxisY.IsLogarithmic = false;
                 }
             }
             catch (Exception exception)
             {
-                MessageBox.Show(string.Format("Error in calculation. Please check your input values. Exception Message: {0}", exception.Message), "DemandCurve Calculation Error");
+                MessageBox.Show(string.Format("Error in calculation. Please check your input values. Exception Message: {0}", exception.Message), "Demand Curve Calculation Error");
             }
         }
 
@@ -305,23 +293,23 @@ namespace CTICustomControls
             }
         }
 
-        private void UnitedStatesCustomaryUnits_IP__CheckedChanged(object sender, EventArgs e)
-        {
-            if (UnitedStatesCustomaryUnits_IP_.Checked)
-            {
-                SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_();
-                CalculateDemandCurve();
-            }
-        }
+        //private void UnitedStatesCustomaryUnits_IP__CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (UnitedStatesCustomaryUnits_IP_.Checked)
+        //    {
+        //        SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_();
+        //        CalculateDemandCurve();
+        //    }
+        //}
 
-        private void InternationalSystemOfUnits_IS__CheckedChanged(object sender, EventArgs e)
-        {
-            if (InternationalSystemOfUnits_IS_.Checked)
-            {
-                SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_();
-                CalculateDemandCurve();
-            }
-        }
+        //private void InternationalSystemOfUnits_IS__CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (IsInternationalSystemOfUnits_IS_)
+        //    {
+        //        SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_();
+        //        CalculateDemandCurve();
+        //    }
+        //}
 
         private void DemandCurveCalculate_Click(object sender, EventArgs e)
         {

@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MaximumDataValue.cs" />
+    <Compile Include="MinimumDataValue.cs" />
+    <Compile Include="SlopeDataValue.cs" />
+    <Compile Include="C1DataValue.cs" />
     <Compile Include="CalculationLibrary.cs" />
     <Compile Include="DemandCurveData.cs" />
     <Compile Include="DemandCurveInputData.cs" />
