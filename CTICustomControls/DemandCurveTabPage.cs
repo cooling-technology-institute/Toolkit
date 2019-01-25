@@ -137,7 +137,7 @@ namespace CTICustomControls
                 //DynamicCurveChart.ChartAreas[0].AxisX.MajorTickMark.LineColor = Color.FromArgb(0xCC, 0xCC, 0xCC);
                 //DynamicCurveChart.ChartAreas[0].AxisX.LineColor = Color.FromArgb(0x77, 0x77, 0x77);
                 //DynamicCurveChart.ChartAreas[0].AxisX.TitleForeColor = Color.FromArgb(0x77, 0x77, 0x77);
-                //DynamicCurveChart.ChartAreas[0].AxisY.Title = "KaV/L";
+                //DynamicCurveChart.ChartAreas[0].AxisX.Title = "KaV/L";
                 ////m_wndGraph.GetAxis().GetLeft().GetGridPen().SetStyle(psSolid);
                 ////m_wndGraph.GetAxis().GetLeft().GetGridPen().SetWidth(1);
                 ////m_wndGraph.GetAxis().GetTop().GetLabels().SetAngle(90);
@@ -248,15 +248,36 @@ namespace CTICustomControls
                 {
                     Series series = DynamicCurveChart.Series.Add(string.Format("Series{0}", i));
                     series.ChartType = SeriesChartType.Line;
-                    series.XValueMember = "X";
+                    series.XValueMember = string.Format("X{0}", i);
                     series.YValueMembers = string.Format("Y{0}", i);
                 }
 
                 new DemandCurveCalculationLibrary().DemandCurveCalculation(DemandCurveData);
-
+                // AxisX, AxisY, AxisX2 and AxisY2
+                //Primary X-Axis  Bottom horizontal axis.
+                //Secondary X-Axis    Top horizontal axis.
+                //Primary Y-Axis  Left vertical axis.
+                //Secondary Y-Axis    Right vertical axis.
                 if (DemandCurveData.DataTable != null && DemandCurveData.DataTable.Rows != null && DemandCurveData.DataTable.Rows.Count > 0)
                 {
+                    DynamicCurveChart.ChartAreas[0].AxisX.Minimum = 0.1;
+                    DynamicCurveChart.ChartAreas[0].AxisX.Maximum = 5;
                     DynamicCurveChart.ChartAreas[0].AxisX.IsLogarithmic = true;
+                    //DynamicCurveChart.ChartAreas[0].AxisX.MajorTickMark.LineColor = Color.FromArgb(0xCC, 0xCC, 0xCC);
+                    //DynamicCurveChart.ChartAreas[0].AxisX.LineColor = Color.FromArgb(0x77, 0x77, 0x77);
+                    //DynamicCurveChart.ChartAreas[0].AxisX.TitleForeColor = Color.FromArgb(0x77, 0x77, 0x77);
+                    //DynamicCurveChart.ChartAreas[0].AxisY.Title = "KaV/L";
+                    ////m_wndGraph.GetAxis().GetLeft().GetGridPen().SetStyle(psSolid);
+                    ////m_wndGraph.GetAxis().GetLeft().GetGridPen().SetWidth(1);
+                    ////m_wndGraph.GetAxis().GetTop().GetLabels().SetAngle(90);
+                    ////m_wndGraph.GetAxis().GetLeft().GetLabels().GetFont().SetSize(6);
+                    ////m_wndGraph.GetAxis().GetLeft().SetAutomaticMinimum(true);
+                    ////m_wndGraph.GetAxis().GetLeft().SetAutomaticMaximum(true);
+                    ////m_wndGraph.GetAxis().GetLeft().GetTitle().GetFont().SetSize(10);
+                    ////m_wndGraph.GetAxis().GetLeft().GetTitle().GetFont().SetBold(true);
+
+                    DynamicCurveChart.ChartAreas[0].AxisY.Minimum = 0.1;
+                    DynamicCurveChart.ChartAreas[0].AxisY.Maximum = 5;
                     DynamicCurveChart.ChartAreas[0].AxisY.IsLogarithmic = true;
 
                     DynamicCurveChart.DataSource = DemandCurveData.DataTable;
@@ -315,5 +336,42 @@ namespace CTICustomControls
         {
             CalculateDemandCurve();
         }
+
+        private void DynamicCurveChart_Click(object sender, EventArgs e)
+        {
+            // get xy
+            // determine value
+            // update page
+        }
+        // resizing
+        //	if (m_wndGraph.m_hWnd)
+        //	{
+        //		if (cy< 550)
+        //		{
+        //			m_wndGraph.GetAxis().GetLeft().SetIncrement(.75);
+        //    }
+        //		else if (cx< 850)
+        //		{
+        //			m_wndGraph.GetAxis().GetLeft().SetIncrement(.5);
+        //}
+        //		else
+        //		{
+        //			m_wndGraph.GetAxis().GetLeft().SetIncrement(.25);
+        //		}
+
+        //		if (cx< 650)
+        //		{
+        //			m_wndGraph.GetAxis().GetBottom().SetIncrement(.5);
+        //		}
+        //		else if (cx< 850)
+        //		{
+        //			m_wndGraph.GetAxis().GetBottom().SetIncrement(.25);
+        //		}
+        //		else
+        //		{
+        //			m_wndGraph.GetAxis().GetBottom().SetIncrement(.2);
+        //		}
+        //	}
+
     }
 }

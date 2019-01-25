@@ -43,12 +43,12 @@ namespace ToolkitLibrary
 
                 data.DataTable.Clear();
 
-                DataColumn dataColumn = new DataColumn();
-                dataColumn.ColumnName = "X";
-                dataColumn.DataType = Type.GetType("System.Double");
-                data.DataTable.Columns.Add(dataColumn);
                 for (int i = 1; i <= INDEX_KAVL; i++)
                 {
+                    DataColumn dataColumn = new DataColumn();
+                    dataColumn.ColumnName = string.Format("X{0}", i);
+                    dataColumn.DataType = Type.GetType("System.Double");
+                    data.DataTable.Columns.Add(dataColumn);
                     dataColumn = new DataColumn();
                     dataColumn.ColumnName = string.Format("Y{0}", i);
                     dataColumn.DataType = Type.GetType("System.Double");
@@ -139,21 +139,18 @@ namespace ToolkitLibrary
             double kaVL = 0;
             double maxVal = 5.0;   // for kavl
             double minVal = 0.01;  // for kavl
-            double min4Lg = 999.0;
-            double dLG = 0.0;
-            double sDLG = 0.0;
+            double calculatedWaterAirRatio = 0.0;
+            const double waterAirRatio_MIN = 0.1, waterAirRatio_MAX = 5.0;
 
-            for (double waterAirRatio = 0.1; waterAirRatio < 5.0; waterAirRatio += .05)
-			{
+            for (double waterAirRatio = waterAirRatio_MIN; waterAirRatio < waterAirRatio_MAX; waterAirRatio += .05)
+            {
                 DataRow dataRow = data.DataTable.NewRow();
+                merkelData.WaterAirRatio = waterAirRatio;
 
                 for (int i = 0; i <= INDEX_USERAPPROACH; i++)
-				{
-                    if (ApproachXValues[i] > 0.0001)
-					{
-                        merkelData.WaterAirRatio = data.WaterAirRatio;
-                        merkelData.Approach = 0.1;
-
+                {
+                    if (/*getapp(i) &&*/ (ApproachXValues[i] > 0.0001))
+                    {
                         merkelData.Approach = ApproachXValues[i];
                         if (!data.IsInternationalSystemOfUnits_IS_)
                         {
@@ -163,32 +160,88 @@ namespace ToolkitLibrary
                         kaVL = CalculationLibrary.CalculateMerkel(merkelData);
 
                         // ddp
-                        if ((kaVL < minVal ) || (kaVL >= maxVal ))
-						{
-							double dInterp;
-							for (dInterp = waterAirRatio; ((kaVL < minVal ) || (kaVL >= maxVal )) && (dInterp > .1); dInterp -= 0.0002)
-							{
+                        if ((kaVL < minVal) || (kaVL >= maxVal))
+                        {
+                            double dInterp;
+                            for (dInterp = waterAirRatio; ((kaVL < minVal) || (kaVL >= maxVal)) && (dInterp > .1); dInterp -= 0.0002)
+                            {
+                                merkelData.Approach = ApproachXValues[i];
+                                if (!data.IsInternationalSystemOfUnits_IS_)
+                                {
+                                    merkelData.Approach *= 1.8;
+                                }
                                 merkelData.WaterAirRatio = dInterp;
                                 kaVL = CalculationLibrary.CalculateMerkel(merkelData);
-							}
-							sDLG = dInterp;
+                            }
+                            calculatedWaterAirRatio = dInterp;
                             ApproachXValues[i] = 0;  //DDP This is the last point
-						}
-						else
-						{
-							sDLG = kaVL;
-						}
-
-						if ((min4Lg > kaVL) && (kaVL > .1))
+                        }
+                        else
                         {
-                            min4Lg = kaVL;
+                            calculatedWaterAirRatio = waterAirRatio;
                         }
 
-                        dataRow[string.Format("Y{0}", i + 1)] = sDLG;
+                        if ((kaVL <= 10.0) && (kaVL >= .1))
+                        {
+                            dataRow[string.Format("Y{0}", i + 1)] = kaVL;
+                            dataRow[string.Format("X{0}", i + 1)] = calculatedWaterAirRatio;
+                        }
                     }
                 }
+                data.DataTable.Rows.Add(dataRow);
+            }
 
-                dataRow["X"] = waterAirRatio;
+            //---------------------------------------------------------------------
+            // Draw Fill Line
+            //---------------------------------------------------------------------
+            double min4Lg = 999.0;
+            if ((data.CurveC1 != 0) && (data.CurveC2 != 0) )//&& coef)
+            {
+                for (double waterAirRatio = data.CurveMinimum; waterAirRatio <= data.CurveMaximum; waterAirRatio += .05)
+                {
+                    DataRow dataRow = data.DataTable.NewRow();
+                    if ((waterAirRatio >= data.CurveMinimum) && (waterAirRatio <= data.CurveMaximum))
+                    {
+                        double dblK = data.CurveC1 * Math.Pow(waterAirRatio, data.CurveC2);
+
+                        if ((dblK >= min4Lg) && (dblK <= maxVal))
+                        {
+                            dataRow[string.Format("Y{0}", INDEX_COEF)] = kaVL;
+                            dataRow[string.Format("X{0}", INDEX_COEF)] = calculatedWaterAirRatio;
+                            //m_wndGraph.GetSeries(INDEX_COEF).AddXY(waterAirRatio, dblK, NULL, 0x0099FF);
+                        }
+                    }
+                    data.DataTable.Rows.Add(dataRow);
+                }
+            }
+
+            //---------------------------------------------------------------------
+            // Draw L/G line
+            //---------------------------------------------------------------------
+            if (data.WaterAirRatio > waterAirRatio_MIN && data.WaterAirRatio <= waterAirRatio_MAX)// && Lg)
+            {
+                DataRow dataRow = data.DataTable.NewRow();
+                dataRow[string.Format("Y{0}", INDEX_LG)] = data.WaterAirRatio;
+                dataRow[string.Format("X{0}", INDEX_LG)] = min4Lg;
+                data.DataTable.Rows.Add(dataRow);
+                dataRow = data.DataTable.NewRow();
+                dataRow[string.Format("Y{0}", INDEX_LG)] = data.WaterAirRatio;
+                dataRow[string.Format("X{0}", INDEX_LG)] = maxVal;
+                data.DataTable.Rows.Add(dataRow);
+            }
+
+            //---------------------------------------------------------------------
+            // Draw KaV/L line
+            //---------------------------------------------------------------------
+            if ((data.KaV_L > 0.1) && (data.KaV_L <= maxVal)) // && m_bShowKaVLLine)
+            {
+                DataRow dataRow = data.DataTable.NewRow();
+                dataRow[string.Format("Y{0}", INDEX_KAVL)] = 0.1;
+                dataRow[string.Format("X{0}", INDEX_KAVL)] = data.KaV_L;
+                data.DataTable.Rows.Add(dataRow);
+                dataRow = data.DataTable.NewRow();
+                dataRow[string.Format("Y{0}", INDEX_KAVL)] = 5.0;
+                dataRow[string.Format("X{0}", INDEX_KAVL)] = data.KaV_L;
                 data.DataTable.Rows.Add(dataRow);
             }
         }
@@ -270,10 +323,10 @@ namespace ToolkitLibrary
             //    data.WaterAirRatio = atof(szValue);
 
             //    GetPrivateProfileString(strSection, "CurveMin", "0.5", szValue, 256, m_strDataName);
-            //    m_dblCurveMin = atof(szValue);
+            //    data.CurveMinimum = atof(szValue);
 
             //    GetPrivateProfileString(strSection, "CurveMax", "2.5", szValue, 256, m_strDataName);
-            //    m_dblCurveMax = atof(szValue);
+            //    data.CurveMaximum = atof(szValue);
 
             //    GetPrivateProfileString(strSection, "CurveWBT", "80.0", szValue, 256, m_strDataName);
             //    m_dblCurveWBT = atof(szValue);
@@ -363,10 +416,10 @@ namespace ToolkitLibrary
             //    strTemp.Format("%.04f", data.WaterAirRatio);
             //    WritePrivateProfileString(strSection, "Lg", strTemp, m_strDataName);
 
-            //    strTemp.Format("%.04f", m_dblCurveMin);
+            //    strTemp.Format("%.04f", data.CurveMinimum);
             //    WritePrivateProfileString(strSection, "CurveMin", strTemp, m_strDataName);
 
-            //    strTemp.Format("%.04f", m_dblCurveMax);
+            //    strTemp.Format("%.04f", data.CurveMaximum);
             //    WritePrivateProfileString(strSection, "CurveMax", strTemp, m_strDataName);
 
             //    strTemp.Format("%.04f", m_dblCurveWBT);
@@ -552,7 +605,7 @@ namespace ToolkitLibrary
 		      //  if (UpdateData(true))
 		      //  {
 			     //   double	dLG;
-			     //   double  sDLG;
+			     //   double  calculatedWaterAirRatio;
 			     //   double  prevKaVL;
 			     //   double  incAmount = 0.0;
 			     //   int		iIndex;
@@ -564,9 +617,9 @@ namespace ToolkitLibrary
         //#ifdef _NEW_GRAPH_LIMITS
         //            // Try to reconcile graph LG limits with the rest of the program
         //            // (speculative change, DBL, 12/08/2003)
-        //            const double dLG_MIN = LG_MIN_IP, dLG_MAX = LG_MAX_IP;
+        //            const double waterAirRatio_MIN = LG_MIN_IP, waterAirRatio_MAX = LG_MAX_IP;
         //#else
-        //            const double dLG_MIN = 0.1, dLG_MAX = 5.0;
+        //            const double waterAirRatio_MIN = 0.1, waterAirRatio_MAX = 5.0;
         //#endif
 
 			     //   //---------------------------------------------------------------------
@@ -704,7 +757,7 @@ namespace ToolkitLibrary
 			     //   //---------------------------------------------------------------------
 			     //   // Calculate the Target Approach
 			     //   //---------------------------------------------------------------------
-			     //   if ((data.WaterAirRatio >= dLG_MIN) && (data.WaterAirRatio <= dLG_MAX))
+			     //   if ((data.WaterAirRatio >= waterAirRatio_MIN) && (data.WaterAirRatio <= waterAirRatio_MAX))
 			     //   {
 				    //    if (data.CurveC1 && data.CurveC2)
 				    //    {
@@ -780,7 +833,7 @@ namespace ToolkitLibrary
 			     //   //---------------------------------------------------------------------
 			     //   // Draw Apprach Lines
 			     //   //---------------------------------------------------------------------
-			     //   for (dLG = dLG_MIN; dLG < dLG_MAX; dLG += .05)
+			     //   for (dLG = waterAirRatio_MIN; dLG < waterAirRatio_MAX; dLG += .05)
 			     //   {
 				    //    incAmount = 0.0;
 				    //    for (iIndex = 0; iIndex <= INDEX_USERAPPROACH; iIndex++)
@@ -815,12 +868,12 @@ namespace ToolkitLibrary
 								//	        kavl = Merkel(m_dblCurveWBT, m_dblCurveRange, App[iIndex], dInterp, m_dblAltitude);
 								//        }
 							 //       }
-							 //       sDLG = dInterp;
+							 //       calculatedWaterAirRatio = dInterp;
 							 //       App[iIndex] = 0;  //DDP This is the last point
 						  //      }
 						  //      else
 						  //      {
-							 //       sDLG = dLG;
+							 //       calculatedWaterAirRatio = dLG;
 						  //      }
 
 						  //      if ((min4Lg > kavl) && (kavl > .1))
@@ -832,11 +885,11 @@ namespace ToolkitLibrary
 							 //       {
 								//        case INDEX_TARGETAPPROACH:
 								//        case INDEX_USERAPPROACH:
-								//	        m_DynamicCurveChart.GetSeries(iIndex).AddXY(sDLG, kavl, NULL, 0x0099FF);
+								//	        m_DynamicCurveChart.GetSeries(iIndex).AddXY(calculatedWaterAirRatio, kavl, NULL, 0x0099FF);
 								//	        break;
 
 								//        default:
-								//	        m_DynamicCurveChart.GetSeries(iIndex).AddXY(sDLG, kavl, NULL, color);
+								//	        m_DynamicCurveChart.GetSeries(iIndex).AddXY(calculatedWaterAirRatio, kavl, NULL, color);
 								//	        break;
 							 //       }
 						  //      }
@@ -849,9 +902,9 @@ namespace ToolkitLibrary
 			     //   //---------------------------------------------------------------------
 			     //   if ((data.CurveC1 != 0) && (data.CurveC2 != 0) && coef)
 			     //   {        
-				    //    for (dLG = m_dblCurveMin; dLG <= m_dblCurveMax; dLG += .05)
+				    //    for (dLG = data.CurveMinimum; dLG <= data.CurveMaximum; dLG += .05)
 				    //    {
-					   //     if ((dLG >= m_dblCurveMin) && (dLG <= m_dblCurveMax))
+					   //     if ((dLG >= data.CurveMinimum) && (dLG <= data.CurveMaximum))
 					   //     {
 						  //      double dblK = data.CurveC1 * pow(dLG, data.CurveC2);
 
@@ -866,7 +919,7 @@ namespace ToolkitLibrary
 			     //   //---------------------------------------------------------------------
 			     //   // Draw L/G line
 			     //   //---------------------------------------------------------------------
-			     //   if (data.WaterAirRatio > dLG_MIN && data.WaterAirRatio <= dLG_MAX && Lg)
+			     //   if (data.WaterAirRatio > waterAirRatio_MIN && data.WaterAirRatio <= waterAirRatio_MAX && Lg)
 			     //   {
 				    //    m_DynamicCurveChart.GetSeries(INDEX_LG).AddXY(data.WaterAirRatio, min4Lg, NULL, 0x0099FF);
 				    //    m_DynamicCurveChart.GetSeries(INDEX_LG).AddXY(data.WaterAirRatio, maxVal, NULL, 0x0099FF);
@@ -924,10 +977,10 @@ namespace ToolkitLibrary
 //            DDX_Control(pDX, IDC_COMBO_DATA_FILES, m_wndDataFileList);
 //            DDX_Control(pDX, IDC_SPIN_MIN, m_SpinMin);
 //            DDX_Control(pDX, IDC_SPIN_MAX, m_SpinMax);
-//            DDX_Text(pDX, IDC_EDIT_MAX, m_dblCurveMax);
-//            DDV_MinMaxDouble(pDX, m_dblCurveMax, 0.1, 20.0);
-//            DDX_Text(pDX, IDC_EDIT_MIN, m_dblCurveMin);
-//            DDV_MinMaxDouble(pDX, m_dblCurveMin, 0.1, 5.);
+//            DDX_Text(pDX, IDC_EDIT_MAX, data.CurveMaximum);
+//            DDV_MinMaxDouble(pDX, data.CurveMaximum, 0.1, 20.0);
+//            DDX_Text(pDX, IDC_EDIT_MIN, data.CurveMinimum);
+//            DDV_MinMaxDouble(pDX, data.CurveMinimum, 0.1, 5.);
 //            DDX_Text(pDX, IDC_CURVE_STATIC_ALTITUDE_UNITS, m_strAltitude);
 //            DDX_Text(pDX, IDC_CURVE_STATIC_RANGE_UNITS, m_strRange);
 //            DDX_Text(pDX, IDC_CURVE_STATIC_WBT_UNITS, m_strWBT);
@@ -1147,8 +1200,8 @@ namespace ToolkitLibrary
 //            data.WaterAirRatio = 1.0;
 //            m_dblAltitude = 0;
 //            m_dblKavl = 0;
-//            m_dblCurveMin = 0.5;
-//            m_dblCurveMax = 2.5;
+//            data.CurveMinimum = 0.5;
+//            data.CurveMaximum = 2.5;
 //            m_dblAltitude = 0;
 //            if (TPropPageBase::metricflag)
 //            {
@@ -1296,8 +1349,8 @@ namespace ToolkitLibrary
             ////{{AFX_DATA_INIT(TPropPageThree)
             //m_dblKavl = 0.0;
             //data.WaterAirRatio = 1.0;
-            //m_dblCurveMax = 0.0;
-            //m_dblCurveMin = 0.0;
+            //data.CurveMaximum = 0.0;
+            //data.CurveMinimum = 0.0;
             //m_dblAltitude = 0.0;
             //m_strAltitude = _T("");
             //m_strRange = _T("");

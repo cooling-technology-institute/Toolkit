@@ -388,14 +388,16 @@
             chartArea1.AxisX.IsLabelAutoFit = false;
             chartArea1.AxisX.IsLogarithmic = true;
             chartArea1.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(119)))), ((int)(((byte)(119)))));
-            chartArea1.AxisX.MajorTickMark.Interval = 0.5D;
+            chartArea1.AxisX.MajorTickMark.Interval = 0.75D;
             chartArea1.AxisX.MajorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            chartArea1.AxisX.Maximum = 10D;
+            chartArea1.AxisX.Maximum = 5D;
             chartArea1.AxisX.Minimum = 0.1D;
+            chartArea1.AxisX.MinorTickMark.Enabled = true;
             chartArea1.AxisX.MinorTickMark.Interval = 0.75D;
             chartArea1.AxisX.MinorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             chartArea1.AxisX.Title = "L/G";
             chartArea1.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+            chartArea1.AxisX2.IsLogarithmic = true;
             chartArea1.AxisX2.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(119)))), ((int)(((byte)(119)))));
             chartArea1.AxisX2.Maximum = 10D;
             chartArea1.AxisX2.Minimum = 0.1D;
@@ -403,7 +405,8 @@
             chartArea1.AxisX2.MinorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             chartArea1.AxisY.IsLogarithmic = true;
             chartArea1.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(119)))), ((int)(((byte)(119)))));
-            chartArea1.AxisY.MajorTickMark.Interval = 0.75D;
+            chartArea1.AxisY.MajorGrid.Interval = 0.75D;
+            chartArea1.AxisY.MajorTickMark.Interval = 0.5D;
             chartArea1.AxisY.Maximum = 10D;
             chartArea1.AxisY.Minimum = 0.1D;
             chartArea1.AxisY.MinorTickMark.Enabled = true;
@@ -411,6 +414,7 @@
             chartArea1.AxisY.MinorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             chartArea1.AxisY.Title = "KaV/L";
             chartArea1.AxisY.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            chartArea1.AxisY2.IsLogarithmic = true;
             chartArea1.AxisY2.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(119)))), ((int)(((byte)(119)))));
             chartArea1.AxisY2.Maximum = 10D;
             chartArea1.AxisY2.Minimum = 0.1D;
@@ -583,6 +587,7 @@
             this.DynamicCurveChart.Size = new System.Drawing.Size(743, 500);
             this.DynamicCurveChart.TabIndex = 16;
             this.DynamicCurveChart.Text = "Dynamic Curve";
+            this.DynamicCurveChart.Click += new System.EventHandler(this.DynamicCurveChart_Click);
             // 
             // DemandCurveTabPage
             // 
