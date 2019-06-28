@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using ToolkitLibrary;
 
 
-namespace CTICustomControls
+namespace CTIToolkit
 {
     public partial class PsychrometricsTabPage: UserControl
     {
@@ -14,11 +14,11 @@ namespace CTICustomControls
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_IS_ { get; set; }
 
-        public PsychrometricsTabPage()
+        public PsychrometricsTabPage(ApplicationSettings applicationSettings)
         {
             InitializeComponent();
 
-            IsInternationalSystemOfUnits_IS_ = (Globals.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            IsInternationalSystemOfUnits_IS_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
 
             PsychrometricsInputData = new PsychrometricsInputData(IsDemo, IsInternationalSystemOfUnits_IS_);
 
@@ -28,9 +28,9 @@ namespace CTICustomControls
 
         }
 
-        public void SetUnitsStandard()
+        public void SetUnitsStandard(ApplicationSettings applicationSettings)
         {
-            IsInternationalSystemOfUnits_IS_ = (Globals.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            IsInternationalSystemOfUnits_IS_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
             SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_();
         }
 
@@ -235,7 +235,7 @@ namespace CTICustomControls
         {
             try
             {
-                PsychrometricsData = new PsychrometricsData();
+                PsychrometricsData = new PsychrometricsData(IsInternationalSystemOfUnits_IS_);
 
                 // clear data set
                 if (Psychrometrics_GridView.DataSource != null)
@@ -350,7 +350,7 @@ namespace CTICustomControls
             }
             catch (Exception exception)
             {
-                MessageBox.Show(string.Format("Error in calculation. Please check your input values. Exception Message: {0}", exception.Message), "Psychrometrics Calculation Error");
+                MessageBox.Show(string.Format("Error in Psychrometrics calculation. Please check your input values. Exception Message: {0}", exception.Message), "Psychrometrics Calculation Error");
             }
         }
 

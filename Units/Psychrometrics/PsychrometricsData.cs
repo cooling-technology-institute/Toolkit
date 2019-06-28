@@ -43,7 +43,7 @@ namespace ToolkitLibrary
         public bool IsElevation { get; set; }
 
         //public PsychrometricsData(bool isInternationalSystemOfUnits_IS_, bool isElevation, bool isDemo = false)
-        public PsychrometricsData()
+        public PsychrometricsData(bool isInternationalSystemOfUnits_IS_)
         {
             NameValueUnitsDataTable = new NameValueUnitsDataTable();
             BarometricPressure = 0.0;
@@ -54,7 +54,7 @@ namespace ToolkitLibrary
             Density = 0.0;
             DewPoint = 0.0;
             IsDemo = false;
-            IsInternationalSystemOfUnits_IS_ = false;
+            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
             IsElevation = true;
             SetUnits();
         }

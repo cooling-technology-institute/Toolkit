@@ -1,4 +1,4 @@
-﻿namespace CTICustomControls
+﻿namespace CTIToolkit
 {
     partial class PsychrometricsTabPage
     {

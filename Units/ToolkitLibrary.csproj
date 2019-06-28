@@ -42,22 +42,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Globals.cs" />
+    <Compile Include="DemandCurve\DemandCurveCalculationLibrary.cs" />
+    <Compile Include="Merkel\MerkelCalculationLibrary.cs" />
     <Compile Include="MaximumDataValue.cs" />
     <Compile Include="MinimumDataValue.cs" />
+    <Compile Include="Psychrometrics\PsychrometricsCalculationLibrary.cs" />
     <Compile Include="SlopeDataValue.cs" />
     <Compile Include="C1DataValue.cs" />
     <Compile Include="CalculationLibrary.cs" />
-    <Compile Include="DemandCurveData.cs" />
-    <Compile Include="DemandCurveInputData.cs" />
+    <Compile Include="DemandCurve\DemandCurveData.cs" />
+    <Compile Include="DemandCurve\DemandCurveInputData.cs" />
+    <Compile Include="LGDataValue.cs" />
     <Compile Include="WaterAirFlowRateDataValue.cs" />
     <Compile Include="ColdWaterTemperatureDataValue.cs" />
     <Compile Include="HotWaterTemperatureDataValue.cs" />
     <Compile Include="NameValueUnitsDataTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MerkelData.cs" />
-    <Compile Include="PsychrometricsData.cs" />
-    <Compile Include="MerkelInputData.cs" />
+    <Compile Include="Merkel\MerkelData.cs" />
+    <Compile Include="Psychrometrics\PsychrometricsData.cs" />
+    <Compile Include="Merkel\MerkelInputData.cs" />
     <Compile Include="DataValue.cs" />
     <Compile Include="EnthalpyDataValue.cs" />
     <Compile Include="ElevationDataValue.cs" />
@@ -66,7 +69,7 @@
     <Compile Include="RelativeHumitityDataValue.cs" />
     <Compile Include="RangeDataValue.cs" />
     <Compile Include="WetBlubTemperatureDataValue.cs" />
-    <Compile Include="PsychrometricsInputData.cs" />
+    <Compile Include="Psychrometrics\PsychrometricsInputData.cs" />
     <Compile Include="UnitConverter.cs" />
     <Compile Include="Units.cs" />
   </ItemGroup>

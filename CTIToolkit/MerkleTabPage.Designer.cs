@@ -1,4 +1,4 @@
-﻿namespace CTICustomControls
+﻿namespace CTIToolkit
 {
     partial class MerkelTabPage
     {
@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.InternationalSystemOfUnits_IS_ = new System.Windows.Forms.RadioButton();
-            this.UnitedStatesCustomaryUnits_IP_ = new System.Windows.Forms.RadioButton();
             this.MerkelGridView = new System.Windows.Forms.DataGridView();
             this.InputPropertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.MerkelTemperatureWebBulbUnits = new System.Windows.Forms.Label();
@@ -58,40 +56,6 @@
             this.InputPropertiesGroupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.InternationalSystemOfUnits_IS_);
-            this.groupBox1.Controls.Add(this.UnitedStatesCustomaryUnits_IP_);
-            this.groupBox1.Location = new System.Drawing.Point(511, 39);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(222, 79);
-            this.groupBox1.TabIndex = 14;
-            this.groupBox1.TabStop = false;
-            // 
-            // InternationalSystemOfUnits_IS_
-            // 
-            this.InternationalSystemOfUnits_IS_.AutoSize = true;
-            this.InternationalSystemOfUnits_IS_.Location = new System.Drawing.Point(17, 50);
-            this.InternationalSystemOfUnits_IS_.Name = "InternationalSystemOfUnits_IS_";
-            this.InternationalSystemOfUnits_IS_.Size = new System.Drawing.Size(178, 17);
-            this.InternationalSystemOfUnits_IS_.TabIndex = 1;
-            this.InternationalSystemOfUnits_IS_.Text = "International System of Units (SI)";
-            this.InternationalSystemOfUnits_IS_.UseVisualStyleBackColor = true;
-            this.InternationalSystemOfUnits_IS_.CheckedChanged += new System.EventHandler(this.InternationalSystemOfUnits_IS__CheckedChanged);
-            // 
-            // UnitedStatesCustomaryUnits_IP_
-            // 
-            this.UnitedStatesCustomaryUnits_IP_.AutoSize = true;
-            this.UnitedStatesCustomaryUnits_IP_.Checked = true;
-            this.UnitedStatesCustomaryUnits_IP_.Location = new System.Drawing.Point(17, 21);
-            this.UnitedStatesCustomaryUnits_IP_.Name = "UnitedStatesCustomaryUnits_IP_";
-            this.UnitedStatesCustomaryUnits_IP_.Size = new System.Drawing.Size(187, 17);
-            this.UnitedStatesCustomaryUnits_IP_.TabIndex = 0;
-            this.UnitedStatesCustomaryUnits_IP_.TabStop = true;
-            this.UnitedStatesCustomaryUnits_IP_.Text = "United States Customary Units (IP)";
-            this.UnitedStatesCustomaryUnits_IP_.UseVisualStyleBackColor = true;
-            this.UnitedStatesCustomaryUnits_IP_.CheckedChanged += new System.EventHandler(this.UnitedStatesCustomaryUnits_IP__CheckedChanged);
             // 
             // MerkelGridView
             // 
@@ -315,8 +279,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton InternationalSystemOfUnits_IS_;
-        private System.Windows.Forms.RadioButton UnitedStatesCustomaryUnits_IP_;
         private System.Windows.Forms.DataGridView MerkelGridView;
         private System.Windows.Forms.GroupBox InputPropertiesGroupBox;
         private System.Windows.Forms.Label MerkelWetBulbTemperatureLabel;

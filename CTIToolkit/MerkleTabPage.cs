@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using ToolkitLibrary;
 
-namespace CTICustomControls
+namespace CTIToolkit
 {
     public partial class MerkelTabPage: UserControl
     {
@@ -13,11 +13,11 @@ namespace CTICustomControls
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_IS_ { get; set; }
 
-        public MerkelTabPage()
+        public MerkelTabPage(ApplicationSettings applicationSettings)
         {
             InitializeComponent();
 
-            IsInternationalSystemOfUnits_IS_ = (Globals.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            IsInternationalSystemOfUnits_IS_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
 
             MerkelInputData = new MerkelInputData(IsDemo, IsInternationalSystemOfUnits_IS_);
 
@@ -27,20 +27,20 @@ namespace CTICustomControls
 
         }
 
-        public void SetUnitsStandard()
+        public void SetUnitsStandard(ApplicationSettings applicationSettings)
         {
-            IsInternationalSystemOfUnits_IS_ = (Globals.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            IsInternationalSystemOfUnits_IS_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
             SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_();
         }
 
         private void SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_()
         {
-            if (MerkelInputData.ConvertValues(InternationalSystemOfUnits_IS_.Checked, MerkelElevationRadio.Checked))
+            if (MerkelInputData.ConvertValues(IsInternationalSystemOfUnits_IS_, MerkelElevationRadio.Checked))
             {
                 SwitchCalculation();
             }
 
-            if (InternationalSystemOfUnits_IS_.Checked)
+            if (IsInternationalSystemOfUnits_IS_)
             {
                 if (MerkelElevationRadio.Checked)
                 {
@@ -68,7 +68,7 @@ namespace CTICustomControls
         {
             string message;
 
-            if (MerkelInputData.ConvertValues(InternationalSystemOfUnits_IS_.Checked, MerkelElevationRadio.Checked))
+            if (MerkelInputData.ConvertValues(IsInternationalSystemOfUnits_IS_, MerkelElevationRadio.Checked))
             {
                 SwitchCalculation();
             }
@@ -78,7 +78,7 @@ namespace CTICustomControls
                 //double value = 0.0;
                 //if (double.TryParse(Merkel_Elevation_Value.Text, out value))
                 //{
-                //    if (InternationalSystemOfUnits_IS_.Checked)
+                //    if (IsInternationalSystemOfUnits_IS_)
                 //    {
                 //        value = UnitConverter.ConvertKilopascalToElevationInMeters(value);
                 //    }
@@ -94,7 +94,7 @@ namespace CTICustomControls
                 //MerkelInputData.BarometricPressureDataValue.UpdateValue(value.ToString(), out message);
                 //Merkel_Elevation_Value.Text = MerkelInputData.ElevationDataValue.InputValue;
                 //MerkelElevationPressureLabel.Text = MerkelInputData.ElevationDataValue.InputMessage + ":";
-                if (InternationalSystemOfUnits_IS_.Checked)
+                if (IsInternationalSystemOfUnits_IS_)
                 {
                     MerkelElevationPressureUnits.Text = ConstantUnits.Meter;
                 }
@@ -108,7 +108,7 @@ namespace CTICustomControls
                 //double value = 0.0;
                 //if (double.TryParse(Merkel_Elevation_Value.Text, out value))
                 //{
-                //   if (InternationalSystemOfUnits_IS_.Checked)
+                //   if (IsInternationalSystemOfUnits_IS_)
                 //    {
                 //        value = UnitConverter.ConvertElevationInMetersToKilopascal(value);
                 //    }
@@ -124,7 +124,7 @@ namespace CTICustomControls
                 //MerkelInputData.BarometricPressureDataValue.UpdateValue(value.ToString(), out message);
                 //Merkel_Elevation_Value.Text = MerkelInputData.BarometricPressureDataValue.InputValue;
                 //MerkelElevationPressureLabel.Text = MerkelInputData.BarometricPressureDataValue.InputMessage + ":";
-                if (InternationalSystemOfUnits_IS_.Checked)
+                if (IsInternationalSystemOfUnits_IS_)
                 {
                     MerkelElevationPressureUnits.Text = ConstantUnits.BarometricPressureKiloPascal;
                 }
@@ -161,7 +161,7 @@ namespace CTICustomControls
             {
                 Merkel_Elevation_Value.Text = MerkelInputData.ElevationDataValue.InputValue;
                 MerkelElevationPressureLabel.Text = MerkelInputData.ElevationDataValue.InputMessage + ":";
-                if (InternationalSystemOfUnits_IS_.Checked)
+                if (IsInternationalSystemOfUnits_IS_)
                 {
                     MerkelElevationPressureUnits.Text = ConstantUnits.Meter;
                 }
@@ -174,7 +174,7 @@ namespace CTICustomControls
             {
                 Merkel_Elevation_Value.Text = MerkelInputData.BarometricPressureDataValue.InputValue;
                 MerkelElevationPressureLabel.Text = MerkelInputData.BarometricPressureDataValue.InputMessage + ":";
-                if (InternationalSystemOfUnits_IS_.Checked)
+                if (IsInternationalSystemOfUnits_IS_)
                 {
                     MerkelElevationPressureUnits.Text = ConstantUnits.BarometricPressureKiloPascal;
                 }
@@ -184,7 +184,7 @@ namespace CTICustomControls
                 }
             }
 
-            if (InternationalSystemOfUnits_IS_.Checked)
+            if (IsInternationalSystemOfUnits_IS_)
             {
                 MerkelTemperatureHotWaterUnits.Text = ConstantUnits.TemperatureCelsius;
                 MerkelTemperatureColdWaterUnits.Text = ConstantUnits.TemperatureCelsius;
@@ -202,7 +202,7 @@ namespace CTICustomControls
         {
             try
             {
-                MerkelData = new MerkelData();
+                MerkelData = new MerkelData(IsInternationalSystemOfUnits_IS_);
 
                 // clear data set
                 if (MerkelGridView.DataSource != null)
@@ -271,7 +271,7 @@ namespace CTICustomControls
                 }
 
                 MerkelData.IsElevation = MerkelElevationRadio.Checked;
-                MerkelData.SetInternationalSystemOfUnits_IS_(InternationalSystemOfUnits_IS_.Checked);
+                MerkelData.SetInternationalSystemOfUnits_IS_(IsInternationalSystemOfUnits_IS_);
 
                 MerkelData.HotWaterTemperature = MerkelInputData.HotWaterTemperatureDataValue.Current;
                 MerkelData.ColdWaterTemperature = MerkelInputData.ColdWaterTemperatureDataValue.Current;
@@ -291,7 +291,7 @@ namespace CTICustomControls
             }
             catch (Exception exception)
             {
-                MessageBox.Show(string.Format("Error in calculation. Please check your input values. Exception Message: {0}", exception.Message), "Merkel Calculation Error");
+                MessageBox.Show(string.Format("Error in Merkel calculation. Please check your input values. Exception Message: {0}", exception.Message), "Merkel Calculation Error");
             }
         }
 
@@ -309,24 +309,6 @@ namespace CTICustomControls
             if (MerkelPressureRadio.Checked)
             {
                 SwitchElevationPressure();
-                CalculateMerkel();
-            }
-        }
-
-        private void UnitedStatesCustomaryUnits_IP__CheckedChanged(object sender, EventArgs e)
-        {
-            if (UnitedStatesCustomaryUnits_IP_.Checked)
-            {
-                SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_();
-                CalculateMerkel();
-            }
-        }
-
-        private void InternationalSystemOfUnits_IS__CheckedChanged(object sender, EventArgs e)
-        {
-            if (InternationalSystemOfUnits_IS_.Checked)
-            {
-                SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_();
                 CalculateMerkel();
             }
         }

@@ -28,7 +28,7 @@ namespace ToolkitLibrary
         public bool IsElevation { get; set; }
 
         //public MerkelData(bool isInternationalSystemOfUnits_IS_, bool isElevation, bool isDemo = false)
-        public MerkelData()
+        public MerkelData(bool isInternationalSystemOfUnits_IS_)
         {
             NameValueUnitsDataTable = new NameValueUnitsDataTable();
             HotWaterTemperature = 0.0;
@@ -37,7 +37,7 @@ namespace ToolkitLibrary
             BarometricPressure = 0.0;
 
             IsDemo = false;
-            IsInternationalSystemOfUnits_IS_ = false;
+            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
             IsElevation = true;
             SetUnits();
         }

@@ -17,9 +17,6 @@ namespace CTIToolkit
         [STAThread]
         static void Main()
         {
-            //Read ini file
-            Globals.ReadConfigurationFile();
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new ToolkitMain());

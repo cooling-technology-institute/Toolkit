@@ -44,49 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DoubleDataEntryTextBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="DoubleDataEntryTextBox.Designer.cs">
-      <DependentUpon>DoubleDataEntryTextBox.cs</DependentUpon>
-    </Compile>
     <Compile Include="DemandCurveCalculationLibrary.cs" />
     <Compile Include="MerkelCalculationLibrary.cs" />
-    <Compile Include="DemandCurveTabPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="DemandCurveTabPage.Designer.cs">
-      <DependentUpon>DemandCurveTabPage.cs</DependentUpon>
-    </Compile>
     <Compile Include="PsychrometricsCalculationLibrary.cs" />
-    <Compile Include="MerkleTabPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MerkleTabPage.Designer.cs">
-      <DependentUpon>MerkleTabPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PsychrometricsTabPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PsychrometricsTabPage.Designer.cs">
-      <DependentUpon>PsychrometricsTabPage.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="DoubleDataEntryTextBox.resx">
-      <DependentUpon>DoubleDataEntryTextBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DemandCurveTabPage.resx">
-      <DependentUpon>DemandCurveTabPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MerkleTabPage.resx">
-      <DependentUpon>MerkleTabPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PsychrometricsTabPage.resx">
-      <DependentUpon>PsychrometricsTabPage.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Units\ToolkitLibrary.csproj">

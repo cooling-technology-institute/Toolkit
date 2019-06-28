@@ -12,6 +12,7 @@ namespace ToolkitLibrary
         public static readonly string BarometricPressureInchOfMercury = "\"Hg";
         public static readonly string TemperatureCelsius = "°C";
         public static readonly string TemperatureFahrenheit = "°F";
+        public static readonly string RangeK = "K";
         public static readonly string Percentage = "%";
         public static readonly string KilojoulesPerKilogram = "kJ/kg";
         public static readonly string BtuPerPound = "BTU/lbm";

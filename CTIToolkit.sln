@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.705
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTIToolkit", "CTIToolkit\CTIToolkit.csproj", "{EB9582BB-0E47-48BF-91D3-5A36BA50800B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTICustomControls", "CTICustomControls\CTICustomControls.csproj", "{56F22FE0-37BE-4FB6-8B8B-AC7B079B7823}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolkitLibrary", "Units\ToolkitLibrary.csproj", "{EF3BE6E9-E07B-4A88-9264-4C7E7B2D7F05}"
 EndProject
@@ -19,10 +17,6 @@ Global
 		{EB9582BB-0E47-48BF-91D3-5A36BA50800B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB9582BB-0E47-48BF-91D3-5A36BA50800B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB9582BB-0E47-48BF-91D3-5A36BA50800B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56F22FE0-37BE-4FB6-8B8B-AC7B079B7823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56F22FE0-37BE-4FB6-8B8B-AC7B079B7823}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56F22FE0-37BE-4FB6-8B8B-AC7B079B7823}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56F22FE0-37BE-4FB6-8B8B-AC7B079B7823}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EF3BE6E9-E07B-4A88-9264-4C7E7B2D7F05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EF3BE6E9-E07B-4A88-9264-4C7E7B2D7F05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF3BE6E9-E07B-4A88-9264-4C7E7B2D7F05}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -30,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A209738-2C0B-4CEA-B7D4-001001AC4F2B}
 	EndGlobalSection
 EndGlobal

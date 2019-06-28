@@ -1,4 +1,4 @@
-﻿namespace CTICustomControls
+﻿namespace CTIToolkit
 {
     partial class DemandCurveTabPage
     {
@@ -29,32 +29,32 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series15 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series21 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series22 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series23 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series24 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series25 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series26 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series27 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series28 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series29 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series30 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series31 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series32 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series33 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series34 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series35 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series36 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series37 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series38 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series39 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series40 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series41 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series42 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series43 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series44 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series45 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series46 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series47 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series48 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.DemandCurveCalculate = new System.Windows.Forms.Button();
             this.DemandCurveDataFileLabel = new System.Windows.Forms.Label();
@@ -62,7 +62,7 @@
             this.DemandCurveDataFile_Value = new System.Windows.Forms.TextBox();
             this.DemandCurve_Range_Value = new System.Windows.Forms.TextBox();
             this.DemandCurve_Wet_Bulb_Value = new System.Windows.Forms.TextBox();
-            this.DemandCurveTemperatureColdWaterUnits = new System.Windows.Forms.Label();
+            this.DemandCurveRangeUnits = new System.Windows.Forms.Label();
             this.DemandCurveWetBulbTemperatureLabel = new System.Windows.Forms.Label();
             this.DemandCurve_Elevation_Value = new System.Windows.Forms.TextBox();
             this.DemandCurveElevationPressureUnits = new System.Windows.Forms.Label();
@@ -74,9 +74,13 @@
             this.SaveButton = new System.Windows.Forms.Button();
             this.InputPropertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.DesignPointGroupBox = new System.Windows.Forms.GroupBox();
+            this.DemandCurve_KavLRadio = new System.Windows.Forms.RadioButton();
             this.DemandCurve_LG_Value = new System.Windows.Forms.TextBox();
+            this.DemandCurve_ApproachRadio = new System.Windows.Forms.RadioButton();
             this.LGlabel = new System.Windows.Forms.Label();
             this.TowerOrFillCharacteristicsGroupBox = new System.Windows.Forms.GroupBox();
+            this.DemandCurve_Maximum_Value = new System.Windows.Forms.NumericUpDown();
+            this.DemandCurve_Minimum_Value = new System.Windows.Forms.NumericUpDown();
             this.Max_label = new System.Windows.Forms.Label();
             this.Min_Label = new System.Windows.Forms.Label();
             this.DemandCurve_Slope_C2_Value = new System.Windows.Forms.TextBox();
@@ -85,18 +89,14 @@
             this.Clabel = new System.Windows.Forms.Label();
             this.ThermalDesignConditionsGroupBox = new System.Windows.Forms.GroupBox();
             this.DynamicCurveChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.DemandCurve_Minimum_Value = new System.Windows.Forms.NumericUpDown();
-            this.DemandCurve_Maximum_Value = new System.Windows.Forms.NumericUpDown();
-            this.DemandCurve_KavLRadio = new System.Windows.Forms.RadioButton();
-            this.DemandCurve_ApproachRadio = new System.Windows.Forms.RadioButton();
             this.groupBoxPressureElevation.SuspendLayout();
             this.InputPropertiesGroupBox.SuspendLayout();
             this.DesignPointGroupBox.SuspendLayout();
             this.TowerOrFillCharacteristicsGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DemandCurve_Maximum_Value)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DemandCurve_Minimum_Value)).BeginInit();
             this.ThermalDesignConditionsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DynamicCurveChart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DemandCurve_Minimum_Value)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DemandCurve_Maximum_Value)).BeginInit();
             this.SuspendLayout();
             // 
             // DemandCurveCalculate
@@ -151,14 +151,14 @@
             this.DemandCurve_Wet_Bulb_Value.TabIndex = 5;
             this.DemandCurve_Wet_Bulb_Value.Text = "80";
             // 
-            // DemandCurveTemperatureColdWaterUnits
+            // DemandCurveRangeUnits
             // 
-            this.DemandCurveTemperatureColdWaterUnits.AutoSize = true;
-            this.DemandCurveTemperatureColdWaterUnits.Location = new System.Drawing.Point(195, 51);
-            this.DemandCurveTemperatureColdWaterUnits.Name = "DemandCurveTemperatureColdWaterUnits";
-            this.DemandCurveTemperatureColdWaterUnits.Size = new System.Drawing.Size(17, 13);
-            this.DemandCurveTemperatureColdWaterUnits.TabIndex = 7;
-            this.DemandCurveTemperatureColdWaterUnits.Text = "°F";
+            this.DemandCurveRangeUnits.AutoSize = true;
+            this.DemandCurveRangeUnits.Location = new System.Drawing.Point(195, 51);
+            this.DemandCurveRangeUnits.Name = "DemandCurveRangeUnits";
+            this.DemandCurveRangeUnits.Size = new System.Drawing.Size(17, 13);
+            this.DemandCurveRangeUnits.TabIndex = 7;
+            this.DemandCurveRangeUnits.Text = "°F";
             // 
             // DemandCurveWetBulbTemperatureLabel
             // 
@@ -273,12 +273,33 @@
             this.DesignPointGroupBox.TabStop = false;
             this.DesignPointGroupBox.Text = "Design Point";
             // 
+            // DemandCurve_KavLRadio
+            // 
+            this.DemandCurve_KavLRadio.Location = new System.Drawing.Point(17, 62);
+            this.DemandCurve_KavLRadio.Name = "DemandCurve_KavLRadio";
+            this.DemandCurve_KavLRadio.Size = new System.Drawing.Size(122, 17);
+            this.DemandCurve_KavLRadio.TabIndex = 1;
+            this.DemandCurve_KavLRadio.Text = "Kav/L";
+            this.DemandCurve_KavLRadio.UseVisualStyleBackColor = true;
+            // 
             // DemandCurve_LG_Value
             // 
             this.DemandCurve_LG_Value.Location = new System.Drawing.Point(58, 17);
             this.DemandCurve_LG_Value.Name = "DemandCurve_LG_Value";
             this.DemandCurve_LG_Value.Size = new System.Drawing.Size(100, 20);
             this.DemandCurve_LG_Value.TabIndex = 2;
+            this.DemandCurve_LG_Value.Text = "1";
+            // 
+            // DemandCurve_ApproachRadio
+            // 
+            this.DemandCurve_ApproachRadio.Checked = true;
+            this.DemandCurve_ApproachRadio.Location = new System.Drawing.Point(17, 41);
+            this.DemandCurve_ApproachRadio.Name = "DemandCurve_ApproachRadio";
+            this.DemandCurve_ApproachRadio.Size = new System.Drawing.Size(122, 17);
+            this.DemandCurve_ApproachRadio.TabIndex = 0;
+            this.DemandCurve_ApproachRadio.TabStop = true;
+            this.DemandCurve_ApproachRadio.Text = "Approach";
+            this.DemandCurve_ApproachRadio.UseVisualStyleBackColor = true;
             // 
             // LGlabel
             // 
@@ -305,6 +326,22 @@
             this.TowerOrFillCharacteristicsGroupBox.TabIndex = 21;
             this.TowerOrFillCharacteristicsGroupBox.TabStop = false;
             this.TowerOrFillCharacteristicsGroupBox.Text = "Tower or Fill Characteristics";
+            // 
+            // DemandCurve_Maximum_Value
+            // 
+            this.DemandCurve_Maximum_Value.DecimalPlaces = 1;
+            this.DemandCurve_Maximum_Value.Location = new System.Drawing.Point(186, 50);
+            this.DemandCurve_Maximum_Value.Name = "DemandCurve_Maximum_Value";
+            this.DemandCurve_Maximum_Value.Size = new System.Drawing.Size(53, 20);
+            this.DemandCurve_Maximum_Value.TabIndex = 9;
+            // 
+            // DemandCurve_Minimum_Value
+            // 
+            this.DemandCurve_Minimum_Value.DecimalPlaces = 1;
+            this.DemandCurve_Minimum_Value.Location = new System.Drawing.Point(186, 24);
+            this.DemandCurve_Minimum_Value.Name = "DemandCurve_Minimum_Value";
+            this.DemandCurve_Minimum_Value.Size = new System.Drawing.Size(53, 20);
+            this.DemandCurve_Minimum_Value.TabIndex = 8;
             // 
             // Max_label
             // 
@@ -367,7 +404,7 @@
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.DemandCurveTemperatureWebBulbUnits);
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.DemandCurve_Wet_Bulb_Value);
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.DemandCurveElevationPressureLabel);
-            this.ThermalDesignConditionsGroupBox.Controls.Add(this.DemandCurveTemperatureColdWaterUnits);
+            this.ThermalDesignConditionsGroupBox.Controls.Add(this.DemandCurveRangeUnits);
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.DemandCurveElevationPressureUnits);
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.DemandCurve_Elevation_Value);
             this.ThermalDesignConditionsGroupBox.Location = new System.Drawing.Point(24, 64);
@@ -379,245 +416,209 @@
             // 
             // DynamicCurveChart
             // 
-            chartArea1.AxisX.IsLabelAutoFit = false;
-            chartArea1.AxisX.IsLogarithmic = true;
-            chartArea1.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(119)))), ((int)(((byte)(119)))));
-            chartArea1.AxisX.MajorTickMark.Interval = 0.75D;
-            chartArea1.AxisX.MajorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            chartArea1.AxisX.Maximum = 5D;
-            chartArea1.AxisX.Minimum = 0.1D;
-            chartArea1.AxisX.MinorTickMark.Enabled = true;
-            chartArea1.AxisX.MinorTickMark.Interval = 0.75D;
-            chartArea1.AxisX.MinorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            chartArea1.AxisX.Title = "L/G";
-            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
-            chartArea1.AxisX2.IsLogarithmic = true;
-            chartArea1.AxisX2.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(119)))), ((int)(((byte)(119)))));
-            chartArea1.AxisX2.Maximum = 10D;
-            chartArea1.AxisX2.Minimum = 0.1D;
-            chartArea1.AxisX2.MinorTickMark.Enabled = true;
-            chartArea1.AxisX2.MinorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            chartArea1.AxisY.IsLogarithmic = true;
-            chartArea1.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(119)))), ((int)(((byte)(119)))));
-            chartArea1.AxisY.MajorGrid.Interval = 0.75D;
-            chartArea1.AxisY.MajorTickMark.Interval = 0.5D;
-            chartArea1.AxisY.Maximum = 10D;
-            chartArea1.AxisY.Minimum = 0.1D;
-            chartArea1.AxisY.MinorTickMark.Enabled = true;
-            chartArea1.AxisY.MinorTickMark.Interval = 0.75D;
-            chartArea1.AxisY.MinorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            chartArea1.AxisY.Title = "KaV/L";
-            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            chartArea1.AxisY2.IsLogarithmic = true;
-            chartArea1.AxisY2.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(119)))), ((int)(((byte)(119)))));
-            chartArea1.AxisY2.Maximum = 10D;
-            chartArea1.AxisY2.Minimum = 0.1D;
-            chartArea1.AxisY2.MinorTickMark.Enabled = true;
-            chartArea1.AxisY2.MinorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            chartArea1.Name = "ChartArea1";
-            this.DynamicCurveChart.ChartAreas.Add(chartArea1);
-            legend1.Enabled = false;
-            legend1.Name = "Legend1";
-            this.DynamicCurveChart.Legends.Add(legend1);
+            chartArea2.AxisX.IsLabelAutoFit = false;
+            chartArea2.AxisX.IsLogarithmic = true;
+            chartArea2.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(119)))), ((int)(((byte)(119)))));
+            chartArea2.AxisX.MajorTickMark.Interval = 0.75D;
+            chartArea2.AxisX.MajorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            chartArea2.AxisX.Maximum = 5D;
+            chartArea2.AxisX.Minimum = 0.1D;
+            chartArea2.AxisX.MinorTickMark.Enabled = true;
+            chartArea2.AxisX.MinorTickMark.Interval = 0.75D;
+            chartArea2.AxisX.MinorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            chartArea2.AxisX.Title = "L/G";
+            chartArea2.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+            chartArea2.AxisX2.IsLogarithmic = true;
+            chartArea2.AxisX2.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(119)))), ((int)(((byte)(119)))));
+            chartArea2.AxisX2.Maximum = 10D;
+            chartArea2.AxisX2.Minimum = 0.1D;
+            chartArea2.AxisX2.MinorTickMark.Enabled = true;
+            chartArea2.AxisX2.MinorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            chartArea2.AxisY.IsLogarithmic = true;
+            chartArea2.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(119)))), ((int)(((byte)(119)))));
+            chartArea2.AxisY.MajorGrid.Interval = 0.75D;
+            chartArea2.AxisY.MajorTickMark.Interval = 0.5D;
+            chartArea2.AxisY.Maximum = 10D;
+            chartArea2.AxisY.Minimum = 0.1D;
+            chartArea2.AxisY.MinorTickMark.Enabled = true;
+            chartArea2.AxisY.MinorTickMark.Interval = 0.75D;
+            chartArea2.AxisY.MinorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            chartArea2.AxisY.Title = "KaV/L";
+            chartArea2.AxisY.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            chartArea2.AxisY2.IsLogarithmic = true;
+            chartArea2.AxisY2.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(119)))), ((int)(((byte)(119)))));
+            chartArea2.AxisY2.Maximum = 10D;
+            chartArea2.AxisY2.Minimum = 0.1D;
+            chartArea2.AxisY2.MinorTickMark.Enabled = true;
+            chartArea2.AxisY2.MinorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            chartArea2.Name = "ChartArea1";
+            this.DynamicCurveChart.ChartAreas.Add(chartArea2);
+            legend2.Enabled = false;
+            legend2.Name = "Legend1";
+            this.DynamicCurveChart.Legends.Add(legend2);
             this.DynamicCurveChart.Location = new System.Drawing.Point(9, 212);
             this.DynamicCurveChart.Name = "DynamicCurveChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Color = System.Drawing.Color.Yellow;
-            series1.IsVisibleInLegend = false;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Color = System.Drawing.Color.Yellow;
-            series2.Enabled = false;
-            series2.IsVisibleInLegend = false;
-            series2.Legend = "Legend1";
-            series2.Name = "Series2";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Color = System.Drawing.Color.Yellow;
-            series3.IsVisibleInLegend = false;
-            series3.Legend = "Legend1";
-            series3.Name = "Series3";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.Color = System.Drawing.Color.Yellow;
-            series4.IsVisibleInLegend = false;
-            series4.Legend = "Legend1";
-            series4.Name = "Series4";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Color = System.Drawing.Color.Yellow;
-            series5.IsVisibleInLegend = false;
-            series5.Legend = "Legend1";
-            series5.Name = "Series5";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series6.Color = System.Drawing.Color.Yellow;
-            series6.IsVisibleInLegend = false;
-            series6.Legend = "Legend1";
-            series6.Name = "Series6";
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series7.Color = System.Drawing.Color.Yellow;
-            series7.IsVisibleInLegend = false;
-            series7.Legend = "Legend1";
-            series7.Name = "Series7";
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series8.Color = System.Drawing.Color.Yellow;
-            series8.IsVisibleInLegend = false;
-            series8.Legend = "Legend1";
-            series8.Name = "Series8";
-            series9.ChartArea = "ChartArea1";
-            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series9.Color = System.Drawing.Color.Yellow;
-            series9.IsVisibleInLegend = false;
-            series9.Legend = "Legend1";
-            series9.Name = "Series9";
-            series10.ChartArea = "ChartArea1";
-            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series10.Color = System.Drawing.Color.Yellow;
-            series10.IsVisibleInLegend = false;
-            series10.Legend = "Legend1";
-            series10.Name = "Series10";
-            series11.ChartArea = "ChartArea1";
-            series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series11.Color = System.Drawing.Color.Yellow;
-            series11.IsVisibleInLegend = false;
-            series11.Legend = "Legend1";
-            series11.Name = "Series11";
-            series12.ChartArea = "ChartArea1";
-            series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series12.Color = System.Drawing.Color.Yellow;
-            series12.IsVisibleInLegend = false;
-            series12.Legend = "Legend1";
-            series12.Name = "Series12";
-            series13.ChartArea = "ChartArea1";
-            series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series13.Color = System.Drawing.Color.Yellow;
-            series13.IsVisibleInLegend = false;
-            series13.Legend = "Legend1";
-            series13.Name = "Series13";
-            series14.ChartArea = "ChartArea1";
-            series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series14.Color = System.Drawing.Color.Yellow;
-            series14.IsVisibleInLegend = false;
-            series14.Legend = "Legend1";
-            series14.Name = "Series14";
-            series15.ChartArea = "ChartArea1";
-            series15.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series15.Color = System.Drawing.Color.Yellow;
-            series15.IsVisibleInLegend = false;
-            series15.Legend = "Legend1";
-            series15.Name = "Series15";
-            series16.ChartArea = "ChartArea1";
-            series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series16.Color = System.Drawing.Color.Yellow;
-            series16.IsVisibleInLegend = false;
-            series16.Legend = "Legend1";
-            series16.Name = "Series16";
-            series17.ChartArea = "ChartArea1";
-            series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series17.Color = System.Drawing.Color.Yellow;
-            series17.IsVisibleInLegend = false;
-            series17.Legend = "Legend1";
-            series17.Name = "Series17";
-            series18.ChartArea = "ChartArea1";
-            series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series18.Color = System.Drawing.Color.Yellow;
-            series18.IsVisibleInLegend = false;
-            series18.Legend = "Legend1";
-            series18.Name = "Series18";
-            series19.ChartArea = "ChartArea1";
-            series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series19.Legend = "Legend1";
-            series19.Name = "Series19";
-            series20.ChartArea = "ChartArea1";
-            series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series20.Legend = "Legend1";
-            series20.Name = "Series20";
-            series21.ChartArea = "ChartArea1";
-            series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series21.Legend = "Legend1";
-            series21.Name = "Series21";
-            series22.ChartArea = "ChartArea1";
-            series22.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series22.Legend = "Legend1";
-            series22.Name = "Series22";
-            series23.ChartArea = "ChartArea1";
-            series23.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series23.Legend = "Legend1";
-            series23.Name = "Series23";
-            series24.ChartArea = "ChartArea1";
-            series24.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series24.Legend = "Legend1";
-            series24.Name = "Series24";
-            this.DynamicCurveChart.Series.Add(series1);
-            this.DynamicCurveChart.Series.Add(series2);
-            this.DynamicCurveChart.Series.Add(series3);
-            this.DynamicCurveChart.Series.Add(series4);
-            this.DynamicCurveChart.Series.Add(series5);
-            this.DynamicCurveChart.Series.Add(series6);
-            this.DynamicCurveChart.Series.Add(series7);
-            this.DynamicCurveChart.Series.Add(series8);
-            this.DynamicCurveChart.Series.Add(series9);
-            this.DynamicCurveChart.Series.Add(series10);
-            this.DynamicCurveChart.Series.Add(series11);
-            this.DynamicCurveChart.Series.Add(series12);
-            this.DynamicCurveChart.Series.Add(series13);
-            this.DynamicCurveChart.Series.Add(series14);
-            this.DynamicCurveChart.Series.Add(series15);
-            this.DynamicCurveChart.Series.Add(series16);
-            this.DynamicCurveChart.Series.Add(series17);
-            this.DynamicCurveChart.Series.Add(series18);
-            this.DynamicCurveChart.Series.Add(series19);
-            this.DynamicCurveChart.Series.Add(series20);
-            this.DynamicCurveChart.Series.Add(series21);
-            this.DynamicCurveChart.Series.Add(series22);
-            this.DynamicCurveChart.Series.Add(series23);
-            this.DynamicCurveChart.Series.Add(series24);
+            series25.ChartArea = "ChartArea1";
+            series25.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series25.Color = System.Drawing.Color.Yellow;
+            series25.IsVisibleInLegend = false;
+            series25.Legend = "Legend1";
+            series25.Name = "Series1";
+            series26.ChartArea = "ChartArea1";
+            series26.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series26.Color = System.Drawing.Color.Yellow;
+            series26.Enabled = false;
+            series26.IsVisibleInLegend = false;
+            series26.Legend = "Legend1";
+            series26.Name = "Series2";
+            series27.ChartArea = "ChartArea1";
+            series27.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series27.Color = System.Drawing.Color.Yellow;
+            series27.IsVisibleInLegend = false;
+            series27.Legend = "Legend1";
+            series27.Name = "Series3";
+            series28.ChartArea = "ChartArea1";
+            series28.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series28.Color = System.Drawing.Color.Yellow;
+            series28.IsVisibleInLegend = false;
+            series28.Legend = "Legend1";
+            series28.Name = "Series4";
+            series29.ChartArea = "ChartArea1";
+            series29.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series29.Color = System.Drawing.Color.Yellow;
+            series29.IsVisibleInLegend = false;
+            series29.Legend = "Legend1";
+            series29.Name = "Series5";
+            series30.ChartArea = "ChartArea1";
+            series30.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series30.Color = System.Drawing.Color.Yellow;
+            series30.IsVisibleInLegend = false;
+            series30.Legend = "Legend1";
+            series30.Name = "Series6";
+            series31.ChartArea = "ChartArea1";
+            series31.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series31.Color = System.Drawing.Color.Yellow;
+            series31.IsVisibleInLegend = false;
+            series31.Legend = "Legend1";
+            series31.Name = "Series7";
+            series32.ChartArea = "ChartArea1";
+            series32.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series32.Color = System.Drawing.Color.Yellow;
+            series32.IsVisibleInLegend = false;
+            series32.Legend = "Legend1";
+            series32.Name = "Series8";
+            series33.ChartArea = "ChartArea1";
+            series33.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series33.Color = System.Drawing.Color.Yellow;
+            series33.IsVisibleInLegend = false;
+            series33.Legend = "Legend1";
+            series33.Name = "Series9";
+            series34.ChartArea = "ChartArea1";
+            series34.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series34.Color = System.Drawing.Color.Yellow;
+            series34.IsVisibleInLegend = false;
+            series34.Legend = "Legend1";
+            series34.Name = "Series10";
+            series35.ChartArea = "ChartArea1";
+            series35.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series35.Color = System.Drawing.Color.Yellow;
+            series35.IsVisibleInLegend = false;
+            series35.Legend = "Legend1";
+            series35.Name = "Series11";
+            series36.ChartArea = "ChartArea1";
+            series36.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series36.Color = System.Drawing.Color.Yellow;
+            series36.IsVisibleInLegend = false;
+            series36.Legend = "Legend1";
+            series36.Name = "Series12";
+            series37.ChartArea = "ChartArea1";
+            series37.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series37.Color = System.Drawing.Color.Yellow;
+            series37.IsVisibleInLegend = false;
+            series37.Legend = "Legend1";
+            series37.Name = "Series13";
+            series38.ChartArea = "ChartArea1";
+            series38.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series38.Color = System.Drawing.Color.Yellow;
+            series38.IsVisibleInLegend = false;
+            series38.Legend = "Legend1";
+            series38.Name = "Series14";
+            series39.ChartArea = "ChartArea1";
+            series39.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series39.Color = System.Drawing.Color.Yellow;
+            series39.IsVisibleInLegend = false;
+            series39.Legend = "Legend1";
+            series39.Name = "Series15";
+            series40.ChartArea = "ChartArea1";
+            series40.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series40.Color = System.Drawing.Color.Yellow;
+            series40.IsVisibleInLegend = false;
+            series40.Legend = "Legend1";
+            series40.Name = "Series16";
+            series41.ChartArea = "ChartArea1";
+            series41.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series41.Color = System.Drawing.Color.Yellow;
+            series41.IsVisibleInLegend = false;
+            series41.Legend = "Legend1";
+            series41.Name = "Series17";
+            series42.ChartArea = "ChartArea1";
+            series42.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series42.Color = System.Drawing.Color.Yellow;
+            series42.IsVisibleInLegend = false;
+            series42.Legend = "Legend1";
+            series42.Name = "Series18";
+            series43.ChartArea = "ChartArea1";
+            series43.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series43.Legend = "Legend1";
+            series43.Name = "Series19";
+            series44.ChartArea = "ChartArea1";
+            series44.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series44.Legend = "Legend1";
+            series44.Name = "Series20";
+            series45.ChartArea = "ChartArea1";
+            series45.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series45.Legend = "Legend1";
+            series45.Name = "Series21";
+            series46.ChartArea = "ChartArea1";
+            series46.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series46.Legend = "Legend1";
+            series46.Name = "Series22";
+            series47.ChartArea = "ChartArea1";
+            series47.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series47.Legend = "Legend1";
+            series47.Name = "Series23";
+            series48.ChartArea = "ChartArea1";
+            series48.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series48.Legend = "Legend1";
+            series48.Name = "Series24";
+            this.DynamicCurveChart.Series.Add(series25);
+            this.DynamicCurveChart.Series.Add(series26);
+            this.DynamicCurveChart.Series.Add(series27);
+            this.DynamicCurveChart.Series.Add(series28);
+            this.DynamicCurveChart.Series.Add(series29);
+            this.DynamicCurveChart.Series.Add(series30);
+            this.DynamicCurveChart.Series.Add(series31);
+            this.DynamicCurveChart.Series.Add(series32);
+            this.DynamicCurveChart.Series.Add(series33);
+            this.DynamicCurveChart.Series.Add(series34);
+            this.DynamicCurveChart.Series.Add(series35);
+            this.DynamicCurveChart.Series.Add(series36);
+            this.DynamicCurveChart.Series.Add(series37);
+            this.DynamicCurveChart.Series.Add(series38);
+            this.DynamicCurveChart.Series.Add(series39);
+            this.DynamicCurveChart.Series.Add(series40);
+            this.DynamicCurveChart.Series.Add(series41);
+            this.DynamicCurveChart.Series.Add(series42);
+            this.DynamicCurveChart.Series.Add(series43);
+            this.DynamicCurveChart.Series.Add(series44);
+            this.DynamicCurveChart.Series.Add(series45);
+            this.DynamicCurveChart.Series.Add(series46);
+            this.DynamicCurveChart.Series.Add(series47);
+            this.DynamicCurveChart.Series.Add(series48);
             this.DynamicCurveChart.Size = new System.Drawing.Size(896, 598);
             this.DynamicCurveChart.TabIndex = 16;
             this.DynamicCurveChart.Text = "Dynamic Curve";
             this.DynamicCurveChart.Click += new System.EventHandler(this.DynamicCurveChart_Click);
-            // 
-            // DemandCurve_Minimum_Value
-            // 
-            this.DemandCurve_Minimum_Value.DecimalPlaces = 1;
-            this.DemandCurve_Minimum_Value.Location = new System.Drawing.Point(186, 24);
-            this.DemandCurve_Minimum_Value.Name = "DemandCurve_Minimum_Value";
-            this.DemandCurve_Minimum_Value.Size = new System.Drawing.Size(53, 20);
-            this.DemandCurve_Minimum_Value.TabIndex = 8;
-            // 
-            // DemandCurve_Maximum_Value
-            // 
-            this.DemandCurve_Maximum_Value.DecimalPlaces = 1;
-            this.DemandCurve_Maximum_Value.Location = new System.Drawing.Point(186, 50);
-            this.DemandCurve_Maximum_Value.Name = "DemandCurve_Maximum_Value";
-            this.DemandCurve_Maximum_Value.Size = new System.Drawing.Size(53, 20);
-            this.DemandCurve_Maximum_Value.TabIndex = 9;
-            // 
-            // DemandCurve_KavLRadio
-            // 
-            this.DemandCurve_KavLRadio.Location = new System.Drawing.Point(17, 62);
-            this.DemandCurve_KavLRadio.Name = "DemandCurve_KavLRadio";
-            this.DemandCurve_KavLRadio.Size = new System.Drawing.Size(122, 17);
-            this.DemandCurve_KavLRadio.TabIndex = 1;
-            this.DemandCurve_KavLRadio.Text = "Kav/L";
-            this.DemandCurve_KavLRadio.UseVisualStyleBackColor = true;
-            // 
-            // DemandCurve_ApproachRadio
-            // 
-            this.DemandCurve_ApproachRadio.Checked = true;
-            this.DemandCurve_ApproachRadio.Location = new System.Drawing.Point(17, 41);
-            this.DemandCurve_ApproachRadio.Name = "DemandCurve_ApproachRadio";
-            this.DemandCurve_ApproachRadio.Size = new System.Drawing.Size(122, 17);
-            this.DemandCurve_ApproachRadio.TabIndex = 0;
-            this.DemandCurve_ApproachRadio.TabStop = true;
-            this.DemandCurve_ApproachRadio.Text = "Approach";
-            this.DemandCurve_ApproachRadio.UseVisualStyleBackColor = true;
             // 
             // DemandCurveTabPage
             // 
@@ -632,11 +633,11 @@
             this.DesignPointGroupBox.PerformLayout();
             this.TowerOrFillCharacteristicsGroupBox.ResumeLayout(false);
             this.TowerOrFillCharacteristicsGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DemandCurve_Maximum_Value)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DemandCurve_Minimum_Value)).EndInit();
             this.ThermalDesignConditionsGroupBox.ResumeLayout(false);
             this.ThermalDesignConditionsGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DynamicCurveChart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DemandCurve_Minimum_Value)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DemandCurve_Maximum_Value)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -649,7 +650,7 @@
         private System.Windows.Forms.TextBox DemandCurveDataFile_Value;
         private System.Windows.Forms.TextBox DemandCurve_Range_Value;
         private System.Windows.Forms.TextBox DemandCurve_Wet_Bulb_Value;
-        private System.Windows.Forms.Label DemandCurveTemperatureColdWaterUnits;
+        private System.Windows.Forms.Label DemandCurveRangeUnits;
         private System.Windows.Forms.Label DemandCurveWetBulbTemperatureLabel;
         private System.Windows.Forms.TextBox DemandCurve_Elevation_Value;
         private System.Windows.Forms.Label DemandCurveElevationPressureUnits;

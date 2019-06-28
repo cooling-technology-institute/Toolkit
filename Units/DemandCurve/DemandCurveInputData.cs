@@ -14,7 +14,7 @@ namespace ToolkitLibrary
         public WetBlubTemperatureDataValue WetBlubTemperatureDataValue { get; set; }
         public RangeDataValue RangeDataValue { get; set; }
         public ElevationDataValue ElevationDataValue { get; set; }
-        public WaterAirFlowRateDataValue WaterAirFlowRateDataValue { get; set; }
+        public LGDataValue LGDataValue { get; set; }
         public BarometricPressureDataValue BarometricPressureDataValue { get; set; }
         public C1DataValue C1DataValue { get; set; }
         public SlopeDataValue SlopeDataValue { get; set; }
@@ -24,7 +24,7 @@ namespace ToolkitLibrary
         public DemandCurveInputData(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
-            IsInternationalSystemOfUnits_IS = IsInternationalSystemOfUnits_IS;
+            IsInternationalSystemOfUnits_IS = isInternationalSystemOfUnits_IS_;
             IsElevation = true;
 
             WetBlubTemperatureDataValue = new WetBlubTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
@@ -35,7 +35,7 @@ namespace ToolkitLibrary
             SlopeDataValue = new SlopeDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             MinimumDataValue = new MinimumDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             MaximumDataValue = new MaximumDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            WaterAirFlowRateDataValue = new WaterAirFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+            LGDataValue = new LGDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
         }
 
         public bool ConvertValues(bool isIS, bool isElevation)
@@ -45,7 +45,7 @@ namespace ToolkitLibrary
             if (IsInternationalSystemOfUnits_IS != isIS)
             {
                 IsInternationalSystemOfUnits_IS = isIS;
-                WaterAirFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
+                LGDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
                 ElevationDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
                 WetBlubTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
                 BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);

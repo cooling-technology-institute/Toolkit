@@ -32,10 +32,10 @@ namespace ToolkitLibrary
 
 
         //public DemandCurveData(bool isInternationalSystemOfUnits_IS_, bool isElevation, bool isDemo = false)
-        public DemandCurveData()
+        public DemandCurveData(bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = false;
-            IsInternationalSystemOfUnits_IS_ = false;
+            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
             IsElevation = true;
 
 //#ifdef _DEMO_VERSION

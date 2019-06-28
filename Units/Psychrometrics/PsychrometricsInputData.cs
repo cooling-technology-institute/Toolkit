@@ -21,7 +21,7 @@ namespace ToolkitLibrary
         public PsychrometricsInputData(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
-            IsInternationalSystemOfUnits_IS_ = IsInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
             IsElevation = true;
             CalculationType = PsychrometricsCalculationType.Psychrometrics_WBT_DBT;
             EnthalpyDataValue = new EnthalpyDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);

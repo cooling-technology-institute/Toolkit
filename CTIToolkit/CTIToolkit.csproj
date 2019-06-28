@@ -37,6 +37,8 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,8 +57,27 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="AssemblyInformation.cs" />
+    <Compile Include="ApplicationSettings.cs" />
+    <Compile Include="DemandCurveTabPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DemandCurveTabPage.Designer.cs">
+      <DependentUpon>DemandCurveTabPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MerkleTabPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MerkleTabPage.Designer.cs">
+      <DependentUpon>MerkleTabPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PsychrometricsTabPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PsychrometricsTabPage.Designer.cs">
+      <DependentUpon>PsychrometricsTabPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolkitMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +86,12 @@
     </Compile>
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DemandCurveTabPage.resx">
+      <DependentUpon>DemandCurveTabPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MerkleTabPage.resx">
+      <DependentUpon>MerkleTabPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -76,6 +103,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="PsychrometricsTabPage.resx">
+      <DependentUpon>PsychrometricsTabPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ToolkitMain.resx">
       <DependentUpon>ToolkitMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -93,10 +123,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CTICustomControls\CTICustomControls.csproj">
-      <Project>{56f22fe0-37be-4fb6-8b8b-ac7b079b7823}</Project>
-      <Name>CTICustomControls</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Units\ToolkitLibrary.csproj">
       <Project>{ef3be6e9-e07b-4a88-9264-4c7e7b2d7f05}</Project>
       <Name>ToolkitLibrary</Name>

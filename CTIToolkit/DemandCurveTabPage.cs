@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using ToolkitLibrary;
 
-namespace CTICustomControls
+namespace CTIToolkit
 {
     public partial class DemandCurveTabPage : UserControl
     {
@@ -20,11 +20,11 @@ namespace CTICustomControls
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_IS_ { get; set; }
 
-        public DemandCurveTabPage()
+        public DemandCurveTabPage(ApplicationSettings applicationSettings)
         {
             InitializeComponent();
 
-            IsInternationalSystemOfUnits_IS_ = (Globals.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            IsInternationalSystemOfUnits_IS_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
 
             DemandCurveInputData = new DemandCurveInputData(IsDemo, IsInternationalSystemOfUnits_IS_);
 
@@ -35,9 +35,9 @@ namespace CTICustomControls
             CalculateDemandCurve();
         }
 
-        public void SetUnitsStandard()
+        public void SetUnitsStandard(ApplicationSettings applicationSettings)
         {
-            IsInternationalSystemOfUnits_IS_ = (Globals.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            IsInternationalSystemOfUnits_IS_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
 
             SwitchCalculation();
         }
@@ -52,7 +52,7 @@ namespace CTICustomControls
             DemandCurve_Slope_C2_Value.Text = DemandCurveInputData.SlopeDataValue.Current.ToString();
             DemandCurve_Minimum_Value.Text = DemandCurveInputData.MinimumDataValue.Current.ToString();
             DemandCurve_Maximum_Value.Text = DemandCurveInputData.MaximumDataValue.Current.ToString();
-            DemandCurve_LG_Value.Text = DemandCurveInputData.WaterAirFlowRateDataValue.Current.ToString();
+            DemandCurve_LG_Value.Text = DemandCurveInputData.LGDataValue.Current.ToString();
         }
 
         private void SwitchElevationPressure()
@@ -95,8 +95,8 @@ namespace CTICustomControls
             DemandCurve_Wet_Bulb_Value.Text = DemandCurveInputData.WetBlubTemperatureDataValue.InputValue;
             toolTip1.SetToolTip(DemandCurve_Wet_Bulb_Value, DemandCurveInputData.WetBlubTemperatureDataValue.ToolTip);
 
-            DemandCurve_LG_Value.Text = DemandCurveInputData.WaterAirFlowRateDataValue.InputValue;
-            toolTip1.SetToolTip(DemandCurve_LG_Value, DemandCurveInputData.WaterAirFlowRateDataValue.ToolTip);
+            DemandCurve_LG_Value.Text = DemandCurveInputData.LGDataValue.InputValue;
+            toolTip1.SetToolTip(DemandCurve_LG_Value, DemandCurveInputData.LGDataValue.ToolTip);
 
             if (DemandCurve_ElevationRadio.Checked)
             {
@@ -128,10 +128,12 @@ namespace CTICustomControls
             if (IsInternationalSystemOfUnits_IS_)
             {
                 DemandCurveTemperatureWebBulbUnits.Text = ConstantUnits.TemperatureCelsius;
+                DemandCurveRangeUnits.Text = ConstantUnits.RangeK;
             }
             else
             {
                 DemandCurveTemperatureWebBulbUnits.Text = ConstantUnits.TemperatureFahrenheit;
+                DemandCurveRangeUnits.Text = ConstantUnits.TemperatureFahrenheit;
             }
         }
 
@@ -139,7 +141,7 @@ namespace CTICustomControls
         {
             try
             {
-                DemandCurveData = new DemandCurveData();
+                DemandCurveData = new DemandCurveData(IsInternationalSystemOfUnits_IS_);
 
                 //DynamicCurveChart.ChartAreas[0].AxisX.Minimum = 0.1;
                 //DynamicCurveChart.ChartAreas[0].AxisX.Maximum = 10;
@@ -226,7 +228,7 @@ namespace CTICustomControls
                     return;
                 }
 
-                if (!DemandCurveInputData.WaterAirFlowRateDataValue.UpdateValue(DemandCurve_LG_Value.Text, out message))
+                if (!DemandCurveInputData.LGDataValue.UpdateValue(DemandCurve_LG_Value.Text, out message))
                 {
                     MessageBox.Show(message);
                     return;
@@ -302,7 +304,7 @@ namespace CTICustomControls
             }
             catch (Exception exception)
             {
-                MessageBox.Show(string.Format("Error in calculation. Please check your input values. Exception Message: {0}", exception.Message), "Demand Curve Calculation Error");
+                MessageBox.Show(string.Format("Error in Demand Curve calculation. Please check your input values. Exception Message: {0}", exception.Message), "Demand Curve Calculation Error");
             }
         }
 

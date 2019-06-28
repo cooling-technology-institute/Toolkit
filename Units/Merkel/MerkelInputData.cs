@@ -26,7 +26,7 @@ namespace ToolkitLibrary
         public MerkelInputData(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
-            IsInternationalSystemOfUnits_IS = IsInternationalSystemOfUnits_IS;
+            IsInternationalSystemOfUnits_IS = isInternationalSystemOfUnits_IS_;
             IsElevation = true;
             HotWaterTemperatureDataValue = new HotWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             ColdWaterTemperatureDataValue = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);

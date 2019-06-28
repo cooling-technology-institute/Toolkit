@@ -1413,7 +1413,7 @@ namespace ToolkitLibrary
             return DEWPoint;
         }
 
-        public static double Pstd(double Z)                      /* UnitedStatesCustomaryUnits_IP_ atmospheric pressure */
+        public static double StandardAtmosphericPressure(double Z) 
         {
             Z /= 10000.0;
             return (.491154 * ((.547462 * Z - 7.67923) * Z + 29.9309) / (.10803 * Z + 1.0));
@@ -1466,7 +1466,7 @@ namespace ToolkitLibrary
 
             if (merkelData.Elevation != 0)
             {
-                pressure = Pstd(merkelData.Elevation);
+                pressure = StandardAtmosphericPressure(merkelData.Elevation);
             }
             Hain = CalculateEnthalpy(pressure, merkelData.WetBulbTemperature, merkelData.WetBulbTemperature);
             Haex = Hain + merkelData.Range * merkelData.WaterAirRatio;
