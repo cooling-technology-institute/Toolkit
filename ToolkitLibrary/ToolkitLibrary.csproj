@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{56F22FE0-37BE-4FB6-8B8B-AC7B079B7823}</ProjectGuid>
+    <ProjectGuid>{EF3BE6E9-E07B-4A88-9264-4C7E7B2D7F05}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CTICustomControls</RootNamespace>
-    <AssemblyName>CTICustomControls</AssemblyName>
+    <RootNamespace>ToolkitLibrary</RootNamespace>
+    <AssemblyName>ToolkitLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -32,29 +32,46 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DemandCurveCalculationLibrary.cs" />
-    <Compile Include="MerkelCalculationLibrary.cs" />
-    <Compile Include="PsychrometricsCalculationLibrary.cs" />
+    <Compile Include="DemandCurve\DemandCurveCalculationLibrary.cs" />
+    <Compile Include="Merkel\MerkelCalculationLibrary.cs" />
+    <Compile Include="MaximumDataValue.cs" />
+    <Compile Include="MinimumDataValue.cs" />
+    <Compile Include="Psychrometrics\PsychrometricsCalculationLibrary.cs" />
+    <Compile Include="SlopeDataValue.cs" />
+    <Compile Include="C1DataValue.cs" />
+    <Compile Include="CalculationLibrary.cs" />
+    <Compile Include="DemandCurve\DemandCurveData.cs" />
+    <Compile Include="DemandCurve\DemandCurveInputData.cs" />
+    <Compile Include="LGDataValue.cs" />
+    <Compile Include="WaterAirFlowRateDataValue.cs" />
+    <Compile Include="ColdWaterTemperatureDataValue.cs" />
+    <Compile Include="HotWaterTemperatureDataValue.cs" />
+    <Compile Include="NameValueUnitsDataTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Units\ToolkitLibrary.csproj">
-      <Project>{ef3be6e9-e07b-4a88-9264-4c7e7b2d7f05}</Project>
-      <Name>ToolkitLibrary</Name>
-    </ProjectReference>
+    <Compile Include="Merkel\MerkelData.cs" />
+    <Compile Include="Psychrometrics\PsychrometricsData.cs" />
+    <Compile Include="Merkel\MerkelInputData.cs" />
+    <Compile Include="DataValue.cs" />
+    <Compile Include="EnthalpyDataValue.cs" />
+    <Compile Include="ElevationDataValue.cs" />
+    <Compile Include="BarometricPressureDataValue.cs" />
+    <Compile Include="DryBlubTemperatureDataValue.cs" />
+    <Compile Include="RelativeHumitityDataValue.cs" />
+    <Compile Include="RangeDataValue.cs" />
+    <Compile Include="WetBlubTemperatureDataValue.cs" />
+    <Compile Include="Psychrometrics\PsychrometricsInputData.cs" />
+    <Compile Include="UnitConverter.cs" />
+    <Compile Include="Units.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.705
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTIToolkit", "CTIToolkit\CTIToolkit.csproj", "{EB9582BB-0E47-48BF-91D3-5A36BA50800B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolkitLibrary", "Units\ToolkitLibrary.csproj", "{EF3BE6E9-E07B-4A88-9264-4C7E7B2D7F05}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolkitLibrary", "ToolkitLibrary\ToolkitLibrary.csproj", "{EF3BE6E9-E07B-4A88-9264-4C7E7B2D7F05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
