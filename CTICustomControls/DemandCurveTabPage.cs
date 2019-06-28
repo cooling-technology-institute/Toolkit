@@ -24,6 +24,8 @@ namespace CTICustomControls
         {
             InitializeComponent();
 
+            IsInternationalSystemOfUnits_IS_ = (Globals.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+
             DemandCurveInputData = new DemandCurveInputData(IsDemo, IsInternationalSystemOfUnits_IS_);
 
             InitializeData();
@@ -32,6 +34,14 @@ namespace CTICustomControls
 
             CalculateDemandCurve();
         }
+
+        public void SetUnitsStandard()
+        {
+            IsInternationalSystemOfUnits_IS_ = (Globals.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+
+            SwitchCalculation();
+        }
+
 
         private void InitializeData()
         {
@@ -47,12 +57,12 @@ namespace CTICustomControls
 
         private void SwitchElevationPressure()
         {
-            if (DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_IS_, DemandCurveElevationRadio.Checked))
+            if (DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_IS_, DemandCurve_ElevationRadio.Checked))
             {
                 SwitchCalculation();
             }
 
-            if (DemandCurveElevationRadio.Checked)
+            if (DemandCurve_ElevationRadio.Checked)
             {
                 if (IsInternationalSystemOfUnits_IS_)
                 {
@@ -88,7 +98,7 @@ namespace CTICustomControls
             DemandCurve_LG_Value.Text = DemandCurveInputData.WaterAirFlowRateDataValue.InputValue;
             toolTip1.SetToolTip(DemandCurve_LG_Value, DemandCurveInputData.WaterAirFlowRateDataValue.ToolTip);
 
-            if (DemandCurveElevationRadio.Checked)
+            if (DemandCurve_ElevationRadio.Checked)
             {
                 DemandCurve_Elevation_Value.Text = DemandCurveInputData.ElevationDataValue.InputValue;
                 DemandCurveElevationPressureLabel.Text = DemandCurveInputData.ElevationDataValue.InputMessage + ":";
@@ -175,7 +185,7 @@ namespace CTICustomControls
                     return;
                 }
 
-                if (DemandCurveElevationRadio.Checked)
+                if (DemandCurve_ElevationRadio.Checked)
                 {
                     if (!DemandCurveInputData.ElevationDataValue.UpdateValue(DemandCurve_Elevation_Value.Text, out message))
                     {
@@ -223,12 +233,12 @@ namespace CTICustomControls
                 }
 
 
-                DemandCurveData.IsElevation = DemandCurveElevationRadio.Checked;
+                DemandCurveData.IsElevation = DemandCurve_ElevationRadio.Checked;
                 DemandCurveData.SetInternationalSystemOfUnits_IS_(IsInternationalSystemOfUnits_IS_);
 
                 DemandCurveData.WetBulbTemperature = DemandCurveInputData.WetBlubTemperatureDataValue.Current;
                 DemandCurveData.Range = DemandCurveInputData.RangeDataValue.Current;
-                if (DemandCurveElevationRadio.Checked)
+                if (DemandCurve_ElevationRadio.Checked)
                 {
                     DemandCurveData.Elevation = DemandCurveInputData.ElevationDataValue.Current;
                 }
@@ -298,7 +308,7 @@ namespace CTICustomControls
 
         private void DemandCurveElevationRadio_CheckedChanged(object sender, EventArgs e)
         {
-            if (DemandCurveElevationRadio.Checked)
+            if (DemandCurve_ElevationRadio.Checked)
             {
                 SwitchElevationPressure();
                 CalculateDemandCurve();
@@ -307,7 +317,7 @@ namespace CTICustomControls
 
         private void DemandCurvePressureRadio_CheckedChanged(object sender, EventArgs e)
         {
-            if (DemandCurvePressureRadio.Checked)
+            if (DemandCurve_PressureRadio.Checked)
             {
                 SwitchElevationPressure();
                 CalculateDemandCurve();

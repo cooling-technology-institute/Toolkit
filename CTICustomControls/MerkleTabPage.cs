@@ -17,12 +17,20 @@ namespace CTICustomControls
         {
             InitializeComponent();
 
+            IsInternationalSystemOfUnits_IS_ = (Globals.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+
             MerkelInputData = new MerkelInputData(IsDemo, IsInternationalSystemOfUnits_IS_);
 
             SwitchCalculation();
 
             CalculateMerkel();
 
+        }
+
+        public void SetUnitsStandard()
+        {
+            IsInternationalSystemOfUnits_IS_ = (Globals.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_();
         }
 
         private void SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_()

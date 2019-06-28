@@ -7,31 +7,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ToolkitLibrary;
 
 namespace CTIToolkit
 {
     public partial class ToolkitMain : Form
     {
+        CTICustomControls.PsychrometricsTabPage PsychrometricsUserControl { get; set; }
+        CTICustomControls.MerkelTabPage MerkelUserControl { get; set; }
+        CTICustomControls.DemandCurveTabPage DemandCurveUserControl { get; set; }
+
         public ToolkitMain()
         {
             InitializeComponent();
 
-            CTICustomControls.PsychrometricsTabPage psychrometricsUserControl = new CTICustomControls.PsychrometricsTabPage();
-            psychrometricsUserControl.Dock = DockStyle.Top;
+            PsychrometricsUserControl = new CTICustomControls.PsychrometricsTabPage();
+            PsychrometricsUserControl.Dock = DockStyle.Top;
             TabPage psychrometricsTabPage = new TabPage("Psychrometrics");
-            psychrometricsTabPage.Controls.Add(psychrometricsUserControl);
+            psychrometricsTabPage.Controls.Add(PsychrometricsUserControl);
             tabControl1.TabPages.Add(psychrometricsTabPage);
 
-            CTICustomControls.MerkelTabPage merkelUserControl = new CTICustomControls.MerkelTabPage();
-            merkelUserControl.Dock = DockStyle.Top;
+            MerkelUserControl = new CTICustomControls.MerkelTabPage();
+            MerkelUserControl.Dock = DockStyle.Top;
             TabPage merkelTabPage = new TabPage("Merkel");
-            merkelTabPage.Controls.Add(merkelUserControl);
+            merkelTabPage.Controls.Add(MerkelUserControl);
             tabControl1.TabPages.Add(merkelTabPage);
 
-            CTICustomControls.DemandCurveTabPage demandCurveUserControl = new CTICustomControls.DemandCurveTabPage();
-            demandCurveUserControl.Dock = DockStyle.Top;
+            DemandCurveUserControl = new CTICustomControls.DemandCurveTabPage();
+            DemandCurveUserControl.Dock = DockStyle.Top;
             TabPage demandCurveTabPage = new TabPage("Demand Curve");
-            demandCurveTabPage.Controls.Add(demandCurveUserControl);
+            demandCurveTabPage.Controls.Add(DemandCurveUserControl);
             tabControl1.TabPages.Add(demandCurveTabPage);
         }
 
@@ -39,6 +44,20 @@ namespace CTIToolkit
         {
             About about = new About();
             about.ShowDialog();
+        }
+
+        private void unitedStatesCustomaryUnitsIPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            internationalSystemOfUnitsSIToolStripMenuItem.Checked = false;
+            Globals.UnitsSelection = UnitsSelection.United_States_Customary_Units_IP;
+            PsychrometricsUserControl.SetUnitsStandard();
+        }
+
+        private void internationalSystemOfUnitsSIToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            unitedStatesCustomaryUnitsIPToolStripMenuItem.Checked = false;
+            Globals.UnitsSelection = UnitsSelection.International_System_Of_Units_SI;
+            PsychrometricsUserControl.SetUnitsStandard();
         }
     }
 }

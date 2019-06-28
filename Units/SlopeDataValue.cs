@@ -6,13 +6,12 @@ namespace ToolkitLibrary
 {
     public class SlopeDataValue : DataValue
     {
-        public const string ToolTipFormat = "Slope Value.\nValue should be between {0} and {1}.";
-
         public SlopeDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
             InputMessage = "Slope";
             Format = "F2";
+            ToolTipFormat = "Slope Value.\nValue should be between {0} and {1}.";
             ConvertValue(isInternationalSystemOfUnits_IS_);
         }
 

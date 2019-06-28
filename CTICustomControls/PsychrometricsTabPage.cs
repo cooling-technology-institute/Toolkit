@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using ToolkitLibrary;
 
+
 namespace CTICustomControls
 {
     public partial class PsychrometricsTabPage: UserControl
@@ -17,6 +18,8 @@ namespace CTICustomControls
         {
             InitializeComponent();
 
+            IsInternationalSystemOfUnits_IS_ = (Globals.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+
             PsychrometricsInputData = new PsychrometricsInputData(IsDemo, IsInternationalSystemOfUnits_IS_);
 
             SwitchCalculation();
@@ -25,14 +28,20 @@ namespace CTICustomControls
 
         }
 
+        public void SetUnitsStandard()
+        {
+            IsInternationalSystemOfUnits_IS_ = (Globals.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_();
+        }
+
         private void SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_()
         {
-            if (PsychrometricsInputData.ConvertValues(InternationalSystemOfUnits_IS_.Checked))
+            if (PsychrometricsInputData.ConvertValues(IsInternationalSystemOfUnits_IS_))
             {
                 SwitchCalculation();
             }
 
-            if (InternationalSystemOfUnits_IS_.Checked)
+            if (IsInternationalSystemOfUnits_IS_)
             {
                 if (Psychrometrics_DBT_RH.Checked)
                 {
@@ -109,7 +118,7 @@ namespace CTICustomControls
                 }
                 Psychrometrics_Elevation_Value.Text = PsychrometricsInputData.ElevationDataValue.InputValue;
                 PsychrometricsElevationPressureLabel1.Text = PsychrometricsInputData.ElevationDataValue.InputMessage + ":";
-                if (InternationalSystemOfUnits_IS_.Checked)
+                if (IsInternationalSystemOfUnits_IS_)
                 {
                     PsychrometricsElevationPressureLabel2.Text = ConstantUnits.Meter;
                 }
@@ -133,7 +142,7 @@ namespace CTICustomControls
                 }
                 Psychrometrics_Elevation_Value.Text = PsychrometricsInputData.BarometricPressureDataValue.InputValue;
                 PsychrometricsElevationPressureLabel1.Text = PsychrometricsInputData.BarometricPressureDataValue.InputMessage + ":";
-                if (InternationalSystemOfUnits_IS_.Checked)
+                if (IsInternationalSystemOfUnits_IS_)
                 {
                     PsychrometricsElevationPressureLabel2.Text = ConstantUnits.BarometricPressureKiloPascal;
                 }
@@ -172,7 +181,7 @@ namespace CTICustomControls
                 TemperatureDryBlubLabel.Text = PsychrometricsInputData.DryBlubTemperatureDataValue.InputMessage + ":";
                 Psychrometrics_DBT_Value.Text = PsychrometricsInputData.DryBlubTemperatureDataValue.InputValue;
                 toolTip1.SetToolTip(Psychrometrics_DBT_Value, PsychrometricsInputData.DryBlubTemperatureDataValue.ToolTip);
-                if (InternationalSystemOfUnits_IS_.Checked)
+                if (IsInternationalSystemOfUnits_IS_)
                 {
                     PsychrometricsTemperatureDryBlubUnits.Text = ConstantUnits.TemperatureCelsius;
                 }
@@ -187,7 +196,7 @@ namespace CTICustomControls
                 TemperatureDryBlubLabel.TextAlign = ContentAlignment.MiddleRight;
                 toolTip1.SetToolTip(Psychrometrics_DBT_Value, PsychrometricsInputData.EnthalpyDataValue.ToolTip);
 
-                if (InternationalSystemOfUnits_IS_.Checked)
+                if (IsInternationalSystemOfUnits_IS_)
                 {
                     PsychrometricsTemperatureDryBlubUnits.Text = ConstantUnits.KilojoulesPerKilogram;
                 }
@@ -209,7 +218,7 @@ namespace CTICustomControls
                 Psychrometrics_DBT_Value.Text = PsychrometricsInputData.DryBlubTemperatureDataValue.InputValue;
                 toolTip1.SetToolTip(Psychrometrics_WBT_Value, PsychrometricsInputData.WetBlubTemperatureDataValue.ToolTip);
 
-                if (InternationalSystemOfUnits_IS_.Checked)
+                if (IsInternationalSystemOfUnits_IS_)
                 {
                     PsychrometricsTemperatureWetBlubUnits.Text = ConstantUnits.TemperatureCelsius;
                     PsychrometricsTemperatureDryBlubUnits.Text = ConstantUnits.TemperatureCelsius;
@@ -229,9 +238,9 @@ namespace CTICustomControls
                 PsychrometricsData = new PsychrometricsData();
 
                 // clear data set
-                if (PsychrometricsGridView.DataSource != null)
+                if (Psychrometrics_GridView.DataSource != null)
                 {
-                    PsychrometricsGridView.DataSource = null;
+                    Psychrometrics_GridView.DataSource = null;
                 }
 
                 DataTable table = null;
@@ -305,7 +314,7 @@ namespace CTICustomControls
                 }
 
                 PsychrometricsData.IsElevation = PyschmetricsElevationRadio.Checked;
-                PsychrometricsData.SetInternationalSystemOfUnits_IS_(InternationalSystemOfUnits_IS_.Checked);
+                PsychrometricsData.SetInternationalSystemOfUnits_IS_(IsInternationalSystemOfUnits_IS_);
 
                 if (Psychrometrics_WBT_DBT.Checked)
                 {
@@ -336,7 +345,7 @@ namespace CTICustomControls
                     DataView view = new DataView(table);
 
                     // Set a DataGrid control's DataSource to the DataView.
-                    PsychrometricsGridView.DataSource = view;
+                    Psychrometrics_GridView.DataSource = view;
                 }
             }
             catch (Exception exception)
@@ -361,25 +370,6 @@ namespace CTICustomControls
             {
                 SwitchElevationPressure();
 
-                CalculatePsychrometrics();
-            }
-        }
-
-        private void UnitedStatesCustomaryUnits_IP__CheckedChanged(object sender, EventArgs e)
-        {
-            if (UnitedStatesCustomaryUnits_IP_.Checked)
-            {
-                SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_();
-
-                CalculatePsychrometrics();
-            }
-        }
-
-        private void InternationalSystemOfUnits_IS__CheckedChanged(object sender, EventArgs e)
-        {
-            if (InternationalSystemOfUnits_IS_.Checked)
-            {
-                SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_();
                 CalculatePsychrometrics();
             }
         }

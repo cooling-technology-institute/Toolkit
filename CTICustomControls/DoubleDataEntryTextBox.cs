@@ -22,7 +22,6 @@ namespace CTICustomControls
         private string Format = string.Empty;
         private string ToolTipFormat = string.Empty;
         private string ToolTip = string.Empty;
-        private bool IsInternationalSystemOfUnits_IS_ = false;
         private bool IsDemo = true;
 
         public DoubleDataEntryTextBox()

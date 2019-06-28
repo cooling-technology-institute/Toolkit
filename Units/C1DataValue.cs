@@ -6,13 +6,12 @@ namespace ToolkitLibrary
 {
     public class C1DataValue : DataValue
     {
-        public const string ToolTipFormat = "C Value.\nValue should be between {0} and {1}.";
-
         public C1DataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
             InputMessage = "C";
             Format = "F1";
+            ToolTipFormat = "C Value.\nValue should be between {0} and {1}.";
             ConvertValue(isInternationalSystemOfUnits_IS_);
         }
 

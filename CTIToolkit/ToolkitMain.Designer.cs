@@ -40,6 +40,8 @@
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.unitedStatesCustomaryUnitsIPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.internationalSystemOfUnitsSIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,6 +72,9 @@
             // 
             // settingToolStripMenuItem
             // 
+            this.settingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.unitedStatesCustomaryUnitsIPToolStripMenuItem,
+            this.internationalSystemOfUnitsSIToolStripMenuItem});
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
             this.settingToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.settingToolStripMenuItem.Text = "Setting";
@@ -105,6 +110,24 @@
             this.tabControl1.Size = new System.Drawing.Size(917, 831);
             this.tabControl1.TabIndex = 1;
             // 
+            // unitedStatesCustomaryUnitsIPToolStripMenuItem
+            // 
+            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.Checked = true;
+            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.CheckOnClick = true;
+            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.Name = "unitedStatesCustomaryUnitsIPToolStripMenuItem";
+            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.Text = "United States Customary Units (IP)";
+            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.Click += new System.EventHandler(this.unitedStatesCustomaryUnitsIPToolStripMenuItem_Click);
+            // 
+            // internationalSystemOfUnitsSIToolStripMenuItem
+            // 
+            this.internationalSystemOfUnitsSIToolStripMenuItem.CheckOnClick = true;
+            this.internationalSystemOfUnitsSIToolStripMenuItem.Name = "internationalSystemOfUnitsSIToolStripMenuItem";
+            this.internationalSystemOfUnitsSIToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.internationalSystemOfUnitsSIToolStripMenuItem.Text = "International System of Units (SI)";
+            this.internationalSystemOfUnitsSIToolStripMenuItem.Click += new System.EventHandler(this.internationalSystemOfUnitsSIToolStripMenuItem_Click);
+            // 
             // ToolkitMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -136,5 +159,7 @@
         private System.Windows.Forms.HelpProvider helpProvider1;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.ToolStripMenuItem unitedStatesCustomaryUnitsIPToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem internationalSystemOfUnitsSIToolStripMenuItem;
     }
 }

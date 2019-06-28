@@ -6,13 +6,12 @@ namespace ToolkitLibrary
 {
     public class MaximumDataValue : DataValue
     {
-        public const string ToolTipFormat = "Maximum Value.\nValue should be between {0} and {1}.";
-
         public MaximumDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
             InputMessage = "Minimum";
             Format = "F1";
+            ToolTipFormat = "Maximum Value.\nValue should be between {0} and {1}.";
             ConvertValue(isInternationalSystemOfUnits_IS_);
         }
 
