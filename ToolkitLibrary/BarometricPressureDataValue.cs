@@ -28,7 +28,7 @@ namespace ToolkitLibrary
         {
             IsDemo = isDemo;
             InputMessage = "Barometric Pressure";
-            Format = "F3";
+            Format = "F5";
             ConvertValue(isInternationalSystemOfUnits_IS_);
         }
 

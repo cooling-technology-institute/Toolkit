@@ -66,7 +66,7 @@ namespace ToolkitLibrary
                     }
                     else
                     {
-                        value = UnitConverter.ConvertBarometricPressureToElevationInFeet(BarometricPressureDataValue.Current);
+                        value = UnitConverter.ConvertBarometricPressureToElevationInFeet(UnitConverter.CalculatePressureCelcius(BarometricPressureDataValue.Current));
                     }
                     ElevationDataValue.UpdateCurrentValue(value, out message);
                 }

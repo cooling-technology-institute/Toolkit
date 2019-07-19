@@ -29,19 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.MerkelGridView = new System.Windows.Forms.DataGridView();
             this.InputPropertiesGroupBox = new System.Windows.Forms.GroupBox();
+            this.Merkle_Elevation_Pressure_Selector = new System.Windows.Forms.ComboBox();
             this.MerkelTemperatureWebBulbUnits = new System.Windows.Forms.Label();
-            this.MerkelElevationPressureLabel = new System.Windows.Forms.Label();
             this.MerkelElevationPressureUnits = new System.Windows.Forms.Label();
             this.Merkel_Elevation_Value = new System.Windows.Forms.TextBox();
             this.LGLabel = new System.Windows.Forms.Label();
             this.Merkel_LG_Value = new System.Windows.Forms.TextBox();
             this.MerkelWetBulbTemperatureLabel = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.MerkelPressureRadio = new System.Windows.Forms.RadioButton();
-            this.MerkelElevationRadio = new System.Windows.Forms.RadioButton();
             this.MerkelTemperatureColdWaterUnits = new System.Windows.Forms.Label();
             this.MerkelTemperatureHotWaterUnits = new System.Windows.Forms.Label();
             this.Merkel_Wet_Bulb_Value = new System.Windows.Forms.TextBox();
@@ -51,10 +47,8 @@
             this.TemperatureHotWaterLabel = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.MerkelCalculate = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MerkelGridView)).BeginInit();
             this.InputPropertiesGroupBox.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // MerkelGridView
@@ -71,14 +65,13 @@
             // 
             // InputPropertiesGroupBox
             // 
+            this.InputPropertiesGroupBox.Controls.Add(this.Merkle_Elevation_Pressure_Selector);
             this.InputPropertiesGroupBox.Controls.Add(this.MerkelTemperatureWebBulbUnits);
-            this.InputPropertiesGroupBox.Controls.Add(this.MerkelElevationPressureLabel);
             this.InputPropertiesGroupBox.Controls.Add(this.MerkelElevationPressureUnits);
             this.InputPropertiesGroupBox.Controls.Add(this.Merkel_Elevation_Value);
             this.InputPropertiesGroupBox.Controls.Add(this.LGLabel);
             this.InputPropertiesGroupBox.Controls.Add(this.Merkel_LG_Value);
             this.InputPropertiesGroupBox.Controls.Add(this.MerkelWetBulbTemperatureLabel);
-            this.InputPropertiesGroupBox.Controls.Add(this.groupBox2);
             this.InputPropertiesGroupBox.Controls.Add(this.MerkelTemperatureColdWaterUnits);
             this.InputPropertiesGroupBox.Controls.Add(this.MerkelTemperatureHotWaterUnits);
             this.InputPropertiesGroupBox.Controls.Add(this.Merkel_Wet_Bulb_Value);
@@ -93,6 +86,20 @@
             this.InputPropertiesGroupBox.TabStop = false;
             this.InputPropertiesGroupBox.Text = "Input Properties";
             // 
+            // Merkle_Elevation_Pressure_Selector
+            // 
+            this.Merkle_Elevation_Pressure_Selector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Merkle_Elevation_Pressure_Selector.FormattingEnabled = true;
+            this.Merkle_Elevation_Pressure_Selector.Items.AddRange(new object[] {
+            "Elevation:",
+            "Barometric Pressure:"});
+            this.Merkle_Elevation_Pressure_Selector.Location = new System.Drawing.Point(15, 114);
+            this.Merkle_Elevation_Pressure_Selector.Name = "Merkle_Elevation_Pressure_Selector";
+            this.Merkle_Elevation_Pressure_Selector.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Merkle_Elevation_Pressure_Selector.Size = new System.Drawing.Size(123, 21);
+            this.Merkle_Elevation_Pressure_Selector.TabIndex = 21;
+            this.Merkle_Elevation_Pressure_Selector.SelectedIndexChanged += new System.EventHandler(this.Merkle_Elevation_Pressure_Selector_SelectedIndexChanged);
+            // 
             // MerkelTemperatureWebBulbUnits
             // 
             this.MerkelTemperatureWebBulbUnits.AutoSize = true;
@@ -101,15 +108,6 @@
             this.MerkelTemperatureWebBulbUnits.Size = new System.Drawing.Size(17, 13);
             this.MerkelTemperatureWebBulbUnits.TabIndex = 18;
             this.MerkelTemperatureWebBulbUnits.Text = "°F";
-            // 
-            // MerkelElevationPressureLabel
-            // 
-            this.MerkelElevationPressureLabel.Location = new System.Drawing.Point(12, 117);
-            this.MerkelElevationPressureLabel.Name = "MerkelElevationPressureLabel";
-            this.MerkelElevationPressureLabel.Size = new System.Drawing.Size(132, 13);
-            this.MerkelElevationPressureLabel.TabIndex = 17;
-            this.MerkelElevationPressureLabel.Text = "Elevation:";
-            this.MerkelElevationPressureLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // MerkelElevationPressureUnits
             // 
@@ -153,39 +151,6 @@
             this.MerkelWetBulbTemperatureLabel.TabIndex = 11;
             this.MerkelWetBulbTemperatureLabel.Text = "Wet Bulb Temperature:";
             this.MerkelWetBulbTemperatureLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox2.Controls.Add(this.MerkelPressureRadio);
-            this.groupBox2.Controls.Add(this.MerkelElevationRadio);
-            this.groupBox2.Location = new System.Drawing.Point(302, 29);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(164, 79);
-            this.groupBox2.TabIndex = 10;
-            this.groupBox2.TabStop = false;
-            // 
-            // MerkelPressureRadio
-            // 
-            this.MerkelPressureRadio.Location = new System.Drawing.Point(17, 50);
-            this.MerkelPressureRadio.Name = "MerkelPressureRadio";
-            this.MerkelPressureRadio.Size = new System.Drawing.Size(130, 17);
-            this.MerkelPressureRadio.TabIndex = 1;
-            this.MerkelPressureRadio.Text = "Barometric Pressure";
-            this.MerkelPressureRadio.UseVisualStyleBackColor = true;
-            this.MerkelPressureRadio.CheckedChanged += new System.EventHandler(this.MerkelPressureRadio_CheckedChanged);
-            // 
-            // MerkelElevationRadio
-            // 
-            this.MerkelElevationRadio.Checked = true;
-            this.MerkelElevationRadio.Location = new System.Drawing.Point(17, 21);
-            this.MerkelElevationRadio.Name = "MerkelElevationRadio";
-            this.MerkelElevationRadio.Size = new System.Drawing.Size(130, 17);
-            this.MerkelElevationRadio.TabIndex = 0;
-            this.MerkelElevationRadio.TabStop = true;
-            this.MerkelElevationRadio.Text = "Elevation";
-            this.MerkelElevationRadio.UseVisualStyleBackColor = true;
-            this.MerkelElevationRadio.CheckedChanged += new System.EventHandler(this.MerkelElevationRadio_CheckedChanged);
             // 
             // MerkelTemperatureColdWaterUnits
             // 
@@ -261,30 +226,21 @@
             // MerkelTabPage
             // 
             this.Controls.Add(this.MerkelCalculate);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.MerkelGridView);
             this.Controls.Add(this.InputPropertiesGroupBox);
             this.Name = "MerkelTabPage";
             this.Size = new System.Drawing.Size(767, 622);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MerkelGridView)).EndInit();
             this.InputPropertiesGroupBox.ResumeLayout(false);
             this.InputPropertiesGroupBox.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView MerkelGridView;
         private System.Windows.Forms.GroupBox InputPropertiesGroupBox;
         private System.Windows.Forms.Label MerkelWetBulbTemperatureLabel;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton MerkelPressureRadio;
-        private System.Windows.Forms.RadioButton MerkelElevationRadio;
         private System.Windows.Forms.Label MerkelTemperatureColdWaterUnits;
         private System.Windows.Forms.Label MerkelTemperatureHotWaterUnits;
         private System.Windows.Forms.TextBox Merkel_Wet_Bulb_Value;
@@ -295,10 +251,10 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label LGLabel;
         private System.Windows.Forms.TextBox Merkel_LG_Value;
-        private System.Windows.Forms.Label MerkelElevationPressureLabel;
         private System.Windows.Forms.Label MerkelElevationPressureUnits;
         private System.Windows.Forms.TextBox Merkel_Elevation_Value;
         private System.Windows.Forms.Label MerkelTemperatureWebBulbUnits;
         private System.Windows.Forms.Button MerkelCalculate;
+        private System.Windows.Forms.ComboBox Merkle_Elevation_Pressure_Selector;
     }
 }

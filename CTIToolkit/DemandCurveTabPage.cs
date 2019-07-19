@@ -14,6 +14,8 @@ namespace CTIToolkit
         const int INDEX_COEF = 20;
         const int INDEX_LG = 21;
         const int INDEX_KAVL = 22;
+        const int ELEVATION = 0;
+        const int PRESSURE = 1;
 
         private DemandCurveInputData DemandCurveInputData { get; set; }
         private DemandCurveData DemandCurveData { get; set; }
@@ -32,7 +34,7 @@ namespace CTIToolkit
 
             SwitchCalculation();
 
-            CalculateDemandCurve();
+            //CalculateDemandCurve();
         }
 
         public void SetUnitsStandard(ApplicationSettings applicationSettings)
@@ -41,7 +43,6 @@ namespace CTIToolkit
 
             SwitchCalculation();
         }
-
 
         private void InitializeData()
         {
@@ -53,16 +54,17 @@ namespace CTIToolkit
             DemandCurve_Minimum_Value.Text = DemandCurveInputData.MinimumDataValue.Current.ToString();
             DemandCurve_Maximum_Value.Text = DemandCurveInputData.MaximumDataValue.Current.ToString();
             DemandCurve_LG_Value.Text = DemandCurveInputData.LGDataValue.Current.ToString();
+            DemandCurve_Elevation_Pressure_Selector.SelectedIndex = ELEVATION;
         }
 
         private void SwitchElevationPressure()
         {
-            if (DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_IS_, DemandCurve_ElevationRadio.Checked))
+            if (DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_IS_, DemandCurve_Elevation_Pressure_Selector.SelectedIndex == ELEVATION))
             {
                 SwitchCalculation();
             }
 
-            if (DemandCurve_ElevationRadio.Checked)
+            if (DemandCurve_Elevation_Pressure_Selector.SelectedIndex == ELEVATION)
             {
                 if (IsInternationalSystemOfUnits_IS_)
                 {
@@ -98,7 +100,7 @@ namespace CTIToolkit
             DemandCurve_LG_Value.Text = DemandCurveInputData.LGDataValue.InputValue;
             toolTip1.SetToolTip(DemandCurve_LG_Value, DemandCurveInputData.LGDataValue.ToolTip);
 
-            if (DemandCurve_ElevationRadio.Checked)
+            if (true)//DemandCurve_ElevationRadio.Checked)
             {
                 DemandCurve_Elevation_Value.Text = DemandCurveInputData.ElevationDataValue.InputValue;
                 DemandCurveElevationPressureLabel.Text = DemandCurveInputData.ElevationDataValue.InputMessage + ":";
@@ -141,7 +143,7 @@ namespace CTIToolkit
         {
             try
             {
-                DemandCurveData = new DemandCurveData(IsInternationalSystemOfUnits_IS_);
+                //DemandCurveData = new //DemandCurveData(IsInternationalSystemOfUnits_IS_);
 
                 //DynamicCurveChart.ChartAreas[0].AxisX.Minimum = 0.1;
                 //DynamicCurveChart.ChartAreas[0].AxisX.Maximum = 10;
@@ -187,22 +189,22 @@ namespace CTIToolkit
                     return;
                 }
 
-                if (DemandCurve_ElevationRadio.Checked)
-                {
-                    if (!DemandCurveInputData.ElevationDataValue.UpdateValue(DemandCurve_Elevation_Value.Text, out message))
-                    {
-                        MessageBox.Show(message);
-                        return;
-                    }
-                }
-                else
-                {
-                    if (!DemandCurveInputData.BarometricPressureDataValue.UpdateValue(DemandCurve_Elevation_Value.Text, out message))
-                    {
-                        MessageBox.Show(message);
-                        return;
-                    }
-                }
+                //if (DemandCurve_ElevationRadio.Checked)
+                //{
+                //    if (!DemandCurveInputData.ElevationDataValue.UpdateValue(DemandCurve_Elevation_Value.Text, out message))
+                //    {
+                //        MessageBox.Show(message);
+                //        return;
+                //    }
+                //}
+                //else
+                //{
+                //    if (!DemandCurveInputData.BarometricPressureDataValue.UpdateValue(DemandCurve_Elevation_Value.Text, out message))
+                //    {
+                //        MessageBox.Show(message);
+                //        return;
+                //    }
+                //}
 
                 if (!DemandCurveInputData.C1DataValue.UpdateValue(DemandCurve_C_C1_Value.Text, out message))
                 {
@@ -235,46 +237,46 @@ namespace CTIToolkit
                 }
 
 
-                DemandCurveData.IsElevation = DemandCurve_ElevationRadio.Checked;
-                DemandCurveData.SetInternationalSystemOfUnits_IS_(IsInternationalSystemOfUnits_IS_);
+                //DemandCurveData.IsElevation = DemandCurve_ElevationRadio.Checked;
+                //DemandCurveData.SetInternationalSystemOfUnits_IS_(IsInternationalSystemOfUnits_IS_);
 
-                DemandCurveData.WetBulbTemperature = DemandCurveInputData.WetBlubTemperatureDataValue.Current;
-                DemandCurveData.Range = DemandCurveInputData.RangeDataValue.Current;
-                if (DemandCurve_ElevationRadio.Checked)
-                {
-                    DemandCurveData.Elevation = DemandCurveInputData.ElevationDataValue.Current;
-                }
-                else
-                {
-                    DemandCurveData.BarometricPressure = DemandCurveInputData.BarometricPressureDataValue.Current;
-                }
+                //DemandCurveData.WetBulbTemperature = DemandCurveInputData.WetBlubTemperatureDataValue.Current;
+                //DemandCurveData.Range = DemandCurveInputData.RangeDataValue.Current;
+                //if (DemandCurve_ElevationRadio.Checked)
+                //{
+                //    //DemandCurveData.Elevation = DemandCurveInputData.ElevationDataValue.Current;
+                //}
+                //else
+                //{
+                //    //DemandCurveData.BarometricPressure = DemandCurveInputData.BarometricPressureDataValue.Current;
+                //}
 
-                DemandCurveData.CurveC1 = DemandCurveInputData.C1DataValue.Current;
-                DemandCurveData.CurveC2 = DemandCurveInputData.SlopeDataValue.Current;
-                DemandCurveData.CurveMinimum = DemandCurveInputData.MinimumDataValue.Current;
-                DemandCurveData.CurveMaximum = DemandCurveInputData.MaximumDataValue.Current;
+                //DemandCurveData.CurveC1 = DemandCurveInputData.C1DataValue.Current;
+                //DemandCurveData.CurveC2 = DemandCurveInputData.SlopeDataValue.Current;
+                //DemandCurveData.CurveMinimum = DemandCurveInputData.MinimumDataValue.Current;
+                //DemandCurveData.CurveMaximum = DemandCurveInputData.MaximumDataValue.Current;
 
-                DynamicCurveChart.Series.Clear();
+                //DynamicCurveChart.Series.Clear();
 
                 for (int i = 1; i <= INDEX_KAVL; i++)
                 {
-                    Series series = DynamicCurveChart.Series.Add(string.Format("Series{0}", i));
-                    series.ChartType = SeriesChartType.Line;
-                    series.XValueMember = string.Format("X{0}", i);
-                    series.YValueMembers = string.Format("Y{0}", i);
+                    //Series series = //DynamicCurveChart.Series.Add(string.Format("Series{0}", i));
+                    //series.ChartType = SeriesChartType.Line;
+                    //series.XValueMember = string.Format("X{0}", i);
+                    //series.YValueMembers = string.Format("Y{0}", i);
                 }
 
-                new DemandCurveCalculationLibrary().DemandCurveCalculation(DemandCurveData);
+                //new DemandCurveCalculationLibrary().DemandCurveCalculation(DemandCurveData);
                 // AxisX, AxisY, AxisX2 and AxisY2
                 //Primary X-Axis  Bottom horizontal axis.
                 //Secondary X-Axis    Top horizontal axis.
                 //Primary Y-Axis  Left vertical axis.
                 //Secondary Y-Axis    Right vertical axis.
-                if (DemandCurveData.DataTable != null && DemandCurveData.DataTable.Rows != null && DemandCurveData.DataTable.Rows.Count > 0)
+                //if (DemandCurveData.DataTable != null && //DemandCurveData.DataTable.Rows != null && //DemandCurveData.DataTable.Rows.Count > 0)
                 {
-                    DynamicCurveChart.ChartAreas[0].AxisX.Minimum = 0.1;
-                    DynamicCurveChart.ChartAreas[0].AxisX.Maximum = 5;
-                    DynamicCurveChart.ChartAreas[0].AxisX.IsLogarithmic = true;
+                    //DynamicCurveChart.ChartAreas[0].AxisX.Minimum = 0.1;
+                    //DynamicCurveChart.ChartAreas[0].AxisX.Maximum = 5;
+                    //DynamicCurveChart.ChartAreas[0].AxisX.IsLogarithmic = true;
                     //DynamicCurveChart.ChartAreas[0].AxisX.MajorTickMark.LineColor = Color.FromArgb(0xCC, 0xCC, 0xCC);
                     //DynamicCurveChart.ChartAreas[0].AxisX.LineColor = Color.FromArgb(0x77, 0x77, 0x77);
                     //DynamicCurveChart.ChartAreas[0].AxisX.TitleForeColor = Color.FromArgb(0x77, 0x77, 0x77);
@@ -288,19 +290,19 @@ namespace CTIToolkit
                     ////m_wndGraph.GetAxis().GetLeft().GetTitle().GetFont().SetSize(10);
                     ////m_wndGraph.GetAxis().GetLeft().GetTitle().GetFont().SetBold(true);
 
-                    DynamicCurveChart.ChartAreas[0].AxisY.Minimum = 0.1;
-                    DynamicCurveChart.ChartAreas[0].AxisY.Maximum = 5;
-                    DynamicCurveChart.ChartAreas[0].AxisY.IsLogarithmic = true;
+                    //DynamicCurveChart.ChartAreas[0].AxisY.Minimum = 0.1;
+                    //DynamicCurveChart.ChartAreas[0].AxisY.Maximum = 5;
+                    //DynamicCurveChart.ChartAreas[0].AxisY.IsLogarithmic = true;
 
-                    DynamicCurveChart.DataSource = DemandCurveData.DataTable;
+                    //DynamicCurveChart.DataSource = //DemandCurveData.DataTable;
 
-                    DynamicCurveChart.DataBind();
+                    //DynamicCurveChart.DataBind();
                 }
-                else
-                {
-                    DynamicCurveChart.ChartAreas[0].AxisX.IsLogarithmic = false;
-                    DynamicCurveChart.ChartAreas[0].AxisY.IsLogarithmic = false;
-                }
+                //else
+                //{
+                //    //DynamicCurveChart.ChartAreas[0].AxisX.IsLogarithmic = false;
+                //    //DynamicCurveChart.ChartAreas[0].AxisY.IsLogarithmic = false;
+                //}
             }
             catch (Exception exception)
             {
@@ -308,23 +310,23 @@ namespace CTIToolkit
             }
         }
 
-        private void DemandCurveElevationRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            if (DemandCurve_ElevationRadio.Checked)
-            {
-                SwitchElevationPressure();
-                CalculateDemandCurve();
-            }
-        }
+        //private void DemandCurveElevationRadio_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (DemandCurve_ElevationRadio.Checked)
+        //    {
+        //        SwitchElevationPressure();
+        //        CalculateDemandCurve();
+        //    }
+        //}
 
-        private void DemandCurvePressureRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            if (DemandCurve_PressureRadio.Checked)
-            {
-                SwitchElevationPressure();
-                CalculateDemandCurve();
-            }
-        }
+        //private void DemandCurvePressureRadio_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (DemandCurve_PressureRadio.Checked)
+        //    {
+        //        SwitchElevationPressure();
+        //        CalculateDemandCurve();
+        //    }
+        //}
 
         //private void UnitedStatesCustomaryUnits_IP__CheckedChanged(object sender, EventArgs e)
         //{
@@ -355,6 +357,13 @@ namespace CTIToolkit
             // determine value
             // update page
         }
+
+        private void DemandCurve_Elevation_Pressure_Selector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SwitchElevationPressure();
+            CalculateDemandCurve();
+        }
+
         // resizing
         //	if (m_wndGraph.m_hWnd)
         //	{

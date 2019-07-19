@@ -48,12 +48,12 @@ namespace ToolkitLibrary
         public const double WaterAirFlowRateDefault_InternationalSystemOfUnits_IS_Demo = 1.3;
         public const double WaterAirFlowRateMinimum_InternationalSystemOfUnits_IS_Demo = 0.1;
         public const double WaterAirFlowRateMaximum_InternationalSystemOfUnits_IS_Demo = 10.0;
-        public const string WaterAirFlowRateToolTipFormat = "Water Flow Rate (L) / Air Flow Rate (G).\nValue should be between {0} and {1}.\n";
+        public const string WaterAirFlowRateToolTipFormat = "Water Flow Rate / Air Flow Rate (L/G).\nValue should be between {0} and {1}.\n";
 
         public WaterAirFlowRateDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
-            InputMessage = "Water Flow Rate / Air Flow Rate";
+            InputMessage = "Water Flow Rate / Air Flow Rate (L/G)";
             Format = "F2";
             ConvertValue(isInternationalSystemOfUnits_IS_);
         }

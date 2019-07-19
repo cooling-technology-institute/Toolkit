@@ -8,6 +8,9 @@ namespace CTIToolkit
 {
     public partial class MerkelTabPage: UserControl
     {
+        const int ELEVATION = 0;
+        const int PRESSURE = 1;
+
         private MerkelInputData MerkelInputData { get; set; }
         private MerkelData MerkelData { get; set; }
         private bool IsDemo { get; set; }
@@ -21,10 +24,33 @@ namespace CTIToolkit
 
             MerkelInputData = new MerkelInputData(IsDemo, IsInternationalSystemOfUnits_IS_);
 
-            SwitchCalculation();
+            Setup();
 
             CalculateMerkel();
 
+        }
+
+        private void Setup()
+        {
+            TemperatureHotWaterLabel.Text = MerkelInputData.HotWaterTemperatureDataValue.InputMessage + ":";
+            TemperatureHotWaterLabel.TextAlign = ContentAlignment.MiddleRight;
+            Merkel_HWT_Value.Text = MerkelInputData.HotWaterTemperatureDataValue.InputValue;
+            toolTip1.SetToolTip(Merkel_HWT_Value, MerkelInputData.HotWaterTemperatureDataValue.ToolTip);
+
+            TemperatureColdWaterLabel.Text = MerkelInputData.ColdWaterTemperatureDataValue.InputMessage + ":";
+            TemperatureColdWaterLabel.TextAlign = ContentAlignment.MiddleRight;
+            Merkel_CWT_Value.Text = MerkelInputData.ColdWaterTemperatureDataValue.InputValue;
+            toolTip1.SetToolTip(Merkel_CWT_Value, MerkelInputData.ColdWaterTemperatureDataValue.ToolTip);
+
+            MerkelWetBulbTemperatureLabel.Text = MerkelInputData.WetBlubTemperatureDataValue.InputMessage + ":";
+            MerkelWetBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
+            Merkel_Wet_Bulb_Value.Text = MerkelInputData.WetBlubTemperatureDataValue.InputValue;
+            toolTip1.SetToolTip(Merkel_Wet_Bulb_Value, MerkelInputData.WetBlubTemperatureDataValue.ToolTip);
+
+            Merkel_LG_Value.Text = MerkelInputData.WaterAirFlowRateDataValue.InputValue;
+            toolTip1.SetToolTip(Merkel_LG_Value, MerkelInputData.WaterAirFlowRateDataValue.ToolTip);
+
+            Merkle_Elevation_Pressure_Selector.SelectedIndex = ELEVATION;
         }
 
         public void SetUnitsStandard(ApplicationSettings applicationSettings)
@@ -35,14 +61,14 @@ namespace CTIToolkit
 
         private void SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_()
         {
-            if (MerkelInputData.ConvertValues(IsInternationalSystemOfUnits_IS_, MerkelElevationRadio.Checked))
+            if (MerkelInputData.ConvertValues(IsInternationalSystemOfUnits_IS_, (Merkle_Elevation_Pressure_Selector.SelectedIndex == ELEVATION)))
             {
                 SwitchCalculation();
             }
 
             if (IsInternationalSystemOfUnits_IS_)
             {
-                if (MerkelElevationRadio.Checked)
+                if (Merkle_Elevation_Pressure_Selector.SelectedIndex == ELEVATION)
                 {
                     MerkelElevationPressureUnits.Text = ConstantUnits.Meter;
                 }
@@ -53,7 +79,7 @@ namespace CTIToolkit
             }
             else
             {
-                if (MerkelElevationRadio.Checked)
+                if (Merkle_Elevation_Pressure_Selector.SelectedIndex == ELEVATION)
                 {
                     MerkelElevationPressureUnits.Text = ConstantUnits.Foot;
                 }
@@ -68,12 +94,12 @@ namespace CTIToolkit
         {
             string message;
 
-            if (MerkelInputData.ConvertValues(IsInternationalSystemOfUnits_IS_, MerkelElevationRadio.Checked))
+            if (MerkelInputData.ConvertValues(IsInternationalSystemOfUnits_IS_, (Merkle_Elevation_Pressure_Selector.SelectedIndex == ELEVATION)))
             {
                 SwitchCalculation();
             }
 
-            if (MerkelElevationRadio.Checked)
+            if (Merkle_Elevation_Pressure_Selector.SelectedIndex == ELEVATION)
             {
                 //double value = 0.0;
                 //if (double.TryParse(Merkel_Elevation_Value.Text, out value))
@@ -139,28 +165,10 @@ namespace CTIToolkit
         {
             string tooltip = string.Empty;
 
-            TemperatureHotWaterLabel.Text = MerkelInputData.HotWaterTemperatureDataValue.InputMessage + ":";
-            TemperatureHotWaterLabel.TextAlign = ContentAlignment.MiddleRight;
-            Merkel_HWT_Value.Text = MerkelInputData.HotWaterTemperatureDataValue.InputValue;
-            toolTip1.SetToolTip(Merkel_HWT_Value, MerkelInputData.HotWaterTemperatureDataValue.ToolTip);
 
-            TemperatureColdWaterLabel.Text = MerkelInputData.ColdWaterTemperatureDataValue.InputMessage + ":";
-            TemperatureColdWaterLabel.TextAlign = ContentAlignment.MiddleRight;
-            Merkel_CWT_Value.Text = MerkelInputData.ColdWaterTemperatureDataValue.InputValue;
-            toolTip1.SetToolTip(Merkel_CWT_Value, MerkelInputData.ColdWaterTemperatureDataValue.ToolTip);
-
-            MerkelWetBulbTemperatureLabel.Text = MerkelInputData.WetBlubTemperatureDataValue.InputMessage + ":";
-            MerkelWetBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
-            Merkel_Wet_Bulb_Value.Text = MerkelInputData.WetBlubTemperatureDataValue.InputValue;
-            toolTip1.SetToolTip(Merkel_Wet_Bulb_Value, MerkelInputData.WetBlubTemperatureDataValue.ToolTip);
-
-            Merkel_LG_Value.Text = MerkelInputData.WaterAirFlowRateDataValue.InputValue;
-            toolTip1.SetToolTip(Merkel_LG_Value, MerkelInputData.WaterAirFlowRateDataValue.ToolTip);
-
-            if (MerkelElevationRadio.Checked)
+            if (Merkle_Elevation_Pressure_Selector.SelectedIndex == ELEVATION)
             {
                 Merkel_Elevation_Value.Text = MerkelInputData.ElevationDataValue.InputValue;
-                MerkelElevationPressureLabel.Text = MerkelInputData.ElevationDataValue.InputMessage + ":";
                 if (IsInternationalSystemOfUnits_IS_)
                 {
                     MerkelElevationPressureUnits.Text = ConstantUnits.Meter;
@@ -173,7 +181,6 @@ namespace CTIToolkit
             else
             {
                 Merkel_Elevation_Value.Text = MerkelInputData.BarometricPressureDataValue.InputValue;
-                MerkelElevationPressureLabel.Text = MerkelInputData.BarometricPressureDataValue.InputMessage + ":";
                 if (IsInternationalSystemOfUnits_IS_)
                 {
                     MerkelElevationPressureUnits.Text = ConstantUnits.BarometricPressureKiloPascal;
@@ -214,7 +221,7 @@ namespace CTIToolkit
 
                 string message = string.Empty;
 
-                if (MerkelElevationRadio.Checked)
+                if (Merkle_Elevation_Pressure_Selector.SelectedIndex == ELEVATION)
                 {
                     if (!MerkelInputData.ElevationDataValue.UpdateValue(Merkel_Elevation_Value.Text, out message))
                     {
@@ -261,7 +268,7 @@ namespace CTIToolkit
                     return;
                 }
 
-                if (MerkelElevationRadio.Checked)
+                if (Merkle_Elevation_Pressure_Selector.SelectedIndex == ELEVATION)
                 {
                     MerkelData.Elevation = MerkelInputData.ElevationDataValue.Current;
                 }
@@ -270,7 +277,7 @@ namespace CTIToolkit
                     MerkelData.BarometricPressure = MerkelInputData.BarometricPressureDataValue.Current;
                 }
 
-                MerkelData.IsElevation = MerkelElevationRadio.Checked;
+                MerkelData.IsElevation = (Merkle_Elevation_Pressure_Selector.SelectedIndex == ELEVATION);
                 MerkelData.SetInternationalSystemOfUnits_IS_(IsInternationalSystemOfUnits_IS_);
 
                 MerkelData.HotWaterTemperature = MerkelInputData.HotWaterTemperatureDataValue.Current;
@@ -295,26 +302,14 @@ namespace CTIToolkit
             }
         }
 
-        private void MerkelElevationRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            if (MerkelElevationRadio.Checked)
-            {
-                SwitchElevationPressure();
-                CalculateMerkel();
-            }
-        }
-
-        private void MerkelPressureRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            if (MerkelPressureRadio.Checked)
-            {
-                SwitchElevationPressure();
-                CalculateMerkel();
-            }
-        }
-
         private void MerkelCalculate_Click(object sender, EventArgs e)
         {
+            CalculateMerkel();
+        }
+
+        private void Merkle_Elevation_Pressure_Selector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SwitchElevationPressure();
             CalculateMerkel();
         }
     }

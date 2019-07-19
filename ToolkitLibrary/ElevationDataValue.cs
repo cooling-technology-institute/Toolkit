@@ -18,7 +18,7 @@ namespace ToolkitLibrary
         {
             IsDemo = isDemo;
             InputMessage = "Elevation";
-            Format = "F2";
+            Format = "F4";
             ConvertValue(isInternationalSystemOfUnits_IS_, false);
         }
 
