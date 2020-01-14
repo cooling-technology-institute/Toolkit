@@ -3,3 +3,4 @@ https://coolingtechnologyinstitute.visualstudio.com/CTI%20Toolkit/_git/CTI%20Too
 
 github rgeoffrion / ragmop3558
 https://github.com/cooling-technology-institute/Toolkit.git
+https://github.com/cooling-technology-institute/CTIBluebook2017.git

@@ -1457,6 +1457,11 @@ namespace ToolkitLibrary
         //    return KaV * Ran;
         //}
 
+        // double Twb - merkelData.WetBulbTemperature
+        // double Ran - merkelData.Range
+        // double Apr - merkelData.Approach
+        // double LG - merkelData.WaterAirRatio
+        // double Elev - merkelData.Elevation
         public static double CalculateMerkel(MerkelData merkelData)
         {
             short i;

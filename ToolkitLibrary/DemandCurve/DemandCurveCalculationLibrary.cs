@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 
 namespace ToolkitLibrary
 {
@@ -13,18 +14,24 @@ namespace ToolkitLibrary
         const int INDEX_KAVL = 22;
 
         double[] InitialApproachXValues = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100 };
+
         List<double> ApproachXValues { get; set; }
         double TargetApproach { get; set; }
+        double UserApproach { get; set; }
+
+        StreamWriter fs = new StreamWriter("new.txt");
 
         public DataTable DemandCurveCalculation(DemandCurveData data)
         {
             TargetApproach = 0;
+            UserApproach = 0;
+
             ApproachXValues = new List<double>();
+
+            data.WetBulbTemperature = 80;
 
             if (data.IsInternationalSystemOfUnits_IS_)
             {
-                data.WetBulbTemperature = UnitConverter.ConvertCelsiusToFahrenheit(data.WetBulbTemperature);
-
                 if (!data.IsElevation)
                 {
                     data.Elevation = UnitConverter.ConvertMetersToFeet(UnitConverter.ConvertKilopascalToElevationInMeters(data.BarometricPressure));
@@ -56,6 +63,8 @@ namespace ToolkitLibrary
             CalculateApproach(data);
             CalculateApproaches(data);
 
+            fs.Flush();
+
             return data.DataTable;
         }
 
@@ -68,17 +77,21 @@ namespace ToolkitLibrary
                 Elevation = data.Elevation,
                 WaterAirRatio = 0.1
             };
-
+            int i = 0;
             foreach (double approachValue in InitialApproachXValues)
             {
-                merkelData.Approach = approachValue;
-
-                double KaVL = CalculationLibrary.CalculateMerkel(merkelData);
-
-                if ((KaVL > 0.1) && (KaVL < 5.0))
+                if (i <= INDEX_USERAPPROACH)
                 {
-                    ApproachXValues.Add(approachValue);
+                    merkelData.Approach = approachValue;
+                    double KaVL = CalculationLibrary.CalculateMerkel(merkelData);
+
+                    if ((KaVL > 0.1) && (KaVL < 5.0))
+                    {
+                        fs.WriteLine("\ndblAppList {0} {1} \n", i, approachValue.ToString("F6"));
+                        ApproachXValues.Add(approachValue);
+                    }
                 }
+                i++;
             }
         }
 
@@ -122,7 +135,7 @@ namespace ToolkitLibrary
         {
             MerkelData merkelData = new MerkelData(data.IsInternationalSystemOfUnits_IS_)
             {
-                WetBulbTemperature = data.WetBulbTemperature,
+                WetBulbTemperature = 80, // data.WetBulbTemperature,
                 Range = data.Range,
                 Elevation = data.Elevation,
                 WaterAirRatio = data.WaterAirRatio
@@ -133,23 +146,36 @@ namespace ToolkitLibrary
             double minVal = 0.01;  // for kavl
             double calculatedWaterAirRatio = 0.0;
             const double waterAirRatio_MIN = 0.1, waterAirRatio_MAX = 5.0;
+            double min4Lg = 999.0;
+
+            ApproachXValues[INDEX_TARGETAPPROACH] = TargetApproach;
+            ApproachXValues[INDEX_USERAPPROACH] = UserApproach;
 
             for (double waterAirRatio = waterAirRatio_MIN; waterAirRatio < waterAirRatio_MAX; waterAirRatio += .05)
             {
-                DataRow dataRow = data.DataTable.NewRow();
-                merkelData.WaterAirRatio = waterAirRatio;
+                fs.WriteLine("\ndLG {0} \n", waterAirRatio.ToString("F6"));
 
-                for (int i = 0; i <= INDEX_USERAPPROACH; i++)
+                DataRow dataRow = data.DataTable.NewRow();
+
+                for(int i = 0; i < ApproachXValues.Count; i++)
                 {
-                    if (/*getapp(i) &&*/ (ApproachXValues[i] > 0.0001))
+                    fs.WriteLine("\niIndex {0}  getapp(iIndex) {1} App[iIndex] {2} ", i, 1, (int)ApproachXValues[i]);
+
+                    if (ApproachXValues[i] != 0.0)
                     {
+                        merkelData.WaterAirRatio = waterAirRatio;
                         merkelData.Approach = ApproachXValues[i];
                         if (!data.IsInternationalSystemOfUnits_IS_)
                         {
                             merkelData.Approach *= 1.8;
                         }
 
+                        fs.WriteLine(" m_dblCurveWBT {0}, m_dblCurveRange {1}, 1.8*App[iIndex] {2}, dLG {3}, m_dblAltitude {4} ", merkelData.WetBulbTemperature.ToString("F6"), merkelData.Range.ToString("F6"), merkelData.Approach.ToString("F6"), merkelData.WaterAirRatio.ToString("F6"), merkelData.Elevation.ToString("F6"));
+
                         kaVL = CalculationLibrary.CalculateMerkel(merkelData);
+
+                        fs.WriteLine(" m_dblCurveWBT {0}, m_dblCurveRange {1}, 1.8*App[iIndex] {2}, dLG {3}, m_dblAltitude {4} ", merkelData.WetBulbTemperature.ToString("F6"), merkelData.Range.ToString("F6"), merkelData.Approach.ToString("F6"), merkelData.WaterAirRatio.ToString("F6"), merkelData.Elevation.ToString("F6"));
+                        fs.WriteLine("kavl {0} minVal {1} maxVal {2} dLG {3} App[iIndex] {4} ", kaVL.ToString("F6"), minVal.ToString("F6"), maxVal.ToString("F6"), waterAirRatio.ToString("F6"), ApproachXValues[i].ToString("F6"));
 
                         // ddp
                         if ((kaVL < minVal) || (kaVL >= maxVal))
@@ -173,8 +199,18 @@ namespace ToolkitLibrary
                             calculatedWaterAirRatio = waterAirRatio;
                         }
 
+                        fs.WriteLine("kavl {0} dLG {1} App[iIndex] {2} ", kaVL.ToString("F6"), waterAirRatio.ToString("F6"), ApproachXValues[i].ToString("F6"));
+
+                        fs.Write("sDLG {0} ", calculatedWaterAirRatio.ToString("F6"));
+                        if ((min4Lg > kaVL) && (kaVL > .1))
+                        {
+                            min4Lg = kaVL;
+                        }
+                        fs.Write("min4Lg {0} ", min4Lg.ToString("F6"));
+
                         if ((kaVL <= 10.0) && (kaVL >= .1))
                         {
+                            fs.WriteLine("m_wndGraph {0} {1} ", calculatedWaterAirRatio.ToString("F6"), kaVL.ToString("F6"));
                             dataRow[string.Format("Y{0}", i + 1)] = kaVL;
                             dataRow[string.Format("X{0}", i + 1)] = calculatedWaterAirRatio;
                         }
@@ -186,7 +222,6 @@ namespace ToolkitLibrary
             //---------------------------------------------------------------------
             // Draw Fill Line
             //---------------------------------------------------------------------
-            double min4Lg = 999.0;
             if ((data.CurveC1 != 0) && (data.CurveC2 != 0) )//&& coef)
             {
                 for (double waterAirRatio = data.CurveMinimum; waterAirRatio <= data.CurveMaximum; waterAirRatio += .05)

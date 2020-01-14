@@ -92,7 +92,7 @@ namespace CTIToolkit
 
         private void SwitchElevationPressure()
         {
-            string message;
+            //string message;
 
             if (MerkelInputData.ConvertValues(IsInternationalSystemOfUnits_IS_, (Merkle_Elevation_Pressure_Selector.SelectedIndex == ELEVATION)))
             {

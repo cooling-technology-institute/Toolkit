@@ -29,6 +29,7 @@ namespace CTIToolkit
             IsInternationalSystemOfUnits_IS_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
 
             DemandCurveInputData = new DemandCurveInputData(IsDemo, IsInternationalSystemOfUnits_IS_);
+            DemandCurveData = new DemandCurveData(true); //applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
 
             InitializeData();
 
@@ -100,7 +101,7 @@ namespace CTIToolkit
             DemandCurve_LG_Value.Text = DemandCurveInputData.LGDataValue.InputValue;
             toolTip1.SetToolTip(DemandCurve_LG_Value, DemandCurveInputData.LGDataValue.ToolTip);
 
-            if (true)//DemandCurve_ElevationRadio.Checked)
+            if (DemandCurve_ElevationRadio.Checked)
             {
                 DemandCurve_Elevation_Value.Text = DemandCurveInputData.ElevationDataValue.InputValue;
                 DemandCurveElevationPressureLabel.Text = DemandCurveInputData.ElevationDataValue.InputMessage + ":";
@@ -143,15 +144,15 @@ namespace CTIToolkit
         {
             try
             {
-                //DemandCurveData = new //DemandCurveData(IsInternationalSystemOfUnits_IS_);
+                DemandCurveData = new DemandCurveData(IsInternationalSystemOfUnits_IS_);
 
-                //DynamicCurveChart.ChartAreas[0].AxisX.Minimum = 0.1;
-                //DynamicCurveChart.ChartAreas[0].AxisX.Maximum = 10;
-                //DynamicCurveChart.ChartAreas[0].AxisX.IsLogarithmic = true;
-                //DynamicCurveChart.ChartAreas[0].AxisX.MajorTickMark.LineColor = Color.FromArgb(0xCC, 0xCC, 0xCC);
-                //DynamicCurveChart.ChartAreas[0].AxisX.LineColor = Color.FromArgb(0x77, 0x77, 0x77);
-                //DynamicCurveChart.ChartAreas[0].AxisX.TitleForeColor = Color.FromArgb(0x77, 0x77, 0x77);
-                //DynamicCurveChart.ChartAreas[0].AxisX.Title = "KaV/L";
+                DemandCurveChart.ChartAreas[0].AxisX.Minimum = 0.1;
+                DemandCurveChart.ChartAreas[0].AxisX.Maximum = 10;
+                //DemandCurveChart.ChartAreas[0].AxisX.IsLogarithmic = true;
+                //DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.LineColor = Color.FromArgb(0xCC, 0xCC, 0xCC);
+                //DemandCurveChart.ChartAreas[0].AxisX.LineColor = Color.FromArgb(0x77, 0x77, 0x77);
+                //DemandCurveChart.ChartAreas[0].AxisX.TitleForeColor = Color.FromArgb(0x77, 0x77, 0x77);
+                //DemandCurveChart.ChartAreas[0].AxisX.Title = "KaV/L";
                 ////m_wndGraph.GetAxis().GetLeft().GetGridPen().SetStyle(psSolid);
                 ////m_wndGraph.GetAxis().GetLeft().GetGridPen().SetWidth(1);
                 ////m_wndGraph.GetAxis().GetTop().GetLabels().SetAngle(90);
@@ -161,15 +162,15 @@ namespace CTIToolkit
                 ////m_wndGraph.GetAxis().GetLeft().GetTitle().GetFont().SetSize(10);
                 ////m_wndGraph.GetAxis().GetLeft().GetTitle().GetFont().SetBold(true);
 
-                //DynamicCurveChart.ChartAreas[0].AxisY.Minimum = 0.1;
-                //DynamicCurveChart.ChartAreas[0].AxisY.Maximum = 10;
-                //DynamicCurveChart.ChartAreas[0].AxisY.IsLogarithmic = true;
-                //DynamicCurveChart.ChartAreas[0].AxisY.MajorTickMark.LineColor = Color.FromArgb(0xCC, 0xCC, 0xCC);
-                //DynamicCurveChart.ChartAreas[0].AxisY.LineColor = Color.FromArgb(0x77, 0x77, 0x77);
-                //DynamicCurveChart.ChartAreas[0].AxisY.TitleForeColor = Color.FromArgb(0x77, 0x77, 0x77);
-                //DynamicCurveChart.ChartAreas[0].AxisY.Title = "L/G";
+                //DemandCurveChart.ChartAreas[0].AxisY.Minimum = 0.1;
+                //DemandCurveChart.ChartAreas[0].AxisY.Maximum = 10;
+                //DemandCurveChart.ChartAreas[0].AxisY.IsLogarithmic = true;
+                //DemandCurveChart.ChartAreas[0].AxisY.MajorTickMark.LineColor = Color.FromArgb(0xCC, 0xCC, 0xCC);
+                //DemandCurveChart.ChartAreas[0].AxisY.LineColor = Color.FromArgb(0x77, 0x77, 0x77);
+                //DemandCurveChart.ChartAreas[0].AxisY.TitleForeColor = Color.FromArgb(0x77, 0x77, 0x77);
+                //DemandCurveChart.ChartAreas[0].AxisY.Title = "L/G";
 
-                // clear data set
+                ////clear data set
                 //if (DemandCurveGridView.DataSource != null)
                 //{
                 //    DemandCurveGridView.DataSource = null;
@@ -256,52 +257,52 @@ namespace CTIToolkit
                 //DemandCurveData.CurveMinimum = DemandCurveInputData.MinimumDataValue.Current;
                 //DemandCurveData.CurveMaximum = DemandCurveInputData.MaximumDataValue.Current;
 
-                //DynamicCurveChart.Series.Clear();
+                //DemandCurveChart.Series.Clear();
 
                 for (int i = 1; i <= INDEX_KAVL; i++)
                 {
-                    //Series series = //DynamicCurveChart.Series.Add(string.Format("Series{0}", i));
+                    //Series series = //DemandCurveChart.Series.Add(string.Format("Series{0}", i));
                     //series.ChartType = SeriesChartType.Line;
                     //series.XValueMember = string.Format("X{0}", i);
                     //series.YValueMembers = string.Format("Y{0}", i);
                 }
 
-                //new DemandCurveCalculationLibrary().DemandCurveCalculation(DemandCurveData);
+                new DemandCurveCalculationLibrary().DemandCurveCalculation(DemandCurveData);
                 // AxisX, AxisY, AxisX2 and AxisY2
                 //Primary X-Axis  Bottom horizontal axis.
                 //Secondary X-Axis    Top horizontal axis.
                 //Primary Y-Axis  Left vertical axis.
                 //Secondary Y-Axis    Right vertical axis.
-                //if (DemandCurveData.DataTable != null && //DemandCurveData.DataTable.Rows != null && //DemandCurveData.DataTable.Rows.Count > 0)
+                if (DemandCurveData.DataTable != null && //DemandCurveData.DataTable.Rows != null && //DemandCurveData.DataTable.Rows.Count > 0)
                 {
-                    //DynamicCurveChart.ChartAreas[0].AxisX.Minimum = 0.1;
-                    //DynamicCurveChart.ChartAreas[0].AxisX.Maximum = 5;
-                    //DynamicCurveChart.ChartAreas[0].AxisX.IsLogarithmic = true;
-                    //DynamicCurveChart.ChartAreas[0].AxisX.MajorTickMark.LineColor = Color.FromArgb(0xCC, 0xCC, 0xCC);
-                    //DynamicCurveChart.ChartAreas[0].AxisX.LineColor = Color.FromArgb(0x77, 0x77, 0x77);
-                    //DynamicCurveChart.ChartAreas[0].AxisX.TitleForeColor = Color.FromArgb(0x77, 0x77, 0x77);
-                    //DynamicCurveChart.ChartAreas[0].AxisY.Title = "KaV/L";
-                    ////m_wndGraph.GetAxis().GetLeft().GetGridPen().SetStyle(psSolid);
-                    ////m_wndGraph.GetAxis().GetLeft().GetGridPen().SetWidth(1);
-                    ////m_wndGraph.GetAxis().GetTop().GetLabels().SetAngle(90);
-                    ////m_wndGraph.GetAxis().GetLeft().GetLabels().GetFont().SetSize(6);
-                    ////m_wndGraph.GetAxis().GetLeft().SetAutomaticMinimum(true);
-                    ////m_wndGraph.GetAxis().GetLeft().SetAutomaticMaximum(true);
-                    ////m_wndGraph.GetAxis().GetLeft().GetTitle().GetFont().SetSize(10);
-                    ////m_wndGraph.GetAxis().GetLeft().GetTitle().GetFont().SetBold(true);
+                    DemandCurveChart.ChartAreas[0].AxisX.Minimum = 0.1;
+                    DemandCurveChart.ChartAreas[0].AxisX.Maximum = 5;
+                    DemandCurveChart.ChartAreas[0].AxisX.IsLogarithmic = true;
+                    DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.LineColor = Color.FromArgb(0xCC, 0xCC, 0xCC);
+                    DemandCurveChart.ChartAreas[0].AxisX.LineColor = Color.FromArgb(0x77, 0x77, 0x77);
+                    DemandCurveChart.ChartAreas[0].AxisX.TitleForeColor = Color.FromArgb(0x77, 0x77, 0x77);
+                    DemandCurveChart.ChartAreas[0].AxisY.Title = "KaV/L";
+                    //m_wndGraph.GetAxis().GetLeft().GetGridPen().SetStyle(psSolid);
+                    //m_wndGraph.GetAxis().GetLeft().GetGridPen().SetWidth(1);
+                    //m_wndGraph.GetAxis().GetTop().GetLabels().SetAngle(90);
+                    //m_wndGraph.GetAxis().GetLeft().GetLabels().GetFont().SetSize(6);
+                    //m_wndGraph.GetAxis().GetLeft().SetAutomaticMinimum(true);
+                    //m_wndGraph.GetAxis().GetLeft().SetAutomaticMaximum(true);
+                    //m_wndGraph.GetAxis().GetLeft().GetTitle().GetFont().SetSize(10);
+                    //m_wndGraph.GetAxis().GetLeft().GetTitle().GetFont().SetBold(true);
 
-                    //DynamicCurveChart.ChartAreas[0].AxisY.Minimum = 0.1;
-                    //DynamicCurveChart.ChartAreas[0].AxisY.Maximum = 5;
-                    //DynamicCurveChart.ChartAreas[0].AxisY.IsLogarithmic = true;
+                    DemandCurveChart.ChartAreas[0].AxisY.Minimum = 0.1;
+                    DemandCurveChart.ChartAreas[0].AxisY.Maximum = 5;
+                    DemandCurveChart.ChartAreas[0].AxisY.IsLogarithmic = true;
 
-                    //DynamicCurveChart.DataSource = //DemandCurveData.DataTable;
+                    DemandCurveChart.DataSource = //DemandCurveData.DataTable;
 
-                    //DynamicCurveChart.DataBind();
+                    DemandCurveChart.DataBind();
                 }
                 //else
                 //{
-                //    //DynamicCurveChart.ChartAreas[0].AxisX.IsLogarithmic = false;
-                //    //DynamicCurveChart.ChartAreas[0].AxisY.IsLogarithmic = false;
+                //    //DemandCurveChart.ChartAreas[0].AxisX.IsLogarithmic = false;
+                //    //DemandCurveChart.ChartAreas[0].AxisY.IsLogarithmic = false;
                 //}
             }
             catch (Exception exception)
@@ -351,7 +352,7 @@ namespace CTIToolkit
             CalculateDemandCurve();
         }
 
-        private void DynamicCurveChart_Click(object sender, EventArgs e)
+        private void DemandCurveChart_Click(object sender, EventArgs e)
         {
             // get xy
             // determine value
