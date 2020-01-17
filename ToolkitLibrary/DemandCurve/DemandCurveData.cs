@@ -53,13 +53,13 @@ namespace ToolkitLibrary
             CurveMaximum = 2.5;
             if (IsInternationalSystemOfUnits_IS_)
             {
-                WetBulbTemperature = 80;
-                Range = 10;
+                WetBulbTemperature = 26.667;
+                Range = 18;
             }
             else
             {
-                WetBulbTemperature = 26.667;
-                Range = 18;
+                WetBulbTemperature = 80;
+                Range = 10;
             }
 
             DataTable = new DataTable();

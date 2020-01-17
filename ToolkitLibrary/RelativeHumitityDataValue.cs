@@ -21,7 +21,7 @@ namespace ToolkitLibrary
 
         public override void ConvertValue(bool isInternationalSystemOfUnits_IS_, bool doConversion = false)
         {
-            Default = RelativeHumidityMinimum;
+            Default = RelativeHumidityDefault;
             Minimum = RelativeHumidityMinimum;
             Maximum = RelativeHumidityMaximum;
 

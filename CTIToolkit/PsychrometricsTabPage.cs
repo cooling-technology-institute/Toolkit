@@ -19,6 +19,7 @@ namespace CTIToolkit
             InitializeComponent();
 
             IsInternationalSystemOfUnits_IS_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            IsInternationalSystemOfUnits_IS_ = false;
 
             PsychrometricsInputData = new PsychrometricsInputData(IsDemo, IsInternationalSystemOfUnits_IS_);
 

@@ -62,19 +62,21 @@
             this.DemandCurve_C_C1_Value = new System.Windows.Forms.TextBox();
             this.Clabel = new System.Windows.Forms.Label();
             this.ThermalDesignConditionsGroupBox = new System.Windows.Forms.GroupBox();
-            this.DemandCurve_Elevation_Pressure_Selector = new System.Windows.Forms.ComboBox();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBoxPressureElevation = new System.Windows.Forms.GroupBox();
             this.DemandCurve_PressureRadio = new System.Windows.Forms.RadioButton();
             this.DemandCurve_ElevationRadio = new System.Windows.Forms.RadioButton();
+            this.DemandCurve_Elevation_Pressure_Selector = new System.Windows.Forms.ComboBox();
+            this.DemandCurveChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.InputPropertiesGroupBox.SuspendLayout();
             this.DesignPointGroupBox.SuspendLayout();
             this.TowerOrFillCharacteristicsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DemandCurve_Maximum_Value)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DemandCurve_Minimum_Value)).BeginInit();
             this.ThermalDesignConditionsGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.groupBoxPressureElevation.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DemandCurveChart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // DemandCurveCalculate
@@ -362,35 +364,6 @@
             this.ThermalDesignConditionsGroupBox.TabStop = false;
             this.ThermalDesignConditionsGroupBox.Text = "Thermal Design Conditions";
             // 
-            // DemandCurve_Elevation_Pressure_Selector
-            // 
-            this.DemandCurve_Elevation_Pressure_Selector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.DemandCurve_Elevation_Pressure_Selector.FormattingEnabled = true;
-            this.DemandCurve_Elevation_Pressure_Selector.Items.AddRange(new object[] {
-            "Elevation",
-            "Barometric Pressure"});
-            this.DemandCurve_Elevation_Pressure_Selector.Location = new System.Drawing.Point(6, 74);
-            this.DemandCurve_Elevation_Pressure_Selector.Name = "DemandCurve_Elevation_Pressure_Selector";
-            this.DemandCurve_Elevation_Pressure_Selector.Size = new System.Drawing.Size(119, 21);
-            this.DemandCurve_Elevation_Pressure_Selector.TabIndex = 20;
-            this.DemandCurve_Elevation_Pressure_Selector.SelectedIndexChanged += new System.EventHandler(this.DemandCurve_Elevation_Pressure_Selector_SelectedIndexChanged);
-            // 
-            // chart1
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(9, 222);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(896, 579);
-            this.chart1.TabIndex = 12;
-            this.chart1.Text = "DemandCurveChart";
-            // 
             // groupBoxPressureElevation
             // 
             this.groupBoxPressureElevation.BackColor = System.Drawing.Color.Transparent;
@@ -422,12 +395,53 @@
             this.DemandCurve_ElevationRadio.Text = "Elevation";
             this.DemandCurve_ElevationRadio.UseVisualStyleBackColor = true;
             // 
+            // DemandCurve_Elevation_Pressure_Selector
+            // 
+            this.DemandCurve_Elevation_Pressure_Selector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.DemandCurve_Elevation_Pressure_Selector.FormattingEnabled = true;
+            this.DemandCurve_Elevation_Pressure_Selector.Items.AddRange(new object[] {
+            "Elevation",
+            "Barometric Pressure"});
+            this.DemandCurve_Elevation_Pressure_Selector.Location = new System.Drawing.Point(6, 74);
+            this.DemandCurve_Elevation_Pressure_Selector.Name = "DemandCurve_Elevation_Pressure_Selector";
+            this.DemandCurve_Elevation_Pressure_Selector.Size = new System.Drawing.Size(119, 21);
+            this.DemandCurve_Elevation_Pressure_Selector.TabIndex = 20;
+            this.DemandCurve_Elevation_Pressure_Selector.SelectedIndexChanged += new System.EventHandler(this.DemandCurve_Elevation_Pressure_Selector_SelectedIndexChanged);
+            // 
+            // DemandCurveChart
+            // 
+            this.DemandCurveChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea1.Name = "ChartArea1";
+            this.DemandCurveChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.DemandCurveChart.Legends.Add(legend1);
+            this.DemandCurveChart.Location = new System.Drawing.Point(9, 413);
+            this.DemandCurveChart.Name = "DemandCurveChart";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.DemandCurveChart.Series.Add(series1);
+            this.DemandCurveChart.Size = new System.Drawing.Size(896, 560);
+            this.DemandCurveChart.TabIndex = 12;
+            this.DemandCurveChart.Text = "DemandCurveChart";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(9, 213);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(878, 194);
+            this.dataGridView1.TabIndex = 13;
+            // 
             // DemandCurveTabPage
             // 
-            this.Controls.Add(this.chart1);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.DemandCurveChart);
             this.Controls.Add(this.InputPropertiesGroupBox);
             this.Name = "DemandCurveTabPage";
-            this.Size = new System.Drawing.Size(920, 824);
+            this.Size = new System.Drawing.Size(920, 976);
             this.InputPropertiesGroupBox.ResumeLayout(false);
             this.InputPropertiesGroupBox.PerformLayout();
             this.DesignPointGroupBox.ResumeLayout(false);
@@ -438,8 +452,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.DemandCurve_Minimum_Value)).EndInit();
             this.ThermalDesignConditionsGroupBox.ResumeLayout(false);
             this.ThermalDesignConditionsGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.groupBoxPressureElevation.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DemandCurveChart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -476,9 +491,10 @@
         private System.Windows.Forms.RadioButton DemandCurve_KavLRadio;
         private System.Windows.Forms.RadioButton DemandCurve_ApproachRadio;
         private System.Windows.Forms.ComboBox DemandCurve_Elevation_Pressure_Selector;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart DemandCurveChart;
         private System.Windows.Forms.GroupBox groupBoxPressureElevation;
         private System.Windows.Forms.RadioButton DemandCurve_PressureRadio;
         private System.Windows.Forms.RadioButton DemandCurve_ElevationRadio;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

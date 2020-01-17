@@ -159,7 +159,7 @@
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.PyschmetricsPressureRadio);
             this.groupBox2.Controls.Add(this.PyschmetricsElevationRadio);
-            this.groupBox2.Location = new System.Drawing.Point(302, 29);
+            this.groupBox2.Location = new System.Drawing.Point(318, 29);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(164, 79);
             this.groupBox2.TabIndex = 10;

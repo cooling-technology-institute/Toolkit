@@ -12,29 +12,29 @@ namespace ToolkitLibrary
         // Data calculations
         //---------------------------------------------------------------------
 
-        public static void CalculateVariablesIP(double p, double TDB, double TWB, ref double PwsDB, ref double PwsWB, ref double FsDB, ref double FsWB)
+        public static void CalculateVariablesIP(double pressure, double temperatureDryBulb, double temperatureWetBulb, ref double PwsDB, ref double PwsWB, ref double FsDB, ref double FsWB)
         {
-            PwsDB = IPPws(TDB);
-            PwsWB = IPPws(TWB);
-            FsDB = Fs(TDB, p);
-            FsWB = Fs(TWB, p);
+            PwsDB = IPPws(temperatureDryBulb);
+            PwsWB = IPPws(temperatureWetBulb);
+            FsDB = Fs(temperatureDryBulb, pressure);
+            FsWB = Fs(temperatureWetBulb, pressure);
         }
 
-        // HumidityRatio = ((1093. - .556 * TWB) * WsWB - .24 * (TDB - TWB)) / (1093. + .444 * TDB - TWB);  //ASHRAE Eq.(33)
-        public static double CalculateHumidityRatioIP(double p, double TDB, double TWB)
+        // humidityRatio = ((1093. - .556 * temperatureWetBulb) * WsWB - .24 * (temperatureDryBulb - temperatureWetBulb)) / (1093. + .444 * temperatureDryBulb - temperatureWetBulb);  //ASHRAE Eq.(33)
+        public static double CalculateHumidityRatioIP(double pressure, double temperatureDryBulb, double temperatureWetBulb)
         {
             double PwsDB = 0.0;
             double PwsWB = 0.0;
             double FsDB = 0.0;
             double FsWB = 0.0;
             double WsWB = 0.0;
-            double HumidityRatio = 0.0;
+            double humidityRatio = 0.0;
 
-            CalculateVariablesIP(p, TDB, TWB, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
+            CalculateVariablesIP(pressure, temperatureDryBulb, temperatureWetBulb, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
 
             // Calculate saturated humidity ratio at twb using saturation pressure (Pws) at twb,
             // and Fs correction factor at twb
-            double density = (p - PwsWB * FsWB);
+            double density = (pressure - PwsWB * FsWB);
             if (density != 0.0)
             {
                 WsWB = 0.62198 * PwsWB * FsWB / density;  //ASHRAE Eq.(21a)
@@ -42,24 +42,24 @@ namespace ToolkitLibrary
 
             // Calculate humidity ratio of the mixture
             // Check for thermodynamic capability
-            density = (1093.0 + (0.444 * TDB) - TWB);
+            density = (1093.0 + (0.444 * temperatureDryBulb) - temperatureWetBulb);
             if (density != 0.0)
             {
-                HumidityRatio = ((1093.0 - 0.556 * TWB) * WsWB - 0.24 * (TDB - TWB)) / density;  //ASHRAE Eq.(33)
+                humidityRatio = ((1093.0 - 0.556 * temperatureWetBulb) * WsWB - 0.24 * (temperatureDryBulb - temperatureWetBulb)) / density;  //ASHRAE Eq.(33)
             }
 
-            return HumidityRatio;
+            return humidityRatio;
         }
 
         //public static void IPEnthalpysearch(int sat,
         //                       double p,
         //                       double RootEnthalpy,
         //                       ref double OutputEnthalpy,
-        //                       ref double TWB,
-        //                       ref double TDB,
-        //                       double HumidityRatio,
-        //                       double RelativeHumidity,
-        //                       double SpecificVolume,
+        //                       ref double temperatureWetBulb,
+        //                       ref double temperatureDryBulb,
+        //                       double humidityRatio,
+        //                       double relativeHumidity,
+        //                       double specificVolume,
         //                       double Density,
         //                       double DEWPoint)
         //{
@@ -78,19 +78,19 @@ namespace ToolkitLibrary
         //    double Enthalpy;
 
         //    // Calculate low value and compare to program and tolerance limits
-        //    TWB = Tlower;
+        //    temperatureWetBulb = Tlower;
         //    if (sat == 1)
         //    {
-        //        TDB = TWB;
+        //        temperatureDryBulb = temperatureWetBulb;
         //    }
 
         //    CalcIPProperties(p,
-        //                      TWB,
-        //                      ref TDB,
-        //                      ref HumidityRatio,
-        //                      ref RelativeHumidity,
+        //                      temperatureWetBulb,
+        //                      ref temperatureDryBulb,
+        //                      ref humidityRatio,
+        //                      ref relativeHumidity,
         //                      ref Hlower,
-        //                      ref SpecificVolume,
+        //                      ref specificVolume,
         //                      ref Density,
         //                      ref DEWPoint
         //                    );
@@ -99,7 +99,7 @@ namespace ToolkitLibrary
         //    if (Math.Abs(Hlower - RootEnthalpy) <= Htolerance)
         //    {
         //        OutputEnthalpy = 0.0;
-        //        TDB = 0.0;
+        //        temperatureDryBulb = 0.0;
         //        return;
         //    }
 
@@ -110,20 +110,20 @@ namespace ToolkitLibrary
         //    }
 
         //    //Calculate high value and compare to program and tolerance limits
-        //    TWB = Tupper;
+        //    temperatureWetBulb = Tupper;
 
         //    if (sat == 1)
         //    {
-        //        TDB = TWB;
+        //        temperatureDryBulb = temperatureWetBulb;
         //    }
 
         //    CalcIPProperties(p,
-        //                      TWB,
-        //                      TDB,
-        //                      ref HumidityRatio,
-        //                      ref RelativeHumidity,
+        //                      temperatureWetBulb,
+        //                      temperatureDryBulb,
+        //                      ref humidityRatio,
+        //                      ref relativeHumidity,
         //                      ref Hupper,
-        //                      ref SpecificVolume,
+        //                      ref specificVolume,
         //                      ref Density,
         //                      ref DEWPoint
         //                    );
@@ -149,14 +149,14 @@ namespace ToolkitLibrary
         //        DT = DT / 2.0;
         //        tmid = trtbis + DT;
         //        if (sat == 1)
-        //            TDB = tmid;
+        //            temperatureDryBulb = tmid;
         //        CalcIPProperties(p,
         //                          tmid,
-        //                          TDB,
-        //                          ref HumidityRatio,
-        //                          ref RelativeHumidity,
+        //                          temperatureDryBulb,
+        //                          ref humidityRatio,
+        //                          ref relativeHumidity,
         //                          ref Enthalpy,
-        //                          ref SpecificVolume,
+        //                          ref specificVolume,
         //                          ref Density,
         //                          ref DEWPoint
         //                        );
@@ -166,10 +166,10 @@ namespace ToolkitLibrary
         //    }
         //    while ((Math.Abs(DT) >= temptolerance) && (hmid != 0.0));
 
-        //    TWB = tmid;
+        //    temperatureWetBulb = tmid;
         //    if (sat == 1)
         //    {
-        //        TDB = tmid;
+        //        temperatureDryBulb = tmid;
         //    }
         //    OutputEnthalpy = Enthalpy;
         //}
@@ -188,7 +188,7 @@ namespace ToolkitLibrary
             return adjustedNumber;
         }
 
-        public static double CalculateDegreeOfSaturationIP(double p, double TDB, double TWB)
+        public static double CalculatedegreeOfSaturationIP(double pressure, double temperatureDryBulb, double temperatureWetBulb)
         {
             double PwsDB = 0.0;
             double PwsWB = 0.0;
@@ -196,42 +196,42 @@ namespace ToolkitLibrary
             double FsWB = 0.0;
             double WsDB = 0.0;
             double WsWB = 0.0;
-            double DegreeOfSaturation = 0.0;
-            double HumidityRatio;
+            double degreeOfSaturation = 0.0;
+            double humidityRatio;
 
-            CalculateVariablesIP(p, TDB, TWB, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
+            CalculateVariablesIP(pressure, temperatureDryBulb, temperatureWetBulb, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
 
             // Calculate saturated humidity ratio at twb using saturation pressure (Pws) at twb,
             // and Fs correction factor at twb
-            double den = (p - PwsWB * FsWB);
-            if (den != 0.0)
+            double density = (pressure - PwsWB * FsWB);
+            if (density != 0.0)
             {
-                WsWB = 0.62198 * PwsWB * FsWB / den;  //ASHRAE Eq.(21a)
+                WsWB = 0.62198 * PwsWB * FsWB / density;  //ASHRAE Eq.(21a)
             }
 
             // Calculate humidity ratio of the mixture
-            // HumidityRatio = ((1093. - .556 * TWB) * WsWB - .24 * (TDB - TWB)) / (1093. + .444 * TDB - TWB);  //ASHRAE Eq.(33)
-            HumidityRatio = CalculateHumidityRatioIP(p, TDB, TWB);
+            // humidityRatio = ((1093. - .556 * temperatureWetBulb) * WsWB - .24 * (temperatureDryBulb - temperatureWetBulb)) / (1093. + .444 * temperatureDryBulb - temperatureWetBulb);  //ASHRAE Eq.(33)
+            humidityRatio = CalculateHumidityRatioIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate saturated humidity ratio at tdb using saturation pressure(Pws) at
             // tdb and correction factor Fs at tdb
-            den = (p - PwsDB * FsDB);
-            if (den != 0.0)
+            density = (pressure - PwsDB * FsDB);
+            if (density != 0.0)
             {
-                WsDB = 0.62198 * PwsDB * FsDB / den; //ASHRAE Eq.(21a)
+                WsDB = 0.62198 * PwsDB * FsDB / density; //ASHRAE Eq.(21a)
             }
 
             // Calculate degree of saturation
             if (WsDB != 0.0)
             {
-                DegreeOfSaturation = HumidityRatio / WsDB;           //ASHRAE Eq.(10)
+                degreeOfSaturation = humidityRatio / WsDB;           //ASHRAE Eq.(10)
             }
 
-            return DegreeOfSaturation;
+            return degreeOfSaturation;
         }
 
-        // RelativeHumidity = DegreeOfSaturation / (1. - (1. - DegreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
-        public static double CalculateRelativeHumidityIP(double p, double TDB, double TWB)
+        // relativeHumidity = degreeOfSaturation / (1. - (1. - degreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
+        public static double CalculateRelativeHumidityIP(double pressure, double temperatureDryBulb, double temperatureWetBulb)
         {
             double PwsDB = 0.0;
             double PwsWB = 0.0;
@@ -239,48 +239,48 @@ namespace ToolkitLibrary
             double FsWB = 0.0;
             double WsDB = 0.0;
             double WsWB = 0.0;
-            double DegreeOfSaturation;
-            double HumidityRatio;
-            double RelativeHumidity = 0.0;
+            double degreeOfSaturation;
+            double humidityRatio;
+            double relativeHumidity = 0.0;
 
             // Calculate vapor pressure and Fs factor at wb & db temperature
-            CalculateVariablesIP(p, TDB, TWB, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
+            CalculateVariablesIP(pressure, temperatureDryBulb, temperatureWetBulb, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
 
             // Calculate saturated humidity ratio at twb using saturation pressure (Pws) at twb,
             // and Fs correction factor at twb
-            double density = (p - PwsWB * FsWB);
+            double density = (pressure - PwsWB * FsWB);
             if (density != 0.0)
             {
                 WsWB = 0.62198 * PwsWB * FsWB / density;  //ASHRAE Eq.(21a)
             }
 
             // Calculate humidity ratio of the mixture
-            // HumidityRatio = ((1093. - .556 * TWB) * WsWB - .24 * (TDB - TWB)) / (1093. + .444 * TDB - TWB);  //ASHRAE Eq.(33)
-            HumidityRatio = CalculateHumidityRatioIP(p, TDB, TWB);
+            // humidityRatio = ((1093. - .556 * temperatureWetBulb) * WsWB - .24 * (temperatureDryBulb - temperatureWetBulb)) / (1093. + .444 * temperatureDryBulb - temperatureWetBulb);  //ASHRAE Eq.(33)
+            humidityRatio = CalculateHumidityRatioIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate saturated humidity ratio at tdb using saturation pressure(Pws) at
             // tdb and correction factor Fs at tdb
-            density = (p - PwsDB * FsDB);
+            density = (pressure - PwsDB * FsDB);
             if (density != 0.0)
             {
                 WsDB = 0.62198 * PwsDB * FsDB / density; //ASHRAE Eq.(21a)
             }
 
             // Calculate degree of saturation
-            DegreeOfSaturation = CalculateDegreeOfSaturationIP(p, TDB, TWB);
+            degreeOfSaturation = CalculatedegreeOfSaturationIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate relative humidity
-            density = p != 0.0 ? (1.0 - (1.0 - DegreeOfSaturation) * (FsDB * PwsDB / p)) : 0.0;
+            density = pressure != 0.0 ? (1.0 - (1.0 - degreeOfSaturation) * (FsDB * PwsDB / pressure)) : 0.0;
 
             if (density != 0.0)
             {
-                RelativeHumidity = DegreeOfSaturation / density;  //ASHRAE Eq.(23a)
+                relativeHumidity = degreeOfSaturation / density;  //ASHRAE Eq.(23a)
             }
 
-            return RelativeHumidity;
+            return relativeHumidity;
         }
 
-        public static double CalculateSpecificVolumeIP(double p, double TDB, double TWB)
+        public static double CalculateSpecificVolumeIP(double p, double temperatureDryBulb, double temperatureWetBulb)
         {
             double PwsDB = 0.0;
             double PwsWB = 0.0;
@@ -288,14 +288,14 @@ namespace ToolkitLibrary
             double FsWB = 0.0;
             double WsDB = 0.0;
             double WsWB = 0.0;
-            double DegreeOfSaturation;
+            double degreeOfSaturation;
             double Ra;
-            double RelativeHumidity;
-            double HumidityRatio;
-            double SpecificVolume = 0.0;
+            double relativeHumidity;
+            double humidityRatio;
+            double specificVolume = 0.0;
 
             // Calculate vapor pressure and Fs factor at wb & db temperature
-            CalculateVariablesIP(p, TDB, TWB, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
+            CalculateVariablesIP(p, temperatureDryBulb, temperatureWetBulb, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
 
             // Calculate saturated humidity ratio at twb using saturation pressure (Pws) at twb,
             // and Fs correction factor at twb
@@ -306,8 +306,8 @@ namespace ToolkitLibrary
             }
 
             // Calculate humidity ratio of the mixture
-            // HumidityRatio = ((1093. - .556 * TWB) * WsWB - .24 * (TDB - TWB)) / (1093. + .444 * TDB - TWB);  //ASHRAE Eq.(33)
-            HumidityRatio = CalculateHumidityRatioIP(p, TDB, TWB);
+            // humidityRatio = ((1093. - .556 * temperatureWetBulb) * WsWB - .24 * (temperatureDryBulb - temperatureWetBulb)) / (1093. + .444 * temperatureDryBulb - temperatureWetBulb);  //ASHRAE Eq.(33)
+            humidityRatio = CalculateHumidityRatioIP(p, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate saturated humidity ratio at tdb using saturation pressure(Pws) at
             // tdb and correction factor Fs at tdb
@@ -318,24 +318,24 @@ namespace ToolkitLibrary
             }
 
             // Calculate degree of saturation
-            // DegreeOfSaturation = HumidityRatio / WsDB;           //ASHRAE Eq.(10)
-            DegreeOfSaturation = CalculateDegreeOfSaturationIP(p, TDB, TWB);
+            // degreeOfSaturation = humidityRatio / WsDB;           //ASHRAE Eq.(10)
+            degreeOfSaturation = CalculatedegreeOfSaturationIP(p, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate relative humidity
-            // RelativeHumidity = DegreeOfSaturation / (1. - (1. - DegreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
-            RelativeHumidity = CalculateRelativeHumidityIP(p, TDB, TWB);
+            // relativeHumidity = degreeOfSaturation / (1. - (1. - degreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
+            relativeHumidity = CalculateRelativeHumidityIP(p, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate specific volume
             Ra = 53.352 / 144.0;   // to change gas constant to psi per foot
             if (p != 0.0)
             {
-                SpecificVolume = Ra * (TDB + 459.67) * (1.0 + 1.6078 * HumidityRatio) / p;   //ASHRAE Eq.(26)
+                specificVolume = Ra * (temperatureDryBulb + 459.67) * (1.0 + 1.6078 * humidityRatio) / p;   //ASHRAE Eq.(26)
             }
 
-            return SpecificVolume;
+            return specificVolume;
         }
 
-        public static double CalculateDensityIP(double p, double TDB, double TWB)
+        public static double CalculateDensityIP(double pressure, double temperatureDryBulb, double temperatureWetBulb)
         {
             double PwsDB = 0.0;
             double PwsWB = 0.0;
@@ -351,40 +351,40 @@ namespace ToolkitLibrary
             //	double Ra;
 
             // Calculate vapor pressure and Fs factor at wb & db temperature
-            CalculateVariablesIP(p, TDB, TWB, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
+            CalculateVariablesIP(pressure, temperatureDryBulb, temperatureWetBulb, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
 
             // Calculate saturated humidity ratio at twb using saturation pressure (Pws) at twb,
             // and Fs correction factor at twb
-            double den = (p - PwsWB * FsWB);
-            if (den != 0.0)
+            density = (pressure - PwsWB * FsWB);
+            if (density != 0.0)
             {
-                WsWB = 0.62198 * PwsWB * FsWB / den;  //ASHRAE Eq.(21a)
+                WsWB = 0.62198 * PwsWB * FsWB / density;  //ASHRAE Eq.(21a)
             }
 
             // Calculate humidity ratio of the mixture
-            // HumidityRatio = ((1093. - .556 * TWB) * WsWB - .24 * (TDB - TWB)) / (1093. + .444 * TDB - TWB);  //ASHRAE Eq.(33)
-            humidityRatio = CalculateHumidityRatioIP(p, TDB, TWB);
+            // humidityRatio = ((1093. - .556 * temperatureWetBulb) * WsWB - .24 * (temperatureDryBulb - temperatureWetBulb)) / (1093. + .444 * temperatureDryBulb - temperatureWetBulb);  //ASHRAE Eq.(33)
+            humidityRatio = CalculateHumidityRatioIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate saturated humidity ratio at tdb using saturation pressure(Pws) at
             // tdb and correction factor Fs at tdb
-            den = (p - PwsDB * FsDB);
-            if (den != 0.0)
+            density = (pressure - PwsDB * FsDB);
+            if (density != 0.0)
             {
-                WsDB = 0.62198 * PwsDB * FsDB / den; //ASHRAE Eq.(21a)
+                WsDB = 0.62198 * PwsDB * FsDB / density; //ASHRAE Eq.(21a)
             }
 
             // Calculate degree of saturation
-            // DegreeOfSaturation = HumidityRatio / WsDB;           //ASHRAE Eq.(10)
-            degreeOfSaturation = CalculateDegreeOfSaturationIP(p, TDB, TWB);
+            // degreeOfSaturation = humidityRatio / WsDB;           //ASHRAE Eq.(10)
+            degreeOfSaturation = CalculatedegreeOfSaturationIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate relative humidity
-            // RelativeHumidity = DegreeOfSaturation / (1. - (1. - DegreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
-            relativeHumidity = CalculateRelativeHumidityIP(p, TDB, TWB);
+            // relativeHumidity = degreeOfSaturation / (1. - (1. - degreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
+            relativeHumidity = CalculateRelativeHumidityIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate specific volume
             // Ra = 53.352 / 144.;   // to change gas constant to psi per foot
-            // SpecificVolume = Ra * (TDB + 459.67) * (1. + 1.6078 * HumidityRatio) / p;   //ASHRAE Eq.(26)
-            specificVolume = CalculateSpecificVolumeIP(p, TDB, TWB);
+            // specificVolume = Ra * (temperatureDryBulb + 459.67) * (1. + 1.6078 * humidityRatio) / p;   //ASHRAE Eq.(26)
+            specificVolume = CalculateSpecificVolumeIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate density
             if (specificVolume != 0.0)
@@ -396,7 +396,7 @@ namespace ToolkitLibrary
         }
 
         // streamlined Enthalpy function for demand curves
-        public static double CalculateEnthalpy(double p, double TDB, double TWB)
+        public static double CalculateEnthalpy(double pressure, double temperatureDryBulb, double temperatureWetBulb)
         {
             double Ra;
             double PwsDB = 0.0;
@@ -405,74 +405,74 @@ namespace ToolkitLibrary
             double FsWB = 0.0;
             double WsDB = 0.0;
             double WsWB = 0.0;
-            double DegreeOfSaturation = 0.0;
-            double HumidityRatio = 0.0;
-            double RelativeHumidity = 0.0;
-            double SpecificVolume = 0.0;
+            double degreeOfSaturation = 0.0;
+            double humidityRatio = 0.0;
+            double relativeHumidity = 0.0;
+            double specificVolume = 0.0;
             double Density = 0.0;
             double Enthalpy;
 
             // CalcIpVars
-            PwsDB = IPPws(TDB);
-            PwsWB = IPPws(TWB);
-            FsDB = Fs(TDB, p);
-            FsWB = Fs(TWB, p);
+            PwsDB = IPPws(temperatureDryBulb);
+            PwsWB = IPPws(temperatureWetBulb);
+            FsDB = Fs(temperatureDryBulb, pressure);
+            FsWB = Fs(temperatureWetBulb, pressure);
 
             // calculate WsWB
-            double den = (p - PwsWB * FsWB);
-            if (den != 0.0)
+            double density = (pressure - PwsWB * FsWB);
+            if (density != 0.0)
             {
-                WsWB = 0.62198 * PwsWB * FsWB / den; ;  //ASHRAE Eq.(21a)
+                WsWB = 0.62198 * PwsWB * FsWB / density; ;  //ASHRAE Eq.(21a)
             }
 
             // calculate humidity ratio
-            den = (1093.0 + .444 * TDB - TWB);
-            if (den != 0.0)
+            density = (1093.0 + .444 * temperatureDryBulb - temperatureWetBulb);
+            if (density != 0.0)
             {
-                HumidityRatio = ((1093.0 - .556 * TWB) * WsWB - .24 * (TDB - TWB)) / den;  //ASHRAE Eq.(33)
+                humidityRatio = ((1093.0 - .556 * temperatureWetBulb) * WsWB - .24 * (temperatureDryBulb - temperatureWetBulb)) / density;  //ASHRAE Eq.(33)
             }
 
             // Calculate saturated humidity ratio at tdb using saturation pressure(Pws) at
             // tdb and correction factor Fs at tdb
-            den = (p - PwsDB * FsDB);
-            if (den != 0.0)
+            density = (pressure - PwsDB * FsDB);
+            if (density != 0.0)
             {
-                WsDB = 0.62198 * PwsDB * FsDB / den; //ASHRAE Eq.(21a)    
+                WsDB = 0.62198 * PwsDB * FsDB / density; //ASHRAE Eq.(21a)    
             }
 
             // Calculate degree of saturation
             if (WsDB != 0.0)
             {
-                DegreeOfSaturation = HumidityRatio / WsDB;           //ASHRAE Eq.(10)
+                degreeOfSaturation = humidityRatio / WsDB;           //ASHRAE Eq.(10)
             }
 
             // Calculate relative humidity
-            den = p != 0.0 ? (1.0 - (1.0 - DegreeOfSaturation) * (FsDB * PwsDB / p)) : 0.0;
-            if (den != 0.0)
+            density = pressure != 0.0 ? (1.0 - (1.0 - degreeOfSaturation) * (FsDB * PwsDB / pressure)) : 0.0;
+            if (density != 0.0)
             {
-                RelativeHumidity = DegreeOfSaturation / den;  //ASHRAE Eq.(23a)
+                relativeHumidity = degreeOfSaturation / density;  //ASHRAE Eq.(23a)
             }
 
             // Calculate specific volume
             Ra = 53.352 / 144.0;   // to change gas constant to psi per foot
-            if (p != 0.0)
+            if (pressure != 0.0)
             {
-                SpecificVolume = Ra * (TDB + 459.67) * (1.0 + 1.6078 * HumidityRatio) / p;   //ASHRAE Eq.(26)
+                specificVolume = Ra * (temperatureDryBulb + 459.67) * (1.0 + 1.6078 * humidityRatio) / pressure;   //ASHRAE Eq.(26)
             }
 
             // Calculate density
-            if (SpecificVolume != 0.0)
+            if (specificVolume != 0.0)
             {
-                Density = (1.0 + HumidityRatio) / SpecificVolume;
+                Density = (1.0 + humidityRatio) / specificVolume;
             }
 
             // Calculate enthalpy
-            Enthalpy = .24 * TDB + HumidityRatio * (1061.0 + .444 * TDB);  //ASHRAE Eq.(30)
+            Enthalpy = .24 * temperatureDryBulb + humidityRatio * (1061.0 + .444 * temperatureDryBulb);  //ASHRAE Eq.(30)
 
             return Enthalpy;
         }
 
-        public static double CalculateEnthalpyIP(double p, double TDB, double TWB)
+        public static double CalculateEnthalpyIP(double pressure, double temperatureDryBulb, double temperatureWetBulb)
         {
             double PwsDB = 0.0;
             double PwsWB = 0.0;
@@ -480,57 +480,57 @@ namespace ToolkitLibrary
             double FsWB = 0.0;
             double WsDB = 0.0;
             double WsWB = 0.0;
-            double DegreeOfSaturation;
-            double HumidityRatio;
-            double RelativeHumidity;
-            double SpecificVolume;
+            double degreeOfSaturation;
+            double humidityRatio;
+            double relativeHumidity;
+            double specificVolume;
             double Density;
             double Enthalpy;
             //	double Ra;
 
             // Calculate vapor pressure and Fs factor at wb & db temperature
-            CalculateVariablesIP(p, TDB, TWB, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
+            CalculateVariablesIP(pressure, temperatureDryBulb, temperatureWetBulb, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
 
             // Calculate saturated humidity ratio at twb using saturation pressure (Pws) at twb,
             // and Fs correction factor at twb
-            double den = (p - PwsWB * FsWB);
-            if (den != 0.0)
-                WsWB = 0.62198 * PwsWB * FsWB / den;  //ASHRAE Eq.(21a)
+            double density = (pressure - PwsWB * FsWB);
+            if (density != 0.0)
+                WsWB = 0.62198 * PwsWB * FsWB / density;  //ASHRAE Eq.(21a)
 
             // Calculate humidity ratio of the mixture
-            // HumidityRatio = ((1093. - .556 * TWB) * WsWB - .24 * (TDB - TWB)) / (1093. + .444 * TDB - TWB);  //ASHRAE Eq.(33)
-            HumidityRatio = CalculateHumidityRatioIP(p, TDB, TWB);
+            // humidityRatio = ((1093. - .556 * temperatureWetBulb) * WsWB - .24 * (temperatureDryBulb - temperatureWetBulb)) / (1093. + .444 * temperatureDryBulb - temperatureWetBulb);  //ASHRAE Eq.(33)
+            humidityRatio = CalculateHumidityRatioIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate saturated humidity ratio at tdb using saturation pressure(Pws) at
             // tdb and correction factor Fs at tdb
-            den = (p - PwsDB * FsDB);
-            if (den != 0.0)
-                WsDB = 0.62198 * PwsDB * FsDB / den; //ASHRAE Eq.(21a)
+            density = (pressure - PwsDB * FsDB);
+            if (density != 0.0)
+                WsDB = 0.62198 * PwsDB * FsDB / density; //ASHRAE Eq.(21a)
 
             // Calculate degree of saturation
-            // DegreeOfSaturation = HumidityRatio / WsDB;           //ASHRAE Eq.(10)
-            DegreeOfSaturation = CalculateDegreeOfSaturationIP(p, TDB, TWB);
+            // degreeOfSaturation = humidityRatio / WsDB;           //ASHRAE Eq.(10)
+            degreeOfSaturation = CalculatedegreeOfSaturationIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate relative humidity
-            // RelativeHumidity = DegreeOfSaturation / (1. - (1. - DegreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
-            RelativeHumidity = CalculateRelativeHumidityIP(p, TDB, TWB);
+            // relativeHumidity = degreeOfSaturation / (1. - (1. - degreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
+            relativeHumidity = CalculateRelativeHumidityIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate specific volume
             // Ra = 53.352 / 144.;   // to change gas constant to psi per foot
-            // SpecificVolume = Ra * (TDB + 459.67) * (1. + 1.6078 * HumidityRatio) / p;   //ASHRAE Eq.(26)
-            SpecificVolume = CalculateSpecificVolumeIP(p, TDB, TWB);
+            // specificVolume = Ra * (temperatureDryBulb + 459.67) * (1. + 1.6078 * humidityRatio) / p;   //ASHRAE Eq.(26)
+            specificVolume = CalculateSpecificVolumeIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate density
-            // Density = (1. + HumidityRatio) / SpecificVolume;
-            Density = CalculateDensityIP(p, TDB, TWB);
+            // Density = (1. + humidityRatio) / specificVolume;
+            Density = CalculateDensityIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate enthalpy
-            Enthalpy = .24 * TDB + HumidityRatio * (1061.0 + .444 * TDB);  //ASHRAE Eq.(30)
+            Enthalpy = .24 * temperatureDryBulb + humidityRatio * (1061.0 + .444 * temperatureDryBulb);  //ASHRAE Eq.(30)
 
             return Enthalpy;
         }
 
-        public static double CalculateDewPointIP(double p, double TDB, double TWB)
+        public static double CalculateDewPointIP(double pressure, double temperatureDryBulb, double temperatureWetBulb)
         {
             double PwsDB = 0.0;
             double PwsWB = 0.0;
@@ -538,60 +538,60 @@ namespace ToolkitLibrary
             double FsWB = 0.0;
             double WsDB = 0.0;
             double WsWB = 0.0;
-            double DegreeOfSaturation;
-            double HumidityRatio;
-            double RelativeHumidity;
-            double SpecificVolume;
+            double degreeOfSaturation;
+            double humidityRatio;
+            double relativeHumidity;
+            double specificVolume;
             double Density;
             double Enthalpy;
             double DEWPoint = 0.0;
 
             // Calculate vapor pressure and Fs factor at wb & db temperature
-            CalculateVariablesIP(p, TDB, TWB, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
+            CalculateVariablesIP(pressure, temperatureDryBulb, temperatureWetBulb, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
 
             // Calculate saturated humidity ratio at twb using saturation pressure (Pws) at twb,
             // and Fs correction factor at twb
-            double den = (p - PwsWB * FsWB);
-            if (den != 0.0)
+            double density = (pressure - PwsWB * FsWB);
+            if (density != 0.0)
             {
-                WsWB = 0.62198 * PwsWB * FsWB / den;  //ASHRAE Eq.(21a)
+                WsWB = 0.62198 * PwsWB * FsWB / density;  //ASHRAE Eq.(21a)
             }
 
             // Calculate humidity ratio of the mixture
-            // HumidityRatio = ((1093. - .556 * TWB) * WsWB - .24 * (TDB - TWB)) / (1093. + .444 * TDB - TWB);  //ASHRAE Eq.(33)
-            HumidityRatio = CalculateHumidityRatioIP(p, TDB, TWB);
+            // humidityRatio = ((1093. - .556 * temperatureWetBulb) * WsWB - .24 * (temperatureDryBulb - temperatureWetBulb)) / (1093. + .444 * temperatureDryBulb - temperatureWetBulb);  //ASHRAE Eq.(33)
+            humidityRatio = CalculateHumidityRatioIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate saturated humidity ratio at tdb using saturation pressure(Pws) at
             // tdb and correction factor Fs at tdb
-            den = (p - PwsDB * FsDB);
-            if (den != 0.0)
+            density = (pressure - PwsDB * FsDB);
+            if (density != 0.0)
             {
-                WsDB = 0.62198 * PwsDB * FsDB / den; //ASHRAE Eq.(21a)
+                WsDB = 0.62198 * PwsDB * FsDB / density; //ASHRAE Eq.(21a)
             }
 
             // Calculate degree of saturation
-            // DegreeOfSaturation = HumidityRatio / WsDB;           //ASHRAE Eq.(10)
-            DegreeOfSaturation = CalculateDegreeOfSaturationIP(p, TDB, TWB);
+            // degreeOfSaturation = humidityRatio / WsDB;           //ASHRAE Eq.(10)
+            degreeOfSaturation = CalculatedegreeOfSaturationIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate relative humidity
-            // RelativeHumidity = DegreeOfSaturation / (1. - (1. - DegreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
-            RelativeHumidity = CalculateRelativeHumidityIP(p, TDB, TWB);
+            // relativeHumidity = degreeOfSaturation / (1. - (1. - degreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
+            relativeHumidity = CalculateRelativeHumidityIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate specific volume
             // Ra = 53.352 / 144.;   // to change gas constant to psi per foot
-            // SpecificVolume = Ra * (TDB + 459.67) * (1. + 1.6078 * HumidityRatio) / p;   //ASHRAE Eq.(26)
-            SpecificVolume = CalculateSpecificVolumeIP(p, TDB, TWB);
+            // specificVolume = Ra * (temperatureDryBulb + 459.67) * (1. + 1.6078 * humidityRatio) / p;   //ASHRAE Eq.(26)
+            specificVolume = CalculateSpecificVolumeIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate density
-            // Density = (1. + HumidityRatio) / SpecificVolume;
-            Density = CalculateDensityIP(p, TDB, TWB);
+            // Density = (1. + humidityRatio) / specificVolume;
+            Density = CalculateDensityIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate enthalpy
-            // Enthalpy = .24 * TDB + HumidityRatio * (1061. + .444 * TDB);  //ASHRAE Eq.(30)
-            Enthalpy = CalculateEnthalpyIP(p, TDB, TWB);
+            // Enthalpy = .24 * temperatureDryBulb + humidityRatio * (1061. + .444 * temperatureDryBulb);  //ASHRAE Eq.(30)
+            Enthalpy = CalculateEnthalpyIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate dew point temperature
-            DEWPoint = CalculateDewPointIP(p, TWB, TDB, HumidityRatio);
+            DEWPoint = CalculateDewPointIP(pressure, temperatureWetBulb, temperatureDryBulb, humidityRatio);
 
             return DEWPoint;
         }
@@ -599,28 +599,28 @@ namespace ToolkitLibrary
         public static void CalculatePropertiesIP(PsychrometricsData data)
         {
             // Calculate humidity ratio of the mixture
-            // HumidityRatio = ((1093. - .556 * data.TemperatureWetBulb) * WsWB - .24 * (data.TemperatureDryBulb - data.TemperatureWetBulb)) / (1093. + .444 * data.TemperatureDryBulb - data.TemperatureWetBulb);  //ASHRAE Eq.(33)
+            // humidityRatio = ((1093. - .556 * data.TemperatureWetBulb) * WsWB - .24 * (data.TemperatureDryBulb - data.TemperatureWetBulb)) / (1093. + .444 * data.TemperatureDryBulb - data.TemperatureWetBulb);  //ASHRAE Eq.(33)
             data.HumidityRatio = CalculateHumidityRatioIP(data.BarometricPressure, data.TemperatureDryBulb, data.TemperatureWetBulb);
 
             // Calculate degree of saturation
-            // DegreeOfSaturation = HumidityRatio / WsDB;           //ASHRAE Eq.(10)
-            data.DegreeOfSaturation = CalculateDegreeOfSaturationIP(data.BarometricPressure, data.TemperatureDryBulb, data.TemperatureWetBulb);
+            // degreeOfSaturation = humidityRatio / WsDB;           //ASHRAE Eq.(10)
+            data.DegreeOfSaturation = CalculatedegreeOfSaturationIP(data.BarometricPressure, data.TemperatureDryBulb, data.TemperatureWetBulb);
 
             // Calculate relative humidity
-            // RelativeHumidity = DegreeOfSaturation / (1. - (1. - DegreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
+            // relativeHumidity = degreeOfSaturation / (1. - (1. - degreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
             data.RelativeHumidity = CalculateRelativeHumidityIP(data.BarometricPressure, data.TemperatureDryBulb, data.TemperatureWetBulb);
 
             // Calculate specific volume
             // Ra = 53.352 / 144.;   // to change gas constant to psi per foot
-            // SpecificVolume = Ra * (data.TemperatureDryBulb + 459.67) * (1. + 1.6078 * HumidityRatio) / p;   //ASHRAE Eq.(26)
+            // specificVolume = Ra * (data.TemperatureDryBulb + 459.67) * (1. + 1.6078 * humidityRatio) / p;   //ASHRAE Eq.(26)
             data.SpecificVolume = CalculateSpecificVolumeIP(data.BarometricPressure, data.TemperatureDryBulb, data.TemperatureWetBulb);
 
             // Calculate density
-            // Density = (1. + HumidityRatio) / SpecificVolume;
+            // Density = (1. + humidityRatio) / specificVolume;
             data.Density = CalculateDensityIP(data.BarometricPressure, data.TemperatureDryBulb, data.TemperatureWetBulb);
 
             // Calculate enthalpy
-            // Enthalpy = .24 * data.TemperatureDryBulb + HumidityRatio * (1061. + .444 * data.TemperatureDryBulb);  //ASHRAE Eq.(30)
+            // Enthalpy = .24 * data.TemperatureDryBulb + humidityRatio * (1061. + .444 * data.TemperatureDryBulb);  //ASHRAE Eq.(30)
             data.Enthalpy = CalculateEnthalpyIP(data.BarometricPressure, data.TemperatureDryBulb, data.TemperatureWetBulb);
 
             // Calculate dew point temperature
@@ -634,41 +634,41 @@ namespace ToolkitLibrary
 
         //*******Given WB & DB Calculate IP psycrometric properties routine ********
         //
-        public static void CalculatePropertiesIP(double p, double TWB, double TDB, ref double HumidityRatio, ref double RelativeHumidity, ref double Enthalpy, ref double SpecificVolume, ref double Density, ref double DEWPoint)
+        public static void CalculatePropertiesIP(double pressure, double temperatureWetBulb, double temperatureDryBulb, ref double humidityRatio, ref double relativeHumidity, ref double Enthalpy, ref double specificVolume, ref double Density, ref double DEWPoint)
         {
-            double DegreeOfSaturation;
+            double degreeOfSaturation;
 
             // Calculate humidity ratio of the mixture
-            // HumidityRatio = ((1093. - .556 * TWB) * WsWB - .24 * (TDB - TWB)) / (1093. + .444 * TDB - TWB);  //ASHRAE Eq.(33)
-            HumidityRatio = CalculateHumidityRatioIP(p, TDB, TWB);
+            // humidityRatio = ((1093. - .556 * temperatureWetBulb) * WsWB - .24 * (temperatureDryBulb - temperatureWetBulb)) / (1093. + .444 * temperatureDryBulb - temperatureWetBulb);  //ASHRAE Eq.(33)
+            humidityRatio = CalculateHumidityRatioIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate degree of saturation
-            // DegreeOfSaturation = HumidityRatio / WsDB;           //ASHRAE Eq.(10)
-            DegreeOfSaturation = CalculateDegreeOfSaturationIP(p, TDB, TWB);
+            // degreeOfSaturation = humidityRatio / WsDB;           //ASHRAE Eq.(10)
+            degreeOfSaturation = CalculatedegreeOfSaturationIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate relative humidity
-            // RelativeHumidity = DegreeOfSaturation / (1. - (1. - DegreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
-            RelativeHumidity = CalculateRelativeHumidityIP(p, TDB, TWB);
+            // relativeHumidity = degreeOfSaturation / (1. - (1. - degreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
+            relativeHumidity = CalculateRelativeHumidityIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate specific volume
             // Ra = 53.352 / 144.;   // to change gas constant to psi per foot
-            // SpecificVolume = Ra * (TDB + 459.67) * (1. + 1.6078 * HumidityRatio) / p;   //ASHRAE Eq.(26)
-            SpecificVolume = CalculateSpecificVolumeIP(p, TDB, TWB);
+            // specificVolume = Ra * (temperatureDryBulb + 459.67) * (1. + 1.6078 * humidityRatio) / p;   //ASHRAE Eq.(26)
+            specificVolume = CalculateSpecificVolumeIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate density
-            // Density = (1. + HumidityRatio) / SpecificVolume;
-            Density = CalculateDensityIP(p, TDB, TWB);
+            // Density = (1. + humidityRatio) / specificVolume;
+            Density = CalculateDensityIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate enthalpy
-            // Enthalpy = .24 * TDB + HumidityRatio * (1061. + .444 * TDB);  //ASHRAE Eq.(30)
-            Enthalpy = CalculateEnthalpyIP(p, TDB, TWB);
+            // Enthalpy = .24 * temperatureDryBulb + humidityRatio * (1061. + .444 * temperatureDryBulb);  //ASHRAE Eq.(30)
+            Enthalpy = CalculateEnthalpyIP(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate dew point temperature
-            DEWPoint = CalculateDewPointIP(p, TWB, TDB, HumidityRatio);
+            DEWPoint = CalculateDewPointIP(pressure, temperatureWetBulb, temperatureDryBulb, humidityRatio);
 
-            if ((HumidityRatio < 0.0) && (Math.Abs(HumidityRatio) < .000001))
+            if ((humidityRatio < 0.0) && (Math.Abs(humidityRatio) < .000001))
             {
-                HumidityRatio = 0.0;
+                humidityRatio = 0.0;
             }
         }
 
@@ -760,7 +760,7 @@ namespace ToolkitLibrary
         //*** Function to find IPDewPoint
         //*** Converges to the same Humidity Ratio as if you had entered
         //*** saturated conditions (DB=WB)
-        public static double CalculateDewPointIP(double p, double TWB, double TDB, double HumidityRatio)
+        public static double CalculateDewPointIP(double p, double temperatureWetBulb, double temperatureDryBulb, double humidityRatio)
         {
             double C1 = -10214.16462;
             double C3 = -.00537657944;
@@ -784,19 +784,19 @@ namespace ToolkitLibrary
             double t;
             double DERHR;
             int iLoop;
-            double den;
+            double density;
 
             errno = 0;
 
             // Method to determine Dew Point - Fs varies with temp - Process in iterative passes.
-            FsDp = Fs(TWB, p);
-            DEWPoint = TWB;
+            FsDp = Fs(temperatureWetBulb, p);
+            DEWPoint = temperatureWetBulb;
 
             for (iLoop = 1; iLoop <= 2; iLoop++)      // Makes exactly two passes to get best first estimate
             {
                 // Calculate dew point pressure
-                den = (FsDp * (.62198 + HumidityRatio));
-                PDEW = den != 0.0 ? (p * HumidityRatio / den) : 1.0;  //ASHRAE Eq.(34)
+                density = (FsDp * (.62198 + humidityRatio));
+                PDEW = density != 0.0 ? (p * humidityRatio / density) : 1.0;  //ASHRAE Eq.(34)
 
                 // Calculate dew point temperature - check above and below ice point
                 if (DEWPoint < 32)
@@ -823,20 +823,20 @@ namespace ToolkitLibrary
             }
 
             PwsDp = IPPws(DEWPoint);
-            den = (p - PwsDp * FsDp);
-            WsDp = den != 0.0 ? (0.62198 * PwsDp * FsDp / den) : 0.0;
+            density = (p - PwsDp * FsDp);
+            WsDp = density != 0.0 ? (0.62198 * PwsDp * FsDp / density) : 0.0;
             DeltaT = 1.0;
 
             while (
                    (WsDp != 0.0) &&
-                   ((Math.Abs(HumidityRatio / WsDp - 1.0) >= 0.000001) ||
+                   ((Math.Abs(humidityRatio / WsDp - 1.0) >= 0.000001) ||
                     (Math.Abs(DeltaT) >= 0.0001))
                   )
             {
                 PwsDp = IPPws(DEWPoint);
                 FsDp = Fs(DEWPoint, p);
-                den = (p - PwsDp * FsDp);
-                WsDp = den != 0.0 ? (0.62198 * PwsDp * FsDp / den) : 0.0;
+                density = (p - PwsDp * FsDp);
+                WsDp = density != 0.0 ? (0.62198 * PwsDp * FsDp / density) : 0.0;
 
                 //Calculate DERivative of Vapor Pressure
                 t = DEWPoint + 459.67;
@@ -856,15 +856,15 @@ namespace ToolkitLibrary
                 //*****************************************************************************
 
                 //Calculate DERivative of Humidity Ratio
-                den = Math.Pow((p - FsDp * PwsDp), 2.0);
-                if (den != 0.0)
-                    DERHR = ((p - PwsDp * FsDp) * 0.62198 * FsDp * DERPws - (.62198 * FsDp * PwsDp) * (-FsDp * DERPws)) / den;
+                density = Math.Pow((p - FsDp * PwsDp), 2.0);
+                if (density != 0.0)
+                    DERHR = ((p - PwsDp * FsDp) * 0.62198 * FsDp * DERPws - (.62198 * FsDp * PwsDp) * (-FsDp * DERPws)) / density;
                 else
                     DERHR = 0.0;
 
-                //Converge to given HumidityRatio using Newton-Raphson Method
+                //Converge to given humidityRatio using Newton-Raphson Method
                 //Yields abref one order of magnitude correction per iteration
-                DeltaT = DERHR != 0.0 ? ((HumidityRatio - WsDp) / DERHR) : 0.0;
+                DeltaT = DERHR != 0.0 ? ((humidityRatio - WsDp) / DERHR) : 0.0;
                 DEWPoint = DEWPoint + DeltaT;
             }
 
@@ -876,272 +876,272 @@ namespace ToolkitLibrary
             return DEWPoint;
         }
 
-        public static void CalculateVariablesSI(double p, double TDB, double TWB, ref double PwsDB, ref double PwsWB, ref double FsDB, ref double FsWB)
+        public static void CalculateVariablesSI(double p, double temperatureDryBulb, double temperatureWetBulb, ref double PwsDB, ref double PwsWB, ref double FsDB, ref double FsWB)
         {
             double Ppsi;
             double tF;
 
-            PwsDB = SIPws(TDB);
-            PwsWB = SIPws(TWB);
-            tF = TDB * 1.8 + 32.0;
+            PwsDB = SIPws(temperatureDryBulb);
+            PwsWB = SIPws(temperatureWetBulb);
+            tF = temperatureDryBulb * 1.8 + 32.0;
             Ppsi = 14.696 * p / 101.325;
             FsDB = Fs(tF, Ppsi);
-            tF = TWB * 1.8 + 32.0;
+            tF = temperatureWetBulb * 1.8 + 32.0;
             FsWB = Fs(tF, Ppsi);
         }
 
         //*******Given WB & DB Calculate SI psycrometric properties routine ********
         //
-        public static double CalculateHumidityRatioSI(double p, double TDB, double TWB)
+        public static double CalculatehumidityRatioSI(double p, double temperatureDryBulb, double temperatureWetBulb)
         {
             double PwsDB = 0.0;
             double PwsWB = 0.0;
             double FsDB = 0.0;
             double FsWB = 0.0;
             double WsWB = 0.0;
-            double HumidityRatio = 0.0;
+            double humidityRatio = 0.0;
 
-            CalculateVariablesSI(p, TDB, TWB, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
+            CalculateVariablesSI(p, temperatureDryBulb, temperatureWetBulb, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
 
             // Calculate saturated humidity ratio at twb using saturation pressure (Pws) at twb,
             // and Fs correction factor at twb
-            double den = (p - PwsWB * FsWB);
-            if (den != 0.0)
+            double density = (p - PwsWB * FsWB);
+            if (density != 0.0)
             {
-                WsWB = 0.62198 * PwsWB * FsWB / den;  //ASHRAE Eq.(21a)
+                WsWB = 0.62198 * PwsWB * FsWB / density;  //ASHRAE Eq.(21a)
             }
 
             // Calculate humidity ratio of the mixture
-            den = (2501.0 + 1.805 * TDB - 4.186 * TWB);
-            if (den != 0.0)
+            density = (2501.0 + 1.805 * temperatureDryBulb - 4.186 * temperatureWetBulb);
+            if (density != 0.0)
             {
-                HumidityRatio = ((2501.0 - 2.381 * TWB) * WsWB - (TDB - TWB)) / den;  //ASHRAE Eq.(33)
+                humidityRatio = ((2501.0 - 2.381 * temperatureWetBulb) * WsWB - (temperatureDryBulb - temperatureWetBulb)) / density;  //ASHRAE Eq.(33)
             }
 
-            return HumidityRatio;
+            return humidityRatio;
         }
 
-        public static double CaclulateDegreeOfSaturationSI(double p, double TDB, double TWB)
+        public static double CaclulateDegreeOfSaturationSI(double pressure, double temperatureDryBulb, double temperatureWetBulb)
         {
             double PwsDB = 0.0;
             double PwsWB = 0.0;
             double FsDB = 0.0;
             double FsWB = 0.0;
             double WsDB = 0.0;
-            double HumidityRatio;
-            double DegreeOfSaturation = 0.0;
+            double humidityRatio;
+            double degreeOfSaturation = 0.0;
 
-            CalculateVariablesSI(p, TDB, TWB, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
+            CalculateVariablesSI(pressure, temperatureDryBulb, temperatureWetBulb, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
 
             // Calculate humidity ratio of the mixture
-            //    HumidityRatio = ((2501 - 2.381 * TWB) * WsWB - (TDB - TWB)) / (2501 + 1.805 * TDB - 4.186 * TWB);  //ASHRAE Eq.(33)
-            HumidityRatio = CalculateHumidityRatioSI(p, TDB, TWB);
+            //    humidityRatio = ((2501 - 2.381 * temperatureWetBulb) * WsWB - (temperatureDryBulb - temperatureWetBulb)) / (2501 + 1.805 * temperatureDryBulb - 4.186 * temperatureWetBulb);  //ASHRAE Eq.(33)
+            humidityRatio = CalculatehumidityRatioSI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate saturated humidity ratio at tdb using saturation pressure(Pws) at
             // tdb and correction factor Fs at tdb
-            double den = (p - PwsDB * FsDB);
-            if (den != 0.0)
-                WsDB = 0.62198 * PwsDB * FsDB / den; //ASHRAE Eq.(21a)
+            double density = (pressure - PwsDB * FsDB);
+            if (density != 0.0)
+                WsDB = 0.62198 * PwsDB * FsDB / density; //ASHRAE Eq.(21a)
 
             // Calculate degree of saturation
             if (WsDB != 0.0)
-                DegreeOfSaturation = HumidityRatio / WsDB;           //ASHRAE Eq.(10)
+                degreeOfSaturation = humidityRatio / WsDB;           //ASHRAE Eq.(10)
 
-            return DegreeOfSaturation;
+            return degreeOfSaturation;
         }
 
-        public static double CaclulateRelativeHumiditySI(double p, double TDB, double TWB)
+        public static double CaclulateRelativeHumiditySI(double pressure, double temperatureDryBulb, double temperatureWetBulb)
         {
             double PwsDB = 0.0;
             double PwsWB = 0.0;
             double FsDB = 0.0;
             double FsWB = 0.0;
-            double DegreeOfSaturation;
-            double HumidityRatio;
-            double RelativeHumidity = 0.0;
+            double degreeOfSaturation;
+            double humidityRatio;
+            double relativeHumidity = 0.0;
 
-            CalculateVariablesSI(p, TDB, TWB, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
+            CalculateVariablesSI(pressure, temperatureDryBulb, temperatureWetBulb, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
 
             // Calculate humidity ratio of the mixture
-            //    HumidityRatio = ((2501 - 2.381 * TWB) * WsWB - (TDB - TWB)) / (2501 + 1.805 * TDB - 4.186 * TWB);  //ASHRAE Eq.(33)
-            HumidityRatio = CalculateHumidityRatioSI(p, TDB, TWB);
+            //    humidityRatio = ((2501 - 2.381 * temperatureWetBulb) * WsWB - (temperatureDryBulb - temperatureWetBulb)) / (2501 + 1.805 * temperatureDryBulb - 4.186 * temperatureWetBulb);  //ASHRAE Eq.(33)
+            humidityRatio = CalculatehumidityRatioSI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate saturated humidity ratio at tdb using saturation pressure(Pws) at
             // tdb and correction factor Fs at tdb
             // WsDB = 0.62198 * PwsDB * FsDB / (p - PwsDB * FsDB); //ASHRAE Eq.(21a)
 
             // Calculate degree of saturation
-            // DegreeOfSaturation = HumidityRatio / WsDB;           //ASHRAE Eq.(10)
-            DegreeOfSaturation = CaclulateDegreeOfSaturationSI(p, TDB, TWB);
+            // degreeOfSaturation = humidityRatio / WsDB;           //ASHRAE Eq.(10)
+            degreeOfSaturation = CaclulateDegreeOfSaturationSI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate relative humidity
-            double den = (p != 0.0 ? (1.0 - (1.0 - DegreeOfSaturation) * (FsDB * PwsDB / p)) : 0.0);
-            if (den != 0.0)
+            double density = (pressure != 0.0 ? (1.0 - (1.0 - degreeOfSaturation) * (FsDB * PwsDB / pressure)) : 0.0);
+            if (density != 0.0)
             {
-                RelativeHumidity = DegreeOfSaturation / den;  //ASHRAE Eq.(23a)
+                relativeHumidity = degreeOfSaturation / density;  //ASHRAE Eq.(23a)
             }
 
-            return RelativeHumidity;
+            return relativeHumidity;
         }
 
-        public static double CaclulateSpecificVolumeSI(double p, double TDB, double TWB)
+        public static double CaclulateSpecificVolumeSI(double p, double temperatureDryBulb, double temperatureWetBulb)
         {
             double PwsDB = 0.0;
             double PwsWB = 0.0;
             double FsDB = 0.0;
             double FsWB = 0.0;
-            double DegreeOfSaturation;
+            double degreeOfSaturation;
             double Ra;
-            double HumidityRatio;
-            double RelativeHumidity;
-            double SpecificVolume = 0.0;
+            double humidityRatio;
+            double relativeHumidity;
+            double specificVolume = 0.0;
 
-            CalculateVariablesSI(p, TDB, TWB, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
+            CalculateVariablesSI(p, temperatureDryBulb, temperatureWetBulb, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
 
             // Calculate humidity ratio of the mixture
-            //    HumidityRatio = ((2501 - 2.381 * TWB) * WsWB - (TDB - TWB)) / (2501 + 1.805 * TDB - 4.186 * TWB);  //ASHRAE Eq.(33)
-            HumidityRatio = CalculateHumidityRatioSI(p, TDB, TWB);
+            //    humidityRatio = ((2501 - 2.381 * temperatureWetBulb) * WsWB - (temperatureDryBulb - temperatureWetBulb)) / (2501 + 1.805 * temperatureDryBulb - 4.186 * temperatureWetBulb);  //ASHRAE Eq.(33)
+            humidityRatio = CalculatehumidityRatioSI(p, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate degree of saturation
-            // DegreeOfSaturation = HumidityRatio / WsDB;           //ASHRAE Eq.(10)
-            DegreeOfSaturation = CaclulateDegreeOfSaturationSI(p, TDB, TWB);
+            // degreeOfSaturation = humidityRatio / WsDB;           //ASHRAE Eq.(10)
+            degreeOfSaturation = CaclulateDegreeOfSaturationSI(p, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate relative humidity
-            // RelativeHumidity = DegreeOfSaturation / (1 - (1 - DegreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
-            RelativeHumidity = CaclulateRelativeHumiditySI(p, TDB, TWB);
+            // relativeHumidity = degreeOfSaturation / (1 - (1 - degreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
+            relativeHumidity = CaclulateRelativeHumiditySI(p, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate specific volume
             Ra = 287.055 / 1000;   // to change gas constant units convert kPa to Pa
 
             if (p != 0.0)
             {
-                SpecificVolume = Ra * (TDB + 273.15) * (1.0 + 1.6078 * HumidityRatio) / p;   //ASHRAE Eq.(26)
+                specificVolume = Ra * (temperatureDryBulb + 273.15) * (1.0 + 1.6078 * humidityRatio) / p;   //ASHRAE Eq.(26)
             }
 
-            return SpecificVolume;
+            return specificVolume;
         }
 
-        public static double CalculateDensitySI(double p, double TDB, double TWB)
+        public static double CalculateDensitySI(double pressure, double temperatureDryBulb, double temperatureWetBulb)
         {
             double PwsDB = 0.0;
             double PwsWB = 0.0;
             double FsDB = 0.0;
             double FsWB = 0.0;
-            double DegreeOfSaturation;
-            double HumidityRatio;
-            double RelativeHumidity;
-            double SpecificVolume;
+            double degreeOfSaturation;
+            double humidityRatio;
+            double relativeHumidity;
+            double specificVolume;
             double Density;
 
-            CalculateVariablesSI(p, TDB, TWB, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
+            CalculateVariablesSI(pressure, temperatureDryBulb, temperatureWetBulb, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
 
             // Calculate humidity ratio of the mixture
-            //    HumidityRatio = ((2501 - 2.381 * TWB) * WsWB - (TDB - TWB)) / (2501 + 1.805 * TDB - 4.186 * TWB);  //ASHRAE Eq.(33)
-            HumidityRatio = CalculateHumidityRatioSI(p, TDB, TWB);
+            //    humidityRatio = ((2501 - 2.381 * temperatureWetBulb) * WsWB - (temperatureDryBulb - temperatureWetBulb)) / (2501 + 1.805 * temperatureDryBulb - 4.186 * temperatureWetBulb);  //ASHRAE Eq.(33)
+            humidityRatio = CalculatehumidityRatioSI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate degree of saturation
-            // DegreeOfSaturation = HumidityRatio / WsDB;           //ASHRAE Eq.(10)
-            DegreeOfSaturation = CaclulateDegreeOfSaturationSI(p, TDB, TWB);
+            // degreeOfSaturation = humidityRatio / WsDB;           //ASHRAE Eq.(10)
+            degreeOfSaturation = CaclulateDegreeOfSaturationSI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate relative humidity
-            // RelativeHumidity = DegreeOfSaturation / (1 - (1 - DegreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
-            RelativeHumidity = CaclulateRelativeHumiditySI(p, TDB, TWB);
+            // relativeHumidity = degreeOfSaturation / (1 - (1 - degreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
+            relativeHumidity = CaclulateRelativeHumiditySI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate specific volume
             // Ra = 287.055 / 1000;   // to change gas constant units convert kPa to Pa
-            // SpecificVolume = Ra * (TDB + 273.15) * (1 + 1.6078 * HumidityRatio) / p;   //ASHRAE Eq.(26)
-            SpecificVolume = CaclulateSpecificVolumeSI(p, TDB, TWB);
+            // specificVolume = Ra * (temperatureDryBulb + 273.15) * (1 + 1.6078 * humidityRatio) / p;   //ASHRAE Eq.(26)
+            specificVolume = CaclulateSpecificVolumeSI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate density
-            Density = SpecificVolume != 0.0 ? ((1.0 + HumidityRatio) / SpecificVolume) : 0.0;
+            Density = specificVolume != 0.0 ? ((1.0 + humidityRatio) / specificVolume) : 0.0;
             return Density;
         }
 
-        public static double CalculateEnthalpySI(double p, double TDB, double TWB)
+        public static double CalculateEnthalpySI(double p, double temperatureDryBulb, double temperatureWetBulb)
         {
             double PwsDB = 0.0;
             double PwsWB = 0.0;
             double FsDB = 0.0;
             double FsWB = 0.0;
-            double DegreeOfSaturation;
-            double HumidityRatio;
-            double RelativeHumidity;
-            double SpecificVolume;
+            double degreeOfSaturation;
+            double humidityRatio;
+            double relativeHumidity;
+            double specificVolume;
             double Density;
             double Enthalpy;
 
-            CalculateVariablesSI(p, TDB, TWB, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
+            CalculateVariablesSI(p, temperatureDryBulb, temperatureWetBulb, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
 
             // Calculate humidity ratio of the mixture
-            //    HumidityRatio = ((2501 - 2.381 * TWB) * WsWB - (TDB - TWB)) / (2501 + 1.805 * TDB - 4.186 * TWB);  //ASHRAE Eq.(33)
-            HumidityRatio = CalculateHumidityRatioSI(p, TDB, TWB);
+            //    humidityRatio = ((2501 - 2.381 * temperatureWetBulb) * WsWB - (temperatureDryBulb - temperatureWetBulb)) / (2501 + 1.805 * temperatureDryBulb - 4.186 * temperatureWetBulb);  //ASHRAE Eq.(33)
+            humidityRatio = CalculatehumidityRatioSI(p, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate degree of saturation
-            // DegreeOfSaturation = HumidityRatio / WsDB;           //ASHRAE Eq.(10)
-            DegreeOfSaturation = CaclulateDegreeOfSaturationSI(p, TDB, TWB);
+            // degreeOfSaturation = humidityRatio / WsDB;           //ASHRAE Eq.(10)
+            degreeOfSaturation = CaclulateDegreeOfSaturationSI(p, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate relative humidity
-            // RelativeHumidity = DegreeOfSaturation / (1 - (1 - DegreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
-            RelativeHumidity = CaclulateRelativeHumiditySI(p, TDB, TWB);
+            // relativeHumidity = degreeOfSaturation / (1 - (1 - degreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
+            relativeHumidity = CaclulateRelativeHumiditySI(p, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate specific volume
             // Ra = 287.055 / 1000;   // to change gas constant units convert kPa to Pa
-            // SpecificVolume = Ra * (TDB + 273.15) * (1 + 1.6078 * HumidityRatio) / p;   //ASHRAE Eq.(26)
-            SpecificVolume = CaclulateSpecificVolumeSI(p, TDB, TWB);
+            // specificVolume = Ra * (temperatureDryBulb + 273.15) * (1 + 1.6078 * humidityRatio) / p;   //ASHRAE Eq.(26)
+            specificVolume = CaclulateSpecificVolumeSI(p, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate density
-            // Density = (1 + HumidityRatio) / SpecificVolume;
-            Density = CalculateDensitySI(p, TDB, TWB);
+            // Density = (1 + humidityRatio) / specificVolume;
+            Density = CalculateDensitySI(p, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate enthalpy
-            Enthalpy = 1.006 * TDB + HumidityRatio * (2501.0 + 1.805 * TDB);  //ASHRAE Eq.(30)
+            Enthalpy = 1.006 * temperatureDryBulb + humidityRatio * (2501.0 + 1.805 * temperatureDryBulb);  //ASHRAE Eq.(30)
 
             return Enthalpy;
         }
 
-        public static double CalculateDewPointSI(double p, double TDB, double TWB)
+        public static double CalculateDewPointSI(double pressure, double temperatureDryBulb, double temperatureWetBulb)
         {
             double PwsDB = 0.0;
             double PwsWB = 0.0;
             double FsDB = 0.0;
             double FsWB = 0.0;
-            double DegreeOfSaturation;
-            double HumidityRatio;
-            double RelativeHumidity;
-            double SpecificVolume;
+            double degreeOfSaturation;
+            double humidityRatio;
+            double relativeHumidity;
+            double specificVolume;
             double Density;
             double Enthalpy;
             double DEWPoint = 0;
 
-            CalculateVariablesSI(p, TDB, TWB, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
+            CalculateVariablesSI(pressure, temperatureDryBulb, temperatureWetBulb, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
 
             // Calculate humidity ratio of the mixture
-            //    HumidityRatio = ((2501 - 2.381 * TWB) * WsWB - (TDB - TWB)) / (2501 + 1.805 * TDB - 4.186 * TWB);  //ASHRAE Eq.(33)
-            HumidityRatio = CalculateHumidityRatioSI(p, TDB, TWB);
+            //    humidityRatio = ((2501 - 2.381 * temperatureWetBulb) * WsWB - (temperatureDryBulb - temperatureWetBulb)) / (2501 + 1.805 * temperatureDryBulb - 4.186 * temperatureWetBulb);  //ASHRAE Eq.(33)
+            humidityRatio = CalculatehumidityRatioSI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate degree of saturation
-            // DegreeOfSaturation = HumidityRatio / WsDB;           //ASHRAE Eq.(10)
-            DegreeOfSaturation = CaclulateDegreeOfSaturationSI(p, TDB, TWB);
+            // degreeOfSaturation = humidityRatio / WsDB;           //ASHRAE Eq.(10)
+            degreeOfSaturation = CaclulateDegreeOfSaturationSI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate relative humidity
-            // RelativeHumidity = DegreeOfSaturation / (1 - (1 - DegreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
-            RelativeHumidity = CaclulateRelativeHumiditySI(p, TDB, TWB);
+            // relativeHumidity = degreeOfSaturation / (1 - (1 - degreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
+            relativeHumidity = CaclulateRelativeHumiditySI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate specific volume
             // Ra = 287.055 / 1000;   // to change gas constant units convert kPa to Pa
-            // SpecificVolume = Ra * (TDB + 273.15) * (1 + 1.6078 * HumidityRatio) / p;   //ASHRAE Eq.(26)
-            SpecificVolume = CaclulateSpecificVolumeSI(p, TDB, TWB);
+            // specificVolume = Ra * (temperatureDryBulb + 273.15) * (1 + 1.6078 * humidityRatio) / p;   //ASHRAE Eq.(26)
+            specificVolume = CaclulateSpecificVolumeSI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate density
-            // Density = (1 + HumidityRatio) / SpecificVolume;
-            Density = CalculateDensitySI(p, TDB, TWB);
+            // Density = (1 + humidityRatio) / specificVolume;
+            Density = CalculateDensitySI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate enthalpy
-            // Enthalpy = 1.006 * TDB + HumidityRatio * (2501 + 1.805 * TDB);  //ASHRAE Eq.(30)
-            Enthalpy = CalculateEnthalpySI(p, TDB, TWB);
+            // Enthalpy = 1.006 * temperatureDryBulb + humidityRatio * (2501 + 1.805 * temperatureDryBulb);  //ASHRAE Eq.(30)
+            Enthalpy = CalculateEnthalpySI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate dew point temperature
-            DEWPoint = CaclulateDewPointSI(p, TWB, TDB, HumidityRatio);
+            DEWPoint = CaclulateDewPointSI(pressure, temperatureWetBulb, temperatureDryBulb, humidityRatio);
 
             return DEWPoint;
         }
@@ -1157,28 +1157,28 @@ namespace ToolkitLibrary
             CalculateVariablesSI(data.BarometricPressure, data.TemperatureDryBulb, data.TemperatureWetBulb, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
 
             // Calculate humidity ratio of the mixture
-            //    HumidityRatio = ((2501 - 2.381 * data.TemperatureWetBulb) * WsWB - (data.TemperatureDryBulb - data.TemperatureWetBulb)) / (2501 + 1.805 * data.TemperatureDryBulb - 4.186 * data.TemperatureWetBulb);  //ASHRAE Eq.(33)
-            data.HumidityRatio = CalculateHumidityRatioSI(data.BarometricPressure, data.TemperatureDryBulb, data.TemperatureWetBulb);
+            //    humidityRatio = ((2501 - 2.381 * data.TemperatureWetBulb) * WsWB - (data.TemperatureDryBulb - data.TemperatureWetBulb)) / (2501 + 1.805 * data.TemperatureDryBulb - 4.186 * data.TemperatureWetBulb);  //ASHRAE Eq.(33)
+            data.HumidityRatio = CalculatehumidityRatioSI(data.BarometricPressure, data.TemperatureDryBulb, data.TemperatureWetBulb);
 
             // Calculate degree of saturation
-            // DegreeOfSaturation = HumidityRatio / WsDB;           //ASHRAE Eq.(10)
+            // degreeOfSaturation = humidityRatio / WsDB;           //ASHRAE Eq.(10)
             data.DegreeOfSaturation = CaclulateDegreeOfSaturationSI(data.BarometricPressure, data.TemperatureDryBulb, data.TemperatureWetBulb);
 
             // Calculate relative humidity
-            // RelativeHumidity = DegreeOfSaturation / (1 - (1 - DegreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
+            // relativeHumidity = degreeOfSaturation / (1 - (1 - degreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
             data.RelativeHumidity = CaclulateRelativeHumiditySI(data.BarometricPressure, data.TemperatureDryBulb, data.TemperatureWetBulb);
 
             // Calculate specific volume
             // Ra = 287.055 / 1000;   // to change gas constant units convert kPa to Pa
-            // SpecificVolume = Ra * (data.TemperatureDryBulb + 273.15) * (1 + 1.6078 * HumidityRatio) / p;   //ASHRAE Eq.(26)
+            // specificVolume = Ra * (data.TemperatureDryBulb + 273.15) * (1 + 1.6078 * humidityRatio) / p;   //ASHRAE Eq.(26)
             data.SpecificVolume = CaclulateSpecificVolumeSI(data.BarometricPressure, data.TemperatureDryBulb, data.TemperatureWetBulb);
 
             // Calculate density
-            // Density = (1 + HumidityRatio) / SpecificVolume;
+            // Density = (1 + humidityRatio) / specificVolume;
             data.Density = CalculateDensitySI(data.BarometricPressure, data.TemperatureDryBulb, data.TemperatureWetBulb);
 
             // Calculate enthalpy
-            // Enthalpy = 1.006 * data.TemperatureDryBulb + HumidityRatio * (2501 + 1.805 * data.TemperatureDryBulb);  //ASHRAE Eq.(30)
+            // Enthalpy = 1.006 * data.TemperatureDryBulb + humidityRatio * (2501 + 1.805 * data.TemperatureDryBulb);  //ASHRAE Eq.(30)
             data.Enthalpy = CalculateEnthalpySI(data.BarometricPressure, data.TemperatureDryBulb, data.TemperatureWetBulb);
 
             // Calculate dew point temperature
@@ -1190,47 +1190,47 @@ namespace ToolkitLibrary
             }
         }
 
-        public static void CalculatePropertiesSI(double p, double TWB, double TDB, ref double HumidityRatio, ref double RelativeHumidity, ref double Enthalpy, ref double SpecificVolume, ref double Density, ref double DEWPoint)
+        public static void CalculatePropertiesSI(double pressure, double temperatureWetBulb, double temperatureDryBulb, ref double humidityRatio, ref double relativeHumidity, ref double Enthalpy, ref double specificVolume, ref double Density, ref double DEWPoint)
         {
             double PwsDB = 0.0;
             double PwsWB = 0.0;
             double FsDB = 0.0;
             double FsWB = 0.0;
-            double DegreeOfSaturation;
+            double degreeOfSaturation;
 
-            CalculateVariablesSI(p, TDB, TWB, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
+            CalculateVariablesSI(pressure, temperatureDryBulb, temperatureWetBulb, ref PwsDB, ref PwsWB, ref FsDB, ref FsWB);
 
             // Calculate humidity ratio of the mixture
-            //    HumidityRatio = ((2501 - 2.381 * TWB) * WsWB - (TDB - TWB)) / (2501 + 1.805 * TDB - 4.186 * TWB);  //ASHRAE Eq.(33)
-            HumidityRatio = CalculateHumidityRatioSI(p, TDB, TWB);
+            //    humidityRatio = ((2501 - 2.381 * temperatureWetBulb) * WsWB - (temperatureDryBulb - temperatureWetBulb)) / (2501 + 1.805 * temperatureDryBulb - 4.186 * temperatureWetBulb);  //ASHRAE Eq.(33)
+            humidityRatio = CalculatehumidityRatioSI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate degree of saturation
-            // DegreeOfSaturation = HumidityRatio / WsDB;           //ASHRAE Eq.(10)
-            DegreeOfSaturation = CaclulateDegreeOfSaturationSI(p, TDB, TWB);
+            // degreeOfSaturation = humidityRatio / WsDB;           //ASHRAE Eq.(10)
+            degreeOfSaturation = CaclulateDegreeOfSaturationSI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate relative humidity
-            // RelativeHumidity = DegreeOfSaturation / (1 - (1 - DegreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
-            RelativeHumidity = CaclulateRelativeHumiditySI(p, TDB, TWB);
+            // relativeHumidity = degreeOfSaturation / (1 - (1 - degreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
+            relativeHumidity = CaclulateRelativeHumiditySI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate specific volume
             // Ra = 287.055 / 1000;   // to change gas constant units convert kPa to Pa
-            // SpecificVolume = Ra * (TDB + 273.15) * (1 + 1.6078 * HumidityRatio) / p;   //ASHRAE Eq.(26)
-            SpecificVolume = CaclulateSpecificVolumeSI(p, TDB, TWB);
+            // specificVolume = Ra * (temperatureDryBulb + 273.15) * (1 + 1.6078 * humidityRatio) / p;   //ASHRAE Eq.(26)
+            specificVolume = CaclulateSpecificVolumeSI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate density
-            // Density = (1 + HumidityRatio) / SpecificVolume;
-            Density = CalculateDensitySI(p, TDB, TWB);
+            // Density = (1 + humidityRatio) / specificVolume;
+            Density = CalculateDensitySI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate enthalpy
-            // Enthalpy = 1.006 * TDB + HumidityRatio * (2501 + 1.805 * TDB);  //ASHRAE Eq.(30)
-            Enthalpy = CalculateEnthalpySI(p, TDB, TWB);
+            // Enthalpy = 1.006 * temperatureDryBulb + humidityRatio * (2501 + 1.805 * temperatureDryBulb);  //ASHRAE Eq.(30)
+            Enthalpy = CalculateEnthalpySI(pressure, temperatureDryBulb, temperatureWetBulb);
 
             // Calculate dew point temperature
-            DEWPoint = CaclulateDewPointSI(p, TWB, TDB, HumidityRatio);
+            DEWPoint = CaclulateDewPointSI(pressure, temperatureWetBulb, temperatureDryBulb, humidityRatio);
 
-            if ((HumidityRatio < 0) && (Math.Abs(HumidityRatio) < .000001))
+            if ((humidityRatio < 0) && (Math.Abs(humidityRatio) < .000001))
             {
-                HumidityRatio = 0;
+                humidityRatio = 0;
             }
         }
 
@@ -1295,7 +1295,7 @@ namespace ToolkitLibrary
         //*** Function to find SIDewPoint
         //*** Converges to the same Humidity Ratio as if you had entered
         //*** saturated conditions (DB=WB)
-        public static double CaclulateDewPointSI(double p, double TWB, double TDB, double HumidityRatio)
+        public static double CaclulateDewPointSI(double pressure, double temperatureWetBulb, double temperatureDryBulb, double humidityRatio)
         {
             int iLoop;
             double PDEW;
@@ -1306,7 +1306,7 @@ namespace ToolkitLibrary
             double t;
             double DERPws;
             double DERHR;
-            double Ppsi = 14.696 * p / 101.325;
+            double Ppsi = 14.696 * pressure / 101.325;
 
             double C1 = -5674.5359;
             double C3 = -.009677843;
@@ -1329,14 +1329,14 @@ namespace ToolkitLibrary
             errno = 0;
 
             // Method to determine Dew Point - Fs varies with temp - Process in iterative passes.
-            double DEWPoint = TWB;
+            double DEWPoint = temperatureWetBulb;
             double tF = DEWPoint * 1.8 + 32.0;
             double FsDP = Fs(tF, Ppsi);
 
             for (iLoop = 1; iLoop <= 2; iLoop++)      // Makes exactly two passes to get best first estimate
             {
                 // Calculate dew point pressure
-                PDEW = p * HumidityRatio / (FsDP * (.62198 + HumidityRatio));  //ASHRAE Eq.(34)
+                PDEW = pressure * humidityRatio / (FsDP * (.62198 + humidityRatio));  //ASHRAE Eq.(34)
 
                 // Calculate dew point temperature - check above and below ice point
                 if (DEWPoint < 0)
@@ -1359,23 +1359,23 @@ namespace ToolkitLibrary
             }
 
             PwsDP = SIPws(DEWPoint);
-            double den = (p - PwsDP * FsDP);
-            WSDP = den != 0.0 ? (0.62198 * PwsDP * FsDP / den) : 0.0;
+            double density = (pressure - PwsDP * FsDP);
+            WSDP = density != 0.0 ? (0.62198 * PwsDP * FsDP / density) : 0.0;
             DeltaT = 1.0;
 
             // DavidL, 04/26/2001: Fixed the loop conditions to mimic IPDEWPoint()
             while
                 (
                 (WSDP != 0.0) &&
-                //		((Math.Abs(HumidityRatio / WSDP - 1.0) < .000001) || (Math.Abs(DeltaT) < .0001))
-                ((Math.Abs(HumidityRatio / WSDP - 1.0) >= .000001) || (Math.Abs(DeltaT) >= .0001))
+                //		((Math.Abs(humidityRatio / WSDP - 1.0) < .000001) || (Math.Abs(DeltaT) < .0001))
+                ((Math.Abs(humidityRatio / WSDP - 1.0) >= .000001) || (Math.Abs(DeltaT) >= .0001))
                 )
             {
                 PwsDP = SIPws(DEWPoint);
                 tF = DEWPoint * 1.8 + 32.0;
                 FsDP = Fs(tF, Ppsi);
-                den = (p - PwsDP * FsDP);
-                WSDP = den != 0.0 ? (0.62198 * PwsDP * FsDP / den) : 0.0;
+                density = (pressure - PwsDP * FsDP);
+                WSDP = density != 0.0 ? (0.62198 * PwsDP * FsDP / density) : 0.0;
 
                 //Calculate DERivative of Vapor Pressure
                 t = DEWPoint + 273.15;
@@ -1392,16 +1392,16 @@ namespace ToolkitLibrary
                 //*****************************************************************************
 
                 //Calculate DERivative of Humidity Ratio
-                den = Math.Pow((p - FsDP * PwsDP), 2.0);
-                if (den != 0.0)
-                    DERHR = ((p - PwsDP * FsDP) * 0.62198 * FsDP * DERPws - (.62198 * FsDP * PwsDP) * (-FsDP * DERPws)) / den;
+                density = Math.Pow((pressure - FsDP * PwsDP), 2.0);
+                if (density != 0.0)
+                    DERHR = ((pressure - PwsDP * FsDP) * 0.62198 * FsDP * DERPws - (.62198 * FsDP * PwsDP) * (-FsDP * DERPws)) / density;
                 else
                     DERHR = 0.0;
 
-                //Converge to given HumidityRatio using Newton-Raphson Method
+                //Converge to given humidityRatio using Newton-Raphson Method
                 //Yields abref one order of magnitude correction per iteration
 
-                DeltaT = DERHR != 0.0 ? ((HumidityRatio - WSDP) / DERHR) : 0.0;
+                DeltaT = DERHR != 0.0 ? ((humidityRatio - WSDP) / DERHR) : 0.0;
                 DEWPoint = DEWPoint + DeltaT;
             }
 
@@ -1501,9 +1501,9 @@ namespace ToolkitLibrary
         {
             double dblKAVL = 0.0;
 
-            double HumidityRatio = 0.0;
-            double RelativeHumidity = 0.0;
-            double SpecificVolume = 0.0;
+            double humidityRatio = 0.0;
+            double relativeHumidity = 0.0;
+            double specificVolume = 0.0;
             double Density = 0.0;
             double DEWPoint = 0.0;
 
@@ -1516,14 +1516,14 @@ namespace ToolkitLibrary
             double Hw2 = 0.0;
             double Hw3 = 0.0;
             double Hw4 = 0.0;
-            CalculatePropertiesIP(14.696, Tt1, Tt1, ref HumidityRatio, ref RelativeHumidity, ref Hw1, ref SpecificVolume, ref Density, ref DEWPoint);
-            CalculatePropertiesIP(14.696, Tt2, Tt2, ref HumidityRatio, ref RelativeHumidity, ref Hw2, ref SpecificVolume, ref Density, ref DEWPoint);
-            CalculatePropertiesIP(14.696, Tt3, Tt3, ref HumidityRatio, ref RelativeHumidity, ref Hw3, ref SpecificVolume, ref Density, ref DEWPoint);
-            CalculatePropertiesIP(14.696, Tt4, Tt4, ref HumidityRatio, ref RelativeHumidity, ref Hw4, ref SpecificVolume, ref Density, ref DEWPoint);
+            CalculatePropertiesIP(14.696, Tt1, Tt1, ref humidityRatio, ref relativeHumidity, ref Hw1, ref specificVolume, ref Density, ref DEWPoint);
+            CalculatePropertiesIP(14.696, Tt2, Tt2, ref humidityRatio, ref relativeHumidity, ref Hw2, ref specificVolume, ref Density, ref DEWPoint);
+            CalculatePropertiesIP(14.696, Tt3, Tt3, ref humidityRatio, ref relativeHumidity, ref Hw3, ref specificVolume, ref Density, ref DEWPoint);
+            CalculatePropertiesIP(14.696, Tt4, Tt4, ref humidityRatio, ref relativeHumidity, ref Hw4, ref specificVolume, ref Density, ref DEWPoint);
 
             double HaStart = 0.0;
             double HaEnd = 0.0;
-            CalculatePropertiesIP(14.696, WBT, WBT, ref HumidityRatio, ref RelativeHumidity, ref HaStart, ref SpecificVolume, ref Density, ref DEWPoint);
+            CalculatePropertiesIP(14.696, WBT, WBT, ref humidityRatio, ref relativeHumidity, ref HaStart, ref specificVolume, ref Density, ref DEWPoint);
             HaEnd = HaStart + LG * (T1 - T2);
 
             double Ha1 = HaStart + .1 * LG * (T1 - T2);
@@ -1601,8 +1601,8 @@ namespace ToolkitLibrary
         {
             double Psat;
             Psat = Pwsat(Ts);
-            double den = (Patm - Psat);
-            return (den != 0.0 ? (0.62198 * Psat / den) : 0.0);
+            double density = (Patm - Psat);
+            return (density != 0.0 ? (0.62198 * Psat / density) : 0.0);
         }
 
         public static double Pwsat(double Ts)
@@ -1611,29 +1611,29 @@ namespace ToolkitLibrary
             return (Ts != 0.0 ? Math.Exp(((-2.478068E-9 * Ts + .00001289036) * Ts - .027022355) * Ts - 11.2946496 - 10440.39708 / Ts + 6.5459673 * Math.Log(Ts)) : 0.0);
         }
 
-        public static double RelativeHumidityityIP(double psi, double TWB, double TDB)
+        public static double RelativeHumidityityIP(double psi, double temperatureWetBulb, double temperatureDryBulb)
         {
             if (psi == 0.0)
                 return 0.0;
 
-            double PwsWB = (IPPws(TWB));
-            double Pwsdb = (IPPws(TDB));
-            double FsWB = (Fs(TWB, psi));
-            double Fsdb = (Fs(TDB, psi));
-            double den = (psi - PwsWB * FsWB);
-            double Wswb = (den != 0.0 ? (0.62198 * PwsWB * FsWB / den) : 0.0);  // 'ASHRAE Eq.(21a)
-            den = (psi - Pwsdb * Fsdb);
-            double Wsdb = (den != 0.0 ? (0.62198 * Pwsdb * Fsdb / den) : 0.0);  // 'ASHRAE Eq.(21a)
-            den = (1093.0 + .444 * TDB - TWB);
-            double HumidityRatio = (den != 0.0 ? (((1093.0 - .556 * TWB) * Wswb - .24 * (TDB - TWB)) / den) : 0.0); // 'ASHRAE Eq.(33)
-            double DegreeOfSaturation = (Wsdb != 0.0 ? (HumidityRatio / Wsdb) : 0.0);
-            den = (1.0 - (1.0 - DegreeOfSaturation) * (Fsdb * Pwsdb / psi));
-            double RelativeHumidityity = (den != 0.0 ? (DegreeOfSaturation / den) : 0.0);
-            return RelativeHumidityity;
+            double PwsWB = (IPPws(temperatureWetBulb));
+            double Pwsdb = (IPPws(temperatureDryBulb));
+            double FsWB = (Fs(temperatureWetBulb, psi));
+            double Fsdb = (Fs(temperatureDryBulb, psi));
+            double density = (psi - PwsWB * FsWB);
+            double Wswb = (density != 0.0 ? (0.62198 * PwsWB * FsWB / density) : 0.0);  // 'ASHRAE Eq.(21a)
+            density = (psi - Pwsdb * Fsdb);
+            double Wsdb = (density != 0.0 ? (0.62198 * Pwsdb * Fsdb / density) : 0.0);  // 'ASHRAE Eq.(21a)
+            density = (1093.0 + .444 * temperatureDryBulb - temperatureWetBulb);
+            double humidityRatio = (density != 0.0 ? (((1093.0 - .556 * temperatureWetBulb) * Wswb - .24 * (temperatureDryBulb - temperatureWetBulb)) / density) : 0.0); // 'ASHRAE Eq.(33)
+            double degreeOfSaturation = (Wsdb != 0.0 ? (humidityRatio / Wsdb) : 0.0);
+            density = (1.0 - (1.0 - degreeOfSaturation) * (Fsdb * Pwsdb / psi));
+            double relativeHumidityity = (density != 0.0 ? (degreeOfSaturation / density) : 0.0);
+            return relativeHumidityity;
         }
 
-        //        public static void WBsearchIP(double psi, double RelativeHumidity, double TDB, ref double TWB)
-//        public static double CalculateTemperatureWetBulbIP(PsychrometricsData data)
+        //        public static void WBsearchIP(double psi, double relativeHumidity, double temperatureDryBulb, ref double temperatureWetBulb)
+//        public static double CalculatetemperatureWetBulbIP(PsychrometricsData data)
         public static double CalculateTemperatureWetBulbIP(double psi, double relativeHumidity, double temperatureDryBulb)
         {
             double temptolerance = .0005;
@@ -1669,14 +1669,14 @@ namespace ToolkitLibrary
             return tmid;
         }
 
-//        public static void WBsearchSI(double psi, double RelativeHumidity, double TDB, ref double TWB)
+//        public static void WBsearchSI(double psi, double relativeHumidity, double temperatureDryBulb, ref double temperatureWetBulb)
         public static double CalculateTemperatureWetBulbSI(double psi, double relativeHumidity, double temperatureDryBulb)
         {
             double temptolerance = .0005;
             double RHtolerance = .00005;
 
             //Calculate saturation value and compare to program and tolerance limits
-            //double RHhigh = CalculateRelativeHumiditySI(psi, TDB, TDB);
+            //double RHhigh = CalculaterelativeHumiditySI(psi, temperatureDryBulb, temperatureDryBulb);
             double RHhigh = CalculateRelativeHumiditySI(psi, temperatureDryBulb, temperatureDryBulb);
             if (Math.Abs(RHhigh - relativeHumidity) <= RHtolerance)
             {
@@ -1703,44 +1703,44 @@ namespace ToolkitLibrary
             return tmid;
         }
 
-        public static double CalculateRelativeHumiditySI(double psi, double TWB, double TDB)
+        public static double CalculateRelativeHumiditySI(double psi, double temperatureWetBulb, double temperatureDryBulb)
         {
             if (psi == 0.0)
                 return 0.0;
 
-            double PwsWB = (SIPws(TWB));
-            double Pwsdb = (SIPws(TDB));
-            double tF = (TDB * 1.8 + 32.0);
+            double PwsWB = (SIPws(temperatureWetBulb));
+            double Pwsdb = (SIPws(temperatureDryBulb));
+            double tF = (temperatureDryBulb * 1.8 + 32.0);
             double Ppsi = (14.696 * psi / 101.325);
             double Fsdb = (Fs(tF, Ppsi));
-            tF = TWB * 1.8 + 32.0;
+            tF = temperatureWetBulb * 1.8 + 32.0;
             double FsWB = Fs(tF, Ppsi);
 
-            double den = (psi - PwsWB * FsWB);
-            double Wswb = (den != 0.0 ? (0.62198 * PwsWB * FsWB / den) : 0.0); // 'ASHRAE Eq.(21a)
-            den = (psi - Pwsdb * Fsdb);
-            double Wsdb = (den != 0.0 ? (0.62198 * Pwsdb * Fsdb / den) : 0.0); // 'ASHRAE Eq.(21a)
-            den = (2501.0 + 1.805 * TDB - 4.186 * TWB);
-            double HumidityRatio = (den != 0.0 ? (((2501.0 - 2.381 * TWB) * Wswb - (TDB - TWB))) / den : 0.0); //   'ASHRAE Eq.(33)
-            double DegreeOfSaturation = (Wsdb != 0.0 ? (HumidityRatio / Wsdb) : 0.0);
-            den = (1.0 - (1.0 - DegreeOfSaturation) * (Fsdb * Pwsdb / psi));
-            double RelativeHumidityity = (den != 0.0 ? (DegreeOfSaturation / den) : 0.0);
-            return RelativeHumidityity;
+            double density = (psi - PwsWB * FsWB);
+            double Wswb = (density != 0.0 ? (0.62198 * PwsWB * FsWB / density) : 0.0); // 'ASHRAE Eq.(21a)
+            density = (psi - Pwsdb * Fsdb);
+            double Wsdb = (density != 0.0 ? (0.62198 * Pwsdb * Fsdb / density) : 0.0); // 'ASHRAE Eq.(21a)
+            density = (2501.0 + 1.805 * temperatureDryBulb - 4.186 * temperatureWetBulb);
+            double humidityRatio = (density != 0.0 ? (((2501.0 - 2.381 * temperatureWetBulb) * Wswb - (temperatureDryBulb - temperatureWetBulb))) / density : 0.0); //   'ASHRAE Eq.(33)
+            double degreeOfSaturation = (Wsdb != 0.0 ? (humidityRatio / Wsdb) : 0.0);
+            density = (1.0 - (1.0 - degreeOfSaturation) * (Fsdb * Pwsdb / psi));
+            double relativeHumidityity = (density != 0.0 ? (degreeOfSaturation / density) : 0.0);
+            return relativeHumidityity;
         }
 
         //public static void SIEnthalpysearch(int sat,
         //                       double p,
         //                       double RootEnthalpy,
         //                       ref double OutputEnthalpy,
-        //                       ref double TWB,
-        //                       ref double TDB,
-        //                       double HumidityRatio,
-        //                       double RelativeHumidity,
-        //                       double SpecificVolume,
+        //                       ref double temperatureWetBulb,
+        //                       ref double temperatureDryBulb,
+        //                       double humidityRatio,
+        //                       double relativeHumidity,
+        //                       double specificVolume,
         //                       double Density,
         //                       double DEWPoint
         //                       )
-        // overwritten TemperatureWetBulb TemperatureDryBulb
+        // overwritten temperatureWetBulb temperatureDryBulb
         public static double EnthalpySI(int sat, PsychrometricsData data)
         {
             double OutputEnthalpy = 0.0;
@@ -1980,11 +1980,11 @@ namespace ToolkitLibrary
         }
 
 
-        public static double CalcTestLG(double dblDesignLG, double dblDesignFlow, double dblTestFlow, double dblDesignFanPower, double dblTestFanPower, double dblDesignAirDensity, double dblTestAirDensity, double dblDesignSpecificVolume, double dblTestSpecificVolume)
+        public static double CalcTestLG(double dblDesignLG, double dblDesignFlow, double dblTestFlow, double dblDesignFanPower, double dblTestFanPower, double dblDesignAirDensity, double dblTestAirDensity, double dblDesignspecificVolume, double dblTestspecificVolume)
         {
             double dblReturn;
 
-            dblReturn = dblDesignLG * (dblTestFlow / dblDesignFlow) * Math.Pow((dblDesignFanPower / dblTestFanPower), (1.0 / 3.0)) * (dblTestAirDensity / dblDesignAirDensity) * Math.Pow((dblTestSpecificVolume / dblDesignSpecificVolume), (1.0 / 3.0));
+            dblReturn = dblDesignLG * (dblTestFlow / dblDesignFlow) * Math.Pow((dblDesignFanPower / dblTestFanPower), (1.0 / 3.0)) * (dblTestAirDensity / dblDesignAirDensity) * Math.Pow((dblTestspecificVolume / dblDesignspecificVolume), (1.0 / 3.0));
 
             return dblReturn;
         }
@@ -2025,8 +2025,8 @@ namespace ToolkitLibrary
             double OutputEnthalpy = 0;
             double LWBD = 0;
             double LDBD = 0;
-            double HumidityRatio = 0;
-            double RelativeHumidity = 0;
+            double humidityRatio = 0;
+            double relativeHumidity = 0;
             double SVOutD = 0;
             double DenOutD = 0;
             double DEWPoint = 0;
@@ -2038,7 +2038,7 @@ namespace ToolkitLibrary
             double DEWPointOutT = 0;
             double HCalcT = 0;
             double LDBTnew = 0;
-            double SpecificVolume = 0;
+            double specificVolume = 0;
             double Density = 0;
             double DenTest = 0;
 
@@ -2098,11 +2098,11 @@ namespace ToolkitLibrary
                 //'Call Enthalpy Search subroutine with calculated HOutD value
                 if (IunitsIP == 1)  //'IP
                 {
-                    EnthalpysearchIP(1, BPd, HOutD, ref OutputEnthalpy, ref LWBD, ref LDBD, ref HumidityRatio, ref RelativeHumidity, ref SVOutD, ref DenOutD, ref DEWPoint);
+                    EnthalpysearchIP(1, BPd, HOutD, ref OutputEnthalpy, ref LWBD, ref LDBD, ref humidityRatio, ref relativeHumidity, ref SVOutD, ref DenOutD, ref DEWPoint);
                 }   //'SI
                 else
                 {
-                    EnthalpysearchSI(1, BPd, HOutD, ref OutputEnthalpy, ref LWBD, ref LDBD, ref HumidityRatio, ref RelativeHumidity, ref SVOutD, ref DenOutD, ref DEWPoint);
+                    EnthalpysearchSI(1, BPd, HOutD, ref OutputEnthalpy, ref LWBD, ref LDBD, ref humidityRatio, ref relativeHumidity, ref SVOutD, ref DenOutD, ref DEWPoint);
                 }
 
                 //'Store Density Out as Density Design and SV Out as SV Design
@@ -2153,12 +2153,12 @@ namespace ToolkitLibrary
                     //'Call Enthalpy Search subroutine for calculated Href value
                     if (IunitsIP == 1)  //'IP
                     {
-                        //'       CALL EnthalpysearchIP(sat%, P!, RootEnthalpy!, OutputEnthalpy!, TWB!, TDB!, HumidityRatio!, RelativeHumidity!, SpecificVolume!, Density!, DEWPoint!)
-                        EnthalpysearchIP(1, BPt, HCalcT, ref OutputEnthalpy, ref LWBTnew, ref LDBTnew, ref HumidityRatio, ref RelativeHumidity, ref SpecificVolume, ref Density, ref DEWPoint);
+                        //'       CALL EnthalpysearchIP(sat%, P!, RootEnthalpy!, OutputEnthalpy!, temperatureWetBulb!, temperatureDryBulb!, humidityRatio!, relativeHumidity!, specificVolume!, Density!, DEWPoint!)
+                        EnthalpysearchIP(1, BPt, HCalcT, ref OutputEnthalpy, ref LWBTnew, ref LDBTnew, ref humidityRatio, ref relativeHumidity, ref specificVolume, ref Density, ref DEWPoint);
                     }
                     else    //'SI
                     {
-                        EnthalpysearchSI(1, BPt, HCalcT, ref OutputEnthalpy, ref LWBTnew, ref LDBTnew, ref HumidityRatio, ref RelativeHumidity, ref SpecificVolume, ref Density, ref DEWPoint);
+                        EnthalpysearchSI(1, BPt, HCalcT, ref OutputEnthalpy, ref LWBTnew, ref LDBTnew, ref humidityRatio, ref relativeHumidity, ref specificVolume, ref Density, ref DEWPoint);
                     }
                     //PRINT USING "HCalcT=###.#### HactT=###.#### dif=+##.#### LWBT=###.#### LWBTnew=###.####"; HCalcT; HLWBT; HCalcT - HLWBT; LWBT; LWBTnew
                     //'    PRINT #2, USING "HCalcT=###.#### HactT=###.#### dif=+##.#### LWBT=###.#### PLWBTnew=###.####"; HCalcT; HLWBT; HCalcT - HLWBT; LWBT; LWBTnew
@@ -2233,7 +2233,7 @@ namespace ToolkitLibrary
             return AdjTestFlow;
         }
 
-        public static void EnthalpysearchIP(int sat, double P, double RootEnthalpy, ref double OutputEnthalpy, ref double TWB, ref double TDB, ref double HumidityRatio, ref double RelativeHumidity, ref double SpecificVolume, ref double Density, ref double DEWPoint)
+        public static void EnthalpysearchIP(int sat, double P, double RootEnthalpy, ref double OutputEnthalpy, ref double temperatureWetBulb, ref double temperatureDryBulb, ref double humidityRatio, ref double relativeHumidity, ref double specificVolume, ref double Density, ref double DEWPoint)
         {
             //'****** Procedure finds IP WB, DB & properties given enthalpy & pressure **
             //'****** Uses bisection method to search for roots.  Limits 0-140 øF *******
@@ -2251,12 +2251,12 @@ namespace ToolkitLibrary
 
             //'Calculate low value and compare to program and tolerance limits
 
-            TWB = 0.0;
+            temperatureWetBulb = 0.0;
             if (sat == 1)
             {
-                TDB = TWB;
+                temperatureDryBulb = temperatureWetBulb;
             }
-            CalculatePropertiesIP(P, TWB, TDB, ref HumidityRatio, ref RelativeHumidity, ref H0, ref SpecificVolume, ref Density, ref DEWPoint);
+            CalculatePropertiesIP(P, temperatureWetBulb, temperatureDryBulb, ref humidityRatio, ref relativeHumidity, ref H0, ref specificVolume, ref Density, ref DEWPoint);
 
             if (Math.Abs(H0 - RootEnthalpy) <= Htolerance)
             {
@@ -2271,12 +2271,12 @@ namespace ToolkitLibrary
 
             //'Calculate high value and compare to program and tolerance limits
 
-            TWB = 140.0;
+            temperatureWetBulb = 140.0;
             if (sat == 1)
             {
-                TDB = TWB;
+                temperatureDryBulb = temperatureWetBulb;
             }
-            CalculatePropertiesIP(P, TWB, TDB, ref HumidityRatio, ref RelativeHumidity, ref H140, ref SpecificVolume, ref Density, ref DEWPoint);
+            CalculatePropertiesIP(P, temperatureWetBulb, temperatureDryBulb, ref humidityRatio, ref relativeHumidity, ref H140, ref specificVolume, ref Density, ref DEWPoint);
 
             if (Math.Abs(H140 - RootEnthalpy) <= Htolerance)
             {
@@ -2303,10 +2303,10 @@ namespace ToolkitLibrary
                 tmid = trtbis + DT;
                 if (sat == 1)
                 {
-                    TDB = tmid;
+                    temperatureDryBulb = tmid;
                 }
-                CalculatePropertiesIP(P, tmid, TDB, ref HumidityRatio, ref RelativeHumidity, ref Enthalpy, ref SpecificVolume, ref Density, ref DEWPoint);
-                //CalcPropertiesIP(P!, tmid, TDB!, HumidityRatio!, RelativeHumidity!, Enthalpy!, SpecificVolume!, Density!, DEWPoint!)
+                CalculatePropertiesIP(P, tmid, temperatureDryBulb, ref humidityRatio, ref relativeHumidity, ref Enthalpy, ref specificVolume, ref Density, ref DEWPoint);
+                //CalcPropertiesIP(P!, tmid, temperatureDryBulb!, humidityRatio!, relativeHumidity!, Enthalpy!, specificVolume!, Density!, DEWPoint!)
                 hmid = RootEnthalpy - Enthalpy;
                 if (hmid >= 0.0)
                 {
@@ -2317,15 +2317,15 @@ namespace ToolkitLibrary
                     break;
                 }
             }
-            TWB = tmid;
+            temperatureWetBulb = tmid;
             if (sat == 1)
             {
-                TDB = tmid;
+                temperatureDryBulb = tmid;
             }
             OutputEnthalpy = Enthalpy;
         }
 
-        //public static void EnthalpyIP(int sat, double P, double RootEnthalpy, ref double OutputEnthalpy, ref double TWB, ref double TDB, double HumidityRatio, double RelativeHumidity, double SpecificVolume, double Density, double DEWPoint)
+        //public static void EnthalpyIP(int sat, double P, double RootEnthalpy, ref double OutputEnthalpy, ref double temperatureWetBulb, ref double temperatureDryBulb, double humidityRatio, double relativeHumidity, double specificVolume, double Density, double DEWPoint)
         public static double EnthalpyIP(int sat, PsychrometricsData data)
         {
             double OutputEnthalpy = 0;
@@ -2428,7 +2428,7 @@ namespace ToolkitLibrary
             return OutputEnthalpy;
         }
 
-        public static void EnthalpysearchSI(int sat, double P, double RootEnthalpy, ref double OutputEnthalpy, ref double TWB, ref double TDB, ref double HumidityRatio, ref double RelativeHumidity, ref double SpecificVolume, ref double Density, ref double DEWPoint)
+        public static void EnthalpysearchSI(int sat, double P, double RootEnthalpy, ref double OutputEnthalpy, ref double temperatureWetBulb, ref double temperatureDryBulb, ref double humidityRatio, ref double relativeHumidity, ref double specificVolume, ref double Density, ref double DEWPoint)
         {
             //'****** Procedure finds SI WB, DB & properties given enthalpy & pressure **
             //'****** Uses bisection method to search for roots.  Limits -20 to 60 øC ****
@@ -2446,13 +2446,13 @@ namespace ToolkitLibrary
 
             //'Calculate low value and compare to program and tolerance limits
 
-            TWB = -20.0;
+            temperatureWetBulb = -20.0;
             if (sat == 1)
             {
-                TDB = TWB;
+                temperatureDryBulb = temperatureWetBulb;
             }
-            CalculatePropertiesSI(P, TWB, TDB, ref HumidityRatio, ref RelativeHumidity, ref H20, ref SpecificVolume, ref Density, ref DEWPoint);
-            //CalcPropertiesSI(P!, TWB!, TDB!, HumidityRatio!, RelativeHumidity!, H20, SpecificVolume!, Density!, DEWPoint!)
+            CalculatePropertiesSI(P, temperatureWetBulb, temperatureDryBulb, ref humidityRatio, ref relativeHumidity, ref H20, ref specificVolume, ref Density, ref DEWPoint);
+            //CalcPropertiesSI(P!, temperatureWetBulb!, temperatureDryBulb!, humidityRatio!, relativeHumidity!, H20, specificVolume!, Density!, DEWPoint!)
 
             if (Math.Abs(H20 - RootEnthalpy) <= Htolerance)
             {
@@ -2467,13 +2467,13 @@ namespace ToolkitLibrary
 
             //'Calculate high value and compare to program and tolerance limits
 
-            TWB = 60.0;
+            temperatureWetBulb = 60.0;
             if (sat == 1)
             {
-                TDB = TWB;
+                temperatureDryBulb = temperatureWetBulb;
             }
-            CalculatePropertiesSI(P, TWB, TDB, ref HumidityRatio, ref RelativeHumidity, ref H60, ref SpecificVolume, ref Density, ref DEWPoint);
-            //CalcPropertiesSI(P!, TWB!, TDB!, HumidityRatio!, RelativeHumidity!, H60, SpecificVolume!, Density!, DEWPoint!)
+            CalculatePropertiesSI(P, temperatureWetBulb, temperatureDryBulb, ref humidityRatio, ref relativeHumidity, ref H60, ref specificVolume, ref Density, ref DEWPoint);
+            //CalcPropertiesSI(P!, temperatureWetBulb!, temperatureDryBulb!, humidityRatio!, relativeHumidity!, H60, specificVolume!, Density!, DEWPoint!)
 
             if (Math.Abs(H60 - RootEnthalpy) <= Htolerance)
             {
@@ -2500,10 +2500,10 @@ namespace ToolkitLibrary
                 tmid = trtbis + DT;
                 if (sat == 1)
                 {
-                    TDB = tmid;
+                    temperatureDryBulb = tmid;
                 }
-                CalculatePropertiesSI(P, tmid, TDB, ref HumidityRatio, ref RelativeHumidity, ref Enthalpy, ref SpecificVolume, ref Density, ref DEWPoint);
-                //CalcPropertiesSI(P!, tmid, TDB!, HumidityRatio!, RelativeHumidity!, Enthalpy!, SpecificVolume!, Density!, DEWPoint!)
+                CalculatePropertiesSI(P, tmid, temperatureDryBulb, ref humidityRatio, ref relativeHumidity, ref Enthalpy, ref specificVolume, ref Density, ref DEWPoint);
+                //CalcPropertiesSI(P!, tmid, temperatureDryBulb!, humidityRatio!, relativeHumidity!, Enthalpy!, specificVolume!, Density!, DEWPoint!)
                 hmid = RootEnthalpy - Enthalpy;
                 if (hmid >= 0.0)
                 {
@@ -2514,10 +2514,10 @@ namespace ToolkitLibrary
                     break;
                 }
             }
-            TWB = tmid;
+            temperatureWetBulb = tmid;
             if (sat == 1)
             {
-                TDB = tmid;
+                temperatureDryBulb = tmid;
             }
             OutputEnthalpy = Enthalpy;
         }
@@ -2629,18 +2629,18 @@ namespace ToolkitLibrary
             return dblSIPws;
         }
 
-        //double TDB, double TWB, ref double PwsDB, ref double PwsWB, ref double FsDB, ref double FsWB
-        public static void CalcSiVariables(double p, double TDB, double TWB, ref double PwsDB, ref double PwsWB, ref double FsDB, ref double FsWB)
+        //double temperatureDryBulb, double temperatureWetBulb, ref double PwsDB, ref double PwsWB, ref double FsDB, ref double FsWB
+        public static void CalcSiVariables(double pressure, double temperatureDryBulb, double temperatureWetBulb, ref double PwsDB, ref double PwsWB, ref double FsDB, ref double FsWB)
         {
             double Ppsi;
             double tF;
 
-            PwsDB = SaturationVaporPressure(TDB);
-            PwsWB = SaturationVaporPressure(TWB);
-            tF = TDB * 1.8 + 32.0;
-            Ppsi = 14.696 * p / 101.325;
+            PwsDB = SaturationVaporPressure(temperatureDryBulb);
+            PwsWB = SaturationVaporPressure(temperatureWetBulb);
+            tF = temperatureDryBulb * 1.8 + 32.0;
+            Ppsi = 14.696 * pressure / 101.325;
             FsDB = Fs(tF, Ppsi);
-            tF = TWB * 1.8 + 32.0;
+            tF = temperatureWetBulb * 1.8 + 32.0;
             FsWB = Fs(tF, Ppsi);
         }
 
