@@ -64,6 +64,12 @@
     <Compile Include="DemandCurveTabPage.Designer.cs">
       <DependentUpon>DemandCurveTabPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="MechanicalDraftPerformanceCurveTabPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MechanicalDraftPerformanceCurveTabPage.Designer.cs">
+      <DependentUpon>MechanicalDraftPerformanceCurveTabPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="MerkleTabPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -84,11 +90,26 @@
     <Compile Include="ToolkitMain.Designer.cs">
       <DependentUpon>ToolkitMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="TowerDesignCurveDataUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TowerDesignCurveDataUserControl.Designer.cs">
+      <DependentUpon>TowerDesignCurveDataUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TowerDesignDataUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TowerDesignDataUserControl.Designer.cs">
+      <DependentUpon>TowerDesignDataUserControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DemandCurveTabPage.resx">
       <DependentUpon>DemandCurveTabPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MechanicalDraftPerformanceCurveTabPage.resx">
+      <DependentUpon>MechanicalDraftPerformanceCurveTabPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MerkleTabPage.resx">
       <DependentUpon>MerkleTabPage.cs</DependentUpon>
@@ -108,6 +129,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ToolkitMain.resx">
       <DependentUpon>ToolkitMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TowerDesignCurveDataUserControl.resx">
+      <DependentUpon>TowerDesignCurveDataUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TowerDesignDataUserControl.resx">
+      <DependentUpon>TowerDesignDataUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

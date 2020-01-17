@@ -19,6 +19,7 @@ namespace CTIToolkit
         PsychrometricsTabPage PsychrometricsUserControl { get; set; }
         MerkelTabPage MerkelUserControl { get; set; }
         DemandCurveTabPage DemandCurveUserControl { get; set; }
+        MechanicalDraftPerformanceCurveTabPage MechanicalDraftPerformanceCurveUserControl { get; set; }
 
         public ToolkitMain()
         {
@@ -52,6 +53,11 @@ namespace CTIToolkit
             TabPage demandCurveTabPage = new TabPage("Demand Curve");
             demandCurveTabPage.Controls.Add(DemandCurveUserControl);
             tabControl1.TabPages.Add(demandCurveTabPage);
+
+            MechanicalDraftPerformanceCurveUserControl = new MechanicalDraftPerformanceCurveTabPage(ApplicationSettings);
+            TabPage mechanicalDraftPerformanceCurveTabPage = new TabPage("Mechanical Draft Performance Curve");
+            mechanicalDraftPerformanceCurveTabPage.Controls.Add(MechanicalDraftPerformanceCurveUserControl);
+            tabControl1.TabPages.Add(mechanicalDraftPerformanceCurveTabPage);
         }
 
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
