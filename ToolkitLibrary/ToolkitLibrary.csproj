@@ -43,6 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DemandCurve\DemandCurveCalculationLibrary.cs" />
+    <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveCalculationLibrary.cs" />
+    <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveData.cs" />
+    <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveDesignData.cs" />
+    <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveDesignInputData.cs" />
+    <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveInputData.cs" />
+    <Compile Include="MechanicalDraftPerformanceCurve\WetBulbTemperatureDesignData.cs" />
     <Compile Include="Merkel\MerkelCalculationLibrary.cs" />
     <Compile Include="MaximumDataValue.cs" />
     <Compile Include="MinimumDataValue.cs" />
@@ -73,6 +79,7 @@
     <Compile Include="UnitConverter.cs" />
     <Compile Include="Units.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
