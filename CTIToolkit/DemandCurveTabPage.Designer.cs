@@ -49,7 +49,7 @@
             this.InputPropertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.DesignPointGroupBox = new System.Windows.Forms.GroupBox();
             this.DemandCurve_KavLRadio = new System.Windows.Forms.RadioButton();
-            this.DemandCurve_LG_Value = new System.Windows.Forms.TextBox();
+            this.DemandCurve_LiquidToGasRatio_Value = new System.Windows.Forms.TextBox();
             this.DemandCurve_ApproachRadio = new System.Windows.Forms.RadioButton();
             this.LGlabel = new System.Windows.Forms.Label();
             this.TowerOrFillCharacteristicsGroupBox = new System.Windows.Forms.GroupBox();
@@ -212,7 +212,7 @@
             // DesignPointGroupBox
             // 
             this.DesignPointGroupBox.Controls.Add(this.DemandCurve_KavLRadio);
-            this.DesignPointGroupBox.Controls.Add(this.DemandCurve_LG_Value);
+            this.DesignPointGroupBox.Controls.Add(this.DemandCurve_LiquidToGasRatio_Value);
             this.DesignPointGroupBox.Controls.Add(this.DemandCurve_ApproachRadio);
             this.DesignPointGroupBox.Controls.Add(this.LGlabel);
             this.DesignPointGroupBox.Location = new System.Drawing.Point(664, 79);
@@ -233,11 +233,11 @@
             // 
             // DemandCurve_LG_Value
             // 
-            this.DemandCurve_LG_Value.Location = new System.Drawing.Point(58, 17);
-            this.DemandCurve_LG_Value.Name = "DemandCurve_LG_Value";
-            this.DemandCurve_LG_Value.Size = new System.Drawing.Size(100, 20);
-            this.DemandCurve_LG_Value.TabIndex = 2;
-            this.DemandCurve_LG_Value.Text = "1";
+            this.DemandCurve_LiquidToGasRatio_Value.Location = new System.Drawing.Point(58, 17);
+            this.DemandCurve_LiquidToGasRatio_Value.Name = "DemandCurve_LG_Value";
+            this.DemandCurve_LiquidToGasRatio_Value.Size = new System.Drawing.Size(100, 20);
+            this.DemandCurve_LiquidToGasRatio_Value.TabIndex = 2;
+            this.DemandCurve_LiquidToGasRatio_Value.Text = "1";
             // 
             // DemandCurve_ApproachRadio
             // 
@@ -483,7 +483,7 @@
         private System.Windows.Forms.Label Slopelabel;
         private System.Windows.Forms.TextBox DemandCurve_C_C1_Value;
         private System.Windows.Forms.Label Clabel;
-        private System.Windows.Forms.TextBox DemandCurve_LG_Value;
+        private System.Windows.Forms.TextBox DemandCurve_LiquidToGasRatio_Value;
         private System.Windows.Forms.Label Max_label;
         private System.Windows.Forms.Label Min_Label;
         private System.Windows.Forms.NumericUpDown DemandCurve_Maximum_Value;

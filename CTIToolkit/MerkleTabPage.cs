@@ -42,10 +42,10 @@ namespace CTIToolkit
             Merkel_CWT_Value.Text = MerkelInputData.ColdWaterTemperatureDataValue.InputValue;
             toolTip1.SetToolTip(Merkel_CWT_Value, MerkelInputData.ColdWaterTemperatureDataValue.ToolTip);
 
-            MerkelWetBulbTemperatureLabel.Text = MerkelInputData.WetBlubTemperatureDataValue.InputMessage + ":";
+            MerkelWetBulbTemperatureLabel.Text = MerkelInputData.WetBulbTemperatureDataValue.InputMessage + ":";
             MerkelWetBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
-            Merkel_Wet_Bulb_Value.Text = MerkelInputData.WetBlubTemperatureDataValue.InputValue;
-            toolTip1.SetToolTip(Merkel_Wet_Bulb_Value, MerkelInputData.WetBlubTemperatureDataValue.ToolTip);
+            Merkel_Wet_Bulb_Value.Text = MerkelInputData.WetBulbTemperatureDataValue.InputValue;
+            toolTip1.SetToolTip(Merkel_Wet_Bulb_Value, MerkelInputData.WetBulbTemperatureDataValue.ToolTip);
 
             Merkel_LG_Value.Text = MerkelInputData.WaterAirFlowRateDataValue.InputValue;
             toolTip1.SetToolTip(Merkel_LG_Value, MerkelInputData.WaterAirFlowRateDataValue.ToolTip);
@@ -250,7 +250,7 @@ namespace CTIToolkit
                     return;
                 }
 
-                if (!MerkelInputData.WetBlubTemperatureDataValue.UpdateValue(Merkel_Wet_Bulb_Value.Text, out message))
+                if (!MerkelInputData.WetBulbTemperatureDataValue.UpdateValue(Merkel_Wet_Bulb_Value.Text, out message))
                 {
                     MessageBox.Show(message);
                     return;
@@ -282,7 +282,7 @@ namespace CTIToolkit
 
                 MerkelData.HotWaterTemperature = MerkelInputData.HotWaterTemperatureDataValue.Current;
                 MerkelData.ColdWaterTemperature = MerkelInputData.ColdWaterTemperatureDataValue.Current;
-                MerkelData.WetBulbTemperature = MerkelInputData.WetBlubTemperatureDataValue.Current;
+                MerkelData.WetBulbTemperature = MerkelInputData.WetBulbTemperatureDataValue.Current;
                 MerkelData.WaterAirRatio = MerkelInputData.WaterAirFlowRateDataValue.Current;
 
                 table = MerkelCalculationLibrary.MerkelCalculation(MerkelData);

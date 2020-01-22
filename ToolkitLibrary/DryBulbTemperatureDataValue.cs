@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ToolkitLibrary
 {
-    public class DryBlubTemperatureDataValue : DataValue
+    public class DryBulbTemperatureDataValue : DataValue
     {
         public const double DryBulbTemperatureDefault = 100.0;
         public const double DryBulbTemperatureMinimum = 0.0;
@@ -23,7 +23,7 @@ namespace ToolkitLibrary
         public const double DryBulbTemperatureMaximum_InternationalSystemOfUnits_IS_Demo = 27.0;
         public const string DryBulbTemperatureToolTipFormat = "Dry Bulb Temperature (DBT).\nValue should be between {0} and {1}.\nValue should be less than the Wet Bulb Temperature.";
 
-        public DryBlubTemperatureDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        public DryBulbTemperatureDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
             InputMessage = "Dry Bulb Temperature";

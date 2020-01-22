@@ -45,6 +45,37 @@
             this.PerformanceCurveForcedRadioButton = new System.Windows.Forms.RadioButton();
             this.PerformanceCurveInducedRadioButton = new System.Windows.Forms.RadioButton();
             this.PerformanceCurveTestResultsGroupBox = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.PerformanceCurveAdjustedFlowlabel = new System.Windows.Forms.Label();
+            this.PerformanceCurvePredictedFlowLabel = new System.Windows.Forms.Label();
+            this.PerformanceCurveTowerCapabilityLabel = new System.Windows.Forms.Label();
+            this.PerformanceCurveColdWaterTemperatureDeviationLabel = new System.Windows.Forms.Label();
+            this.PerformanceCurveUnitsAdjustedFlow = new System.Windows.Forms.Label();
+            this.PerformanceCurveUnitsPredictedFlow = new System.Windows.Forms.Label();
+            this.PerformanceCurveUnitsTowerCapability = new System.Windows.Forms.Label();
+            this.PerformanceCurveUnitsColdWaterTemperatureDeviation = new System.Windows.Forms.Label();
+            this.PerformanceCurvePredictedFlow = new System.Windows.Forms.TextBox();
+            this.PerformanceCurveTowerCapability = new System.Windows.Forms.TextBox();
+            this.PerformanceCurveColdWaterTemperatureDeviation = new System.Windows.Forms.TextBox();
+            this.PerformanceCurveAdjustedFlow = new System.Windows.Forms.TextBox();
+            this.PerformanceCurveUnitsWaterFlowRate = new System.Windows.Forms.Label();
+            this.PerformanceCurveUnitsHotWaterTemperature = new System.Windows.Forms.Label();
+            this.PerformanceCurveUnitsColdWaterTemperature = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.PerformanceCurveUnitsDryBulbTemperature = new System.Windows.Forms.Label();
+            this.PerformanceCurveUnitsFanDrivePower = new System.Windows.Forms.Label();
+            this.PerformanceCurveUnitsBarometricPressure = new System.Windows.Forms.Label();
+            this.PerformanceCurveUnitsLiquidToGasRatio = new System.Windows.Forms.Label();
+            this.PerformanceCurveDesignDataButton = new System.Windows.Forms.Button();
+            this.PerformanceCurveTestGroupBox = new System.Windows.Forms.GroupBox();
+            this.PerformanceCurveTestLiquidToGasRatio = new System.Windows.Forms.TextBox();
+            this.PerformanceCurveTestWaterFlowRate = new System.Windows.Forms.TextBox();
+            this.PerformanceCurveTestHotWaterTemperature = new System.Windows.Forms.TextBox();
+            this.PerformanceCurveTestColdWaterTemperature = new System.Windows.Forms.TextBox();
+            this.PerformanceCurveTestWetBulbTemperature = new System.Windows.Forms.TextBox();
+            this.PerformanceCurveTestDryBulbTemperature = new System.Windows.Forms.TextBox();
+            this.PerformanceCurveTestBarometricPressure = new System.Windows.Forms.TextBox();
+            this.PerformanceCurveTestFanDrivePower = new System.Windows.Forms.TextBox();
             this.PerformanceCurveDesignGroupBox = new System.Windows.Forms.GroupBox();
             this.PerformanceCurveDesignFanDrivePower = new System.Windows.Forms.TextBox();
             this.PerformanceCurveDesignHotWaterTemperature = new System.Windows.Forms.TextBox();
@@ -62,41 +93,10 @@
             this.PerformanceCurveFanDrivePowerLabel = new System.Windows.Forms.Label();
             this.PerformanceCurveBarometricPressureLabel = new System.Windows.Forms.Label();
             this.PerformanceCurveLiquidToGasRatioLabel = new System.Windows.Forms.Label();
-            this.PerformanceCurveDesignDataButton = new System.Windows.Forms.Button();
-            this.PerformanceCurveUnitsWaterFlowRate = new System.Windows.Forms.Label();
-            this.PerformanceCurveUnitsHotWaterTemperature = new System.Windows.Forms.Label();
-            this.PerformanceCurveUnitsColdWaterTemperature = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.PerformanceCurveUnitsDryBulbTemperature = new System.Windows.Forms.Label();
-            this.PerformanceCurveUnitsFanDrivePower = new System.Windows.Forms.Label();
-            this.PerformanceCurveUnitsBarometricPressure = new System.Windows.Forms.Label();
-            this.PerformanceCurveUnitsLiquidToGasRatio = new System.Windows.Forms.Label();
-            this.PerformanceCurvePredictedFlow = new System.Windows.Forms.TextBox();
-            this.PerformanceCurveTowerCapability = new System.Windows.Forms.TextBox();
-            this.PerformanceCurveColdWaterTemperatureDeviation = new System.Windows.Forms.TextBox();
-            this.PerformanceCurveAdjustedFlow = new System.Windows.Forms.TextBox();
-            this.PerformanceCurveUnitsAdjustedFlow = new System.Windows.Forms.Label();
-            this.PerformanceCurveUnitsPredictedFlow = new System.Windows.Forms.Label();
-            this.PerformanceCurveUnitsTowerCapability = new System.Windows.Forms.Label();
-            this.PerformanceCurveUnitsColdWaterTemperatureDeviation = new System.Windows.Forms.Label();
-            this.PerformanceCurveAdjustedFlowlabel = new System.Windows.Forms.Label();
-            this.PerformanceCurvePredictedFlowLabel = new System.Windows.Forms.Label();
-            this.PerformanceCurveTowerCapabilityLabel = new System.Windows.Forms.Label();
-            this.PerformanceCurveColdWaterTemperatureDeviationLabel = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.PerformanceCurveTestFanDrivePower = new System.Windows.Forms.TextBox();
-            this.PerformanceCurveTestBarometricPressure = new System.Windows.Forms.TextBox();
-            this.PerformanceCurveTestDryBulbTemperature = new System.Windows.Forms.TextBox();
-            this.PerformanceCurveTestWetBulbTemperature = new System.Windows.Forms.TextBox();
-            this.PerformanceCurveTestColdWaterTemperature = new System.Windows.Forms.TextBox();
-            this.PerformanceCurveTestHotWaterTemperature = new System.Windows.Forms.TextBox();
-            this.PerformanceCurveTestWaterFlowRate = new System.Windows.Forms.TextBox();
-            this.PerformanceCurveTestLiquidToGasRatio = new System.Windows.Forms.TextBox();
-            this.PerformanceCurveTestGroupBox = new System.Windows.Forms.GroupBox();
             this.PerformanceCurveTowerTypeGroupBox.SuspendLayout();
             this.PerformanceCurveTestResultsGroupBox.SuspendLayout();
-            this.PerformanceCurveDesignGroupBox.SuspendLayout();
             this.PerformanceCurveTestGroupBox.SuspendLayout();
+            this.PerformanceCurveDesignGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // PerformanceCurveDataFileLabel
@@ -289,6 +289,271 @@
             this.PerformanceCurveTestResultsGroupBox.TabStop = false;
             this.PerformanceCurveTestResultsGroupBox.Text = "Test Results";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(121, 32);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(486, 21);
+            this.comboBox1.TabIndex = 31;
+            // 
+            // PerformanceCurveAdjustedFlowlabel
+            // 
+            this.PerformanceCurveAdjustedFlowlabel.AutoSize = true;
+            this.PerformanceCurveAdjustedFlowlabel.Location = new System.Drawing.Point(16, 405);
+            this.PerformanceCurveAdjustedFlowlabel.Name = "PerformanceCurveAdjustedFlowlabel";
+            this.PerformanceCurveAdjustedFlowlabel.Size = new System.Drawing.Size(76, 13);
+            this.PerformanceCurveAdjustedFlowlabel.TabIndex = 29;
+            this.PerformanceCurveAdjustedFlowlabel.Text = "Adjusted Flow:";
+            // 
+            // PerformanceCurvePredictedFlowLabel
+            // 
+            this.PerformanceCurvePredictedFlowLabel.AutoSize = true;
+            this.PerformanceCurvePredictedFlowLabel.Location = new System.Drawing.Point(16, 435);
+            this.PerformanceCurvePredictedFlowLabel.Name = "PerformanceCurvePredictedFlowLabel";
+            this.PerformanceCurvePredictedFlowLabel.Size = new System.Drawing.Size(80, 13);
+            this.PerformanceCurvePredictedFlowLabel.TabIndex = 28;
+            this.PerformanceCurvePredictedFlowLabel.Text = "Predicted Flow:";
+            // 
+            // PerformanceCurveTowerCapabilityLabel
+            // 
+            this.PerformanceCurveTowerCapabilityLabel.AutoSize = true;
+            this.PerformanceCurveTowerCapabilityLabel.Location = new System.Drawing.Point(16, 465);
+            this.PerformanceCurveTowerCapabilityLabel.Name = "PerformanceCurveTowerCapabilityLabel";
+            this.PerformanceCurveTowerCapabilityLabel.Size = new System.Drawing.Size(88, 13);
+            this.PerformanceCurveTowerCapabilityLabel.TabIndex = 27;
+            this.PerformanceCurveTowerCapabilityLabel.Text = "Tower Capability:";
+            // 
+            // PerformanceCurveColdWaterTemperatureDeviationLabel
+            // 
+            this.PerformanceCurveColdWaterTemperatureDeviationLabel.AutoSize = true;
+            this.PerformanceCurveColdWaterTemperatureDeviationLabel.Location = new System.Drawing.Point(16, 495);
+            this.PerformanceCurveColdWaterTemperatureDeviationLabel.Name = "PerformanceCurveColdWaterTemperatureDeviationLabel";
+            this.PerformanceCurveColdWaterTemperatureDeviationLabel.Size = new System.Drawing.Size(174, 13);
+            this.PerformanceCurveColdWaterTemperatureDeviationLabel.TabIndex = 30;
+            this.PerformanceCurveColdWaterTemperatureDeviationLabel.Text = "Cold Water Temperature Deviation:";
+            // 
+            // PerformanceCurveUnitsAdjustedFlow
+            // 
+            this.PerformanceCurveUnitsAdjustedFlow.AutoSize = true;
+            this.PerformanceCurveUnitsAdjustedFlow.Location = new System.Drawing.Point(335, 405);
+            this.PerformanceCurveUnitsAdjustedFlow.Name = "PerformanceCurveUnitsAdjustedFlow";
+            this.PerformanceCurveUnitsAdjustedFlow.Size = new System.Drawing.Size(27, 13);
+            this.PerformanceCurveUnitsAdjustedFlow.TabIndex = 25;
+            this.PerformanceCurveUnitsAdjustedFlow.Text = "gmp";
+            // 
+            // PerformanceCurveUnitsPredictedFlow
+            // 
+            this.PerformanceCurveUnitsPredictedFlow.AutoSize = true;
+            this.PerformanceCurveUnitsPredictedFlow.Location = new System.Drawing.Point(335, 435);
+            this.PerformanceCurveUnitsPredictedFlow.Name = "PerformanceCurveUnitsPredictedFlow";
+            this.PerformanceCurveUnitsPredictedFlow.Size = new System.Drawing.Size(27, 13);
+            this.PerformanceCurveUnitsPredictedFlow.TabIndex = 24;
+            this.PerformanceCurveUnitsPredictedFlow.Text = "gpm";
+            // 
+            // PerformanceCurveUnitsTowerCapability
+            // 
+            this.PerformanceCurveUnitsTowerCapability.AutoSize = true;
+            this.PerformanceCurveUnitsTowerCapability.Location = new System.Drawing.Point(335, 465);
+            this.PerformanceCurveUnitsTowerCapability.Name = "PerformanceCurveUnitsTowerCapability";
+            this.PerformanceCurveUnitsTowerCapability.Size = new System.Drawing.Size(15, 13);
+            this.PerformanceCurveUnitsTowerCapability.TabIndex = 23;
+            this.PerformanceCurveUnitsTowerCapability.Text = "%";
+            // 
+            // PerformanceCurveUnitsColdWaterTemperatureDeviation
+            // 
+            this.PerformanceCurveUnitsColdWaterTemperatureDeviation.AutoSize = true;
+            this.PerformanceCurveUnitsColdWaterTemperatureDeviation.Location = new System.Drawing.Point(335, 495);
+            this.PerformanceCurveUnitsColdWaterTemperatureDeviation.Name = "PerformanceCurveUnitsColdWaterTemperatureDeviation";
+            this.PerformanceCurveUnitsColdWaterTemperatureDeviation.Size = new System.Drawing.Size(17, 13);
+            this.PerformanceCurveUnitsColdWaterTemperatureDeviation.TabIndex = 26;
+            this.PerformanceCurveUnitsColdWaterTemperatureDeviation.Text = "°F";
+            // 
+            // PerformanceCurvePredictedFlow
+            // 
+            this.PerformanceCurvePredictedFlow.Location = new System.Drawing.Point(197, 432);
+            this.PerformanceCurvePredictedFlow.Name = "PerformanceCurvePredictedFlow";
+            this.PerformanceCurvePredictedFlow.ReadOnly = true;
+            this.PerformanceCurvePredictedFlow.Size = new System.Drawing.Size(132, 20);
+            this.PerformanceCurvePredictedFlow.TabIndex = 22;
+            // 
+            // PerformanceCurveTowerCapability
+            // 
+            this.PerformanceCurveTowerCapability.Location = new System.Drawing.Point(197, 462);
+            this.PerformanceCurveTowerCapability.Name = "PerformanceCurveTowerCapability";
+            this.PerformanceCurveTowerCapability.ReadOnly = true;
+            this.PerformanceCurveTowerCapability.Size = new System.Drawing.Size(132, 20);
+            this.PerformanceCurveTowerCapability.TabIndex = 21;
+            // 
+            // PerformanceCurveColdWaterTemperatureDeviation
+            // 
+            this.PerformanceCurveColdWaterTemperatureDeviation.Location = new System.Drawing.Point(197, 492);
+            this.PerformanceCurveColdWaterTemperatureDeviation.Name = "PerformanceCurveColdWaterTemperatureDeviation";
+            this.PerformanceCurveColdWaterTemperatureDeviation.ReadOnly = true;
+            this.PerformanceCurveColdWaterTemperatureDeviation.Size = new System.Drawing.Size(132, 20);
+            this.PerformanceCurveColdWaterTemperatureDeviation.TabIndex = 20;
+            // 
+            // PerformanceCurveAdjustedFlow
+            // 
+            this.PerformanceCurveAdjustedFlow.Location = new System.Drawing.Point(197, 402);
+            this.PerformanceCurveAdjustedFlow.Name = "PerformanceCurveAdjustedFlow";
+            this.PerformanceCurveAdjustedFlow.ReadOnly = true;
+            this.PerformanceCurveAdjustedFlow.Size = new System.Drawing.Size(132, 20);
+            this.PerformanceCurveAdjustedFlow.TabIndex = 19;
+            // 
+            // PerformanceCurveUnitsWaterFlowRate
+            // 
+            this.PerformanceCurveUnitsWaterFlowRate.AutoSize = true;
+            this.PerformanceCurveUnitsWaterFlowRate.Location = new System.Drawing.Point(550, 113);
+            this.PerformanceCurveUnitsWaterFlowRate.Name = "PerformanceCurveUnitsWaterFlowRate";
+            this.PerformanceCurveUnitsWaterFlowRate.Size = new System.Drawing.Size(27, 13);
+            this.PerformanceCurveUnitsWaterFlowRate.TabIndex = 13;
+            this.PerformanceCurveUnitsWaterFlowRate.Text = "gmp";
+            // 
+            // PerformanceCurveUnitsHotWaterTemperature
+            // 
+            this.PerformanceCurveUnitsHotWaterTemperature.AutoSize = true;
+            this.PerformanceCurveUnitsHotWaterTemperature.Location = new System.Drawing.Point(550, 143);
+            this.PerformanceCurveUnitsHotWaterTemperature.Name = "PerformanceCurveUnitsHotWaterTemperature";
+            this.PerformanceCurveUnitsHotWaterTemperature.Size = new System.Drawing.Size(17, 13);
+            this.PerformanceCurveUnitsHotWaterTemperature.TabIndex = 12;
+            this.PerformanceCurveUnitsHotWaterTemperature.Text = "°F";
+            // 
+            // PerformanceCurveUnitsColdWaterTemperature
+            // 
+            this.PerformanceCurveUnitsColdWaterTemperature.AutoSize = true;
+            this.PerformanceCurveUnitsColdWaterTemperature.Location = new System.Drawing.Point(550, 173);
+            this.PerformanceCurveUnitsColdWaterTemperature.Name = "PerformanceCurveUnitsColdWaterTemperature";
+            this.PerformanceCurveUnitsColdWaterTemperature.Size = new System.Drawing.Size(17, 13);
+            this.PerformanceCurveUnitsColdWaterTemperature.TabIndex = 11;
+            this.PerformanceCurveUnitsColdWaterTemperature.Text = "°F";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(550, 203);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(17, 13);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "°F";
+            // 
+            // PerformanceCurveUnitsDryBulbTemperature
+            // 
+            this.PerformanceCurveUnitsDryBulbTemperature.AutoSize = true;
+            this.PerformanceCurveUnitsDryBulbTemperature.Location = new System.Drawing.Point(550, 233);
+            this.PerformanceCurveUnitsDryBulbTemperature.Name = "PerformanceCurveUnitsDryBulbTemperature";
+            this.PerformanceCurveUnitsDryBulbTemperature.Size = new System.Drawing.Size(17, 13);
+            this.PerformanceCurveUnitsDryBulbTemperature.TabIndex = 15;
+            this.PerformanceCurveUnitsDryBulbTemperature.Text = "°F";
+            // 
+            // PerformanceCurveUnitsFanDrivePower
+            // 
+            this.PerformanceCurveUnitsFanDrivePower.AutoSize = true;
+            this.PerformanceCurveUnitsFanDrivePower.Location = new System.Drawing.Point(550, 263);
+            this.PerformanceCurveUnitsFanDrivePower.Name = "PerformanceCurveUnitsFanDrivePower";
+            this.PerformanceCurveUnitsFanDrivePower.Size = new System.Drawing.Size(25, 13);
+            this.PerformanceCurveUnitsFanDrivePower.TabIndex = 14;
+            this.PerformanceCurveUnitsFanDrivePower.Text = "bhp";
+            // 
+            // PerformanceCurveUnitsBarometricPressure
+            // 
+            this.PerformanceCurveUnitsBarometricPressure.AutoSize = true;
+            this.PerformanceCurveUnitsBarometricPressure.Location = new System.Drawing.Point(550, 293);
+            this.PerformanceCurveUnitsBarometricPressure.Name = "PerformanceCurveUnitsBarometricPressure";
+            this.PerformanceCurveUnitsBarometricPressure.Size = new System.Drawing.Size(26, 13);
+            this.PerformanceCurveUnitsBarometricPressure.TabIndex = 17;
+            this.PerformanceCurveUnitsBarometricPressure.Text = "\"Hg";
+            // 
+            // PerformanceCurveUnitsLiquidToGasRatio
+            // 
+            this.PerformanceCurveUnitsLiquidToGasRatio.AutoSize = true;
+            this.PerformanceCurveUnitsLiquidToGasRatio.Location = new System.Drawing.Point(550, 323);
+            this.PerformanceCurveUnitsLiquidToGasRatio.Name = "PerformanceCurveUnitsLiquidToGasRatio";
+            this.PerformanceCurveUnitsLiquidToGasRatio.Size = new System.Drawing.Size(0, 13);
+            this.PerformanceCurveUnitsLiquidToGasRatio.TabIndex = 18;
+            // 
+            // PerformanceCurveDesignDataButton
+            // 
+            this.PerformanceCurveDesignDataButton.Location = new System.Drawing.Point(613, 32);
+            this.PerformanceCurveDesignDataButton.Name = "PerformanceCurveDesignDataButton";
+            this.PerformanceCurveDesignDataButton.Size = new System.Drawing.Size(88, 23);
+            this.PerformanceCurveDesignDataButton.TabIndex = 10;
+            this.PerformanceCurveDesignDataButton.Text = "Design Data...";
+            this.PerformanceCurveDesignDataButton.UseVisualStyleBackColor = true;
+            // 
+            // PerformanceCurveTestGroupBox
+            // 
+            this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestLiquidToGasRatio);
+            this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestWaterFlowRate);
+            this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestHotWaterTemperature);
+            this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestColdWaterTemperature);
+            this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestWetBulbTemperature);
+            this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestDryBulbTemperature);
+            this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestBarometricPressure);
+            this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestFanDrivePower);
+            this.PerformanceCurveTestGroupBox.Location = new System.Drawing.Point(349, 79);
+            this.PerformanceCurveTestGroupBox.Name = "PerformanceCurveTestGroupBox";
+            this.PerformanceCurveTestGroupBox.Size = new System.Drawing.Size(183, 273);
+            this.PerformanceCurveTestGroupBox.TabIndex = 9;
+            this.PerformanceCurveTestGroupBox.TabStop = false;
+            this.PerformanceCurveTestGroupBox.Text = "Test";
+            // 
+            // PerformanceCurveTestLiquidToGasRatio
+            // 
+            this.PerformanceCurveTestLiquidToGasRatio.Location = new System.Drawing.Point(25, 237);
+            this.PerformanceCurveTestLiquidToGasRatio.Name = "PerformanceCurveTestLiquidToGasRatio";
+            this.PerformanceCurveTestLiquidToGasRatio.Size = new System.Drawing.Size(132, 20);
+            this.PerformanceCurveTestLiquidToGasRatio.TabIndex = 7;
+            // 
+            // PerformanceCurveTestWaterFlowRate
+            // 
+            this.PerformanceCurveTestWaterFlowRate.Location = new System.Drawing.Point(25, 27);
+            this.PerformanceCurveTestWaterFlowRate.Name = "PerformanceCurveTestWaterFlowRate";
+            this.PerformanceCurveTestWaterFlowRate.Size = new System.Drawing.Size(132, 20);
+            this.PerformanceCurveTestWaterFlowRate.TabIndex = 6;
+            // 
+            // PerformanceCurveTestHotWaterTemperature
+            // 
+            this.PerformanceCurveTestHotWaterTemperature.Location = new System.Drawing.Point(25, 57);
+            this.PerformanceCurveTestHotWaterTemperature.Name = "PerformanceCurveTestHotWaterTemperature";
+            this.PerformanceCurveTestHotWaterTemperature.Size = new System.Drawing.Size(132, 20);
+            this.PerformanceCurveTestHotWaterTemperature.TabIndex = 5;
+            // 
+            // PerformanceCurveTestColdWaterTemperature
+            // 
+            this.PerformanceCurveTestColdWaterTemperature.Location = new System.Drawing.Point(25, 87);
+            this.PerformanceCurveTestColdWaterTemperature.Name = "PerformanceCurveTestColdWaterTemperature";
+            this.PerformanceCurveTestColdWaterTemperature.Size = new System.Drawing.Size(132, 20);
+            this.PerformanceCurveTestColdWaterTemperature.TabIndex = 4;
+            // 
+            // PerformanceCurveTestWetBulbTemperature
+            // 
+            this.PerformanceCurveTestWetBulbTemperature.Location = new System.Drawing.Point(25, 117);
+            this.PerformanceCurveTestWetBulbTemperature.Name = "PerformanceCurveTestWetBulbTemperature";
+            this.PerformanceCurveTestWetBulbTemperature.Size = new System.Drawing.Size(132, 20);
+            this.PerformanceCurveTestWetBulbTemperature.TabIndex = 3;
+            // 
+            // PerformanceCurveTestDryBulbTemperature
+            // 
+            this.PerformanceCurveTestDryBulbTemperature.Location = new System.Drawing.Point(25, 147);
+            this.PerformanceCurveTestDryBulbTemperature.Name = "PerformanceCurveTestDryBulbTemperature";
+            this.PerformanceCurveTestDryBulbTemperature.Size = new System.Drawing.Size(132, 20);
+            this.PerformanceCurveTestDryBulbTemperature.TabIndex = 2;
+            // 
+            // PerformanceCurveTestBarometricPressure
+            // 
+            this.PerformanceCurveTestBarometricPressure.Location = new System.Drawing.Point(25, 207);
+            this.PerformanceCurveTestBarometricPressure.Name = "PerformanceCurveTestBarometricPressure";
+            this.PerformanceCurveTestBarometricPressure.Size = new System.Drawing.Size(132, 20);
+            this.PerformanceCurveTestBarometricPressure.TabIndex = 1;
+            // 
+            // PerformanceCurveTestFanDrivePower
+            // 
+            this.PerformanceCurveTestFanDrivePower.Location = new System.Drawing.Point(25, 177);
+            this.PerformanceCurveTestFanDrivePower.Name = "PerformanceCurveTestFanDrivePower";
+            this.PerformanceCurveTestFanDrivePower.Size = new System.Drawing.Size(132, 20);
+            this.PerformanceCurveTestFanDrivePower.TabIndex = 0;
+            // 
             // PerformanceCurveDesignGroupBox
             // 
             this.PerformanceCurveDesignGroupBox.Controls.Add(this.PerformanceCurveDesignFanDrivePower);
@@ -442,271 +707,6 @@
             this.PerformanceCurveLiquidToGasRatioLabel.TabIndex = 7;
             this.PerformanceCurveLiquidToGasRatioLabel.Text = "Liquid To Gas Ratio:";
             // 
-            // PerformanceCurveDesignDataButton
-            // 
-            this.PerformanceCurveDesignDataButton.Location = new System.Drawing.Point(613, 32);
-            this.PerformanceCurveDesignDataButton.Name = "PerformanceCurveDesignDataButton";
-            this.PerformanceCurveDesignDataButton.Size = new System.Drawing.Size(75, 23);
-            this.PerformanceCurveDesignDataButton.TabIndex = 10;
-            this.PerformanceCurveDesignDataButton.Text = "Design Data";
-            this.PerformanceCurveDesignDataButton.UseVisualStyleBackColor = true;
-            // 
-            // PerformanceCurveUnitsWaterFlowRate
-            // 
-            this.PerformanceCurveUnitsWaterFlowRate.AutoSize = true;
-            this.PerformanceCurveUnitsWaterFlowRate.Location = new System.Drawing.Point(550, 113);
-            this.PerformanceCurveUnitsWaterFlowRate.Name = "PerformanceCurveUnitsWaterFlowRate";
-            this.PerformanceCurveUnitsWaterFlowRate.Size = new System.Drawing.Size(27, 13);
-            this.PerformanceCurveUnitsWaterFlowRate.TabIndex = 13;
-            this.PerformanceCurveUnitsWaterFlowRate.Text = "gmp";
-            // 
-            // PerformanceCurveUnitsHotWaterTemperature
-            // 
-            this.PerformanceCurveUnitsHotWaterTemperature.AutoSize = true;
-            this.PerformanceCurveUnitsHotWaterTemperature.Location = new System.Drawing.Point(550, 143);
-            this.PerformanceCurveUnitsHotWaterTemperature.Name = "PerformanceCurveUnitsHotWaterTemperature";
-            this.PerformanceCurveUnitsHotWaterTemperature.Size = new System.Drawing.Size(17, 13);
-            this.PerformanceCurveUnitsHotWaterTemperature.TabIndex = 12;
-            this.PerformanceCurveUnitsHotWaterTemperature.Text = "°F";
-            // 
-            // PerformanceCurveUnitsColdWaterTemperature
-            // 
-            this.PerformanceCurveUnitsColdWaterTemperature.AutoSize = true;
-            this.PerformanceCurveUnitsColdWaterTemperature.Location = new System.Drawing.Point(550, 173);
-            this.PerformanceCurveUnitsColdWaterTemperature.Name = "PerformanceCurveUnitsColdWaterTemperature";
-            this.PerformanceCurveUnitsColdWaterTemperature.Size = new System.Drawing.Size(17, 13);
-            this.PerformanceCurveUnitsColdWaterTemperature.TabIndex = 11;
-            this.PerformanceCurveUnitsColdWaterTemperature.Text = "°F";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(550, 203);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(17, 13);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "°F";
-            // 
-            // PerformanceCurveUnitsDryBulbTemperature
-            // 
-            this.PerformanceCurveUnitsDryBulbTemperature.AutoSize = true;
-            this.PerformanceCurveUnitsDryBulbTemperature.Location = new System.Drawing.Point(550, 233);
-            this.PerformanceCurveUnitsDryBulbTemperature.Name = "PerformanceCurveUnitsDryBulbTemperature";
-            this.PerformanceCurveUnitsDryBulbTemperature.Size = new System.Drawing.Size(17, 13);
-            this.PerformanceCurveUnitsDryBulbTemperature.TabIndex = 15;
-            this.PerformanceCurveUnitsDryBulbTemperature.Text = "°F";
-            // 
-            // PerformanceCurveUnitsFanDrivePower
-            // 
-            this.PerformanceCurveUnitsFanDrivePower.AutoSize = true;
-            this.PerformanceCurveUnitsFanDrivePower.Location = new System.Drawing.Point(550, 263);
-            this.PerformanceCurveUnitsFanDrivePower.Name = "PerformanceCurveUnitsFanDrivePower";
-            this.PerformanceCurveUnitsFanDrivePower.Size = new System.Drawing.Size(25, 13);
-            this.PerformanceCurveUnitsFanDrivePower.TabIndex = 14;
-            this.PerformanceCurveUnitsFanDrivePower.Text = "bhp";
-            // 
-            // PerformanceCurveUnitsBarometricPressure
-            // 
-            this.PerformanceCurveUnitsBarometricPressure.AutoSize = true;
-            this.PerformanceCurveUnitsBarometricPressure.Location = new System.Drawing.Point(550, 293);
-            this.PerformanceCurveUnitsBarometricPressure.Name = "PerformanceCurveUnitsBarometricPressure";
-            this.PerformanceCurveUnitsBarometricPressure.Size = new System.Drawing.Size(26, 13);
-            this.PerformanceCurveUnitsBarometricPressure.TabIndex = 17;
-            this.PerformanceCurveUnitsBarometricPressure.Text = "\"Hg";
-            // 
-            // PerformanceCurveUnitsLiquidToGasRatio
-            // 
-            this.PerformanceCurveUnitsLiquidToGasRatio.AutoSize = true;
-            this.PerformanceCurveUnitsLiquidToGasRatio.Location = new System.Drawing.Point(550, 323);
-            this.PerformanceCurveUnitsLiquidToGasRatio.Name = "PerformanceCurveUnitsLiquidToGasRatio";
-            this.PerformanceCurveUnitsLiquidToGasRatio.Size = new System.Drawing.Size(0, 13);
-            this.PerformanceCurveUnitsLiquidToGasRatio.TabIndex = 18;
-            // 
-            // PerformanceCurvePredictedFlow
-            // 
-            this.PerformanceCurvePredictedFlow.Location = new System.Drawing.Point(197, 432);
-            this.PerformanceCurvePredictedFlow.Name = "PerformanceCurvePredictedFlow";
-            this.PerformanceCurvePredictedFlow.ReadOnly = true;
-            this.PerformanceCurvePredictedFlow.Size = new System.Drawing.Size(132, 20);
-            this.PerformanceCurvePredictedFlow.TabIndex = 22;
-            // 
-            // PerformanceCurveTowerCapability
-            // 
-            this.PerformanceCurveTowerCapability.Location = new System.Drawing.Point(197, 462);
-            this.PerformanceCurveTowerCapability.Name = "PerformanceCurveTowerCapability";
-            this.PerformanceCurveTowerCapability.ReadOnly = true;
-            this.PerformanceCurveTowerCapability.Size = new System.Drawing.Size(132, 20);
-            this.PerformanceCurveTowerCapability.TabIndex = 21;
-            // 
-            // PerformanceCurveColdWaterTemperatureDeviation
-            // 
-            this.PerformanceCurveColdWaterTemperatureDeviation.Location = new System.Drawing.Point(197, 492);
-            this.PerformanceCurveColdWaterTemperatureDeviation.Name = "PerformanceCurveColdWaterTemperatureDeviation";
-            this.PerformanceCurveColdWaterTemperatureDeviation.ReadOnly = true;
-            this.PerformanceCurveColdWaterTemperatureDeviation.Size = new System.Drawing.Size(132, 20);
-            this.PerformanceCurveColdWaterTemperatureDeviation.TabIndex = 20;
-            // 
-            // PerformanceCurveAdjustedFlow
-            // 
-            this.PerformanceCurveAdjustedFlow.Location = new System.Drawing.Point(197, 402);
-            this.PerformanceCurveAdjustedFlow.Name = "PerformanceCurveAdjustedFlow";
-            this.PerformanceCurveAdjustedFlow.ReadOnly = true;
-            this.PerformanceCurveAdjustedFlow.Size = new System.Drawing.Size(132, 20);
-            this.PerformanceCurveAdjustedFlow.TabIndex = 19;
-            // 
-            // PerformanceCurveUnitsAdjustedFlow
-            // 
-            this.PerformanceCurveUnitsAdjustedFlow.AutoSize = true;
-            this.PerformanceCurveUnitsAdjustedFlow.Location = new System.Drawing.Point(335, 405);
-            this.PerformanceCurveUnitsAdjustedFlow.Name = "PerformanceCurveUnitsAdjustedFlow";
-            this.PerformanceCurveUnitsAdjustedFlow.Size = new System.Drawing.Size(27, 13);
-            this.PerformanceCurveUnitsAdjustedFlow.TabIndex = 25;
-            this.PerformanceCurveUnitsAdjustedFlow.Text = "gmp";
-            // 
-            // PerformanceCurveUnitsPredictedFlow
-            // 
-            this.PerformanceCurveUnitsPredictedFlow.AutoSize = true;
-            this.PerformanceCurveUnitsPredictedFlow.Location = new System.Drawing.Point(335, 435);
-            this.PerformanceCurveUnitsPredictedFlow.Name = "PerformanceCurveUnitsPredictedFlow";
-            this.PerformanceCurveUnitsPredictedFlow.Size = new System.Drawing.Size(27, 13);
-            this.PerformanceCurveUnitsPredictedFlow.TabIndex = 24;
-            this.PerformanceCurveUnitsPredictedFlow.Text = "gpm";
-            // 
-            // PerformanceCurveUnitsTowerCapability
-            // 
-            this.PerformanceCurveUnitsTowerCapability.AutoSize = true;
-            this.PerformanceCurveUnitsTowerCapability.Location = new System.Drawing.Point(335, 465);
-            this.PerformanceCurveUnitsTowerCapability.Name = "PerformanceCurveUnitsTowerCapability";
-            this.PerformanceCurveUnitsTowerCapability.Size = new System.Drawing.Size(15, 13);
-            this.PerformanceCurveUnitsTowerCapability.TabIndex = 23;
-            this.PerformanceCurveUnitsTowerCapability.Text = "%";
-            // 
-            // PerformanceCurveUnitsColdWaterTemperatureDeviation
-            // 
-            this.PerformanceCurveUnitsColdWaterTemperatureDeviation.AutoSize = true;
-            this.PerformanceCurveUnitsColdWaterTemperatureDeviation.Location = new System.Drawing.Point(335, 495);
-            this.PerformanceCurveUnitsColdWaterTemperatureDeviation.Name = "PerformanceCurveUnitsColdWaterTemperatureDeviation";
-            this.PerformanceCurveUnitsColdWaterTemperatureDeviation.Size = new System.Drawing.Size(17, 13);
-            this.PerformanceCurveUnitsColdWaterTemperatureDeviation.TabIndex = 26;
-            this.PerformanceCurveUnitsColdWaterTemperatureDeviation.Text = "°F";
-            // 
-            // PerformanceCurveAdjustedFlowlabel
-            // 
-            this.PerformanceCurveAdjustedFlowlabel.AutoSize = true;
-            this.PerformanceCurveAdjustedFlowlabel.Location = new System.Drawing.Point(16, 405);
-            this.PerformanceCurveAdjustedFlowlabel.Name = "PerformanceCurveAdjustedFlowlabel";
-            this.PerformanceCurveAdjustedFlowlabel.Size = new System.Drawing.Size(76, 13);
-            this.PerformanceCurveAdjustedFlowlabel.TabIndex = 29;
-            this.PerformanceCurveAdjustedFlowlabel.Text = "Adjusted Flow:";
-            // 
-            // PerformanceCurvePredictedFlowLabel
-            // 
-            this.PerformanceCurvePredictedFlowLabel.AutoSize = true;
-            this.PerformanceCurvePredictedFlowLabel.Location = new System.Drawing.Point(16, 435);
-            this.PerformanceCurvePredictedFlowLabel.Name = "PerformanceCurvePredictedFlowLabel";
-            this.PerformanceCurvePredictedFlowLabel.Size = new System.Drawing.Size(80, 13);
-            this.PerformanceCurvePredictedFlowLabel.TabIndex = 28;
-            this.PerformanceCurvePredictedFlowLabel.Text = "Predicted Flow:";
-            // 
-            // PerformanceCurveTowerCapabilityLabel
-            // 
-            this.PerformanceCurveTowerCapabilityLabel.AutoSize = true;
-            this.PerformanceCurveTowerCapabilityLabel.Location = new System.Drawing.Point(16, 465);
-            this.PerformanceCurveTowerCapabilityLabel.Name = "PerformanceCurveTowerCapabilityLabel";
-            this.PerformanceCurveTowerCapabilityLabel.Size = new System.Drawing.Size(88, 13);
-            this.PerformanceCurveTowerCapabilityLabel.TabIndex = 27;
-            this.PerformanceCurveTowerCapabilityLabel.Text = "Tower Capability:";
-            // 
-            // PerformanceCurveColdWaterTemperatureDeviationLabel
-            // 
-            this.PerformanceCurveColdWaterTemperatureDeviationLabel.AutoSize = true;
-            this.PerformanceCurveColdWaterTemperatureDeviationLabel.Location = new System.Drawing.Point(16, 495);
-            this.PerformanceCurveColdWaterTemperatureDeviationLabel.Name = "PerformanceCurveColdWaterTemperatureDeviationLabel";
-            this.PerformanceCurveColdWaterTemperatureDeviationLabel.Size = new System.Drawing.Size(174, 13);
-            this.PerformanceCurveColdWaterTemperatureDeviationLabel.TabIndex = 30;
-            this.PerformanceCurveColdWaterTemperatureDeviationLabel.Text = "Cold Water Temperature Deviation:";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(121, 32);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(486, 21);
-            this.comboBox1.TabIndex = 31;
-            // 
-            // PerformanceCurveTestFanDrivePower
-            // 
-            this.PerformanceCurveTestFanDrivePower.Location = new System.Drawing.Point(25, 177);
-            this.PerformanceCurveTestFanDrivePower.Name = "PerformanceCurveTestFanDrivePower";
-            this.PerformanceCurveTestFanDrivePower.Size = new System.Drawing.Size(132, 20);
-            this.PerformanceCurveTestFanDrivePower.TabIndex = 0;
-            // 
-            // PerformanceCurveTestBarometricPressure
-            // 
-            this.PerformanceCurveTestBarometricPressure.Location = new System.Drawing.Point(25, 207);
-            this.PerformanceCurveTestBarometricPressure.Name = "PerformanceCurveTestBarometricPressure";
-            this.PerformanceCurveTestBarometricPressure.Size = new System.Drawing.Size(132, 20);
-            this.PerformanceCurveTestBarometricPressure.TabIndex = 1;
-            // 
-            // PerformanceCurveTestDryBulbTemperature
-            // 
-            this.PerformanceCurveTestDryBulbTemperature.Location = new System.Drawing.Point(25, 147);
-            this.PerformanceCurveTestDryBulbTemperature.Name = "PerformanceCurveTestDryBulbTemperature";
-            this.PerformanceCurveTestDryBulbTemperature.Size = new System.Drawing.Size(132, 20);
-            this.PerformanceCurveTestDryBulbTemperature.TabIndex = 2;
-            // 
-            // PerformanceCurveTestWetBulbTemperature
-            // 
-            this.PerformanceCurveTestWetBulbTemperature.Location = new System.Drawing.Point(25, 117);
-            this.PerformanceCurveTestWetBulbTemperature.Name = "PerformanceCurveTestWetBulbTemperature";
-            this.PerformanceCurveTestWetBulbTemperature.Size = new System.Drawing.Size(132, 20);
-            this.PerformanceCurveTestWetBulbTemperature.TabIndex = 3;
-            // 
-            // PerformanceCurveTestColdWaterTemperature
-            // 
-            this.PerformanceCurveTestColdWaterTemperature.Location = new System.Drawing.Point(25, 87);
-            this.PerformanceCurveTestColdWaterTemperature.Name = "PerformanceCurveTestColdWaterTemperature";
-            this.PerformanceCurveTestColdWaterTemperature.Size = new System.Drawing.Size(132, 20);
-            this.PerformanceCurveTestColdWaterTemperature.TabIndex = 4;
-            // 
-            // PerformanceCurveTestHotWaterTemperature
-            // 
-            this.PerformanceCurveTestHotWaterTemperature.Location = new System.Drawing.Point(25, 57);
-            this.PerformanceCurveTestHotWaterTemperature.Name = "PerformanceCurveTestHotWaterTemperature";
-            this.PerformanceCurveTestHotWaterTemperature.Size = new System.Drawing.Size(132, 20);
-            this.PerformanceCurveTestHotWaterTemperature.TabIndex = 5;
-            // 
-            // PerformanceCurveTestWaterFlowRate
-            // 
-            this.PerformanceCurveTestWaterFlowRate.Location = new System.Drawing.Point(25, 27);
-            this.PerformanceCurveTestWaterFlowRate.Name = "PerformanceCurveTestWaterFlowRate";
-            this.PerformanceCurveTestWaterFlowRate.Size = new System.Drawing.Size(132, 20);
-            this.PerformanceCurveTestWaterFlowRate.TabIndex = 6;
-            // 
-            // PerformanceCurveTestLiquidToGasRatio
-            // 
-            this.PerformanceCurveTestLiquidToGasRatio.Location = new System.Drawing.Point(25, 237);
-            this.PerformanceCurveTestLiquidToGasRatio.Name = "PerformanceCurveTestLiquidToGasRatio";
-            this.PerformanceCurveTestLiquidToGasRatio.Size = new System.Drawing.Size(132, 20);
-            this.PerformanceCurveTestLiquidToGasRatio.TabIndex = 7;
-            // 
-            // PerformanceCurveTestGroupBox
-            // 
-            this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestLiquidToGasRatio);
-            this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestWaterFlowRate);
-            this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestHotWaterTemperature);
-            this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestColdWaterTemperature);
-            this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestWetBulbTemperature);
-            this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestDryBulbTemperature);
-            this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestBarometricPressure);
-            this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestFanDrivePower);
-            this.PerformanceCurveTestGroupBox.Location = new System.Drawing.Point(349, 79);
-            this.PerformanceCurveTestGroupBox.Name = "PerformanceCurveTestGroupBox";
-            this.PerformanceCurveTestGroupBox.Size = new System.Drawing.Size(183, 273);
-            this.PerformanceCurveTestGroupBox.TabIndex = 9;
-            this.PerformanceCurveTestGroupBox.TabStop = false;
-            this.PerformanceCurveTestGroupBox.Text = "Test";
-            // 
             // MechanicalDraftPerformanceCurveTabPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -732,10 +732,10 @@
             this.PerformanceCurveTowerTypeGroupBox.PerformLayout();
             this.PerformanceCurveTestResultsGroupBox.ResumeLayout(false);
             this.PerformanceCurveTestResultsGroupBox.PerformLayout();
-            this.PerformanceCurveDesignGroupBox.ResumeLayout(false);
-            this.PerformanceCurveDesignGroupBox.PerformLayout();
             this.PerformanceCurveTestGroupBox.ResumeLayout(false);
             this.PerformanceCurveTestGroupBox.PerformLayout();
+            this.PerformanceCurveDesignGroupBox.ResumeLayout(false);
+            this.PerformanceCurveDesignGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

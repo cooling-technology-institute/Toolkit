@@ -49,14 +49,14 @@ namespace CTIToolkit
 
         private void InitializeData()
         {
-            DemandCurve_Wet_Bulb_Value.Text = DemandCurveInputData.WetBlubTemperatureDataValue.Current.ToString();
+            DemandCurve_Wet_Bulb_Value.Text = DemandCurveInputData.WetBulbTemperatureDataValue.Current.ToString();
             DemandCurve_Range_Value.Text = DemandCurveInputData.RangeDataValue.Current.ToString();
             DemandCurve_Elevation_Value.Text = DemandCurveInputData.ElevationDataValue.Current.ToString();
             DemandCurve_C_C1_Value.Text = DemandCurveInputData.C1DataValue.Current.ToString();
             DemandCurve_Slope_C2_Value.Text = DemandCurveInputData.SlopeDataValue.Current.ToString();
             DemandCurve_Minimum_Value.Text = DemandCurveInputData.MinimumDataValue.Current.ToString();
             DemandCurve_Maximum_Value.Text = DemandCurveInputData.MaximumDataValue.Current.ToString();
-            DemandCurve_LG_Value.Text = DemandCurveInputData.LGDataValue.Current.ToString();
+            DemandCurve_LiquidToGasRatio_Value.Text = DemandCurveInputData.LiquidToGasRatioRateDataValue.Current.ToString();
             DemandCurve_Elevation_Pressure_Selector.SelectedIndex = ELEVATION;
         }
 
@@ -95,13 +95,13 @@ namespace CTIToolkit
         {
             string tooltip = string.Empty;
 
-            DemandCurveWetBulbTemperatureLabel.Text = DemandCurveInputData.WetBlubTemperatureDataValue.InputMessage + ":";
+            DemandCurveWetBulbTemperatureLabel.Text = DemandCurveInputData.WetBulbTemperatureDataValue.InputMessage + ":";
             DemandCurveWetBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
-            DemandCurve_Wet_Bulb_Value.Text = DemandCurveInputData.WetBlubTemperatureDataValue.InputValue;
-            toolTip1.SetToolTip(DemandCurve_Wet_Bulb_Value, DemandCurveInputData.WetBlubTemperatureDataValue.ToolTip);
+            DemandCurve_Wet_Bulb_Value.Text = DemandCurveInputData.WetBulbTemperatureDataValue.InputValue;
+            toolTip1.SetToolTip(DemandCurve_Wet_Bulb_Value, DemandCurveInputData.WetBulbTemperatureDataValue.ToolTip);
 
-            DemandCurve_LG_Value.Text = DemandCurveInputData.LGDataValue.InputValue;
-            toolTip1.SetToolTip(DemandCurve_LG_Value, DemandCurveInputData.LGDataValue.ToolTip);
+            DemandCurve_LiquidToGasRatio_Value.Text = DemandCurveInputData.LiquidToGasRatioRateDataValue.InputValue;
+            toolTip1.SetToolTip(DemandCurve_LiquidToGasRatio_Value, DemandCurveInputData.LiquidToGasRatioRateDataValue.ToolTip);
 
             if (DemandCurve_ElevationRadio.Checked)
             {
@@ -182,7 +182,7 @@ namespace CTIToolkit
 
                 string message = string.Empty;
 
-                if (!DemandCurveInputData.WetBlubTemperatureDataValue.UpdateValue(DemandCurve_Wet_Bulb_Value.Text, out message))
+                if (!DemandCurveInputData.WetBulbTemperatureDataValue.UpdateValue(DemandCurve_Wet_Bulb_Value.Text, out message))
                 {
                     MessageBox.Show(message);
                     return;
@@ -235,7 +235,7 @@ namespace CTIToolkit
                     return;
                 }
 
-                if (!DemandCurveInputData.LGDataValue.UpdateValue(DemandCurve_LG_Value.Text, out message))
+                if (!DemandCurveInputData.LiquidToGasRatioRateDataValue.UpdateValue(DemandCurve_LiquidToGasRatio_Value.Text, out message))
                 {
                     MessageBox.Show(message);
                     return;
@@ -245,7 +245,7 @@ namespace CTIToolkit
                 //DemandCurveData.IsElevation = DemandCurve_ElevationRadio.Checked;
                 //DemandCurveData.SetInternationalSystemOfUnits_IS_(IsInternationalSystemOfUnits_IS_);
 
-                //DemandCurveData.WetBulbTemperature = DemandCurveInputData.WetBlubTemperatureDataValue.Current;
+                //DemandCurveData.WetBulbTemperature = DemandCurveInputData.WetBulbTemperatureDataValue.Current;
                 //DemandCurveData.Range = DemandCurveInputData.RangeDataValue.Current;
                 //if (DemandCurve_ElevationRadio.Checked)
                 //{

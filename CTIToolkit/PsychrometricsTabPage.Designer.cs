@@ -41,13 +41,13 @@
             this.PyschmetricsPressureRadio = new System.Windows.Forms.RadioButton();
             this.PyschmetricsElevationRadio = new System.Windows.Forms.RadioButton();
             this.PsychrometricsElevationPressureLabel2 = new System.Windows.Forms.Label();
-            this.PsychrometricsTemperatureDryBlubUnits = new System.Windows.Forms.Label();
-            this.PsychrometricsTemperatureWetBlubUnits = new System.Windows.Forms.Label();
+            this.PsychrometricsTemperatureDryBulbUnits = new System.Windows.Forms.Label();
+            this.PsychrometricsTemperatureWetBulbUnits = new System.Windows.Forms.Label();
             this.Psychrometrics_Elevation_Value = new System.Windows.Forms.TextBox();
             this.Psychrometrics_DBT_Value = new System.Windows.Forms.TextBox();
             this.Psychrometrics_WBT_Value = new System.Windows.Forms.TextBox();
-            this.TemperatureDryBlubLabel = new System.Windows.Forms.Label();
-            this.TemperatureWetBlubLabel = new System.Windows.Forms.Label();
+            this.TemperatureDryBulbLabel = new System.Windows.Forms.Label();
+            this.TemperatureWetBulbLabel = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.Psychrometrics_GridView)).BeginInit();
             this.PsychrometricPropertiesGroupBox.SuspendLayout();
@@ -131,13 +131,13 @@
             this.InputPropertiesGroupBox.Controls.Add(this.PsychrometricsElevationPressureLabel1);
             this.InputPropertiesGroupBox.Controls.Add(this.groupBox2);
             this.InputPropertiesGroupBox.Controls.Add(this.PsychrometricsElevationPressureLabel2);
-            this.InputPropertiesGroupBox.Controls.Add(this.PsychrometricsTemperatureDryBlubUnits);
-            this.InputPropertiesGroupBox.Controls.Add(this.PsychrometricsTemperatureWetBlubUnits);
+            this.InputPropertiesGroupBox.Controls.Add(this.PsychrometricsTemperatureDryBulbUnits);
+            this.InputPropertiesGroupBox.Controls.Add(this.PsychrometricsTemperatureWetBulbUnits);
             this.InputPropertiesGroupBox.Controls.Add(this.Psychrometrics_Elevation_Value);
             this.InputPropertiesGroupBox.Controls.Add(this.Psychrometrics_DBT_Value);
             this.InputPropertiesGroupBox.Controls.Add(this.Psychrometrics_WBT_Value);
-            this.InputPropertiesGroupBox.Controls.Add(this.TemperatureDryBlubLabel);
-            this.InputPropertiesGroupBox.Controls.Add(this.TemperatureWetBlubLabel);
+            this.InputPropertiesGroupBox.Controls.Add(this.TemperatureDryBulbLabel);
+            this.InputPropertiesGroupBox.Controls.Add(this.TemperatureWetBulbLabel);
             this.InputPropertiesGroupBox.Location = new System.Drawing.Point(9, 10);
             this.InputPropertiesGroupBox.Name = "InputPropertiesGroupBox";
             this.InputPropertiesGroupBox.Size = new System.Drawing.Size(743, 130);
@@ -196,23 +196,23 @@
             this.PsychrometricsElevationPressureLabel2.TabIndex = 8;
             this.PsychrometricsElevationPressureLabel2.Text = "ft";
             // 
-            // PsychrometricsTemperatureDryBlubUnits
+            // PsychrometricsTemperatureDryBulbUnits
             // 
-            this.PsychrometricsTemperatureDryBlubUnits.AutoSize = true;
-            this.PsychrometricsTemperatureDryBlubUnits.Location = new System.Drawing.Point(259, 65);
-            this.PsychrometricsTemperatureDryBlubUnits.Name = "PsychrometricsTemperatureDryBlubUnits";
-            this.PsychrometricsTemperatureDryBlubUnits.Size = new System.Drawing.Size(17, 13);
-            this.PsychrometricsTemperatureDryBlubUnits.TabIndex = 7;
-            this.PsychrometricsTemperatureDryBlubUnits.Text = "°F";
+            this.PsychrometricsTemperatureDryBulbUnits.AutoSize = true;
+            this.PsychrometricsTemperatureDryBulbUnits.Location = new System.Drawing.Point(259, 65);
+            this.PsychrometricsTemperatureDryBulbUnits.Name = "PsychrometricsTemperatureDryBulbUnits";
+            this.PsychrometricsTemperatureDryBulbUnits.Size = new System.Drawing.Size(17, 13);
+            this.PsychrometricsTemperatureDryBulbUnits.TabIndex = 7;
+            this.PsychrometricsTemperatureDryBulbUnits.Text = "°F";
             // 
-            // PsychrometricsTemperatureWetBlubUnits
+            // PsychrometricsTemperatureWetBulbUnits
             // 
-            this.PsychrometricsTemperatureWetBlubUnits.AutoSize = true;
-            this.PsychrometricsTemperatureWetBlubUnits.Location = new System.Drawing.Point(259, 36);
-            this.PsychrometricsTemperatureWetBlubUnits.Name = "PsychrometricsTemperatureWetBlubUnits";
-            this.PsychrometricsTemperatureWetBlubUnits.Size = new System.Drawing.Size(17, 13);
-            this.PsychrometricsTemperatureWetBlubUnits.TabIndex = 6;
-            this.PsychrometricsTemperatureWetBlubUnits.Text = "°F";
+            this.PsychrometricsTemperatureWetBulbUnits.AutoSize = true;
+            this.PsychrometricsTemperatureWetBulbUnits.Location = new System.Drawing.Point(259, 36);
+            this.PsychrometricsTemperatureWetBulbUnits.Name = "PsychrometricsTemperatureWetBulbUnits";
+            this.PsychrometricsTemperatureWetBulbUnits.Size = new System.Drawing.Size(17, 13);
+            this.PsychrometricsTemperatureWetBulbUnits.TabIndex = 6;
+            this.PsychrometricsTemperatureWetBulbUnits.Text = "°F";
             // 
             // Psychrometrics_Elevation_Value
             // 
@@ -238,24 +238,24 @@
             this.Psychrometrics_WBT_Value.TabIndex = 3;
             this.Psychrometrics_WBT_Value.Text = "80";
             // 
-            // TemperatureDryBlubLabel
+            // TemperatureDryBulbLabel
             // 
-            this.TemperatureDryBlubLabel.Location = new System.Drawing.Point(19, 65);
-            this.TemperatureDryBlubLabel.Name = "TemperatureDryBlubLabel";
-            this.TemperatureDryBlubLabel.Size = new System.Drawing.Size(113, 13);
-            this.TemperatureDryBlubLabel.TabIndex = 1;
-            this.TemperatureDryBlubLabel.Text = "Dry Bulb Temperature:";
-            this.TemperatureDryBlubLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TemperatureDryBulbLabel.Location = new System.Drawing.Point(19, 65);
+            this.TemperatureDryBulbLabel.Name = "TemperatureDryBulbLabel";
+            this.TemperatureDryBulbLabel.Size = new System.Drawing.Size(113, 13);
+            this.TemperatureDryBulbLabel.TabIndex = 1;
+            this.TemperatureDryBulbLabel.Text = "Dry Bulb Temperature:";
+            this.TemperatureDryBulbLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // TemperatureWetBlubLabel
+            // TemperatureWetBulbLabel
             // 
-            this.TemperatureWetBlubLabel.Location = new System.Drawing.Point(15, 39);
-            this.TemperatureWetBlubLabel.Name = "TemperatureWetBlubLabel";
-            this.TemperatureWetBlubLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.TemperatureWetBlubLabel.Size = new System.Drawing.Size(117, 13);
-            this.TemperatureWetBlubLabel.TabIndex = 0;
-            this.TemperatureWetBlubLabel.Text = "Wet Bulb Temperature:";
-            this.TemperatureWetBlubLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TemperatureWetBulbLabel.Location = new System.Drawing.Point(15, 39);
+            this.TemperatureWetBulbLabel.Name = "TemperatureWetBulbLabel";
+            this.TemperatureWetBulbLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.TemperatureWetBulbLabel.Size = new System.Drawing.Size(117, 13);
+            this.TemperatureWetBulbLabel.TabIndex = 0;
+            this.TemperatureWetBulbLabel.Text = "Wet Bulb Temperature:";
+            this.TemperatureWetBulbLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // PsychrometricsTabPage
             // 
@@ -287,13 +287,13 @@
         private System.Windows.Forms.RadioButton PyschmetricsPressureRadio;
         private System.Windows.Forms.RadioButton PyschmetricsElevationRadio;
         private System.Windows.Forms.Label PsychrometricsElevationPressureLabel2;
-        private System.Windows.Forms.Label PsychrometricsTemperatureDryBlubUnits;
-        private System.Windows.Forms.Label PsychrometricsTemperatureWetBlubUnits;
+        private System.Windows.Forms.Label PsychrometricsTemperatureDryBulbUnits;
+        private System.Windows.Forms.Label PsychrometricsTemperatureWetBulbUnits;
         private System.Windows.Forms.TextBox Psychrometrics_Elevation_Value;
         private System.Windows.Forms.TextBox Psychrometrics_DBT_Value;
         private System.Windows.Forms.TextBox Psychrometrics_WBT_Value;
-        private System.Windows.Forms.Label TemperatureDryBlubLabel;
-        private System.Windows.Forms.Label TemperatureWetBlubLabel;
+        private System.Windows.Forms.Label TemperatureDryBulbLabel;
+        private System.Windows.Forms.Label TemperatureWetBulbLabel;
         private System.Windows.Forms.ToolTip toolTip1;
     }
 }

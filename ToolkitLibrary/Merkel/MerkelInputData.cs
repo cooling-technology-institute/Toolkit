@@ -18,7 +18,7 @@ namespace ToolkitLibrary
 
         public HotWaterTemperatureDataValue HotWaterTemperatureDataValue { get; set; }
         public ColdWaterTemperatureDataValue ColdWaterTemperatureDataValue { get; set; }
-        public WetBlubTemperatureDataValue WetBlubTemperatureDataValue { get; set; }
+        public WetBulbTemperatureDataValue WetBulbTemperatureDataValue { get; set; }
         public ElevationDataValue ElevationDataValue { get; set; }
         public WaterAirFlowRateDataValue WaterAirFlowRateDataValue { get; set; }
         public BarometricPressureDataValue BarometricPressureDataValue { get; set; }
@@ -30,7 +30,7 @@ namespace ToolkitLibrary
             IsElevation = true;
             HotWaterTemperatureDataValue = new HotWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             ColdWaterTemperatureDataValue = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            WetBlubTemperatureDataValue = new WetBlubTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+            WetBulbTemperatureDataValue = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             ElevationDataValue = new ElevationDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             WaterAirFlowRateDataValue = new WaterAirFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             BarometricPressureDataValue = new BarometricPressureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
@@ -47,7 +47,7 @@ namespace ToolkitLibrary
                 ColdWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
                 WaterAirFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
                 ElevationDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
-                WetBlubTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
+                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
                 BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
                 isChanged = true;
             }

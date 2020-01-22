@@ -11,10 +11,10 @@ namespace ToolkitLibrary
         public bool IsInternationalSystemOfUnits_IS { get; set; }
         public bool IsElevation { get; set; }
 
-        public WetBlubTemperatureDataValue WetBlubTemperatureDataValue { get; set; }
+        public WetBulbTemperatureDataValue WetBulbTemperatureDataValue { get; set; }
         public RangeDataValue RangeDataValue { get; set; }
         public ElevationDataValue ElevationDataValue { get; set; }
-        public LGDataValue LGDataValue { get; set; }
+        public LiquidToGasRatioRateDataValue LiquidToGasRatioRateDataValue { get; set; }
         public BarometricPressureDataValue BarometricPressureDataValue { get; set; }
         public C1DataValue C1DataValue { get; set; }
         public SlopeDataValue SlopeDataValue { get; set; }
@@ -27,7 +27,7 @@ namespace ToolkitLibrary
             IsInternationalSystemOfUnits_IS = isInternationalSystemOfUnits_IS_;
             IsElevation = true;
 
-            WetBlubTemperatureDataValue = new WetBlubTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+            WetBulbTemperatureDataValue = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             RangeDataValue = new RangeDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             ElevationDataValue = new ElevationDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             BarometricPressureDataValue = new BarometricPressureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
@@ -35,7 +35,7 @@ namespace ToolkitLibrary
             SlopeDataValue = new SlopeDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             MinimumDataValue = new MinimumDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
             MaximumDataValue = new MaximumDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            LGDataValue = new LGDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+            LiquidToGasRatioRateDataValue = new LiquidToGasRatioRateDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
         }
 
         public bool ConvertValues(bool isIS, bool isElevation)
@@ -45,9 +45,9 @@ namespace ToolkitLibrary
             if (IsInternationalSystemOfUnits_IS != isIS)
             {
                 IsInternationalSystemOfUnits_IS = isIS;
-                LGDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
+                LiquidToGasRatioRateDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
                 ElevationDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
-                WetBlubTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
+                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
                 BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
                 isChanged = true;
             }

@@ -15,8 +15,8 @@ namespace ToolkitLibrary
         public ElevationDataValue ElevationDataValue { get; set; }
         public BarometricPressureDataValue BarometricPressureDataValue { get; set; }
         public RelativeHumitityDataValue RelativeHumitityDataValue { get; set; }
-        public WetBlubTemperatureDataValue WetBlubTemperatureDataValue { get; set; }
-        public DryBlubTemperatureDataValue DryBlubTemperatureDataValue { get; set; }
+        public WetBulbTemperatureDataValue WetBulbTemperatureDataValue { get; set; }
+        public DryBulbTemperatureDataValue DryBulbTemperatureDataValue { get; set; }
 
         public PsychrometricsInputData(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
@@ -28,8 +28,8 @@ namespace ToolkitLibrary
             ElevationDataValue = new ElevationDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
             BarometricPressureDataValue = new BarometricPressureDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
             RelativeHumitityDataValue = new RelativeHumitityDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
-            WetBlubTemperatureDataValue = new WetBlubTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
-            DryBlubTemperatureDataValue = new DryBlubTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
+            WetBulbTemperatureDataValue = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
+            DryBulbTemperatureDataValue = new DryBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
         }
 
         public bool ConvertValues(bool isInternationalSystemOfUnits_IS_)
@@ -40,8 +40,8 @@ namespace ToolkitLibrary
                 EnthalpyDataValue.ConvertValue(IsInternationalSystemOfUnits_IS_);
                 ElevationDataValue.ConvertValue(IsInternationalSystemOfUnits_IS_);
                 BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS_);
-                WetBlubTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS_);
-                DryBlubTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS_);
+                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS_);
+                DryBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS_);
                 return true;
             }
             return false;
