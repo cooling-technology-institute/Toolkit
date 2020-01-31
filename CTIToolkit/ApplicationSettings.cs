@@ -12,6 +12,7 @@ namespace CTIToolkit
     public class ApplicationSettings
     {
         private UnitsSelection _UnitsSelection = UnitsSelection.United_States_Customary_Units_IP;
+        private bool _IsDemo = true;
 
         public UnitsSelection UnitsSelection
         {
@@ -26,11 +27,17 @@ namespace CTIToolkit
             }
         }
 
+        public bool IsDemo
+        {
+            get { return _IsDemo; }
+        }
+
         private void UpdateSettings()
         {
             Properties.Settings.Default.UnitsSelection = UnitsSelection.ToString();
             Properties.Settings.Default.Save();
-            ////Load appsettings
+
+            //Load appsettings
             //Configuration config = ConfigurationManager.OpenExeConfiguration(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
             ////Check if key exists in the settings

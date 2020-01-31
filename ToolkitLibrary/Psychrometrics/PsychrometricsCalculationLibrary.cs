@@ -10,8 +10,8 @@ namespace ToolkitLibrary
         {
             switch (data.CalculationType)
             {
-                case PsychrometricsCalculationType.Psychrometrics_WBT_DBT:
-                    return Psychrometrics_WBT_DBT_Calculation(data);
+                case PsychrometricsCalculationType.Psychrometrics_WetBulbTemperature_DryBulbTemperature:
+                    return Psychrometrics_WetBulbTemperature_DryBulbTemperature_Calculation(data);
 
                 case PsychrometricsCalculationType.Psychrometrics_DBT_RH:
                     return Psychrometrics_DBT_RH_Calculation(data);
@@ -22,7 +22,7 @@ namespace ToolkitLibrary
             return null;
         }
 
-        public static DataTable Psychrometrics_WBT_DBT_Calculation(PsychrometricsData data)
+        public static DataTable Psychrometrics_WetBulbTemperature_DryBulbTemperature_Calculation(PsychrometricsData data)
         {
             //if (TPropPageBase::CheckData()) return;
 

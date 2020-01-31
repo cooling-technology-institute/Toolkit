@@ -44,49 +44,18 @@
   <ItemGroup>
     <Compile Include="DemandCurve\DemandCurveCalculationLibrary.cs" />
     <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveCalculationLibrary.cs" />
-    <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveData.cs" />
-    <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveOutput.cs" />
-    <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceTowerType.cs" />
-    <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveTestData.cs" />
-    <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveDesignData.cs" />
-    <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveDesignInputData.cs" />
-    <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveInputData.cs" />
-    <Compile Include="MechanicalDraftPerformanceCurve\RangeWetBulbTemperatureDesignData.cs" />
-    <Compile Include="MechanicalDraftPerformanceCurve\RangedWetBulbTemperatureDesignData.cs" />
-    <Compile Include="MechanicalDraftPerformanceCurve\WetBulbTemperatureDesignData.cs" />
     <Compile Include="Merkel\MerkelCalculationLibrary.cs" />
-    <Compile Include="MaximumDataValue.cs" />
-    <Compile Include="MinimumDataValue.cs" />
     <Compile Include="Psychrometrics\PsychrometricsCalculationLibrary.cs" />
-    <Compile Include="FanDrivePowerDataValue.cs" />
-    <Compile Include="WaterFlowRateDataValue.cs" />
-    <Compile Include="SlopeDataValue.cs" />
-    <Compile Include="C1DataValue.cs" />
-    <Compile Include="CalculationLibrary.cs" />
-    <Compile Include="DemandCurve\DemandCurveData.cs" />
-    <Compile Include="DemandCurve\DemandCurveInputData.cs" />
-    <Compile Include="LiquidToGasRatioRateDataValue.cs" />
-    <Compile Include="WaterAirFlowRateDataValue.cs" />
-    <Compile Include="ColdWaterTemperatureDataValue.cs" />
-    <Compile Include="HotWaterTemperatureDataValue.cs" />
-    <Compile Include="NameValueUnitsDataTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Merkel\MerkelData.cs" />
-    <Compile Include="Psychrometrics\PsychrometricsData.cs" />
-    <Compile Include="Merkel\MerkelInputData.cs" />
-    <Compile Include="DataValue.cs" />
-    <Compile Include="EnthalpyDataValue.cs" />
-    <Compile Include="ElevationDataValue.cs" />
-    <Compile Include="BarometricPressureDataValue.cs" />
-    <Compile Include="DryBulbTemperatureDataValue.cs" />
-    <Compile Include="RelativeHumitityDataValue.cs" />
-    <Compile Include="RangeDataValue.cs" />
-    <Compile Include="WetBulbTemperatureDataValue.cs" />
-    <Compile Include="Psychrometrics\PsychrometricsInputData.cs" />
     <Compile Include="UnitConverter.cs" />
     <Compile Include="Units.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{8bce9eb4-a471-4d30-a806-932d122c1b84}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

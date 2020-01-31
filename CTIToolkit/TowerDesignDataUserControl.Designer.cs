@@ -29,14 +29,6 @@
         private void InitializeComponent()
         {
             this.TowerDesignDataTowerDesignSpecificationsGroupBox = new System.Windows.Forms.GroupBox();
-            this.TowerDesignDataTowerDesignSpecificationsLiquidToGasRatio = new System.Windows.Forms.TextBox();
-            this.TowerDesignDataTowerDesignSpecificationsWaterFlowRate = new System.Windows.Forms.TextBox();
-            this.TowerDesignDataTowerDesignSpecificationsHotWaterTemperature = new System.Windows.Forms.TextBox();
-            this.TowerDesignDataTowerDesignSpecificationsColdWaterTemperature = new System.Windows.Forms.TextBox();
-            this.TowerDesignDataTowerDesignSpecificationsWetBulbTemperature = new System.Windows.Forms.TextBox();
-            this.TowerDesignDataTowerDesignSpecificationsDryBulbTemperature = new System.Windows.Forms.TextBox();
-            this.TowerDesignDataTowerDesignSpecificationsBarometricPressure = new System.Windows.Forms.TextBox();
-            this.TowerDesignDataTowerDesignSpecificationsFanDrivePower = new System.Windows.Forms.TextBox();
             this.TowerDesignDataTowerDesignSpecificationsWaterFlowRateLabel = new System.Windows.Forms.Label();
             this.TowerDesignDataTowerDesignSpecificationsHotWaterTemperatureLabel = new System.Windows.Forms.Label();
             this.TowerDesignDataTowerDesignSpecificationsColdWaterTemperatureLabel = new System.Windows.Forms.Label();
@@ -45,16 +37,34 @@
             this.TowerDesignDataTowerDesignSpecificationsFanDrivePowerLabel = new System.Windows.Forms.Label();
             this.TowerDesignDataTowerDesignSpecificationsBarometricPressureLabel = new System.Windows.Forms.Label();
             this.TowerDesignDataTowerDesignSpecificationsLiquidToGasRatioLabel = new System.Windows.Forms.Label();
+            this.TowerDesignDataTowerDesignSpecificationsLiquidToGasRatio = new System.Windows.Forms.TextBox();
+            this.TowerDesignDataTowerDesignSpecificationsWaterFlowRate = new System.Windows.Forms.TextBox();
+            this.TowerDesignDataTowerDesignSpecificationsHotWaterTemperature = new System.Windows.Forms.TextBox();
+            this.TowerDesignDataTowerDesignSpecificationsColdWaterTemperature = new System.Windows.Forms.TextBox();
+            this.TowerDesignDataTowerDesignSpecificationsWetBulbTemperature = new System.Windows.Forms.TextBox();
+            this.TowerDesignDataTowerDesignSpecificationsDryBulbTemperature = new System.Windows.Forms.TextBox();
+            this.TowerDesignDataTowerDesignSpecificationsBarometricPressure = new System.Windows.Forms.TextBox();
+            this.TowerDesignDataTowerDesignSpecificationsFanDrivePower = new System.Windows.Forms.TextBox();
             this.TowerDesignDataTowerInformation = new System.Windows.Forms.GroupBox();
+            this.TowerDesignDataTowerInformationTowerManufacturer = new System.Windows.Forms.TextBox();
+            this.TowerDesignDataTowerInformationLocation = new System.Windows.Forms.TextBox();
+            this.TowerDesignDataTowerInformationProjectName = new System.Windows.Forms.TextBox();
+            this.TowerDesignDataTowerInformationOwnerName = new System.Windows.Forms.TextBox();
             this.TowerDesignDataTowerInformationTowerManufacturerLabel = new System.Windows.Forms.Label();
             this.TowerDesignDataTowerInformationLocationLabel = new System.Windows.Forms.Label();
             this.TowerDesignDataTowerInformationProjectNameLabel = new System.Windows.Forms.Label();
             this.TowerDesignDataTowerInformationOwnerNameLabel = new System.Windows.Forms.Label();
-            this.TowerDesignDataTowerInformationOwnerName = new System.Windows.Forms.TextBox();
-            this.TowerDesignDataTowerInformationProjectName = new System.Windows.Forms.TextBox();
-            this.TowerDesignDataTowerInformationLocation = new System.Windows.Forms.TextBox();
-            this.TowerDesignDataTowerInformationTowerManufacturer = new System.Windows.Forms.TextBox();
             this.TowerDesignDataTowerDesignCurveDataRangesGroupBox = new System.Windows.Forms.GroupBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel5 = new System.Windows.Forms.Label();
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel4 = new System.Windows.Forms.Label();
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel3 = new System.Windows.Forms.Label();
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel2 = new System.Windows.Forms.Label();
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel1 = new System.Windows.Forms.Label();
             this.lTowerDesignDataTowerDesignCurveDataRangesWarning = new System.Windows.Forms.TextBox();
             this.TowerDesignDataCurveDataGroupBox = new System.Windows.Forms.GroupBox();
             this.TowerDesignDataCurveDataTabControl = new System.Windows.Forms.TabControl();
@@ -62,21 +72,15 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.TowerDesignCurveDataSaveButton = new System.Windows.Forms.Button();
             this.TowerDesignCurveDataCancelButton = new System.Windows.Forms.Button();
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel1 = new System.Windows.Forms.Label();
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel2 = new System.Windows.Forms.Label();
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel3 = new System.Windows.Forms.Label();
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel4 = new System.Windows.Forms.Label();
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.PerformanceCurveTowerTypeGroupBox = new System.Windows.Forms.GroupBox();
+            this.PerformanceCurveForcedRadioButton = new System.Windows.Forms.RadioButton();
+            this.PerformanceCurveInducedRadioButton = new System.Windows.Forms.RadioButton();
             this.TowerDesignDataTowerDesignSpecificationsGroupBox.SuspendLayout();
             this.TowerDesignDataTowerInformation.SuspendLayout();
             this.TowerDesignDataTowerDesignCurveDataRangesGroupBox.SuspendLayout();
             this.TowerDesignDataCurveDataGroupBox.SuspendLayout();
             this.TowerDesignDataCurveDataTabControl.SuspendLayout();
+            this.PerformanceCurveTowerTypeGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // TowerDesignDataTowerDesignSpecificationsGroupBox
@@ -103,70 +107,6 @@
             this.TowerDesignDataTowerDesignSpecificationsGroupBox.TabIndex = 10;
             this.TowerDesignDataTowerDesignSpecificationsGroupBox.TabStop = false;
             this.TowerDesignDataTowerDesignSpecificationsGroupBox.Text = "Tower Design Specifications (IP)";
-            // 
-            // TowerDesignDataTowerDesignSpecificationsLiquidToGasRatio
-            // 
-            this.TowerDesignDataTowerDesignSpecificationsLiquidToGasRatio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TowerDesignDataTowerDesignSpecificationsLiquidToGasRatio.Location = new System.Drawing.Point(147, 229);
-            this.TowerDesignDataTowerDesignSpecificationsLiquidToGasRatio.Name = "TowerDesignDataTowerDesignSpecificationsLiquidToGasRatio";
-            this.TowerDesignDataTowerDesignSpecificationsLiquidToGasRatio.Size = new System.Drawing.Size(132, 20);
-            this.TowerDesignDataTowerDesignSpecificationsLiquidToGasRatio.TabIndex = 7;
-            // 
-            // TowerDesignDataTowerDesignSpecificationsWaterFlowRate
-            // 
-            this.TowerDesignDataTowerDesignSpecificationsWaterFlowRate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TowerDesignDataTowerDesignSpecificationsWaterFlowRate.Location = new System.Drawing.Point(147, 19);
-            this.TowerDesignDataTowerDesignSpecificationsWaterFlowRate.Name = "TowerDesignDataTowerDesignSpecificationsWaterFlowRate";
-            this.TowerDesignDataTowerDesignSpecificationsWaterFlowRate.Size = new System.Drawing.Size(132, 20);
-            this.TowerDesignDataTowerDesignSpecificationsWaterFlowRate.TabIndex = 6;
-            // 
-            // TowerDesignDataTowerDesignSpecificationsHotWaterTemperature
-            // 
-            this.TowerDesignDataTowerDesignSpecificationsHotWaterTemperature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TowerDesignDataTowerDesignSpecificationsHotWaterTemperature.Location = new System.Drawing.Point(147, 49);
-            this.TowerDesignDataTowerDesignSpecificationsHotWaterTemperature.Name = "TowerDesignDataTowerDesignSpecificationsHotWaterTemperature";
-            this.TowerDesignDataTowerDesignSpecificationsHotWaterTemperature.Size = new System.Drawing.Size(132, 20);
-            this.TowerDesignDataTowerDesignSpecificationsHotWaterTemperature.TabIndex = 5;
-            // 
-            // TowerDesignDataTowerDesignSpecificationsColdWaterTemperature
-            // 
-            this.TowerDesignDataTowerDesignSpecificationsColdWaterTemperature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TowerDesignDataTowerDesignSpecificationsColdWaterTemperature.Location = new System.Drawing.Point(147, 79);
-            this.TowerDesignDataTowerDesignSpecificationsColdWaterTemperature.Name = "TowerDesignDataTowerDesignSpecificationsColdWaterTemperature";
-            this.TowerDesignDataTowerDesignSpecificationsColdWaterTemperature.Size = new System.Drawing.Size(132, 20);
-            this.TowerDesignDataTowerDesignSpecificationsColdWaterTemperature.TabIndex = 4;
-            // 
-            // TowerDesignDataTowerDesignSpecificationsWetBulbTemperature
-            // 
-            this.TowerDesignDataTowerDesignSpecificationsWetBulbTemperature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TowerDesignDataTowerDesignSpecificationsWetBulbTemperature.Location = new System.Drawing.Point(147, 109);
-            this.TowerDesignDataTowerDesignSpecificationsWetBulbTemperature.Name = "TowerDesignDataTowerDesignSpecificationsWetBulbTemperature";
-            this.TowerDesignDataTowerDesignSpecificationsWetBulbTemperature.Size = new System.Drawing.Size(132, 20);
-            this.TowerDesignDataTowerDesignSpecificationsWetBulbTemperature.TabIndex = 3;
-            // 
-            // TowerDesignDataTowerDesignSpecificationsDryBulbTemperature
-            // 
-            this.TowerDesignDataTowerDesignSpecificationsDryBulbTemperature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TowerDesignDataTowerDesignSpecificationsDryBulbTemperature.Location = new System.Drawing.Point(147, 139);
-            this.TowerDesignDataTowerDesignSpecificationsDryBulbTemperature.Name = "TowerDesignDataTowerDesignSpecificationsDryBulbTemperature";
-            this.TowerDesignDataTowerDesignSpecificationsDryBulbTemperature.Size = new System.Drawing.Size(132, 20);
-            this.TowerDesignDataTowerDesignSpecificationsDryBulbTemperature.TabIndex = 2;
-            // 
-            // TowerDesignDataTowerDesignSpecificationsBarometricPressure
-            // 
-            this.TowerDesignDataTowerDesignSpecificationsBarometricPressure.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TowerDesignDataTowerDesignSpecificationsBarometricPressure.Location = new System.Drawing.Point(147, 199);
-            this.TowerDesignDataTowerDesignSpecificationsBarometricPressure.Name = "TowerDesignDataTowerDesignSpecificationsBarometricPressure";
-            this.TowerDesignDataTowerDesignSpecificationsBarometricPressure.Size = new System.Drawing.Size(132, 20);
-            this.TowerDesignDataTowerDesignSpecificationsBarometricPressure.TabIndex = 1;
-            // 
-            // TowerDesignDataTowerDesignSpecificationsFanDrivePower
-            // 
-            this.TowerDesignDataTowerDesignSpecificationsFanDrivePower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TowerDesignDataTowerDesignSpecificationsFanDrivePower.Location = new System.Drawing.Point(147, 169);
-            this.TowerDesignDataTowerDesignSpecificationsFanDrivePower.Name = "TowerDesignDataTowerDesignSpecificationsFanDrivePower";
-            this.TowerDesignDataTowerDesignSpecificationsFanDrivePower.Size = new System.Drawing.Size(132, 20);
-            this.TowerDesignDataTowerDesignSpecificationsFanDrivePower.TabIndex = 0;
             // 
             // TowerDesignDataTowerDesignSpecificationsWaterFlowRateLabel
             // 
@@ -240,8 +180,73 @@
             this.TowerDesignDataTowerDesignSpecificationsLiquidToGasRatioLabel.TabIndex = 15;
             this.TowerDesignDataTowerDesignSpecificationsLiquidToGasRatioLabel.Text = "Liquid To Gas Ratio:";
             // 
+            // TowerDesignDataTowerDesignSpecificationsLiquidToGasRatio
+            // 
+            this.TowerDesignDataTowerDesignSpecificationsLiquidToGasRatio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TowerDesignDataTowerDesignSpecificationsLiquidToGasRatio.Location = new System.Drawing.Point(147, 229);
+            this.TowerDesignDataTowerDesignSpecificationsLiquidToGasRatio.Name = "TowerDesignDataTowerDesignSpecificationsLiquidToGasRatio";
+            this.TowerDesignDataTowerDesignSpecificationsLiquidToGasRatio.Size = new System.Drawing.Size(132, 20);
+            this.TowerDesignDataTowerDesignSpecificationsLiquidToGasRatio.TabIndex = 7;
+            // 
+            // TowerDesignDataTowerDesignSpecificationsWaterFlowRate
+            // 
+            this.TowerDesignDataTowerDesignSpecificationsWaterFlowRate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TowerDesignDataTowerDesignSpecificationsWaterFlowRate.Location = new System.Drawing.Point(147, 19);
+            this.TowerDesignDataTowerDesignSpecificationsWaterFlowRate.Name = "TowerDesignDataTowerDesignSpecificationsWaterFlowRate";
+            this.TowerDesignDataTowerDesignSpecificationsWaterFlowRate.Size = new System.Drawing.Size(132, 20);
+            this.TowerDesignDataTowerDesignSpecificationsWaterFlowRate.TabIndex = 6;
+            // 
+            // TowerDesignDataTowerDesignSpecificationsHotWaterTemperature
+            // 
+            this.TowerDesignDataTowerDesignSpecificationsHotWaterTemperature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TowerDesignDataTowerDesignSpecificationsHotWaterTemperature.Location = new System.Drawing.Point(147, 49);
+            this.TowerDesignDataTowerDesignSpecificationsHotWaterTemperature.Name = "TowerDesignDataTowerDesignSpecificationsHotWaterTemperature";
+            this.TowerDesignDataTowerDesignSpecificationsHotWaterTemperature.Size = new System.Drawing.Size(132, 20);
+            this.TowerDesignDataTowerDesignSpecificationsHotWaterTemperature.TabIndex = 5;
+            // 
+            // TowerDesignDataTowerDesignSpecificationsColdWaterTemperature
+            // 
+            this.TowerDesignDataTowerDesignSpecificationsColdWaterTemperature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TowerDesignDataTowerDesignSpecificationsColdWaterTemperature.Location = new System.Drawing.Point(147, 79);
+            this.TowerDesignDataTowerDesignSpecificationsColdWaterTemperature.Name = "TowerDesignDataTowerDesignSpecificationsColdWaterTemperature";
+            this.TowerDesignDataTowerDesignSpecificationsColdWaterTemperature.Size = new System.Drawing.Size(132, 20);
+            this.TowerDesignDataTowerDesignSpecificationsColdWaterTemperature.TabIndex = 4;
+            // 
+            // TowerDesignDataTowerDesignSpecificationsWetBulbTemperature
+            // 
+            this.TowerDesignDataTowerDesignSpecificationsWetBulbTemperature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TowerDesignDataTowerDesignSpecificationsWetBulbTemperature.Location = new System.Drawing.Point(147, 109);
+            this.TowerDesignDataTowerDesignSpecificationsWetBulbTemperature.Name = "TowerDesignDataTowerDesignSpecificationsWetBulbTemperature";
+            this.TowerDesignDataTowerDesignSpecificationsWetBulbTemperature.Size = new System.Drawing.Size(132, 20);
+            this.TowerDesignDataTowerDesignSpecificationsWetBulbTemperature.TabIndex = 3;
+            // 
+            // TowerDesignDataTowerDesignSpecificationsDryBulbTemperature
+            // 
+            this.TowerDesignDataTowerDesignSpecificationsDryBulbTemperature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TowerDesignDataTowerDesignSpecificationsDryBulbTemperature.Location = new System.Drawing.Point(147, 139);
+            this.TowerDesignDataTowerDesignSpecificationsDryBulbTemperature.Name = "TowerDesignDataTowerDesignSpecificationsDryBulbTemperature";
+            this.TowerDesignDataTowerDesignSpecificationsDryBulbTemperature.Size = new System.Drawing.Size(132, 20);
+            this.TowerDesignDataTowerDesignSpecificationsDryBulbTemperature.TabIndex = 2;
+            // 
+            // TowerDesignDataTowerDesignSpecificationsBarometricPressure
+            // 
+            this.TowerDesignDataTowerDesignSpecificationsBarometricPressure.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TowerDesignDataTowerDesignSpecificationsBarometricPressure.Location = new System.Drawing.Point(147, 199);
+            this.TowerDesignDataTowerDesignSpecificationsBarometricPressure.Name = "TowerDesignDataTowerDesignSpecificationsBarometricPressure";
+            this.TowerDesignDataTowerDesignSpecificationsBarometricPressure.Size = new System.Drawing.Size(132, 20);
+            this.TowerDesignDataTowerDesignSpecificationsBarometricPressure.TabIndex = 1;
+            // 
+            // TowerDesignDataTowerDesignSpecificationsFanDrivePower
+            // 
+            this.TowerDesignDataTowerDesignSpecificationsFanDrivePower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TowerDesignDataTowerDesignSpecificationsFanDrivePower.Location = new System.Drawing.Point(147, 169);
+            this.TowerDesignDataTowerDesignSpecificationsFanDrivePower.Name = "TowerDesignDataTowerDesignSpecificationsFanDrivePower";
+            this.TowerDesignDataTowerDesignSpecificationsFanDrivePower.Size = new System.Drawing.Size(132, 20);
+            this.TowerDesignDataTowerDesignSpecificationsFanDrivePower.TabIndex = 0;
+            // 
             // TowerDesignDataTowerInformation
             // 
+            this.TowerDesignDataTowerInformation.Controls.Add(this.PerformanceCurveTowerTypeGroupBox);
             this.TowerDesignDataTowerInformation.Controls.Add(this.TowerDesignDataTowerInformationTowerManufacturer);
             this.TowerDesignDataTowerInformation.Controls.Add(this.TowerDesignDataTowerInformationLocation);
             this.TowerDesignDataTowerInformation.Controls.Add(this.TowerDesignDataTowerInformationProjectName);
@@ -252,10 +257,38 @@
             this.TowerDesignDataTowerInformation.Controls.Add(this.TowerDesignDataTowerInformationOwnerNameLabel);
             this.TowerDesignDataTowerInformation.Location = new System.Drawing.Point(15, 19);
             this.TowerDesignDataTowerInformation.Name = "TowerDesignDataTowerInformation";
-            this.TowerDesignDataTowerInformation.Size = new System.Drawing.Size(702, 159);
+            this.TowerDesignDataTowerInformation.Size = new System.Drawing.Size(702, 269);
             this.TowerDesignDataTowerInformation.TabIndex = 11;
             this.TowerDesignDataTowerInformation.TabStop = false;
             this.TowerDesignDataTowerInformation.Text = "Tower Information";
+            // 
+            // TowerDesignDataTowerInformationTowerManufacturer
+            // 
+            this.TowerDesignDataTowerInformationTowerManufacturer.Location = new System.Drawing.Point(124, 122);
+            this.TowerDesignDataTowerInformationTowerManufacturer.Name = "TowerDesignDataTowerInformationTowerManufacturer";
+            this.TowerDesignDataTowerInformationTowerManufacturer.Size = new System.Drawing.Size(560, 20);
+            this.TowerDesignDataTowerInformationTowerManufacturer.TabIndex = 23;
+            // 
+            // TowerDesignDataTowerInformationLocation
+            // 
+            this.TowerDesignDataTowerInformationLocation.Location = new System.Drawing.Point(124, 92);
+            this.TowerDesignDataTowerInformationLocation.Name = "TowerDesignDataTowerInformationLocation";
+            this.TowerDesignDataTowerInformationLocation.Size = new System.Drawing.Size(560, 20);
+            this.TowerDesignDataTowerInformationLocation.TabIndex = 22;
+            // 
+            // TowerDesignDataTowerInformationProjectName
+            // 
+            this.TowerDesignDataTowerInformationProjectName.Location = new System.Drawing.Point(124, 59);
+            this.TowerDesignDataTowerInformationProjectName.Name = "TowerDesignDataTowerInformationProjectName";
+            this.TowerDesignDataTowerInformationProjectName.Size = new System.Drawing.Size(560, 20);
+            this.TowerDesignDataTowerInformationProjectName.TabIndex = 21;
+            // 
+            // TowerDesignDataTowerInformationOwnerName
+            // 
+            this.TowerDesignDataTowerInformationOwnerName.Location = new System.Drawing.Point(124, 26);
+            this.TowerDesignDataTowerInformationOwnerName.Name = "TowerDesignDataTowerInformationOwnerName";
+            this.TowerDesignDataTowerInformationOwnerName.Size = new System.Drawing.Size(560, 20);
+            this.TowerDesignDataTowerInformationOwnerName.TabIndex = 20;
             // 
             // TowerDesignDataTowerInformationTowerManufacturerLabel
             // 
@@ -293,34 +326,6 @@
             this.TowerDesignDataTowerInformationOwnerNameLabel.TabIndex = 16;
             this.TowerDesignDataTowerInformationOwnerNameLabel.Text = "Owner Name:";
             // 
-            // TowerDesignDataTowerInformationOwnerName
-            // 
-            this.TowerDesignDataTowerInformationOwnerName.Location = new System.Drawing.Point(124, 26);
-            this.TowerDesignDataTowerInformationOwnerName.Name = "TowerDesignDataTowerInformationOwnerName";
-            this.TowerDesignDataTowerInformationOwnerName.Size = new System.Drawing.Size(560, 20);
-            this.TowerDesignDataTowerInformationOwnerName.TabIndex = 20;
-            // 
-            // TowerDesignDataTowerInformationProjectName
-            // 
-            this.TowerDesignDataTowerInformationProjectName.Location = new System.Drawing.Point(124, 59);
-            this.TowerDesignDataTowerInformationProjectName.Name = "TowerDesignDataTowerInformationProjectName";
-            this.TowerDesignDataTowerInformationProjectName.Size = new System.Drawing.Size(560, 20);
-            this.TowerDesignDataTowerInformationProjectName.TabIndex = 21;
-            // 
-            // TowerDesignDataTowerInformationLocation
-            // 
-            this.TowerDesignDataTowerInformationLocation.Location = new System.Drawing.Point(124, 92);
-            this.TowerDesignDataTowerInformationLocation.Name = "TowerDesignDataTowerInformationLocation";
-            this.TowerDesignDataTowerInformationLocation.Size = new System.Drawing.Size(560, 20);
-            this.TowerDesignDataTowerInformationLocation.TabIndex = 22;
-            // 
-            // TowerDesignDataTowerInformationTowerManufacturer
-            // 
-            this.TowerDesignDataTowerInformationTowerManufacturer.Location = new System.Drawing.Point(124, 122);
-            this.TowerDesignDataTowerInformationTowerManufacturer.Name = "TowerDesignDataTowerInformationTowerManufacturer";
-            this.TowerDesignDataTowerInformationTowerManufacturer.Size = new System.Drawing.Size(560, 20);
-            this.TowerDesignDataTowerInformationTowerManufacturer.TabIndex = 23;
-            // 
             // TowerDesignDataTowerDesignCurveDataRangesGroupBox
             // 
             this.TowerDesignDataTowerDesignCurveDataRangesGroupBox.Controls.Add(this.textBox5);
@@ -333,21 +338,101 @@
             this.TowerDesignDataTowerDesignCurveDataRangesGroupBox.Controls.Add(this.TowerDesignDataTowerDesignCurveDataRangeLabel3);
             this.TowerDesignDataTowerDesignCurveDataRangesGroupBox.Controls.Add(this.TowerDesignDataTowerDesignCurveDataRangeLabel2);
             this.TowerDesignDataTowerDesignCurveDataRangesGroupBox.Controls.Add(this.TowerDesignDataTowerDesignCurveDataRangeLabel1);
-            this.TowerDesignDataTowerDesignCurveDataRangesGroupBox.Location = new System.Drawing.Point(15, 221);
+            this.TowerDesignDataTowerDesignCurveDataRangesGroupBox.Location = new System.Drawing.Point(15, 367);
             this.TowerDesignDataTowerDesignCurveDataRangesGroupBox.Name = "TowerDesignDataTowerDesignCurveDataRangesGroupBox";
             this.TowerDesignDataTowerDesignCurveDataRangesGroupBox.Size = new System.Drawing.Size(702, 67);
             this.TowerDesignDataTowerDesignCurveDataRangesGroupBox.TabIndex = 12;
             this.TowerDesignDataTowerDesignCurveDataRangesGroupBox.TabStop = false;
             this.TowerDesignDataTowerDesignCurveDataRangesGroupBox.Text = "Tower Design Curve Data Ranges";
             // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(584, 23);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(100, 20);
+            this.textBox5.TabIndex = 9;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(448, 23);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 8;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(317, 23);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 7;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(181, 23);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 6;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(36, 23);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 5;
+            // 
+            // TowerDesignDataTowerDesignCurveDataRangeLabel5
+            // 
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel5.AutoSize = true;
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel5.Location = new System.Drawing.Point(554, 26);
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel5.Name = "TowerDesignDataTowerDesignCurveDataRangeLabel5";
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel5.Size = new System.Drawing.Size(24, 13);
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel5.TabIndex = 4;
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel5.Text = "R5:";
+            // 
+            // TowerDesignDataTowerDesignCurveDataRangeLabel4
+            // 
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel4.AutoSize = true;
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel4.Location = new System.Drawing.Point(424, 26);
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel4.Name = "TowerDesignDataTowerDesignCurveDataRangeLabel4";
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel4.Size = new System.Drawing.Size(24, 13);
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel4.TabIndex = 3;
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel4.Text = "R4:";
+            // 
+            // TowerDesignDataTowerDesignCurveDataRangeLabel3
+            // 
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel3.AutoSize = true;
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel3.Location = new System.Drawing.Point(287, 26);
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel3.Name = "TowerDesignDataTowerDesignCurveDataRangeLabel3";
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel3.Size = new System.Drawing.Size(24, 13);
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel3.TabIndex = 2;
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel3.Text = "R3:";
+            // 
+            // TowerDesignDataTowerDesignCurveDataRangeLabel2
+            // 
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel2.AutoSize = true;
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel2.Location = new System.Drawing.Point(151, 26);
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel2.Name = "TowerDesignDataTowerDesignCurveDataRangeLabel2";
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel2.Size = new System.Drawing.Size(24, 13);
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel2.TabIndex = 1;
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel2.Text = "R2:";
+            // 
+            // TowerDesignDataTowerDesignCurveDataRangeLabel1
+            // 
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel1.AutoSize = true;
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel1.Location = new System.Drawing.Point(8, 26);
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel1.Name = "TowerDesignDataTowerDesignCurveDataRangeLabel1";
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel1.Size = new System.Drawing.Size(24, 13);
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel1.TabIndex = 0;
+            this.TowerDesignDataTowerDesignCurveDataRangeLabel1.Text = "R1:";
+            // 
             // lTowerDesignDataTowerDesignCurveDataRangesWarning
             // 
             this.lTowerDesignDataTowerDesignCurveDataRangesWarning.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lTowerDesignDataTowerDesignCurveDataRangesWarning.Location = new System.Drawing.Point(22, 184);
+            this.lTowerDesignDataTowerDesignCurveDataRangesWarning.Location = new System.Drawing.Point(30, 310);
             this.lTowerDesignDataTowerDesignCurveDataRangesWarning.Multiline = true;
             this.lTowerDesignDataTowerDesignCurveDataRangesWarning.Name = "lTowerDesignDataTowerDesignCurveDataRangesWarning";
             this.lTowerDesignDataTowerDesignCurveDataRangesWarning.ReadOnly = true;
-            this.lTowerDesignDataTowerDesignCurveDataRangesWarning.Size = new System.Drawing.Size(616, 37);
+            this.lTowerDesignDataTowerDesignCurveDataRangesWarning.Size = new System.Drawing.Size(1011, 34);
             this.lTowerDesignDataTowerDesignCurveDataRangesWarning.TabIndex = 14;
             this.lTowerDesignDataTowerDesignCurveDataRangesWarning.Text = "Range and flow design data can be entered in either ascending or descending order" +
     ", but not mixed. Wet bulb temperature design data must be entered in ascending o" +
@@ -356,9 +441,9 @@
             // TowerDesignDataCurveDataGroupBox
             // 
             this.TowerDesignDataCurveDataGroupBox.Controls.Add(this.TowerDesignDataCurveDataTabControl);
-            this.TowerDesignDataCurveDataGroupBox.Location = new System.Drawing.Point(22, 294);
+            this.TowerDesignDataCurveDataGroupBox.Location = new System.Drawing.Point(15, 440);
             this.TowerDesignDataCurveDataGroupBox.Name = "TowerDesignDataCurveDataGroupBox";
-            this.TowerDesignDataCurveDataGroupBox.Size = new System.Drawing.Size(1031, 331);
+            this.TowerDesignDataCurveDataGroupBox.Size = new System.Drawing.Size(1031, 347);
             this.TowerDesignDataCurveDataGroupBox.TabIndex = 15;
             this.TowerDesignDataCurveDataGroupBox.TabStop = false;
             this.TowerDesignDataCurveDataGroupBox.Text = "Tower Design Curve Data (IP)";
@@ -388,14 +473,14 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(192, 74);
+            this.tabPage2.Size = new System.Drawing.Size(1017, 273);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // TowerDesignCurveDataSaveButton
             // 
-            this.TowerDesignCurveDataSaveButton.Location = new System.Drawing.Point(442, 643);
+            this.TowerDesignCurveDataSaveButton.Location = new System.Drawing.Point(438, 793);
             this.TowerDesignCurveDataSaveButton.Name = "TowerDesignCurveDataSaveButton";
             this.TowerDesignCurveDataSaveButton.Size = new System.Drawing.Size(75, 23);
             this.TowerDesignCurveDataSaveButton.TabIndex = 16;
@@ -404,92 +489,45 @@
             // 
             // TowerDesignCurveDataCancelButton
             // 
-            this.TowerDesignCurveDataCancelButton.Location = new System.Drawing.Point(552, 643);
+            this.TowerDesignCurveDataCancelButton.Location = new System.Drawing.Point(548, 793);
             this.TowerDesignCurveDataCancelButton.Name = "TowerDesignCurveDataCancelButton";
             this.TowerDesignCurveDataCancelButton.Size = new System.Drawing.Size(75, 23);
             this.TowerDesignCurveDataCancelButton.TabIndex = 17;
             this.TowerDesignCurveDataCancelButton.Text = "Cancel";
             this.TowerDesignCurveDataCancelButton.UseVisualStyleBackColor = true;
             // 
-            // TowerDesignDataTowerDesignCurveDataRangeLabel1
+            // PerformanceCurveTowerTypeGroupBox
             // 
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel1.AutoSize = true;
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel1.Location = new System.Drawing.Point(8, 26);
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel1.Name = "TowerDesignDataTowerDesignCurveDataRangeLabel1";
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel1.Size = new System.Drawing.Size(24, 13);
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel1.TabIndex = 0;
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel1.Text = "R1:";
+            this.PerformanceCurveTowerTypeGroupBox.Controls.Add(this.PerformanceCurveForcedRadioButton);
+            this.PerformanceCurveTowerTypeGroupBox.Controls.Add(this.PerformanceCurveInducedRadioButton);
+            this.PerformanceCurveTowerTypeGroupBox.Location = new System.Drawing.Point(18, 158);
+            this.PerformanceCurveTowerTypeGroupBox.Name = "PerformanceCurveTowerTypeGroupBox";
+            this.PerformanceCurveTowerTypeGroupBox.Size = new System.Drawing.Size(326, 71);
+            this.PerformanceCurveTowerTypeGroupBox.TabIndex = 24;
+            this.PerformanceCurveTowerTypeGroupBox.TabStop = false;
+            this.PerformanceCurveTowerTypeGroupBox.Text = "Tower Type";
             // 
-            // TowerDesignDataTowerDesignCurveDataRangeLabel2
+            // PerformanceCurveForcedRadioButton
             // 
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel2.AutoSize = true;
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel2.Location = new System.Drawing.Point(151, 26);
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel2.Name = "TowerDesignDataTowerDesignCurveDataRangeLabel2";
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel2.Size = new System.Drawing.Size(24, 13);
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel2.TabIndex = 1;
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel2.Text = "R2:";
+            this.PerformanceCurveForcedRadioButton.AutoSize = true;
+            this.PerformanceCurveForcedRadioButton.Location = new System.Drawing.Point(24, 44);
+            this.PerformanceCurveForcedRadioButton.Name = "PerformanceCurveForcedRadioButton";
+            this.PerformanceCurveForcedRadioButton.Size = new System.Drawing.Size(58, 17);
+            this.PerformanceCurveForcedRadioButton.TabIndex = 1;
+            this.PerformanceCurveForcedRadioButton.TabStop = true;
+            this.PerformanceCurveForcedRadioButton.Text = "Forced";
+            this.PerformanceCurveForcedRadioButton.UseVisualStyleBackColor = true;
             // 
-            // TowerDesignDataTowerDesignCurveDataRangeLabel3
+            // PerformanceCurveInducedRadioButton
             // 
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel3.AutoSize = true;
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel3.Location = new System.Drawing.Point(287, 26);
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel3.Name = "TowerDesignDataTowerDesignCurveDataRangeLabel3";
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel3.Size = new System.Drawing.Size(24, 13);
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel3.TabIndex = 2;
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel3.Text = "R3:";
-            // 
-            // TowerDesignDataTowerDesignCurveDataRangeLabel4
-            // 
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel4.AutoSize = true;
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel4.Location = new System.Drawing.Point(424, 26);
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel4.Name = "TowerDesignDataTowerDesignCurveDataRangeLabel4";
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel4.Size = new System.Drawing.Size(24, 13);
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel4.TabIndex = 3;
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel4.Text = "R4:";
-            // 
-            // TowerDesignDataTowerDesignCurveDataRangeLabel5
-            // 
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel5.AutoSize = true;
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel5.Location = new System.Drawing.Point(554, 26);
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel5.Name = "TowerDesignDataTowerDesignCurveDataRangeLabel5";
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel5.Size = new System.Drawing.Size(24, 13);
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel5.TabIndex = 4;
-            this.TowerDesignDataTowerDesignCurveDataRangeLabel5.Text = "R5:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(36, 23);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 5;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(181, 23);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 6;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(317, 23);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 7;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(448, 23);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 8;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(584, 23);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 9;
+            this.PerformanceCurveInducedRadioButton.AutoSize = true;
+            this.PerformanceCurveInducedRadioButton.Location = new System.Drawing.Point(24, 20);
+            this.PerformanceCurveInducedRadioButton.Name = "PerformanceCurveInducedRadioButton";
+            this.PerformanceCurveInducedRadioButton.Size = new System.Drawing.Size(64, 17);
+            this.PerformanceCurveInducedRadioButton.TabIndex = 0;
+            this.PerformanceCurveInducedRadioButton.TabStop = true;
+            this.PerformanceCurveInducedRadioButton.Text = "Induced";
+            this.PerformanceCurveInducedRadioButton.UseVisualStyleBackColor = true;
             // 
             // TowerDesignDataUserControl
             // 
@@ -503,7 +541,7 @@
             this.Controls.Add(this.TowerDesignDataTowerInformation);
             this.Controls.Add(this.TowerDesignDataTowerDesignSpecificationsGroupBox);
             this.Name = "TowerDesignDataUserControl";
-            this.Size = new System.Drawing.Size(1062, 680);
+            this.Size = new System.Drawing.Size(1062, 837);
             this.TowerDesignDataTowerDesignSpecificationsGroupBox.ResumeLayout(false);
             this.TowerDesignDataTowerDesignSpecificationsGroupBox.PerformLayout();
             this.TowerDesignDataTowerInformation.ResumeLayout(false);
@@ -512,6 +550,8 @@
             this.TowerDesignDataTowerDesignCurveDataRangesGroupBox.PerformLayout();
             this.TowerDesignDataCurveDataGroupBox.ResumeLayout(false);
             this.TowerDesignDataCurveDataTabControl.ResumeLayout(false);
+            this.PerformanceCurveTowerTypeGroupBox.ResumeLayout(false);
+            this.PerformanceCurveTowerTypeGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -563,5 +603,8 @@
         private System.Windows.Forms.Label TowerDesignDataTowerDesignCurveDataRangeLabel2;
         private System.Windows.Forms.Label TowerDesignDataTowerDesignCurveDataRangeLabel1;
         private System.Windows.Forms.Button TowerDesignCurveDataCancelButton;
+        private System.Windows.Forms.GroupBox PerformanceCurveTowerTypeGroupBox;
+        private System.Windows.Forms.RadioButton PerformanceCurveForcedRadioButton;
+        private System.Windows.Forms.RadioButton PerformanceCurveInducedRadioButton;
     }
 }

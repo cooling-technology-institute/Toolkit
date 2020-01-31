@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Configuration;
-using System.Collections.Specialized;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ToolkitLibrary;
 
 namespace CTIToolkit
 {
