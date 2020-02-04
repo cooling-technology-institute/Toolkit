@@ -8,12 +8,13 @@ namespace ViewModels
 {
     public class MinimumDataValue : DataValue
     {
+        public const string MinimumToolTipFormat = "Minimum Value.\nValue should be between {0} and {1}.";
+
         public MinimumDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
             InputMessage = "Minimum";
             Format = "F1";
-            ToolTipFormat = "Minimum Value.\nValue should be between {0} and {1}.";
             ConvertValue(isInternationalSystemOfUnits_IS_);
         }
 
@@ -26,7 +27,7 @@ namespace ViewModels
             Current = Default;
 
             InputValue = Current.ToString(Format);
-            ToolTip = string.Format(ToolTipFormat, Minimum, Maximum);
+            ToolTip = string.Format(MinimumToolTipFormat, Minimum, Maximum);
 
             IsInternationalSystemOfUnits_IS_ = isIS;
         }

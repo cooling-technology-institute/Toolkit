@@ -4,35 +4,85 @@ namespace ViewModels
 {
     public class WaterFlowRateDataValue : DataValue
     {
+        public const double WaterFlowRateDefault = 0.1;
+        public const double WaterFlowRateMinimum = 0.1;
+        public const double WaterFlowRateMaximum = double.MaxValue;
+
+        public const double WaterFlowRateDefaultDemo = 0.1;
+        public const double WaterFlowRateMinimumDemo = 0.1;
+        public const double WaterFlowRateMaximumDemo = 57500.0;
+
+        public const double WaterFlowRateDefault_InternationalSystemOfUnits_IS_ = 0.1;
+        public const double WaterFlowRateMinimum_InternationalSystemOfUnits_IS_ = 0.1;
+        public const double WaterFlowRateMaximum_InternationalSystemOfUnits_IS_ = double.MaxValue;
+
+        public const double WaterFlowRateDefault_InternationalSystemOfUnits_IS_Demo = 0.1;
+        public const double WaterFlowRateMinimum_InternationalSystemOfUnits_IS_Demo = 0.1;
+        public const double WaterFlowRateMaximum_InternationalSystemOfUnits_IS_Demo = 3630.0;
+
+        public const string WaterFlowRateToolTipFormat = "Water Flow Rate.\nValue should be between {0} and {1}.";
+
         public WaterFlowRateDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
             InputMessage = "Water Flow Rate";
             Format = "F2";
-            ToolTipFormat = "Water Flow Rate.\nValue should be between {0} and {1}.";
             ConvertValue(isInternationalSystemOfUnits_IS_);
         }
 
-        public override void ConvertValue(bool isIS, bool doConversion = false)
+        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_, bool doConversion = false)
         {
-            if (IsDemo)
+            if (isInternationalSystemOfUnits_IS_)
             {
-                Default = -0.75;
+                if (IsDemo)
+                {
+                    Default = WaterFlowRateDefault_InternationalSystemOfUnits_IS_Demo;
+                    Minimum = WaterFlowRateMinimum_InternationalSystemOfUnits_IS_Demo;
+                    Maximum = WaterFlowRateMaximum_InternationalSystemOfUnits_IS_Demo;
+                }
+                else
+                {
+                    Default = WaterFlowRateDefault_InternationalSystemOfUnits_IS_;
+                    Minimum = WaterFlowRateMinimum_InternationalSystemOfUnits_IS_;
+                    Maximum = WaterFlowRateMaximum_InternationalSystemOfUnits_IS_;
+                }
             }
             else
             {
-                Default = 0;
+                if (IsDemo)
+                {
+                    Default = WaterFlowRateDefaultDemo;
+                    Minimum = WaterFlowRateMinimumDemo;
+                    Maximum = WaterFlowRateMaximumDemo;
+                }
+                else
+                {
+                    Default = WaterFlowRateDefault;
+                    Minimum = WaterFlowRateMinimum;
+                    Maximum = WaterFlowRateMaximum;
+                }
             }
 
-            Minimum = -2;
-            Maximum = 0;
-
-            Current = Default;
+            if (doConversion)
+            {
+                if (IsInternationalSystemOfUnits_IS_ && !isInternationalSystemOfUnits_IS_)
+                {
+                    // convert to United States Customary Units (IP)
+                }
+                else
+                {
+                    // convert to InternationalSystemOfUnits_IS
+                }
+            }
+            else
+            {
+                Current = Default;
+            }
 
             InputValue = Current.ToString(Format);
-            ToolTip = string.Format(ToolTipFormat, Minimum, Maximum);
+            ToolTip = string.Format(WaterFlowRateToolTipFormat, Minimum, Maximum);
 
-            IsInternationalSystemOfUnits_IS_ = isIS;
+            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
         }
     }
 }

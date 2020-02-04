@@ -35,12 +35,8 @@
             this.PerformanceCurveCalculate = new System.Windows.Forms.Button();
             this.PerformanceCurveViewGraph = new System.Windows.Forms.Button();
             this.PerformanceCurveOwnerNameLabel = new System.Windows.Forms.Label();
-            this.PerformanceCurveOwnerNameField = new System.Windows.Forms.Label();
-            this.PerformanceCurveProjectNameField = new System.Windows.Forms.Label();
             this.PerformanceCurveProjectNameLabel = new System.Windows.Forms.Label();
-            this.PerformanceCurveLocationField = new System.Windows.Forms.Label();
             this.PerformanceCurveLocationLabel = new System.Windows.Forms.Label();
-            this.PerformanceCurveTowerManufacturerField = new System.Windows.Forms.Label();
             this.PerformanceCurveTowerManufacturerLabel = new System.Windows.Forms.Label();
             this.PerformanceCurveTestResultsGroupBox = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -83,6 +79,12 @@
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.MechanicalDraftPerformanceCurveGridView = new System.Windows.Forms.DataGridView();
+            this.MechanicalDraftPerformanceCurveTowerTypeLabel = new System.Windows.Forms.Label();
+            this.PerformanceCurveOwnerNameField = new System.Windows.Forms.TextBox();
+            this.PerformanceCurveProjectNameField = new System.Windows.Forms.TextBox();
+            this.PerformanceCurveLocationField = new System.Windows.Forms.TextBox();
+            this.PerformanceCurveTowerManufacturerField = new System.Windows.Forms.TextBox();
+            this.PerformanceCurveTowerTypeField = new System.Windows.Forms.TextBox();
             this.PerformanceCurveTestResultsGroupBox.SuspendLayout();
             this.PerformanceCurveTestGroupBox.SuspendLayout();
             this.PerformanceCurveDesignGroupBox.SuspendLayout();
@@ -104,12 +106,12 @@
             this.PerformanceCurveComboBox.FormattingEnabled = true;
             this.PerformanceCurveComboBox.Location = new System.Drawing.Point(138, 18);
             this.PerformanceCurveComboBox.Name = "PerformanceCurveComboBox";
-            this.PerformanceCurveComboBox.Size = new System.Drawing.Size(486, 21);
+            this.PerformanceCurveComboBox.Size = new System.Drawing.Size(520, 21);
             this.PerformanceCurveComboBox.TabIndex = 1;
             // 
             // PerformanceCurveNewFile
             // 
-            this.PerformanceCurveNewFile.Location = new System.Drawing.Point(630, 18);
+            this.PerformanceCurveNewFile.Location = new System.Drawing.Point(683, 16);
             this.PerformanceCurveNewFile.Name = "PerformanceCurveNewFile";
             this.PerformanceCurveNewFile.Size = new System.Drawing.Size(75, 23);
             this.PerformanceCurveNewFile.TabIndex = 2;
@@ -118,7 +120,7 @@
             // 
             // PerformanceCurveCalculate
             // 
-            this.PerformanceCurveCalculate.Location = new System.Drawing.Point(786, 16);
+            this.PerformanceCurveCalculate.Location = new System.Drawing.Point(683, 55);
             this.PerformanceCurveCalculate.Name = "PerformanceCurveCalculate";
             this.PerformanceCurveCalculate.Size = new System.Drawing.Size(75, 23);
             this.PerformanceCurveCalculate.TabIndex = 3;
@@ -127,7 +129,7 @@
             // 
             // PerformanceCurveViewGraph
             // 
-            this.PerformanceCurveViewGraph.Location = new System.Drawing.Point(786, 55);
+            this.PerformanceCurveViewGraph.Location = new System.Drawing.Point(683, 95);
             this.PerformanceCurveViewGraph.Name = "PerformanceCurveViewGraph";
             this.PerformanceCurveViewGraph.Size = new System.Drawing.Size(75, 23);
             this.PerformanceCurveViewGraph.TabIndex = 4;
@@ -137,70 +139,34 @@
             // PerformanceCurveOwnerNameLabel
             // 
             this.PerformanceCurveOwnerNameLabel.AutoSize = true;
-            this.PerformanceCurveOwnerNameLabel.Location = new System.Drawing.Point(17, 65);
+            this.PerformanceCurveOwnerNameLabel.Location = new System.Drawing.Point(19, 60);
             this.PerformanceCurveOwnerNameLabel.Name = "PerformanceCurveOwnerNameLabel";
             this.PerformanceCurveOwnerNameLabel.Size = new System.Drawing.Size(72, 13);
             this.PerformanceCurveOwnerNameLabel.TabIndex = 5;
             this.PerformanceCurveOwnerNameLabel.Text = "Owner Name:";
             // 
-            // PerformanceCurveOwnerNameField
-            // 
-            this.PerformanceCurveOwnerNameField.AutoSize = true;
-            this.PerformanceCurveOwnerNameField.Location = new System.Drawing.Point(125, 65);
-            this.PerformanceCurveOwnerNameField.Name = "PerformanceCurveOwnerNameField";
-            this.PerformanceCurveOwnerNameField.Size = new System.Drawing.Size(176, 13);
-            this.PerformanceCurveOwnerNameField.TabIndex = 6;
-            this.PerformanceCurveOwnerNameField.Text = "PerformanceCurveOwnerNameField";
-            // 
-            // PerformanceCurveProjectNameField
-            // 
-            this.PerformanceCurveProjectNameField.AutoSize = true;
-            this.PerformanceCurveProjectNameField.Location = new System.Drawing.Point(125, 84);
-            this.PerformanceCurveProjectNameField.Name = "PerformanceCurveProjectNameField";
-            this.PerformanceCurveProjectNameField.Size = new System.Drawing.Size(178, 13);
-            this.PerformanceCurveProjectNameField.TabIndex = 8;
-            this.PerformanceCurveProjectNameField.Text = "PerformanceCurveProjectNameField";
-            // 
             // PerformanceCurveProjectNameLabel
             // 
             this.PerformanceCurveProjectNameLabel.AutoSize = true;
-            this.PerformanceCurveProjectNameLabel.Location = new System.Drawing.Point(17, 85);
+            this.PerformanceCurveProjectNameLabel.Location = new System.Drawing.Point(17, 88);
             this.PerformanceCurveProjectNameLabel.Name = "PerformanceCurveProjectNameLabel";
             this.PerformanceCurveProjectNameLabel.Size = new System.Drawing.Size(74, 13);
             this.PerformanceCurveProjectNameLabel.TabIndex = 7;
             this.PerformanceCurveProjectNameLabel.Text = "Project Name:";
             // 
-            // PerformanceCurveLocationField
-            // 
-            this.PerformanceCurveLocationField.AutoSize = true;
-            this.PerformanceCurveLocationField.Location = new System.Drawing.Point(125, 104);
-            this.PerformanceCurveLocationField.Name = "PerformanceCurveLocationField";
-            this.PerformanceCurveLocationField.Size = new System.Drawing.Size(158, 13);
-            this.PerformanceCurveLocationField.TabIndex = 10;
-            this.PerformanceCurveLocationField.Text = "PerformanceCurveLocationField";
-            // 
             // PerformanceCurveLocationLabel
             // 
             this.PerformanceCurveLocationLabel.AutoSize = true;
-            this.PerformanceCurveLocationLabel.Location = new System.Drawing.Point(17, 104);
+            this.PerformanceCurveLocationLabel.Location = new System.Drawing.Point(17, 116);
             this.PerformanceCurveLocationLabel.Name = "PerformanceCurveLocationLabel";
             this.PerformanceCurveLocationLabel.Size = new System.Drawing.Size(51, 13);
             this.PerformanceCurveLocationLabel.TabIndex = 9;
             this.PerformanceCurveLocationLabel.Text = "Location:";
             // 
-            // PerformanceCurveTowerManufacturerField
-            // 
-            this.PerformanceCurveTowerManufacturerField.AutoSize = true;
-            this.PerformanceCurveTowerManufacturerField.Location = new System.Drawing.Point(125, 125);
-            this.PerformanceCurveTowerManufacturerField.Name = "PerformanceCurveTowerManufacturerField";
-            this.PerformanceCurveTowerManufacturerField.Size = new System.Drawing.Size(210, 13);
-            this.PerformanceCurveTowerManufacturerField.TabIndex = 12;
-            this.PerformanceCurveTowerManufacturerField.Text = "PerformanceCurveTowerManufacturerField";
-            // 
             // PerformanceCurveTowerManufacturerLabel
             // 
             this.PerformanceCurveTowerManufacturerLabel.AutoSize = true;
-            this.PerformanceCurveTowerManufacturerLabel.Location = new System.Drawing.Point(17, 125);
+            this.PerformanceCurveTowerManufacturerLabel.Location = new System.Drawing.Point(17, 144);
             this.PerformanceCurveTowerManufacturerLabel.Name = "PerformanceCurveTowerManufacturerLabel";
             this.PerformanceCurveTowerManufacturerLabel.Size = new System.Drawing.Size(106, 13);
             this.PerformanceCurveTowerManufacturerLabel.TabIndex = 15;
@@ -228,9 +194,9 @@
             this.PerformanceCurveTestResultsGroupBox.Controls.Add(this.PerformanceCurveFanDriverPowerLabel);
             this.PerformanceCurveTestResultsGroupBox.Controls.Add(this.PerformanceCurveBarometricPressureLabel);
             this.PerformanceCurveTestResultsGroupBox.Controls.Add(this.PerformanceCurveLiquidToGasRatioLabel);
-            this.PerformanceCurveTestResultsGroupBox.Location = new System.Drawing.Point(17, 167);
+            this.PerformanceCurveTestResultsGroupBox.Location = new System.Drawing.Point(17, 207);
             this.PerformanceCurveTestResultsGroupBox.Name = "PerformanceCurveTestResultsGroupBox";
-            this.PerformanceCurveTestResultsGroupBox.Size = new System.Drawing.Size(853, 375);
+            this.PerformanceCurveTestResultsGroupBox.Size = new System.Drawing.Size(741, 355);
             this.PerformanceCurveTestResultsGroupBox.TabIndex = 14;
             this.PerformanceCurveTestResultsGroupBox.TabStop = false;
             this.PerformanceCurveTestResultsGroupBox.Text = "Test Results";
@@ -238,7 +204,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(121, 32);
+            this.comboBox1.Location = new System.Drawing.Point(120, 20);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(486, 21);
             this.comboBox1.TabIndex = 31;
@@ -246,7 +212,7 @@
             // PerformanceCurveUnitsWaterFlowRate
             // 
             this.PerformanceCurveUnitsWaterFlowRate.AutoSize = true;
-            this.PerformanceCurveUnitsWaterFlowRate.Location = new System.Drawing.Point(550, 113);
+            this.PerformanceCurveUnitsWaterFlowRate.Location = new System.Drawing.Point(549, 101);
             this.PerformanceCurveUnitsWaterFlowRate.Name = "PerformanceCurveUnitsWaterFlowRate";
             this.PerformanceCurveUnitsWaterFlowRate.Size = new System.Drawing.Size(27, 13);
             this.PerformanceCurveUnitsWaterFlowRate.TabIndex = 13;
@@ -255,7 +221,7 @@
             // PerformanceCurveUnitsHotWaterTemperature
             // 
             this.PerformanceCurveUnitsHotWaterTemperature.AutoSize = true;
-            this.PerformanceCurveUnitsHotWaterTemperature.Location = new System.Drawing.Point(550, 143);
+            this.PerformanceCurveUnitsHotWaterTemperature.Location = new System.Drawing.Point(549, 131);
             this.PerformanceCurveUnitsHotWaterTemperature.Name = "PerformanceCurveUnitsHotWaterTemperature";
             this.PerformanceCurveUnitsHotWaterTemperature.Size = new System.Drawing.Size(17, 13);
             this.PerformanceCurveUnitsHotWaterTemperature.TabIndex = 12;
@@ -264,7 +230,7 @@
             // PerformanceCurveUnitsColdWaterTemperature
             // 
             this.PerformanceCurveUnitsColdWaterTemperature.AutoSize = true;
-            this.PerformanceCurveUnitsColdWaterTemperature.Location = new System.Drawing.Point(550, 173);
+            this.PerformanceCurveUnitsColdWaterTemperature.Location = new System.Drawing.Point(549, 161);
             this.PerformanceCurveUnitsColdWaterTemperature.Name = "PerformanceCurveUnitsColdWaterTemperature";
             this.PerformanceCurveUnitsColdWaterTemperature.Size = new System.Drawing.Size(17, 13);
             this.PerformanceCurveUnitsColdWaterTemperature.TabIndex = 11;
@@ -273,7 +239,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(550, 203);
+            this.label4.Location = new System.Drawing.Point(549, 191);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(17, 13);
             this.label4.TabIndex = 16;
@@ -282,7 +248,7 @@
             // PerformanceCurveUnitsDryBulbTemperature
             // 
             this.PerformanceCurveUnitsDryBulbTemperature.AutoSize = true;
-            this.PerformanceCurveUnitsDryBulbTemperature.Location = new System.Drawing.Point(550, 233);
+            this.PerformanceCurveUnitsDryBulbTemperature.Location = new System.Drawing.Point(549, 221);
             this.PerformanceCurveUnitsDryBulbTemperature.Name = "PerformanceCurveUnitsDryBulbTemperature";
             this.PerformanceCurveUnitsDryBulbTemperature.Size = new System.Drawing.Size(17, 13);
             this.PerformanceCurveUnitsDryBulbTemperature.TabIndex = 15;
@@ -291,7 +257,7 @@
             // PerformanceCurveUnitsFanDrivePower
             // 
             this.PerformanceCurveUnitsFanDrivePower.AutoSize = true;
-            this.PerformanceCurveUnitsFanDrivePower.Location = new System.Drawing.Point(550, 263);
+            this.PerformanceCurveUnitsFanDrivePower.Location = new System.Drawing.Point(549, 251);
             this.PerformanceCurveUnitsFanDrivePower.Name = "PerformanceCurveUnitsFanDrivePower";
             this.PerformanceCurveUnitsFanDrivePower.Size = new System.Drawing.Size(25, 13);
             this.PerformanceCurveUnitsFanDrivePower.TabIndex = 14;
@@ -300,7 +266,7 @@
             // PerformanceCurveUnitsBarometricPressure
             // 
             this.PerformanceCurveUnitsBarometricPressure.AutoSize = true;
-            this.PerformanceCurveUnitsBarometricPressure.Location = new System.Drawing.Point(550, 293);
+            this.PerformanceCurveUnitsBarometricPressure.Location = new System.Drawing.Point(549, 281);
             this.PerformanceCurveUnitsBarometricPressure.Name = "PerformanceCurveUnitsBarometricPressure";
             this.PerformanceCurveUnitsBarometricPressure.Size = new System.Drawing.Size(26, 13);
             this.PerformanceCurveUnitsBarometricPressure.TabIndex = 17;
@@ -309,19 +275,20 @@
             // PerformanceCurveUnitsLiquidToGasRatio
             // 
             this.PerformanceCurveUnitsLiquidToGasRatio.AutoSize = true;
-            this.PerformanceCurveUnitsLiquidToGasRatio.Location = new System.Drawing.Point(550, 323);
+            this.PerformanceCurveUnitsLiquidToGasRatio.Location = new System.Drawing.Point(549, 311);
             this.PerformanceCurveUnitsLiquidToGasRatio.Name = "PerformanceCurveUnitsLiquidToGasRatio";
             this.PerformanceCurveUnitsLiquidToGasRatio.Size = new System.Drawing.Size(0, 13);
             this.PerformanceCurveUnitsLiquidToGasRatio.TabIndex = 18;
             // 
             // PerformanceCurveDesignDataButton
             // 
-            this.PerformanceCurveDesignDataButton.Location = new System.Drawing.Point(613, 32);
+            this.PerformanceCurveDesignDataButton.Location = new System.Drawing.Point(612, 20);
             this.PerformanceCurveDesignDataButton.Name = "PerformanceCurveDesignDataButton";
             this.PerformanceCurveDesignDataButton.Size = new System.Drawing.Size(88, 23);
             this.PerformanceCurveDesignDataButton.TabIndex = 10;
             this.PerformanceCurveDesignDataButton.Text = "Design Data...";
             this.PerformanceCurveDesignDataButton.UseVisualStyleBackColor = true;
+            this.PerformanceCurveDesignDataButton.Click += new System.EventHandler(this.PerformanceCurveDesignDataButton_Click);
             // 
             // PerformanceCurveTestGroupBox
             // 
@@ -333,7 +300,7 @@
             this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestDryBulbTemperature);
             this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestBarometricPressure);
             this.PerformanceCurveTestGroupBox.Controls.Add(this.PerformanceCurveTestFanDriverPower);
-            this.PerformanceCurveTestGroupBox.Location = new System.Drawing.Point(349, 79);
+            this.PerformanceCurveTestGroupBox.Location = new System.Drawing.Point(348, 67);
             this.PerformanceCurveTestGroupBox.Name = "PerformanceCurveTestGroupBox";
             this.PerformanceCurveTestGroupBox.Size = new System.Drawing.Size(183, 273);
             this.PerformanceCurveTestGroupBox.TabIndex = 9;
@@ -423,7 +390,7 @@
             this.PerformanceCurveDesignGroupBox.Controls.Add(this.PerformanceCurveDesignWetBulbTemperature);
             this.PerformanceCurveDesignGroupBox.Controls.Add(this.PerformanceCurveDesignLiquidToGasRatio);
             this.PerformanceCurveDesignGroupBox.Controls.Add(this.PerformanceCurveDesignWaterFlowRate);
-            this.PerformanceCurveDesignGroupBox.Location = new System.Drawing.Point(148, 79);
+            this.PerformanceCurveDesignGroupBox.Location = new System.Drawing.Point(147, 67);
             this.PerformanceCurveDesignGroupBox.Name = "PerformanceCurveDesignGroupBox";
             this.PerformanceCurveDesignGroupBox.Size = new System.Drawing.Size(183, 273);
             this.PerformanceCurveDesignGroupBox.TabIndex = 8;
@@ -497,7 +464,7 @@
             // PerformanceCurveWaterFlowRateLabel
             // 
             this.PerformanceCurveWaterFlowRateLabel.AutoSize = true;
-            this.PerformanceCurveWaterFlowRateLabel.Location = new System.Drawing.Point(16, 113);
+            this.PerformanceCurveWaterFlowRateLabel.Location = new System.Drawing.Point(15, 101);
             this.PerformanceCurveWaterFlowRateLabel.Name = "PerformanceCurveWaterFlowRateLabel";
             this.PerformanceCurveWaterFlowRateLabel.Size = new System.Drawing.Size(90, 13);
             this.PerformanceCurveWaterFlowRateLabel.TabIndex = 2;
@@ -506,7 +473,7 @@
             // PerformanceCurveHotWaterTemperatureLabel
             // 
             this.PerformanceCurveHotWaterTemperatureLabel.AutoSize = true;
-            this.PerformanceCurveHotWaterTemperatureLabel.Location = new System.Drawing.Point(16, 143);
+            this.PerformanceCurveHotWaterTemperatureLabel.Location = new System.Drawing.Point(15, 131);
             this.PerformanceCurveHotWaterTemperatureLabel.Name = "PerformanceCurveHotWaterTemperatureLabel";
             this.PerformanceCurveHotWaterTemperatureLabel.Size = new System.Drawing.Size(122, 13);
             this.PerformanceCurveHotWaterTemperatureLabel.TabIndex = 1;
@@ -515,7 +482,7 @@
             // PerformanceCurveColdWaterTemperatureLabel
             // 
             this.PerformanceCurveColdWaterTemperatureLabel.AutoSize = true;
-            this.PerformanceCurveColdWaterTemperatureLabel.Location = new System.Drawing.Point(16, 173);
+            this.PerformanceCurveColdWaterTemperatureLabel.Location = new System.Drawing.Point(15, 161);
             this.PerformanceCurveColdWaterTemperatureLabel.Name = "PerformanceCurveColdWaterTemperatureLabel";
             this.PerformanceCurveColdWaterTemperatureLabel.Size = new System.Drawing.Size(126, 13);
             this.PerformanceCurveColdWaterTemperatureLabel.TabIndex = 0;
@@ -524,7 +491,7 @@
             // PerformanceCurveWetBulbTemperatureLabel
             // 
             this.PerformanceCurveWetBulbTemperatureLabel.AutoSize = true;
-            this.PerformanceCurveWetBulbTemperatureLabel.Location = new System.Drawing.Point(16, 203);
+            this.PerformanceCurveWetBulbTemperatureLabel.Location = new System.Drawing.Point(15, 191);
             this.PerformanceCurveWetBulbTemperatureLabel.Name = "PerformanceCurveWetBulbTemperatureLabel";
             this.PerformanceCurveWetBulbTemperatureLabel.Size = new System.Drawing.Size(117, 13);
             this.PerformanceCurveWetBulbTemperatureLabel.TabIndex = 5;
@@ -533,7 +500,7 @@
             // PerformanceCurveDryBulbTemperatureLabel
             // 
             this.PerformanceCurveDryBulbTemperatureLabel.AutoSize = true;
-            this.PerformanceCurveDryBulbTemperatureLabel.Location = new System.Drawing.Point(16, 233);
+            this.PerformanceCurveDryBulbTemperatureLabel.Location = new System.Drawing.Point(15, 221);
             this.PerformanceCurveDryBulbTemperatureLabel.Name = "PerformanceCurveDryBulbTemperatureLabel";
             this.PerformanceCurveDryBulbTemperatureLabel.Size = new System.Drawing.Size(113, 13);
             this.PerformanceCurveDryBulbTemperatureLabel.TabIndex = 4;
@@ -542,7 +509,7 @@
             // PerformanceCurveFanDriverPowerLabel
             // 
             this.PerformanceCurveFanDriverPowerLabel.AutoSize = true;
-            this.PerformanceCurveFanDriverPowerLabel.Location = new System.Drawing.Point(16, 263);
+            this.PerformanceCurveFanDriverPowerLabel.Location = new System.Drawing.Point(15, 251);
             this.PerformanceCurveFanDriverPowerLabel.Name = "PerformanceCurveFanDriverPowerLabel";
             this.PerformanceCurveFanDriverPowerLabel.Size = new System.Drawing.Size(92, 13);
             this.PerformanceCurveFanDriverPowerLabel.TabIndex = 3;
@@ -551,7 +518,7 @@
             // PerformanceCurveBarometricPressureLabel
             // 
             this.PerformanceCurveBarometricPressureLabel.AutoSize = true;
-            this.PerformanceCurveBarometricPressureLabel.Location = new System.Drawing.Point(16, 293);
+            this.PerformanceCurveBarometricPressureLabel.Location = new System.Drawing.Point(15, 281);
             this.PerformanceCurveBarometricPressureLabel.Name = "PerformanceCurveBarometricPressureLabel";
             this.PerformanceCurveBarometricPressureLabel.Size = new System.Drawing.Size(104, 13);
             this.PerformanceCurveBarometricPressureLabel.TabIndex = 6;
@@ -560,7 +527,7 @@
             // PerformanceCurveLiquidToGasRatioLabel
             // 
             this.PerformanceCurveLiquidToGasRatioLabel.AutoSize = true;
-            this.PerformanceCurveLiquidToGasRatioLabel.Location = new System.Drawing.Point(16, 323);
+            this.PerformanceCurveLiquidToGasRatioLabel.Location = new System.Drawing.Point(15, 311);
             this.PerformanceCurveLiquidToGasRatioLabel.Name = "PerformanceCurveLiquidToGasRatioLabel";
             this.PerformanceCurveLiquidToGasRatioLabel.Size = new System.Drawing.Size(104, 13);
             this.PerformanceCurveLiquidToGasRatioLabel.TabIndex = 7;
@@ -578,25 +545,76 @@
             this.MechanicalDraftPerformanceCurveGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.MechanicalDraftPerformanceCurveGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.MechanicalDraftPerformanceCurveGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.MechanicalDraftPerformanceCurveGridView.Location = new System.Drawing.Point(20, 562);
+            this.MechanicalDraftPerformanceCurveGridView.Location = new System.Drawing.Point(17, 568);
             this.MechanicalDraftPerformanceCurveGridView.Name = "MechanicalDraftPerformanceCurveGridView";
             this.MechanicalDraftPerformanceCurveGridView.ReadOnly = true;
-            this.MechanicalDraftPerformanceCurveGridView.Size = new System.Drawing.Size(850, 294);
+            this.MechanicalDraftPerformanceCurveGridView.Size = new System.Drawing.Size(738, 288);
             this.MechanicalDraftPerformanceCurveGridView.TabIndex = 16;
+            // 
+            // MechanicalDraftPerformanceCurveTowerTypeLabel
+            // 
+            this.MechanicalDraftPerformanceCurveTowerTypeLabel.AutoSize = true;
+            this.MechanicalDraftPerformanceCurveTowerTypeLabel.Location = new System.Drawing.Point(17, 172);
+            this.MechanicalDraftPerformanceCurveTowerTypeLabel.Name = "MechanicalDraftPerformanceCurveTowerTypeLabel";
+            this.MechanicalDraftPerformanceCurveTowerTypeLabel.Size = new System.Drawing.Size(67, 13);
+            this.MechanicalDraftPerformanceCurveTowerTypeLabel.TabIndex = 17;
+            this.MechanicalDraftPerformanceCurveTowerTypeLabel.Text = "Tower Type:";
+            // 
+            // PerformanceCurveOwnerNameField
+            // 
+            this.PerformanceCurveOwnerNameField.Location = new System.Drawing.Point(138, 57);
+            this.PerformanceCurveOwnerNameField.Name = "PerformanceCurveOwnerNameField";
+            this.PerformanceCurveOwnerNameField.ReadOnly = true;
+            this.PerformanceCurveOwnerNameField.Size = new System.Drawing.Size(520, 20);
+            this.PerformanceCurveOwnerNameField.TabIndex = 19;
+            // 
+            // PerformanceCurveProjectNameField
+            // 
+            this.PerformanceCurveProjectNameField.Location = new System.Drawing.Point(138, 85);
+            this.PerformanceCurveProjectNameField.Name = "PerformanceCurveProjectNameField";
+            this.PerformanceCurveProjectNameField.ReadOnly = true;
+            this.PerformanceCurveProjectNameField.Size = new System.Drawing.Size(520, 20);
+            this.PerformanceCurveProjectNameField.TabIndex = 20;
+            // 
+            // PerformanceCurveLocationField
+            // 
+            this.PerformanceCurveLocationField.Location = new System.Drawing.Point(138, 113);
+            this.PerformanceCurveLocationField.Name = "PerformanceCurveLocationField";
+            this.PerformanceCurveLocationField.ReadOnly = true;
+            this.PerformanceCurveLocationField.Size = new System.Drawing.Size(520, 20);
+            this.PerformanceCurveLocationField.TabIndex = 21;
+            // 
+            // PerformanceCurveTowerManufacturerField
+            // 
+            this.PerformanceCurveTowerManufacturerField.Location = new System.Drawing.Point(138, 141);
+            this.PerformanceCurveTowerManufacturerField.Name = "PerformanceCurveTowerManufacturerField";
+            this.PerformanceCurveTowerManufacturerField.ReadOnly = true;
+            this.PerformanceCurveTowerManufacturerField.Size = new System.Drawing.Size(520, 20);
+            this.PerformanceCurveTowerManufacturerField.TabIndex = 22;
+            // 
+            // PerformanceCurveTowerTypeField
+            // 
+            this.PerformanceCurveTowerTypeField.Location = new System.Drawing.Point(138, 169);
+            this.PerformanceCurveTowerTypeField.Name = "PerformanceCurveTowerTypeField";
+            this.PerformanceCurveTowerTypeField.ReadOnly = true;
+            this.PerformanceCurveTowerTypeField.Size = new System.Drawing.Size(520, 20);
+            this.PerformanceCurveTowerTypeField.TabIndex = 23;
             // 
             // MechanicalDraftPerformanceCurveTabPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.PerformanceCurveTowerTypeField);
+            this.Controls.Add(this.PerformanceCurveTowerManufacturerField);
+            this.Controls.Add(this.PerformanceCurveLocationField);
+            this.Controls.Add(this.PerformanceCurveProjectNameField);
+            this.Controls.Add(this.PerformanceCurveOwnerNameField);
+            this.Controls.Add(this.MechanicalDraftPerformanceCurveTowerTypeLabel);
             this.Controls.Add(this.MechanicalDraftPerformanceCurveGridView);
             this.Controls.Add(this.PerformanceCurveTestResultsGroupBox);
-            this.Controls.Add(this.PerformanceCurveTowerManufacturerField);
             this.Controls.Add(this.PerformanceCurveTowerManufacturerLabel);
-            this.Controls.Add(this.PerformanceCurveLocationField);
             this.Controls.Add(this.PerformanceCurveLocationLabel);
-            this.Controls.Add(this.PerformanceCurveProjectNameField);
             this.Controls.Add(this.PerformanceCurveProjectNameLabel);
-            this.Controls.Add(this.PerformanceCurveOwnerNameField);
             this.Controls.Add(this.PerformanceCurveOwnerNameLabel);
             this.Controls.Add(this.PerformanceCurveViewGraph);
             this.Controls.Add(this.PerformanceCurveCalculate);
@@ -604,7 +622,7 @@
             this.Controls.Add(this.PerformanceCurveComboBox);
             this.Controls.Add(this.PerformanceCurveDataFileLabel);
             this.Name = "MechanicalDraftPerformanceCurveTabPage";
-            this.Size = new System.Drawing.Size(891, 883);
+            this.Size = new System.Drawing.Size(779, 883);
             this.PerformanceCurveTestResultsGroupBox.ResumeLayout(false);
             this.PerformanceCurveTestResultsGroupBox.PerformLayout();
             this.PerformanceCurveTestGroupBox.ResumeLayout(false);
@@ -626,12 +644,8 @@
         private System.Windows.Forms.Button PerformanceCurveCalculate;
         private System.Windows.Forms.Button PerformanceCurveViewGraph;
         private System.Windows.Forms.Label PerformanceCurveOwnerNameLabel;
-        private System.Windows.Forms.Label PerformanceCurveOwnerNameField;
-        private System.Windows.Forms.Label PerformanceCurveProjectNameField;
         private System.Windows.Forms.Label PerformanceCurveProjectNameLabel;
-        private System.Windows.Forms.Label PerformanceCurveLocationField;
         private System.Windows.Forms.Label PerformanceCurveLocationLabel;
-        private System.Windows.Forms.Label PerformanceCurveTowerManufacturerField;
         private System.Windows.Forms.Label PerformanceCurveTowerManufacturerLabel;
         private System.Windows.Forms.GroupBox PerformanceCurveTestResultsGroupBox;
         private System.Windows.Forms.Label PerformanceCurveColdWaterTemperatureLabel;
@@ -674,5 +688,11 @@
         private System.Windows.Forms.HelpProvider helpProvider1;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.DataGridView MechanicalDraftPerformanceCurveGridView;
+        private System.Windows.Forms.Label MechanicalDraftPerformanceCurveTowerTypeLabel;
+        private System.Windows.Forms.TextBox PerformanceCurveTowerTypeField;
+        private System.Windows.Forms.TextBox PerformanceCurveTowerManufacturerField;
+        private System.Windows.Forms.TextBox PerformanceCurveLocationField;
+        private System.Windows.Forms.TextBox PerformanceCurveProjectNameField;
+        private System.Windows.Forms.TextBox PerformanceCurveOwnerNameField;
     }
 }

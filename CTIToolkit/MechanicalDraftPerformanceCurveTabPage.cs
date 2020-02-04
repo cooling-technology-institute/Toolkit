@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ViewModels;
-using Models;
 
 namespace CTIToolkit
 {
@@ -37,7 +31,7 @@ namespace CTIToolkit
             PerformanceCurveWaterFlowRateLabel.Text = MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueInputMessage + ":";
             PerformanceCurveWaterFlowRateLabel.TextAlign = ContentAlignment.MiddleRight;
             PerformanceCurveTestWaterFlowRate.Text = MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueInputValue;
-            toolTip1.SetToolTip(PerformanceCurveTestHotWaterTemperature, MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueTooltip);
+            toolTip1.SetToolTip(PerformanceCurveTestWaterFlowRate, MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueTooltip);
 
             PerformanceCurveHotWaterTemperatureLabel.Text = MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValueInputMessage + ":";
             PerformanceCurveHotWaterTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
@@ -73,6 +67,12 @@ namespace CTIToolkit
             PerformanceCurveLiquidToGasRatioLabel.TextAlign = ContentAlignment.MiddleRight;
             PerformanceCurveTestLiquidToGasRatio.Text = MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueInputValue;
             toolTip1.SetToolTip(PerformanceCurveTestLiquidToGasRatio, MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueTooltip);
+
+            PerformanceCurveOwnerNameField.Text = "";
+            PerformanceCurveProjectNameField.Text = "";
+            PerformanceCurveLocationField.Text = "";
+            PerformanceCurveTowerManufacturerField.Text = "";
+            PerformanceCurveTowerTypeField.Text = "";
         }
 
         private void PerformanceCurveTestWaterFlowRate_Validated(object sender, EventArgs e)
@@ -235,5 +235,24 @@ namespace CTIToolkit
             }
         }
 
+        private void PerformanceCurveDesignDataButton_Click(object sender, EventArgs e)
+        {
+            var control = new TowerDesignDataUserControl();
+            //PsychrometricsUserControl = new PsychrometricsTabPage(ApplicationSettings);
+            //PsychrometricsUserControl.Dock = DockStyle.Top;
+            //TabPage psychrometricsTabPage = new TabPage("Psychrometrics");
+            //psychrometricsTabPage.Controls.Add(PsychrometricsUserControl);
+            //tabControl1.TabPages.Add(psychrometricsTabPage);
+
+            //splitContainer1.Panel2.Controls.Add(control);
+
+            //Disable your other controls here
+
+
+            if (await control.ShowModalAsync() == DialogResult.OK) //Execution will pause here until the user closes the "dialog" (task completes), just like a modal dialog.
+            {
+                // save data
+            }
+        }
     }
 }

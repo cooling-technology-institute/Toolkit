@@ -32,7 +32,6 @@ namespace ViewModels
             IsDemo = isDemo;
             InputMessage = "Fan Driver Power";
             Format = "F2";
-            ToolTipFormat = "Fan Driver Power.\nValue should be between {0} and {1}.";
             ConvertValue(isInternationalSystemOfUnits_IS_);
         }
 

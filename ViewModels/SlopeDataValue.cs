@@ -8,12 +8,13 @@ namespace ViewModels
 {
     public class SlopeDataValue : DataValue
     {
+        public const string SlopeToolTipFormat = "Slope Value.\nValue should be between {0} and {1}.";
+
         public SlopeDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
             InputMessage = "Slope";
             Format = "F2";
-            ToolTipFormat = "Slope Value.\nValue should be between {0} and {1}.";
             ConvertValue(isInternationalSystemOfUnits_IS_);
         }
 
@@ -34,7 +35,7 @@ namespace ViewModels
             Current = Default;
 
             InputValue = Current.ToString(Format);
-            ToolTip = string.Format(ToolTipFormat, Minimum, Maximum);
+            ToolTip = string.Format(SlopeToolTipFormat, Minimum, Maximum);
 
             IsInternationalSystemOfUnits_IS_ = isIS;
         }

@@ -1,5 +1,8 @@
 ﻿// Copyright Cooling Technology Institute 2019-2020
 
+using Models;
+using System.Collections.Generic;
+
 namespace ViewModels
 {
     public class MechanicalDraftPerformanceCurveTowerDesignInputData
@@ -8,7 +11,7 @@ namespace ViewModels
         public string ProjectName { set; get; }
         public string Location { set; get; }
         public string TowerManufacturer { set; get; }
-        public string TowerType { set; get; }
+        public TOWER_TYPE TowerType { set; get; }
 
         public RangeDataValue RangeDataValue1 { get; set; }
         public RangeDataValue RangeDataValue2 { get; set; }
@@ -24,6 +27,7 @@ namespace ViewModels
         public FanDriverPowerDataValue FanDriverPowerDataValue { get; set; }
         public BarometricPressureDataValue BarometricPressureDataValue { get; set; }
         public LiquidToGasRatioDataValue LiquidToGasRatioDataValue { get; set; }
+        public List<RangedTemperatureDesignInputData> RangedTemperatureDesignInputData { get; set; }
 
         public string MechanicalDraftPerformanceCurvePerformanceDesignDataFile { get; set; }
 

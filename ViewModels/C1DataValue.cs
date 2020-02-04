@@ -4,12 +4,13 @@ namespace ViewModels
 {
     public class C1DataValue : DataValue
     {
+        public const string C1ToolTipFormat = "C Value.\nValue should be between {0} and {1}.";
+
         public C1DataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
             InputMessage = "C";
             Format = "F1";
-            ToolTipFormat = "C Value.\nValue should be between {0} and {1}.";
             ConvertValue(isInternationalSystemOfUnits_IS_);
         }
 
@@ -30,7 +31,7 @@ namespace ViewModels
             Current = Default;
 
             InputValue = Current.ToString(Format);
-            ToolTip = string.Format(ToolTipFormat, Minimum, Maximum);
+            ToolTip = string.Format(C1ToolTipFormat, Minimum, Maximum);
 
             IsInternationalSystemOfUnits_IS_ = isIS;
         }

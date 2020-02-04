@@ -16,7 +16,6 @@ namespace ViewModels
         public string InputMessage { get; set; }
         public string InputValue { get; set; }
         public string Format { get; set; }
-        public string ToolTipFormat { get; set; }
         public string ToolTip { get; set; }
         public bool IsInternationalSystemOfUnits_IS_ { get; set; }
         public bool IsDemo { get; set; }
@@ -33,7 +32,6 @@ namespace ViewModels
             InputMessage = string.Empty;
             InputValue = string.Empty;
             Format = string.Empty;
-            ToolTipFormat = string.Empty;
             ToolTip = string.Empty;
         }
 

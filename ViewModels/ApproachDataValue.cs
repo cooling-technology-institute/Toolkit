@@ -15,7 +15,7 @@ namespace ViewModels
         public const double ApproachMinimum_InternationalSystemOfUnits_IS_ = 0.2;
         public const double ApproachMaximum_InternationalSystemOfUnits_IS_ = 88.9;
 
-        public const string ApproachToolTipFormat = "Approach.";
+        public const string ApproachToolTipFormat = "Approach.\nValue should be between {0} and {1}.";
 
         public ApproachDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
