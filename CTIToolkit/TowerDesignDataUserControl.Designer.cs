@@ -190,7 +190,7 @@
             this.TowerDesignDataLiquidToGasRatio.Location = new System.Drawing.Point(147, 229);
             this.TowerDesignDataLiquidToGasRatio.Name = "TowerDesignDataLiquidToGasRatio";
             this.TowerDesignDataLiquidToGasRatio.Size = new System.Drawing.Size(132, 20);
-            this.TowerDesignDataLiquidToGasRatio.TabIndex = 7;
+            this.TowerDesignDataLiquidToGasRatio.TabIndex = 14;
             this.TowerDesignDataLiquidToGasRatio.Validating += new System.ComponentModel.CancelEventHandler(this.TowerDesignDataLiquidToGasRatio_Validating);
             this.TowerDesignDataLiquidToGasRatio.Validated += new System.EventHandler(this.TowerDesignDataLiquidToGasRatio_Validated);
             // 
@@ -200,7 +200,7 @@
             this.TowerDesignDataWaterFlowRate.Location = new System.Drawing.Point(147, 19);
             this.TowerDesignDataWaterFlowRate.Name = "TowerDesignDataWaterFlowRate";
             this.TowerDesignDataWaterFlowRate.Size = new System.Drawing.Size(132, 20);
-            this.TowerDesignDataWaterFlowRate.TabIndex = 6;
+            this.TowerDesignDataWaterFlowRate.TabIndex = 7;
             this.TowerDesignDataWaterFlowRate.Validating += new System.ComponentModel.CancelEventHandler(this.TowerDesignDataWaterFlowRate_Validating);
             this.TowerDesignDataWaterFlowRate.Validated += new System.EventHandler(this.TowerDesignDataWaterFlowRate_Validated);
             // 
@@ -210,7 +210,7 @@
             this.TowerDesignDataHotWaterTemperature.Location = new System.Drawing.Point(147, 49);
             this.TowerDesignDataHotWaterTemperature.Name = "TowerDesignDataHotWaterTemperature";
             this.TowerDesignDataHotWaterTemperature.Size = new System.Drawing.Size(132, 20);
-            this.TowerDesignDataHotWaterTemperature.TabIndex = 5;
+            this.TowerDesignDataHotWaterTemperature.TabIndex = 8;
             this.TowerDesignDataHotWaterTemperature.Validating += new System.ComponentModel.CancelEventHandler(this.TowerDesignDataHotWaterTemperature_Validating);
             this.TowerDesignDataHotWaterTemperature.Validated += new System.EventHandler(this.TowerDesignDataHotWaterTemperature_Validated);
             // 
@@ -220,7 +220,7 @@
             this.TowerDesignDataColdWaterTemperature.Location = new System.Drawing.Point(147, 79);
             this.TowerDesignDataColdWaterTemperature.Name = "TowerDesignDataColdWaterTemperature";
             this.TowerDesignDataColdWaterTemperature.Size = new System.Drawing.Size(132, 20);
-            this.TowerDesignDataColdWaterTemperature.TabIndex = 4;
+            this.TowerDesignDataColdWaterTemperature.TabIndex = 9;
             this.TowerDesignDataColdWaterTemperature.Validating += new System.ComponentModel.CancelEventHandler(this.TowerDesignDataColdWaterTemperature_Validating);
             this.TowerDesignDataColdWaterTemperature.Validated += new System.EventHandler(this.TowerDesignDataColdWaterTemperature_Validated);
             // 
@@ -230,7 +230,7 @@
             this.TowerDesignDataWetBulbTemperature.Location = new System.Drawing.Point(147, 109);
             this.TowerDesignDataWetBulbTemperature.Name = "TowerDesignDataWetBulbTemperature";
             this.TowerDesignDataWetBulbTemperature.Size = new System.Drawing.Size(132, 20);
-            this.TowerDesignDataWetBulbTemperature.TabIndex = 3;
+            this.TowerDesignDataWetBulbTemperature.TabIndex = 10;
             this.TowerDesignDataWetBulbTemperature.Validating += new System.ComponentModel.CancelEventHandler(this.TowerDesignDataWetBulbTemperature_Validating);
             this.TowerDesignDataWetBulbTemperature.Validated += new System.EventHandler(this.TowerDesignDataWetBulbTemperature_Validated);
             // 
@@ -240,7 +240,7 @@
             this.TowerDesignDataDryBulbTemperature.Location = new System.Drawing.Point(147, 139);
             this.TowerDesignDataDryBulbTemperature.Name = "TowerDesignDataDryBulbTemperature";
             this.TowerDesignDataDryBulbTemperature.Size = new System.Drawing.Size(132, 20);
-            this.TowerDesignDataDryBulbTemperature.TabIndex = 2;
+            this.TowerDesignDataDryBulbTemperature.TabIndex = 11;
             this.TowerDesignDataDryBulbTemperature.Validating += new System.ComponentModel.CancelEventHandler(this.TowerDesignDataDryBulbTemperature_Validating);
             this.TowerDesignDataDryBulbTemperature.Validated += new System.EventHandler(this.TowerDesignDataDryBulbTemperature_Validated);
             // 
@@ -250,7 +250,7 @@
             this.TowerDesignDataBarometricPressure.Location = new System.Drawing.Point(147, 199);
             this.TowerDesignDataBarometricPressure.Name = "TowerDesignDataBarometricPressure";
             this.TowerDesignDataBarometricPressure.Size = new System.Drawing.Size(132, 20);
-            this.TowerDesignDataBarometricPressure.TabIndex = 1;
+            this.TowerDesignDataBarometricPressure.TabIndex = 13;
             this.TowerDesignDataBarometricPressure.Validating += new System.ComponentModel.CancelEventHandler(this.TowerDesignDataBarometricPressure_Validating);
             this.TowerDesignDataBarometricPressure.Validated += new System.EventHandler(this.TowerDesignDataBarometricPressure_Validated);
             // 
@@ -260,7 +260,7 @@
             this.TowerDesignDataFanDriverPower.Location = new System.Drawing.Point(147, 169);
             this.TowerDesignDataFanDriverPower.Name = "TowerDesignDataFanDriverPower";
             this.TowerDesignDataFanDriverPower.Size = new System.Drawing.Size(132, 20);
-            this.TowerDesignDataFanDriverPower.TabIndex = 0;
+            this.TowerDesignDataFanDriverPower.TabIndex = 12;
             this.TowerDesignDataFanDriverPower.Validating += new System.ComponentModel.CancelEventHandler(this.TowerDesignDataFanDriverPower_Validating);
             this.TowerDesignDataFanDriverPower.Validated += new System.EventHandler(this.TowerDesignDataFanDriverPower_Validated);
             // 
@@ -299,7 +299,7 @@
             this.TowerDesignDataTowerTypeForcedRadio.Location = new System.Drawing.Point(24, 44);
             this.TowerDesignDataTowerTypeForcedRadio.Name = "TowerDesignDataTowerTypeForcedRadio";
             this.TowerDesignDataTowerTypeForcedRadio.Size = new System.Drawing.Size(58, 17);
-            this.TowerDesignDataTowerTypeForcedRadio.TabIndex = 1;
+            this.TowerDesignDataTowerTypeForcedRadio.TabIndex = 6;
             this.TowerDesignDataTowerTypeForcedRadio.TabStop = true;
             this.TowerDesignDataTowerTypeForcedRadio.Text = "Forced";
             this.TowerDesignDataTowerTypeForcedRadio.UseVisualStyleBackColor = true;
@@ -310,7 +310,7 @@
             this.TowerDesignDataTowerTypeInducedRadio.Location = new System.Drawing.Point(24, 20);
             this.TowerDesignDataTowerTypeInducedRadio.Name = "TowerDesignDataTowerTypeInducedRadio";
             this.TowerDesignDataTowerTypeInducedRadio.Size = new System.Drawing.Size(64, 17);
-            this.TowerDesignDataTowerTypeInducedRadio.TabIndex = 0;
+            this.TowerDesignDataTowerTypeInducedRadio.TabIndex = 5;
             this.TowerDesignDataTowerTypeInducedRadio.TabStop = true;
             this.TowerDesignDataTowerTypeInducedRadio.Text = "Induced";
             this.TowerDesignDataTowerTypeInducedRadio.UseVisualStyleBackColor = true;
@@ -320,28 +320,28 @@
             this.TowerDesignDataTowerManufacturer.Location = new System.Drawing.Point(124, 122);
             this.TowerDesignDataTowerManufacturer.Name = "TowerDesignDataTowerManufacturer";
             this.TowerDesignDataTowerManufacturer.Size = new System.Drawing.Size(560, 20);
-            this.TowerDesignDataTowerManufacturer.TabIndex = 23;
+            this.TowerDesignDataTowerManufacturer.TabIndex = 4;
             // 
             // TowerDesignDataLocation
             // 
             this.TowerDesignDataLocation.Location = new System.Drawing.Point(124, 92);
             this.TowerDesignDataLocation.Name = "TowerDesignDataLocation";
             this.TowerDesignDataLocation.Size = new System.Drawing.Size(560, 20);
-            this.TowerDesignDataLocation.TabIndex = 22;
+            this.TowerDesignDataLocation.TabIndex = 3;
             // 
             // TowerDesignDataProjectName
             // 
             this.TowerDesignDataProjectName.Location = new System.Drawing.Point(124, 59);
             this.TowerDesignDataProjectName.Name = "TowerDesignDataProjectName";
             this.TowerDesignDataProjectName.Size = new System.Drawing.Size(560, 20);
-            this.TowerDesignDataProjectName.TabIndex = 21;
+            this.TowerDesignDataProjectName.TabIndex = 2;
             // 
             // TowerDesignDataOwnerName
             // 
             this.TowerDesignDataOwnerName.Location = new System.Drawing.Point(124, 26);
             this.TowerDesignDataOwnerName.Name = "TowerDesignDataOwnerName";
             this.TowerDesignDataOwnerName.Size = new System.Drawing.Size(560, 20);
-            this.TowerDesignDataOwnerName.TabIndex = 20;
+            this.TowerDesignDataOwnerName.TabIndex = 1;
             // 
             // TowerDesignDataTowerManufacturerLabel
             // 
@@ -403,7 +403,7 @@
             this.TowerDesignDataRange5.Location = new System.Drawing.Point(891, 30);
             this.TowerDesignDataRange5.Name = "TowerDesignDataRange5";
             this.TowerDesignDataRange5.Size = new System.Drawing.Size(100, 20);
-            this.TowerDesignDataRange5.TabIndex = 9;
+            this.TowerDesignDataRange5.TabIndex = 19;
             this.TowerDesignDataRange5.Validating += new System.ComponentModel.CancelEventHandler(this.TowerDesignDataRange5_Validating);
             this.TowerDesignDataRange5.Validated += new System.EventHandler(this.TowerDesignDataRange5_Validated);
             // 
@@ -412,7 +412,7 @@
             this.TowerDesignDataRange4.Location = new System.Drawing.Point(692, 30);
             this.TowerDesignDataRange4.Name = "TowerDesignDataRange4";
             this.TowerDesignDataRange4.Size = new System.Drawing.Size(100, 20);
-            this.TowerDesignDataRange4.TabIndex = 8;
+            this.TowerDesignDataRange4.TabIndex = 18;
             this.TowerDesignDataRange4.Validating += new System.ComponentModel.CancelEventHandler(this.TowerDesignDataRange4_Validating);
             this.TowerDesignDataRange4.Validated += new System.EventHandler(this.TowerDesignDataRange4_Validated);
             // 
@@ -421,7 +421,7 @@
             this.TowerDesignDataRange3.Location = new System.Drawing.Point(493, 30);
             this.TowerDesignDataRange3.Name = "TowerDesignDataRange3";
             this.TowerDesignDataRange3.Size = new System.Drawing.Size(100, 20);
-            this.TowerDesignDataRange3.TabIndex = 7;
+            this.TowerDesignDataRange3.TabIndex = 17;
             this.TowerDesignDataRange3.Validating += new System.ComponentModel.CancelEventHandler(this.TowerDesignDataRange3_Validating);
             this.TowerDesignDataRange3.Validated += new System.EventHandler(this.TowerDesignDataRange3_Validated);
             // 
@@ -430,7 +430,7 @@
             this.TowerDesignDataRange2.Location = new System.Drawing.Point(294, 30);
             this.TowerDesignDataRange2.Name = "TowerDesignDataRange2";
             this.TowerDesignDataRange2.Size = new System.Drawing.Size(100, 20);
-            this.TowerDesignDataRange2.TabIndex = 6;
+            this.TowerDesignDataRange2.TabIndex = 16;
             this.TowerDesignDataRange2.Validating += new System.ComponentModel.CancelEventHandler(this.TowerDesignDataRange2_Validating);
             this.TowerDesignDataRange2.Validated += new System.EventHandler(this.TowerDesignDataRange2_Validated);
             // 
@@ -439,7 +439,7 @@
             this.TowerDesignDataRange1.Location = new System.Drawing.Point(95, 30);
             this.TowerDesignDataRange1.Name = "TowerDesignDataRange1";
             this.TowerDesignDataRange1.Size = new System.Drawing.Size(100, 20);
-            this.TowerDesignDataRange1.TabIndex = 5;
+            this.TowerDesignDataRange1.TabIndex = 15;
             this.TowerDesignDataRange1.Validating += new System.ComponentModel.CancelEventHandler(this.TowerDesignDataRange1_Validating);
             this.TowerDesignDataRange1.Validated += new System.EventHandler(this.TowerDesignDataRange1_Validated);
             // 
@@ -527,7 +527,7 @@
             this.TowerDesignDataTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.TowerDesignDataTabPage.Size = new System.Drawing.Size(1017, 273);
             this.TowerDesignDataTabPage.TabIndex = 0;
-            this.TowerDesignDataTabPage.Text = "tabPage1";
+            this.TowerDesignDataTabPage.Text = "Click to Add Flow";
             this.TowerDesignDataTabPage.UseVisualStyleBackColor = true;
             // 
             // TowerDesignCurveDataSaveButton
@@ -535,7 +535,7 @@
             this.TowerDesignCurveDataSaveButton.Location = new System.Drawing.Point(438, 799);
             this.TowerDesignCurveDataSaveButton.Name = "TowerDesignCurveDataSaveButton";
             this.TowerDesignCurveDataSaveButton.Size = new System.Drawing.Size(75, 23);
-            this.TowerDesignCurveDataSaveButton.TabIndex = 16;
+            this.TowerDesignCurveDataSaveButton.TabIndex = 50;
             this.TowerDesignCurveDataSaveButton.Text = "Save";
             this.TowerDesignCurveDataSaveButton.UseVisualStyleBackColor = true;
             this.TowerDesignCurveDataSaveButton.Click += new System.EventHandler(this.TowerDesignCurveDataSaveButton_Click);
@@ -545,7 +545,7 @@
             this.TowerDesignCurveDataCancelButton.Location = new System.Drawing.Point(548, 799);
             this.TowerDesignCurveDataCancelButton.Name = "TowerDesignCurveDataCancelButton";
             this.TowerDesignCurveDataCancelButton.Size = new System.Drawing.Size(75, 23);
-            this.TowerDesignCurveDataCancelButton.TabIndex = 17;
+            this.TowerDesignCurveDataCancelButton.TabIndex = 51;
             this.TowerDesignCurveDataCancelButton.Text = "Cancel";
             this.TowerDesignCurveDataCancelButton.UseVisualStyleBackColor = true;
             this.TowerDesignCurveDataCancelButton.Click += new System.EventHandler(this.TowerDesignCurveDataCancelButton_Click);

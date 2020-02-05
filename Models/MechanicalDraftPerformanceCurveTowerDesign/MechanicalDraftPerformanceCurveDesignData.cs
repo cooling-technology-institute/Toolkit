@@ -10,6 +10,8 @@ namespace Models
         public string ProjectName { set; get; }
         public string Location { set; get; }
         public string TowerManufacturer { set; get; }
+
+        [Newtonsoft.Json.JsonConverter(typeof(StringEnumAsIntConverter))]
         public TOWER_TYPE TowerType { set; get; }
 
         public double WaterFlowRate { set; get; }
@@ -17,7 +19,7 @@ namespace Models
         public double HotWaterTemperature { set; get; }
         public double WetBulbTemperature { set; get; } 
         public double DryBulbTemperature { set; get; }
-        public double FanDrivePower { set; get; }
+        public double FanDriverPower { set; get; }
         public double BarometricPressure { set; get; }
         public double LiquidToGasRatio { set; get; }
 
@@ -27,7 +29,7 @@ namespace Models
         public double Range4 { set; get; }
         public double Range5 { set; get; }
 
-        public List<RangedTemperaturesDesignData> RangedWetBulbTemperatureDesignData { set; get; }
+        public List<RangedTemperaturesDesignData> RangedTemperaturesDesignData { set; get; }
 	
         public MechanicalDraftPerformanceCurveDesignData()
         {
@@ -42,11 +44,11 @@ namespace Models
             ColdWaterTemperature = 0.0;
             WetBulbTemperature = 0.0;
             DryBulbTemperature = 0.0;
-            FanDrivePower = 0.0;
+            FanDriverPower = 0.0;
             BarometricPressure = 0.0;
             LiquidToGasRatio = 0.0;
 
-            RangedWetBulbTemperatureDesignData = new List<RangedTemperaturesDesignData>();
+            RangedTemperaturesDesignData = new List<RangedTemperaturesDesignData>();
         }
     }
 }

@@ -22,7 +22,26 @@ namespace CTIToolkit
 
             MechanicalDraftPerformanceCurveViewModel = new MechanicalDraftPerformanceCurveViewModel(IsDemo, IsInternationalSystemOfUnits_IS_);
             MechanicalDraftPerformanceCurveTowerDesignViewModel = new MechanicalDraftPerformanceCurveTowerDesignViewModel(IsDemo, IsInternationalSystemOfUnits_IS_);
-            
+
+            Setup();
+        }
+
+        public void OpenDataFile(string fileName)
+        {
+            MechanicalDraftPerformanceCurveViewModel.OpenDataFile(fileName);
+            MechanicalDraftPerformanceCurveTowerDesignViewModel.LoadData(MechanicalDraftPerformanceCurveViewModel.GetData());
+            Setup();
+        }
+
+        public void SaveDataFile()
+        {
+            MechanicalDraftPerformanceCurveViewModel.SaveDataFile();
+            Setup();
+        }
+
+        public void SaveAsDataFile(string fileName)
+        {
+            MechanicalDraftPerformanceCurveViewModel.SaveAsDataFile(fileName);
             Setup();
         }
 
@@ -68,11 +87,22 @@ namespace CTIToolkit
             PerformanceCurveTestLiquidToGasRatio.Text = MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueInputValue;
             toolTip1.SetToolTip(PerformanceCurveTestLiquidToGasRatio, MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueTooltip);
 
-            PerformanceCurveOwnerNameField.Text = "";
-            PerformanceCurveProjectNameField.Text = "";
-            PerformanceCurveLocationField.Text = "";
-            PerformanceCurveTowerManufacturerField.Text = "";
-            PerformanceCurveTowerTypeField.Text = "";
+            PerformanceCurveOwnerNameField.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.OwnerNameInputValue;
+            PerformanceCurveProjectNameField.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.ProjectNameInputValue;
+            PerformanceCurveLocationField.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.LocationInputValue;
+            PerformanceCurveTowerManufacturerField.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.TowerManufacturerInputValue;
+            PerformanceCurveTowerTypeField.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.TowerTypeInputValue.ToString();
+
+            PerformanceCurveDesignWaterFlowRate.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.WaterFlowRateDataValueInputValue;
+            PerformanceCurveDesignHotWaterTemperature.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.HotWaterTemperatureDataValueInputValue;
+            PerformanceCurveDesignColdWaterTemperature.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.ColdWaterTemperatureDataValueInputValue;
+            PerformanceCurveDesignWetBulbTemperature.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.WetBulbTemperatureDataValueInputValue;
+            PerformanceCurveDesignDryBulbTemperature.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.DryBulbTemperatureDataValueInputValue;
+            PerformanceCurveDesignFanDriverPower.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.FanDriverPowerDataValueInputValue;
+            PerformanceCurveDesignBarometricPressure.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.BarometricPressureDataValueInputValue;
+            PerformanceCurveDesignLiquidToGasRatio.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.LiquidToGasRatioDataValueInputValue;
+
+            DataFilename.Text = MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue;
         }
 
         private void PerformanceCurveTestWaterFlowRate_Validated(object sender, EventArgs e)
@@ -237,22 +267,26 @@ namespace CTIToolkit
 
         private void PerformanceCurveDesignDataButton_Click(object sender, EventArgs e)
         {
-            var control = new TowerDesignDataUserControl();
-            //PsychrometricsUserControl = new PsychrometricsTabPage(ApplicationSettings);
-            //PsychrometricsUserControl.Dock = DockStyle.Top;
-            //TabPage psychrometricsTabPage = new TabPage("Psychrometrics");
-            //psychrometricsTabPage.Controls.Add(PsychrometricsUserControl);
-            //tabControl1.TabPages.Add(psychrometricsTabPage);
+            var towerDesignDataUserControl = new TowerDesignDataUserControl(IsDemo, IsInternationalSystemOfUnits_IS_);
+            Form towerDesignDataDialog = new Form();
+            towerDesignDataDialog.Controls.Add(towerDesignDataUserControl);
+            towerDesignDataDialog.Size = new Size(1072, 887);
+            towerDesignDataUserControl.LoadData(MechanicalDraftPerformanceCurveViewModel.GetData());
 
-            //splitContainer1.Panel2.Controls.Add(control);
-
-            //Disable your other controls here
-
-
-            if (await control.ShowModalAsync() == DialogResult.OK) //Execution will pause here until the user closes the "dialog" (task completes), just like a modal dialog.
+            // set data
+            if (towerDesignDataDialog.ShowDialog(this) == DialogResult.OK)
             {
-                // save data
+                // save data to file?
+                if(towerDesignDataUserControl.IsChanged)
+                {
+
+                }
             }
+            else
+            {
+                // do nothing?
+            }
+            towerDesignDataDialog.Dispose();
         }
     }
 }

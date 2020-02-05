@@ -1,5 +1,9 @@
 ﻿// Copyright Cooling Technology Institute 2019-2020
 
+using Models;
+using System.Collections.Generic;
+using System.IO;
+
 namespace ViewModels
 {
     public class MechanicalDraftPerformanceCurveViewModel
@@ -242,14 +246,41 @@ namespace ViewModels
             return MechanicalDraftPerformanceCurveInputData.LiquidToGasRatioDataValue.UpdateValue(value, out errorMessage);
         }
 
+        public string DataFilenameInputValue
+        {
+            get
+            {
+                return Path.GetFileName(MechanicalDraftPerformanceCurveInputData.MechanicalDraftPerformanceCurveDataFile);
+            }
+        }
+
         public MechanicalDraftPerformanceCurveViewModel(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
             IsInternationalSystemOfUnits_IS = IsInternationalSystemOfUnits_IS;
 
             MechanicalDraftPerformanceCurveInputData = new MechanicalDraftPerformanceCurveInputData(IsDemo, IsInternationalSystemOfUnits_IS);
-
-
         }
+
+        public MechanicalDraftPerformanceCurveData GetData()
+        {
+            return MechanicalDraftPerformanceCurveInputData.Data;
+        }
+
+        public void OpenDataFile(string fileName)
+        {
+            MechanicalDraftPerformanceCurveInputData.OpenDataFile(fileName);
+        }
+
+        public void SaveDataFile()
+        {
+            MechanicalDraftPerformanceCurveInputData.SaveDataFile();
+        }
+
+        public void SaveAsDataFile(string fileName)
+        {
+            MechanicalDraftPerformanceCurveInputData.SaveAsDataFile(fileName);
+        }
+
     }
 }

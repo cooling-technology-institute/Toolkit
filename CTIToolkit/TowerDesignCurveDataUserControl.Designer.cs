@@ -98,7 +98,7 @@
             this.TowerDesignDataWetBulbTemperature1.Location = new System.Drawing.Point(6, 35);
             this.TowerDesignDataWetBulbTemperature1.Name = "TowerDesignDataWetBulbTemperature1";
             this.TowerDesignDataWetBulbTemperature1.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataWetBulbTemperature1.TabIndex = 6;
+            this.TowerDesignDataWetBulbTemperature1.TabIndex = 1;
             // 
             // TowerDesignDataWetBulbTemperatureLabel2
             // 
@@ -114,7 +114,7 @@
             this.TowerDesignDataWetBulbTemperature2.Location = new System.Drawing.Point(6, 65);
             this.TowerDesignDataWetBulbTemperature2.Name = "TowerDesignDataWetBulbTemperature2";
             this.TowerDesignDataWetBulbTemperature2.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataWetBulbTemperature2.TabIndex = 8;
+            this.TowerDesignDataWetBulbTemperature2.TabIndex = 2;
             // 
             // TowerDesignDataWetBulbTemperatureLabel4
             // 
@@ -130,7 +130,7 @@
             this.TowerDesignDataWetBulbTemperature4.Location = new System.Drawing.Point(6, 125);
             this.TowerDesignDataWetBulbTemperature4.Name = "TowerDesignDataWetBulbTemperature4";
             this.TowerDesignDataWetBulbTemperature4.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataWetBulbTemperature4.TabIndex = 10;
+            this.TowerDesignDataWetBulbTemperature4.TabIndex = 4;
             // 
             // TowerDesignDataWetBulbTemperatureLabel3
             // 
@@ -146,7 +146,7 @@
             this.TowerDesignDataWetBulbTemperature3.Location = new System.Drawing.Point(6, 95);
             this.TowerDesignDataWetBulbTemperature3.Name = "TowerDesignDataWetBulbTemperature3";
             this.TowerDesignDataWetBulbTemperature3.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataWetBulbTemperature3.TabIndex = 12;
+            this.TowerDesignDataWetBulbTemperature3.TabIndex = 3;
             // 
             // TowerDesignDataWetBulbTemperatureLabel5
             // 
@@ -162,7 +162,7 @@
             this.TowerDesignDataWetBulbTemperature5.Location = new System.Drawing.Point(6, 155);
             this.TowerDesignDataWetBulbTemperature5.Name = "TowerDesignDataWetBulbTemperature5";
             this.TowerDesignDataWetBulbTemperature5.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataWetBulbTemperature5.TabIndex = 14;
+            this.TowerDesignDataWetBulbTemperature5.TabIndex = 5;
             // 
             // TowerDesignDataWetBulbTemperatureLabel6
             // 
@@ -178,7 +178,7 @@
             this.TowerDesignDataWetBulbTemperature6.Location = new System.Drawing.Point(6, 185);
             this.TowerDesignDataWetBulbTemperature6.Name = "TowerDesignDataWetBulbTemperature6";
             this.TowerDesignDataWetBulbTemperature6.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataWetBulbTemperature6.TabIndex = 16;
+            this.TowerDesignDataWetBulbTemperature6.TabIndex = 6;
             // 
             // TowerDesignDataRange1GroupBox
             // 
@@ -200,42 +200,42 @@
             this.TowerDesignDataRange1ColdWaterTemperature1.Location = new System.Drawing.Point(12, 38);
             this.TowerDesignDataRange1ColdWaterTemperature1.Name = "TowerDesignDataRange1ColdWaterTemperature1";
             this.TowerDesignDataRange1ColdWaterTemperature1.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange1ColdWaterTemperature1.TabIndex = 5;
+            this.TowerDesignDataRange1ColdWaterTemperature1.TabIndex = 7;
             // 
             // TowerDesignDataRange1ColdWaterTemperature2
             // 
             this.TowerDesignDataRange1ColdWaterTemperature2.Location = new System.Drawing.Point(12, 68);
             this.TowerDesignDataRange1ColdWaterTemperature2.Name = "TowerDesignDataRange1ColdWaterTemperature2";
             this.TowerDesignDataRange1ColdWaterTemperature2.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange1ColdWaterTemperature2.TabIndex = 4;
+            this.TowerDesignDataRange1ColdWaterTemperature2.TabIndex = 8;
             // 
             // TowerDesignDataRange1ColdWaterTemperature3
             // 
             this.TowerDesignDataRange1ColdWaterTemperature3.Location = new System.Drawing.Point(12, 98);
             this.TowerDesignDataRange1ColdWaterTemperature3.Name = "TowerDesignDataRange1ColdWaterTemperature3";
             this.TowerDesignDataRange1ColdWaterTemperature3.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange1ColdWaterTemperature3.TabIndex = 3;
+            this.TowerDesignDataRange1ColdWaterTemperature3.TabIndex = 9;
             // 
             // TowerDesignDataRange1ColdWaterTemperature4
             // 
             this.TowerDesignDataRange1ColdWaterTemperature4.Location = new System.Drawing.Point(12, 128);
             this.TowerDesignDataRange1ColdWaterTemperature4.Name = "TowerDesignDataRange1ColdWaterTemperature4";
             this.TowerDesignDataRange1ColdWaterTemperature4.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange1ColdWaterTemperature4.TabIndex = 2;
+            this.TowerDesignDataRange1ColdWaterTemperature4.TabIndex = 10;
             // 
             // TowerDesignDataRange1ColdWaterTemperature5
             // 
             this.TowerDesignDataRange1ColdWaterTemperature5.Location = new System.Drawing.Point(12, 158);
             this.TowerDesignDataRange1ColdWaterTemperature5.Name = "TowerDesignDataRange1ColdWaterTemperature5";
             this.TowerDesignDataRange1ColdWaterTemperature5.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange1ColdWaterTemperature5.TabIndex = 1;
+            this.TowerDesignDataRange1ColdWaterTemperature5.TabIndex = 11;
             // 
             // TowerDesignDataRange1ColdWaterTemperature6
             // 
             this.TowerDesignDataRange1ColdWaterTemperature6.Location = new System.Drawing.Point(12, 188);
             this.TowerDesignDataRange1ColdWaterTemperature6.Name = "TowerDesignDataRange1ColdWaterTemperature6";
             this.TowerDesignDataRange1ColdWaterTemperature6.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange1ColdWaterTemperature6.TabIndex = 0;
+            this.TowerDesignDataRange1ColdWaterTemperature6.TabIndex = 12;
             // 
             // TowerDesignDataWetBulbTemperatureGroupBox
             // 
@@ -272,42 +272,42 @@
             this.TowerDesignDataRange2ColdWaterTemperature1.Location = new System.Drawing.Point(12, 38);
             this.TowerDesignDataRange2ColdWaterTemperature1.Name = "TowerDesignDataRange2ColdWaterTemperature1";
             this.TowerDesignDataRange2ColdWaterTemperature1.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange2ColdWaterTemperature1.TabIndex = 5;
+            this.TowerDesignDataRange2ColdWaterTemperature1.TabIndex = 13;
             // 
             // TowerDesignDataRange2ColdWaterTemperature2
             // 
             this.TowerDesignDataRange2ColdWaterTemperature2.Location = new System.Drawing.Point(12, 68);
             this.TowerDesignDataRange2ColdWaterTemperature2.Name = "TowerDesignDataRange2ColdWaterTemperature2";
             this.TowerDesignDataRange2ColdWaterTemperature2.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange2ColdWaterTemperature2.TabIndex = 4;
+            this.TowerDesignDataRange2ColdWaterTemperature2.TabIndex = 14;
             // 
             // TowerDesignDataRange2ColdWaterTemperature3
             // 
             this.TowerDesignDataRange2ColdWaterTemperature3.Location = new System.Drawing.Point(12, 98);
             this.TowerDesignDataRange2ColdWaterTemperature3.Name = "TowerDesignDataRange2ColdWaterTemperature3";
             this.TowerDesignDataRange2ColdWaterTemperature3.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange2ColdWaterTemperature3.TabIndex = 3;
+            this.TowerDesignDataRange2ColdWaterTemperature3.TabIndex = 15;
             // 
             // TowerDesignDataRange2ColdWaterTemperature4
             // 
             this.TowerDesignDataRange2ColdWaterTemperature4.Location = new System.Drawing.Point(12, 128);
             this.TowerDesignDataRange2ColdWaterTemperature4.Name = "TowerDesignDataRange2ColdWaterTemperature4";
             this.TowerDesignDataRange2ColdWaterTemperature4.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange2ColdWaterTemperature4.TabIndex = 2;
+            this.TowerDesignDataRange2ColdWaterTemperature4.TabIndex = 16;
             // 
             // TowerDesignDataRange2ColdWaterTemperature5
             // 
             this.TowerDesignDataRange2ColdWaterTemperature5.Location = new System.Drawing.Point(12, 158);
             this.TowerDesignDataRange2ColdWaterTemperature5.Name = "TowerDesignDataRange2ColdWaterTemperature5";
             this.TowerDesignDataRange2ColdWaterTemperature5.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange2ColdWaterTemperature5.TabIndex = 1;
+            this.TowerDesignDataRange2ColdWaterTemperature5.TabIndex = 17;
             // 
             // TowerDesignDataRange2ColdWaterTemperature6
             // 
             this.TowerDesignDataRange2ColdWaterTemperature6.Location = new System.Drawing.Point(12, 188);
             this.TowerDesignDataRange2ColdWaterTemperature6.Name = "TowerDesignDataRange2ColdWaterTemperature6";
             this.TowerDesignDataRange2ColdWaterTemperature6.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange2ColdWaterTemperature6.TabIndex = 0;
+            this.TowerDesignDataRange2ColdWaterTemperature6.TabIndex = 18;
             // 
             // TowerDesignDataRange3GroupBox
             // 
@@ -329,42 +329,42 @@
             this.TowerDesignDataRange3ColdWaterTemperature1.Location = new System.Drawing.Point(12, 38);
             this.TowerDesignDataRange3ColdWaterTemperature1.Name = "TowerDesignDataRange3ColdWaterTemperature1";
             this.TowerDesignDataRange3ColdWaterTemperature1.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange3ColdWaterTemperature1.TabIndex = 5;
+            this.TowerDesignDataRange3ColdWaterTemperature1.TabIndex = 19;
             // 
             // TowerDesignDataRange3ColdWaterTemperature2
             // 
             this.TowerDesignDataRange3ColdWaterTemperature2.Location = new System.Drawing.Point(12, 68);
             this.TowerDesignDataRange3ColdWaterTemperature2.Name = "TowerDesignDataRange3ColdWaterTemperature2";
             this.TowerDesignDataRange3ColdWaterTemperature2.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange3ColdWaterTemperature2.TabIndex = 4;
+            this.TowerDesignDataRange3ColdWaterTemperature2.TabIndex = 20;
             // 
             // TowerDesignDataRange3ColdWaterTemperature3
             // 
             this.TowerDesignDataRange3ColdWaterTemperature3.Location = new System.Drawing.Point(12, 98);
             this.TowerDesignDataRange3ColdWaterTemperature3.Name = "TowerDesignDataRange3ColdWaterTemperature3";
             this.TowerDesignDataRange3ColdWaterTemperature3.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange3ColdWaterTemperature3.TabIndex = 3;
+            this.TowerDesignDataRange3ColdWaterTemperature3.TabIndex = 21;
             // 
             // TowerDesignDataRange3ColdWaterTemperature4
             // 
             this.TowerDesignDataRange3ColdWaterTemperature4.Location = new System.Drawing.Point(12, 128);
             this.TowerDesignDataRange3ColdWaterTemperature4.Name = "TowerDesignDataRange3ColdWaterTemperature4";
             this.TowerDesignDataRange3ColdWaterTemperature4.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange3ColdWaterTemperature4.TabIndex = 2;
+            this.TowerDesignDataRange3ColdWaterTemperature4.TabIndex = 22;
             // 
             // TowerDesignDataRange3ColdWaterTemperature5
             // 
             this.TowerDesignDataRange3ColdWaterTemperature5.Location = new System.Drawing.Point(12, 158);
             this.TowerDesignDataRange3ColdWaterTemperature5.Name = "TowerDesignDataRange3ColdWaterTemperature5";
             this.TowerDesignDataRange3ColdWaterTemperature5.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange3ColdWaterTemperature5.TabIndex = 1;
+            this.TowerDesignDataRange3ColdWaterTemperature5.TabIndex = 23;
             // 
             // TowerDesignDataRange3ColdWaterTemperature6
             // 
             this.TowerDesignDataRange3ColdWaterTemperature6.Location = new System.Drawing.Point(12, 188);
             this.TowerDesignDataRange3ColdWaterTemperature6.Name = "TowerDesignDataRange3ColdWaterTemperature6";
             this.TowerDesignDataRange3ColdWaterTemperature6.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange3ColdWaterTemperature6.TabIndex = 0;
+            this.TowerDesignDataRange3ColdWaterTemperature6.TabIndex = 24;
             // 
             // TowerDesignDataRange4GroupBox
             // 
@@ -386,42 +386,42 @@
             this.TowerDesignDataRange4ColdWaterTemperature1.Location = new System.Drawing.Point(12, 38);
             this.TowerDesignDataRange4ColdWaterTemperature1.Name = "TowerDesignDataRange4ColdWaterTemperature1";
             this.TowerDesignDataRange4ColdWaterTemperature1.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange4ColdWaterTemperature1.TabIndex = 5;
+            this.TowerDesignDataRange4ColdWaterTemperature1.TabIndex = 25;
             // 
             // TowerDesignDataRange4ColdWaterTemperature2
             // 
             this.TowerDesignDataRange4ColdWaterTemperature2.Location = new System.Drawing.Point(12, 68);
             this.TowerDesignDataRange4ColdWaterTemperature2.Name = "TowerDesignDataRange4ColdWaterTemperature2";
             this.TowerDesignDataRange4ColdWaterTemperature2.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange4ColdWaterTemperature2.TabIndex = 4;
+            this.TowerDesignDataRange4ColdWaterTemperature2.TabIndex = 26;
             // 
             // TowerDesignDataRange4ColdWaterTemperature3
             // 
             this.TowerDesignDataRange4ColdWaterTemperature3.Location = new System.Drawing.Point(12, 98);
             this.TowerDesignDataRange4ColdWaterTemperature3.Name = "TowerDesignDataRange4ColdWaterTemperature3";
             this.TowerDesignDataRange4ColdWaterTemperature3.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange4ColdWaterTemperature3.TabIndex = 3;
+            this.TowerDesignDataRange4ColdWaterTemperature3.TabIndex = 27;
             // 
             // TowerDesignDataRange4ColdWaterTemperature4
             // 
             this.TowerDesignDataRange4ColdWaterTemperature4.Location = new System.Drawing.Point(12, 128);
             this.TowerDesignDataRange4ColdWaterTemperature4.Name = "TowerDesignDataRange4ColdWaterTemperature4";
             this.TowerDesignDataRange4ColdWaterTemperature4.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange4ColdWaterTemperature4.TabIndex = 2;
+            this.TowerDesignDataRange4ColdWaterTemperature4.TabIndex = 28;
             // 
             // TowerDesignDataRange4ColdWaterTemperature5
             // 
             this.TowerDesignDataRange4ColdWaterTemperature5.Location = new System.Drawing.Point(12, 158);
             this.TowerDesignDataRange4ColdWaterTemperature5.Name = "TowerDesignDataRange4ColdWaterTemperature5";
             this.TowerDesignDataRange4ColdWaterTemperature5.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange4ColdWaterTemperature5.TabIndex = 1;
+            this.TowerDesignDataRange4ColdWaterTemperature5.TabIndex = 29;
             // 
             // TowerDesignDataRange4ColdWaterTemperature6
             // 
             this.TowerDesignDataRange4ColdWaterTemperature6.Location = new System.Drawing.Point(12, 188);
             this.TowerDesignDataRange4ColdWaterTemperature6.Name = "TowerDesignDataRange4ColdWaterTemperature6";
             this.TowerDesignDataRange4ColdWaterTemperature6.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange4ColdWaterTemperature6.TabIndex = 0;
+            this.TowerDesignDataRange4ColdWaterTemperature6.TabIndex = 30;
             // 
             // TowerDesignDataRange5GroupBox
             // 
@@ -443,42 +443,42 @@
             this.TowerDesignDataRange5ColdWaterTemperature1.Location = new System.Drawing.Point(12, 38);
             this.TowerDesignDataRange5ColdWaterTemperature1.Name = "TowerDesignDataRange5ColdWaterTemperature1";
             this.TowerDesignDataRange5ColdWaterTemperature1.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange5ColdWaterTemperature1.TabIndex = 5;
+            this.TowerDesignDataRange5ColdWaterTemperature1.TabIndex = 31;
             // 
             // TowerDesignDataRange5ColdWaterTemperature2
             // 
             this.TowerDesignDataRange5ColdWaterTemperature2.Location = new System.Drawing.Point(12, 68);
             this.TowerDesignDataRange5ColdWaterTemperature2.Name = "TowerDesignDataRange5ColdWaterTemperature2";
             this.TowerDesignDataRange5ColdWaterTemperature2.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange5ColdWaterTemperature2.TabIndex = 4;
+            this.TowerDesignDataRange5ColdWaterTemperature2.TabIndex = 32;
             // 
             // TowerDesignDataRange5ColdWaterTemperature3
             // 
             this.TowerDesignDataRange5ColdWaterTemperature3.Location = new System.Drawing.Point(12, 98);
             this.TowerDesignDataRange5ColdWaterTemperature3.Name = "TowerDesignDataRange5ColdWaterTemperature3";
             this.TowerDesignDataRange5ColdWaterTemperature3.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange5ColdWaterTemperature3.TabIndex = 3;
+            this.TowerDesignDataRange5ColdWaterTemperature3.TabIndex = 33;
             // 
             // TowerDesignDataRange5ColdWaterTemperature4
             // 
             this.TowerDesignDataRange5ColdWaterTemperature4.Location = new System.Drawing.Point(12, 128);
             this.TowerDesignDataRange5ColdWaterTemperature4.Name = "TowerDesignDataRange5ColdWaterTemperature4";
             this.TowerDesignDataRange5ColdWaterTemperature4.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange5ColdWaterTemperature4.TabIndex = 2;
+            this.TowerDesignDataRange5ColdWaterTemperature4.TabIndex = 34;
             // 
             // TowerDesignDataRange5ColdWaterTemperature5
             // 
             this.TowerDesignDataRange5ColdWaterTemperature5.Location = new System.Drawing.Point(12, 158);
             this.TowerDesignDataRange5ColdWaterTemperature5.Name = "TowerDesignDataRange5ColdWaterTemperature5";
             this.TowerDesignDataRange5ColdWaterTemperature5.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange5ColdWaterTemperature5.TabIndex = 1;
+            this.TowerDesignDataRange5ColdWaterTemperature5.TabIndex = 35;
             // 
             // TowerDesignDataRange5ColdWaterTemperature6
             // 
             this.TowerDesignDataRange5ColdWaterTemperature6.Location = new System.Drawing.Point(12, 188);
             this.TowerDesignDataRange5ColdWaterTemperature6.Name = "TowerDesignDataRange5ColdWaterTemperature6";
             this.TowerDesignDataRange5ColdWaterTemperature6.Size = new System.Drawing.Size(92, 20);
-            this.TowerDesignDataRange5ColdWaterTemperature6.TabIndex = 0;
+            this.TowerDesignDataRange5ColdWaterTemperature6.TabIndex = 26;
             // 
             // TowerDesignCurveDataUserControl
             // 

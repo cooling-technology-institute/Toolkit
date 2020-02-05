@@ -32,16 +32,26 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ToolkitMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unitedStatesCustomaryUnitsIPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.internationalSystemOfUnitsSIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.unitedStatesCustomaryUnitsIPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.internationalSystemOfUnitsSIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,9 +70,86 @@
             // 
             // fileToolStripMenuItem
             // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem,
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem1,
+            this.saveAsToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.printToolStripMenuItem,
+            this.printPreviewToolStripMenuItem,
+            this.printSetupToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem1
+            // 
+            this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem1.Text = "Save";
+            this.saveToolStripMenuItem1.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Text = "Save As";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // printToolStripMenuItem
+            // 
+            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.printToolStripMenuItem.Text = "Print ";
+            this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
+            // 
+            // printPreviewToolStripMenuItem
+            // 
+            this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
+            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.printPreviewToolStripMenuItem.Text = "Print Preview";
+            this.printPreviewToolStripMenuItem.Click += new System.EventHandler(this.printPreviewToolStripMenuItem_Click);
+            // 
+            // printSetupToolStripMenuItem
+            // 
+            this.printSetupToolStripMenuItem.Name = "printSetupToolStripMenuItem";
+            this.printSetupToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.printSetupToolStripMenuItem.Text = "Print Setup";
+            this.printSetupToolStripMenuItem.Click += new System.EventHandler(this.printSetupToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // documentationToolStripMenuItem
             // 
@@ -78,6 +165,24 @@
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
             this.settingToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.settingToolStripMenuItem.Text = "Setting";
+            // 
+            // unitedStatesCustomaryUnitsIPToolStripMenuItem
+            // 
+            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.Checked = true;
+            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.CheckOnClick = true;
+            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.Name = "unitedStatesCustomaryUnitsIPToolStripMenuItem";
+            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.Text = "United States Customary Units (IP)";
+            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.Click += new System.EventHandler(this.unitedStatesCustomaryUnitsIPToolStripMenuItem_Click);
+            // 
+            // internationalSystemOfUnitsSIToolStripMenuItem
+            // 
+            this.internationalSystemOfUnitsSIToolStripMenuItem.CheckOnClick = true;
+            this.internationalSystemOfUnitsSIToolStripMenuItem.Name = "internationalSystemOfUnitsSIToolStripMenuItem";
+            this.internationalSystemOfUnitsSIToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.internationalSystemOfUnitsSIToolStripMenuItem.Text = "International System of Units (SI)";
+            this.internationalSystemOfUnitsSIToolStripMenuItem.Click += new System.EventHandler(this.internationalSystemOfUnitsSIToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -109,24 +214,6 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(917, 831);
             this.tabControl1.TabIndex = 1;
-            // 
-            // unitedStatesCustomaryUnitsIPToolStripMenuItem
-            // 
-            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.Checked = true;
-            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.CheckOnClick = true;
-            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.Name = "unitedStatesCustomaryUnitsIPToolStripMenuItem";
-            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.Text = "United States Customary Units (IP)";
-            this.unitedStatesCustomaryUnitsIPToolStripMenuItem.Click += new System.EventHandler(this.unitedStatesCustomaryUnitsIPToolStripMenuItem_Click);
-            // 
-            // internationalSystemOfUnitsSIToolStripMenuItem
-            // 
-            this.internationalSystemOfUnitsSIToolStripMenuItem.CheckOnClick = true;
-            this.internationalSystemOfUnitsSIToolStripMenuItem.Name = "internationalSystemOfUnitsSIToolStripMenuItem";
-            this.internationalSystemOfUnitsSIToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.internationalSystemOfUnitsSIToolStripMenuItem.Text = "International System of Units (SI)";
-            this.internationalSystemOfUnitsSIToolStripMenuItem.Click += new System.EventHandler(this.internationalSystemOfUnitsSIToolStripMenuItem_Click);
             // 
             // ToolkitMain
             // 
@@ -161,5 +248,15 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.ToolStripMenuItem unitedStatesCustomaryUnitsIPToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem internationalSystemOfUnitsSIToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printPreviewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printSetupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }

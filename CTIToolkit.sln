@@ -8,7 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{0543EE4D-7322-439D-9BF1-F820AC4D2139}"
 	ProjectSection(SolutionItems) = preProject
 		Data\Appendix C.bbp = Data\Appendix C.bbp
+		Data\Appendix C.json = Data\Appendix C.json
 		Data\Appendix D.bbp = Data\Appendix D.bbp
+		Data\Appendix D.json = Data\Appendix D.json
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{70534718-9183-4478-9FB7-410936784EBB}"
@@ -16,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\ViewModels.csproj", "{7BEA5325-3D6A-4693-BFA5-9360AD65E403}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculationLibrary", "CalculationLibrary\CalculationLibrary.csproj", "{9DDB975C-03CB-48A0-A6E0-AF9E1C9212F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IniFileConverter", "IniFileConverter\IniFileConverter.csproj", "{7189B201-AF6C-4FDC-837D-3BBB00FAAB88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,10 @@ Global
 		{9DDB975C-03CB-48A0-A6E0-AF9E1C9212F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DDB975C-03CB-48A0-A6E0-AF9E1C9212F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DDB975C-03CB-48A0-A6E0-AF9E1C9212F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7189B201-AF6C-4FDC-837D-3BBB00FAAB88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7189B201-AF6C-4FDC-837D-3BBB00FAAB88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7189B201-AF6C-4FDC-837D-3BBB00FAAB88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7189B201-AF6C-4FDC-837D-3BBB00FAAB88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

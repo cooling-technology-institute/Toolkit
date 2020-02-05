@@ -13,7 +13,7 @@ namespace Models
         public double HotWaterTemperature { set; get; }
         public double WetBulbTemperature { set; get; } 
         public double DryBulbTemperature { set; get; }
-        public double FanDrivePower { set; get; }
+        public double FanDriverPower { set; get; }
         public double BarometricPressure { set; get; }
         public double LiquidToGasRatio { set; get; }
 
@@ -24,7 +24,7 @@ namespace Models
             ColdWaterTemperature = 0.0;
             WetBulbTemperature = 0.0;
             DryBulbTemperature = 0.0;
-            FanDrivePower = 0.0;
+            FanDriverPower = 0.0;
             BarometricPressure = 0.0;
             LiquidToGasRatio = 0.0;
         }

@@ -13,13 +13,13 @@ namespace Models
 
 		public MechanicalDraftPerformanceCurveTestData MechanicalDraftPerformanceCurveTestData { get; set; }
         public MechanicalDraftPerformanceCurveDesignData MechanicalDraftPerformanceCurveDesignData { get; set; }
-        public MechanicalDraftPerformanceCurveOutput MechanicalDraftPerformanceCurveOutput { get; set; }
 
         public MechanicalDraftPerformanceCurveData(bool isInternationalSystemOfUnits_IS_)
         {
+            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
+
             MechanicalDraftPerformanceCurveTestData = new MechanicalDraftPerformanceCurveTestData();
             MechanicalDraftPerformanceCurveDesignData = new MechanicalDraftPerformanceCurveDesignData();
-            MechanicalDraftPerformanceCurveOutput = new MechanicalDraftPerformanceCurveOutput();
         }
     }
 }

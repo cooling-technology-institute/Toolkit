@@ -439,6 +439,241 @@ namespace ViewModels
             }
         }
 
+
+        public string WaterFlowRateDesignDataValueInputMessage
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.WaterFlowRateDataValue.InputMessage;
+            }
+        }
+
+        public string WaterFlowRateDesignDataValueInputValue
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.WaterFlowRateDataValue.InputValue;
+            }
+        }
+
+        public bool WaterFlowRateDesignDataValueUpdateValue(string value, out string errorMessage)
+        {
+            return MechanicalDraftPerformanceCurveTowerDesignInputData.WaterFlowRateDataValue.UpdateValue(value, out errorMessage);
+        }
+
+        public string WaterFlowRateDesignDataValueTooltip
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.WaterFlowRateDataValue.ToolTip;
+            }
+        }
+
+
+        public string HotWaterTemperatureDesignDataValueInputMessage
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.HotWaterTemperatureDataValue.InputMessage;
+            }
+        }
+
+        public string HotWaterTemperatureDesignDataValueInputValue
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.HotWaterTemperatureDataValue.InputValue;
+            }
+        }
+
+        public bool HotWaterTemperatureDesignDataValueUpdateValue(string value, out string errorMessage)
+        {
+            return MechanicalDraftPerformanceCurveTowerDesignInputData.HotWaterTemperatureDataValue.UpdateValue(value, out errorMessage);
+        }
+
+        public string HotWaterTemperatureDesignDataValueTooltip
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.HotWaterTemperatureDataValue.ToolTip;
+            }
+        }
+
+        public string ColdWaterTemperatureDesignDataValueInputMessage
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.ColdWaterTemperatureDataValue.InputMessage;
+            }
+        }
+
+        public string ColdWaterTemperatureDesignDataValueInputValue
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.ColdWaterTemperatureDataValue.InputValue;
+            }
+        }
+
+        public string ColdWaterTemperatureDesignDataValueTooltip
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.ColdWaterTemperatureDataValue.ToolTip;
+            }
+        }
+
+        public bool ColdWaterTemperatureDesignDataValueUpdateValue(string value, out string errorMessage)
+        {
+            return MechanicalDraftPerformanceCurveTowerDesignInputData.ColdWaterTemperatureDataValue.UpdateValue(value, out errorMessage);
+        }
+
+        public string WetBulbTemperatureDesignDataValueInputMessage
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.WetBulbTemperatureDataValue.InputMessage;
+            }
+        }
+
+        public string WetBulbTemperatureDesignDataValueInputValue
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.WetBulbTemperatureDataValue.InputValue;
+            }
+        }
+
+        public string WetBulbTemperatureDesignDataValueTooltip
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.WetBulbTemperatureDataValue.ToolTip;
+            }
+        }
+
+        public bool WetBulbTemperatureDesignDataValueUpdateValue(string value, out string errorMessage)
+        {
+            return MechanicalDraftPerformanceCurveTowerDesignInputData.WetBulbTemperatureDataValue.UpdateValue(value, out errorMessage);
+        }
+
+        public string DryBulbTemperatureDesignDataValueInputMessage
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.DryBulbTemperatureDataValue.InputMessage;
+            }
+        }
+
+        public string DryBulbTemperatureDesignDataValueInputValue
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.DryBulbTemperatureDataValue.InputValue;
+            }
+        }
+
+        public string DryBulbTemperatureDesignDataValueTooltip
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.DryBulbTemperatureDataValue.ToolTip;
+            }
+        }
+
+        public bool DryBulbTemperatureDesignDataValueUpdateValue(string value, out string errorMessage)
+        {
+            return MechanicalDraftPerformanceCurveTowerDesignInputData.DryBulbTemperatureDataValue.UpdateValue(value, out errorMessage);
+        }
+
+        public string FanDriverPowerDesignDataValueInputMessage
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.FanDriverPowerDataValue.InputMessage;
+            }
+        }
+
+        public string FanDriverPowerDesignDataValueInputValue
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.FanDriverPowerDataValue.InputValue;
+            }
+        }
+
+        public string FanDriverPowerDesignDataValueTooltip
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.FanDriverPowerDataValue.ToolTip;
+            }
+        }
+
+        public bool FanDriverPowerDesignDataValueUpdateValue(string value, out string errorMessage)
+        {
+            return MechanicalDraftPerformanceCurveTowerDesignInputData.FanDriverPowerDataValue.UpdateValue(value, out errorMessage);
+        }
+
+        public string BarometricPressureDesignDataValueInputMessage
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.BarometricPressureDataValue.InputMessage;
+            }
+        }
+
+        public string BarometricPressureDesignDataValueInputValue
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.BarometricPressureDataValue.InputValue;
+            }
+        }
+
+        public string BarometricPressureDesignDataValueTooltip
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.BarometricPressureDataValue.ToolTip;
+            }
+        }
+
+        public bool BarometricPressureDesignDataValueUpdateValue(string value, out string errorMessage)
+        {
+            return MechanicalDraftPerformanceCurveTowerDesignInputData.BarometricPressureDataValue.UpdateValue(value, out errorMessage);
+        }
+
+        public string LiquidToGasRatioDesignDataValueInputMessage
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.LiquidToGasRatioDataValue.InputMessage;
+            }
+        }
+
+        public string LiquidToGasRatioDesignDataValueInputValue
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.LiquidToGasRatioDataValue.InputValue;
+            }
+        }
+
+        public string LiquidToGasRatioDesignDataValueTooltip
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.LiquidToGasRatioDataValue.ToolTip;
+            }
+        }
+
+        public bool LiquidToGasRatioDesignDataValueUpdateValue(string value, out string errorMessage)
+        {
+            return MechanicalDraftPerformanceCurveTowerDesignInputData.LiquidToGasRatioDataValue.UpdateValue(value, out errorMessage);
+        }
+
+
         public MechanicalDraftPerformanceCurveTowerDesignViewModel(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
@@ -446,5 +681,17 @@ namespace ViewModels
 
             MechanicalDraftPerformanceCurveTowerDesignInputData = new MechanicalDraftPerformanceCurveTowerDesignInputData(IsDemo, IsInternationalSystemOfUnits_IS);
         }
+
+        public void WriteAllText(string filename)
+        {
+            MechanicalDraftPerformanceCurveTowerDesignInputData.WriteAllText(filename);
+        }
+
+        public void LoadData(MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData)
+        {
+            string errorMessage;
+            MechanicalDraftPerformanceCurveTowerDesignInputData.LoadData(mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData, out errorMessage);
+        }
+
     }
 }

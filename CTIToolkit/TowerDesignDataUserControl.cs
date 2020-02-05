@@ -1,8 +1,9 @@
-﻿using Models;
+﻿// Copyright Cooling Technology Institute 2019-2020
+
+using Models;
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ViewModels;
 
@@ -10,13 +11,29 @@ namespace CTIToolkit
 {
     public partial class TowerDesignDataUserControl : UserControl
     {
-        TaskCompletionSource<DialogResult> _tcs;
-        
         MechanicalDraftPerformanceCurveTowerDesignViewModel MechanicalDraftPerformanceCurveTowerDesignViewModel { get; set; }
+        public bool IsChanged { get; set; }
+        private bool IsDemo { get; set; }
+        private bool IsInternationalSystemOfUnits_IS { get; set; }
+        private string filename { get; set; }
 
-        public TowerDesignDataUserControl()
+        public TowerDesignDataUserControl(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
+            IsDemo = isDemo;
+            IsInternationalSystemOfUnits_IS = IsInternationalSystemOfUnits_IS;
+
             InitializeComponent();
+            
+            MechanicalDraftPerformanceCurveTowerDesignViewModel = new MechanicalDraftPerformanceCurveTowerDesignViewModel(IsDemo, IsInternationalSystemOfUnits_IS);
+
+            IsChanged = false;
+
+            Setup();
+        }
+
+        public void LoadData(MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData)
+        {
+            MechanicalDraftPerformanceCurveTowerDesignViewModel.LoadData(mechanicalDraftPerformanceCurveData);
             Setup();
         }
 
@@ -79,16 +96,16 @@ namespace CTIToolkit
             TowerDesignDataRange1.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue1InputValue;
             toolTip1.SetToolTip(TowerDesignDataRange1, MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue1Tooltip);
 
-            TowerDesignDataRange2.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue1InputValue;
+            TowerDesignDataRange2.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue2InputValue;
             toolTip1.SetToolTip(TowerDesignDataRange2, MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue2Tooltip);
 
-            TowerDesignDataRange3.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue1InputValue;
+            TowerDesignDataRange3.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue3InputValue;
             toolTip1.SetToolTip(TowerDesignDataRange3, MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue3Tooltip);
 
-            TowerDesignDataRange4.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue1InputValue;
+            TowerDesignDataRange4.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue4InputValue;
             toolTip1.SetToolTip(TowerDesignDataRange4, MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue4Tooltip);
 
-            TowerDesignDataRange5.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue1InputValue;
+            TowerDesignDataRange5.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue5InputValue;
             toolTip1.SetToolTip(TowerDesignDataRange5, MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue5Tooltip);
 
             // build tab pages
@@ -359,26 +376,23 @@ namespace CTIToolkit
             }
         }
 
-        public Task<DialogResult> ShowModalAsync()
-        {
-            _tcs = new TaskCompletionSource<DialogResult>();
-
-            this.Visible = true;
-            this.Dock = DockStyle.Fill;
-            this.BringToFront();
-            return _tcs.Task;
-        }
-
         private void TowerDesignCurveDataSaveButton_Click(object sender, EventArgs e)
         {
+            // save data to file?
+            if(string.IsNullOrWhiteSpace(filename))
+            {
+                // popup to get file name
+                filename = "test.json";
+            }
+
+            MechanicalDraftPerformanceCurveTowerDesignViewModel.WriteAllText(filename);
+
             this.Visible = false;
-            _tcs.SetResult(DialogResult.OK);
         }
 
         private void TowerDesignCurveDataCancelButton_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            _tcs.SetResult(DialogResult.Cancel);
         }
     }
 }
