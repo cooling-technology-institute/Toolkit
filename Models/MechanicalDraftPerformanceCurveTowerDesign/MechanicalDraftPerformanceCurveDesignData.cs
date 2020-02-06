@@ -155,5 +155,58 @@ namespace Models
             }
             return returnValue;
         }
+
+        public int CountRanges()
+        {
+            bool zeroDetected = false;
+
+            RangeCount = 0;
+            LastValidRange = 0;
+
+            for (int i = 0; i < 5; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        if(Range1 == 0.0)
+                        {
+                            zeroDetected = true;
+                        }
+                        break;
+                    case 1:
+                        if (Range2 == 0.0)
+                        {
+                            zeroDetected = true;
+                        }
+                        break;
+                    case 2:
+                        if (Range3 == 0.0)
+                        {
+                            zeroDetected = true;
+                        }
+                        break;
+                    case 3:
+                        if (Range4 == 0.0)
+                        {
+                            zeroDetected = true;
+                        }
+                        break;
+                    case 4:
+                        if (Range5 == 0.0)
+                        {
+                            zeroDetected = true;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                if(!zeroDetected)
+                {
+                    LastValidRange = i + 1;
+                    RangeCount++;
+                }
+            }
+            return RangeCount;
+        }
     }
 }

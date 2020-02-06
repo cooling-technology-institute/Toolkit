@@ -10,8 +10,8 @@ namespace ViewModels
     public class MechanicalDraftPerformanceCurveTowerDesignViewModel
     {
         public MechanicalDraftPerformanceCurveTowerDesignInputData MechanicalDraftPerformanceCurveTowerDesignInputData { get; set; }
-        public List<RangedTemperatureDesignViewModel> RangedTemperatureDesignViewModels { get; set; }
-
+        public int RangeCount { get; set; }
+        
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_SI { get; set; }
 
@@ -21,8 +21,6 @@ namespace ViewModels
             IsInternationalSystemOfUnits_SI = IsInternationalSystemOfUnits_SI;
 
             MechanicalDraftPerformanceCurveTowerDesignInputData = new MechanicalDraftPerformanceCurveTowerDesignInputData(IsDemo, IsInternationalSystemOfUnits_SI);
-
-            RangedTemperatureDesignViewModels = new List<RangedTemperatureDesignViewModel>();
         }
 
         #region DataValueAccess
@@ -286,7 +284,7 @@ namespace ViewModels
 
         public bool RangeDataValue1UpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveTowerDesignInputData.RangeDataValue1.UpdateValue(value, out errorMessage);
+            return UpdateRangeValue(MechanicalDraftPerformanceCurveTowerDesignInputData.RangeDataValue1, value, out errorMessage);
         }
 
         public string RangeDataValue2InputMessage
@@ -315,7 +313,7 @@ namespace ViewModels
 
         public bool RangeDataValue2UpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveTowerDesignInputData.RangeDataValue2.UpdateValue(value, out errorMessage);
+            return UpdateRangeValue(MechanicalDraftPerformanceCurveTowerDesignInputData.RangeDataValue2, value, out errorMessage);
         }
 
         public string RangeDataValue3InputMessage
@@ -344,7 +342,7 @@ namespace ViewModels
 
         public bool RangeDataValue3UpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveTowerDesignInputData.RangeDataValue3.UpdateValue(value, out errorMessage);
+            return UpdateRangeValue(MechanicalDraftPerformanceCurveTowerDesignInputData.RangeDataValue3, value, out errorMessage);
         }
 
         public string RangeDataValue4InputMessage
@@ -373,7 +371,7 @@ namespace ViewModels
 
         public bool RangeDataValue4UpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveTowerDesignInputData.RangeDataValue4.UpdateValue(value, out errorMessage);
+            return UpdateRangeValue(MechanicalDraftPerformanceCurveTowerDesignInputData.RangeDataValue4, value, out errorMessage);
         }
 
         public string RangeDataValue5InputMessage
@@ -402,7 +400,7 @@ namespace ViewModels
 
         public bool RangeDataValue5UpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveTowerDesignInputData.RangeDataValue5.UpdateValue(value, out errorMessage);
+            return UpdateRangeValue(MechanicalDraftPerformanceCurveTowerDesignInputData.RangeDataValue5, value, out errorMessage);
         }
 
         public string AddWaterFlowRateDataValueInputMessage
@@ -732,18 +730,6 @@ namespace ViewModels
                 errorMessage = string.Empty;
             }
 
-            RangedTemperatureDesignViewModels.Clear();
-            foreach (RangedTemperaturesDesignData rangedTemperaturesDesignData in mechanicalDraftPerformanceCurveDesignData.RangedTemperaturesDesignData)
-            {
-                RangedTemperatureDesignViewModel rangedTemperatureDesignViewModel = new RangedTemperatureDesignViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
-                if(!rangedTemperatureDesignViewModel.LoadData(rangedTemperaturesDesignData, out errorMessage))
-                {
-                    returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
-                }
-                RangedTemperatureDesignViewModels.Add(rangedTemperatureDesignViewModel);
-            }
             return returnValue;
         }
 
@@ -761,6 +747,30 @@ namespace ViewModels
             }
 
             return returnValue;
+        }
+
+        private bool UpdateRangeValue(RangeDataValue rangeDataValue, string value, out string errorMessage)
+        {
+
+            if (rangeDataValue.UpdateValue(value, out errorMessage))
+            {
+                int rangeCount = CountRanges();
+                if(RangeCount != rangeCount)
+                {
+                    RangeCount = rangeCount;
+                    //todo change the flow rate tab pages
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public int CountRanges()
+        {
+            return MechanicalDraftPerformanceCurveTowerDesignInputData.CountRanges();
         }
     }
 }

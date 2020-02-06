@@ -173,5 +173,772 @@ namespace CTIToolkit
 
             return returnValue;
         }
+
+        public void RangedColdWaterTemperatureVisibility(int rangeCount)
+        {
+            TowerDesignDataRange1GroupBox.Visible = (rangeCount >= 1);
+            TowerDesignDataRange2GroupBox.Visible = (rangeCount >= 2);
+            TowerDesignDataRange3GroupBox.Visible = (rangeCount >= 3);
+            TowerDesignDataRange4GroupBox.Visible = (rangeCount >= 4);
+            TowerDesignDataRange5GroupBox.Visible = (rangeCount >= 5);
+        }
+
+        public void RangedColdWaterTemperatureEnable(int webBulbTemperatureCount)
+        {
+            TowerDesignDataRange1ColdWaterTemperature1.Visible = (webBulbTemperatureCount >= 1);
+            TowerDesignDataRange1ColdWaterTemperature2.Visible = (webBulbTemperatureCount >= 2);
+            TowerDesignDataRange1ColdWaterTemperature3.Visible = (webBulbTemperatureCount >= 3);
+            TowerDesignDataRange1ColdWaterTemperature4.Visible = (webBulbTemperatureCount >= 4);
+            TowerDesignDataRange1ColdWaterTemperature5.Visible = (webBulbTemperatureCount >= 5);
+            TowerDesignDataRange1ColdWaterTemperature6.Visible = (webBulbTemperatureCount >= 6);
+
+            TowerDesignDataRange2ColdWaterTemperature1.Visible = (webBulbTemperatureCount >= 1);
+            TowerDesignDataRange2ColdWaterTemperature2.Visible = (webBulbTemperatureCount >= 2);
+            TowerDesignDataRange2ColdWaterTemperature3.Visible = (webBulbTemperatureCount >= 3);
+            TowerDesignDataRange2ColdWaterTemperature4.Visible = (webBulbTemperatureCount >= 4);
+            TowerDesignDataRange2ColdWaterTemperature5.Visible = (webBulbTemperatureCount >= 5);
+            TowerDesignDataRange2ColdWaterTemperature6.Visible = (webBulbTemperatureCount >= 6);
+
+            TowerDesignDataRange3ColdWaterTemperature1.Visible = (webBulbTemperatureCount >= 1);
+            TowerDesignDataRange3ColdWaterTemperature2.Visible = (webBulbTemperatureCount >= 2);
+            TowerDesignDataRange3ColdWaterTemperature3.Visible = (webBulbTemperatureCount >= 3);
+            TowerDesignDataRange3ColdWaterTemperature4.Visible = (webBulbTemperatureCount >= 4);
+            TowerDesignDataRange3ColdWaterTemperature5.Visible = (webBulbTemperatureCount >= 5);
+            TowerDesignDataRange3ColdWaterTemperature6.Visible = (webBulbTemperatureCount >= 6);
+
+            TowerDesignDataRange4ColdWaterTemperature1.Visible = (webBulbTemperatureCount >= 1);
+            TowerDesignDataRange4ColdWaterTemperature2.Visible = (webBulbTemperatureCount >= 2);
+            TowerDesignDataRange4ColdWaterTemperature3.Visible = (webBulbTemperatureCount >= 3);
+            TowerDesignDataRange4ColdWaterTemperature4.Visible = (webBulbTemperatureCount >= 4);
+            TowerDesignDataRange4ColdWaterTemperature5.Visible = (webBulbTemperatureCount >= 5);
+            TowerDesignDataRange4ColdWaterTemperature6.Visible = (webBulbTemperatureCount >= 6);
+
+            TowerDesignDataRange5ColdWaterTemperature1.Visible = (webBulbTemperatureCount >= 1);
+            TowerDesignDataRange5ColdWaterTemperature2.Visible = (webBulbTemperatureCount >= 2);
+            TowerDesignDataRange5ColdWaterTemperature3.Visible = (webBulbTemperatureCount >= 3);
+            TowerDesignDataRange5ColdWaterTemperature4.Visible = (webBulbTemperatureCount >= 4);
+            TowerDesignDataRange5ColdWaterTemperature5.Visible = (webBulbTemperatureCount >= 5);
+            TowerDesignDataRange5ColdWaterTemperature6.Visible = (webBulbTemperatureCount >= 6);
+        }
+
+        private void TowerDesignDataWetBulbTemperature1_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataWetBulbTemperature1, "");
+        }
+
+        private void TowerDesignDataWetBulbTemperature1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.WetBulbTemperatureDataValue1UpdateValue(TowerDesignDataWetBulbTemperature1.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataWetBulbTemperature1.Select(0, TowerDesignDataWetBulbTemperature1.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataWetBulbTemperature1, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataWetBulbTemperature2_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataWetBulbTemperature2, "");
+        }
+
+        private void TowerDesignDataWetBulbTemperature2_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.WetBulbTemperatureDataValue1UpdateValue(TowerDesignDataWetBulbTemperature2.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataWetBulbTemperature2.Select(0, TowerDesignDataWetBulbTemperature2.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataWetBulbTemperature2, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataWetBulbTemperature3_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataWetBulbTemperature3, "");
+        }
+
+        private void TowerDesignDataWetBulbTemperature3_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.WetBulbTemperatureDataValue1UpdateValue(TowerDesignDataWetBulbTemperature3.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataWetBulbTemperature3.Select(0, TowerDesignDataWetBulbTemperature3.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataWetBulbTemperature3, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataWetBulbTemperature4_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataWetBulbTemperature4, "");
+        }
+
+        private void TowerDesignDataWetBulbTemperature4_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.WetBulbTemperatureDataValue1UpdateValue(TowerDesignDataWetBulbTemperature4.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataWetBulbTemperature4.Select(0, TowerDesignDataWetBulbTemperature4.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataWetBulbTemperature4, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataWetBulbTemperature5_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataWetBulbTemperature5, "");
+        }
+
+        private void TowerDesignDataWetBulbTemperature5_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.WetBulbTemperatureDataValue1UpdateValue(TowerDesignDataWetBulbTemperature5.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataWetBulbTemperature5.Select(0, TowerDesignDataWetBulbTemperature5.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataWetBulbTemperature5, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataWetBulbTemperature6_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataWetBulbTemperature6, "");
+        }
+
+        private void TowerDesignDataWetBulbTemperature6_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.WetBulbTemperatureDataValue1UpdateValue(TowerDesignDataWetBulbTemperature6.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataWetBulbTemperature6.Select(0, TowerDesignDataWetBulbTemperature6.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataWetBulbTemperature6, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange1ColdWaterTemperature1_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange1ColdWaterTemperature1, "");
+        }
+
+        private void TowerDesignDataRange1ColdWaterTemperature1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range1ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange1ColdWaterTemperature1.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange1ColdWaterTemperature1.Select(0, TowerDesignDataRange1ColdWaterTemperature1.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange1ColdWaterTemperature1, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange1ColdWaterTemperature2_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange1ColdWaterTemperature2, "");
+        }
+
+        private void TowerDesignDataRange1ColdWaterTemperature2_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range1ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange1ColdWaterTemperature2.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange1ColdWaterTemperature2.Select(0, TowerDesignDataRange1ColdWaterTemperature2.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange1ColdWaterTemperature2, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange1ColdWaterTemperature3_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange1ColdWaterTemperature3, "");
+        }
+
+        private void TowerDesignDataRange1ColdWaterTemperature3_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range1ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange1ColdWaterTemperature3.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange1ColdWaterTemperature3.Select(0, TowerDesignDataRange1ColdWaterTemperature3.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange1ColdWaterTemperature3, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange1ColdWaterTemperature4_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange1ColdWaterTemperature4, "");
+        }
+
+        private void TowerDesignDataRange1ColdWaterTemperature4_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range1ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange1ColdWaterTemperature4.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange1ColdWaterTemperature4.Select(0, TowerDesignDataRange1ColdWaterTemperature4.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange1ColdWaterTemperature4, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange1ColdWaterTemperature5_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange1ColdWaterTemperature5, "");
+        }
+
+        private void TowerDesignDataRange1ColdWaterTemperature5_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range1ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange1ColdWaterTemperature5.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange1ColdWaterTemperature5.Select(0, TowerDesignDataRange1ColdWaterTemperature5.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange1ColdWaterTemperature5, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange1ColdWaterTemperature6_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange1ColdWaterTemperature6, "");
+        }
+
+        private void TowerDesignDataRange1ColdWaterTemperature6_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range1ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange1ColdWaterTemperature6.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange1ColdWaterTemperature6.Select(0, TowerDesignDataRange1ColdWaterTemperature6.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange1ColdWaterTemperature6, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange2ColdWaterTemperature1_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange2ColdWaterTemperature1, "");
+        }
+
+        private void TowerDesignDataRange2ColdWaterTemperature1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range2ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange2ColdWaterTemperature1.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange2ColdWaterTemperature1.Select(0, TowerDesignDataRange2ColdWaterTemperature1.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange2ColdWaterTemperature1, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange2ColdWaterTemperature2_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange2ColdWaterTemperature2, "");
+        }
+
+        private void TowerDesignDataRange2ColdWaterTemperature2_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range2ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange2ColdWaterTemperature2.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange2ColdWaterTemperature2.Select(0, TowerDesignDataRange2ColdWaterTemperature2.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange2ColdWaterTemperature2, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange2ColdWaterTemperature3_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange2ColdWaterTemperature3, "");
+        }
+
+        private void TowerDesignDataRange2ColdWaterTemperature3_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range2ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange2ColdWaterTemperature3.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange2ColdWaterTemperature3.Select(0, TowerDesignDataRange2ColdWaterTemperature3.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange2ColdWaterTemperature3, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange2ColdWaterTemperature4_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange2ColdWaterTemperature4, "");
+        }
+
+        private void TowerDesignDataRange2ColdWaterTemperature4_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range2ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange2ColdWaterTemperature4.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange2ColdWaterTemperature4.Select(0, TowerDesignDataRange2ColdWaterTemperature4.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange2ColdWaterTemperature4, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange2ColdWaterTemperature5_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange2ColdWaterTemperature5, "");
+        }
+
+        private void TowerDesignDataRange2ColdWaterTemperature5_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range2ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange2ColdWaterTemperature5.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange2ColdWaterTemperature5.Select(0, TowerDesignDataRange2ColdWaterTemperature5.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange2ColdWaterTemperature5, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange2ColdWaterTemperature6_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange2ColdWaterTemperature6, "");
+        }
+
+        private void TowerDesignDataRange2ColdWaterTemperature6_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range2ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange2ColdWaterTemperature6.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange2ColdWaterTemperature6.Select(0, TowerDesignDataRange2ColdWaterTemperature6.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange2ColdWaterTemperature6, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange3ColdWaterTemperature1_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange3ColdWaterTemperature1, "");
+        }
+
+        private void TowerDesignDataRange3ColdWaterTemperature1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range3ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange3ColdWaterTemperature1.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange3ColdWaterTemperature1.Select(0, TowerDesignDataRange3ColdWaterTemperature1.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange3ColdWaterTemperature1, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange3ColdWaterTemperature2_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange3ColdWaterTemperature2, "");
+        }
+
+        private void TowerDesignDataRange3ColdWaterTemperature2_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range3ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange3ColdWaterTemperature2.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange3ColdWaterTemperature2.Select(0, TowerDesignDataRange3ColdWaterTemperature2.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange3ColdWaterTemperature2, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange3ColdWaterTemperature3_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange3ColdWaterTemperature3, "");
+        }
+
+        private void TowerDesignDataRange3ColdWaterTemperature3_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range3ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange3ColdWaterTemperature3.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange3ColdWaterTemperature3.Select(0, TowerDesignDataRange3ColdWaterTemperature3.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange3ColdWaterTemperature3, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange3ColdWaterTemperature4_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange3ColdWaterTemperature4, "");
+        }
+
+        private void TowerDesignDataRange3ColdWaterTemperature4_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range3ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange3ColdWaterTemperature4.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange3ColdWaterTemperature4.Select(0, TowerDesignDataRange3ColdWaterTemperature4.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange3ColdWaterTemperature4, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange3ColdWaterTemperature5_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange3ColdWaterTemperature5, "");
+        }
+
+        private void TowerDesignDataRange3ColdWaterTemperature5_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range3ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange3ColdWaterTemperature5.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange3ColdWaterTemperature5.Select(0, TowerDesignDataRange3ColdWaterTemperature5.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange3ColdWaterTemperature5, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange3ColdWaterTemperature6_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange3ColdWaterTemperature6, "");
+        }
+
+        private void TowerDesignDataRange3ColdWaterTemperature6_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range3ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange3ColdWaterTemperature6.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange3ColdWaterTemperature6.Select(0, TowerDesignDataRange3ColdWaterTemperature6.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange3ColdWaterTemperature6, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange4ColdWaterTemperature1_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange4ColdWaterTemperature1, "");
+        }
+
+        private void TowerDesignDataRange4ColdWaterTemperature1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range4ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange4ColdWaterTemperature1.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange4ColdWaterTemperature1.Select(0, TowerDesignDataRange4ColdWaterTemperature1.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange4ColdWaterTemperature1, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange4ColdWaterTemperature2_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange4ColdWaterTemperature2, "");
+        }
+
+        private void TowerDesignDataRange4ColdWaterTemperature2_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range4ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange4ColdWaterTemperature2.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange4ColdWaterTemperature2.Select(0, TowerDesignDataRange4ColdWaterTemperature2.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange4ColdWaterTemperature2, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange4ColdWaterTemperature3_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange4ColdWaterTemperature3, "");
+        }
+
+        private void TowerDesignDataRange4ColdWaterTemperature3_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range4ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange4ColdWaterTemperature3.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange4ColdWaterTemperature3.Select(0, TowerDesignDataRange4ColdWaterTemperature3.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange4ColdWaterTemperature3, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange4ColdWaterTemperature4_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange4ColdWaterTemperature4, "");
+        }
+
+        private void TowerDesignDataRange4ColdWaterTemperature4_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range4ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange4ColdWaterTemperature4.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange4ColdWaterTemperature4.Select(0, TowerDesignDataRange4ColdWaterTemperature4.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange4ColdWaterTemperature4, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange4ColdWaterTemperature5_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange4ColdWaterTemperature5, "");
+        }
+
+        private void TowerDesignDataRange4ColdWaterTemperature5_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range4ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange4ColdWaterTemperature5.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange4ColdWaterTemperature5.Select(0, TowerDesignDataRange4ColdWaterTemperature5.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange4ColdWaterTemperature5, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange4ColdWaterTemperature6_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange4ColdWaterTemperature6, "");
+        }
+
+        private void TowerDesignDataRange4ColdWaterTemperature6_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range4ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange4ColdWaterTemperature6.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange4ColdWaterTemperature6.Select(0, TowerDesignDataRange4ColdWaterTemperature6.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange4ColdWaterTemperature6, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange5ColdWaterTemperature1_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange5ColdWaterTemperature1, "");
+        }
+
+        private void TowerDesignDataRange5ColdWaterTemperature1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range5ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange5ColdWaterTemperature1.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange5ColdWaterTemperature1.Select(0, TowerDesignDataRange5ColdWaterTemperature1.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange5ColdWaterTemperature1, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange5ColdWaterTemperature2_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange5ColdWaterTemperature2, "");
+        }
+
+        private void TowerDesignDataRange5ColdWaterTemperature2_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range5ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange5ColdWaterTemperature2.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange5ColdWaterTemperature2.Select(0, TowerDesignDataRange5ColdWaterTemperature2.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange5ColdWaterTemperature2, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange5ColdWaterTemperature3_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange5ColdWaterTemperature3, "");
+        }
+
+        private void TowerDesignDataRange5ColdWaterTemperature3_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range5ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange5ColdWaterTemperature3.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange5ColdWaterTemperature3.Select(0, TowerDesignDataRange5ColdWaterTemperature3.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange5ColdWaterTemperature3, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange5ColdWaterTemperature4_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange5ColdWaterTemperature4, "");
+        }
+
+        private void TowerDesignDataRange5ColdWaterTemperature4_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range5ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange5ColdWaterTemperature4.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange5ColdWaterTemperature4.Select(0, TowerDesignDataRange5ColdWaterTemperature4.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange5ColdWaterTemperature4, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange5ColdWaterTemperature5_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange5ColdWaterTemperature5, "");
+        }
+
+        private void TowerDesignDataRange5ColdWaterTemperature5_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range5ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange5ColdWaterTemperature5.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange5ColdWaterTemperature5.Select(0, TowerDesignDataRange5ColdWaterTemperature5.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange5ColdWaterTemperature5, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataRange5ColdWaterTemperature6_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataRange5ColdWaterTemperature6, "");
+        }
+
+        private void TowerDesignDataRange5ColdWaterTemperature6_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!RangedTemperatureDesignViewModel.Range5ColdWaterTemperatureDataValue1UpdateValue(TowerDesignDataRange5ColdWaterTemperature6.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataRange5ColdWaterTemperature6.Select(0, TowerDesignDataRange5ColdWaterTemperature6.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataRange5ColdWaterTemperature6, errorMessage);
+            }
+        }
     }
 }

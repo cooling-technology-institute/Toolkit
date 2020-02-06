@@ -215,5 +215,62 @@ namespace ViewModels
             }
             return returnValue;
         }
+
+        public int CountWetBulbTemperatures()
+        {
+            bool zeroDetected = false;
+
+            int count = 0;
+
+            for (int i = 0; i < 6 && !zeroDetected; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        if (WetBulbTemperatureDataValue1.Current == 0.0)
+                        {
+                            zeroDetected = true;
+                        }
+                        break;
+                    case 1:
+                        if (WetBulbTemperatureDataValue2.Current == 0.0)
+                        {
+                            zeroDetected = true;
+                        }
+                        break;
+                    case 2:
+                        if (WetBulbTemperatureDataValue3.Current == 0.0)
+                        {
+                            zeroDetected = true;
+                        }
+                        break;
+                    case 3:
+                        if (WetBulbTemperatureDataValue4.Current == 0.0)
+                        {
+                            zeroDetected = true;
+                        }
+                        break;
+                    case 4:
+                        if (WetBulbTemperatureDataValue5.Current == 0.0)
+                        {
+                            zeroDetected = true;
+                        }
+                        break;
+                    case 5:
+                        if (WetBulbTemperatureDataValue6.Current == 0.0)
+                        {
+                            zeroDetected = true;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                if (!zeroDetected)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
     }
 }

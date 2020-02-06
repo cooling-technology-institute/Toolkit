@@ -1110,5 +1110,11 @@ namespace ViewModels
 
             return returnValue;
         }
+
+        public int CountWetBulbTemperatures()
+        {
+            return RangedTemperatureDesignInputData.CountWetBulbTemperatures();
+        }
+
     }
 }

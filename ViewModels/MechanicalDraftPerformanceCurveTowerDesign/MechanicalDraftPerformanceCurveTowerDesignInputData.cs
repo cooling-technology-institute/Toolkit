@@ -14,13 +14,13 @@ namespace ViewModels
         const int MIN_FLOW_COUNT = 3;
         const int MIN_RANGE_COUNT = 3;
         const int MIN_WET_BULB_TEMPERTURE_COUNT = 3;	// Dean's notes say 5 ....
-        const string rangeOrderError = "Range are not order correctly. They must be entered in either ascending or descending order, but not mixed or the same value.";
 
         public string OwnerName { set; get; }
         public string ProjectName { set; get; }
         public string Location { set; get; }
         public string TowerManufacturer { set; get; }
         public TOWER_TYPE TowerType { set; get; }
+        public int RangeCount { set; get; }
 
         public RangeDataValue RangeDataValue1 { get; set; }
         public RangeDataValue RangeDataValue2 { get; set; }
@@ -36,7 +36,6 @@ namespace ViewModels
         public FanDriverPowerDataValue FanDriverPowerDataValue { get; set; }
         public BarometricPressureDataValue BarometricPressureDataValue { get; set; }
         public LiquidToGasRatioDataValue LiquidToGasRatioDataValue { get; set; }
-        public List<RangedTemperatureDesignInputData> RangedTemperatureDesignInputData { get; set; }
 
         public WaterFlowRateDataValue AddWaterFlowRateDataValue { get; set; }
 
@@ -81,8 +80,6 @@ namespace ViewModels
             LiquidToGasRatioDataValue = new LiquidToGasRatioDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
 
             AddWaterFlowRateDataValue = new WaterFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
-            
-            RangedTemperatureDesignInputData = new List<RangedTemperatureDesignInputData>();
         }
 
         public bool LoadData(MechanicalDraftPerformanceCurveDesignData data, out string errorMessage)
@@ -100,14 +97,6 @@ namespace ViewModels
                 TowerType = MechanicalDraftPerformanceCurveDesignData.TowerType;
 
                 MechanicalDraftPerformanceCurveDesignData = data;
-
-                RangedTemperatureDesignInputData.Clear();
-                foreach (RangedTemperaturesDesignData rangedTemperaturesDesignData in MechanicalDraftPerformanceCurveDesignData.RangedTemperaturesDesignData)
-                {
-                    RangedTemperatureDesignInputData rangedTemperatureDesignInputData = new RangedTemperatureDesignInputData(IsDemo, IsInternationalSystemOfUnits_SI);
-                    rangedTemperatureDesignInputData.LoadData(rangedTemperaturesDesignData, out errorMessage);
-                    RangedTemperatureDesignInputData.Add(rangedTemperatureDesignInputData);
-                }
 
                 if (!RangeDataValue1.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.Range1, out errorMessage))
                 {
@@ -143,7 +132,6 @@ namespace ViewModels
                     stringBuilder.AppendLine(errorMessage);
                     errorMessage = string.Empty;
                 }
-
 
                 if (!WaterFlowRateDataValue.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.WaterFlowRate, out errorMessage))
                 {
@@ -200,6 +188,8 @@ namespace ViewModels
                     stringBuilder.AppendLine(errorMessage);
                     errorMessage = string.Empty;
                 }
+                
+                CountRanges();
             }
             catch (Exception e)
             {
@@ -209,93 +199,76 @@ namespace ViewModels
             return returnValue;
         }
 
-        public void ReadAllText(string filename)
+        public int CountRanges()
         {
-            File.WriteAllText(filename, JsonConvert.SerializeObject(MechanicalDraftPerformanceCurveDesignData));
-        }
+            bool zeroDetected = false;
 
-        public void WriteAllText(string filename)
-        {
-            // fill data
+            RangeCount = 0;
 
-            File.WriteAllText(filename, JsonConvert.SerializeObject(MechanicalDraftPerformanceCurveDesignData, Formatting.Indented));
+            for (int i = 0; i < 5; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        if (RangeDataValue1.Current == 0.0)
+                        {
+                            zeroDetected = true;
+                        }
+                        break;
+                    case 1:
+                        if (RangeDataValue2.Current == 0.0)
+                        {
+                            zeroDetected = true;
+                        }
+                        break;
+                    case 2:
+                        if (RangeDataValue3.Current == 0.0)
+                        {
+                            zeroDetected = true;
+                        }
+                        break;
+                    case 3:
+                        if (RangeDataValue4.Current == 0.0)
+                        {
+                            zeroDetected = true;
+                        }
+                        break;
+                    case 4:
+                        if (RangeDataValue5.Current == 0.0)
+                        {
+                            zeroDetected = true;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                if (!zeroDetected)
+                {
+                    RangeCount++;
+                }
+            }
+            return RangeCount;
         }
 
         public bool FillAndValidate(MechanicalDraftPerformanceCurveDesignData mechanicalDraftPerformanceCurveDesignData, out string errorMessage)
         {
             errorMessage = string.Empty;
-            StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
 
             try
             {
-                mechanicalDraftPerformanceCurveDesignData.WaterFlowRate = WaterFlowRateDataValue.Current;
                 mechanicalDraftPerformanceCurveDesignData.OwnerName = OwnerName;
                 mechanicalDraftPerformanceCurveDesignData.ProjectName = ProjectName;
                 mechanicalDraftPerformanceCurveDesignData.Location = Location;
                 mechanicalDraftPerformanceCurveDesignData.TowerManufacturer = TowerManufacturer;
                 mechanicalDraftPerformanceCurveDesignData.TowerType = TowerType;
+                mechanicalDraftPerformanceCurveDesignData.OwnerName = OwnerName;
 
                 mechanicalDraftPerformanceCurveDesignData.Range1 = RangeDataValue1.Current;
                 mechanicalDraftPerformanceCurveDesignData.Range2 = RangeDataValue2.Current;
                 mechanicalDraftPerformanceCurveDesignData.Range3 = RangeDataValue3.Current;
                 mechanicalDraftPerformanceCurveDesignData.Range4 = RangeDataValue4.Current;
                 mechanicalDraftPerformanceCurveDesignData.Range5 = RangeDataValue5.Current;
-
-                if(!mechanicalDraftPerformanceCurveDesignData.ValidateRanges(MIN_RANGE_COUNT, out errorMessage))
-                {
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
-                    returnValue = false;
-                }
-
-                mechanicalDraftPerformanceCurveDesignData.RangedTemperaturesDesignData.Clear();
-                foreach (RangedTemperaturesDesignData rangedTemperaturesDesignData in MechanicalDraftPerformanceCurveDesignData.RangedTemperaturesDesignData)
-                {
-                    if (!rangedTemperaturesDesignData.ValidateWetBulbTemperature(MIN_WET_BULB_TEMPERTURE_COUNT, out errorMessage))
-                    {
-                        stringBuilder.AppendLine(errorMessage);
-                        errorMessage = string.Empty;
-                        returnValue = false;
-                    }
-                    if (!rangedTemperaturesDesignData.ValidateColdWaterTemperaturesRange1(MIN_WET_BULB_TEMPERTURE_COUNT, out errorMessage))
-                    {
-                        stringBuilder.AppendLine(errorMessage);
-                        errorMessage = string.Empty;
-                        returnValue = false;
-                    }
-                    if (!rangedTemperaturesDesignData.ValidateColdWaterTemperaturesRange2(MIN_WET_BULB_TEMPERTURE_COUNT, out errorMessage))
-                    {
-                        stringBuilder.AppendLine(errorMessage);
-                        errorMessage = string.Empty;
-                        returnValue = false;
-                    }
-                    if (!rangedTemperaturesDesignData.ValidateColdWaterTemperaturesRange3(MIN_WET_BULB_TEMPERTURE_COUNT, out errorMessage))
-                    {
-                        stringBuilder.AppendLine(errorMessage);
-                        errorMessage = string.Empty;
-                        returnValue = false;
-                    }
-                    if (!rangedTemperaturesDesignData.ValidateColdWaterTemperaturesRange4(MIN_WET_BULB_TEMPERTURE_COUNT, out errorMessage))
-                    {
-                        stringBuilder.AppendLine(errorMessage);
-                        errorMessage = string.Empty;
-                        returnValue = false;
-                    }
-                    if (!rangedTemperaturesDesignData.ValidateColdWaterTemperaturesRange5(MIN_WET_BULB_TEMPERTURE_COUNT, out errorMessage))
-                    {
-                        stringBuilder.AppendLine(errorMessage);
-                        errorMessage = string.Empty;
-                        returnValue = false;
-                    }
-                    mechanicalDraftPerformanceCurveDesignData.RangedTemperaturesDesignData.Add(rangedTemperaturesDesignData);
-                }
-
-                if (mechanicalDraftPerformanceCurveDesignData.RangedTemperaturesDesignData.Count < MIN_FLOW_COUNT)
-                {
-                    stringBuilder.AppendLine(string.Format("You must specify a minimum of {0} flows in the Tower Design Data to calculate Tower Capability.", MIN_FLOW_COUNT));
-                    returnValue = false;
-                }
 
                 mechanicalDraftPerformanceCurveDesignData.WaterFlowRate = WaterFlowRateDataValue.Current;
                 mechanicalDraftPerformanceCurveDesignData.HotWaterTemperature = HotWaterTemperatureDataValue.Current;
@@ -308,7 +281,7 @@ namespace ViewModels
             }
             catch (Exception exception)
             {
-                errorMessage = string.Format("Failed to fill and validate Mechanical Draft Performance Curve Design Data. Exception {0}.", exception.ToString());
+                errorMessage = string.Format("Failure to fill and validate Mechanical Draft Performance Curve Test Data. Exception {0}.", exception.ToString());
             }
             return returnValue;
         }

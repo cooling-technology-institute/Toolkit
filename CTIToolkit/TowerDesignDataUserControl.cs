@@ -49,7 +49,7 @@ namespace CTIToolkit
                 stringBuilder.AppendLine(errorMessage);
                 errorMessage = string.Empty;
             }
-            
+
             RangedTemperatureDesignViewModels.Clear();
             foreach (RangedTemperaturesDesignData rangedTemperaturesDesignData in mechanicalDraftPerformanceCurveDesignData.RangedTemperaturesDesignData)
             {
@@ -181,6 +181,8 @@ namespace CTIToolkit
             TabPage tabPage = new TabPage();
 
             RangedTemperatureDesignUserControl towerDesignCurveDataUserControl = new RangedTemperatureDesignUserControl(IsDemo, IsInternationalSystemOfUnits_SI);
+            towerDesignCurveDataUserControl.RangedColdWaterTemperatureVisibility(MechanicalDraftPerformanceCurveTowerDesignViewModel.CountRanges());
+            towerDesignCurveDataUserControl.RangedColdWaterTemperatureEnable(rangedTemperatureDesignViewModel.CountWetBulbTemperatures());
             towerDesignCurveDataUserControl.RangedTemperatureDesignViewModel = rangedTemperatureDesignViewModel;
             tabPage.Text = rangedTemperatureDesignViewModel.WaterFlowRateDataValueInputValue;
             tabPage.Controls.Add(towerDesignCurveDataUserControl);
