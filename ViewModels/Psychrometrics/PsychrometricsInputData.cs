@@ -8,7 +8,7 @@ namespace ViewModels
     {
         public PsychrometricsCalculationType CalculationType { get; set; }
         public bool IsDemo { get; set; }
-        public bool IsInternationalSystemOfUnits_IS_ { get; set; }
+        public bool IsInternationalSystemOfUnits_SI_ { get; set; }
         public bool IsElevation { get; set; }
 
         public EnthalpyDataValue EnthalpyDataValue { get; set; }
@@ -21,15 +21,15 @@ namespace ViewModels
         public PsychrometricsInputData(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
-            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
             IsElevation = true;
             CalculationType = PsychrometricsCalculationType.Psychrometrics_WetBulbTemperature_DryBulbTemperature;
-            EnthalpyDataValue = new EnthalpyDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
-            ElevationDataValue = new ElevationDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
-            BarometricPressureDataValue = new BarometricPressureDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
-            RelativeHumidityDataValue = new RelativeHumidityDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
-            WetBulbTemperatureDataValue = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
-            DryBulbTemperatureDataValue = new DryBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS_);
+            EnthalpyDataValue = new EnthalpyDataValue(IsDemo, IsInternationalSystemOfUnits_SI_);
+            ElevationDataValue = new ElevationDataValue(IsDemo, IsInternationalSystemOfUnits_SI_);
+            BarometricPressureDataValue = new BarometricPressureDataValue(IsDemo, IsInternationalSystemOfUnits_SI_);
+            RelativeHumidityDataValue = new RelativeHumidityDataValue(IsDemo, IsInternationalSystemOfUnits_SI_);
+            WetBulbTemperatureDataValue = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI_);
+            DryBulbTemperatureDataValue = new DryBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI_);
         }
 
         public bool FillPsychrometricsData(PsychrometricsData data, bool isElevation, out string errorMessage)
@@ -37,7 +37,7 @@ namespace ViewModels
             errorMessage = string.Empty;
 
             data.IsElevation = IsElevation;
-            data.IsInternationalSystemOfUnits_IS_ = IsInternationalSystemOfUnits_IS_;
+            data.IsInternationalSystemOfUnits_SI_ = IsInternationalSystemOfUnits_SI_;
             data.BarometricPressure = BarometricPressureDataValue.Current;
             data.Elevation = ElevationDataValue.Current;
             data.Enthalpy = EnthalpyDataValue.Current;
@@ -50,14 +50,14 @@ namespace ViewModels
 
         public bool ConvertValues(bool isInternationalSystemOfUnits_IS_)
         {
-            if(IsInternationalSystemOfUnits_IS_ != isInternationalSystemOfUnits_IS_)
+            if(IsInternationalSystemOfUnits_SI_ != isInternationalSystemOfUnits_IS_)
             {
-                IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
-                EnthalpyDataValue.ConvertValue(IsInternationalSystemOfUnits_IS_);
-                ElevationDataValue.ConvertValue(IsInternationalSystemOfUnits_IS_);
-                BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS_);
-                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS_);
-                DryBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS_);
+                IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+                EnthalpyDataValue.ConvertValue(IsInternationalSystemOfUnits_SI_);
+                ElevationDataValue.ConvertValue(IsInternationalSystemOfUnits_SI_);
+                BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI_);
+                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI_);
+                DryBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI_);
                 return true;
             }
             return false;

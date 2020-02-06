@@ -13,7 +13,7 @@ namespace ViewModels
         private PsychrometricsOutputData PsychrometricsOutputData { get; set; }
         private PsychrometricsData PsychrometricsData { get; set; }
         private PsychrometricsCalculationLibrary PsychrometricsCalculationLibrary { get; set; }
-        private bool IsInternationalSystemOfUnits_IS_ { get; set; }
+        private bool IsInternationalSystemOfUnits_SI_ { get; set; }
         private bool IsDemo { get; set; }
         public bool IsElevation { get; set; }
 
@@ -193,20 +193,20 @@ namespace ViewModels
 
         public PsychrometricsViewModel(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
-            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
             IsDemo = isDemo;
-            PsychrometricsInputData = new PsychrometricsInputData(IsDemo, IsInternationalSystemOfUnits_IS_);
-            PsychrometricsOutputData = new PsychrometricsOutputData(IsInternationalSystemOfUnits_IS_);
+            PsychrometricsInputData = new PsychrometricsInputData(IsDemo, IsInternationalSystemOfUnits_SI_);
+            PsychrometricsOutputData = new PsychrometricsOutputData(IsInternationalSystemOfUnits_SI_);
             PsychrometricsCalculationLibrary = new PsychrometricsCalculationLibrary();
             PsychrometricsData = new PsychrometricsData();
         }
 
         public bool ConvertValues(bool isInternationalSystemOfUnits_IS_)
         {
-            if(IsInternationalSystemOfUnits_IS_ != isInternationalSystemOfUnits_IS_)
+            if(IsInternationalSystemOfUnits_SI_ != isInternationalSystemOfUnits_IS_)
             {
-                IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
-                return PsychrometricsInputData.ConvertValues(IsInternationalSystemOfUnits_IS_);
+                IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+                return PsychrometricsInputData.ConvertValues(IsInternationalSystemOfUnits_SI_);
             }
             return false;
         }
@@ -236,9 +236,9 @@ namespace ViewModels
             }
         }
 
-        public bool FillPsychrometricsData(bool isElevation, out string message)
+        public bool FillPsychrometricsData(bool isElevation, out string errorMessage)
         {
-            return PsychrometricsInputData.FillPsychrometricsData(PsychrometricsData, isElevation, out message);
+            return PsychrometricsInputData.FillPsychrometricsData(PsychrometricsData, isElevation, out errorMessage);
         }
 
         public DataTable GetDataTable()

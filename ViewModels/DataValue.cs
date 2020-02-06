@@ -17,7 +17,7 @@ namespace ViewModels
         public string InputValue { get; set; }
         public string Format { get; set; }
         public string ToolTip { get; set; }
-        public bool IsInternationalSystemOfUnits_IS_ { get; set; }
+        public bool IsInternationalSystemOfUnits_SI_ { get; set; }
         public bool IsDemo { get; set; }
 
         public DataValue()
@@ -28,7 +28,7 @@ namespace ViewModels
             Current = 0.0;
             IsValid = false;
             IsDemo = true;
-            IsInternationalSystemOfUnits_IS_ = false;
+            IsInternationalSystemOfUnits_SI_ = false;
             InputMessage = string.Empty;
             InputValue = string.Empty;
             Format = string.Empty;
@@ -37,16 +37,16 @@ namespace ViewModels
 
         public abstract void ConvertValue(bool isInternationalSystemOfUnits_IS_, bool doConversion = false);
 
-        public bool UpdateValue(string input, out string message)
+        public bool UpdateValue(string input, out string errorMessage)
         {
             InputValue = input;
-            return IsValidValue(out message);
+            return IsValidValue(out errorMessage);
         }
 
-        public bool UpdateCurrentValue(double input, out string message)
+        public bool UpdateCurrentValue(double input, out string errorMessage)
         {
             InputValue = input.ToString();
-            return IsValidValue(out message);
+            return IsValidValue(out errorMessage);
         }
 
         private bool IsValidValue(out string message)
@@ -83,6 +83,12 @@ namespace ViewModels
             }
 
             return IsValid;
+        }
+
+        public void InitializeValue(double value)
+        {
+            Current = value;
+            InputValue = Current.ToString(Format);
         }
     }
 }

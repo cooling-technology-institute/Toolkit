@@ -7,6 +7,11 @@ namespace Models
 {
     public class DemandCurveData
     {
+        public const string DataType = "DemandCurveData";
+        public const string Version = "1.0";
+
+        public bool IsInternationalSystemOfUnits_SI_ { get; set; }
+
         public DataTable DataTable { get; set; }
 
         public double CurveC1 { set; get; }
@@ -21,7 +26,6 @@ namespace Models
         public double Range { set; get; }
         public double Approach { set; get; }
 
-        public bool IsInternationalSystemOfUnits_IS_ { get; set; }
         public bool IsElevation { get; set; } // attitude
         public bool IsCoef { get; set; } // coef
         public bool IsWaterAirRatio { get; set; } // lg
@@ -34,7 +38,7 @@ namespace Models
 
         public DemandCurveData(bool isInternationalSystemOfUnits_IS_)
         {
-            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
             IsElevation = true;
 
 //#ifdef _DEMO_VERSION
@@ -50,7 +54,7 @@ namespace Models
             KaV_L = 0;
             CurveMinimum = 0.5;
             CurveMaximum = 2.5;
-            if (IsInternationalSystemOfUnits_IS_)
+            if (IsInternationalSystemOfUnits_SI_)
             {
                 WetBulbTemperature = 26.667;
                 Range = 18;

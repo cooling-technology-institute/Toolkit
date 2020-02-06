@@ -59,6 +59,7 @@
     <Compile Include="HotWaterTemperatureDataValue.cs" />
     <Compile Include="LiquidToGasRatioDataValue.cs" />
     <Compile Include="MaximumDataValue.cs" />
+    <Compile Include="MechanicalDraftPerformanceCurveTowerDesign\RangedTemperatureDesignViewModel.cs" />
     <Compile Include="MechanicalDraftPerformanceCurveTowerDesign\RangedTemperatureDesignInputData.cs" />
     <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveOutputData.cs" />
     <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveInputData.cs" />

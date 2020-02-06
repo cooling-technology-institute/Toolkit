@@ -33,7 +33,7 @@ namespace ViewModels
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(C1ToolTipFormat, Minimum, Maximum);
 
-            IsInternationalSystemOfUnits_IS_ = isIS;
+            IsInternationalSystemOfUnits_SI_ = isIS;
         }
     }
 }

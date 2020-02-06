@@ -1,8 +1,11 @@
 ﻿// Copyright Cooling Technology Institute 2019-2020
 
+using CalculationLibrary;
 using Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace ViewModels
 {
@@ -11,7 +14,16 @@ namespace ViewModels
         public MechanicalDraftPerformanceCurveInputData MechanicalDraftPerformanceCurveInputData { get; set; }
 
         private bool IsDemo { get; set; }
-        private bool IsInternationalSystemOfUnits_IS { get; set; }
+        private bool IsInternationalSystemOfUnits_SI { get; set; }
+
+        public MechanicalDraftPerformanceCurveViewModel(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        {
+            IsDemo = isDemo;
+            IsInternationalSystemOfUnits_SI = IsInternationalSystemOfUnits_SI;
+
+            MechanicalDraftPerformanceCurveInputData = new MechanicalDraftPerformanceCurveInputData(IsDemo, IsInternationalSystemOfUnits_SI);
+        }
+
 
         public string WaterFlowRateDataValueInputMessage
         {
@@ -254,33 +266,65 @@ namespace ViewModels
             }
         }
 
-        public MechanicalDraftPerformanceCurveViewModel(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        public bool OpenDataFile(string fileName, out string errorMessage, MechanicalDraftPerformanceCurveTowerDesignViewModel mechanicalDraftPerformanceCurveTowerDesignViewModel = null)
         {
-            IsDemo = isDemo;
-            IsInternationalSystemOfUnits_IS = IsInternationalSystemOfUnits_IS;
+            errorMessage = string.Empty;
+            bool returnValue = true;
+            StringBuilder stringBuilder = new StringBuilder();
 
-            MechanicalDraftPerformanceCurveInputData = new MechanicalDraftPerformanceCurveInputData(IsDemo, IsInternationalSystemOfUnits_IS);
+            if (!MechanicalDraftPerformanceCurveInputData.OpenDataFile(fileName, out errorMessage, mechanicalDraftPerformanceCurveTowerDesignViewModel?.MechanicalDraftPerformanceCurveTowerDesignInputData))
+            {
+                returnValue = false;
+                stringBuilder.AppendLine(errorMessage);
+                errorMessage = string.Empty;
+            }
+            return returnValue;
         }
 
-        public MechanicalDraftPerformanceCurveData GetData()
+        public bool SaveDataFile(out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputData.Data;
+            return MechanicalDraftPerformanceCurveInputData.SaveDataFile(out errorMessage);
         }
 
-        public void OpenDataFile(string fileName)
+        public bool SaveAsDataFile(string fileName, out string errorMessage)
         {
-            MechanicalDraftPerformanceCurveInputData.OpenDataFile(fileName);
+            return MechanicalDraftPerformanceCurveInputData.SaveAsDataFile(fileName, out errorMessage);
         }
 
-        public void SaveDataFile()
+        public bool FillAndValidate(MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData, out string errorMessage)
         {
-            MechanicalDraftPerformanceCurveInputData.SaveDataFile();
+            errorMessage = string.Empty;
+            bool returnValue = true;
+            return returnValue;
         }
 
-        public void SaveAsDataFile(string fileName)
+        public bool CalculatePerformanceCurve(MechanicalDraftPerformanceCurveTowerDesignViewModel mechanicalDraftPerformanceCurveTowerDesignViewModel, out string errorMessage)
         {
-            MechanicalDraftPerformanceCurveInputData.SaveAsDataFile(fileName);
-        }
+            errorMessage = string.Empty;
+            bool returnValue = true;
+            try
+            {
+                MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData = new MechanicalDraftPerformanceCurveData(IsInternationalSystemOfUnits_SI);
 
+                // validate test data
+                if (!mechanicalDraftPerformanceCurveTowerDesignViewModel.FillAndValidate(mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData, out errorMessage))
+                {
+
+                }
+
+                if (!MechanicalDraftPerformanceCurveInputData.FillAndValidate(ref mechanicalDraftPerformanceCurveData, out errorMessage))
+                {
+
+                }
+
+
+                MechanicalDraftPerformanceCurveCalculationLibrary mechanicalDraftPerformanceCurveCalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+            }
+            catch (Exception exception)
+            {
+                errorMessage = string.Format("Error in Performance Curve calculation. Please check your input values. Exception Message: {0}", exception.Message);
+            }
+            return returnValue;
+        }
     }
 }

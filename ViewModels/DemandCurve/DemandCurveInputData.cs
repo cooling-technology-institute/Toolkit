@@ -9,7 +9,7 @@ namespace ViewModels
     {
         //public PsychrometricsCalculationType CalculationType { get; set; }
         public bool IsDemo { get; set; }
-        public bool IsInternationalSystemOfUnits_IS { get; set; }
+        public bool IsInternationalSystemOfUnits_SI { get; set; }
         public bool IsElevation { get; set; }
 
         public WetBulbTemperatureDataValue WetBulbTemperatureDataValue { get; set; }
@@ -26,31 +26,32 @@ namespace ViewModels
         public DemandCurveInputData(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
-            IsInternationalSystemOfUnits_IS = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
             IsElevation = true;
 
-            WetBulbTemperatureDataValue = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            RangeDataValue = new RangeDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            ElevationDataValue = new ElevationDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            BarometricPressureDataValue = new BarometricPressureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            C1DataValue = new C1DataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            SlopeDataValue = new SlopeDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            MinimumDataValue = new MinimumDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            MaximumDataValue = new MaximumDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            LiquidToGasRatioDataValue = new LiquidToGasRatioDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+            WetBulbTemperatureDataValue = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            RangeDataValue = new RangeDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            ElevationDataValue = new ElevationDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            BarometricPressureDataValue = new BarometricPressureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            C1DataValue = new C1DataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            SlopeDataValue = new SlopeDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            MinimumDataValue = new MinimumDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            MaximumDataValue = new MaximumDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            LiquidToGasRatioDataValue = new LiquidToGasRatioDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
         }
 
-        public bool ConvertValues(bool isIS, bool isElevation)
+        public bool ConvertValues(bool isIS, bool isElevation, out string errorMessage)
         {
             bool isChanged = false;
+            errorMessage = string.Empty;
 
-            if (IsInternationalSystemOfUnits_IS != isIS)
+            if (IsInternationalSystemOfUnits_SI != isIS)
             {
-                IsInternationalSystemOfUnits_IS = isIS;
-                LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
-                ElevationDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
-                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
-                BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_IS, true);
+                IsInternationalSystemOfUnits_SI = isIS;
+                LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                ElevationDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
                 isChanged = true;
             }
 
@@ -59,10 +60,9 @@ namespace ViewModels
                 IsElevation = isElevation;
 
                 double value = 0.0;
-                string message;
                 if (IsElevation)
                 {
-                    if (IsInternationalSystemOfUnits_IS)
+                    if (IsInternationalSystemOfUnits_SI)
                     {
                         value = UnitConverter.ConvertKilopascalToElevationInMeters(BarometricPressureDataValue.Current);
                     }
@@ -70,11 +70,11 @@ namespace ViewModels
                     {
                         value = UnitConverter.ConvertBarometricPressureToElevationInFeet(BarometricPressureDataValue.Current);
                     }
-                    ElevationDataValue.UpdateCurrentValue(value, out message);
+                    ElevationDataValue.UpdateCurrentValue(value, out errorMessage);
                 }
                 else
                 {
-                    if (IsInternationalSystemOfUnits_IS)
+                    if (IsInternationalSystemOfUnits_SI)
                     {
                         value = UnitConverter.ConvertElevationInMetersToKilopascal(ElevationDataValue.Current);
                     }
@@ -82,7 +82,7 @@ namespace ViewModels
                     {
                         value = UnitConverter.CalculatePressureFahrenheit(UnitConverter.ConvertElevationInFeetToBarometricPressure(ElevationDataValue.Current));
                     }
-                    BarometricPressureDataValue.UpdateCurrentValue(value, out message);
+                    BarometricPressureDataValue.UpdateCurrentValue(value, out errorMessage);
                 }
 
                 isChanged = true;

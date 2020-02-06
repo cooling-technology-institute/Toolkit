@@ -1,6 +1,6 @@
 ﻿namespace CTIToolkit
 {
-    partial class TowerDesignCurveDataUserControl
+    partial class RangedTemperatureDesignUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.c = new System.Windows.Forms.Label();
             this.TowerDesignDataWetBulbTemperature1 = new System.Windows.Forms.TextBox();
             this.TowerDesignDataWetBulbTemperatureLabel2 = new System.Windows.Forms.Label();
@@ -76,12 +77,15 @@
             this.TowerDesignDataRange5ColdWaterTemperature4 = new System.Windows.Forms.TextBox();
             this.TowerDesignDataRange5ColdWaterTemperature5 = new System.Windows.Forms.TextBox();
             this.TowerDesignDataRange5ColdWaterTemperature6 = new System.Windows.Forms.TextBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.TowerDesignDataRange1GroupBox.SuspendLayout();
             this.TowerDesignDataWetBulbTemperatureGroupBox.SuspendLayout();
             this.TowerDesignDataRange2GroupBox.SuspendLayout();
             this.TowerDesignDataRange3GroupBox.SuspendLayout();
             this.TowerDesignDataRange4GroupBox.SuspendLayout();
             this.TowerDesignDataRange5GroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // c
@@ -480,6 +484,10 @@
             this.TowerDesignDataRange5ColdWaterTemperature6.Size = new System.Drawing.Size(92, 20);
             this.TowerDesignDataRange5ColdWaterTemperature6.TabIndex = 26;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // TowerDesignCurveDataUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -510,6 +518,7 @@
             this.TowerDesignDataRange4GroupBox.PerformLayout();
             this.TowerDesignDataRange5GroupBox.ResumeLayout(false);
             this.TowerDesignDataRange5GroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -565,5 +574,7 @@
         private System.Windows.Forms.TextBox TowerDesignDataRange5ColdWaterTemperature4;
         private System.Windows.Forms.TextBox TowerDesignDataRange5ColdWaterTemperature5;
         private System.Windows.Forms.TextBox TowerDesignDataRange5ColdWaterTemperature6;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

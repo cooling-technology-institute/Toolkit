@@ -30,5 +30,35 @@ namespace Models
             ColdWaterTemperaturesRange5 = new TemperatureDesignData();
             ColdWaterTemperaturesRange6 = new TemperatureDesignData();
         }
+
+        public bool ValidateWetBulbTemperature(int count, out string errorMessage)
+        {
+            return WetBulbTemperatures.ValidateTemperatures(count, 6, "Wet Bulb Temperatures", out errorMessage);
+        }
+
+        public bool ValidateColdWaterTemperaturesRange1(int count, out string errorMessage)
+        {
+            return ColdWaterTemperaturesRange1.ValidateTemperatures(count, WetBulbTemperatures.LastValidTemperature, "Cold Water Temperatures for Range 1", out errorMessage);
+        }
+
+        public bool ValidateColdWaterTemperaturesRange2(int count, out string errorMessage)
+        {
+            return ColdWaterTemperaturesRange2.ValidateTemperatures(count, WetBulbTemperatures.LastValidTemperature, "Cold Water Temperatures for Range 2", out errorMessage);
+        }
+
+        public bool ValidateColdWaterTemperaturesRange3(int count, out string errorMessage)
+        {
+            return ColdWaterTemperaturesRange3.ValidateTemperatures(count, WetBulbTemperatures.LastValidTemperature, "Cold Water Temperatures for Range 3", out errorMessage);
+        }
+
+        public bool ValidateColdWaterTemperaturesRange4(int count, out string errorMessage)
+        {
+            return ColdWaterTemperaturesRange4.ValidateTemperatures(count, WetBulbTemperatures.LastValidTemperature, "Cold Water Temperatures for Range 4", out errorMessage);
+        }
+
+        public bool ValidateColdWaterTemperaturesRange5(int count, out string errorMessage)
+        {
+            return ColdWaterTemperaturesRange5.ValidateTemperatures(count, WetBulbTemperatures.LastValidTemperature, "Cold Water Temperatures for Range 5", out errorMessage);
+        }
     }
 }

@@ -45,7 +45,6 @@
             this.PerformanceCurveUnitsFanDriverPower = new System.Windows.Forms.Label();
             this.PerformanceCurveUnitsBarometricPressure = new System.Windows.Forms.Label();
             this.PerformanceCurveUnitsLiquidToGasRatio = new System.Windows.Forms.Label();
-            this.PerformanceCurveDesignDataButton = new System.Windows.Forms.Button();
             this.PerformanceCurveTestGroupBox = new System.Windows.Forms.GroupBox();
             this.PerformanceCurveTestLiquidToGasRatio = new System.Windows.Forms.TextBox();
             this.PerformanceCurveTestWaterFlowRate = new System.Windows.Forms.TextBox();
@@ -72,6 +71,7 @@
             this.PerformanceCurveFanDriverPowerLabel = new System.Windows.Forms.Label();
             this.PerformanceCurveBarometricPressureLabel = new System.Windows.Forms.Label();
             this.PerformanceCurveLiquidToGasRatioLabel = new System.Windows.Forms.Label();
+            this.PerformanceCurveDesignDataButton = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -107,15 +107,18 @@
             this.PerformanceCurveCalculate.TabIndex = 3;
             this.PerformanceCurveCalculate.Text = "Calculate";
             this.PerformanceCurveCalculate.UseVisualStyleBackColor = true;
+            this.PerformanceCurveCalculate.Click += new System.EventHandler(this.PerformanceCurveCalculate_Click);
             // 
             // PerformanceCurveViewGraph
             // 
+            this.PerformanceCurveViewGraph.Enabled = false;
             this.PerformanceCurveViewGraph.Location = new System.Drawing.Point(683, 95);
             this.PerformanceCurveViewGraph.Name = "PerformanceCurveViewGraph";
             this.PerformanceCurveViewGraph.Size = new System.Drawing.Size(75, 23);
             this.PerformanceCurveViewGraph.TabIndex = 4;
             this.PerformanceCurveViewGraph.Text = "View Graph";
             this.PerformanceCurveViewGraph.UseVisualStyleBackColor = true;
+            this.PerformanceCurveViewGraph.Click += new System.EventHandler(this.PerformanceCurveViewGraph_Click);
             // 
             // PerformanceCurveOwnerNameLabel
             // 
@@ -250,16 +253,6 @@
             this.PerformanceCurveUnitsLiquidToGasRatio.Name = "PerformanceCurveUnitsLiquidToGasRatio";
             this.PerformanceCurveUnitsLiquidToGasRatio.Size = new System.Drawing.Size(0, 13);
             this.PerformanceCurveUnitsLiquidToGasRatio.TabIndex = 18;
-            // 
-            // PerformanceCurveDesignDataButton
-            // 
-            this.PerformanceCurveDesignDataButton.Location = new System.Drawing.Point(683, 16);
-            this.PerformanceCurveDesignDataButton.Name = "PerformanceCurveDesignDataButton";
-            this.PerformanceCurveDesignDataButton.Size = new System.Drawing.Size(88, 23);
-            this.PerformanceCurveDesignDataButton.TabIndex = 10;
-            this.PerformanceCurveDesignDataButton.Text = "Design Data...";
-            this.PerformanceCurveDesignDataButton.UseVisualStyleBackColor = true;
-            this.PerformanceCurveDesignDataButton.Click += new System.EventHandler(this.PerformanceCurveDesignDataButton_Click);
             // 
             // PerformanceCurveTestGroupBox
             // 
@@ -503,6 +496,16 @@
             this.PerformanceCurveLiquidToGasRatioLabel.Size = new System.Drawing.Size(104, 13);
             this.PerformanceCurveLiquidToGasRatioLabel.TabIndex = 7;
             this.PerformanceCurveLiquidToGasRatioLabel.Text = "Liquid To Gas Ratio:";
+            // 
+            // PerformanceCurveDesignDataButton
+            // 
+            this.PerformanceCurveDesignDataButton.Location = new System.Drawing.Point(683, 16);
+            this.PerformanceCurveDesignDataButton.Name = "PerformanceCurveDesignDataButton";
+            this.PerformanceCurveDesignDataButton.Size = new System.Drawing.Size(88, 23);
+            this.PerformanceCurveDesignDataButton.TabIndex = 10;
+            this.PerformanceCurveDesignDataButton.Text = "Design Data...";
+            this.PerformanceCurveDesignDataButton.UseVisualStyleBackColor = true;
+            this.PerformanceCurveDesignDataButton.Click += new System.EventHandler(this.PerformanceCurveDesignDataButton_Click);
             // 
             // errorProvider1
             // 

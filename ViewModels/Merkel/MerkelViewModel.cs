@@ -14,7 +14,7 @@ namespace ViewModels
         private MerkelData MerkelData { get; set; }
         private MerkelCalculationLibrary MerkelCalculationLibrary { get; set; }
         public bool IsDemo { get; set; }
-        public bool IsInternationalSystemOfUnits_IS { get; set; }
+        public bool IsInternationalSystemOfUnits_SI { get; set; }
         public bool IsElevation { get; set; }
 
         public string HotWaterTemperatureDataValueInputMessage
@@ -193,9 +193,11 @@ namespace ViewModels
 
         public MerkelViewModel(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
-            MerkelInputData = new MerkelInputData(isDemo, isInternationalSystemOfUnits_IS_);
-            MerkelOutputData = new MerkelOutputData(isInternationalSystemOfUnits_IS_);
-            IsInternationalSystemOfUnits_IS = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
+            IsDemo = isDemo;
+
+            MerkelInputData = new MerkelInputData(IsDemo, IsInternationalSystemOfUnits_SI);
+            MerkelOutputData = new MerkelOutputData(IsInternationalSystemOfUnits_SI);
             MerkelCalculationLibrary = new MerkelCalculationLibrary();
         }
 
@@ -203,7 +205,7 @@ namespace ViewModels
         {
             try
             {
-                MerkelData = new MerkelData();
+                MerkelData = new MerkelData(IsInternationalSystemOfUnits_SI);
 
                 if (!FillMerkelData(isElevation, out errorMessage))
                 {
@@ -230,9 +232,9 @@ namespace ViewModels
             }
         }
 
-        public bool FillMerkelData(bool isElevation, out string message)
+        public bool FillMerkelData(bool isElevation, out string errorMessage)
         {
-            return MerkelInputData.FillMerkelData(MerkelData, isElevation, out message);
+            return MerkelInputData.FillMerkelData(MerkelData, isElevation, out errorMessage);
         }
 
         public DataTable GetDataTable()
@@ -240,13 +242,15 @@ namespace ViewModels
             return MerkelOutputData.NameValueUnitsDataTable.DataTable;
         }
 
-        public bool ConvertValues(bool isIS, bool isElevation)
+        public bool ConvertValues(bool isIS, bool isElevation, out string errorMessage)
         {
-            if ((IsInternationalSystemOfUnits_IS != isIS) || (IsElevation != isElevation))
+            errorMessage = string.Empty;
+
+            if ((IsInternationalSystemOfUnits_SI != isIS) || (IsElevation != isElevation))
             { 
-                IsInternationalSystemOfUnits_IS = isIS;
+                IsInternationalSystemOfUnits_SI = isIS;
                 IsElevation = isElevation;
-                return MerkelInputData.ConvertValues(IsInternationalSystemOfUnits_IS, IsElevation);
+                return MerkelInputData.ConvertValues(IsInternationalSystemOfUnits_SI, IsElevation, out errorMessage);
             }
             return false;
         }

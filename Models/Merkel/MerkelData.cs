@@ -4,6 +4,11 @@ namespace Models
 {
     public class MerkelData
     {
+        public const string DataType = "MerkelData";
+        public const string Version = "1.0";
+
+        public bool IsInternationalSystemOfUnits_SI_ { get; set; }
+
         public double Elevation { set; get; }
         public double BarometricPressure { set; get; }
 
@@ -15,8 +20,10 @@ namespace Models
         public double Range { set; get; }
         public double KaV_L { set; get; }
 
-        public MerkelData()
+        public MerkelData(bool isInternationalSystemOfUnits_IS_)
         {
+            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+
             HotWaterTemperature = 0.0;
             ColdWaterTemperature = 0.0;
             LiquidToGasRatio = 0.0;

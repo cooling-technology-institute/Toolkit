@@ -12,32 +12,32 @@ namespace CTIToolkit
     {
         PsychrometricsViewModel PsychrometricsViewModel { get; set; }
         private bool IsDemo { get; set; }
-        private bool IsInternationalSystemOfUnits_IS_ { get; set; }
+        private bool IsInternationalSystemOfUnits_SI_ { get; set; }
 
         public PsychrometricsTabPage(ApplicationSettings applicationSettings)
         {
             InitializeComponent();
 
-            IsInternationalSystemOfUnits_IS_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
-            IsInternationalSystemOfUnits_IS_ = false;
+            IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            IsInternationalSystemOfUnits_SI_ = false;
 
             IsDemo = applicationSettings.IsDemo;
-            IsInternationalSystemOfUnits_IS_ = false;
+            IsInternationalSystemOfUnits_SI_ = false;
 
-            PsychrometricsViewModel = new PsychrometricsViewModel(IsDemo, IsInternationalSystemOfUnits_IS_);
+            PsychrometricsViewModel = new PsychrometricsViewModel(IsDemo, IsInternationalSystemOfUnits_SI_);
 
         }
 
         public void SetUnitsStandard(ApplicationSettings applicationSettings)
         {
-            IsInternationalSystemOfUnits_IS_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
 
             SwitchUnitsSelection();
         }
 
         private void SwitchUnitsSelection()
         {
-            if (IsInternationalSystemOfUnits_IS_)
+            if (IsInternationalSystemOfUnits_SI_)
             {
                 if (Psychrometrics_DryBulbTemperature_RelativeHumidity.Checked)
                 {
@@ -105,7 +105,7 @@ namespace CTIToolkit
 
                 Psychrometrics_Elevation_Value.Text = PsychrometricsViewModel.ElevationDataValueInputValue;
                 PsychrometricsElevationPressureLabel.Text = PsychrometricsViewModel.ElevationDataValueInputMessage + ":";
-                if (IsInternationalSystemOfUnits_IS_)
+                if (IsInternationalSystemOfUnits_SI_)
                 {
                     PsychrometricsElevationPressureUnits.Text = ConstantUnits.Meter;
                 }
@@ -125,7 +125,7 @@ namespace CTIToolkit
                 Psychrometrics_Elevation_Value.Text = PsychrometricsViewModel.BarometricPressureDataValueInputValue;
                 PsychrometricsElevationPressureLabel.Text = PsychrometricsViewModel.BarometricPressureDataValueInputMessage + ":";
 
-                if (IsInternationalSystemOfUnits_IS_)
+                if (IsInternationalSystemOfUnits_SI_)
                 {
                     PsychrometricsElevationPressureUnits.Text = ConstantUnits.BarometricPressureKiloPascal;
                 }
@@ -156,7 +156,7 @@ namespace CTIToolkit
                 Psychrometrics_DryBulbTemperature_Value.Text = PsychrometricsViewModel.DryBulbTemperatureDataValueInputValue;
                 toolTip1.SetToolTip(Psychrometrics_WetBulbTemperature_Value, PsychrometricsViewModel.WetBulbTemperatureDataValueToolTip);
 
-                if (IsInternationalSystemOfUnits_IS_)
+                if (IsInternationalSystemOfUnits_SI_)
                 {
                     PsychrometricsTemperatureWetBulbUnits.Text = ConstantUnits.TemperatureCelsius;
                     PsychrometricsTemperatureDryBulbUnits.Text = ConstantUnits.TemperatureCelsius;
@@ -189,7 +189,7 @@ namespace CTIToolkit
                 Psychrometrics_DryBulbTemperature_Value.Text = PsychrometricsViewModel.DryBulbTemperatureDataValueInputValue;
                 toolTip1.SetToolTip(Psychrometrics_DryBulbTemperature_Value, PsychrometricsViewModel.DryBulbTemperatureDataValueToolTip);
 
-                if (IsInternationalSystemOfUnits_IS_)
+                if (IsInternationalSystemOfUnits_SI_)
                 {
                     PsychrometricsTemperatureDryBulbUnits.Text = ConstantUnits.TemperatureCelsius;
                 }
@@ -214,7 +214,7 @@ namespace CTIToolkit
                 TemperatureDryBulbLabel.TextAlign = ContentAlignment.MiddleRight;
                 toolTip1.SetToolTip(Psychrometrics_DryBulbTemperature_Value, PsychrometricsViewModel.EnthalpyDataValueToolTip);
 
-                if (IsInternationalSystemOfUnits_IS_)
+                if (IsInternationalSystemOfUnits_SI_)
                 {
                     PsychrometricsTemperatureDryBulbUnits.Text = ConstantUnits.KilojoulesPerKilogram;
                 }

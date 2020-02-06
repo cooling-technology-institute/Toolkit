@@ -37,7 +37,7 @@ namespace ViewModels
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(SlopeToolTipFormat, Minimum, Maximum);
 
-            IsInternationalSystemOfUnits_IS_ = isIS;
+            IsInternationalSystemOfUnits_SI_ = isIS;
         }
     }
 }

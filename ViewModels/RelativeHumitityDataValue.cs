@@ -32,7 +32,7 @@ namespace ViewModels
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(RelativeHumidityToolTipFormat, Minimum, Maximum);
 
-            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
         }
     }
 }

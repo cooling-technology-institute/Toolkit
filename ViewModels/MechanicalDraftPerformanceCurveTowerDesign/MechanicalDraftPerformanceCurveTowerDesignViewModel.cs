@@ -2,6 +2,7 @@
 
 using Models;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 
 namespace ViewModels
@@ -9,9 +10,22 @@ namespace ViewModels
     public class MechanicalDraftPerformanceCurveTowerDesignViewModel
     {
         public MechanicalDraftPerformanceCurveTowerDesignInputData MechanicalDraftPerformanceCurveTowerDesignInputData { get; set; }
+        public List<RangedTemperatureDesignViewModel> RangedTemperatureDesignViewModels { get; set; }
 
         private bool IsDemo { get; set; }
-        private bool IsInternationalSystemOfUnits_IS { get; set; }
+        private bool IsInternationalSystemOfUnits_SI { get; set; }
+
+        public MechanicalDraftPerformanceCurveTowerDesignViewModel(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        {
+            IsDemo = isDemo;
+            IsInternationalSystemOfUnits_SI = IsInternationalSystemOfUnits_SI;
+
+            MechanicalDraftPerformanceCurveTowerDesignInputData = new MechanicalDraftPerformanceCurveTowerDesignInputData(IsDemo, IsInternationalSystemOfUnits_SI);
+
+            RangedTemperatureDesignViewModels = new List<RangedTemperatureDesignViewModel>();
+        }
+
+        #region DataValueAccess
 
         public string WaterFlowRateDataValueInputMessage
         {
@@ -391,6 +405,35 @@ namespace ViewModels
             return MechanicalDraftPerformanceCurveTowerDesignInputData.RangeDataValue5.UpdateValue(value, out errorMessage);
         }
 
+        public string AddWaterFlowRateDataValueInputMessage
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.AddWaterFlowRateDataValue.InputMessage;
+            }
+        }
+
+        public string AddWaterFlowRateDataValueInputValue
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.AddWaterFlowRateDataValue.InputValue;
+            }
+        }
+
+        public string AddWaterFlowRateDataValueTooltip
+        {
+            get
+            {
+                return MechanicalDraftPerformanceCurveTowerDesignInputData.AddWaterFlowRateDataValue.ToolTip;
+            }
+        }
+
+        public bool AddWaterFlowRateDataValueUpdateValue(string value, out string errorMessage)
+        {
+            return MechanicalDraftPerformanceCurveTowerDesignInputData.AddWaterFlowRateDataValue.UpdateValue(value, out errorMessage);
+        }
+
         public string OwnerNameInputValue
         {
             get
@@ -435,6 +478,7 @@ namespace ViewModels
         {
             get
             {
+                //return MechanicalDraftPerformanceCurveTowerDesignInputData.RangedTemperatureDesignInputData;
                 return new List<TabPage>();
             }
         }
@@ -673,25 +717,50 @@ namespace ViewModels
             return MechanicalDraftPerformanceCurveTowerDesignInputData.LiquidToGasRatioDataValue.UpdateValue(value, out errorMessage);
         }
 
+        #endregion DataValueAccess
 
-        public MechanicalDraftPerformanceCurveTowerDesignViewModel(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        public bool LoadData(MechanicalDraftPerformanceCurveDesignData mechanicalDraftPerformanceCurveDesignData, out string errorMessage)
         {
-            IsDemo = isDemo;
-            IsInternationalSystemOfUnits_IS = IsInternationalSystemOfUnits_IS;
+            bool returnValue = true;
+            errorMessage = string.Empty;
+            StringBuilder stringBuilder = new StringBuilder();
 
-            MechanicalDraftPerformanceCurveTowerDesignInputData = new MechanicalDraftPerformanceCurveTowerDesignInputData(IsDemo, IsInternationalSystemOfUnits_IS);
+            if(!MechanicalDraftPerformanceCurveTowerDesignInputData.LoadData(mechanicalDraftPerformanceCurveDesignData, out errorMessage))
+            {
+                returnValue = false;
+                stringBuilder.AppendLine(errorMessage);
+                errorMessage = string.Empty;
+            }
+
+            RangedTemperatureDesignViewModels.Clear();
+            foreach (RangedTemperaturesDesignData rangedTemperaturesDesignData in mechanicalDraftPerformanceCurveDesignData.RangedTemperaturesDesignData)
+            {
+                RangedTemperatureDesignViewModel rangedTemperatureDesignViewModel = new RangedTemperatureDesignViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
+                if(!rangedTemperatureDesignViewModel.LoadData(rangedTemperaturesDesignData, out errorMessage))
+                {
+                    returnValue = false;
+                    stringBuilder.AppendLine(errorMessage);
+                    errorMessage = string.Empty;
+                }
+                RangedTemperatureDesignViewModels.Add(rangedTemperatureDesignViewModel);
+            }
+            return returnValue;
         }
 
-        public void WriteAllText(string filename)
+        public bool FillAndValidate(MechanicalDraftPerformanceCurveDesignData mechanicalDraftPerformanceCurveDesignData, out string errorMessage)
         {
-            MechanicalDraftPerformanceCurveTowerDesignInputData.WriteAllText(filename);
-        }
+            bool returnValue = true;
+            errorMessage = string.Empty;
+            StringBuilder stringBuilder = new StringBuilder();
 
-        public void LoadData(MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData)
-        {
-            string errorMessage;
-            MechanicalDraftPerformanceCurveTowerDesignInputData.LoadData(mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData, out errorMessage);
-        }
+            if (!MechanicalDraftPerformanceCurveTowerDesignInputData.FillAndValidate(mechanicalDraftPerformanceCurveDesignData, out errorMessage))
+            {
+                returnValue = false;
+                stringBuilder.AppendLine(errorMessage);
+                errorMessage = string.Empty;
+            }
 
+            return returnValue;
+        }
     }
 }

@@ -39,7 +39,7 @@ namespace ViewModels
 
             if (doConversion)
             {
-                if (IsInternationalSystemOfUnits_IS_ && !isSI)
+                if (IsInternationalSystemOfUnits_SI_ && !isSI)
                 {
                     // convert to United States Customary Units (IP)
                     Current = UnitConverter.ConvertMetersToFeet(Current);
@@ -58,7 +58,7 @@ namespace ViewModels
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(ElevationToolTipFormat, Minimum, Maximum);
 
-            IsInternationalSystemOfUnits_IS_ = isSI;
+            IsInternationalSystemOfUnits_SI_ = isSI;
         }
     }
 }

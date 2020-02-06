@@ -41,7 +41,7 @@ namespace CalculationLibrary
             //double Density;
             //double DEWPoint;
 
-            if (data.IsInternationalSystemOfUnits_IS_)
+            if (data.IsInternationalSystemOfUnits_SI_)
             {
                 // metric
                 //{
@@ -101,7 +101,7 @@ namespace CalculationLibrary
 
         public bool Psychrometrics_DryBulbTemperature_RelativeHumidity_Calculation(PsychrometricsData data, out string errorMessage)
         {
-            if (data.IsInternationalSystemOfUnits_IS_)
+            if (data.IsInternationalSystemOfUnits_SI_)
             {
                 //    p = Elevation2KPA(m_dblElevation);
                 //    SIWBsearch(p, TWB / 100, TDB, TWB);
@@ -156,7 +156,7 @@ namespace CalculationLibrary
             data.DewPoint = -999;
             data.DryBulbTemperature = data.Enthalpy;
 
-            if (data.IsInternationalSystemOfUnits_IS_)
+            if (data.IsInternationalSystemOfUnits_SI_)
             {
                 //TWB = 0;
                 //p = Elevation2KPA(m_dblElevation);

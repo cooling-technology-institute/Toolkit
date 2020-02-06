@@ -14,7 +14,7 @@ namespace ViewModels
         private DemandCurveData DemandCurveData { get; set; }
         private DemandCurveCalculationLibrary DemandCurveCalculationLibrary { get; set; }
         public bool IsDemo { get; set; }
-        public bool IsInternationalSystemOfUnits_IS { get; set; }
+        public bool IsInternationalSystemOfUnits_SI { get; set; }
         public bool IsElevation { get; set; }
 
         public string WetBulbTemperatureDataValueInputMessage
@@ -284,7 +284,7 @@ namespace ViewModels
             DemandCurveOutputData = new DemandCurveOutputData(isInternationalSystemOfUnits_IS_);
             DemandCurveData = new DemandCurveData(isInternationalSystemOfUnits_IS_);
             DemandCurveCalculationLibrary = new DemandCurveCalculationLibrary();
-            IsInternationalSystemOfUnits_IS = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
             IsDemo = isDemo;
         }
 
@@ -292,7 +292,7 @@ namespace ViewModels
         {
             try
             {
-                DemandCurveData = new DemandCurveData(IsInternationalSystemOfUnits_IS);
+                DemandCurveData = new DemandCurveData(IsInternationalSystemOfUnits_SI);
 
                 if (!FillDemandCurveData(isElevation, showUserApproach, out errorMessage))
                 {
@@ -329,13 +329,15 @@ namespace ViewModels
             return DemandCurveOutputData.NameValueUnitsDataTable.DataTable;
         }
 
-        public bool ConvertValues(bool isIS, bool isElevation)
+        public bool ConvertValues(bool isIS, bool isElevation, out string errorMessage)
         {
-            if ((IsInternationalSystemOfUnits_IS != isIS) || (IsElevation != isElevation))
+            errorMessage = string.Empty;
+
+            if ((IsInternationalSystemOfUnits_SI != isIS) || (IsElevation != isElevation))
             {
-                IsInternationalSystemOfUnits_IS = isIS;
+                IsInternationalSystemOfUnits_SI = isIS;
                 IsElevation = isElevation;
-                return DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_IS, IsElevation);
+                return DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_SI, IsElevation, out errorMessage);
             }
             return false;
         }

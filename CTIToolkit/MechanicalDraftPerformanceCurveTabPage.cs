@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
 using ViewModels;
 
@@ -9,100 +10,179 @@ namespace CTIToolkit
     public partial class MechanicalDraftPerformanceCurveTabPage : UserControl
     {
         private MechanicalDraftPerformanceCurveViewModel MechanicalDraftPerformanceCurveViewModel { get; set; }
-        private MechanicalDraftPerformanceCurveTowerDesignViewModel MechanicalDraftPerformanceCurveTowerDesignViewModel { get; set; }
+
+        private TowerDesignDataUserControl TowerDesignDataUserControl { get; set; }
+
+        private TowerDesignDataForm TowerDesignDataForm { get; set; }
 
         private bool IsDemo { get; set; }
-        private bool IsInternationalSystemOfUnits_IS_ { get; set; }
+        private bool IsInternationalSystemOfUnits_SI_ { get; set; }
 
         public MechanicalDraftPerformanceCurveTabPage(ApplicationSettings applicationSettings)
         {
             InitializeComponent();
 
-            IsInternationalSystemOfUnits_IS_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
 
-            MechanicalDraftPerformanceCurveViewModel = new MechanicalDraftPerformanceCurveViewModel(IsDemo, IsInternationalSystemOfUnits_IS_);
-            MechanicalDraftPerformanceCurveTowerDesignViewModel = new MechanicalDraftPerformanceCurveTowerDesignViewModel(IsDemo, IsInternationalSystemOfUnits_IS_);
+            MechanicalDraftPerformanceCurveViewModel = new MechanicalDraftPerformanceCurveViewModel(IsDemo, IsInternationalSystemOfUnits_SI_);
 
-            Setup();
+            TowerDesignDataForm = new TowerDesignDataForm();
+            TowerDesignDataUserControl = new TowerDesignDataUserControl(IsDemo, IsInternationalSystemOfUnits_SI_);
+            TowerDesignDataForm.Controls.Add(TowerDesignDataUserControl);
+            TowerDesignDataForm.AddControlEvents();
+
+            string errorMessage = string.Empty;
+            if(Setup(out errorMessage))
+            {
+
+            }
         }
 
-        public void OpenDataFile(string fileName)
+        public bool OpenDataFile(string fileName, out string errorMessage)
         {
-            MechanicalDraftPerformanceCurveViewModel.OpenDataFile(fileName);
-            MechanicalDraftPerformanceCurveTowerDesignViewModel.LoadData(MechanicalDraftPerformanceCurveViewModel.GetData());
-            Setup();
+            StringBuilder stringBuilder = new StringBuilder();
+            bool returnValue = true;
+            errorMessage = string.Empty;
+
+            if (!MechanicalDraftPerformanceCurveViewModel.OpenDataFile(fileName, out errorMessage, TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel))
+            {
+                stringBuilder.AppendLine(errorMessage);
+                returnValue = false;
+                errorMessage = string.Empty;
+            }
+
+            if (!Setup(out errorMessage))
+            {
+                stringBuilder.AppendLine(errorMessage);
+                returnValue = false;
+                errorMessage = string.Empty;
+            }
+
+            errorMessage = stringBuilder.ToString();
+
+            return returnValue;
         }
 
-        public void SaveDataFile()
+        public bool SaveDataFile(out string errorMessage)
         {
-            MechanicalDraftPerformanceCurveViewModel.SaveDataFile();
-            Setup();
+            StringBuilder stringBuilder = new StringBuilder();
+            bool returnValue = true;
+            errorMessage = string.Empty;
+
+            if (!MechanicalDraftPerformanceCurveViewModel.SaveDataFile(out errorMessage))
+            {
+                stringBuilder.AppendLine(errorMessage);
+                returnValue = false;
+                errorMessage = string.Empty;
+            }
+
+            if (!Setup(out errorMessage))
+            {
+                stringBuilder.AppendLine(errorMessage);
+                returnValue = false;
+                errorMessage = string.Empty;
+            }
+
+            errorMessage = stringBuilder.ToString();
+
+            return returnValue;
         }
 
-        public void SaveAsDataFile(string fileName)
+        public bool SaveAsDataFile(string fileName, out string errorMessage)
         {
-            MechanicalDraftPerformanceCurveViewModel.SaveAsDataFile(fileName);
-            Setup();
+            StringBuilder stringBuilder = new StringBuilder();
+            bool returnValue = true;
+            errorMessage = string.Empty;
+            
+            if (!MechanicalDraftPerformanceCurveViewModel.SaveAsDataFile(fileName, out errorMessage))
+            {
+                stringBuilder.AppendLine(errorMessage);
+                returnValue = false;
+                errorMessage = string.Empty;
+            }
+
+            if (!Setup(out errorMessage))
+            {
+                stringBuilder.AppendLine(errorMessage);
+                returnValue = false;
+                errorMessage = string.Empty;
+            }
+
+            errorMessage = stringBuilder.ToString();
+
+            return returnValue;
         }
 
-        private void Setup()
+        private bool Setup(out string errorMessage)
         {
-            PerformanceCurveWaterFlowRateLabel.Text = MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueInputMessage + ":";
-            PerformanceCurveWaterFlowRateLabel.TextAlign = ContentAlignment.MiddleRight;
-            PerformanceCurveTestWaterFlowRate.Text = MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueInputValue;
-            toolTip1.SetToolTip(PerformanceCurveTestWaterFlowRate, MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueTooltip);
+            errorMessage = string.Empty;
+            try
+            {
+                PerformanceCurveWaterFlowRateLabel.Text = MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueInputMessage + ":";
+                PerformanceCurveWaterFlowRateLabel.TextAlign = ContentAlignment.MiddleRight;
+                PerformanceCurveTestWaterFlowRate.Text = MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueInputValue;
+                toolTip1.SetToolTip(PerformanceCurveTestWaterFlowRate, MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueTooltip);
 
-            PerformanceCurveHotWaterTemperatureLabel.Text = MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValueInputMessage + ":";
-            PerformanceCurveHotWaterTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
-            PerformanceCurveTestHotWaterTemperature.Text = MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValueInputValue;
-            toolTip1.SetToolTip(PerformanceCurveTestHotWaterTemperature, MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValueTooltip);
+                PerformanceCurveHotWaterTemperatureLabel.Text = MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValueInputMessage + ":";
+                PerformanceCurveHotWaterTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
+                PerformanceCurveTestHotWaterTemperature.Text = MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValueInputValue;
+                toolTip1.SetToolTip(PerformanceCurveTestHotWaterTemperature, MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValueTooltip);
 
-            PerformanceCurveColdWaterTemperatureLabel.Text = MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValueInputMessage + ":";
-            PerformanceCurveColdWaterTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
-            PerformanceCurveTestColdWaterTemperature.Text = MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValueInputValue;
-            toolTip1.SetToolTip(PerformanceCurveTestColdWaterTemperature, MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValueTooltip);
+                PerformanceCurveColdWaterTemperatureLabel.Text = MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValueInputMessage + ":";
+                PerformanceCurveColdWaterTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
+                PerformanceCurveTestColdWaterTemperature.Text = MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValueInputValue;
+                toolTip1.SetToolTip(PerformanceCurveTestColdWaterTemperature, MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValueTooltip);
 
-            PerformanceCurveWetBulbTemperatureLabel.Text = MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValueInputMessage + ":";
-            PerformanceCurveWetBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
-            PerformanceCurveTestWetBulbTemperature.Text = MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValueInputValue;
-            toolTip1.SetToolTip(PerformanceCurveTestWetBulbTemperature, MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValueTooltip);
+                PerformanceCurveWetBulbTemperatureLabel.Text = MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValueInputMessage + ":";
+                PerformanceCurveWetBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
+                PerformanceCurveTestWetBulbTemperature.Text = MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValueInputValue;
+                toolTip1.SetToolTip(PerformanceCurveTestWetBulbTemperature, MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValueTooltip);
 
-            PerformanceCurveDryBulbTemperatureLabel.Text = MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValueInputMessage + ":";
-            PerformanceCurveDryBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
-            PerformanceCurveTestDryBulbTemperature.Text = MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValueInputValue;
-            toolTip1.SetToolTip(PerformanceCurveTestDryBulbTemperature, MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValueTooltip);
+                PerformanceCurveDryBulbTemperatureLabel.Text = MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValueInputMessage + ":";
+                PerformanceCurveDryBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
+                PerformanceCurveTestDryBulbTemperature.Text = MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValueInputValue;
+                toolTip1.SetToolTip(PerformanceCurveTestDryBulbTemperature, MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValueTooltip);
 
-            PerformanceCurveFanDriverPowerLabel.Text = MechanicalDraftPerformanceCurveViewModel.FanDriverPowerDataValueInputMessage + ":";
-            PerformanceCurveFanDriverPowerLabel.TextAlign = ContentAlignment.MiddleRight;
-            PerformanceCurveTestFanDriverPower.Text = MechanicalDraftPerformanceCurveViewModel.FanDriverPowerDataValueInputValue;
-            toolTip1.SetToolTip(PerformanceCurveTestFanDriverPower, MechanicalDraftPerformanceCurveViewModel.FanDriverPowerDataValueTooltip);
+                PerformanceCurveFanDriverPowerLabel.Text = MechanicalDraftPerformanceCurveViewModel.FanDriverPowerDataValueInputMessage + ":";
+                PerformanceCurveFanDriverPowerLabel.TextAlign = ContentAlignment.MiddleRight;
+                PerformanceCurveTestFanDriverPower.Text = MechanicalDraftPerformanceCurveViewModel.FanDriverPowerDataValueInputValue;
+                toolTip1.SetToolTip(PerformanceCurveTestFanDriverPower, MechanicalDraftPerformanceCurveViewModel.FanDriverPowerDataValueTooltip);
 
-            PerformanceCurveBarometricPressureLabel.Text = MechanicalDraftPerformanceCurveViewModel.BarometricPressureDataValueInputMessage + ":";
-            PerformanceCurveBarometricPressureLabel.TextAlign = ContentAlignment.MiddleRight;
-            PerformanceCurveTestBarometricPressure.Text = MechanicalDraftPerformanceCurveViewModel.BarometricPressureDataValueInputValue;
-            toolTip1.SetToolTip(PerformanceCurveTestBarometricPressure, MechanicalDraftPerformanceCurveViewModel.BarometricPressureDataValueTooltip);
+                PerformanceCurveBarometricPressureLabel.Text = MechanicalDraftPerformanceCurveViewModel.BarometricPressureDataValueInputMessage + ":";
+                PerformanceCurveBarometricPressureLabel.TextAlign = ContentAlignment.MiddleRight;
+                PerformanceCurveTestBarometricPressure.Text = MechanicalDraftPerformanceCurveViewModel.BarometricPressureDataValueInputValue;
+                toolTip1.SetToolTip(PerformanceCurveTestBarometricPressure, MechanicalDraftPerformanceCurveViewModel.BarometricPressureDataValueTooltip);
 
-            PerformanceCurveLiquidToGasRatioLabel.Text = MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueInputMessage + ":";
-            PerformanceCurveLiquidToGasRatioLabel.TextAlign = ContentAlignment.MiddleRight;
-            PerformanceCurveTestLiquidToGasRatio.Text = MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueInputValue;
-            toolTip1.SetToolTip(PerformanceCurveTestLiquidToGasRatio, MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueTooltip);
+                PerformanceCurveLiquidToGasRatioLabel.Text = MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueInputMessage + ":";
+                PerformanceCurveLiquidToGasRatioLabel.TextAlign = ContentAlignment.MiddleRight;
+                PerformanceCurveTestLiquidToGasRatio.Text = MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueInputValue;
+                toolTip1.SetToolTip(PerformanceCurveTestLiquidToGasRatio, MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueTooltip);
 
-            PerformanceCurveOwnerNameField.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.OwnerNameInputValue;
-            PerformanceCurveProjectNameField.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.ProjectNameInputValue;
-            PerformanceCurveLocationField.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.LocationInputValue;
-            PerformanceCurveTowerManufacturerField.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.TowerManufacturerInputValue;
-            PerformanceCurveTowerTypeField.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.TowerTypeInputValue.ToString();
+                // design data
 
-            PerformanceCurveDesignWaterFlowRate.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.WaterFlowRateDataValueInputValue;
-            PerformanceCurveDesignHotWaterTemperature.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.HotWaterTemperatureDataValueInputValue;
-            PerformanceCurveDesignColdWaterTemperature.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.ColdWaterTemperatureDataValueInputValue;
-            PerformanceCurveDesignWetBulbTemperature.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.WetBulbTemperatureDataValueInputValue;
-            PerformanceCurveDesignDryBulbTemperature.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.DryBulbTemperatureDataValueInputValue;
-            PerformanceCurveDesignFanDriverPower.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.FanDriverPowerDataValueInputValue;
-            PerformanceCurveDesignBarometricPressure.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.BarometricPressureDataValueInputValue;
-            PerformanceCurveDesignLiquidToGasRatio.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.LiquidToGasRatioDataValueInputValue;
+                PerformanceCurveOwnerNameField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.OwnerNameInputValue;
+                PerformanceCurveProjectNameField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.ProjectNameInputValue;
+                PerformanceCurveLocationField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.LocationInputValue;
+                PerformanceCurveTowerManufacturerField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.TowerManufacturerInputValue;
+                PerformanceCurveTowerTypeField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.TowerTypeInputValue.ToString();
 
-            DataFilename.Text = MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue;
+                PerformanceCurveDesignWaterFlowRate.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.WaterFlowRateDataValueInputValue;
+                PerformanceCurveDesignHotWaterTemperature.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.HotWaterTemperatureDataValueInputValue;
+                PerformanceCurveDesignColdWaterTemperature.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.ColdWaterTemperatureDataValueInputValue;
+                PerformanceCurveDesignWetBulbTemperature.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.WetBulbTemperatureDataValueInputValue;
+                PerformanceCurveDesignDryBulbTemperature.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.DryBulbTemperatureDataValueInputValue;
+                PerformanceCurveDesignFanDriverPower.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.FanDriverPowerDataValueInputValue;
+                PerformanceCurveDesignBarometricPressure.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.BarometricPressureDataValueInputValue;
+                PerformanceCurveDesignLiquidToGasRatio.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.LiquidToGasRatioDataValueInputValue;
+
+                DataFilename.Text = MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue;
+            }
+            catch(Exception e)
+            {
+                errorMessage = string.Format("Failure to load page. Exception: {0}", e.ToString());
+                return false;
+            }
+            return true;
         }
 
         private void PerformanceCurveTestWaterFlowRate_Validated(object sender, EventArgs e)
@@ -267,26 +347,38 @@ namespace CTIToolkit
 
         private void PerformanceCurveDesignDataButton_Click(object sender, EventArgs e)
         {
-            var towerDesignDataUserControl = new TowerDesignDataUserControl(IsDemo, IsInternationalSystemOfUnits_IS_);
-            Form towerDesignDataDialog = new Form();
-            towerDesignDataDialog.Controls.Add(towerDesignDataUserControl);
-            towerDesignDataDialog.Size = new Size(1072, 887);
-            towerDesignDataUserControl.LoadData(MechanicalDraftPerformanceCurveViewModel.GetData());
+            string errorMessage;
 
             // set data
-            if (towerDesignDataDialog.ShowDialog(this) == DialogResult.OK)
+            if (TowerDesignDataForm.ShowDialog(this) == DialogResult.OK)
             {
-                // save data to file?
-                if(towerDesignDataUserControl.IsChanged)
+                if(TowerDesignDataUserControl.IsChanged)
                 {
+                    // update data on this page
+                    if (Setup(out errorMessage))
+                    {
 
+                    }
                 }
             }
             else
             {
                 // do nothing?
             }
-            towerDesignDataDialog.Dispose();
+        }
+
+        private void PerformanceCurveCalculate_Click(object sender, EventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if(!MechanicalDraftPerformanceCurveViewModel.CalculatePerformanceCurve(TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel, out errorMessage))
+            {
+                MessageBox.Show(errorMessage, "Mechanical Draft Performance Curve Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void PerformanceCurveViewGraph_Click(object sender, EventArgs e)
+        {
         }
     }
 }

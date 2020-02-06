@@ -70,7 +70,7 @@ namespace CalculationLibrary
 
         void InitializeApproachList(DemandCurveData data)
         {
-            MerkelData merkelData = new MerkelData()
+            MerkelData merkelData = new MerkelData(data.IsInternationalSystemOfUnits_SI_)
             {
                 WetBulbTemperature = data.WetBulbTemperature,
                 Range = data.Range,
@@ -91,7 +91,7 @@ namespace CalculationLibrary
 
         void CalculateApproach(DemandCurveData data)
         {
-            MerkelData merkelData = new MerkelData()
+            MerkelData merkelData = new MerkelData(data.IsInternationalSystemOfUnits_SI_)
             {
                 WetBulbTemperature = data.WetBulbTemperature,
                 Range = data.Range,
@@ -117,7 +117,7 @@ namespace CalculationLibrary
                         data.Approach = 0;
                     }
 
-                    if (!data.IsInternationalSystemOfUnits_IS_)
+                    if (!data.IsInternationalSystemOfUnits_SI_)
                     {
                         data.Approach *= 5.0 / 9.0;
                     }
@@ -129,7 +129,7 @@ namespace CalculationLibrary
         {
             //StreamWriter fs = new StreamWriter("new.txt");
 
-            MerkelData merkelData = new MerkelData()
+            MerkelData merkelData = new MerkelData(data.IsInternationalSystemOfUnits_SI_)
             {
                 WetBulbTemperature = 80, // data.WetBulbTemperature,
                 Range = data.Range,
@@ -159,7 +159,7 @@ namespace CalculationLibrary
                     {
                         merkelData.LiquidToGasRatio = waterAirRatio;
                         merkelData.Approach = InitialApproachXValues[i];
-                        if (data.IsInternationalSystemOfUnits_IS_)
+                        if (data.IsInternationalSystemOfUnits_SI_)
                         {
                             merkelData.Approach *= 1.8;
                         }
@@ -183,7 +183,7 @@ namespace CalculationLibrary
                             for (dInterp = waterAirRatio; ((kaVL < waterAirRatio_MIN) || (kaVL >= waterAirRatio_MAX)) && (dInterp > .1); dInterp -= 0.0002)
                             {
                                 merkelData.Approach = InitialApproachXValues[i];
-                                if (data.IsInternationalSystemOfUnits_IS_)
+                                if (data.IsInternationalSystemOfUnits_SI_)
                                 {
                                     merkelData.Approach *= 1.8;
                                 }

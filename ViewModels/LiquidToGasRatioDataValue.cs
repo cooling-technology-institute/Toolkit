@@ -70,7 +70,7 @@ namespace ViewModels
 
             if (doConversion)
             {
-                if (IsInternationalSystemOfUnits_IS_ && !isInternationalSystemOfUnits_IS_)
+                if (IsInternationalSystemOfUnits_SI_ && !isInternationalSystemOfUnits_IS_)
                 {
                 }
                 else
@@ -85,7 +85,7 @@ namespace ViewModels
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(LiquidToGasRatioToolTipFormat, Minimum, Maximum);
 
-            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
         }
     }
 }

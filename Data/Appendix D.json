@@ -1,5 +1,7 @@
 {
-  "IsInternationalSystemOfUnits_IS_": false,
+  "DataType": "MechanicalDraftPerformanceCurveData",
+  "Version": "1.0",
+  "IsInternationalSystemOfUnits_SI_": false,
   "MechanicalDraftPerformanceCurveTestData": {
     "WaterFlowRate": 57426.0,
     "ColdWaterTemperature": 84.27,

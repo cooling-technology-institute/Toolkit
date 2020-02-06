@@ -42,26 +42,24 @@ namespace ViewModels
 
             if (doConversion)
             {
-                if (IsInternationalSystemOfUnits_IS_ && !isInternationalSystemOfUnits_IS_)
+                if (IsInternationalSystemOfUnits_SI_ && !isInternationalSystemOfUnits_IS_)
                 {
                     // convert to United States Customary Units (IP)
-                    Current = UnitConverter.ConvertCelsiusToFahrenheit(Current);
+                    InitializeValue(UnitConverter.ConvertCelsiusToFahrenheit(Current));
                 }
                 else
                 {
                     // convert to InternationalSystemOfUnits_IS
-                    Current = UnitConverter.ConvertFahrenheitToCelsius(Current);
+                    InitializeValue(Current = UnitConverter.ConvertFahrenheitToCelsius(Current));
                 }
             }
             else
             {
-                Current = Default;
+                InitializeValue(Default);
             }
-
-            InputValue = Current.ToString(Format);
             ToolTip = string.Format(RangeToolTipFormat, Minimum, Maximum);
 
-            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
         }
     }
 }

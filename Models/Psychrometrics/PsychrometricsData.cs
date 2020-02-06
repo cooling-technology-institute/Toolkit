@@ -4,9 +4,13 @@ namespace Models
 {
     public class PsychrometricsData
     {
+        public const string DataType = "PsychrometricsData";
+        public const string Version = "1.0";
+
+        public bool IsInternationalSystemOfUnits_SI_ { get; set; }
+
         public PsychrometricsCalculationType CalculationType { set; get; }
         public bool IsElevation { set; get; }
-        public bool IsInternationalSystemOfUnits_IS_ { set; get; }
         public double Elevation { set; get; }
         public double WetBulbTemperature { set; get; } // TWB
         public double DryBulbTemperature { set; get; } // TDB
@@ -23,7 +27,7 @@ namespace Models
         {
             CalculationType = PsychrometricsCalculationType.Psychrometrics_WetBulbTemperature_DryBulbTemperature;
             IsElevation = false;
-            IsInternationalSystemOfUnits_IS_ = false;
+            IsInternationalSystemOfUnits_SI_ = false;
             Elevation = 0.0;
             WetBulbTemperature = 0.0;
             DryBulbTemperature = 0.0;

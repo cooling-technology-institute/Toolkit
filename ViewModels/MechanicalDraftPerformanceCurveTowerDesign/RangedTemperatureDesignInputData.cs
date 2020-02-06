@@ -1,8 +1,7 @@
-﻿// Copyright Cooling Technology Institute 2019-2020DataValue
+﻿// Copyright Cooling Technology Institute 2019-2020
 
 using Models;
-using System.Collections.Generic;
-using System.Windows.Forms;
+using System;
 
 namespace ViewModels
 {
@@ -56,55 +55,55 @@ namespace ViewModels
         public ColdWaterTemperatureDataValue Range5ColdWaterTemperatureDataValue6 { set; get; }
 
         private bool IsDemo { get; set; }
-        private bool IsInternationalSystemOfUnits_IS { get; set; }
+        private bool IsInternationalSystemOfUnits_SI { get; set; }
 
         public RangedTemperatureDesignInputData(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
-            IsInternationalSystemOfUnits_IS = IsInternationalSystemOfUnits_IS;
+            IsInternationalSystemOfUnits_SI = IsInternationalSystemOfUnits_SI;
 
-            WaterFlowRateDataValue = new WaterFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            WetBulbTemperatureDataValue1 = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            WetBulbTemperatureDataValue2 = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            WetBulbTemperatureDataValue3 = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            WetBulbTemperatureDataValue4 = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            WetBulbTemperatureDataValue5 = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            WetBulbTemperatureDataValue6 = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+            WaterFlowRateDataValue = new WaterFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            WetBulbTemperatureDataValue1 = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            WetBulbTemperatureDataValue2 = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            WetBulbTemperatureDataValue3 = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            WetBulbTemperatureDataValue4 = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            WetBulbTemperatureDataValue5 = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            WetBulbTemperatureDataValue6 = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
 
-            Range1ColdWaterTemperatureDataValue1 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range1ColdWaterTemperatureDataValue2 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range1ColdWaterTemperatureDataValue3 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range1ColdWaterTemperatureDataValue4 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range1ColdWaterTemperatureDataValue5 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range1ColdWaterTemperatureDataValue6 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+            Range1ColdWaterTemperatureDataValue1 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range1ColdWaterTemperatureDataValue2 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range1ColdWaterTemperatureDataValue3 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range1ColdWaterTemperatureDataValue4 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range1ColdWaterTemperatureDataValue5 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range1ColdWaterTemperatureDataValue6 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
 
-            Range2ColdWaterTemperatureDataValue1 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range2ColdWaterTemperatureDataValue2 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range2ColdWaterTemperatureDataValue3 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range2ColdWaterTemperatureDataValue4 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range2ColdWaterTemperatureDataValue5 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range2ColdWaterTemperatureDataValue6 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+            Range2ColdWaterTemperatureDataValue1 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range2ColdWaterTemperatureDataValue2 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range2ColdWaterTemperatureDataValue3 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range2ColdWaterTemperatureDataValue4 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range2ColdWaterTemperatureDataValue5 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range2ColdWaterTemperatureDataValue6 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
 
-            Range3ColdWaterTemperatureDataValue1 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range3ColdWaterTemperatureDataValue2 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range3ColdWaterTemperatureDataValue3 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range3ColdWaterTemperatureDataValue4 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range3ColdWaterTemperatureDataValue5 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range3ColdWaterTemperatureDataValue6 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+            Range3ColdWaterTemperatureDataValue1 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range3ColdWaterTemperatureDataValue2 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range3ColdWaterTemperatureDataValue3 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range3ColdWaterTemperatureDataValue4 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range3ColdWaterTemperatureDataValue5 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range3ColdWaterTemperatureDataValue6 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
 
-            Range4ColdWaterTemperatureDataValue1 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range4ColdWaterTemperatureDataValue2 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range4ColdWaterTemperatureDataValue3 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range4ColdWaterTemperatureDataValue4 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range4ColdWaterTemperatureDataValue5 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range4ColdWaterTemperatureDataValue6 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+            Range4ColdWaterTemperatureDataValue1 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range4ColdWaterTemperatureDataValue2 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range4ColdWaterTemperatureDataValue3 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range4ColdWaterTemperatureDataValue4 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range4ColdWaterTemperatureDataValue5 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range4ColdWaterTemperatureDataValue6 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
 
-            Range5ColdWaterTemperatureDataValue1 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range5ColdWaterTemperatureDataValue2 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range5ColdWaterTemperatureDataValue3 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range5ColdWaterTemperatureDataValue4 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range5ColdWaterTemperatureDataValue5 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
-            Range5ColdWaterTemperatureDataValue6 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_IS);
+            Range5ColdWaterTemperatureDataValue1 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range5ColdWaterTemperatureDataValue2 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range5ColdWaterTemperatureDataValue3 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range5ColdWaterTemperatureDataValue4 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range5ColdWaterTemperatureDataValue5 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range5ColdWaterTemperatureDataValue6 = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
         }
 
         public bool LoadData(RangedTemperaturesDesignData data, out string errorMessage)
@@ -160,5 +159,61 @@ namespace ViewModels
             return true;
         }
 
+        public bool FillAndValidate(ref RangedTemperaturesDesignData rangedTemperaturesDesignData, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+            bool returnValue = true;
+
+            try
+            {
+                rangedTemperaturesDesignData.WaterFlowRate = WaterFlowRateDataValue.Current;
+                rangedTemperaturesDesignData.WetBulbTemperatures.Temperature1 = WetBulbTemperatureDataValue1.Current;
+                rangedTemperaturesDesignData.WetBulbTemperatures.Temperature2 = WetBulbTemperatureDataValue2.Current;
+                rangedTemperaturesDesignData.WetBulbTemperatures.Temperature3 = WetBulbTemperatureDataValue3.Current;
+                rangedTemperaturesDesignData.WetBulbTemperatures.Temperature4 = WetBulbTemperatureDataValue4.Current;
+                rangedTemperaturesDesignData.WetBulbTemperatures.Temperature5 = WetBulbTemperatureDataValue5.Current;
+                rangedTemperaturesDesignData.WetBulbTemperatures.Temperature6 = WetBulbTemperatureDataValue6.Current;
+
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature1 = Range1ColdWaterTemperatureDataValue1.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature2 = Range1ColdWaterTemperatureDataValue2.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature3 = Range1ColdWaterTemperatureDataValue3.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature4 = Range1ColdWaterTemperatureDataValue4.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature5 = Range1ColdWaterTemperatureDataValue5.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature6 = Range1ColdWaterTemperatureDataValue6.Current;
+
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature1 = Range2ColdWaterTemperatureDataValue1.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature2 = Range2ColdWaterTemperatureDataValue2.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature3 = Range2ColdWaterTemperatureDataValue3.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature4 = Range2ColdWaterTemperatureDataValue4.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature5 = Range2ColdWaterTemperatureDataValue5.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature6 = Range2ColdWaterTemperatureDataValue6.Current;
+
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature1 = Range3ColdWaterTemperatureDataValue1.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature2 = Range3ColdWaterTemperatureDataValue2.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature3 = Range3ColdWaterTemperatureDataValue3.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature4 = Range3ColdWaterTemperatureDataValue4.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature5 = Range3ColdWaterTemperatureDataValue5.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature6 = Range3ColdWaterTemperatureDataValue6.Current;
+
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature1 = Range4ColdWaterTemperatureDataValue1.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature2 = Range4ColdWaterTemperatureDataValue2.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature3 = Range4ColdWaterTemperatureDataValue3.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature4 = Range4ColdWaterTemperatureDataValue4.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature5 = Range4ColdWaterTemperatureDataValue5.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature6 = Range4ColdWaterTemperatureDataValue6.Current;
+
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature1 = Range5ColdWaterTemperatureDataValue1.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature2 = Range5ColdWaterTemperatureDataValue2.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature3 = Range5ColdWaterTemperatureDataValue3.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature4 = Range5ColdWaterTemperatureDataValue4.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature5 = Range5ColdWaterTemperatureDataValue5.Current;
+                rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature6 = Range5ColdWaterTemperatureDataValue6.Current;
+            }
+            catch(Exception e)
+            {
+                errorMessage = string.Format("Ranged Temperature design data fill failed. Exception: {0} ", e.ToString());
+            }
+            return returnValue;
+        }
     }
 }

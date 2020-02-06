@@ -67,7 +67,7 @@ namespace ViewModels
 
             if (doConversion)
             {
-                if (IsInternationalSystemOfUnits_IS_ && !isIS)
+                if (IsInternationalSystemOfUnits_SI_ && !isIS)
                 {
                     // convert to United States Customary Units (IP)
                     Current = UnitConverter.ConvertCelsiusToFahrenheit(UnitConverter.ConvertKilopascalToBarometricPressure(Current));
@@ -86,7 +86,7 @@ namespace ViewModels
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(BarometricPressureToolTipFormat, Minimum, Maximum);
 
-            IsInternationalSystemOfUnits_IS_ = isIS;
+            IsInternationalSystemOfUnits_SI_ = isIS;
         }
     }
 }

@@ -66,7 +66,7 @@ namespace ViewModels
 
             if (doConversion)
             {
-                if (IsInternationalSystemOfUnits_IS_ && !isInternationalSystemOfUnits_IS_)
+                if (IsInternationalSystemOfUnits_SI_ && !isInternationalSystemOfUnits_IS_)
                 {
                     // convert to United States Customary Units (IP)
                     Current = UnitConverter.ConvertCelsiusToFahrenheit(Current);
@@ -85,7 +85,7 @@ namespace ViewModels
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(DryBulbTemperatureToolTipFormat, Minimum, Maximum);
 
-            IsInternationalSystemOfUnits_IS_ = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
         }
     }
 }

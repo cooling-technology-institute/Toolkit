@@ -113,11 +113,17 @@
     <Compile Include="ToolkitMain.Designer.cs">
       <DependentUpon>ToolkitMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="TowerDesignCurveDataUserControl.cs">
+    <Compile Include="RangedTemperatureDesignUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TowerDesignCurveDataUserControl.Designer.cs">
-      <DependentUpon>TowerDesignCurveDataUserControl.cs</DependentUpon>
+    <Compile Include="RangedTemperatureDesignUserControl.Designer.cs">
+      <DependentUpon>RangedTemperatureDesignUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TowerDesignDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TowerDesignDataForm.Designer.cs">
+      <DependentUpon>TowerDesignDataForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TowerDesignDataUserControl.cs">
       <SubType>UserControl</SubType>
@@ -143,8 +149,11 @@
     <EmbeddedResource Include="ToolkitMain.resx">
       <DependentUpon>ToolkitMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TowerDesignCurveDataUserControl.resx">
-      <DependentUpon>TowerDesignCurveDataUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="RangedTemperatureDesignUserControl.resx">
+      <DependentUpon>RangedTemperatureDesignUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TowerDesignDataForm.resx">
+      <DependentUpon>TowerDesignDataForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TowerDesignDataUserControl.resx">
       <DependentUpon>TowerDesignDataUserControl.cs</DependentUpon>

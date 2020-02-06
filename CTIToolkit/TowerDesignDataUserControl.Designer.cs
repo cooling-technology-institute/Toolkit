@@ -71,6 +71,9 @@
             this.TowerDesignDataRangeLabel1 = new System.Windows.Forms.Label();
             this.lTowerDesignDataRangesWarning = new System.Windows.Forms.TextBox();
             this.TowerDesignDataCurveDataGroupBox = new System.Windows.Forms.GroupBox();
+            this.WaterFlowRateLabel = new System.Windows.Forms.Label();
+            this.AddWaterFlowRateValue = new System.Windows.Forms.TextBox();
+            this.AddFlowRateButton = new System.Windows.Forms.Button();
             this.TowerDesignDataCurveDataTabControl = new System.Windows.Forms.TabControl();
             this.TowerDesignDataTabPage = new System.Windows.Forms.TabPage();
             this.TowerDesignCurveDataSaveButton = new System.Windows.Forms.Button();
@@ -503,21 +506,52 @@
             // 
             // TowerDesignDataCurveDataGroupBox
             // 
+            this.TowerDesignDataCurveDataGroupBox.Controls.Add(this.WaterFlowRateLabel);
+            this.TowerDesignDataCurveDataGroupBox.Controls.Add(this.AddWaterFlowRateValue);
+            this.TowerDesignDataCurveDataGroupBox.Controls.Add(this.AddFlowRateButton);
             this.TowerDesignDataCurveDataGroupBox.Controls.Add(this.TowerDesignDataCurveDataTabControl);
             this.TowerDesignDataCurveDataGroupBox.Location = new System.Drawing.Point(15, 449);
             this.TowerDesignDataCurveDataGroupBox.Name = "TowerDesignDataCurveDataGroupBox";
-            this.TowerDesignDataCurveDataGroupBox.Size = new System.Drawing.Size(1031, 347);
+            this.TowerDesignDataCurveDataGroupBox.Size = new System.Drawing.Size(1031, 318);
             this.TowerDesignDataCurveDataGroupBox.TabIndex = 15;
             this.TowerDesignDataCurveDataGroupBox.TabStop = false;
             this.TowerDesignDataCurveDataGroupBox.Text = "Tower Design Curve Data (IP)";
             // 
+            // WaterFlowRateLabel
+            // 
+            this.WaterFlowRateLabel.AutoSize = true;
+            this.WaterFlowRateLabel.Location = new System.Drawing.Point(754, 22);
+            this.WaterFlowRateLabel.Name = "WaterFlowRateLabel";
+            this.WaterFlowRateLabel.Size = new System.Drawing.Size(90, 13);
+            this.WaterFlowRateLabel.TabIndex = 3;
+            this.WaterFlowRateLabel.Text = "Water Flow Rate:";
+            // 
+            // AddWaterFlowRateValue
+            // 
+            this.AddWaterFlowRateValue.Location = new System.Drawing.Point(850, 19);
+            this.AddWaterFlowRateValue.Name = "AddWaterFlowRateValue";
+            this.AddWaterFlowRateValue.Size = new System.Drawing.Size(83, 20);
+            this.AddWaterFlowRateValue.TabIndex = 2;
+            this.AddWaterFlowRateValue.Validating += new System.ComponentModel.CancelEventHandler(this.WaterFlowRateValue_Validating);
+            this.AddWaterFlowRateValue.Validated += new System.EventHandler(this.WaterFlowRateValue_Validated);
+            // 
+            // AddFlowRateButton
+            // 
+            this.AddFlowRateButton.Location = new System.Drawing.Point(943, 17);
+            this.AddFlowRateButton.Name = "AddFlowRateButton";
+            this.AddFlowRateButton.Size = new System.Drawing.Size(75, 23);
+            this.AddFlowRateButton.TabIndex = 0;
+            this.AddFlowRateButton.Text = "Add";
+            this.AddFlowRateButton.UseVisualStyleBackColor = true;
+            this.AddFlowRateButton.Click += new System.EventHandler(this.AddFlowRateButton_Click);
+            // 
             // TowerDesignDataCurveDataTabControl
             // 
             this.TowerDesignDataCurveDataTabControl.Controls.Add(this.TowerDesignDataTabPage);
-            this.TowerDesignDataCurveDataTabControl.Location = new System.Drawing.Point(7, 20);
+            this.TowerDesignDataCurveDataTabControl.Location = new System.Drawing.Point(15, 46);
             this.TowerDesignDataCurveDataTabControl.Name = "TowerDesignDataCurveDataTabControl";
             this.TowerDesignDataCurveDataTabControl.SelectedIndex = 0;
-            this.TowerDesignDataCurveDataTabControl.Size = new System.Drawing.Size(1025, 299);
+            this.TowerDesignDataCurveDataTabControl.Size = new System.Drawing.Size(1003, 255);
             this.TowerDesignDataCurveDataTabControl.TabIndex = 0;
             // 
             // TowerDesignDataTabPage
@@ -525,14 +559,14 @@
             this.TowerDesignDataTabPage.Location = new System.Drawing.Point(4, 22);
             this.TowerDesignDataTabPage.Name = "TowerDesignDataTabPage";
             this.TowerDesignDataTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.TowerDesignDataTabPage.Size = new System.Drawing.Size(1017, 273);
+            this.TowerDesignDataTabPage.Size = new System.Drawing.Size(995, 229);
             this.TowerDesignDataTabPage.TabIndex = 0;
             this.TowerDesignDataTabPage.Text = "Click to Add Flow";
             this.TowerDesignDataTabPage.UseVisualStyleBackColor = true;
             // 
             // TowerDesignCurveDataSaveButton
             // 
-            this.TowerDesignCurveDataSaveButton.Location = new System.Drawing.Point(438, 799);
+            this.TowerDesignCurveDataSaveButton.Location = new System.Drawing.Point(438, 808);
             this.TowerDesignCurveDataSaveButton.Name = "TowerDesignCurveDataSaveButton";
             this.TowerDesignCurveDataSaveButton.Size = new System.Drawing.Size(75, 23);
             this.TowerDesignCurveDataSaveButton.TabIndex = 50;
@@ -542,7 +576,7 @@
             // 
             // TowerDesignCurveDataCancelButton
             // 
-            this.TowerDesignCurveDataCancelButton.Location = new System.Drawing.Point(548, 799);
+            this.TowerDesignCurveDataCancelButton.Location = new System.Drawing.Point(548, 808);
             this.TowerDesignCurveDataCancelButton.Name = "TowerDesignCurveDataCancelButton";
             this.TowerDesignCurveDataCancelButton.Size = new System.Drawing.Size(75, 23);
             this.TowerDesignCurveDataCancelButton.TabIndex = 51;
@@ -566,7 +600,7 @@
             this.Controls.Add(this.TowerDesignData);
             this.Controls.Add(this.TowerDesignDataGroupBox);
             this.Name = "TowerDesignDataUserControl";
-            this.Size = new System.Drawing.Size(1062, 837);
+            this.Size = new System.Drawing.Size(1062, 843);
             this.TowerDesignDataGroupBox.ResumeLayout(false);
             this.TowerDesignDataGroupBox.PerformLayout();
             this.TowerDesignData.ResumeLayout(false);
@@ -576,6 +610,7 @@
             this.TowerDesignDataRangesGroupBox.ResumeLayout(false);
             this.TowerDesignDataRangesGroupBox.PerformLayout();
             this.TowerDesignDataCurveDataGroupBox.ResumeLayout(false);
+            this.TowerDesignDataCurveDataGroupBox.PerformLayout();
             this.TowerDesignDataCurveDataTabControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
@@ -634,5 +669,8 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.HelpProvider helpProvider1;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button AddFlowRateButton;
+        private System.Windows.Forms.Label WaterFlowRateLabel;
+        private System.Windows.Forms.TextBox AddWaterFlowRateValue;
     }
 }
