@@ -10,7 +10,7 @@ namespace ViewModels
         public const double DryBulbTemperatureMinimum = 0.0;
         public const double DryBulbTemperatureMaximum = 200.0;
 
-        public const double DryBulbTemperatureDefaultDemo = 100.0;
+        public const double DryBulbTemperatureDefaultDemo = 77.0;
         public const double DryBulbTemperatureMinimumDemo = 75.0;
         public const double DryBulbTemperatureMaximumDemo = 80.0;
 

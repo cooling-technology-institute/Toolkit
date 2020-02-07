@@ -58,6 +58,7 @@
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Psychrometrics\PsychrometricsCalculationType.cs" />
+    <Compile Include="Psychrometrics\PsychrometricsInputData.cs" />
     <Compile Include="Psychrometrics\PsychrometricsData.cs" />
     <Compile Include="StringEnumAsIntConverter.cs" />
   </ItemGroup>

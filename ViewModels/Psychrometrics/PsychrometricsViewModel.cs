@@ -220,7 +220,7 @@ namespace ViewModels
                     return false;
                 }
 
-                if (!PsychrometricsCalculationLibrary.PsychrometricsCalculation(PsychrometricsData, out errorMessage))
+                if (!PsychrometricsCalculationLibrary.PsychrometricsCalculation(PsychrometricsInputData.CalculationType, PsychrometricsInputData.IsElevation, PsychrometricsData, out errorMessage))
                 {
                     return false;
                 }
@@ -252,9 +252,9 @@ namespace ViewModels
 
             switch (psychrometricsCalculationType)
             {
-                case PsychrometricsCalculationType.Psychrometrics_DryBulbTemperature_RelativeHumidity:
-                case PsychrometricsCalculationType.Psychrometrics_Enthalpy:
-                case PsychrometricsCalculationType.Psychrometrics_WetBulbTemperature_DryBulbTemperature:
+                case PsychrometricsCalculationType.DryBulbTemperature_RelativeHumidity:
+                case PsychrometricsCalculationType.Enthalpy:
+                case PsychrometricsCalculationType.WetBulbTemperature_DryBulbTemperature:
                     PsychrometricsInputData.CalculationType = psychrometricsCalculationType;
                     break;
 

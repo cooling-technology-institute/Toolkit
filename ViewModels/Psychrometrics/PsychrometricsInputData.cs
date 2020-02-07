@@ -23,7 +23,7 @@ namespace ViewModels
             IsDemo = isDemo;
             IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
             IsElevation = true;
-            CalculationType = PsychrometricsCalculationType.Psychrometrics_WetBulbTemperature_DryBulbTemperature;
+            CalculationType = PsychrometricsCalculationType.WetBulbTemperature_DryBulbTemperature;
             EnthalpyDataValue = new EnthalpyDataValue(IsDemo, IsInternationalSystemOfUnits_SI_);
             ElevationDataValue = new ElevationDataValue(IsDemo, IsInternationalSystemOfUnits_SI_);
             BarometricPressureDataValue = new BarometricPressureDataValue(IsDemo, IsInternationalSystemOfUnits_SI_);
@@ -36,8 +36,7 @@ namespace ViewModels
         {
             errorMessage = string.Empty;
 
-            data.IsElevation = IsElevation;
-            data.IsInternationalSystemOfUnits_SI_ = IsInternationalSystemOfUnits_SI_;
+            data.IsInternationalSystemOfUnits_SI = IsInternationalSystemOfUnits_SI_;
             data.BarometricPressure = BarometricPressureDataValue.Current;
             data.Elevation = ElevationDataValue.Current;
             data.Enthalpy = EnthalpyDataValue.Current;

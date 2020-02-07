@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.DemandCurveCalculate = new System.Windows.Forms.Button();
             this.DemandCurveDataFileLabel = new System.Windows.Forms.Label();
@@ -82,6 +82,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.AutoPopDelay = 5000;
+            this.toolTip1.InitialDelay = 50;
+            this.toolTip1.ReshowDelay = 100;
             // 
             // DemandCurveCalculate
             // 
@@ -244,9 +250,9 @@
             // 
             // DemandCurve_LiquidToGasRatio_Value
             // 
-            this.DemandCurve_LiquidToGasRatio_Value.Location = new System.Drawing.Point(108, 21);
+            this.DemandCurve_LiquidToGasRatio_Value.Location = new System.Drawing.Point(125, 21);
             this.DemandCurve_LiquidToGasRatio_Value.Name = "DemandCurve_LiquidToGasRatio_Value";
-            this.DemandCurve_LiquidToGasRatio_Value.Size = new System.Drawing.Size(100, 20);
+            this.DemandCurve_LiquidToGasRatio_Value.Size = new System.Drawing.Size(69, 20);
             this.DemandCurve_LiquidToGasRatio_Value.TabIndex = 2;
             this.DemandCurve_LiquidToGasRatio_Value.Text = "1";
             this.DemandCurve_LiquidToGasRatio_Value.Validating += new System.ComponentModel.CancelEventHandler(this.DemandCurve_LiquidToGasRatio_Value_Validating);
@@ -269,9 +275,9 @@
             this.LiquidToGasRatioLabel.AutoSize = true;
             this.LiquidToGasRatioLabel.Location = new System.Drawing.Point(15, 25);
             this.LiquidToGasRatioLabel.Name = "LiquidToGasRatioLabel";
-            this.LiquidToGasRatioLabel.Size = new System.Drawing.Size(29, 13);
+            this.LiquidToGasRatioLabel.Size = new System.Drawing.Size(104, 13);
             this.LiquidToGasRatioLabel.TabIndex = 0;
-            this.LiquidToGasRatioLabel.Text = "L/G:";
+            this.LiquidToGasRatioLabel.Text = "Liquid To Gas Ratio:";
             // 
             // TowerOrFillCharacteristicsGroupBox
             // 
@@ -419,16 +425,16 @@
             this.DemandCurveChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "ChartArea1";
-            this.DemandCurveChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.DemandCurveChart.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.DemandCurveChart.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.DemandCurveChart.Legends.Add(legend3);
             this.DemandCurveChart.Location = new System.Drawing.Point(9, 303);
             this.DemandCurveChart.Name = "DemandCurveChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.DemandCurveChart.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.DemandCurveChart.Series.Add(series3);
             this.DemandCurveChart.Size = new System.Drawing.Size(896, 560);
             this.DemandCurveChart.TabIndex = 12;
             this.DemandCurveChart.Text = "DemandCurveChart";

@@ -307,7 +307,7 @@ namespace ViewModels
                 MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData = new MechanicalDraftPerformanceCurveData(IsInternationalSystemOfUnits_SI);
 
                 // validate test data
-                if (!mechanicalDraftPerformanceCurveTowerDesignViewModel.FillAndValidate(mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData, out errorMessage))
+                if (!mechanicalDraftPerformanceCurveTowerDesignViewModel.FillAndValidate(mechanicalDraftPerformanceCurveData.DesignData, out errorMessage))
                 {
 
                 }

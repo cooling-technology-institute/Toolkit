@@ -11,7 +11,7 @@ namespace Models
         public double AdjustedFlow { set; get; }
         public double PredictedFlow { set; get; }
         public double TowerCapability { set; get; }
-        public double ColdWaterTemperatureDeviation { set; get; } 
+        public double ColdWaterTemperatureDeviation { set; get; }
 
         public MechanicalDraftPerformanceCurveOutput()
         {

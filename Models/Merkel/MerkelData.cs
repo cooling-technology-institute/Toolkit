@@ -7,7 +7,7 @@ namespace Models
         public const string DataType = "MerkelData";
         public const string Version = "1.0";
 
-        public bool IsInternationalSystemOfUnits_SI_ { get; set; }
+        public bool IsInternationalSystemOfUnits_SI { get; set; }
 
         public double Elevation { set; get; }
         public double BarometricPressure { set; get; }
@@ -22,7 +22,7 @@ namespace Models
 
         public MerkelData(bool isInternationalSystemOfUnits_IS_)
         {
-            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
 
             HotWaterTemperature = 0.0;
             ColdWaterTemperature = 0.0;

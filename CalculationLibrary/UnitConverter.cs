@@ -33,6 +33,11 @@ namespace CalculationLibrary
             return barometricPressure;
         }
 
+        public static double ConvertBarometricPressureToPsi(double barometricPressure)
+        {
+            return SeaLevelBasePressure * barometricPressure / OneAtmosphere;
+        }
+
         public static double ConvertBarometricPressureToElevationInFeet(double barometricPressure)
         {
             double elevation = (Math.Exp (Math.Log(barometricPressure / SeaLevelBasePressure) / ElevationPowerFactor) - 1.0) / ElevationConversionFactor * -1.0;
@@ -51,8 +56,13 @@ namespace CalculationLibrary
 
         public static double ConvertBarometricPressureToKilopascal(double barometricPressure)
         {
-            return OneAtmosphere * barometricPressure / SeaLevelBasePressure;
+            return barometricPressure / (BarometricPressure * SeaLevelBasePressure);
         }
+
+        //public static double ConvertBarometricPressureToKilopascal(double barometricPressure)
+        //{
+        //    return OneAtmosphere * barometricPressure / SeaLevelBasePressure;
+        //}
 
         public static double ConvertKilopascalToBarometricPressure(double kilopascal)
         {

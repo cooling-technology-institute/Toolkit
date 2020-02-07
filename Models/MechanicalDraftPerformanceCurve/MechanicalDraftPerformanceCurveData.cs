@@ -9,19 +9,19 @@ namespace Models
 {
     public class MechanicalDraftPerformanceCurveData
     {
-        public bool IsInternationalSystemOfUnits_SI_ { get; set; }
+        public bool IsInternationalSystemOfUnits_SI { get; set; }
         public const string DataType = "MechanicalDraftPerformanceCurveData";
         public const string Version = "1.0";
 
-        public MechanicalDraftPerformanceCurveTestData MechanicalDraftPerformanceCurveTestData { get; set; }
-        public MechanicalDraftPerformanceCurveDesignData MechanicalDraftPerformanceCurveDesignData { get; set; }
+        public MechanicalDraftPerformanceCurveTestData TestData { get; set; }
+        public MechanicalDraftPerformanceCurveDesignData DesignData { get; set; }
 
         public MechanicalDraftPerformanceCurveData(bool isInternationalSystemOfUnits_IS_)
         {
-            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
 
-            MechanicalDraftPerformanceCurveTestData = new MechanicalDraftPerformanceCurveTestData();
-            MechanicalDraftPerformanceCurveDesignData = new MechanicalDraftPerformanceCurveDesignData();
+            TestData = new MechanicalDraftPerformanceCurveTestData();
+            DesignData = new MechanicalDraftPerformanceCurveDesignData();
         }
     }
 }

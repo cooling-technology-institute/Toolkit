@@ -28,7 +28,7 @@ namespace ViewModels
         {
             IsDemo = isDemo;
             InputMessage = "Barometric Pressure";
-            Format = "F5";
+            Format = "F3";
             ConvertValue(isInternationalSystemOfUnits_IS_);
         }
 
@@ -53,9 +53,9 @@ namespace ViewModels
             {
                 if (IsDemo)
                 {
-                    Default = BarometricPressureMinimumDemo;
-                    Minimum = BarometricPressureMaximumDemo;
-                    Maximum = BarometricPressureDefaultDemo;
+                    Default = BarometricPressureDefaultDemo;
+                    Minimum = BarometricPressureMinimumDemo;
+                    Maximum = BarometricPressureMaximumDemo;
                 }
                 else
                 {

@@ -8,8 +8,8 @@ namespace Models
 {
     public enum PsychrometricsCalculationType
     {
-        Psychrometrics_WetBulbTemperature_DryBulbTemperature,
-        Psychrometrics_DryBulbTemperature_RelativeHumidity,
-        Psychrometrics_Enthalpy
+        WetBulbTemperature_DryBulbTemperature,
+        DryBulbTemperature_RelativeHumidity,
+        Enthalpy
     }
 }

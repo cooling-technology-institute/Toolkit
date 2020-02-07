@@ -39,9 +39,9 @@ namespace ViewModels
             NameValueUnitsDataTable.AddRow("Enthalpy", data.Enthalpy.ToString("F4"), Units.Enthalpy);
             NameValueUnitsDataTable.AddRow("Dew Point", data.DewPoint.ToString("F2"), Units.Temperature);
             NameValueUnitsDataTable.AddRow("Relative Humidity", (data.RelativeHumidity * 100.00).ToString("F2"), ConstantUnits.Percentage);
-            NameValueUnitsDataTable.AddRow("Density", data.Density.ToString("F4"), Units.Density);
+            NameValueUnitsDataTable.AddRow("Density", data.Density.ToString("F5"), Units.Density);
             NameValueUnitsDataTable.AddRow("Specific Volume", data.SpecificVolume.ToString("F4"), Units.SpecificVolume);
-            NameValueUnitsDataTable.AddRow("Humidity Ratio", data.HumidityRatio.ToString("F4"), Units.HumidityRatio);
+            NameValueUnitsDataTable.AddRow("Humidity Ratio", data.HumidityRatio.ToString("F5"), Units.HumidityRatio);
         }
     }
 }

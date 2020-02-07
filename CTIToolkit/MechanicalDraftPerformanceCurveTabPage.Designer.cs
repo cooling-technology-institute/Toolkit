@@ -40,7 +40,7 @@
             this.PerformanceCurveUnitsWaterFlowRate = new System.Windows.Forms.Label();
             this.PerformanceCurveUnitsHotWaterTemperature = new System.Windows.Forms.Label();
             this.PerformanceCurveUnitsColdWaterTemperature = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.PerformanceCurveUnitsWetBulbTemperature = new System.Windows.Forms.Label();
             this.PerformanceCurveUnitsDryBulbTemperature = new System.Windows.Forms.Label();
             this.PerformanceCurveUnitsFanDriverPower = new System.Windows.Forms.Label();
             this.PerformanceCurveUnitsBarometricPressure = new System.Windows.Forms.Label();
@@ -161,7 +161,7 @@
             this.PerformanceCurveTestResultsGroupBox.Controls.Add(this.PerformanceCurveUnitsWaterFlowRate);
             this.PerformanceCurveTestResultsGroupBox.Controls.Add(this.PerformanceCurveUnitsHotWaterTemperature);
             this.PerformanceCurveTestResultsGroupBox.Controls.Add(this.PerformanceCurveUnitsColdWaterTemperature);
-            this.PerformanceCurveTestResultsGroupBox.Controls.Add(this.label4);
+            this.PerformanceCurveTestResultsGroupBox.Controls.Add(this.PerformanceCurveUnitsWetBulbTemperature);
             this.PerformanceCurveTestResultsGroupBox.Controls.Add(this.PerformanceCurveUnitsDryBulbTemperature);
             this.PerformanceCurveTestResultsGroupBox.Controls.Add(this.PerformanceCurveUnitsFanDriverPower);
             this.PerformanceCurveTestResultsGroupBox.Controls.Add(this.PerformanceCurveUnitsBarometricPressure);
@@ -210,14 +210,14 @@
             this.PerformanceCurveUnitsColdWaterTemperature.TabIndex = 11;
             this.PerformanceCurveUnitsColdWaterTemperature.Text = "°F";
             // 
-            // label4
+            // PerformanceCurveUnitsWetBulbTemperature
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(605, 154);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(17, 13);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "°F";
+            this.PerformanceCurveUnitsWetBulbTemperature.AutoSize = true;
+            this.PerformanceCurveUnitsWetBulbTemperature.Location = new System.Drawing.Point(605, 154);
+            this.PerformanceCurveUnitsWetBulbTemperature.Name = "PerformanceCurveUnitsWetBulbTemperature";
+            this.PerformanceCurveUnitsWetBulbTemperature.Size = new System.Drawing.Size(17, 13);
+            this.PerformanceCurveUnitsWetBulbTemperature.TabIndex = 16;
+            this.PerformanceCurveUnitsWetBulbTemperature.Text = "°F";
             // 
             // PerformanceCurveUnitsDryBulbTemperature
             // 
@@ -649,7 +649,7 @@
         private System.Windows.Forms.Label PerformanceCurveUnitsWaterFlowRate;
         private System.Windows.Forms.Label PerformanceCurveUnitsHotWaterTemperature;
         private System.Windows.Forms.Label PerformanceCurveUnitsColdWaterTemperature;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label PerformanceCurveUnitsWetBulbTemperature;
         private System.Windows.Forms.Label PerformanceCurveUnitsDryBulbTemperature;
         private System.Windows.Forms.Label PerformanceCurveUnitsFanDriverPower;
         private System.Windows.Forms.Label PerformanceCurveUnitsBarometricPressure;

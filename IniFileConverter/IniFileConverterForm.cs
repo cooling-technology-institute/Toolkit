@@ -43,27 +43,27 @@ namespace IniFileConverter
                     //Manufacturer=Cooling Technology Institute
                     //ManufacturerData=0
                     //InducedFlow=1
-                    mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.OwnerName = data["Tower Info"]["Owner"];
-                    mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.ProjectName = data["Tower Info"]["ProjectName"];
-                    mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.Location = data["Tower Info"]["Location"];
-                    mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.TowerManufacturer = data["Tower Info"]["Manufacturer"];
+                    mechanicalDraftPerformanceCurveData.DesignData.OwnerName = data["Tower Info"]["Owner"];
+                    mechanicalDraftPerformanceCurveData.DesignData.ProjectName = data["Tower Info"]["ProjectName"];
+                    mechanicalDraftPerformanceCurveData.DesignData.Location = data["Tower Info"]["Location"];
+                    mechanicalDraftPerformanceCurveData.DesignData.TowerManufacturer = data["Tower Info"]["Manufacturer"];
                     if (int.Parse(data["Tower Info"]["InducedFlow"]) == 1)
                     {
-                        mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.TowerType = TOWER_TYPE.Induced;
+                        mechanicalDraftPerformanceCurveData.DesignData.TowerType = TOWER_TYPE.Induced;
                     }
                     else
                     {
-                        mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.TowerType = TOWER_TYPE.Forced;
+                        mechanicalDraftPerformanceCurveData.DesignData.TowerType = TOWER_TYPE.Forced;
                     }
 
-                    mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.WaterFlowRate = double.Parse(data["Tower Design Point"]["WaterFlowRate"]);
-                    mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.HotWaterTemperature = double.Parse(data["Tower Design Point"]["HWT"]);
-                    mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.ColdWaterTemperature = double.Parse(data["Tower Design Point"]["CWT"]);
-                    mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.WetBulbTemperature = double.Parse(data["Tower Design Point"]["WBT"]);
-                    mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.DryBulbTemperature = double.Parse(data["Tower Design Point"]["DBT"]);
-                    mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.FanDriverPower = double.Parse(data["Tower Design Point"]["FanDriverPower"]);
-                    mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.BarometricPressure = double.Parse(data["Tower Design Point"]["BarometricPressure"]);
-                    mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.LiquidToGasRatio = double.Parse(data["Tower Design Point"]["LG"]);
+                    mechanicalDraftPerformanceCurveData.DesignData.WaterFlowRate = double.Parse(data["Tower Design Point"]["WaterFlowRate"]);
+                    mechanicalDraftPerformanceCurveData.DesignData.HotWaterTemperature = double.Parse(data["Tower Design Point"]["HWT"]);
+                    mechanicalDraftPerformanceCurveData.DesignData.ColdWaterTemperature = double.Parse(data["Tower Design Point"]["CWT"]);
+                    mechanicalDraftPerformanceCurveData.DesignData.WetBulbTemperature = double.Parse(data["Tower Design Point"]["WBT"]);
+                    mechanicalDraftPerformanceCurveData.DesignData.DryBulbTemperature = double.Parse(data["Tower Design Point"]["DBT"]);
+                    mechanicalDraftPerformanceCurveData.DesignData.FanDriverPower = double.Parse(data["Tower Design Point"]["FanDriverPower"]);
+                    mechanicalDraftPerformanceCurveData.DesignData.BarometricPressure = double.Parse(data["Tower Design Point"]["BarometricPressure"]);
+                    mechanicalDraftPerformanceCurveData.DesignData.LiquidToGasRatio = double.Parse(data["Tower Design Point"]["LG"]);
 
                     int numberOfRanges = int.Parse(data["Curve Data"]["NumRanges"]);
                     for(int i = 0; i < numberOfRanges; i++)
@@ -71,19 +71,19 @@ namespace IniFileConverter
                         switch (i)
                         {
                             case 0:
-                                mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.Range1 = double.Parse(data["Curve Data"]["Range1"]);
+                                mechanicalDraftPerformanceCurveData.DesignData.Range1 = double.Parse(data["Curve Data"]["Range1"]);
                                 break;
                             case 1:
-                                mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.Range2 = double.Parse(data["Curve Data"]["Range2"]);
+                                mechanicalDraftPerformanceCurveData.DesignData.Range2 = double.Parse(data["Curve Data"]["Range2"]);
                                 break;
                             case 2:
-                                mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.Range3 = double.Parse(data["Curve Data"]["Range3"]);
+                                mechanicalDraftPerformanceCurveData.DesignData.Range3 = double.Parse(data["Curve Data"]["Range3"]);
                                 break;
                             case 3:
-                                mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.Range4 = double.Parse(data["Curve Data"]["Range4"]);
+                                mechanicalDraftPerformanceCurveData.DesignData.Range4 = double.Parse(data["Curve Data"]["Range4"]);
                                 break;
                             case 4:
-                                mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.Range5 = double.Parse(data["Curve Data"]["Range5"]);
+                                mechanicalDraftPerformanceCurveData.DesignData.Range5 = double.Parse(data["Curve Data"]["Range5"]);
                                 break;
                         }
                     }
@@ -252,7 +252,7 @@ namespace IniFileConverter
                             }
                             wetBlubNumber++;
                         }
-                        mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveDesignData.RangedTemperaturesDesignData.Add(rangedTemperaturesDesignData);
+                        mechanicalDraftPerformanceCurveData.DesignData.RangedTemperaturesDesignData.Add(rangedTemperaturesDesignData);
                     }
 
                     int numberOfTests = int.Parse(data["Tests"]["NumTests"]);
@@ -261,13 +261,13 @@ namespace IniFileConverter
                         string testName = string.Format("TestPoint{0}", testNumber+1);
                         if (data[testName]["Date"].Contains("Test Data"))
                         {
-                            mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveTestData.WaterFlowRate = double.Parse(data[testName]["WaterFlowRate"]);
-                            mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveTestData.HotWaterTemperature = double.Parse(data[testName]["HWT"]);
-                            mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveTestData.ColdWaterTemperature = double.Parse(data[testName]["CWT"]);
-                            mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveTestData.WetBulbTemperature = double.Parse(data[testName]["WBT"]);
-                            mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveTestData.DryBulbTemperature = double.Parse(data[testName]["DBT"]);
-                            mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveTestData.FanDriverPower = double.Parse(data[testName]["FanDriverPower"]);
-                            mechanicalDraftPerformanceCurveData.MechanicalDraftPerformanceCurveTestData.BarometricPressure = double.Parse(data[testName]["BarometricPressure"]);
+                            mechanicalDraftPerformanceCurveData.TestData.WaterFlowRate = double.Parse(data[testName]["WaterFlowRate"]);
+                            mechanicalDraftPerformanceCurveData.TestData.HotWaterTemperature = double.Parse(data[testName]["HWT"]);
+                            mechanicalDraftPerformanceCurveData.TestData.ColdWaterTemperature = double.Parse(data[testName]["CWT"]);
+                            mechanicalDraftPerformanceCurveData.TestData.WetBulbTemperature = double.Parse(data[testName]["WBT"]);
+                            mechanicalDraftPerformanceCurveData.TestData.DryBulbTemperature = double.Parse(data[testName]["DBT"]);
+                            mechanicalDraftPerformanceCurveData.TestData.FanDriverPower = double.Parse(data[testName]["FanDriverPower"]);
+                            mechanicalDraftPerformanceCurveData.TestData.BarometricPressure = double.Parse(data[testName]["BarometricPressure"]);
                         }
                     }
 

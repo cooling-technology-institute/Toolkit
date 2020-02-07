@@ -221,6 +221,8 @@ namespace CTIToolkit
             TowerDesignDataRange5ColdWaterTemperature6.Visible = (webBulbTemperatureCount >= 6);
         }
 
+        #region DataValidation
+
         private void TowerDesignDataWetBulbTemperature1_Validated(object sender, EventArgs e)
         {
             errorProvider1.SetError(TowerDesignDataWetBulbTemperature1, "");
@@ -940,5 +942,7 @@ namespace CTIToolkit
                 this.errorProvider1.SetError(TowerDesignDataRange5ColdWaterTemperature6, errorMessage);
             }
         }
+        
+        #endregion DataValidation
     }
 }
