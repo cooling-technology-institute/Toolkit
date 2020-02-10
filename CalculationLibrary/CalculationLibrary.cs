@@ -2,6 +2,8 @@
 
 using Models;
 using System;
+using System.IO;
+using System.Text;
 
 namespace CalculationLibrary
 {
@@ -180,13 +182,12 @@ namespace CalculationLibrary
         {
             //'****** Procedure finds SI WB, DB & properties given enthalpy & pressure **
             //'****** Uses bisection method to search for roots.  Limits -20 to 60 øC ****
+            StringBuilder stringBuilder = new StringBuilder();
 
             //'Establish tolerance on enthalpy search
 
-            double temptolerance = (data.IsInternationalSystemOfUnits_SI) ? .00001 : .0001;
-            double Htolerance = .00005;
-            double Hlow = 0.0;
-            double Hhigh = 0.0;
+            double temptolerance = (data.IsInternationalSystemOfUnits_SI) ? 0.00001 : 0.001;
+            double Htolerance = 0.00005;
             double Enthalpy = 0.0;
 
             //' First need to bracket region of WB/DB to created bisection region
@@ -203,12 +204,14 @@ namespace CalculationLibrary
 
             CalculateProperties(data);
 
-            if (Math.Abs(Hlow - data.Enthalpy) <= Htolerance)
+            if (Math.Abs(data.Enthalpy - data.RootEnthalpy) <= Htolerance)
             {
                 return;
             }
 
-            if (data.Enthalpy < Hlow)
+            stringBuilder.AppendFormat(" WetBulbTemperature {0} DryBulbTemperature {1} Hlow {2} RootEnthalpy {3}\n", data.WetBulbTemperature.ToString("F6"), data.DryBulbTemperature.ToString("F6"), data.Enthalpy.ToString("F6"), data.RootEnthalpy.ToString("F6"));
+
+            if (data.RootEnthalpy < data.Enthalpy)
             {
                 ////todo ASSERT(0);
                 //LOCATE 17, 10: PRINT "Enthalpy ref of range of program"
@@ -223,20 +226,23 @@ namespace CalculationLibrary
             {
                 data.DryBulbTemperature = data.WetBulbTemperature;
             }
-            
+
+            Enthalpy = data.Enthalpy;
             CalculateProperties(data);
-            
-            if (Math.Abs(Hhigh - data.Enthalpy) <= Htolerance)
+
+            if (Math.Abs(data.Enthalpy - data.RootEnthalpy) <= Htolerance)
             {
                 return;
             }
 
-            if (data.Enthalpy > Hhigh)
+            if (data.RootEnthalpy > data.Enthalpy)
             {
                 ////todo ASSERT(0);
                 //LOCATE 17, 10: PRINT "Enthalpy ref of range of program"
                 return;
             }
+
+            stringBuilder.AppendFormat(" WetBulbTemperature {0} DryBulbTemperature {1} Hhigh {2} RootEnthalpy {3}\n", data.WetBulbTemperature.ToString("F6"), data.DryBulbTemperature.ToString("F6"), data.Enthalpy.ToString("F6"), data.RootEnthalpy.ToString("F6"));
 
             //'Begin bisection root search procedure from Numerical Recipes in BASIC, p 193
 
@@ -247,28 +253,26 @@ namespace CalculationLibrary
             double tmid = 0.0;
             double hmid;
 
-            while (true)
+            do
             {
                 DT /= 2.0;
-                tmid = trtbis + DT;
+                data.WetBulbTemperature = trtbis + DT;
                 if (saturation)
                 {
-                    data.DryBulbTemperature = tmid;
+                    data.DryBulbTemperature = data.WetBulbTemperature;
                 }
 
                 CalculateProperties(data);
 
-                hmid = data.Enthalpy - Enthalpy;
+                hmid = data.RootEnthalpy - data.Enthalpy;
 
                 if (hmid >= 0.0)
                 {
-                    trtbis = tmid;
+                    trtbis = data.WetBulbTemperature;
                 }
-                if ((Math.Abs(DT) < temptolerance) || (hmid == 0.0))
-                {
-                    break;
-                }
-            }
+                stringBuilder.AppendFormat(" hmid {0}\n", hmid.ToString("F6"));
+                stringBuilder.AppendFormat(" temptolerance {0} DT {1} trtbis {2} tmid {3} Enthalpy {4} RootEnthalpy {5}\n", temptolerance.ToString("F6"), DT.ToString("F6"), trtbis.ToString("F6"), data.WetBulbTemperature.ToString("F6"), data.Enthalpy.ToString("F6"), data.RootEnthalpy.ToString("F6"));
+            } while ((Math.Abs(DT) >= temptolerance) || (hmid != 0.0));
 
             data.WetBulbTemperature = tmid;
 
@@ -278,6 +282,9 @@ namespace CalculationLibrary
             }
 
             data.Enthalpy = Enthalpy;
+            stringBuilder.AppendFormat(" Enthalpy {0} WetBulbTemperature {1}\n", Enthalpy.ToString("F6"), data.WetBulbTemperature.ToString("F6"));
+
+            File.WriteAllText("entout.txt", stringBuilder.ToString());
         }
 
         //*********** Partial Pressure of Water Vapor (-148ø to 32ø) ****************
@@ -488,23 +495,23 @@ namespace CalculationLibrary
             double FsDP;
 
             double C1 = (data.IsInternationalSystemOfUnits_SI) ? -5674.5359 : -10214.16462;
-            double C3 = (data.IsInternationalSystemOfUnits_SI) ? -.009677843 : .00537657944;
+            double C3 = (data.IsInternationalSystemOfUnits_SI) ? -.009677843 : -0.00537657944;
             double C4 = (data.IsInternationalSystemOfUnits_SI) ? .00000062215701 : .000000192023769;
             double C5 = (data.IsInternationalSystemOfUnits_SI) ? .0000000020747825 : 3.55758316E-10;
             double C6 = (data.IsInternationalSystemOfUnits_SI) ? -9.484024000000001E-13 : -9.03446883E-14;
             double C7 = 4.1635019;
 
             double C8 = (data.IsInternationalSystemOfUnits_SI) ? -5800.2206 : -10440.39708;
-            double C10 = (data.IsInternationalSystemOfUnits_SI) ? -.048640239 : -.027022355;
-            double C11 = (data.IsInternationalSystemOfUnits_SI) ? .000041764768 : .00001289036;
-            double C12 = (data.IsInternationalSystemOfUnits_SI) ? -.000000014452093 : -.000000002478068;
+            double C10 = (data.IsInternationalSystemOfUnits_SI) ? -.048640239 : -0.027022355;
+            double C11 = (data.IsInternationalSystemOfUnits_SI) ? .000041764768 : 0.00001289036;
+            double C12 = (data.IsInternationalSystemOfUnits_SI) ? -.000000014452093 : -0.000000002478068;
             double C13 = 6.5459673;
 
-            double C14 = 6.54;
-            double C15 = 14.526;
-            double C16 = .7389;
-            double C17 = .09486;
-            double C18 = .4569;
+            double C14 = (data.IsInternationalSystemOfUnits_SI) ? 6.54 : 100.45;
+            double C15 = (data.IsInternationalSystemOfUnits_SI) ? 14.526 : 33.193;
+            double C16 = (data.IsInternationalSystemOfUnits_SI) ? 0.7389 : 2.319;
+            double C17 = (data.IsInternationalSystemOfUnits_SI) ? 0.09486 : 0.17074;
+            double C18 = (data.IsInternationalSystemOfUnits_SI) ? 0.4569 : 1.2063;
             
             double density;
             double freezing = (data.IsInternationalSystemOfUnits_SI) ? 0.0 : 32.0;
@@ -512,6 +519,7 @@ namespace CalculationLibrary
             double c2 = (data.IsInternationalSystemOfUnits_SI) ? 0.4959 : 0.8927;
             double c3 = (data.IsInternationalSystemOfUnits_SI) ? 12.608 : 26.142;
 
+            StringBuilder stringBuilder = new StringBuilder();
 
             // Method to determine Dew Point - Fs varies with temp - Process in iterative passes.
             double DewPoint = data.WetBulbTemperature;
@@ -530,40 +538,20 @@ namespace CalculationLibrary
                 // Calculate dew point pressure
                 density = (FsDP * (.62198 + data.HumidityRatio));
                 PDEW = (density == 0.0) ? 0.0 : (data.BarometricPressure * data.HumidityRatio / density);  //ASHRAE Eq.(34)
+                stringBuilder.AppendFormat(" density {0} pressure {1} HumidityRatio {2}\n", density.ToString("F6"), data.BarometricPressure.ToString("F6"), data.HumidityRatio.ToString("F6"));
 
                 // Calculate dew point temperature - check above and below ice point
                 if (DewPoint < freezing)
                 {
                     lnpw = Math.Log(PDEW);
                     DewPoint = c1 + c3 * lnpw + c2 * Math.Pow(lnpw, 2.0);   //ASHRAE Eq.(36)
+                    stringBuilder.AppendFormat(" DewPoint {0} lnpw {1}\n", DewPoint.ToString("F6"), lnpw.ToString("F6"));
                 }
                 else
                 {
-                    if(data.IsInternationalSystemOfUnits_SI)
-                    {
-                        C14 = 6.54;
-                        C15 = 14.526;
-                        C16 = .7389;
-                        C17 = .09486;
-                        C18 = .4569;
-                        lnpw = Math.Log(PDEW);
-                        DewPoint = C14 + C15 * lnpw + C16 * Math.Pow(lnpw, 2.0) + C17 * Math.Pow(lnpw, 3.0) + C18 * Math.Pow((PDEW), .1984);  //ASHRAE Eq.(35)
-                    }
-                    else
-                    {
-                        C14 = 100.45;
-                        C15 = 33.193;
-                        C16 = 2.319;
-                        C17 = 0.17074;
-                        C18 = 1.2063;
-                        lnpw = Math.Log(PDEW);
-
-                        double t1 = (Math.Pow(lnpw, 2.0));
-                        double t2 = (Math.Pow(lnpw, 3.0));
-                        double t3 = (Math.Pow(PDEW, 0.1984));
-
-                        DewPoint = C14 + C15 * lnpw + C16 * t1 + C17 * t2 + C18 * t3;  //ASHRAE Eq.(36)
-                    }
+                    lnpw = Math.Log(PDEW);
+                    DewPoint = C14 + C15 * lnpw + C16 * Math.Pow(lnpw, 2.0) + C17 * Math.Pow(lnpw, 3.0) + C18 * Math.Pow(PDEW, 0.1984);  //ASHRAE Eq.(36)
+                    stringBuilder.AppendFormat(" DewPoint {0} lnpw {1} PDEW {2}\n", DewPoint.ToString("F6"), lnpw.ToString("F6"), PDEW.ToString("F6"));
                 }
                 if (data.IsInternationalSystemOfUnits_SI)
                 {
@@ -580,9 +568,10 @@ namespace CalculationLibrary
             density = (data.BarometricPressure - PwsDP * FsDP);
             WSDP = (density == 0.0) ? 0.0 : (0.62198 * PwsDP * FsDP / density);
             DeltaT = 1.0;
+            stringBuilder.AppendFormat(" PwsDP {0} density {1} WSDP {2}\n", PwsDP.ToString("F6"), density.ToString("F6"), WSDP.ToString("F6"));
 
             // DavidL, 04/26/2001: Fixed the loop conditions to mimic IPDEWPoint()
-            while((WSDP != 0.0) &&  ((Math.Abs(data.HumidityRatio / WSDP - 1.0) >= .000001) || (Math.Abs(DeltaT) >= .0001)))
+            while ((WSDP != 0.0) &&  ((Math.Abs(data.HumidityRatio / WSDP - 1.0) >= .000001) || (Math.Abs(DeltaT) >= .0001)))
             {
                 PwsDP = CalculateVaporPressure(data.IsInternationalSystemOfUnits_SI, DewPoint);
                 if(data.IsInternationalSystemOfUnits_SI)
@@ -597,6 +586,7 @@ namespace CalculationLibrary
 
                 density = (data.BarometricPressure - PwsDP * FsDP);
                 WSDP = (density == 0.0) ? 0.0 : (0.62198 * PwsDP * FsDP / density);
+                stringBuilder.AppendFormat(" PwsDP {0} density {1} WSDP {2}\n", PwsDP.ToString("F6"), density.ToString("F6"), WSDP.ToString("F6"));
 
                 //Calculate DERivative of Vapor Pressure
                 t = DewPoint + ((data.IsInternationalSystemOfUnits_SI) ? 273.15 : 459.67);
@@ -615,14 +605,17 @@ namespace CalculationLibrary
                 //Calculate DERivative of Humidity Ratio
                 density = Math.Pow((data.BarometricPressure - FsDP * PwsDP), 2.0);
                 DERHR = (density == 0.0) ? 0.0 :((data.BarometricPressure - PwsDP * FsDP) * 0.62198 * FsDP * DERPws - (.62198 * FsDP * PwsDP) * (-FsDP * DERPws)) / density;
-                                        
+
+                stringBuilder.AppendFormat(" PwsDP {0} density {1} WSDP {2} DERHR {3} FsDP {4} DERPws {5}\n", PwsDP.ToString("F6"), density.ToString("F6"), WSDP.ToString("F6"), DERHR.ToString("F6"), FsDP.ToString("F6"), DERPws.ToString("F6"));
+
                 //Converge to given humidityRatio using Newton-Raphson Method
                 //Yields abref one order of magnitude correction per iteration
 
                 DeltaT = DERHR != 0.0 ? ((data.HumidityRatio - WSDP) / DERHR) : 0.0;
                 DewPoint += DeltaT;
+                stringBuilder.AppendFormat(" DeltaT {0} DERHR {1} WSDP {2} DewPoint {3}\n", DeltaT.ToString("F6"), DERHR.ToString("F6"), WSDP.ToString("F6"), DewPoint.ToString("F6"));
             }
-
+            File.WriteAllText("out.txt", stringBuilder.ToString());
             return DewPoint;
         }
 
@@ -789,81 +782,99 @@ namespace CalculationLibrary
         public static double DetermineAdjustedTestFlow(MechanicalDraftPerformanceCurveData data, PsychrometricsData testPsychrometricsData, PsychrometricsData designPsychrometricsData, MechanicalDraftPerformanceCurveOutput output)
         {
             double Cpw = (data.IsInternationalSystemOfUnits_SI) ? 4.186 : 1.0; // specific heat at constant pressure
+            double HCalcT;
+            double LWBT;
 
-            data.TestData.LiquidToGasRatio = 0;
+            output.LiquidToGasRatio = 0;
 
-            //if (data.DesignData.TowerType == TOWER_TYPE.Induced)      //'compute AdjTestFlow on LEAVING air temperatures
-            //{
-            //    //'  LEAVING AIR CONDITIONS - Predicted Leaving Wet Bulb
+            if(!data.IsInternationalSystemOfUnits_SI)
+            {
 
-            //    //'First determine Design Leaving Air Density, designPsychrometricsData.Density  *****************************
-            //    //'first step is determine Leaving air Enthalpy Design, HOutD
-            //    designPsychrometricsData.Enthalpy += data.DesignData.LiquidToGasRatio * Cpw * (data.DesignData.HotWaterTemperature - data.DesignData.ColdWaterTemperature);
+                designPsychrometricsData.BarometricPressure = 14.696 * designPsychrometricsData.BarometricPressure / 29.921;
+                testPsychrometricsData.BarometricPressure = 14.696 * testPsychrometricsData.BarometricPressure / 29.921;
+            }
 
-            //    //'Call Enthalpy Search subroutine with calculated HOutD value
-            //    EnthalpySearch(true, designPsychrometricsData);
+            CalculateProperties(designPsychrometricsData);
+            CalculateProperties(testPsychrometricsData);
 
-            ////    //'Store Density Out as Density Design and SV Out as SV Design
+            if (data.DesignData.TowerType == TOWER_TYPE.Induced)      //'compute AdjTestFlow on LEAVING air temperatures
+            {
+                //'  LEAVING AIR CONDITIONS - Predicted Leaving Wet Bulb
 
-            ////    //'Next Iterate to find Test Leaving Wet bulb and testPsychrometricsData.Density
-            ////    //'Initial guess of Leaving Wet Bulb is average of Test Entering and Leaving temperature
-            ////    LWBT = (data.TestData.HotWaterTemperature + data.TestData.ColdWaterTemperature) / 2.0;
+                //'First determine Design Leaving Air Density, designPsychrometricsData.Density  *****************************
+                //'first step is determine Leaving air Enthalpy Design, HOutD                
+                designPsychrometricsData.RootEnthalpy = designPsychrometricsData.Enthalpy + data.DesignData.LiquidToGasRatio * Cpw * (data.DesignData.HotWaterTemperature - data.DesignData.ColdWaterTemperature);
 
-            //    bool bGoto200 = true;
-            //    while (bGoto200)
-            //    {
-            //        //200 'Top of iteration loop *****************************************************************
-            //        //' Determine conditions of air at guess Leaving Wet Bulb (assumed saturated LDB=LWB)
+                //EnthalpysearchIP(int sat, double P,                                    double RootEnthalpy, ref double OutputEnthalpy, ref double temperatureWetBulb, ref double temperatureDryBulb, ref double humidityRatio, ref double relativeHumidity, ref double specificVolume, ref double Density, ref double DEWPoint)
 
-            //        CalculateProperties(testPsychrometricsData);
+                //EnthalpysearchIP(1,       designPsychrometricsData.BarometricPressure, HOutD,               ref OutputEnthalpy,        ref LWBD,                      ref LDBD,                      ref humidityRatio,        ref relativeHumidity,        ref designPsychrometricsData.SpecificVolume,                ref designPsychrometricsData.Density,        ref DEWPoint);
+ 
+                //'Call Enthalpy Search subroutine with calculated HOutD value
+                EnthalpySearch(true, designPsychrometricsData);
 
-            //        //'Calculate L/G Test
-            //        //'Equation 5.1, Liquid to Gas ratio Test
-            //        if ((data.DesignData.WaterFlowRate == 0.0) || (designPsychrometricsData.Density == 0.0) || (data.TestData.FanDriverPower == 0.0) || (designPsychrometricsData.SpecificVolume == 0.0))
-            //        {
-            //            data.TestData.LiquidToGasRatio = 0.0;
-            //        }
-            //        else
-            //        {
-            //            data.TestData.LiquidToGasRatio = data.DesignData.LiquidToGasRatio * (data.TestData.WaterFlowRate / data.DesignData.WaterFlowRate) * Math.Pow((testPsychrometricsData.Density / designPsychrometricsData.Density * data.DesignData.FanDriverPower / data.TestData.FanDriverPower), (1.0 / 3.0)) * (SVOutT / designPsychrometricsData.SpecificVolume);
-            //        }
+                //    //'Store Density Out as Density Design and SV Out as SV Design
+                output.Density = designPsychrometricsData.Density;
+                output.SpecificVolume = designPsychrometricsData.SpecificVolume;
 
-            //        HCalcT = testPsychrometricsData.Enthalpy + data.TestData.LiquidToGasRatio * Cpw * (data.TestData.HotWaterTemperature - data.TestData.ColdWaterTemperature);
+                //    //'Next Iterate to find Test Leaving Wet bulb and testPsychrometricsData.Density
+                //    //'Initial guess of Leaving Wet Bulb is average of Test Entering and Leaving temperature
+                testPsychrometricsData.WetBulbTemperature = testPsychrometricsData.DryBulbTemperature = (data.TestData.HotWaterTemperature + data.TestData.ColdWaterTemperature) / 2.0;
 
-            //        //'Call Enthalpy Search subroutine for calculated Href value
-            //        EnthalpySearch(true, testPsychrometricsData);
+                bool bGoto200 = true;
+                while (bGoto200)
+                {
+                    //200 'Top of iteration loop *****************************************************************
+                    //' Determine conditions of air at guess Leaving Wet Bulb (assumed saturated LDB=LWB)
 
-            //        //'Check to see if Enthalpy  of Leaving Wet Bulb Test (testPsychrometricsData.Enthalpy) converged to calculated value (HCalcT)
-            //        if (Math.Abs(HCalcT - testPsychrometricsData.Enthalpy) > .0002)
-            //        {
-            //            LWBT = LWBTnew;
-            //            bGoto200 = true;
-            //        }
-            //        else
-            //        {
-            //            bGoto200 = false;
-            //        }
-            //    }
+                    CalculateProperties(testPsychrometricsData);
 
-            //    //'Save convergered Density Out Test as Density Design
-            //    DenTest = testPsychrometricsData.Density;
-            //}
-            //else    //'Forced Draft NO ITERATION
-            //{
-            //    //'        ENTERING air conditions  Test and Design
-            //    DenTest = testPsychrometricsData.Density;
-            //    DenDesign = designPsychrometricsData.Density;
+                    //'Calculate L/G Test
+                    //'Equation 5.1, Liquid to Gas ratio Test
+                    if ((data.DesignData.WaterFlowRate == 0.0) || (designPsychrometricsData.Density == 0.0) || (data.TestData.FanDriverPower == 0.0) || (designPsychrometricsData.SpecificVolume == 0.0))
+                    {
+                        output.LiquidToGasRatio = 0.0;
+                    }
+                    else
+                    {
+                        output.LiquidToGasRatio = data.DesignData.LiquidToGasRatio * (data.TestData.WaterFlowRate / data.DesignData.WaterFlowRate) * Math.Pow((output.Density / designPsychrometricsData.Density * data.DesignData.FanDriverPower / data.TestData.FanDriverPower), (1.0 / 3.0)) * (output.SpecificVolume / designPsychrometricsData.SpecificVolume);
+                    }
 
-            //    // Try these values for Forced Draft option
-            //    // (Toolkit v3.0 Build #5, DBL - 05/23/03)
-            //    testPsychrometricsData.Enthalpy = HInT;
+                    testPsychrometricsData.RootEnthalpy = testPsychrometricsData.Enthalpy + output.LiquidToGasRatio * Cpw * (data.TestData.HotWaterTemperature - data.TestData.ColdWaterTemperature);
 
-            //    testPsychrometricsData.SpecificVolume = SVInT;
+                    //'Call Enthalpy Search subroutine for calculated Href value
+                    EnthalpySearch(true, testPsychrometricsData);
 
-            //    testPsychrometricsData.Density = DenInT;
+                    //'Check to see if Enthalpy  of Leaving Wet Bulb Test (testPsychrometricsData.Enthalpy) converged to calculated value (HCalcT)
+                    if (Math.Abs(testPsychrometricsData.RootEnthalpy - testPsychrometricsData.Enthalpy) > 0.0002)
+                    {
+                        testPsychrometricsData.WetBulbTemperature = testPsychrometricsData.DryBulbTemperature = testPsychrometricsData.WetBulbTemperature;
+                        bGoto200 = true;
+                    }
+                    else
+                    {
+                        bGoto200 = false;
+                    }
+                }
 
-            //    LWBTnew = data.TestData.WetBulbTemperature;
-            //}
+                //'Save convergered Density Out Test as Density Design
+                designPsychrometricsData.Density = testPsychrometricsData.Density;
+            }
+            else    //'Forced Draft NO ITERATION
+            {
+                //'        ENTERING air conditions  Test and Design
+                //    DenTest = testPsychrometricsData.Density;
+                //    DenDesign = designPsychrometricsData.Density;
+
+                //    // Try these values for Forced Draft option
+                //    // (Toolkit v3.0 Build #5, DBL - 05/23/03)
+                //    testPsychrometricsData.Enthalpy = HInT;
+
+                //    testPsychrometricsData.SpecificVolume = SVInT;
+
+                //    testPsychrometricsData.Density = DenInT;
+
+                //    LWBTnew = data.TestData.WetBulbTemperature;
+            }
 
             //'Equation 6.1, Adjusted TestFlow
 

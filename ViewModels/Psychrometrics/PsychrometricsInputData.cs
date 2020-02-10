@@ -39,7 +39,7 @@ namespace ViewModels
             data.IsInternationalSystemOfUnits_SI = IsInternationalSystemOfUnits_SI_;
             data.BarometricPressure = BarometricPressureDataValue.Current;
             data.Elevation = ElevationDataValue.Current;
-            data.Enthalpy = EnthalpyDataValue.Current;
+            data.RootEnthalpy = EnthalpyDataValue.Current;
             data.RelativeHumidity = RelativeHumidityDataValue.Current;
             data.WetBulbTemperature = WetBulbTemperatureDataValue.Current;
             data.DryBulbTemperature = DryBulbTemperatureDataValue.Current;

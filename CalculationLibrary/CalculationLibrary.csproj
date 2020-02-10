@@ -42,8 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculationLibrary.cs" />
-    <Compile Include="CalculationProperties.cs" />
-    <Compile Include="CalculationVariables.cs" />
     <Compile Include="DemandCurve\DemandCurveCalculationLibrary.cs" />
     <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveCalculationLibrary.cs" />
     <Compile Include="Merkel\MerkelCalculationLibrary.cs" />

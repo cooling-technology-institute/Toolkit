@@ -12,6 +12,10 @@ namespace Models
         public double PredictedFlow { set; get; }
         public double TowerCapability { set; get; }
         public double ColdWaterTemperatureDeviation { set; get; }
+        public double Density { set; get; }
+        public double SpecificVolume { set; get; }
+        public double WetBulbTemperature { set; get; }
+        public double LiquidToGasRatio { set; get; }
 
         public MechanicalDraftPerformanceCurveOutput()
         {
