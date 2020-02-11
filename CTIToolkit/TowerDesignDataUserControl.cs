@@ -37,27 +37,32 @@ namespace CTIToolkit
             Setup(out errorMessage);
         }
 
-        public bool LoadData(MechanicalDraftPerformanceCurveDesignData mechanicalDraftPerformanceCurveDesignData, out string errorMessage)
+        public bool LoadData(MechanicalDraftPerformanceCurveData data, out string errorMessage)
         {
             bool returnValue = true;
             errorMessage = string.Empty;
             StringBuilder stringBuilder = new StringBuilder();
+            string label = "Design Data: ";
 
-            if (!MechanicalDraftPerformanceCurveTowerDesignViewModel.LoadData(mechanicalDraftPerformanceCurveDesignData, out errorMessage))
+            IsChanged = false;
+
+            IsInternationalSystemOfUnits_SI = data.IsInternationalSystemOfUnits_SI;
+
+            if (!MechanicalDraftPerformanceCurveTowerDesignViewModel.LoadData(data, out errorMessage))
             {
                 returnValue = false;
-                stringBuilder.AppendLine(errorMessage);
+                stringBuilder.AppendLine(label + errorMessage);
                 errorMessage = string.Empty;
             }
 
             RangedTemperatureDesignViewModels.Clear();
-            foreach (RangedTemperaturesDesignData rangedTemperaturesDesignData in mechanicalDraftPerformanceCurveDesignData.RangedTemperaturesDesignData)
+            foreach (RangedTemperaturesDesignData rangedTemperaturesDesignData in data.DesignData.RangedTemperaturesDesignData)
             {
                 RangedTemperatureDesignViewModel rangedTemperatureDesignViewModel = new RangedTemperatureDesignViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
-                if (!rangedTemperatureDesignViewModel.LoadData(rangedTemperaturesDesignData, out errorMessage))
+                if (!rangedTemperatureDesignViewModel.LoadData(data.IsInternationalSystemOfUnits_SI, rangedTemperaturesDesignData, out errorMessage))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
                 RangedTemperatureDesignViewModels.Add(rangedTemperatureDesignViewModel);
@@ -155,17 +160,11 @@ namespace CTIToolkit
                 TowerDesignDataCurveDataTabControl.TabPages.Clear();
                 foreach (RangedTemperatureDesignViewModel rangedTemperatureDesignViewModel in RangedTemperatureDesignViewModels)
                 {
-                    AddTabPage(rangedTemperatureDesignViewModel);
+                    AddTabPage(rangedTemperatureDesignViewModel, out errorMessage);
                 }
 
-                if (IsInternationalSystemOfUnits_SI)
-                {
-                    TowerDesignDataGroupBox.Text = "Tower Design Specifications (IP)";
-                }
-                else
-                {
-                    TowerDesignDataGroupBox.Text = "Tower Design Specifications (SI)";
-                }
+                TowerDesignDataGroupBox.Text = string.Format("Tower Design Specifications ({0})", (IsInternationalSystemOfUnits_SI) ? "SI" : "IP");
+                TowerDesignDataCurveDataGroupBox.Text = string.Format("Tower Design Curve Data ({0})", (IsInternationalSystemOfUnits_SI) ? "SI" : "IP");
             }
             catch(Exception e)
             {
@@ -176,18 +175,34 @@ namespace CTIToolkit
             return returnValue;
         }
 
-        private void AddTabPage(RangedTemperatureDesignViewModel rangedTemperatureDesignViewModel)
+        private bool AddTabPage(RangedTemperatureDesignViewModel rangedTemperatureDesignViewModel, out string errorMessage)
         {
-            TabPage tabPage = new TabPage();
+            bool returnValue = true;
 
-            RangedTemperatureDesignUserControl towerDesignCurveDataUserControl = new RangedTemperatureDesignUserControl(IsDemo, IsInternationalSystemOfUnits_SI);
-            towerDesignCurveDataUserControl.RangedColdWaterTemperatureVisibility(MechanicalDraftPerformanceCurveTowerDesignViewModel.CountRanges());
-            towerDesignCurveDataUserControl.RangedColdWaterTemperatureEnable(rangedTemperatureDesignViewModel.CountWetBulbTemperatures());
-            towerDesignCurveDataUserControl.RangedTemperatureDesignViewModel = rangedTemperatureDesignViewModel;
-            tabPage.Text = rangedTemperatureDesignViewModel.WaterFlowRateDataValueInputValue;
-            tabPage.Controls.Add(towerDesignCurveDataUserControl);
+            try
+            {
+                TabPage tabPage = new TabPage();
 
-            TowerDesignDataCurveDataTabControl.TabPages.Add(tabPage);
+                RangedTemperatureDesignUserControl towerDesignCurveDataUserControl = new RangedTemperatureDesignUserControl(IsDemo, IsInternationalSystemOfUnits_SI);
+                towerDesignCurveDataUserControl.RangedColdWaterTemperatureVisibility(MechanicalDraftPerformanceCurveTowerDesignViewModel.CountRanges());
+                towerDesignCurveDataUserControl.RangedColdWaterTemperatureEnable(rangedTemperatureDesignViewModel.CountWetBulbTemperatures());
+                towerDesignCurveDataUserControl.RangedTemperatureDesignViewModel = rangedTemperatureDesignViewModel;
+                tabPage.Text = rangedTemperatureDesignViewModel.WaterFlowRateDataValueInputValue;
+                tabPage.Controls.Add(towerDesignCurveDataUserControl);
+                if (!towerDesignCurveDataUserControl.Setup(out errorMessage))
+                {
+
+                }
+
+                TowerDesignDataCurveDataTabControl.TabPages.Add(tabPage);
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("Tower design page setup failed. Exception: {0} ", e.ToString());
+                returnValue = false;
+            }
+
+            return returnValue;
         }
 
         #region Validating
@@ -505,14 +520,14 @@ namespace CTIToolkit
             {
                 rangedTemperaturesDesignData.WaterFlowRate = waterFlowRateDataValue.Current;
 
-                if (!rangedTemperatureDesignViewModel.LoadData(rangedTemperaturesDesignData, out errorMessage))
+                if (!rangedTemperatureDesignViewModel.LoadData(IsInternationalSystemOfUnits_SI, rangedTemperaturesDesignData, out errorMessage))
                 {
                     MessageBox.Show(errorMessage);
                 }
                 else
                 {
                     RangedTemperatureDesignViewModels.Add(rangedTemperatureDesignViewModel);
-                    AddTabPage(rangedTemperatureDesignViewModel);
+                    AddTabPage(rangedTemperatureDesignViewModel, out errorMessage);
                     TowerDesignDataCurveDataTabControl.SelectedIndex = TowerDesignDataCurveDataTabControl.TabPages.Count;
                 }
             }

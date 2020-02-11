@@ -1096,10 +1096,10 @@ namespace ViewModels
 
         #endregion DataValueAccess
 
-        public bool LoadData(RangedTemperaturesDesignData rangedTemperaturesDesignData, out string errorMessage)
+        public bool LoadData(bool isInternationalSystemOfUnits_IS, RangedTemperaturesDesignData rangedTemperaturesDesignData, out string errorMessage)
         {
             errorMessage = string.Empty;
-            return RangedTemperatureDesignInputData.LoadData(rangedTemperaturesDesignData, out errorMessage);
+            return RangedTemperatureDesignInputData.LoadData(isInternationalSystemOfUnits_IS, rangedTemperaturesDesignData, out errorMessage);
         }
 
         public bool FillAndValidate(ref RangedTemperaturesDesignData rangedTemperaturesDesignData, out string errorMessage)

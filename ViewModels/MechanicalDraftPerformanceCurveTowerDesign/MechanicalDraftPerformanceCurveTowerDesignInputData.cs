@@ -82,113 +82,131 @@ namespace ViewModels
             AddWaterFlowRateDataValue = new WaterFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
         }
 
-        public bool LoadData(MechanicalDraftPerformanceCurveDesignData data, out string errorMessage)
+        public bool LoadData(MechanicalDraftPerformanceCurveData data, out string errorMessage)
         {
             errorMessage = string.Empty;
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
-
+            string label = "Design Data: ";
             try
             {
+                MechanicalDraftPerformanceCurveDesignData = data.DesignData;
+
                 OwnerName = MechanicalDraftPerformanceCurveDesignData.OwnerName;
                 ProjectName = MechanicalDraftPerformanceCurveDesignData.ProjectName;
                 Location = MechanicalDraftPerformanceCurveDesignData.Location;
                 TowerManufacturer = MechanicalDraftPerformanceCurveDesignData.TowerManufacturer;
                 TowerType = MechanicalDraftPerformanceCurveDesignData.TowerType;
 
-                MechanicalDraftPerformanceCurveDesignData = data;
-
-                if (!RangeDataValue1.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.Range1, out errorMessage))
+                if (IsInternationalSystemOfUnits_SI != data.IsInternationalSystemOfUnits_SI)
                 {
-                    returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
-                }
-
-                if (!RangeDataValue2.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.Range2, out errorMessage))
-                {
-                    returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
-                }
-
-                if (!RangeDataValue3.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.Range3, out errorMessage))
-                {
-                    returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
-                }
-
-                if (RangeDataValue4.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.Range4, out errorMessage))
-                {
-                    returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
-                }
-
-                if (!RangeDataValue5.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.Range5, out errorMessage))
-                {
-                    returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
+                    IsInternationalSystemOfUnits_SI = data.IsInternationalSystemOfUnits_SI;
+                    WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    HotWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    ColdWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    DryBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    FanDriverPowerDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    RangeDataValue1.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    RangeDataValue2.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    RangeDataValue3.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    RangeDataValue4.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    RangeDataValue5.ConvertValue(IsInternationalSystemOfUnits_SI, false);
                 }
 
                 if (!WaterFlowRateDataValue.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.WaterFlowRate, out errorMessage))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
                 if (!HotWaterTemperatureDataValue.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.HotWaterTemperature, out errorMessage))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
                 if (!ColdWaterTemperatureDataValue.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.ColdWaterTemperature, out errorMessage))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
                 if (!WetBulbTemperatureDataValue.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.WetBulbTemperature, out errorMessage))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
                 if (!DryBulbTemperatureDataValue.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.DryBulbTemperature, out errorMessage))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
                 if (!FanDriverPowerDataValue.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.FanDriverPower, out errorMessage))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
                 if (!BarometricPressureDataValue.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.BarometricPressure, out errorMessage))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
                 if (!LiquidToGasRatioDataValue.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.LiquidToGasRatio, out errorMessage))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
-                
+
+                if (!RangeDataValue1.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.Range1, out errorMessage))
+                {
+                    returnValue = false;
+                    stringBuilder.AppendLine(label + errorMessage);
+                    errorMessage = string.Empty;
+                }
+
+                if (!RangeDataValue2.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.Range2, out errorMessage))
+                {
+                    returnValue = false;
+                    stringBuilder.AppendLine(label + errorMessage);
+                    errorMessage = string.Empty;
+                }
+
+                if (!RangeDataValue3.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.Range3, out errorMessage))
+                {
+                    returnValue = false;
+                    stringBuilder.AppendLine(label + errorMessage);
+                    errorMessage = string.Empty;
+                }
+
+                if (!RangeDataValue4.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.Range4, out errorMessage))
+                {
+                    returnValue = false;
+                    stringBuilder.AppendLine(label + errorMessage);
+                    errorMessage = string.Empty;
+                }
+
+                if (!RangeDataValue5.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.Range5, out errorMessage))
+                {
+                    returnValue = false;
+                    stringBuilder.AppendLine(label + errorMessage);
+                    errorMessage = string.Empty;
+                }
+
                 CountRanges();
             }
             catch (Exception e)

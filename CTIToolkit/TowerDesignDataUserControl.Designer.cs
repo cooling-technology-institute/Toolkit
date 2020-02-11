@@ -113,7 +113,7 @@
             this.TowerDesignDataGroupBox.Size = new System.Drawing.Size(299, 269);
             this.TowerDesignDataGroupBox.TabIndex = 10;
             this.TowerDesignDataGroupBox.TabStop = false;
-            this.TowerDesignDataGroupBox.Text = "Tower Design Specifications (IP)";
+            this.TowerDesignDataGroupBox.Text = "Tower Design Specifications";
             // 
             // TowerDesignDataWaterFlowRateLabel
             // 
@@ -515,7 +515,7 @@
             this.TowerDesignDataCurveDataGroupBox.Size = new System.Drawing.Size(1031, 318);
             this.TowerDesignDataCurveDataGroupBox.TabIndex = 15;
             this.TowerDesignDataCurveDataGroupBox.TabStop = false;
-            this.TowerDesignDataCurveDataGroupBox.Text = "Tower Design Curve Data (IP)";
+            this.TowerDesignDataCurveDataGroupBox.Text = "Tower Design Curve Data";
             // 
             // WaterFlowRateLabel
             // 

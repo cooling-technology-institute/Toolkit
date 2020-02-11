@@ -9,10 +9,8 @@ namespace CalculationLibrary
 {
     public class MechanicalDraftPerformanceCurveCalculationLibrary
     {
-        public static MechanicalDraftPerformanceCurveOutput MechanicalDraftPerformanceCurveCalculation(MechanicalDraftPerformanceCurveData data)
+        public void MechanicalDraftPerformanceCurveCalculation(MechanicalDraftPerformanceCurveData data, MechanicalDraftPerformanceCurveOutput output)
         {
-			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
-
             PsychrometricsData testPsychrometricsData = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = data.IsInternationalSystemOfUnits_SI,
@@ -173,8 +171,6 @@ namespace CalculationLibrary
 //			{
 //				m_fnCalcWBTDeviation();
 //			}
-
-			return output;
         }
     }
 }

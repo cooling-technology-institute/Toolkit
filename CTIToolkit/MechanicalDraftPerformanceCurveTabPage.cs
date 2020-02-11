@@ -1,6 +1,10 @@
-﻿using System;
+﻿using Models;
+using Newtonsoft.Json;
+using System;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using ViewModels;
@@ -42,20 +46,49 @@ namespace CTIToolkit
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
-            errorMessage = string.Empty;
 
-            if (!MechanicalDraftPerformanceCurveViewModel.OpenDataFile(fileName, out errorMessage, TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel))
+            MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData;
+
+            try
             {
-                stringBuilder.AppendLine(errorMessage);
-                returnValue = false;
-                errorMessage = string.Empty;
+                mechanicalDraftPerformanceCurveData = JsonConvert.DeserializeObject<MechanicalDraftPerformanceCurveData>(File.ReadAllText(fileName));
             }
-
-            if (!Setup(out errorMessage))
+            catch (Exception e)
             {
-                stringBuilder.AppendLine(errorMessage);
-                returnValue = false;
-                errorMessage = string.Empty;
+                errorMessage = string.Format("Failure to read file: {0}. Exception: {1}", Path.GetFileName(fileName), e.ToString());
+                return false;
+            }
+            if(mechanicalDraftPerformanceCurveData != null)
+            {
+                if (IsInternationalSystemOfUnits_SI_ != mechanicalDraftPerformanceCurveData.IsInternationalSystemOfUnits_SI)
+                {
+                    IsInternationalSystemOfUnits_SI_ = mechanicalDraftPerformanceCurveData.IsInternationalSystemOfUnits_SI;
+                }
+
+                if (!MechanicalDraftPerformanceCurveViewModel.LoadData(fileName, mechanicalDraftPerformanceCurveData, out errorMessage))
+                {
+                    stringBuilder.AppendLine(errorMessage);
+                    returnValue = false;
+                    errorMessage = string.Empty;
+                }
+
+                if (!TowerDesignDataUserControl.LoadData(mechanicalDraftPerformanceCurveData, out errorMessage))
+                {
+                    stringBuilder.AppendLine(errorMessage);
+                    returnValue = false;
+                    errorMessage = string.Empty;
+                }
+
+                if (!Setup(out errorMessage))
+                {
+                    stringBuilder.AppendLine(errorMessage);
+                    returnValue = false;
+                    errorMessage = string.Empty;
+                }
+            }
+            else
+            {
+                stringBuilder.AppendLine("Unable to load file. File contains invalid data");
             }
 
             errorMessage = stringBuilder.ToString();
@@ -176,8 +209,10 @@ namespace CTIToolkit
                 PerformanceCurveDesignLiquidToGasRatio.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.LiquidToGasRatioDataValueInputValue;
 
                 DataFilename.Text = MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue;
+
+                PerformanceCurveTestResultsGroupBox.Text = string.Format("Test Results ({0})", (IsInternationalSystemOfUnits_SI_) ? "SI" : "IP");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 errorMessage = string.Format("Failure to load page. Exception: {0}", e.ToString());
                 return false;
@@ -371,7 +406,15 @@ namespace CTIToolkit
         {
             string errorMessage = string.Empty;
 
-            if(!MechanicalDraftPerformanceCurveViewModel.CalculatePerformanceCurve(TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel, out errorMessage))
+            if(MechanicalDraftPerformanceCurveViewModel.CalculatePerformanceCurve(TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel, out errorMessage))
+            {
+                if (MechanicalDraftPerformanceCurveViewModel.GetDataTable() != null)
+                {
+                    // Set a DataGrid control's DataSource to the DataView.
+                    MechanicalDraftPerformanceCurveGridView.DataSource = new DataView(MechanicalDraftPerformanceCurveViewModel.GetDataTable());
+                }
+            }
+            else
             {
                 MessageBox.Show(errorMessage, "Mechanical Draft Performance Curve Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

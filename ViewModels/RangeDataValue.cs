@@ -15,13 +15,14 @@ namespace ViewModels
         public const double RangeMinimum_InternationalSystemOfUnits_IS_ = 0.2;
         public const double RangeMaximum_InternationalSystemOfUnits_IS_ = 88.9;
 
-        public const string RangeToolTipFormat = "Range.";
+        public const string RangeToolTipFormat = "Range.\nValue should be between {0} and {1}.";
 
         public RangeDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
             InputMessage = "Range";
             Format = "F2";
+            IsZeroValid = true;
             ConvertValue(isInternationalSystemOfUnits_IS_);
         }
 

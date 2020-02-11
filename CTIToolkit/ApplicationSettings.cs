@@ -12,7 +12,7 @@ namespace CTIToolkit
     public class ApplicationSettings
     {
         private UnitsSelection _UnitsSelection = UnitsSelection.United_States_Customary_Units_IP;
-        private bool _IsDemo = true;
+        private bool _IsDemo = false;
 
         public UnitsSelection UnitsSelection
         {

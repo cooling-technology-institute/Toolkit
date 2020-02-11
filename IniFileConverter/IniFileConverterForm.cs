@@ -34,7 +34,8 @@ namespace IniFileConverter
                     var parser = new FileIniDataParser();
                     IniData data = parser.ReadFile(fileName);
 
-                    MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData = new MechanicalDraftPerformanceCurveData((data["Tower Design Point"]["Units"] == "SI"));
+                    string units = data["Tower Design Point"]["Units"];
+                    MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData = new MechanicalDraftPerformanceCurveData(units == "SI");
 
                     //[Tower Info]
                     //Owner=New Era Power Company

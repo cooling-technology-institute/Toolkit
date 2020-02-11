@@ -12,11 +12,22 @@ namespace ViewModels
         private DemandCurveInputData DemandCurveInputData { get; set; }
         private DemandCurveOutputData DemandCurveOutputData { get; set; }
         private DemandCurveData DemandCurveData { get; set; }
-        private DemandCurveCalculationLibrary DemandCurveCalculationLibrary { get; set; }
+        public DemandCurveCalculationLibrary DemandCurveCalculationLibrary { get; set; }
         public bool IsDemo { get; set; }
         public bool IsInternationalSystemOfUnits_SI { get; set; }
         public bool IsElevation { get; set; }
 
+        public DemandCurveViewModel(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        {
+            DemandCurveInputData = new DemandCurveInputData(isDemo, isInternationalSystemOfUnits_IS_);
+            DemandCurveOutputData = new DemandCurveOutputData(isInternationalSystemOfUnits_IS_);
+            DemandCurveData = new DemandCurveData(isInternationalSystemOfUnits_IS_);
+            DemandCurveCalculationLibrary = new DemandCurveCalculationLibrary();
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
+            IsDemo = isDemo;
+        }
+
+        #region DataValues
         public string WetBulbTemperatureDataValueInputMessage
         {
             get
@@ -277,16 +288,8 @@ namespace ViewModels
                 return DemandCurveInputData.MaximumDataValue.ToolTip;
             }
         }
+        #endregion DataValues
 
-        public DemandCurveViewModel(bool isDemo, bool isInternationalSystemOfUnits_IS_)
-        {
-            DemandCurveInputData = new DemandCurveInputData(isDemo, isInternationalSystemOfUnits_IS_);
-            DemandCurveOutputData = new DemandCurveOutputData(isInternationalSystemOfUnits_IS_);
-            DemandCurveData = new DemandCurveData(isInternationalSystemOfUnits_IS_);
-            DemandCurveCalculationLibrary = new DemandCurveCalculationLibrary();
-            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
-            IsDemo = isDemo;
-        }
 
         public bool CalculateDemandCurve(bool isElevation, bool showUserApproach, out string errorMessage)
         {
@@ -294,7 +297,7 @@ namespace ViewModels
             {
                 DemandCurveData = new DemandCurveData(IsInternationalSystemOfUnits_SI);
 
-                if (!FillDemandCurveData(isElevation, showUserApproach, out errorMessage))
+                if (!FillAndValidate(isElevation, showUserApproach, out errorMessage))
                 {
                     return false;
                 }
@@ -319,14 +322,14 @@ namespace ViewModels
             }
         }
 
-        public bool FillDemandCurveData(bool isElevation, bool showUserApproach, out string errorMessage)
+        public bool FillAndValidate(bool isElevation, bool showUserApproach, out string errorMessage)
         {
-            return DemandCurveInputData.FillDemandCurveData(DemandCurveData, isElevation, showUserApproach, out errorMessage);
+            return DemandCurveInputData.FillAndValidate(DemandCurveData, isElevation, showUserApproach, out errorMessage);
         }
 
         public DataTable GetDataTable()
         {
-            return DemandCurveOutputData.NameValueUnitsDataTable.DataTable;
+            return DemandCurveData.DataTable;
         }
 
         public bool ConvertValues(bool isIS, bool isElevation, out string errorMessage)

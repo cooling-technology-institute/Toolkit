@@ -1,0 +1,10 @@
+{
+  "DataType": "MechanicalDraftPerformanceCurveData",
+  "Version": "1.0",
+  "IsInternationalSystemOfUnits_SI_": false,
+  "DesignData": {
+    "OwnerName": "New Era Power Company",
+    "ProjectName": "Big Megawatt Station",
+    "Location": "Off the Highway",
+    "TowerManufacturer": "Cooling Technology Institute",
+}

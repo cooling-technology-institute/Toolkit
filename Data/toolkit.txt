@@ -1,0 +1,31 @@
+L/G ranges and defaults are different between Merkel and Demand Curve, should they be?
+DDV_MinMaxDouble(pDX, m_dblMerkelLG, (ip min) 0.1, (ip max) 10.0, (is min) 0.1, (is max) 10.0, (decimal) 2)
+DDV_MinMaxDouble(pDX, m_dblLg,                0.0,           5.0,          0.0,           5.0, 2);
+
+Demand curve
+Color of curves (all the same or multicolor or selectable)
+Checkboxes in legend
+slider
+any benefit to seeing the values?
+
+Psychrometrics should changing click automatically calculate
+Should the calculation selection be on the top
+
+MechanicalDraftPerformanceCurve
+are the number of ranges ok
+inputting design data, would it be easier to allow importing a cvs file?
+How do you see all the test points? Wouldn't be better as a tab like the ranged data
+Are there only 2 tests points? design and test
+Can the test data units be different than design units?
+
+if there is an error reading the file - one of the values is out of range, do you want to reset it to it default value?
+when you change from ip to is do you want the values converted when reading file or convert the values already loaded?
+
+Help Abbreviations there are * what does the * mean?
+
+Would you like to save the data on other pages to a file?
+
+any interest in running the toolkit on your phone?
+
+any interest in running the toolkit as a web app?
+

@@ -75,39 +75,6 @@ namespace ViewModels
             return mechanicalDraftPerformanceCurveDataFile;
         }
 
-        public bool OpenDataFile(string fileName, out string errorMessage, MechanicalDraftPerformanceCurveTowerDesignInputData mechanicalDraftPerformanceCurveTowerDesignInputData)
-        {
-            try
-            {
-                MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData; 
-
-                try
-                {
-                    mechanicalDraftPerformanceCurveData = JsonConvert.DeserializeObject<MechanicalDraftPerformanceCurveData>(File.ReadAllText(fileName));
-                }
-                catch(Exception e)
-                {
-                    errorMessage = string.Format("Failure to read file: {0}. Exception: {1}", Path.GetFileName(fileName), e.ToString());
-                    return false;
-                }
-
-                MechanicalDraftPerformanceCurveDataFile = fileName;
-                MechanicalDraftPerformanceCurveData = mechanicalDraftPerformanceCurveData;
-
-                bool returnValue = LoadData(fileName, MechanicalDraftPerformanceCurveData, out errorMessage);
-                if(mechanicalDraftPerformanceCurveTowerDesignInputData != null)
-                {
-                    returnValue = mechanicalDraftPerformanceCurveTowerDesignInputData.LoadData(MechanicalDraftPerformanceCurveData.DesignData, out errorMessage);
-                }
-            }
-            catch(Exception e)
-            {
-                errorMessage = string.Format("Failure to Mechanica lDraft Performance Curve Data from file: {0}. Exception: {1}", Path.GetFileName(fileName), e.ToString());
-                return false;
-            }
-            return true;
-        }
-
         public bool SaveDataFile(out string errorMessage)
         {
             errorMessage = string.Empty;
@@ -142,64 +109,77 @@ namespace ViewModels
             errorMessage = string.Empty;
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
+            string label = "Test Data: ";
 
             try
             {
                 MechanicalDraftPerformanceCurveDataFile = fileName;
+                if(IsInternationalSystemOfUnits_SI != mechanicalDraftPerformanceCurveData.IsInternationalSystemOfUnits_SI)
+                {
+                    IsInternationalSystemOfUnits_SI = mechanicalDraftPerformanceCurveData.IsInternationalSystemOfUnits_SI;
+                    WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    HotWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    ColdWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    DryBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    FanDriverPowerDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                    LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                }
 
                 if (!WaterFlowRateDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveData.TestData.WaterFlowRate, out errorMessage))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
                 if (!HotWaterTemperatureDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveData.TestData.HotWaterTemperature, out errorMessage))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
                 if (!ColdWaterTemperatureDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveData.TestData.ColdWaterTemperature, out errorMessage))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
                 if (!WetBulbTemperatureDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveData.TestData.WetBulbTemperature, out errorMessage))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
                 if (!DryBulbTemperatureDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveData.TestData.DryBulbTemperature, out errorMessage))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
                 if (!FanDriverPowerDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveData.TestData.FanDriverPower, out errorMessage))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
                 if (!BarometricPressureDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveData.TestData.BarometricPressure, out errorMessage))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
                 if (!LiquidToGasRatioDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveData.TestData.LiquidToGasRatio, out errorMessage))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
@@ -207,7 +187,7 @@ namespace ViewModels
             }
             catch(Exception exception)
             {
-                errorMessage = string.Format("Failure to Mechanical Draft Performance Curve Test Data. Exception {0}.", exception.ToString());
+                errorMessage = string.Format("Failure to update page with test data. Exception {0}.", exception.ToString());
             }
             return returnValue;
         }
@@ -238,7 +218,7 @@ namespace ViewModels
             IsDemo = value;
         }
 
-        public bool FillAndValidate(ref MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData, out string errorMessage)
+        public bool FillAndValidate(MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData, out string errorMessage)
         {
             errorMessage = string.Empty;
             bool returnValue = true;

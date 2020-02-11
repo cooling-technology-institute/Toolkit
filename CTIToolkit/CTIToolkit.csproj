@@ -57,10 +57,19 @@
     <Compile Include="MechanicalDraftPerformanceCurveSplitTabPage.Designer.cs">
       <DependentUpon>MechanicalDraftPerformanceCurveSplitTabPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="MoreTests.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MoreTests.Designer.cs">
+      <DependentUpon>MoreTests.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MechanicalDraftPerformanceCurveSplitTabPage.resx">
       <DependentUpon>MechanicalDraftPerformanceCurveSplitTabPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MoreTests.resx">
+      <DependentUpon>MoreTests.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -116,6 +125,12 @@
     <Compile Include="PsychrometricsTabPage.Designer.cs">
       <DependentUpon>PsychrometricsTabPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestPointUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TestPointUserControl.Designer.cs">
+      <DependentUpon>TestPointUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolkitMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +169,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PsychrometricsTabPage.resx">
       <DependentUpon>PsychrometricsTabPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestPointUserControl.resx">
+      <DependentUpon>TestPointUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolkitMain.resx">
       <DependentUpon>ToolkitMain.cs</DependentUpon>

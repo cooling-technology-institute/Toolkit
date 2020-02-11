@@ -38,6 +38,7 @@ namespace ViewModels
             MinimumDataValue = new MinimumDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
             MaximumDataValue = new MaximumDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
             LiquidToGasRatioDataValue = new LiquidToGasRatioDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            ApproachDataValue = new ApproachDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
         }
 
         public bool ConvertValues(bool isIS, bool isElevation, out string errorMessage)
@@ -91,7 +92,7 @@ namespace ViewModels
             return isChanged;
         }
 
-        public bool FillDemandCurveData(DemandCurveData data, bool isElevation, bool showUserApproach, out string errorMessage)
+        public bool FillAndValidate(DemandCurveData data, bool isElevation, bool showUserApproach, out string errorMessage)
         {
             errorMessage = string.Empty;
 

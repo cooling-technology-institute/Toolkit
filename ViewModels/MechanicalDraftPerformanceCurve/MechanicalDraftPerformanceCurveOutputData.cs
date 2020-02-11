@@ -1,19 +1,21 @@
 ﻿// Copyright Cooling Technology Institute 2019-2020
 
-using System;
-using System.Collections.Generic;
-using System.IO;
+using Models;
 
 namespace ViewModels
 {
     public class MechanicalDraftPerformanceCurveOutputData
     {
-        NameValueUnitsDataTable NameValueUnitsDataTable { get; set; }
-        Units Units { get; set; }
+        public MechanicalDraftPerformanceCurveOutput MechanicalDraftPerformanceCurveOutput { get; set; }
+        public NameValueUnitsDataTable NameValueUnitsDataTable { get; set; }
+        public Units Units { get; set; }
 
         public MechanicalDraftPerformanceCurveOutputData(bool isInternationalSystemOfUnits_IS_)
         {
             NameValueUnitsDataTable = new NameValueUnitsDataTable();
+
+            MechanicalDraftPerformanceCurveOutput = new MechanicalDraftPerformanceCurveOutput();
+
             if (isInternationalSystemOfUnits_IS_)
             {
                 Units = new UnitsIS();
@@ -24,11 +26,13 @@ namespace ViewModels
             }
         }
 
-        public void FillTable(MechanicalDraftPerformanceCurveOutputData data)
+        public void FillTable(MechanicalDraftPerformanceCurveOutput data)
         {
             NameValueUnitsDataTable.DataTable.Clear();
-
-            //NameValueUnitsDataTable.AddRow("KaV/L", data.KaV_L.ToString("F5"), string.Empty);
+            NameValueUnitsDataTable.AddRow("Adjusted Flow", data.AdjustedFlow.ToString("F1"), Units.FlowRate);
+            NameValueUnitsDataTable.AddRow("Predicted Flow", data.PredictedFlow.ToString("F1"), Units.FlowRate);
+            NameValueUnitsDataTable.AddRow("Tower Capability", data.TowerCapability.ToString("F2"), ConstantUnits.Percentage);
+            NameValueUnitsDataTable.AddRow("Cold Water Temperature Deviation", data.ColdWaterTemperatureDeviation.ToString("1"), Units.Temperature);
         }
-    }
+}
 }

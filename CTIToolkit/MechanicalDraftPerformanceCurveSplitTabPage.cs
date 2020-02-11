@@ -8,34 +8,37 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ViewModels;
+using Models;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace CTIToolkit
 {
     public partial class MechanicalDraftPerformanceCurveSplitTabPage: UserControl
     {
         private MechanicalDraftPerformanceCurveViewModel MechanicalDraftPerformanceCurveViewModel { get; set; }
-
-        private TowerDesignDataUserControl TowerDesignDataUserControl { get; set; }
-
-        private TowerDesignDataForm TowerDesignDataForm { get; set; }
+        public MechanicalDraftPerformanceCurveTowerDesignViewModel MechanicalDraftPerformanceCurveTowerDesignViewModel { get; set; }
+        public List<RangedTemperatureDesignViewModel> RangedTemperatureDesignViewModels { get; set; }
+        bool IsChanged { get; set; }
 
         private bool IsDemo { get; set; }
-        private bool IsInternationalSystemOfUnits_SI_ { get; set; }
+        private bool IsInternationalSystemOfUnits_SI { get; set; }
 
         public MechanicalDraftPerformanceCurveSplitTabPage(ApplicationSettings applicationSettings)
         {
             InitializeComponent();
 
-            IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            IsChanged = false;
+
+            IsInternationalSystemOfUnits_SI = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
 
             PerformanceCurveDesignDataButton_Click(null, null);
 
-            MechanicalDraftPerformanceCurveViewModel = new MechanicalDraftPerformanceCurveViewModel(IsDemo, IsInternationalSystemOfUnits_SI_);
+            MechanicalDraftPerformanceCurveViewModel = new MechanicalDraftPerformanceCurveViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
 
-            TowerDesignDataForm = new TowerDesignDataForm();
-            TowerDesignDataUserControl = new TowerDesignDataUserControl(IsDemo, IsInternationalSystemOfUnits_SI_);
-            TowerDesignDataForm.Controls.Add(TowerDesignDataUserControl);
-            TowerDesignDataForm.AddControlEvents();
+            MechanicalDraftPerformanceCurveTowerDesignViewModel = new MechanicalDraftPerformanceCurveTowerDesignViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
+            
+            RangedTemperatureDesignViewModels = new List<RangedTemperatureDesignViewModel>();
 
             string errorMessage = string.Empty;
             if (Setup(out errorMessage))
@@ -48,26 +51,70 @@ namespace CTIToolkit
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
-            errorMessage = string.Empty;
 
-            if (!MechanicalDraftPerformanceCurveViewModel.OpenDataFile(fileName, out errorMessage, TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel))
+            MechanicalDraftPerformanceCurveData data;
+
+            try
             {
-                stringBuilder.AppendLine(errorMessage);
-                returnValue = false;
-                errorMessage = string.Empty;
+                data = JsonConvert.DeserializeObject<MechanicalDraftPerformanceCurveData>(File.ReadAllText(fileName));
             }
-
-            if (!Setup(out errorMessage))
+            catch (Exception e)
             {
-                stringBuilder.AppendLine(errorMessage);
-                returnValue = false;
-                errorMessage = string.Empty;
+                errorMessage = string.Format("Failure to read file: {0}. Exception: {1}", Path.GetFileName(fileName), e.ToString());
+                return false;
+            }
+            if (data != null)
+            {
+                if (IsInternationalSystemOfUnits_SI != data.IsInternationalSystemOfUnits_SI)
+                {
+                    IsInternationalSystemOfUnits_SI = data.IsInternationalSystemOfUnits_SI;
+                }
+
+                if (!MechanicalDraftPerformanceCurveViewModel.LoadData(fileName, data, out errorMessage))
+                {
+                    stringBuilder.AppendLine(errorMessage);
+                    returnValue = false;
+                    errorMessage = string.Empty;
+                }
+
+                if (!MechanicalDraftPerformanceCurveTowerDesignViewModel.LoadData(data, out errorMessage))
+                {
+                    stringBuilder.AppendLine(errorMessage);
+                    returnValue = false;
+                    errorMessage = string.Empty;
+                }
+
+                RangedTemperatureDesignViewModels.Clear();
+                string label = "Design Data: ";
+                foreach (RangedTemperaturesDesignData rangedTemperaturesDesignData in data.DesignData.RangedTemperaturesDesignData)
+                {
+                    RangedTemperatureDesignViewModel rangedTemperatureDesignViewModel = new RangedTemperatureDesignViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
+                    if (!rangedTemperatureDesignViewModel.LoadData(data.IsInternationalSystemOfUnits_SI, rangedTemperaturesDesignData, out errorMessage))
+                    {
+                        returnValue = false;
+                        stringBuilder.AppendLine(label + errorMessage);
+                        errorMessage = string.Empty;
+                    }
+                    RangedTemperatureDesignViewModels.Add(rangedTemperatureDesignViewModel);
+                }
+
+                if (!Setup(out errorMessage))
+                {
+                    stringBuilder.AppendLine(errorMessage);
+                    returnValue = false;
+                    errorMessage = string.Empty;
+                }
+            }
+            else
+            {
+                stringBuilder.AppendLine("Unable to load file. File contains invalid data");
             }
 
             errorMessage = stringBuilder.ToString();
 
             return returnValue;
         }
+
 
         public bool SaveDataFile(out string errorMessage)
         {
@@ -166,20 +213,69 @@ namespace CTIToolkit
 
                 // design data
 
-                //PerformanceCurveOwnerNameField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.OwnerNameInputValue;
-                //PerformanceCurveProjectNameField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.ProjectNameInputValue;
-                //PerformanceCurveLocationField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.LocationInputValue;
-                //PerformanceCurveTowerManufacturerField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.TowerManufacturerInputValue;
-                //PerformanceCurveTowerTypeField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.TowerTypeInputValue.ToString();
+                IsChanged = false;
 
-                //PerformanceCurveDesignWaterFlowRate.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.WaterFlowRateDataValueInputValue;
-                //PerformanceCurveDesignHotWaterTemperature.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.HotWaterTemperatureDataValueInputValue;
-                //PerformanceCurveDesignColdWaterTemperature.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.ColdWaterTemperatureDataValueInputValue;
-                //PerformanceCurveDesignWetBulbTemperature.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.WetBulbTemperatureDataValueInputValue;
-                //PerformanceCurveDesignDryBulbTemperature.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.DryBulbTemperatureDataValueInputValue;
-                //PerformanceCurveDesignFanDriverPower.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.FanDriverPowerDataValueInputValue;
-                //PerformanceCurveDesignBarometricPressure.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.BarometricPressureDataValueInputValue;
-                //PerformanceCurveDesignLiquidToGasRatio.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.LiquidToGasRatioDataValueInputValue;
+                TowerDesignDataOwnerName.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.OwnerNameInputValue;
+                TowerDesignDataProjectName.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.ProjectNameInputValue;
+                TowerDesignDataLocation.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.LocationInputValue;
+                TowerDesignDataTowerManufacturer.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.TowerManufacturerInputValue;
+
+                if (MechanicalDraftPerformanceCurveTowerDesignViewModel.TowerTypeInputValue == TOWER_TYPE.Induced)
+                {
+                    TowerDesignDataTowerTypeInducedRadio.Checked = true;
+                }
+                else
+                {
+                    TowerDesignDataTowerTypeForcedRadio.Checked = true;
+                }
+
+                TowerDesignDataWaterFlowRate.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.WaterFlowRateDataValueInputValue;
+                toolTip1.SetToolTip(TowerDesignDataWaterFlowRate, MechanicalDraftPerformanceCurveTowerDesignViewModel.WaterFlowRateDataValueTooltip);
+
+                TowerDesignDataHotWaterTemperature.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.HotWaterTemperatureDataValueInputValue;
+                toolTip1.SetToolTip(TowerDesignDataHotWaterTemperature, MechanicalDraftPerformanceCurveTowerDesignViewModel.HotWaterTemperatureDataValueTooltip);
+
+                TowerDesignDataColdWaterTemperature.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.ColdWaterTemperatureDataValueInputValue;
+                toolTip1.SetToolTip(TowerDesignDataColdWaterTemperature, MechanicalDraftPerformanceCurveTowerDesignViewModel.ColdWaterTemperatureDataValueTooltip);
+
+                TowerDesignDataWetBulbTemperature.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.WetBulbTemperatureDataValueInputValue;
+                toolTip1.SetToolTip(TowerDesignDataWetBulbTemperature, MechanicalDraftPerformanceCurveTowerDesignViewModel.WetBulbTemperatureDataValueTooltip);
+
+                TowerDesignDataDryBulbTemperature.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.DryBulbTemperatureDataValueInputValue;
+                toolTip1.SetToolTip(TowerDesignDataDryBulbTemperature, MechanicalDraftPerformanceCurveTowerDesignViewModel.DryBulbTemperatureDataValueTooltip);
+
+                TowerDesignDataFanDriverPower.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.FanDriverPowerDataValueInputValue;
+                toolTip1.SetToolTip(TowerDesignDataFanDriverPower, MechanicalDraftPerformanceCurveTowerDesignViewModel.FanDriverPowerDataValueTooltip);
+
+                TowerDesignDataBarometricPressure.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.BarometricPressureDataValueInputValue;
+                toolTip1.SetToolTip(TowerDesignDataBarometricPressure, MechanicalDraftPerformanceCurveTowerDesignViewModel.BarometricPressureDataValueTooltip);
+
+                TowerDesignDataLiquidToGasRatio.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.LiquidToGasRatioDataValueInputValue;
+                toolTip1.SetToolTip(TowerDesignDataLiquidToGasRatio, MechanicalDraftPerformanceCurveTowerDesignViewModel.LiquidToGasRatioDataValueTooltip);
+
+                TowerDesignDataRange1.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue1InputValue;
+                toolTip1.SetToolTip(TowerDesignDataRange1, MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue1Tooltip);
+
+                TowerDesignDataRange2.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue2InputValue;
+                toolTip1.SetToolTip(TowerDesignDataRange2, MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue2Tooltip);
+
+                TowerDesignDataRange3.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue3InputValue;
+                toolTip1.SetToolTip(TowerDesignDataRange3, MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue3Tooltip);
+
+                TowerDesignDataRange4.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue4InputValue;
+                toolTip1.SetToolTip(TowerDesignDataRange4, MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue4Tooltip);
+
+                TowerDesignDataRange5.Text = MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue5InputValue;
+                toolTip1.SetToolTip(TowerDesignDataRange5, MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue5Tooltip);
+
+                // build tab pages
+                TowerDesignDataCurveDataTabControl.TabPages.Clear();
+                foreach (RangedTemperatureDesignViewModel rangedTemperatureDesignViewModel in RangedTemperatureDesignViewModels)
+                {
+                    AddTabPage(rangedTemperatureDesignViewModel, out errorMessage);
+                }
+
+                TowerDesignDataCurveDataGroupBox.Text = string.Format("Tower Design Curve Data ({0})", (IsInternationalSystemOfUnits_SI) ? "SI" : "IP");
 
                 DataFilename.Text = MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue;
             }
@@ -189,6 +285,36 @@ namespace CTIToolkit
                 return false;
             }
             return true;
+        }
+
+        private bool AddTabPage(RangedTemperatureDesignViewModel rangedTemperatureDesignViewModel, out string errorMessage)
+        {
+            bool returnValue = true;
+
+            try
+            {
+                TabPage tabPage = new TabPage();
+
+                RangedTemperatureDesignUserControl towerDesignCurveDataUserControl = new RangedTemperatureDesignUserControl(IsDemo, IsInternationalSystemOfUnits_SI);
+                towerDesignCurveDataUserControl.RangedColdWaterTemperatureVisibility(MechanicalDraftPerformanceCurveTowerDesignViewModel.CountRanges());
+                towerDesignCurveDataUserControl.RangedColdWaterTemperatureEnable(rangedTemperatureDesignViewModel.CountWetBulbTemperatures());
+                towerDesignCurveDataUserControl.RangedTemperatureDesignViewModel = rangedTemperatureDesignViewModel;
+                tabPage.Text = rangedTemperatureDesignViewModel.WaterFlowRateDataValueInputValue;
+                tabPage.Controls.Add(towerDesignCurveDataUserControl);
+                if (!towerDesignCurveDataUserControl.Setup(out errorMessage))
+                {
+
+                }
+
+                TowerDesignDataCurveDataTabControl.TabPages.Add(tabPage);
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("Tower design page setup failed. Exception: {0} ", e.ToString());
+                returnValue = false;
+            }
+
+            return returnValue;
         }
 
         private void PerformanceCurveTestWaterFlowRate_Validated(object sender, EventArgs e)
@@ -411,7 +537,7 @@ namespace CTIToolkit
         {
             string errorMessage = string.Empty;
 
-            if (!MechanicalDraftPerformanceCurveViewModel.CalculatePerformanceCurve(TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel, out errorMessage))
+            if (!MechanicalDraftPerformanceCurveViewModel.CalculatePerformanceCurve(MechanicalDraftPerformanceCurveTowerDesignViewModel, out errorMessage))
             {
                 MessageBox.Show(errorMessage, "Mechanical Draft Performance Curve Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

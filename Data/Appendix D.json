@@ -2,7 +2,7 @@
   "DataType": "MechanicalDraftPerformanceCurveData",
   "Version": "1.0",
   "IsInternationalSystemOfUnits_SI_": false,
-  "MechanicalDraftPerformanceCurveTestData": {
+  "TestData": {
     "WaterFlowRate": 57426.0,
     "ColdWaterTemperature": 84.27,
     "HotWaterTemperature": 115.7,
@@ -12,7 +12,7 @@
     "BarometricPressure": 29.18,
     "LiquidToGasRatio": 0.0
   },
-  "MechanicalDraftPerformanceCurveDesignData": {
+  "DesignData": {
     "OwnerName": "New Era Power Company",
     "ProjectName": "Big Megawatt Station",
     "Location": "Off the Highway",

@@ -3,6 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
+using System.Text;
 using Models;
 
 namespace CalculationLibrary
@@ -127,7 +129,14 @@ namespace CalculationLibrary
 
         void CalculateApproaches(DemandCurveData data)
         {
-            //StreamWriter fs = new StreamWriter("new.txt");
+            StringBuilder stringBuilder = new StringBuilder();
+            const double liquidToGasRatio_MIN = 0.1;
+            const double liquidToGasRatio_MAX = 5.0;
+            const double kavl_MIN = 0.01;
+            const double kavl_MAX = 5.0;
+            double kaVL = 0;
+            double calculatedLiquidToGasRatio = 0.0;
+            double calculatedLiquidToGasRatio_MIN = 999.0;
 
             MerkelData merkelData = new MerkelData(data.IsInternationalSystemOfUnits_SI_)
             {
@@ -137,50 +146,45 @@ namespace CalculationLibrary
                 LiquidToGasRatio = data.LiquidToGasRatio
             };
 
-            double kaVL = 0;
-            double calculatedWaterAirRatio = 0.0;
-            const double waterAirRatio_MIN = 0.01, waterAirRatio_MAX = 5.0;
-            double calculatedWaterAirRatio_MIN = 999.0;
-
             //ApproachXValues[INDEX_TARGETAPPROACH] = TargetApproach;
             //ApproachXValues[INDEX_USERAPPROACH] = UserApproach;
 
-            for (double waterAirRatio = waterAirRatio_MIN; waterAirRatio < waterAirRatio_MAX; waterAirRatio += .05)
+
+            for (double liquidToGasRatio = liquidToGasRatio_MIN; liquidToGasRatio < liquidToGasRatio_MAX; liquidToGasRatio += .05)
             {
-                //fs.WriteLine("\ndLG {0} \n", waterAirRatio.ToString("F6"));
+                stringBuilder.AppendFormat("\ndLG {0} \n\n", liquidToGasRatio.ToString("F6"));
                 DataRow dataRow = data.DataTable.NewRow();
 
                 for(int i = 0; i < InitialApproachXValues.Length; i++)
                 {
-                    //fs.WriteLine("\niIndex {0}  getapp(iIndex) {1} App[iIndex] {2} ", i, 1, (int)ApproachXValues[i]);
+                    stringBuilder.AppendFormat("\niIndex {0}  getapp(iIndex) {1} App[iIndex] {2} \n", i, 1, ApproachOutOfRange[i] ? "0" : InitialApproachXValues[i].ToString("F0"));
                     string approachXValue = ((int)InitialApproachXValues[i]).ToString();
 
                     if (ApproachInRange[i] && !ApproachOutOfRange[i])
                     {
-                        merkelData.LiquidToGasRatio = waterAirRatio;
+                        merkelData.LiquidToGasRatio = liquidToGasRatio;
                         merkelData.Approach = InitialApproachXValues[i];
                         if (data.IsInternationalSystemOfUnits_SI_)
                         {
                             merkelData.Approach *= 1.8;
                         }
 
-                        if (waterAirRatio > 1.3 && waterAirRatio < 1.4)
+                        if (liquidToGasRatio > 1.3 && liquidToGasRatio < 1.4)
                         {
-                            //fs.WriteLine();
+                            stringBuilder.AppendLine();
                         }
-
-                        //fs.WriteLine(" m_dblCurveWBT {0}, m_dblCurveRange {1}, App[iIndex] {2}, dLG {3}, m_dblAltitude {4} ", merkelData.WetBulbTemperature.ToString("F6"), merkelData.Range.ToString("F6"), merkelData.Approach.ToString("F6"), merkelData.WaterAirRatio.ToString("F6"), merkelData.Elevation.ToString("F6"));
+                        stringBuilder.AppendFormat(" m_dblCurveWBT {0}, m_dblCurveRange {1}, App[iIndex] {2}, dLG {3}, m_dblAltitude {4} \n", merkelData.WetBulbTemperature.ToString("F6"), merkelData.Range.ToString("F6"), merkelData.Approach.ToString("F6"), merkelData.LiquidToGasRatio.ToString("F6"), merkelData.Elevation.ToString("F6"));
 
                         kaVL = CalculationLibrary.CalculateMerkel(merkelData);
 
-                        //fs.WriteLine(" m_dblCurveWBT {0}, m_dblCurveRange {1}, App[iIndex] {2}, dLG {3}, m_dblAltitude {4} ", merkelData.WetBulbTemperature.ToString("F6"), merkelData.Range.ToString("F6"), merkelData.Approach.ToString("F6"), merkelData.WaterAirRatio.ToString("F6"), merkelData.Elevation.ToString("F6"));
-                        //fs.WriteLine("kavl {0} minVal {1} maxVal {2} dLG {3} App[iIndex] {4} ", kaVL.ToString("F6"), waterAirRatio_MIN.ToString("F6"), waterAirRatio_MAX.ToString("F6"), waterAirRatio.ToString("F6"), ApproachXValues[i].ToString("F6"));
+                        stringBuilder.AppendFormat(" m_dblCurveWBT {0}, m_dblCurveRange {1}, App[iIndex] {2}, dLG {3}, m_dblAltitude {4} \n", merkelData.WetBulbTemperature.ToString("F6"), merkelData.Range.ToString("F6"), merkelData.Approach.ToString("F6"), merkelData.LiquidToGasRatio.ToString("F6"), merkelData.Elevation.ToString("F6"));
+                        stringBuilder.AppendFormat("kavl {0} minVal {1} maxVal {2} dLG {3} App[iIndex] {4} \n", kaVL.ToString("F6"), kavl_MIN.ToString("F6"), kavl_MAX.ToString("F6"), liquidToGasRatio.ToString("F6"), InitialApproachXValues[i].ToString("F6"));
 
                         // ddp
-                        if ((kaVL < waterAirRatio_MIN) || (kaVL >= waterAirRatio_MAX))
+                        if ((kaVL < kavl_MIN) || (kaVL >= kavl_MAX))
                         {
                             double dInterp;
-                            for (dInterp = waterAirRatio; ((kaVL < waterAirRatio_MIN) || (kaVL >= waterAirRatio_MAX)) && (dInterp > .1); dInterp -= 0.0002)
+                            for (dInterp = liquidToGasRatio; ((kaVL < kavl_MIN) || (kaVL >= kavl_MAX)) && (dInterp > .1); dInterp -= 0.0002)
                             {
                                 merkelData.Approach = InitialApproachXValues[i];
                                 if (data.IsInternationalSystemOfUnits_SI_)
@@ -190,31 +194,33 @@ namespace CalculationLibrary
                                 merkelData.LiquidToGasRatio = dInterp;
                                 kaVL = CalculationLibrary.CalculateMerkel(merkelData);
                             }
-                            calculatedWaterAirRatio = dInterp;
+                            calculatedLiquidToGasRatio = dInterp;
                             ApproachOutOfRange[i] = true;  //DDP This is the last point
                         }
                         else
                         {
-                            calculatedWaterAirRatio = waterAirRatio;
+                            calculatedLiquidToGasRatio = liquidToGasRatio;
                         }
 
-                        //fs.WriteLine("kavl {0} dLG {1} App[iIndex] {2} ", kaVL.ToString("F6"), waterAirRatio.ToString("F6"), ApproachXValues[i].ToString("F6"));
+                        stringBuilder.AppendFormat("kavl {0} dLG {1} App[iIndex] {2} \n", kaVL.ToString("F6"), liquidToGasRatio.ToString("F6"), ApproachOutOfRange[i] ? "0.000000" : InitialApproachXValues[i].ToString("F6"));
 
-                        if ((calculatedWaterAirRatio_MIN > kaVL) && (kaVL > .1))
+                        if ((calculatedLiquidToGasRatio_MIN > kaVL) && (kaVL > .1))
                         {
-                            calculatedWaterAirRatio_MIN = kaVL;
+                            calculatedLiquidToGasRatio_MIN = kaVL;
                         }
-                        //fs.Write("sDLG {0} ", calculatedWaterAirRatio.ToString("F6"));
-                        //fs.Write("min4Lg {0} \n", min4Lg.ToString("F6"));
+                        stringBuilder.AppendFormat("sDLG {0} ", calculatedLiquidToGasRatio.ToString("F6"));
+                        stringBuilder.AppendFormat("min4Lg {0} \n", calculatedLiquidToGasRatio_MIN.ToString("F6"));
 
                         if ((kaVL <= 10.0) && (kaVL >= .1))
                         {
-                            //fs.WriteLine("index {2} m_wndGraph {0} {1}", calculatedWaterAirRatio.ToString("F6"), kaVL.ToString("F6"), i);
-                            dataRow[string.Format("L/G-{0}", approachXValue)] = calculatedWaterAirRatio;
+                            stringBuilder.AppendFormat("index {2} m_wndGraph {0} {1}\n", calculatedLiquidToGasRatio.ToString("F6"), kaVL.ToString("F6"), i);
+                            dataRow[string.Format("L/G-{0}", approachXValue)] = calculatedLiquidToGasRatio;
                             dataRow[string.Format("kaVL-{0}", approachXValue)] = kaVL;
                         }
                     }
                 }
+                stringBuilder.AppendLine("\niIndex 18  getapp(iIndex) 1 App[iIndex] 0 \n");
+                stringBuilder.AppendLine("iIndex 19  getapp(iIndex) 1 App[iIndex] 0 ");
                 data.DataTable.Rows.Add(dataRow);
             }
 
@@ -230,10 +236,10 @@ namespace CalculationLibrary
             //        {
             //            double dblK = data.CurveC1 * Math.Pow(waterAirRatio, data.CurveC2);
 
-            //            if ((dblK >= calculatedWaterAirRatio_MIN) && (dblK <= waterAirRatio_MAX))
+            //            if ((dblK >= calculatedLiquidToGasRatio_MIN) && (dblK <= waterAirRatio_MAX))
             //            {
             //                dataRow["kaVL-COEF"] = kaVL;
-            //                dataRow["L/G-COEF"] = calculatedWaterAirRatio;
+            //                dataRow["L/G-COEF"] = calculatedLiquidToGasRatio;
             //                //m_wndGraph.GetSeries(INDEX_COEF).AddXY(waterAirRatio, dblK, NULL, 00099FF);
             //            }
             //        }
@@ -244,7 +250,7 @@ namespace CalculationLibrary
             //////---------------------------------------------------------------------
             ////// Draw L/G line
             //////---------------------------------------------------------------------
-            //if (data.WaterAirRatio > waterAirRatio_MIN && data.WaterAirRatio <= waterAirRatio_MAX)// && Lg)
+            //if (data.LiquidToGasRatio > waterAirRatio_MIN && data.LiquidToGasRatio <= waterAirRatio_MAX)// && Lg)
             //{
             //    DataColumn dataColumn = new DataColumn();
             //    dataColumn.ColumnName = "L/G-X";
@@ -256,12 +262,12 @@ namespace CalculationLibrary
             //    data.DataTable.Columns.Add(dataColumn);
 
             //    DataRow dataRow = data.DataTable.NewRow();
-            //    dataRow["L/G-Y"] = data.WaterAirRatio;
-            //    dataRow["L/G-X"] = calculatedWaterAirRatio_MIN;
+            //    dataRow["L/G-Y"] = data.LiquidToGasRatio;
+            //    dataRow["L/G-X"] = calculatedLiquidToGasRatio_MIN;
             //    data.DataTable.Rows.Add(dataRow);
 
             //    dataRow = data.DataTable.NewRow();
-            //    dataRow["L/G-Y"] = data.WaterAirRatio;
+            //    dataRow["L/G-Y"] = data.LiquidToGasRatio;
             //    dataRow["L/G-X"] = waterAirRatio_MAX;
             //    data.DataTable.Rows.Add(dataRow);
             //}
@@ -279,13 +285,12 @@ namespace CalculationLibrary
             //    dataRow[string.Format("kaVL-{0}", INDEX_KAVL)] = waterAirRatio_MAX;
             //    dataRow[string.Format("L/G-{0}", INDEX_KAVL)] = data.KaV_L;
             //    data.DataTable.Rows.Add(dataRow);
-                  data.DataTable.Rows[0][string.Format("kaVL-{0}", INDEX_KAVL)] = waterAirRatio_MAX;
+            //      data.DataTable.Rows[0][string.Format("kaVL-{0}", INDEX_KAVL)] = liquidToGasRatio_MAX;
             //    data.DataTable.Rows[0][columnName] = waterAirRatio_MAX;
             //    data.DataTable.Rows[1][columnName] = waterAirRatio_MAX;
             //}
 
-            //fs.Flush();
-            //fs.Close();
+            File.WriteAllText("demand.txt", stringBuilder.ToString());
         }
 
         void SaveDataFiles()
@@ -362,7 +367,7 @@ namespace CalculationLibrary
             //    m_dblKavl = atof(szValue);
 
             //    GetPrivateProfileString(strSection, "Lg", "0.0", szValue, 256, m_strDataName);
-            //    data.WaterAirRatio = atof(szValue);
+            //    data.LiquidToGasRatio = atof(szValue);
 
             //    GetPrivateProfileString(strSection, "CurveMin", "0.5", szValue, 256, m_strDataName);
             //    data.CurveMinimum = atof(szValue);
@@ -455,7 +460,7 @@ namespace CalculationLibrary
             //    strTemp.Format("%.04f", m_dblKavl);
             //    WritePrivateProfileString(strSection, "Kavl", strTemp, m_strDataName);
 
-            //    strTemp.Format("%.04f", data.WaterAirRatio);
+            //    strTemp.Format("%.04f", data.LiquidToGasRatio);
             //    WritePrivateProfileString(strSection, "Lg", strTemp, m_strDataName);
 
             //    strTemp.Format("%.04f", data.CurveMinimum);
@@ -582,7 +587,7 @@ namespace CalculationLibrary
             //    wndPrintFrame.ShowWindow(SW_NORMAL);
             //    wndPrintView.ShowWindow(SW_NORMAL);
             //    wndPrintFrame.m_bPrintPreview = TRUE;
-            //    wndPrintView.m_fnPrintPreview(tp.m_csDescription, m_dblCurveRange, m_dblCurveWBT, m_dblAltitude, data.CurveC1, data.CurveC2, m_dblKavl, data.WaterAirRatio, INDEX_TARGETAPPROACH, INDEX_USERAPPROACH, &m_DynamicCurveChart);
+            //    wndPrintView.m_fnPrintPreview(tp.m_csDescription, m_dblCurveRange, m_dblCurveWBT, m_dblAltitude, data.CurveC1, data.CurveC2, m_dblKavl, data.LiquidToGasRatio, INDEX_TARGETAPPROACH, INDEX_USERAPPROACH, &m_DynamicCurveChart);
             //}
         }
 
@@ -591,7 +596,7 @@ namespace CalculationLibrary
             //TPrint tp;
             //if (tp.DoModal() == IDOK)
             //{
-            //    wndPrintView.m_fnPrint(tp.m_csDescription, m_dblCurveRange, m_dblCurveWBT, m_dblAltitude, data.CurveC1, data.CurveC2, m_dblKavl, data.WaterAirRatio, INDEX_TARGETAPPROACH, INDEX_USERAPPROACH, &m_DynamicCurveChart);
+            //    wndPrintView.m_fnPrint(tp.m_csDescription, m_dblCurveRange, m_dblCurveWBT, m_dblAltitude, data.CurveC1, data.CurveC2, m_dblKavl, data.LiquidToGasRatio, INDEX_TARGETAPPROACH, INDEX_USERAPPROACH, &m_DynamicCurveChart);
             //}
         }
     }

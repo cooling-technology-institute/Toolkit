@@ -190,7 +190,7 @@
             this.PerformanceCurveUnitsWaterFlowRate.Name = "PerformanceCurveUnitsWaterFlowRate";
             this.PerformanceCurveUnitsWaterFlowRate.Size = new System.Drawing.Size(27, 13);
             this.PerformanceCurveUnitsWaterFlowRate.TabIndex = 13;
-            this.PerformanceCurveUnitsWaterFlowRate.Text = "gmp";
+            this.PerformanceCurveUnitsWaterFlowRate.Text = "gpm";
             // 
             // PerformanceCurveUnitsHotWaterTemperature
             // 

@@ -26,12 +26,12 @@ namespace CTIToolkit
             Setup(out errorMessage);
         }
 
-        public bool LoadData(RangedTemperaturesDesignData rangedTemperaturesDesignData, out string errorMessage)
+        public bool LoadData(bool isInternationalSystemOfUnits_SI_, RangedTemperaturesDesignData rangedTemperaturesDesignData, out string errorMessage)
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
                
-            if(!RangedTemperatureDesignViewModel.LoadData(rangedTemperaturesDesignData, out errorMessage))
+            if(!RangedTemperatureDesignViewModel.LoadData(isInternationalSystemOfUnits_SI_, rangedTemperaturesDesignData, out errorMessage))
             {
                 stringBuilder.AppendLine(errorMessage);
                 errorMessage = string.Empty;
@@ -46,7 +46,7 @@ namespace CTIToolkit
             return returnValue;
         }
 
-        private bool Setup(out string errorMessage)
+        public bool Setup(out string errorMessage)
         {
             bool returnValue = true;
             errorMessage = string.Empty;

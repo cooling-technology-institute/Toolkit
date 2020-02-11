@@ -19,6 +19,7 @@ namespace ViewModels
         public string ToolTip { get; set; }
         public bool IsInternationalSystemOfUnits_SI_ { get; set; }
         public bool IsDemo { get; set; }
+        public bool IsZeroValid { get; set; }
 
         public DataValue()
         {
@@ -26,6 +27,7 @@ namespace ViewModels
             Minimum = 0.0;
             Maximum = 0.0;
             Current = 0.0;
+            IsZeroValid = false;
             IsValid = false;
             IsDemo = true;
             IsInternationalSystemOfUnits_SI_ = false;
@@ -58,7 +60,12 @@ namespace ViewModels
             {
                 if (double.TryParse(InputValue, out value))
                 {
-                    if ((value < Minimum) || (value > Maximum))
+                    if (IsZeroValid && value == 0)
+                    {
+                        Current = value;
+                        IsValid = true;
+                    }
+                    else if ((value < Minimum) || (value > Maximum))
                     {
                         value = Current;
                         message = string.Format("The {0} input must be between {1} and {2}", InputMessage, Minimum, Maximum);

@@ -1,14 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CTIToolkit.Properties;
 
 namespace CTIToolkit
 {
@@ -21,6 +12,7 @@ namespace CTIToolkit
         DemandCurveTabPage DemandCurveUserControl { get; set; }
         MechanicalDraftPerformanceCurveTabPage MechanicalDraftPerformanceCurveUserControl { get; set; }
         MechanicalDraftPerformanceCurveSplitTabPage MechanicalDraftPerformanceCurveSplitTabPage { get; set; }
+        MoreTests MoreTests { get; set; }
 
         public ToolkitMain()
         {
@@ -64,6 +56,11 @@ namespace CTIToolkit
             TabPage mechanicalDraftPerformanceCurveSplitTabPage = new TabPage("Split");
             mechanicalDraftPerformanceCurveSplitTabPage.Controls.Add(MechanicalDraftPerformanceCurveSplitTabPage);
             tabControl1.TabPages.Add(mechanicalDraftPerformanceCurveSplitTabPage);
+
+            MoreTests = new MoreTests();
+            TabPage moreTests = new TabPage("More");
+            moreTests.Controls.Add(MoreTests);
+            tabControl1.TabPages.Add(moreTests);
         }
 
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -110,6 +107,10 @@ namespace CTIToolkit
                     string errorMessage = string.Empty;
 
                     if(!MechanicalDraftPerformanceCurveUserControl.OpenDataFile(openFileDialog.FileName, out errorMessage))
+                    {
+                        MessageBox.Show(errorMessage);
+                    }
+                    if (!MechanicalDraftPerformanceCurveSplitTabPage.OpenDataFile(openFileDialog.FileName, out errorMessage))
                     {
                         MessageBox.Show(errorMessage);
                     }
