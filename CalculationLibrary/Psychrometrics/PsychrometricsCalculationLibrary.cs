@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CalculationLibrary
 {
-    public class PsychrometricsCalculationLibrary
+    public class PsychrometricsCalculationLibrary : CalculationLibrary
     {
         public bool PsychrometricsCalculation(PsychrometricsCalculationType calculationType, bool isElevation, PsychrometricsData data, out string errorMessage)
         {
@@ -35,7 +35,7 @@ namespace CalculationLibrary
                     data.BarometricPressure = UnitConverter.ConvertElevationInMetersToKilopascal(data.Elevation);
                 }
 
-                CalculationLibrary.CalculateProperties(data);
+                CalculateProperties(data);
 
                 if (data.Enthalpy > 6030)
                 {
@@ -49,7 +49,7 @@ namespace CalculationLibrary
                     data.BarometricPressure = UnitConverter.ConvertElevationInFeetToBarometricPressure(data.Elevation);
                 }
 
-                CalculationLibrary.CalculateProperties(data);
+                CalculateProperties(data);
 
                 if (data.Enthalpy > 2758)
                 {
@@ -68,10 +68,12 @@ namespace CalculationLibrary
             {
                 data.BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertElevationInMetersToKilopascal(data.Elevation) : UnitConverter.ConvertElevationInFeetToBarometricPressure(data.Elevation);
             }
-            
-            data.WetBulbTemperature = CalculationLibrary.CalculateWetBulbTemperature(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.RelativeHumidity / 100, data.DryBulbTemperature);
 
-            CalculationLibrary.CalculateProperties(data);
+            data.WetBulbTemperature = data.DryBulbTemperature;
+
+            CalculateProperties(data);
+
+            data.WetBulbTemperature = CalculateWetBulbTemperature(data);
 
             if(!data.IsInternationalSystemOfUnits_SI)
             { 
@@ -92,8 +94,8 @@ namespace CalculationLibrary
                 data.BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertElevationInMetersToKilopascal(data.Elevation) : UnitConverter.ConvertElevationInFeetToBarometricPressure(data.Elevation);
             }
 
-            CalculationLibrary.EnthalpySearch(true, data);
-            CalculationLibrary.CalculateProperties(data);
+            EnthalpySearch(true, data);
+            CalculateProperties(data);
 
             if (!data.IsInternationalSystemOfUnits_SI)
             {

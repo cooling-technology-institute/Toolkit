@@ -110,7 +110,7 @@ namespace CTIToolkit
                 else //Psychrometrics_Enthalpy
                 {
                     SetupRelativeHumidity(false);
-                    SetupWetBulbTemperature(true);
+                    SetupWetBulbTemperature(false);
                     SetupEnthalpy(true);
                 }
 
@@ -234,7 +234,7 @@ namespace CTIToolkit
             {
                 ClearDataSource();
                 SetupRelativeHumidity(false);
-                SetupWetBulbTemperature(true);
+                SetupWetBulbTemperature(false);
                 SetupEnthalpy(true);
                 string errorMessage = string.Empty;
                 PsychrometricsViewModel.UpdateCalculationType(Models.PsychrometricsCalculationType.Enthalpy, out errorMessage);

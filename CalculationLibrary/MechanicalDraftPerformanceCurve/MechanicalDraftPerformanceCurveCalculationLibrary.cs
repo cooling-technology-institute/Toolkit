@@ -7,14 +7,14 @@ using Models;
 
 namespace CalculationLibrary
 {
-    public class MechanicalDraftPerformanceCurveCalculationLibrary
+    public class MechanicalDraftPerformanceCurveCalculationLibrary : CalculationLibrary
     {
         public void MechanicalDraftPerformanceCurveCalculation(MechanicalDraftPerformanceCurveData data, MechanicalDraftPerformanceCurveOutput output)
         {
             PsychrometricsData testPsychrometricsData = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = data.IsInternationalSystemOfUnits_SI,
-                BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? data.TestData.BarometricPressure : UnitConverter.ConvertBarometricPressureToKilopascal(data.TestData.BarometricPressure),
+                BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertBarometricPressureToKilopascal(data.TestData.BarometricPressure): data.TestData.BarometricPressure,
                 DryBulbTemperature = data.TestData.DryBulbTemperature,
                 WetBulbTemperature = data.TestData.WetBulbTemperature
             };
@@ -22,17 +22,17 @@ namespace CalculationLibrary
             PsychrometricsData designPsychrometricsData = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = data.IsInternationalSystemOfUnits_SI,
-                BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? data.DesignData.BarometricPressure : UnitConverter.ConvertBarometricPressureToKilopascal(data.DesignData.BarometricPressure),
+                BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertBarometricPressureToKilopascal(data.DesignData.BarometricPressure) : data.DesignData.BarometricPressure,
                 DryBulbTemperature = data.DesignData.DryBulbTemperature,
                 WetBulbTemperature = data.DesignData.WetBulbTemperature
             };
 
-            CalculationLibrary.CalculateProperties(testPsychrometricsData);
-            CalculationLibrary.CalculateProperties(designPsychrometricsData);
+            CalculateProperties(testPsychrometricsData);
+            CalculateProperties(designPsychrometricsData);
 
-            data.TestData.LiquidToGasRatio = CalculationLibrary.CalculateTestLiquidToGasRatio(data, testPsychrometricsData, designPsychrometricsData);
+            data.TestData.LiquidToGasRatio = CalculateTestLiquidToGasRatio(data, testPsychrometricsData, designPsychrometricsData);
 
-			CalculationLibrary.DetermineAdjustedTestFlow(data, testPsychrometricsData, designPsychrometricsData, output);
+			DetermineAdjustedTestFlow(data, testPsychrometricsData, designPsychrometricsData, output);
 
 //			m_filePerfData.m_designData.m_fnGetCWTArray(CWT, !data.IsInternationalSystemOfUnits_SI);
 //			m_filePerfData.m_designData.m_fnGetRangeArray(R, !data.IsInternationalSystemOfUnits_SI);

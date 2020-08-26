@@ -32,7 +32,7 @@ namespace ViewModels
             DryBulbTemperatureDataValue = new DryBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI_);
         }
 
-        public bool FillPsychrometricsData(PsychrometricsData data, bool isElevation, out string errorMessage)
+        public bool FillAndValidate(PsychrometricsData data, bool isElevation, out string errorMessage)
         {
             errorMessage = string.Empty;
 

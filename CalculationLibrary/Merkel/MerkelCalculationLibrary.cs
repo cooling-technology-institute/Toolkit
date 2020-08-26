@@ -4,14 +4,14 @@ using Models;
 
 namespace CalculationLibrary
 {
-    public class MerkelCalculationLibrary
+    public class MerkelCalculationLibrary : CalculationLibrary
     {
         public bool MerkelCalculation(MerkelData data, out string errorMessage)
         {
             data.Range = data.HotWaterTemperature - data.ColdWaterTemperature;
             data.Approach = data.ColdWaterTemperature - data.WetBulbTemperature;
 
-            CalculationLibrary.CalculateMerkel(data);
+            CalculateMerkel(data);
 
             return Merkel_CheckCalculationValues(data, out errorMessage);
         }

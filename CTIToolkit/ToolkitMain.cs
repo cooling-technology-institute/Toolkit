@@ -51,16 +51,6 @@ namespace CTIToolkit
             TabPage mechanicalDraftPerformanceCurveTabPage = new TabPage("Mechanical Draft Performance Curve");
             mechanicalDraftPerformanceCurveTabPage.Controls.Add(MechanicalDraftPerformanceCurveUserControl);
             tabControl1.TabPages.Add(mechanicalDraftPerformanceCurveTabPage);
-
-            MechanicalDraftPerformanceCurveSplitTabPage = new MechanicalDraftPerformanceCurveSplitTabPage(ApplicationSettings);
-            TabPage mechanicalDraftPerformanceCurveSplitTabPage = new TabPage("Split");
-            mechanicalDraftPerformanceCurveSplitTabPage.Controls.Add(MechanicalDraftPerformanceCurveSplitTabPage);
-            tabControl1.TabPages.Add(mechanicalDraftPerformanceCurveSplitTabPage);
-
-            MoreTests = new MoreTests();
-            TabPage moreTests = new TabPage("More");
-            moreTests.Controls.Add(MoreTests);
-            tabControl1.TabPages.Add(moreTests);
         }
 
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)

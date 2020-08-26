@@ -18,7 +18,7 @@ namespace CalculationLibrary
         //---------------------------------------------------------------------
         // Data calculations IP
         //---------------------------------------------------------------------
-        public static double AdjustPrecision(double number, int precision)
+        public double AdjustPrecision(double number, int precision)
         {
             //? should use Math.Round(number, precision)
             // String.Format("{0:F3}", dec); // Show 3 Decimel Points
@@ -39,8 +39,9 @@ namespace CalculationLibrary
             -1.762686E-6*P+6.35199E-6)*T+3.18886E-4*P+1.000104);
         }
         */
-        // psych35 version
-        public static double Fs(double t, double p)
+        // Psychrometrics 35 version
+        // fs = adjust pWV over purewater to pWV in association with air
+        public double Fs(double temperature, double pressure)
         {
             double C1 = 1.000119;
             double C2 = 9.184907E-06;
@@ -55,68 +56,71 @@ namespace CalculationLibrary
             double C11 = 1.229524E-10;
             double C12 = -2.336628E-11;
 
-            double C13 = C1 + C2 * t + C3 * Math.Pow(t, 4.0) + C4 * Math.Pow(t, 5.0) + C5 * p + C6 * p * t;
-            double C14 = C13 + C7 * p * Math.Pow(t, 2.0) + C8 * p * Math.Pow(t, 4.0) + C9 * t * Math.Pow(p, 4.0);
-            double dblFs = C14 + C10 * Math.Pow(t, 2.0) * Math.Pow(p, 2.0) + C11 * Math.Pow(t, 2.0) * Math.Pow(p, 3.0) + C12 * Math.Pow(p, 2.0) * Math.Pow(t, 3.0);
-
-            return dblFs;
+            double C13 = C1 + C2 * temperature + C3 * Math.Pow(temperature, 4.0) + C4 * Math.Pow(temperature, 5.0) + C5 * pressure + C6 * pressure * temperature;
+            double C14 = C13 + C7 * pressure * Math.Pow(temperature, 2.0) + C8 * pressure * Math.Pow(temperature, 4.0) + C9 * temperature * Math.Pow(pressure, 4.0);
+            return (C14 + C10 * Math.Pow(temperature, 2.0) * Math.Pow(pressure, 2.0) + C11 * Math.Pow(temperature, 2.0) * Math.Pow(pressure, 3.0) + C12 * Math.Pow(pressure, 2.0) * Math.Pow(temperature, 3.0));
         }
 
-        // public static void WBsearchIP(double psi, double relativeHumidity, double temperatureDryBulb, ref double temperatureWetBulb)
-        // public static double CalculatetemperatureWetBulbIP(PsychrometricsData data)
+        // void IPWBsearch (double psi, double RelHumid, double TDB, double& TWB)
+        // void SIWBsearch (double psi, double RelHumid, double TDB, double& TWB)
+        // public double CalculatetemperatureWetBulbIP(PsychrometricsData data)
         // (double pressure, double temperatureDryBulb, double temperatureWetBulb)
-        public static double CalculateWetBulbTemperature(bool isInternationalSystemOfUnits_SI, double psi, double relativeHumidity, double dryBulbTemperature)
+        public double CalculateWetBulbTemperature(PsychrometricsData data)
         {
             double temptolerance = .0005;
             double RHtolerance = .00005;
-            double RHhigh;
             double RHmid;
-
-            PsychrometricsData data = new PsychrometricsData()
-            {
-                IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI,
-                BarometricPressure = psi,
-                WetBulbTemperature = dryBulbTemperature,
-                DryBulbTemperature = dryBulbTemperature
-            };
-
-            CalculateProperties(data);
+            StringBuilder stringBuilder = new StringBuilder();
 
             //Calculate saturation value and compare to program and tolerance limits
-            RHhigh = data.RelativeHumidity;
-
-            if (Math.Abs(RHhigh - relativeHumidity) <= RHtolerance)
+            if (Math.Abs(CalculateRelativeHumidity(data) - (data.RelativeHumidity / 100)) <= RHtolerance)
             {
-                return dryBulbTemperature;
+                return data.DryBulbTemperature;
             }
+
+            stringBuilder.AppendFormat(" BarometricPressure {0} \n RHhigh {1} \n RelHumid {1} \n",
+                        data.BarometricPressure.ToString("F6"),
+                        data.RelativeHumidity.ToString("F6"),
+                        CalculateRelativeHumidity(data));
 
             // Begin bisection root search procedure from Numerical Recipes in BASIC, p 193   
             double t1 = 0.0;
-            double t2 = dryBulbTemperature;
+            double t2 = data.DryBulbTemperature;
             double trtbis = t1;
             double DT = t2 - t1;
             double tmid;
+            stringBuilder.AppendFormat(" t2 {0} \n trtbis {1} \n DT {2} \n",
+                t2.ToString("F6"),
+                trtbis.ToString("F6"),
+                DT.ToString("F6"));
+
             do
             {
+                stringBuilder.AppendLine();
                 DT /= 2;
                 tmid = trtbis + DT;
-                data.BarometricPressure = psi;
-                data.WetBulbTemperature = dryBulbTemperature;
+                data.WetBulbTemperature = data.DryBulbTemperature;
                 data.DryBulbTemperature = tmid;
-                RHmid = relativeHumidity - CalculateRelativeHumidity(data);
+                RHmid = (data.RelativeHumidity / 100) - CalculateRelativeHumidity(data);
                 if (RHmid >= 0.0)
                 {
                     trtbis = tmid;
                 }
+                stringBuilder.AppendFormat(" RHmid {0} \n trtbis {1} \n DT {2} \n tmid {3} \n",
+                    RHmid.ToString("F6"),
+                    trtbis.ToString("F6"),
+                    DT.ToString("F6"),
+                    tmid.ToString("F6"));
             }
             while ((Math.Abs(DT) >= temptolerance) && (RHmid != 0.0));
 
+            File.WriteAllText("CalculateWetBulbTemperature.txt", stringBuilder.ToString());
             // found wet bulb
             return tmid;
         }
 
         // streamlined Enthalpy function for demand curves
-        public static double CalculateEnthalpy(bool isSI, double pressure, double dryBulbTemperature, double wetBulbTemperature)
+        public double CalculateEnthalpy(bool isSI, double pressure, double dryBulbTemperature, double wetBulbTemperature)
         {
             PsychrometricsData data = new PsychrometricsData()
             {
@@ -136,7 +140,7 @@ namespace CalculationLibrary
         // double Apr - merkelData.Approach
         // double LG - merkelData.WaterAirRatio
         // double Elev - merkelData.Elevation
-        public static double CalculateMerkel(MerkelData merkelData)
+        public double CalculateMerkel(MerkelData merkelData)
         {
             short i;
             double KaV, Ha, Haex, Hain, Hw, Tcold, Thot, Tw;
@@ -172,13 +176,13 @@ namespace CalculationLibrary
             return merkelData.KaV_L;
         }
 
-        public static double StandardAtmosphericPressure(double Z)
+        public double StandardAtmosphericPressure(double Z)
         {
             Z /= 10000.0;
             return (.491154 * ((.547462 * Z - 7.67923) * Z + 29.9309) / (.10803 * Z + 1.0));
         }
 
-        public static void EnthalpySearch(bool saturation, PsychrometricsData data)
+        public void EnthalpySearch(bool saturation, PsychrometricsData data)
         {
             //'****** Procedure finds SI WB, DB & properties given enthalpy & pressure **
             //'****** Uses bisection method to search for roots.  Limits -20 to 60 øC ****
@@ -284,26 +288,26 @@ namespace CalculationLibrary
         //*********** Partial Pressure of Water Vapor (-148ø to 32ø) ****************
         //*********** Partial Pressure of Water Vapor (32ø-392ø) ********************
         // Pws = saturation vapor pressure
-        public static double CalculateVaporPressure(bool IsInternationalSystemOfUnits_SI, double tair)
+        public double CalculateVaporPressure(bool IsInternationalSystemOfUnits_SI, double airTemperature)
         {
             // saturation vapor pressure (Pws)
             double Pws = 0.0;
             double C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, C12, C13;
             double LnPws; // natural logarithm saturation pressure
-            double t; // absolute temperature, K = °C + 273.15
-            
+            double t; // absolute temperature, K = °C + 273.15; K = °F + 459.67
+
             double freezingTemperature = (IsInternationalSystemOfUnits_SI) ? 0.0 : 32.0;
 
             // Calculate saturation pressure at t!
-            if (tair >= freezingTemperature)
+            if (airTemperature >= freezingTemperature)
             {
                 C8 = (IsInternationalSystemOfUnits_SI) ? -5800.2206 : -10440.39708;
                 C9 = (IsInternationalSystemOfUnits_SI) ? -5.516256 : -11.2946496;
-                C10 = (IsInternationalSystemOfUnits_SI) ? -.048640239 : -.027022355;
-                C11 = (IsInternationalSystemOfUnits_SI) ? .000041764768 : .00001289036;
-                C12 = (IsInternationalSystemOfUnits_SI) ? .000000014452093 : -.000000002478068;
+                C10 = (IsInternationalSystemOfUnits_SI) ? -0.048640239 : -0.027022355;
+                C11 = (IsInternationalSystemOfUnits_SI) ? 0.000041764768 : 0.00001289036;
+                C12 = (IsInternationalSystemOfUnits_SI) ? -0.000000014452093 : -0.000000002478068;
                 C13 = 6.5459673;
-                t = tair + ((IsInternationalSystemOfUnits_SI) ? 273.15 : 459.67);
+                t = airTemperature + ((IsInternationalSystemOfUnits_SI) ? 273.15 : 459.67);
 
                 if (t != 0.0)
                 {
@@ -320,7 +324,7 @@ namespace CalculationLibrary
                 C5 = (IsInternationalSystemOfUnits_SI) ? 0.0000000020747825 : 3.55758316E-10;
                 C6 = (IsInternationalSystemOfUnits_SI) ? -9.484024000000001E-13 : -9.03446883E-14;
                 C7 = 4.1635019;
-                t = tair + ((IsInternationalSystemOfUnits_SI) ? 273.15 : 459.67);
+                t = airTemperature + ((IsInternationalSystemOfUnits_SI) ? 273.15 : 459.67);
 
                 if (t != 0.0)
                 {
@@ -331,22 +335,23 @@ namespace CalculationLibrary
             return Pws;
         }
 
-        public static void CalculateVariables(PsychrometricsData data)
+        public void CalculateVariables(PsychrometricsData data)
         {
-            double kilopascal;
-            double tF;
+            double pressure;
+            double temperatureF;
 
             data.SaturationVaporPressureDryBulbTemperature = CalculateVaporPressure(data.IsInternationalSystemOfUnits_SI, data.DryBulbTemperature);
             data.SaturationVaporPressureWetBulbTemperature = CalculateVaporPressure(data.IsInternationalSystemOfUnits_SI, data.WetBulbTemperature);
 
             if(data.IsInternationalSystemOfUnits_SI)
             {
-                kilopascal = UnitConverter.ConvertKilopascalToBarometricPressure(data.BarometricPressure);
+                pressure = UnitConverter.ConvertKilopascalToBarometricPressure(data.BarometricPressure);
 
-                tF = data.DryBulbTemperature * 1.8 + 32.0;
-                data.FsDryBulbTemperature = Fs(tF, kilopascal);
-                tF = data.WetBulbTemperature * 1.8 + 32.0;
-                data.FsWetBulbTemperature = Fs(tF, kilopascal);
+                temperatureF = UnitConverter.ConvertCelsiusToFahrenheit(data.DryBulbTemperature);
+                data.FsDryBulbTemperature = Fs(temperatureF, pressure);
+
+                temperatureF = UnitConverter.ConvertCelsiusToFahrenheit(data.WetBulbTemperature);
+                data.FsWetBulbTemperature = Fs(temperatureF, pressure);
             }
             else
             {
@@ -355,7 +360,7 @@ namespace CalculationLibrary
             }
         }
 
-        public static void CalculateProperties(PsychrometricsData data)
+        public void CalculateProperties(PsychrometricsData data)
         {
             CalculateVariables(data);
 
@@ -393,12 +398,11 @@ namespace CalculationLibrary
             }
         }
 
-        private static double CalculateHumidityRatio(PsychrometricsData data)
+        public double CalculateHumidityRatio(PsychrometricsData data)
         {
             double WsWB = 0.0; // WsWB = humidity ratio of moist air at saturation at thermodynamic wet bulb temperature --- saturation humidity ratio Ws
 
-            // Calculate saturated humidity ratio at twb using saturation pressure (Pws) at twb,
-            // and Fs correction factor at twb
+            // Calculate saturated humidity ratio at WetBulbTemperature (twb) using saturation pressure (Pws) at WetBulbTemperature (twb), and Fs correction factor at twb
             double density = (data.BarometricPressure - data.SaturationVaporPressureWetBulbTemperature * data.FsWetBulbTemperature);
 
             if (density != 0.0)
@@ -418,7 +422,7 @@ namespace CalculationLibrary
             return (density == 0.0) ? 0.0 : ((c1 - c3 * data.WetBulbTemperature) * WsWB - (c4 * (data.DryBulbTemperature - data.WetBulbTemperature))) / density;  // ASHRAE Eq.(33)
         }
 
-        private static double CalculateDegreeOfSaturation(PsychrometricsData data)
+        public double CalculateDegreeOfSaturation(PsychrometricsData data)
         {
             double WsDB = 0.0;
             double degreeOfSaturation = 0.0;
@@ -440,13 +444,13 @@ namespace CalculationLibrary
             return degreeOfSaturation;
         }
 
-        public static double CalculateRelativeHumidity(PsychrometricsData data)
+        public double CalculateRelativeHumidity(PsychrometricsData data)
         {
-            double density = ((data.BarometricPressure != 0.0) ? (1.0 - (1.0 - data.DegreeOfSaturation) * (data.FsDryBulbTemperature * data.SaturationVaporPressureDryBulbTemperature / data.BarometricPressure)) : 0.0);
+            double density = ((data.BarometricPressure == 0.0) ?  0.0 : (1.0 - (1.0 - data.DegreeOfSaturation) * (data.FsDryBulbTemperature * data.SaturationVaporPressureDryBulbTemperature / data.BarometricPressure)));
             return (density == 0.0) ? 0.0 : data.DegreeOfSaturation / density;  //ASHRAE Eq.(23a)
         }
 
-        private static double CalculateSpecificVolume(PsychrometricsData data)
+        public double CalculateSpecificVolume(PsychrometricsData data)
         {
             double Ra = (data.IsInternationalSystemOfUnits_SI) ? (287.055 / 1000) : (53.352 / 144.0);
             double c1 = (data.IsInternationalSystemOfUnits_SI) ? 273.15 : 459.67;
@@ -454,13 +458,13 @@ namespace CalculationLibrary
             return (data.BarometricPressure == 0.0) ? 0.0 : (Ra * (data.DryBulbTemperature + c1) * (1.0 + 1.6078 * data.HumidityRatio) / data.BarometricPressure);   //ASHRAE Eq.(26)
         }
 
-        public static double CalculateDensity(PsychrometricsData data)
+        public double CalculateDensity(PsychrometricsData data)
         {
             return (data.SpecificVolume == 0.0) ? 0.0 : ((1.0 + data.HumidityRatio) / data.SpecificVolume);
         }
 
         // streamlined Enthalpy function for demand curves
-        public static double CalculateEnthalpy(PsychrometricsData data)
+        public double CalculateEnthalpy(PsychrometricsData data)
         {
             double c1 = (data.IsInternationalSystemOfUnits_SI) ? 1.006 : 0.24;
             double c2 = (data.IsInternationalSystemOfUnits_SI) ? 2501.0 : 1061.0;
@@ -473,7 +477,7 @@ namespace CalculationLibrary
         //*** Function to find DewPoint
         //*** Converges to the same Humidity Ratio as if you had entered
         //*** saturated conditions (DB=WB)
-        public static double CalculateDewPoint(PsychrometricsData data)
+        public double CalculateDewPoint(PsychrometricsData data)
         {
             int iLoop;
             double PDEW;
@@ -613,7 +617,7 @@ namespace CalculationLibrary
             return DewPoint;
         }
 
-        public static void CalculatePerformanceData(int INUM, double[] X, double[] YMEAS, double XREAL, ref double YFIT, double[] Y2)
+        public void CalculatePerformanceData(int INUM, double[] X, double[] YMEAS, double XREAL, ref double YFIT, double[] Y2)
         {
             //'						I			I			I				I				O			O
             //'  EXAMPLE:			4			2			112
@@ -632,7 +636,7 @@ namespace CalculationLibrary
             //'ERASE YMEASP
         }
 
-        public static void SPLINE(double[] X, double[] Y, int INUM, double YP1, double YPN, double[] Y2)
+        public void SPLINE(double[] X, double[] Y, int INUM, double YP1, double YPN, double[] Y2)
         {
             //'Cubic Spline subroutine from Numerical Recipes in BASIC (1994), p43
             double QN;
@@ -696,7 +700,7 @@ namespace CalculationLibrary
             }
         }
 
-        public static void SPLINT(double[] XA, double[] YA, double[] Y2A, int INUM, double X, ref double Y)
+        public void SPLINT(double[] XA, double[] YA, double[] Y2A, int INUM, double X, ref double Y)
         {
             //' Determine interpolated Y value
             //' Rev: 2-22-99 to handle either Increasing or Decreasing XA array
@@ -755,7 +759,7 @@ namespace CalculationLibrary
             }
         }
 
-        public static double CalculateTestLiquidToGasRatio(MechanicalDraftPerformanceCurveData data, PsychrometricsData testPsychrometricsData, PsychrometricsData designPsychrometricsData)
+        public double CalculateTestLiquidToGasRatio(MechanicalDraftPerformanceCurveData data, PsychrometricsData testPsychrometricsData, PsychrometricsData designPsychrometricsData)
         {
             double liquidToGasRatio = 0;
 
@@ -771,7 +775,7 @@ namespace CalculationLibrary
             return liquidToGasRatio;
         }
 
-        public static double CalcAdjustedFlow(double dblTestWaterFlowRate, double dblDesignFanDriverPower, double dblTestFanDriverPower, double dblDesignAirDensity, double dblTestAirDensity)
+        public double CalcAdjustedFlow(double dblTestWaterFlowRate, double dblDesignFanDriverPower, double dblTestFanDriverPower, double dblDesignAirDensity, double dblTestAirDensity)
         {
             double dblReturn;
 
@@ -780,22 +784,14 @@ namespace CalculationLibrary
             return dblReturn;
         }
 
-        public static double DetermineAdjustedTestFlow(MechanicalDraftPerformanceCurveData data, PsychrometricsData testPsychrometricsData, PsychrometricsData designPsychrometricsData, MechanicalDraftPerformanceCurveOutput output)
+        public double DetermineAdjustedTestFlow(MechanicalDraftPerformanceCurveData data, PsychrometricsData testPsychrometricsData, PsychrometricsData designPsychrometricsData, MechanicalDraftPerformanceCurveOutput output)
         {
             double Cpw = (data.IsInternationalSystemOfUnits_SI) ? 4.186 : 1.0; // specific heat at constant pressure
             StringBuilder stringBuilder = new StringBuilder();
 
             output.LiquidToGasRatio = 0;
 
-            if(!data.IsInternationalSystemOfUnits_SI)
-            {
-
-                designPsychrometricsData.BarometricPressure = 14.696 * designPsychrometricsData.BarometricPressure / 29.921;
-                testPsychrometricsData.BarometricPressure = 14.696 * testPsychrometricsData.BarometricPressure / 29.921;
-            }
-
-            CalculateProperties(designPsychrometricsData);
-            stringBuilder.AppendLine("designPsychrometricsData ");
+            stringBuilder.AppendLine("designPsychrometricsData");
             stringBuilder.AppendFormat("BarometricPressure {0} \nDensity {1} \nDewPoint {2} \nDryBulbTemperature {3} \nEnthalpy {4} \nHumidityRatio {5} \nRelativeHumidity {6} \nSpecificVolume {7} \nWetBulbTemperature {8} \n",
                         designPsychrometricsData.BarometricPressure.ToString("F6"),
                         designPsychrometricsData.Density.ToString("F6"),
@@ -806,8 +802,8 @@ namespace CalculationLibrary
                         designPsychrometricsData.RelativeHumidity.ToString("F6"),
                         designPsychrometricsData.SpecificVolume.ToString("F6"),
                         designPsychrometricsData.WetBulbTemperature.ToString("F6"));
-            CalculateProperties(testPsychrometricsData);
-            stringBuilder.AppendLine("testPsychrometricsData ");
+
+            stringBuilder.AppendLine("testPsychrometricsData");
             stringBuilder.AppendFormat("BarometricPressure {0} \nDensity {1} \nDewPoint {2} \nDryBulbTemperature {3} \nEnthalpy {4} \nHumidityRatio {5} \nRelativeHumidity {6} \nSpecificVolume {7} \nWetBulbTemperature {8} \n", 
                         testPsychrometricsData.BarometricPressure.ToString("F6"), 
                         testPsychrometricsData.Density.ToString("F6"), 
@@ -853,7 +849,7 @@ namespace CalculationLibrary
                     //' Determine conditions of air at guess Leaving Wet Bulb (assumed saturated LDB=LWB)
 
                     CalculateProperties(testPsychrometricsData);
-                    stringBuilder.AppendLine("testPsychrometricsData ");
+                    stringBuilder.AppendLine("testPsychrometricsData");
                     stringBuilder.AppendFormat("BarometricPressure {0} \nDensity {1} \nDewPoint {2} \nDryBulbTemperature {3} \nEnthalpy {4} \nHumidityRatio {5} \nRelativeHumidity {6} \nSpecificVolume {7} \nWetBulbTemperature {8} \n", 
                         testPsychrometricsData.BarometricPressure.ToString("F6"), 
                         testPsychrometricsData.Density.ToString("F6"), 
@@ -880,7 +876,7 @@ namespace CalculationLibrary
 
                     //'Call Enthalpy Search subroutine for calculated Href value
                     EnthalpySearch(true, testPsychrometricsData);
-                    stringBuilder.AppendLine("EnthalpysearchSI ");
+                    stringBuilder.AppendLine("EnthalpysearchSI");
                     stringBuilder.AppendFormat("BPt {0} \n HCalcT {1} \n OutputEnthalpy {2} \n LWBTnew {3} \n LDBTnew {4} \n HumidRatio {5} \n RelHumid {6} \n SpVolume {7} \n Density {8} \n DEWPoint {9} \n",
                         testPsychrometricsData.BarometricPressure.ToString("F6"),
                         testPsychrometricsData.RootEnthalpy.ToString("F6"),

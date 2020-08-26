@@ -215,7 +215,7 @@ namespace ViewModels
         {
             try
             {
-                if (!FillPsychrometricsData(isElevation, out errorMessage))
+                if (!FillAndValidate(isElevation, out errorMessage))
                 {
                     return false;
                 }
@@ -236,9 +236,9 @@ namespace ViewModels
             }
         }
 
-        public bool FillPsychrometricsData(bool isElevation, out string errorMessage)
+        public bool FillAndValidate(bool isElevation, out string errorMessage)
         {
-            return PsychrometricsInputData.FillPsychrometricsData(PsychrometricsData, isElevation, out errorMessage);
+            return PsychrometricsInputData.FillAndValidate(PsychrometricsData, isElevation, out errorMessage);
         }
 
         public DataTable GetDataTable()

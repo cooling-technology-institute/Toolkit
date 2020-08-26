@@ -56,7 +56,7 @@ namespace CalculationLibrary
 
         public static double ConvertBarometricPressureToKilopascal(double barometricPressure)
         {
-            return barometricPressure / (BarometricPressure * SeaLevelBasePressure);
+            return barometricPressure / BarometricPressure * SeaLevelBasePressure;
         }
 
         //public static double ConvertBarometricPressureToKilopascal(double barometricPressure)

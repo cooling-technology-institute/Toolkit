@@ -9,7 +9,7 @@ using Models;
 
 namespace CalculationLibrary
 {
-    public class DemandCurveCalculationLibrary
+    public class DemandCurveCalculationLibrary : CalculationLibrary
     {
         const int INDEX_TARGETAPPROACH = 18;
         const int INDEX_USERAPPROACH = 19;
@@ -84,7 +84,7 @@ namespace CalculationLibrary
             {
                 merkelData.Approach = approachValue;
 
-                double KaVL = CalculationLibrary.CalculateMerkel(merkelData);
+                double KaVL = CalculateMerkel(merkelData);
                 bool approachInRange = (KaVL > 0.1) && (KaVL < 5.0);
                 ApproachInRange.Add(approachInRange);
                 ApproachOutOfRange.Add(!approachInRange);
@@ -175,7 +175,7 @@ namespace CalculationLibrary
                         }
                         stringBuilder.AppendFormat(" m_dblCurveWBT {0}, m_dblCurveRange {1}, App[iIndex] {2}, dLG {3}, m_dblAltitude {4} \n", merkelData.WetBulbTemperature.ToString("F6"), merkelData.Range.ToString("F6"), merkelData.Approach.ToString("F6"), merkelData.LiquidToGasRatio.ToString("F6"), merkelData.Elevation.ToString("F6"));
 
-                        kaVL = CalculationLibrary.CalculateMerkel(merkelData);
+                        kaVL = CalculateMerkel(merkelData);
 
                         stringBuilder.AppendFormat(" m_dblCurveWBT {0}, m_dblCurveRange {1}, App[iIndex] {2}, dLG {3}, m_dblAltitude {4} \n", merkelData.WetBulbTemperature.ToString("F6"), merkelData.Range.ToString("F6"), merkelData.Approach.ToString("F6"), merkelData.LiquidToGasRatio.ToString("F6"), merkelData.Elevation.ToString("F6"));
                         stringBuilder.AppendFormat("kavl {0} minVal {1} maxVal {2} dLG {3} App[iIndex] {4} \n", kaVL.ToString("F6"), kavl_MIN.ToString("F6"), kavl_MAX.ToString("F6"), liquidToGasRatio.ToString("F6"), InitialApproachXValues[i].ToString("F6"));
@@ -192,7 +192,7 @@ namespace CalculationLibrary
                                     merkelData.Approach *= 1.8;
                                 }
                                 merkelData.LiquidToGasRatio = dInterp;
-                                kaVL = CalculationLibrary.CalculateMerkel(merkelData);
+                                kaVL = CalculateMerkel(merkelData);
                             }
                             calculatedLiquidToGasRatio = dInterp;
                             ApproachOutOfRange[i] = true;  //DDP This is the last point
@@ -554,7 +554,7 @@ namespace CalculationLibrary
             for (approach = 0.0; approach < 100.0; approach += delta)
             {
                 merkelData.Approach = approach;
-                double kavl = CalculationLibrary.CalculateMerkel(merkelData);
+                double kavl = CalculateMerkel(merkelData);
 
                 if (delta > 0.9)
                 {
