@@ -49,6 +49,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalculateDegreeOfSaturationUnitTest.cs" />
+    <Compile Include="CalculateSpecificVolumeUnitTest.cs" />
     <Compile Include="CalculateHumidityRatioUnitTest.cs" />
     <Compile Include="CalculatePropertiesUnitTest.cs" />
     <Compile Include="FsUnitTest.cs" />

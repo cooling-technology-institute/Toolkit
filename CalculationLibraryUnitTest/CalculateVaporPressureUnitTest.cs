@@ -26,7 +26,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(returnValue, 0.60613974008942884, "Returned value does not match");
+            Assert.AreEqual(0.60613974008942884, returnValue, "Returned value does not match");
         }
 
         [TestMethod]
@@ -47,7 +47,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(returnValue, 0.088212703345247362, "Returned value does not match");
+            Assert.AreEqual(0.088212703345247362, returnValue, "Returned value does not match");
         }
 
         [TestMethod]
@@ -68,7 +68,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(returnValue, 0.61121285460480013, "Returned value does not match");
+            Assert.AreEqual(0.61121285460480013, returnValue, "Returned value does not match");
         }
 
         [TestMethod]
@@ -89,7 +89,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(returnValue, 0.088648919713124566, "Returned value does not match");
+            Assert.AreEqual(0.088648919713124566, returnValue, "Returned value does not match");
         }
 
         [TestMethod]
@@ -110,7 +110,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(returnValue, 0.61566735840863751, "Returned value does not match");
+            Assert.AreEqual(0.61566735840863751, returnValue, "Returned value does not match");
         }
 
         [TestMethod]
@@ -131,7 +131,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(returnValue, 0.089007334390018011, "Returned value does not match");
+            Assert.AreEqual(0.089007334390018011, returnValue, "Returned value does not match");
         }
 
         [TestMethod]
@@ -152,7 +152,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(returnValue, 0.0, "Returned value does not match");
+            Assert.AreEqual(0.0, returnValue, "Returned value does not match");
         }
 
         [TestMethod]
@@ -173,7 +173,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(returnValue, 0.0, "Returned value does not match");
+            Assert.AreEqual(0.0, returnValue, "Returned value does not match");
         }
     }
 }

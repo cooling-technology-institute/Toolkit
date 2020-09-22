@@ -403,11 +403,11 @@ namespace CalculationLibrary
             double WsWB = 0.0; // WsWB = humidity ratio of moist air at saturation at thermodynamic wet bulb temperature --- saturation humidity ratio Ws
 
             // Calculate saturated humidity ratio at WetBulbTemperature (twb) using saturation pressure (Pws) at WetBulbTemperature (twb), and Fs correction factor at twb
-            double density = (data.BarometricPressure - data.SaturationVaporPressureWetBulbTemperature * data.FsWetBulbTemperature);
+            double ratio = (data.BarometricPressure - data.SaturationVaporPressureWetBulbTemperature * data.FsWetBulbTemperature);
 
-            if (density != 0.0)
+            if (ratio != 0.0)
             {
-                WsWB = 0.62198 * data.SaturationVaporPressureWetBulbTemperature * data.FsWetBulbTemperature / density;  //ASHRAE Eq.(21a)
+                WsWB = 0.62198 * data.SaturationVaporPressureWetBulbTemperature * data.FsWetBulbTemperature / ratio;  //ASHRAE Eq.(21a)
             }
 
             // Calculate humidity ratio of the mixture
@@ -417,9 +417,9 @@ namespace CalculationLibrary
             double c4 = (data.IsInternationalSystemOfUnits_SI) ? 1.0 : 0.24;
             double c5 = (data.IsInternationalSystemOfUnits_SI) ? 4.186 : 1.0;
 
-            density = (c1 + c2 * data.DryBulbTemperature - (c5 * data.WetBulbTemperature));
+            ratio = c1 + c2 * data.DryBulbTemperature - c5 * data.WetBulbTemperature;
 
-            return (density == 0.0) ? 0.0 : ((c1 - c3 * data.WetBulbTemperature) * WsWB - (c4 * (data.DryBulbTemperature - data.WetBulbTemperature))) / density;  // ASHRAE Eq.(33)
+            return (ratio == 0.0) ? 0.0 : ((c1 - c3 * data.WetBulbTemperature) * WsWB - (c4 * (data.DryBulbTemperature - data.WetBulbTemperature))) / ratio;  // ASHRAE Eq.(33)
         }
 
         public double CalculateDegreeOfSaturation(PsychrometricsData data)
@@ -427,12 +427,12 @@ namespace CalculationLibrary
             double WsDB = 0.0;
             double degreeOfSaturation = 0.0;
 
-            // Calculate saturated humidity ratio at tdb using saturation pressure (Pws) at tdb and correction factor Fs at tdb
-            double density = (data.BarometricPressure - data.SaturationVaporPressureDryBulbTemperature * data.FsDryBulbTemperature);
+            // Calculate saturated humidity ratio at Dry Bulb Temperature (tdb) using saturation pressure (Pws) at tdb and correction factor Fs at tdb
+            double ratio = (data.BarometricPressure - data.SaturationVaporPressureDryBulbTemperature * data.FsDryBulbTemperature);
 
-            if (density != 0.0)
+            if (ratio != 0.0)
             {
-                WsDB = 0.62198 * data.SaturationVaporPressureDryBulbTemperature * data.FsDryBulbTemperature / density; //ASHRAE Eq.(21a)
+                WsDB = 0.62198 * data.SaturationVaporPressureDryBulbTemperature * data.FsDryBulbTemperature / ratio; //ASHRAE Eq.(21a)
             }
 
             // Calculate degree of saturation
