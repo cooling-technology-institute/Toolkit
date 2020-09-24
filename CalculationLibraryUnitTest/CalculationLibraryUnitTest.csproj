@@ -50,6 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculateDegreeOfSaturationUnitTest.cs" />
+    <Compile Include="CalculateMerkelUnitTest.cs" />
+    <Compile Include="DetermineAdjustedTestFlowUnitTest.cs" />
+    <Compile Include="CalculateFsUnitTest.cs" />
+    <Compile Include="CalculateDewPointUnitTest.cs" />
+    <Compile Include="CalculateEnthalpyUnitTest.cs" />
+    <Compile Include="CalculateDensityUnitTest.cs" />
     <Compile Include="CalculateSpecificVolumeUnitTest.cs" />
     <Compile Include="CalculateHumidityRatioUnitTest.cs" />
     <Compile Include="CalculatePropertiesUnitTest.cs" />

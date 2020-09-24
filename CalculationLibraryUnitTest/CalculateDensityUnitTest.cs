@@ -6,12 +6,12 @@ using Models;
 namespace CalculationLibraryUnitTest
 {
     [TestClass]
-    public class CalculateSpecificVolumeUnitTest
+    public class CalculateDensityUnitTest
     {
         CalculationLibrary.CalculationLibrary CalculationLibrary { get; set; }
 
         [TestMethod]
-        public void SI_CalculateSpecificVolumeTest()
+        public void SI_CalculateDensityTest()
         {
             bool methodThrew = false;
 
@@ -31,6 +31,7 @@ namespace CalculationLibraryUnitTest
                 data.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(data);
                 data.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(data);
                 data.SpecificVolume = CalculationLibrary.CalculateSpecificVolume(data);
+                data.Density = CalculationLibrary.CalculateDensity(data);
             }
             catch
             {
@@ -38,11 +39,11 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(11.689970139488507, data.SpecificVolume, "SpecificVolume value does not match");
+            Assert.AreEqual(0.14258609761478092, data.Density, "Density value does not match");
         }
 
         [TestMethod]
-        public void IP_CalculateSpecificVolumeTest()
+        public void IP_CalculateDensityTest()
         {
             bool methodThrew = false;
 
@@ -63,6 +64,7 @@ namespace CalculationLibraryUnitTest
                 data.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(data);
                 data.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(data);
                 data.SpecificVolume = CalculationLibrary.CalculateSpecificVolume(data);
+                data.Density = CalculationLibrary.CalculateDensity(data);
             }
             catch
             {
@@ -70,11 +72,11 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(6.9518746096697424, data.SpecificVolume, "SpecificVolume value does not match");
+            Assert.AreEqual(0.14675003558781019, data.Density, "Density value does not match");
         }
 
         [TestMethod]
-        public void SI_CalculateSpecificVolume_BarometricPressureZeroTest()
+        public void SI_CalculateDensity_SpecificVolumeZeroTest()
         {
             bool methodThrew = false;
 
@@ -83,7 +85,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = true,
                 DryBulbTemperature = 50,
                 WetBulbTemperature = 55,
-                BarometricPressure = 0
+                BarometricPressure = 15
             };
 
             try
@@ -94,7 +96,8 @@ namespace CalculationLibraryUnitTest
                 data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data);
                 data.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(data);
                 data.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(data);
-                data.SpecificVolume = CalculationLibrary.CalculateSpecificVolume(data);
+                data.SpecificVolume = 0.0;
+                data.Density = CalculationLibrary.CalculateDensity(data);
             }
             catch
             {
@@ -102,11 +105,11 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(0.0, data.SpecificVolume, "SpecificVolume value does not match");
+            Assert.AreEqual(0.0, data.Density, "Density value does not match");
         }
 
         [TestMethod]
-        public void IP_CalculateSpecificVolume_BarometricPressureZeroTest()
+        public void IP_CalculateDensity_SpecificVolumeZeroTest()
         {
             bool methodThrew = false;
 
@@ -115,7 +118,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = false,
                 DryBulbTemperature = 50,
                 WetBulbTemperature = 80,
-                BarometricPressure = 0
+                BarometricPressure = 30
             };
 
             try
@@ -126,7 +129,8 @@ namespace CalculationLibraryUnitTest
                 data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data);
                 data.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(data);
                 data.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(data);
-                data.SpecificVolume = CalculationLibrary.CalculateSpecificVolume(data);
+                data.SpecificVolume = 0.0;
+                data.Density = CalculationLibrary.CalculateDensity(data);
             }
             catch
             {
@@ -134,7 +138,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(0.0, data.SpecificVolume, "SpecificVolume value does not match");
+            Assert.AreEqual(0.0, data.Density, "Density value does not match");
         }
     }
 }
