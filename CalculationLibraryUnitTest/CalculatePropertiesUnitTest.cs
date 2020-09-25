@@ -38,11 +38,11 @@ namespace CalculationLibraryUnitTest
 
                 results.SaturationVaporPressureDryBulbTemperature = CalculationLibrary.CalculateVaporPressure(true, data.DryBulbTemperature);
                 results.SaturationVaporPressureWetBulbTemperature = CalculationLibrary.CalculateVaporPressure(true, data.WetBulbTemperature);
-                results.FsDryBulbTemperature = CalculationLibrary.Fs(UnitConverter.ConvertCelsiusToFahrenheit(data.DryBulbTemperature), UnitConverter.ConvertKilopascalToBarometricPressure(data.BarometricPressure));
-                results.FsWetBulbTemperature = CalculationLibrary.Fs(UnitConverter.ConvertCelsiusToFahrenheit(data.WetBulbTemperature), UnitConverter.ConvertKilopascalToBarometricPressure(data.BarometricPressure));
-                results.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(results);
-                results.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(results);
-                results.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(results);
+                results.FsDryBulbTemperature = CalculationLibrary.CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.DryBulbTemperature);
+                results.FsWetBulbTemperature = CalculationLibrary.CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.WetBulbTemperature);
+                results.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.DryBulbTemperature, data.WetBulbTemperature);
+                results.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.HumidityRatio);
+                results.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.FsDryBulbTemperature, data.WetBulbTemperature);
                 results.SpecificVolume = CalculationLibrary.CalculateSpecificVolume(results);
                 results.Density = CalculationLibrary.CalculateDensity(results);
                 results.Enthalpy = CalculationLibrary.CalculateEnthalpy(results);
@@ -97,12 +97,11 @@ namespace CalculationLibraryUnitTest
 
                 results.SaturationVaporPressureDryBulbTemperature = CalculationLibrary.CalculateVaporPressure(false, data.DryBulbTemperature);
                 results.SaturationVaporPressureWetBulbTemperature = CalculationLibrary.CalculateVaporPressure(false, data.WetBulbTemperature);
-                results.FsDryBulbTemperature = CalculationLibrary.Fs(data.DryBulbTemperature, data.BarometricPressure);
-                results.FsWetBulbTemperature = CalculationLibrary.Fs(data.WetBulbTemperature, data.BarometricPressure);
-                results.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(results);
-                results.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(results);
-                results.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(results);
-                results.SpecificVolume = CalculationLibrary.CalculateSpecificVolume(results);
+                results.FsDryBulbTemperature = CalculationLibrary.CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.DryBulbTemperature);
+                results.FsWetBulbTemperature = CalculationLibrary.CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.WetBulbTemperature);
+                results.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.DryBulbTemperature, data.WetBulbTemperature);
+                results.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.HumidityRatio);
+                results.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.FsDryBulbTemperature, data.WetBulbTemperature);
                 results.Density = CalculationLibrary.CalculateDensity(results);
                 results.Enthalpy = CalculationLibrary.CalculateEnthalpy(results);
                 results.DewPoint = CalculationLibrary.CalculateDewPoint(results);

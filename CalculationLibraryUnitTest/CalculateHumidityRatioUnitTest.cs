@@ -18,21 +18,17 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = true,
-                DryBulbTemperature = 13,
-                WetBulbTemperature = 40,
-                BarometricPressure = 14.56
+                DryBulbTemperature = 43,
+                WetBulbTemperature = 20,
+                BarometricPressure = 14
             };
 
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary.CalculateVariables(data);
 
-                data.SaturationVaporPressureDryBulbTemperature = CalculationLibrary.CalculateVaporPressure(true, data.DryBulbTemperature);
-                data.SaturationVaporPressureWetBulbTemperature = CalculationLibrary.CalculateVaporPressure(true, data.WetBulbTemperature);
-                data.FsDryBulbTemperature = CalculationLibrary.Fs(UnitConverter.ConvertCelsiusToFahrenheit(data.DryBulbTemperature), UnitConverter.ConvertKilopascalToBarometricPressure(data.BarometricPressure));
-                data.FsWetBulbTemperature = CalculationLibrary.Fs(UnitConverter.ConvertCelsiusToFahrenheit(data.WetBulbTemperature), UnitConverter.ConvertKilopascalToBarometricPressure(data.BarometricPressure));
-
-                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data);
+                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureWetBulbTemperature, data.FsWetBulbTemperature, data.DryBulbTemperature, data.WetBulbTemperature);
             }
             catch
             {
@@ -40,7 +36,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(0.66682722342298228, data.HumidityRatio, "HumidityRatio value does not match");
+            Assert.AreEqual(0.11365004696355566, data.HumidityRatio, "HumidityRatio value does not match");
         }
 
         [TestMethod]
@@ -59,13 +55,9 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary.CalculateVariables(data);
 
-                data.SaturationVaporPressureDryBulbTemperature = CalculationLibrary.CalculateVaporPressure(false, data.DryBulbTemperature);
-                data.SaturationVaporPressureWetBulbTemperature = CalculationLibrary.CalculateVaporPressure(false, data.WetBulbTemperature);
-                data.FsDryBulbTemperature = CalculationLibrary.Fs(data.DryBulbTemperature, data.BarometricPressure);
-                data.FsWetBulbTemperature = CalculationLibrary.Fs(data.WetBulbTemperature, data.BarometricPressure);
-
-                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data);
+                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureWetBulbTemperature, data.FsWetBulbTemperature, data.DryBulbTemperature, data.WetBulbTemperature);
             }
             catch
             {
@@ -93,13 +85,9 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary.CalculateVariables(data);
 
-                data.SaturationVaporPressureDryBulbTemperature = CalculationLibrary.CalculateVaporPressure(true, data.DryBulbTemperature);
-                data.SaturationVaporPressureWetBulbTemperature = CalculationLibrary.CalculateVaporPressure(true, data.WetBulbTemperature);
-                data.FsDryBulbTemperature = CalculationLibrary.Fs(UnitConverter.ConvertCelsiusToFahrenheit(data.DryBulbTemperature), UnitConverter.ConvertKilopascalToBarometricPressure(data.BarometricPressure));
-                data.FsWetBulbTemperature = CalculationLibrary.Fs(UnitConverter.ConvertCelsiusToFahrenheit(data.WetBulbTemperature), UnitConverter.ConvertKilopascalToBarometricPressure(data.BarometricPressure));
-
-                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data);
+                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.DryBulbTemperature, data.WetBulbTemperature);
             }
             catch
             {
@@ -127,13 +115,11 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-
-                data.SaturationVaporPressureDryBulbTemperature = CalculationLibrary.CalculateVaporPressure(false, data.DryBulbTemperature);
-                data.SaturationVaporPressureWetBulbTemperature = CalculationLibrary.CalculateVaporPressure(false, data.WetBulbTemperature);
+                CalculationLibrary.CalculateVariables(data);
                 data.FsDryBulbTemperature = data.BarometricPressure;
                 data.FsWetBulbTemperature = 1.0;
 
-                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data);
+                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.DryBulbTemperature, data.WetBulbTemperature);
             }
             catch
             {
@@ -168,13 +154,12 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-
-                data.SaturationVaporPressureDryBulbTemperature = CalculationLibrary.CalculateVaporPressure(true, data.DryBulbTemperature);
+                CalculationLibrary.CalculateVariables(data);
                 data.SaturationVaporPressureWetBulbTemperature = 2;
-                data.FsDryBulbTemperature = CalculationLibrary.Fs(UnitConverter.ConvertCelsiusToFahrenheit(data.DryBulbTemperature), UnitConverter.ConvertKilopascalToBarometricPressure(data.BarometricPressure));
+                data.FsDryBulbTemperature = CalculationLibrary.CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.DryBulbTemperature);
                 data.FsWetBulbTemperature = data.BarometricPressure / data.SaturationVaporPressureWetBulbTemperature;
 
-                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data);
+                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureWetBulbTemperature, data.FsWetBulbTemperature, data.DryBulbTemperature, data.WetBulbTemperature);
             }
             catch
             {
@@ -211,13 +196,11 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-
-                data.SaturationVaporPressureDryBulbTemperature = CalculationLibrary.CalculateVaporPressure(false, data.DryBulbTemperature);
-                data.SaturationVaporPressureWetBulbTemperature = CalculationLibrary.CalculateVaporPressure(false, data.WetBulbTemperature);
+                CalculationLibrary.CalculateVariables(data);
                 data.FsDryBulbTemperature = data.BarometricPressure;
                 data.FsWetBulbTemperature = data.BarometricPressure / data.SaturationVaporPressureWetBulbTemperature;
 
-                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data);
+                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureWetBulbTemperature, data.FsWetBulbTemperature, data.DryBulbTemperature, data.WetBulbTemperature);
             }
             catch
             {

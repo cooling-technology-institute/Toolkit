@@ -49,17 +49,19 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalculateFsUnitTest.cs" />
+    <Compile Include="CalculateSaturatedHumidityRatioUnitTest.cs" />
     <Compile Include="CalculateDegreeOfSaturationUnitTest.cs" />
+    <Compile Include="CalculateRelativeHumidityUnitTest.cs" />
+    <Compile Include="CalculateWetBulbTemperatureUnitTest.cs" />
     <Compile Include="CalculateMerkelUnitTest.cs" />
     <Compile Include="DetermineAdjustedTestFlowUnitTest.cs" />
-    <Compile Include="CalculateFsUnitTest.cs" />
     <Compile Include="CalculateDewPointUnitTest.cs" />
     <Compile Include="CalculateEnthalpyUnitTest.cs" />
     <Compile Include="CalculateDensityUnitTest.cs" />
     <Compile Include="CalculateSpecificVolumeUnitTest.cs" />
     <Compile Include="CalculateHumidityRatioUnitTest.cs" />
     <Compile Include="CalculatePropertiesUnitTest.cs" />
-    <Compile Include="FsUnitTest.cs" />
     <Compile Include="CalculateVaporPressureUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CalculateVariablesUnitTest.cs" />

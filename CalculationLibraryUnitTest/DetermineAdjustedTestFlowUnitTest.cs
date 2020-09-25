@@ -22,7 +22,7 @@ namespace CalculationLibraryUnitTest
 			
 			double Cpw = 1.0032476431355153;
 			
-			double EDBd = 30.199999999999999l;
+			double EDBd = 30.199999999999999;
 			double EDBt = 25.520000000000000;
 			
 			double EWBd = 26.000000000000000;

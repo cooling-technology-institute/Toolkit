@@ -27,7 +27,7 @@ namespace CalculationLibraryUnitTest
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
                 CalculationLibrary.CalculateVariables(data);
-                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data);
+                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.DryBulbTemperature, data.WetBulbTemperature);
                 data.Enthalpy = CalculationLibrary.CalculateEnthalpy(data);
             }
             catch
@@ -56,7 +56,7 @@ namespace CalculationLibraryUnitTest
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
                 CalculationLibrary.CalculateVariables(data);
-                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data);
+                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.DryBulbTemperature, data.WetBulbTemperature);
                 data.Enthalpy = CalculationLibrary.CalculateEnthalpy(data);
             }
             catch

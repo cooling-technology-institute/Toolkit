@@ -24,11 +24,13 @@ namespace Models
         {
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
 
+            Elevation = 0.0;
+            BarometricPressure = 0.0;
             HotWaterTemperature = 0.0;
             ColdWaterTemperature = 0.0;
-            LiquidToGasRatio = 0.0;
-            BarometricPressure = 0.0;
             WetBulbTemperature = 0.0;
+            LiquidToGasRatio = 0.0;
+            Approach = 0.0;
             Range = 0.0;
             KaV_L = 0.0;
         }

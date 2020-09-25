@@ -9,7 +9,7 @@ namespace CalculationLibraryUnitTest
         CalculationLibrary.CalculationLibrary CalculationLibrary { get; set; }
 
         [TestMethod]
-        public void SI_BelowFreezingTest()
+        public void SI_CalculateVaporPressure_BelowFreezingTest()
         {
             double returnValue = 0.0;
             bool methodThrew = false;
@@ -30,7 +30,7 @@ namespace CalculationLibraryUnitTest
         }
 
         [TestMethod]
-        public void IP_BelowFreezingTest()
+        public void IP_CalculateVaporPressure_BelowFreezingTest()
         {
             double returnValue = 0.0;
             bool methodThrew = false;
@@ -51,7 +51,7 @@ namespace CalculationLibraryUnitTest
         }
 
         [TestMethod]
-        public void SI_FreezingTest()
+        public void SI_CalculateVaporPressure_FreezingTest()
         {
             double returnValue = 0.0;
             bool methodThrew = false;
@@ -72,7 +72,7 @@ namespace CalculationLibraryUnitTest
         }
 
         [TestMethod]
-        public void IP_FreezingTest()
+        public void IP_CalculateVaporPressure_FreezingTest()
         {
             double returnValue = 0.0;
             bool methodThrew = false;
@@ -93,7 +93,7 @@ namespace CalculationLibraryUnitTest
         }
 
         [TestMethod]
-        public void SI_AboveFreezingTest()
+        public void SI_CalculateVaporPressure_AboveFreezingTest()
         {
             double returnValue = 0.0;
             bool methodThrew = false;
@@ -114,7 +114,7 @@ namespace CalculationLibraryUnitTest
         }
 
         [TestMethod]
-        public void IP_AboveFreezingTest()
+        public void IP_CalculateVaporPressure_AboveFreezingTest()
         {
             double returnValue = 0.0;
             bool methodThrew = false;
@@ -135,7 +135,7 @@ namespace CalculationLibraryUnitTest
         }
 
         [TestMethod]
-        public void SI_MiniumTemperatureTest()
+        public void SI_CalculateVaporPressure_MiniumTemperatureTest()
         {
             double returnValue = 0.0;
             bool methodThrew = false;
@@ -156,7 +156,7 @@ namespace CalculationLibraryUnitTest
         }
 
         [TestMethod]
-        public void IP_MiniumTemperatureTest()
+        public void IP_CalculateVaporPressure_MiniumTemperatureTest()
         {
             double returnValue = 0.0;
             bool methodThrew = false;
