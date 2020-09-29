@@ -27,9 +27,9 @@ namespace CalculationLibraryUnitTest
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
                 CalculationLibrary.CalculateVariables(data);
-                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.DryBulbTemperature, data.WetBulbTemperature);
-                data.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.HumidityRatio);
-                data.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.FsDryBulbTemperature, data.WetBulbTemperature);
+                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data);
+                data.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(data);
+                data.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(data);
                 CalculationLibrary.CalculateSpecificVolume(data);
                 CalculationLibrary.CalculateDensity(data);
             }
@@ -60,9 +60,9 @@ namespace CalculationLibraryUnitTest
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
 
                 CalculationLibrary.CalculateVariables(data);
-                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.DryBulbTemperature, data.WetBulbTemperature);
-                data.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.HumidityRatio);
-                data.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.FsDryBulbTemperature, data.WetBulbTemperature);
+                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data);
+                data.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(data);
+                data.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(data);
                 CalculationLibrary.CalculateSpecificVolume(data);
                 CalculationLibrary.CalculateDensity(data);
             }
@@ -93,9 +93,9 @@ namespace CalculationLibraryUnitTest
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
 
                 CalculationLibrary.CalculateVariables(data);
-                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.DryBulbTemperature, data.WetBulbTemperature);
-                data.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.HumidityRatio);
-                data.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.FsDryBulbTemperature, data.WetBulbTemperature);
+                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data);
+                data.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(data);
+                data.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(data);
                 data.SpecificVolume = 0.0;
                 CalculationLibrary.CalculateDensity(data);
             }
@@ -126,9 +126,9 @@ namespace CalculationLibraryUnitTest
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
 
                 CalculationLibrary.CalculateVariables(data);
-                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.DryBulbTemperature, data.WetBulbTemperature);
-                data.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.HumidityRatio);
-                data.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.FsDryBulbTemperature, data.WetBulbTemperature);
+                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data);
+                data.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(data);
+                data.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(data);
                 data.SpecificVolume = 0.0;
                 CalculationLibrary.CalculateDensity(data);
             }

@@ -14,10 +14,6 @@ namespace CalculationLibraryUnitTest
         public void SI_CalculateVariablesTest()
         {
             bool methodThrew = false;
-            double SaturationVaporPressureDryBulbTemperature = 0.0;
-            double SaturationVaporPressureWetBulbTemperature = 0.0;
-            double FsDryBulbTemperature = 0.0;
-            double FsWetBulbTemperature = 0.0;
 
             PsychrometricsData data = new PsychrometricsData()
             {
@@ -30,10 +26,6 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                SaturationVaporPressureDryBulbTemperature = CalculationLibrary.CalculateVaporPressure(true, data.DryBulbTemperature);
-                SaturationVaporPressureWetBulbTemperature = CalculationLibrary.CalculateVaporPressure(true, data.WetBulbTemperature);
-                FsDryBulbTemperature = CalculationLibrary.CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.DryBulbTemperature);
-                FsWetBulbTemperature = CalculationLibrary.CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.WetBulbTemperature);
                 CalculationLibrary.CalculateVariables(data);
             }
             catch
@@ -42,36 +34,30 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(data.SaturationVaporPressureDryBulbTemperature, SaturationVaporPressureDryBulbTemperature, "SaturationVaporPressureDryBulbTemperature value does not match");
-            Assert.AreEqual(data.SaturationVaporPressureWetBulbTemperature, SaturationVaporPressureWetBulbTemperature, "SaturationVaporPressureWetBulbTemperature value does not match");
-            Assert.AreEqual(data.FsDryBulbTemperature, FsDryBulbTemperature, "FsDryBulbTemperature value does not match");
-            Assert.AreEqual(data.FsWetBulbTemperature, FsWetBulbTemperature, "FsWetBulbTemperature value does not match");
+            Assert.AreEqual(1.4978108118095652, data.SaturationVaporPressureDryBulb, "SaturationVaporPressureDryBulb value does not match");
+            Assert.AreEqual(7.3834598538015586, data.SaturationVaporPressureWetBulb, "SaturationVaporPressureWetBulb value does not match");
+            Assert.AreEqual(1.0012003737919406, data.FsDryBulb, "FsDryBulb value does not match");
+            Assert.AreEqual(1.0016780922074051, data.FsWetBulb, "FsWetBulb value does not match");
+            Assert.AreEqual(0.071416439887867028, data.WsDryBulb, "WsDryBulb value does not match");
+            Assert.AreEqual(0.64209581848919040, data.WsWetBulb, "WsWetBulb value does not match");
         }
 
         [TestMethod]
         public void IP_CalculateVariablesTest()
         {
             bool methodThrew = false;
-            double SaturationVaporPressureDryBulbTemperature = 0.0;
-            double SaturationVaporPressureWetBulbTemperature = 0.0;
-            double FsDryBulbTemperature = 0.0;
-            double FsWetBulbTemperature = 0.0;
 
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = false,
-                DryBulbTemperature = 25.0,
-                WetBulbTemperature = 55.0,
-                BarometricPressure = 29.921
-        };
+                DryBulbTemperature = 70.0,
+                WetBulbTemperature = 90.0,
+                BarometricPressure = 29.145
+            };
 
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                SaturationVaporPressureDryBulbTemperature = CalculationLibrary.CalculateVaporPressure(false, data.DryBulbTemperature);
-                SaturationVaporPressureWetBulbTemperature = CalculationLibrary.CalculateVaporPressure(false, data.WetBulbTemperature);
-                FsDryBulbTemperature = CalculationLibrary.CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.DryBulbTemperature);
-                FsWetBulbTemperature = CalculationLibrary.CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.WetBulbTemperature);
                 CalculationLibrary.CalculateVariables(data);
             }
             catch
@@ -80,10 +66,12 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(data.SaturationVaporPressureDryBulbTemperature, SaturationVaporPressureDryBulbTemperature, "SaturationVaporPressureDryBulbTemperature value does not match");
-            Assert.AreEqual(data.SaturationVaporPressureWetBulbTemperature, SaturationVaporPressureWetBulbTemperature, "SaturationVaporPressureWetBulbTemperature value does not match");
-            Assert.AreEqual(data.FsDryBulbTemperature, FsDryBulbTemperature, "FsDryBulbTemperature value does not match");
-            Assert.AreEqual(data.FsWetBulbTemperature, FsWetBulbTemperature, "FsWetBulbTemperature value does not match");
+            Assert.AreEqual(0.36327716067983784, data.SaturationVaporPressureDryBulb, "SaturationVaporPressureDryBulb value does not match");
+            Assert.AreEqual(0.69888797756930821, data.SaturationVaporPressureWetBulb, "SaturationVaporPressureWetBulb value does not match");
+            Assert.AreEqual(1.0072761896919915, data.FsDryBulb, "FsDryBulb value does not match");
+            Assert.AreEqual(1.0084514220198235, data.FsWetBulb, "FsWetBulb value does not match");
+            Assert.AreEqual(0.0079083554826944250, data.WsDryBulb, "WsDryBulb value does not match");
+            Assert.AreEqual(0.015413676627438729, data.WsWetBulb, "WsWetBulb value does not match");
         }
     }
 }

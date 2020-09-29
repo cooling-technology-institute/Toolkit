@@ -18,14 +18,14 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = true,
-                DryBulbTemperature = 100.0,
-                RelativeHumidity = 42.38,
+                BarometricPressure = 14.56,
+                DryBulbTemperature = 30.0,
+                RelativeHumidity = 0.24
             };
 
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                CalculationLibrary.CalculateProperties(data);
                 WetBulbTemperature = CalculationLibrary.CalculateWetBulbTemperature(data);
             }
             catch
@@ -34,7 +34,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(1.5576363962243127, WetBulbTemperature, "WetBulbTemperature value does not match");
+            Assert.AreEqual(-2.4377822875976563, WetBulbTemperature, "WetBulbTemperature value does not match");
         }
 
         [TestMethod]
@@ -46,14 +46,14 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = false,
-                DryBulbTemperature = 100.0,
-                RelativeHumidity = 42.38,
+                BarometricPressure = 29.145,
+                DryBulbTemperature = 70.0,
+                RelativeHumidity = 0.24
             };
 
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                CalculationLibrary.CalculateProperties(data);
                 WetBulbTemperature = CalculationLibrary.CalculateWetBulbTemperature(data);
             }
             catch
@@ -62,7 +62,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(2.1200361989715248, WetBulbTemperature, "WetBulbTemperature value does not match");
+            Assert.AreEqual(56.616783142089844, WetBulbTemperature, "WetBulbTemperature value does not match");
         }
     }
 }

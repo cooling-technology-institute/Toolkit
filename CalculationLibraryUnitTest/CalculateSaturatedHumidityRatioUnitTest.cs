@@ -20,21 +20,21 @@ namespace CalculationLibraryUnitTest
             {
                 IsInternationalSystemOfUnits_SI = true,
                 BarometricPressure = 14.56,
-                SaturationVaporPressureDryBulbTemperature = 3.4,
-                FsDryBulbTemperature = 2.1,
+                SaturationVaporPressureDryBulb = 3.4,
+                FsDryBulb = 2.1,
             };
 
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                ratio = CalculationLibrary.CalculateSaturatedHumidityRatio(data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature);
+                ratio = CalculationLibrary.CalculateSaturatedHumidityRatio(data.BarometricPressure, data.SaturationVaporPressureDryBulb, data.FsDryBulb);
             }
             catch
             {
                 methodThrew = true;
             }
 
-            double expected = 0.62198 * data.SaturationVaporPressureDryBulbTemperature * data.FsDryBulbTemperature / (data.BarometricPressure - data.SaturationVaporPressureDryBulbTemperature * data.FsDryBulbTemperature);
+            double expected = 0.62198 * data.SaturationVaporPressureDryBulb * data.FsDryBulb / (data.BarometricPressure - data.SaturationVaporPressureDryBulb * data.FsDryBulb);
 
             Assert.IsFalse(methodThrew, "Method threw");
             // 9.3371669670174899
@@ -51,14 +51,14 @@ namespace CalculationLibraryUnitTest
             {
                 IsInternationalSystemOfUnits_SI = true,
                 BarometricPressure = 14.56,
-                SaturationVaporPressureDryBulbTemperature = 14.56,
-                FsDryBulbTemperature = 1,
+                SaturationVaporPressureDryBulb = 14.56,
+                FsDryBulb = 1,
             };
 
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                ratio = CalculationLibrary.CalculateSaturatedHumidityRatio(data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature);
+                ratio = CalculationLibrary.CalculateSaturatedHumidityRatio(data.BarometricPressure, data.SaturationVaporPressureDryBulb, data.FsDryBulb);
             }
             catch
             {

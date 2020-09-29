@@ -18,10 +18,12 @@ namespace Models
         public double Density { set; get; }
         public double DewPoint { set; get; }
         public double DegreeOfSaturation { get; set; }
-        public double SaturationVaporPressureWetBulbTemperature { get; set; }
-        public double SaturationVaporPressureDryBulbTemperature { get; set; }
-        public double FsWetBulbTemperature { get; set; }
-        public double FsDryBulbTemperature { get; set; }
+        public double SaturationVaporPressureWetBulb { get; set; }
+        public double SaturationVaporPressureDryBulb { get; set; }
+        public double FsWetBulb { get; set; }
+        public double FsDryBulb { get; set; }
+        public double WsWetBulb { get; set; }
+        public double WsDryBulb { get; set; }
 
         public PsychrometricsData()
         {
@@ -38,10 +40,12 @@ namespace Models
             Density = 0.0;
             DewPoint = 0.0;
             DegreeOfSaturation = 0.0;
-            SaturationVaporPressureWetBulbTemperature = 0.0;
-            SaturationVaporPressureDryBulbTemperature = 0.0;
-            FsWetBulbTemperature = 0.0;
-            FsDryBulbTemperature = 0.0;
+            SaturationVaporPressureWetBulb = 0.0;
+            SaturationVaporPressureDryBulb = 0.0;
+            FsWetBulb = 0.0;
+            FsDryBulb = 0.0;
+            WsWetBulb = 0.0;
+            WsDryBulb = 0.0;
         }
     }
 }

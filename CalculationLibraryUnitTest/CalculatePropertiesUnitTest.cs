@@ -36,13 +36,18 @@ namespace CalculationLibraryUnitTest
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
 
-                results.SaturationVaporPressureDryBulbTemperature = CalculationLibrary.CalculateVaporPressure(true, data.DryBulbTemperature);
-                results.SaturationVaporPressureWetBulbTemperature = CalculationLibrary.CalculateVaporPressure(true, data.WetBulbTemperature);
-                results.FsDryBulbTemperature = CalculationLibrary.CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.DryBulbTemperature);
-                results.FsWetBulbTemperature = CalculationLibrary.CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.WetBulbTemperature);
-                results.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.DryBulbTemperature, data.WetBulbTemperature);
-                results.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.HumidityRatio);
-                results.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.FsDryBulbTemperature, data.WetBulbTemperature);
+                results.SaturationVaporPressureDryBulb = CalculationLibrary.CalculateVaporPressure(true, results.DryBulbTemperature);
+                results.SaturationVaporPressureWetBulb = CalculationLibrary.CalculateVaporPressure(true, results.WetBulbTemperature);
+                results.FsDryBulb = CalculationLibrary.CalculateFs(true, results.BarometricPressure, results.DryBulbTemperature);
+                results.FsWetBulb = CalculationLibrary.CalculateFs(true, results.BarometricPressure, results.WetBulbTemperature);
+                results.WsWetBulb = CalculationLibrary.CalculateSaturatedHumidityRatio(results.BarometricPressure, results.SaturationVaporPressureWetBulb, results.FsWetBulb);  // 'ASHRAE Eq.(21a)
+                results.WsDryBulb = CalculationLibrary.CalculateSaturatedHumidityRatio(results.BarometricPressure, results.SaturationVaporPressureDryBulb, results.FsDryBulb);  // 'ASHRAE Eq.(21a)
+                results.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(results);
+                results.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(results);
+                results.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(results);
+                results.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(results);
+                results.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(results);
+                results.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(results);
                 results.SpecificVolume = CalculationLibrary.CalculateSpecificVolume(results);
                 results.Density = CalculationLibrary.CalculateDensity(results);
                 results.Enthalpy = CalculationLibrary.CalculateEnthalpy(results);
@@ -56,10 +61,12 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(data.SaturationVaporPressureDryBulbTemperature, results.SaturationVaporPressureDryBulbTemperature, "SaturationVaporPressureDryBulbTemperature value does not match");
-            Assert.AreEqual(data.SaturationVaporPressureWetBulbTemperature, results.SaturationVaporPressureWetBulbTemperature, "SaturationVaporPressureWetBulbTemperature value does not match");
-            Assert.AreEqual(data.FsDryBulbTemperature, results.FsDryBulbTemperature, "FsDryBulbTemperature value does not match");
-            Assert.AreEqual(data.FsWetBulbTemperature, results.FsWetBulbTemperature, "FsWetBulbTemperature value does not match");
+            Assert.AreEqual(data.SaturationVaporPressureDryBulb, results.SaturationVaporPressureDryBulb, "SaturationVaporPressureDryBulb value does not match");
+            Assert.AreEqual(data.SaturationVaporPressureWetBulb, results.SaturationVaporPressureWetBulb, "SaturationVaporPressureWetBulb value does not match");
+            Assert.AreEqual(data.FsDryBulb, results.FsDryBulb, "FsDryBulb value does not match");
+            Assert.AreEqual(data.FsWetBulb, results.FsWetBulb, "FsWetBulb value does not match");
+            Assert.AreEqual(data.WsDryBulb, results.WsDryBulb, "WsDryBulb value does not match");
+            Assert.AreEqual(data.WsWetBulb, results.WsWetBulb, "WsWetBulb value does not match");
             Assert.AreEqual(data.HumidityRatio, results.HumidityRatio, "HumidityRatio value does not match");
             Assert.AreEqual(data.DegreeOfSaturation, results.DegreeOfSaturation, "DegreeOfSaturation value does not match");
             Assert.AreEqual(data.RelativeHumidity, results.RelativeHumidity, "RelativeHumidity value does not match");
@@ -95,13 +102,19 @@ namespace CalculationLibraryUnitTest
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
 
-                results.SaturationVaporPressureDryBulbTemperature = CalculationLibrary.CalculateVaporPressure(false, data.DryBulbTemperature);
-                results.SaturationVaporPressureWetBulbTemperature = CalculationLibrary.CalculateVaporPressure(false, data.WetBulbTemperature);
-                results.FsDryBulbTemperature = CalculationLibrary.CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.DryBulbTemperature);
-                results.FsWetBulbTemperature = CalculationLibrary.CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.WetBulbTemperature);
-                results.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.DryBulbTemperature, data.WetBulbTemperature);
-                results.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureDryBulbTemperature, data.FsDryBulbTemperature, data.HumidityRatio);
-                results.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.FsDryBulbTemperature, data.WetBulbTemperature);
+                results.SaturationVaporPressureDryBulb = CalculationLibrary.CalculateVaporPressure(false, results.DryBulbTemperature);
+                results.SaturationVaporPressureWetBulb = CalculationLibrary.CalculateVaporPressure(false, results.WetBulbTemperature);
+                results.FsDryBulb = CalculationLibrary.CalculateFs(false, results.BarometricPressure, results.DryBulbTemperature);
+                results.FsWetBulb = CalculationLibrary.CalculateFs(false, results.BarometricPressure, results.WetBulbTemperature);
+                results.WsWetBulb = CalculationLibrary.CalculateSaturatedHumidityRatio(results.BarometricPressure, results.SaturationVaporPressureWetBulb, results.FsWetBulb);  // 'ASHRAE Eq.(21a)
+                results.WsDryBulb = CalculationLibrary.CalculateSaturatedHumidityRatio(results.BarometricPressure, results.SaturationVaporPressureDryBulb, results.FsDryBulb);  // 'ASHRAE Eq.(21a)
+                results.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(results);
+                results.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(results);
+                results.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(results);
+                results.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(results);
+                results.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(results);
+                results.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(results);
+                results.SpecificVolume = CalculationLibrary.CalculateSpecificVolume(results);
                 results.Density = CalculationLibrary.CalculateDensity(results);
                 results.Enthalpy = CalculationLibrary.CalculateEnthalpy(results);
                 results.DewPoint = CalculationLibrary.CalculateDewPoint(results);
@@ -114,10 +127,12 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(data.SaturationVaporPressureDryBulbTemperature, results.SaturationVaporPressureDryBulbTemperature, "SaturationVaporPressureDryBulbTemperature value does not match");
-            Assert.AreEqual(data.SaturationVaporPressureWetBulbTemperature, results.SaturationVaporPressureWetBulbTemperature, "SaturationVaporPressureWetBulbTemperature value does not match");
-            Assert.AreEqual(data.FsDryBulbTemperature, results.FsDryBulbTemperature, "FsDryBulbTemperature value does not match");
-            Assert.AreEqual(data.FsWetBulbTemperature, results.FsWetBulbTemperature, "FsWetBulbTemperature value does not match");
+            Assert.AreEqual(data.SaturationVaporPressureDryBulb, results.SaturationVaporPressureDryBulb, "SaturationVaporPressureDryBulb value does not match");
+            Assert.AreEqual(data.SaturationVaporPressureWetBulb, results.SaturationVaporPressureWetBulb, "SaturationVaporPressureWetBulb value does not match");
+            Assert.AreEqual(data.FsDryBulb, results.FsDryBulb, "FsDryBulb value does not match");
+            Assert.AreEqual(data.FsWetBulb, results.FsWetBulb, "FsWetBulb value does not match");
+            Assert.AreEqual(data.WsDryBulb, results.WsDryBulb, "WsDryBulb value does not match");
+            Assert.AreEqual(data.WsWetBulb, results.WsWetBulb, "WsWetBulb value does not match");
             Assert.AreEqual(data.HumidityRatio, results.HumidityRatio, "HumidityRatio value does not match");
             Assert.AreEqual(data.DegreeOfSaturation, results.DegreeOfSaturation, "DegreeOfSaturation value does not match");
             Assert.AreEqual(data.RelativeHumidity, results.RelativeHumidity, "RelativeHumidity value does not match");

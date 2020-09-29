@@ -121,10 +121,10 @@ double DetermineAdjTestFlow(int IunitsIP, int IInduced, double EWTd, double LWTd
 				Density = 0.0,
 				DewPoint = 0.0,
 				DegreeOfSaturation = 0.0,
-				SaturationVaporPressureWetBulbTemperature = 0.0,
-				SaturationVaporPressureDryBulbTemperature = 0.0,
-				FsWetBulbTemperature = 0.0,
-				FsDryBulbTemperature = 0.0
+				SaturationVaporPressureWetBulb = 0.0,
+				SaturationVaporPressureDryBulb = 0.0,
+				FsWetBulb = 0.0,
+				FsDryBulb = 0.0
 			};
 			
 			PsychrometricsData designPsychrometricsData = new PsychrometricsData()
@@ -142,10 +142,10 @@ double DetermineAdjTestFlow(int IunitsIP, int IInduced, double EWTd, double LWTd
 				Density = 0.0,
 				DewPoint = 0.0,
 				DegreeOfSaturation = 0.0,
-				SaturationVaporPressureWetBulbTemperature = 0.0,
-				SaturationVaporPressureDryBulbTemperature = 0.0,
-				FsWetBulbTemperature = 0.0,
-				FsDryBulbTemperature = 0.0
+				SaturationVaporPressureWetBulb = 0.0,
+				SaturationVaporPressureDryBulb = 0.0,
+				FsWetBulb = 0.0,
+				FsDryBulb = 0.0
 			};
 
 			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
