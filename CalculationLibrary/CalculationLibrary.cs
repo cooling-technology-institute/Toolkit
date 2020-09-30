@@ -146,7 +146,6 @@ namespace CalculationLibrary
             double temptolerance = .0005;
             double RHtolerance = .00005;
             double RHmid;
-            StringBuilder stringBuilder = new StringBuilder();
 
             double RHhigh = CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.DryBulbTemperature, data.DryBulbTemperature);
 
@@ -156,41 +155,27 @@ namespace CalculationLibrary
                 return data.DryBulbTemperature;
             }
 
-            stringBuilder.AppendFormat(" BarometricPressure {0} \n RHhigh {1} \n RelHumid {1} \n",
-                        data.BarometricPressure.ToString("F6"),
-                        RHhigh,
-                        RHhigh);
-
             // Begin bisection root search procedure from Numerical Recipes in BASIC, p 193   
             double t1 = (data.IsInternationalSystemOfUnits_SI) ? -20.0 : 0.0;
             double t2 = data.DryBulbTemperature;
             double trtbis = t1;
             double DT = t2 - t1;
             double tmid;
-            stringBuilder.AppendFormat(" t2 {0} \n trtbis {1} \n DT {2} \n",
-                t2.ToString("F6"),
-                trtbis.ToString("F6"),
-                DT.ToString("F6"));
+            double RelativeHumidity;
 
             do
             {
-                stringBuilder.AppendLine();
                 DT /= 2;
                 tmid = trtbis + DT;
-                RHmid = data.RelativeHumidity - CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, tmid, data.DryBulbTemperature);
+                RelativeHumidity = CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, tmid, data.DryBulbTemperature);
+                RHmid = data.RelativeHumidity - RelativeHumidity;
                 if (RHmid >= 0.0)
                 {
                     trtbis = tmid;
                 }
-                stringBuilder.AppendFormat(" RHmid {0} \n trtbis {1} \n DT {2} \n tmid {3} \n",
-                    RHmid.ToString("F6"),
-                    trtbis.ToString("F6"),
-                    DT.ToString("F6"),
-                    tmid.ToString("F6"));
             }
             while ((Math.Abs(DT) >= temptolerance) && (RHmid != 0.0));
 
-            File.WriteAllText("CalculateWetBulbTemperature.txt", stringBuilder.ToString());
             // found wet bulb
             return tmid;
         }
@@ -448,7 +433,7 @@ namespace CalculationLibrary
         }
 
 
-        public double CalculateRelativeHumidity(bool isInternationalSystemOfUnits_SI, double barometricPressure, double DryBulbTemperature, double WetBulbTemperature)
+        public double CalculateRelativeHumidity(bool isInternationalSystemOfUnits_SI, double barometricPressure, double WetBulbTemperature, double DryBulbTemperature)
         {
             if (barometricPressure == 0.0)
             {
@@ -522,10 +507,8 @@ namespace CalculationLibrary
             double WSDP;
             double DeltaT;
             double t;
-            double tF;
             double DERPws;
             double DERHR;
-            double Ppsi = UnitConverter.ConvertBarometricPressureToPsi(data.BarometricPressure);
             double FsDP;
 
             double C1 = (data.IsInternationalSystemOfUnits_SI) ? -5674.5359 : -10214.16462;
@@ -770,8 +753,7 @@ namespace CalculationLibrary
 
             if ((data.DesignData.WaterFlowRate != 0) && (data.DesignData.FanDriverPower != 0) && (designPsychrometricsData.Density != 0) && (designPsychrometricsData.SpecificVolume != 0))
             {
-                liquidToGasRatio = data.DesignData.LiquidToGasRatio
-                                   * (data.TestData.WaterFlowRate / data.DesignData.WaterFlowRate)
+                liquidToGasRatio = data.DesignData.LiquidToGasRatio * (data.TestData.WaterFlowRate / data.DesignData.WaterFlowRate)
                                    * Math.Pow((data.DesignData.FanDriverPower / data.TestData.FanDriverPower), (1.0 / 3.0))
                                    * (testPsychrometricsData.Density / designPsychrometricsData.Density)
                                    * Math.Pow((testPsychrometricsData.SpecificVolume / designPsychrometricsData.SpecificVolume), (1.0 / 3.0));

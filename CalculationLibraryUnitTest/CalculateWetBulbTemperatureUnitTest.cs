@@ -34,7 +34,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(-2.4377822875976563, WetBulbTemperature, "WetBulbTemperature value does not match");
+            Assert.AreEqual(9.6245574951171875, WetBulbTemperature, "WetBulbTemperature value does not match");
         }
 
         [TestMethod]
