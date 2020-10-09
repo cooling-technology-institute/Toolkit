@@ -69,12 +69,12 @@ namespace CalculationLibrary
             return (kilopascal * SeaLevelBasePressure) / OneAtmosphere;
         }
 
-        public static double CalculatePressureCelcius(double pressure)
+        public static double CalculateInchesOfMercuryToPsi(double inchesOfMercury)
         {
-            return (pressure / BarometricPressure) * SeaLevelBasePressure;
+            return (inchesOfMercury / BarometricPressure) * SeaLevelBasePressure;
         }
 
-        public static double CalculatePressureFahrenheit(double pressure)
+        public static double CalculatePsiToInchesOfMercury(double pressure)
         {
             return (pressure / SeaLevelBasePressure) * BarometricPressure;
         }

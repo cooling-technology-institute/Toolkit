@@ -37,7 +37,7 @@ namespace CTIToolkit
             Setup(out errorMessage);
         }
 
-        public bool LoadData(MechanicalDraftPerformanceCurveData data, out string errorMessage)
+        public bool LoadData(MechanicalDraftPerformanceCurveFileData data, out string errorMessage)
         {
             bool returnValue = true;
             errorMessage = string.Empty;

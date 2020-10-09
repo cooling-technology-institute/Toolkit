@@ -199,6 +199,7 @@ namespace CalculationLibraryUnitTest
             Assert.IsFalse(methodThrew, "Method threw");
             Assert.AreEqual(0.0, data.RelativeHumidity, "RelativeHumidity value does not match");
         }
+
         [TestMethod]
         public void SI_CalculateRelativeHumidityMethod2Test()
         {

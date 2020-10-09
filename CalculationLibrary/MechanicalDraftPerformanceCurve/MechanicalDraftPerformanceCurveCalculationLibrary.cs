@@ -9,7 +9,7 @@ namespace CalculationLibrary
 {
     public class MechanicalDraftPerformanceCurveCalculationLibrary : CalculationLibrary
     {
-        public void MechanicalDraftPerformanceCurveCalculation(MechanicalDraftPerformanceCurveData data, MechanicalDraftPerformanceCurveOutput output)
+        public void MechanicalDraftPerformanceCurveCalculation(MechanicalDraftPerformanceCurveFileData data, MechanicalDraftPerformanceCurveOutput output)
         {
             PsychrometricsData testPsychrometricsData = new PsychrometricsData()
             {
@@ -22,9 +22,9 @@ namespace CalculationLibrary
             PsychrometricsData designPsychrometricsData = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = data.IsInternationalSystemOfUnits_SI,
-                BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertBarometricPressureToKilopascal(data.DesignData.BarometricPressure) : data.DesignData.BarometricPressure,
-                DryBulbTemperature = data.DesignData.DryBulbTemperature,
-                WetBulbTemperature = data.DesignData.WetBulbTemperature
+                BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertBarometricPressureToKilopascal(data.DesignData.MechanicalDraftPerformanceCurveData.BarometricPressure) : data.DesignData.MechanicalDraftPerformanceCurveData.BarometricPressure,
+                DryBulbTemperature = data.DesignData.MechanicalDraftPerformanceCurveData.DryBulbTemperature,
+                WetBulbTemperature = data.DesignData.MechanicalDraftPerformanceCurveData.WetBulbTemperature
             };
 
             CalculateProperties(testPsychrometricsData);

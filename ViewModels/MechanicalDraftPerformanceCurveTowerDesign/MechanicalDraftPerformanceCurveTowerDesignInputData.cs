@@ -82,7 +82,7 @@ namespace ViewModels
             AddWaterFlowRateDataValue = new WaterFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
         }
 
-        public bool LoadData(MechanicalDraftPerformanceCurveData data, out string errorMessage)
+        public bool LoadData(MechanicalDraftPerformanceCurveFileData data, out string errorMessage)
         {
             errorMessage = string.Empty;
             bool returnValue = true;
@@ -116,56 +116,56 @@ namespace ViewModels
                     RangeDataValue5.ConvertValue(IsInternationalSystemOfUnits_SI, false);
                 }
 
-                if (!WaterFlowRateDataValue.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.WaterFlowRate, out errorMessage))
+                if (!WaterFlowRateDataValue.UpdateCurrentValue(data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate, out errorMessage))
                 {
                     returnValue = false;
                     stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
-                if (!HotWaterTemperatureDataValue.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.HotWaterTemperature, out errorMessage))
+                if (!HotWaterTemperatureDataValue.UpdateCurrentValue(data.DesignData.MechanicalDraftPerformanceCurveData.HotWaterTemperature, out errorMessage))
                 {
                     returnValue = false;
                     stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
-                if (!ColdWaterTemperatureDataValue.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.ColdWaterTemperature, out errorMessage))
+                if (!ColdWaterTemperatureDataValue.UpdateCurrentValue(data.DesignData.MechanicalDraftPerformanceCurveData.ColdWaterTemperature, out errorMessage))
                 {
                     returnValue = false;
                     stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
-                if (!WetBulbTemperatureDataValue.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.WetBulbTemperature, out errorMessage))
+                if (!WetBulbTemperatureDataValue.UpdateCurrentValue(data.DesignData.MechanicalDraftPerformanceCurveData.WetBulbTemperature, out errorMessage))
                 {
                     returnValue = false;
                     stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
-                if (!DryBulbTemperatureDataValue.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.DryBulbTemperature, out errorMessage))
+                if (!DryBulbTemperatureDataValue.UpdateCurrentValue(data.DesignData.MechanicalDraftPerformanceCurveData.DryBulbTemperature, out errorMessage))
                 {
                     returnValue = false;
                     stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
-                if (!FanDriverPowerDataValue.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.FanDriverPower, out errorMessage))
+                if (!FanDriverPowerDataValue.UpdateCurrentValue(data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower, out errorMessage))
                 {
                     returnValue = false;
                     stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
-                if (!BarometricPressureDataValue.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.BarometricPressure, out errorMessage))
+                if (!BarometricPressureDataValue.UpdateCurrentValue(data.DesignData.MechanicalDraftPerformanceCurveData.BarometricPressure, out errorMessage))
                 {
                     returnValue = false;
                     stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
-                if (!LiquidToGasRatioDataValue.UpdateCurrentValue(MechanicalDraftPerformanceCurveDesignData.LiquidToGasRatio, out errorMessage))
+                if (!LiquidToGasRatioDataValue.UpdateCurrentValue(data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio, out errorMessage))
                 {
                     returnValue = false;
                     stringBuilder.AppendLine(label + errorMessage);
@@ -288,14 +288,14 @@ namespace ViewModels
                 mechanicalDraftPerformanceCurveDesignData.Range4 = RangeDataValue4.Current;
                 mechanicalDraftPerformanceCurveDesignData.Range5 = RangeDataValue5.Current;
 
-                mechanicalDraftPerformanceCurveDesignData.WaterFlowRate = WaterFlowRateDataValue.Current;
-                mechanicalDraftPerformanceCurveDesignData.HotWaterTemperature = HotWaterTemperatureDataValue.Current;
-                mechanicalDraftPerformanceCurveDesignData.ColdWaterTemperature = ColdWaterTemperatureDataValue.Current;
-                mechanicalDraftPerformanceCurveDesignData.WetBulbTemperature = WetBulbTemperatureDataValue.Current;
-                mechanicalDraftPerformanceCurveDesignData.DryBulbTemperature = DryBulbTemperatureDataValue.Current;
-                mechanicalDraftPerformanceCurveDesignData.FanDriverPower = FanDriverPowerDataValue.Current;
-                mechanicalDraftPerformanceCurveDesignData.BarometricPressure = BarometricPressureDataValue.Current;
-                mechanicalDraftPerformanceCurveDesignData.LiquidToGasRatio = LiquidToGasRatioDataValue.Current;
+                mechanicalDraftPerformanceCurveDesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate = WaterFlowRateDataValue.Current;
+                mechanicalDraftPerformanceCurveDesignData.MechanicalDraftPerformanceCurveData.HotWaterTemperature = HotWaterTemperatureDataValue.Current;
+                mechanicalDraftPerformanceCurveDesignData.MechanicalDraftPerformanceCurveData.ColdWaterTemperature = ColdWaterTemperatureDataValue.Current;
+                mechanicalDraftPerformanceCurveDesignData.MechanicalDraftPerformanceCurveData.WetBulbTemperature = WetBulbTemperatureDataValue.Current;
+                mechanicalDraftPerformanceCurveDesignData.MechanicalDraftPerformanceCurveData.DryBulbTemperature = DryBulbTemperatureDataValue.Current;
+                mechanicalDraftPerformanceCurveDesignData.MechanicalDraftPerformanceCurveData.FanDriverPower = FanDriverPowerDataValue.Current;
+                mechanicalDraftPerformanceCurveDesignData.MechanicalDraftPerformanceCurveData.BarometricPressure = BarometricPressureDataValue.Current;
+                mechanicalDraftPerformanceCurveDesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio = LiquidToGasRatioDataValue.Current;
             }
             catch (Exception exception)
             {

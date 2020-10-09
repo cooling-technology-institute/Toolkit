@@ -35,7 +35,7 @@ namespace IniFileConverter
                     IniData data = parser.ReadFile(fileName);
 
                     string units = data["Tower Design Point"]["Units"];
-                    MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData = new MechanicalDraftPerformanceCurveData(units == "SI");
+                    MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData = new MechanicalDraftPerformanceCurveFileData(units == "SI");
 
                     //[Tower Info]
                     //Owner=New Era Power Company
@@ -44,27 +44,27 @@ namespace IniFileConverter
                     //Manufacturer=Cooling Technology Institute
                     //ManufacturerData=0
                     //InducedFlow=1
-                    mechanicalDraftPerformanceCurveData.DesignData.OwnerName = data["Tower Info"]["Owner"];
-                    mechanicalDraftPerformanceCurveData.DesignData.ProjectName = data["Tower Info"]["ProjectName"];
-                    mechanicalDraftPerformanceCurveData.DesignData.Location = data["Tower Info"]["Location"];
-                    mechanicalDraftPerformanceCurveData.DesignData.TowerManufacturer = data["Tower Info"]["Manufacturer"];
+                    mechanicalDraftPerformanceCurveFileData.DesignData.OwnerName = data["Tower Info"]["Owner"];
+                    mechanicalDraftPerformanceCurveFileData.DesignData.ProjectName = data["Tower Info"]["ProjectName"];
+                    mechanicalDraftPerformanceCurveFileData.DesignData.Location = data["Tower Info"]["Location"];
+                    mechanicalDraftPerformanceCurveFileData.DesignData.TowerManufacturer = data["Tower Info"]["Manufacturer"];
                     if (int.Parse(data["Tower Info"]["InducedFlow"]) == 1)
                     {
-                        mechanicalDraftPerformanceCurveData.DesignData.TowerType = TOWER_TYPE.Induced;
+                        mechanicalDraftPerformanceCurveFileData.DesignData.TowerType = TOWER_TYPE.Induced;
                     }
                     else
                     {
-                        mechanicalDraftPerformanceCurveData.DesignData.TowerType = TOWER_TYPE.Forced;
+                        mechanicalDraftPerformanceCurveFileData.DesignData.TowerType = TOWER_TYPE.Forced;
                     }
 
-                    mechanicalDraftPerformanceCurveData.DesignData.WaterFlowRate = double.Parse(data["Tower Design Point"]["WaterFlowRate"]);
-                    mechanicalDraftPerformanceCurveData.DesignData.HotWaterTemperature = double.Parse(data["Tower Design Point"]["HWT"]);
-                    mechanicalDraftPerformanceCurveData.DesignData.ColdWaterTemperature = double.Parse(data["Tower Design Point"]["CWT"]);
-                    mechanicalDraftPerformanceCurveData.DesignData.WetBulbTemperature = double.Parse(data["Tower Design Point"]["WBT"]);
-                    mechanicalDraftPerformanceCurveData.DesignData.DryBulbTemperature = double.Parse(data["Tower Design Point"]["DBT"]);
-                    mechanicalDraftPerformanceCurveData.DesignData.FanDriverPower = double.Parse(data["Tower Design Point"]["FanDriverPower"]);
-                    mechanicalDraftPerformanceCurveData.DesignData.BarometricPressure = double.Parse(data["Tower Design Point"]["BarometricPressure"]);
-                    mechanicalDraftPerformanceCurveData.DesignData.LiquidToGasRatio = double.Parse(data["Tower Design Point"]["LG"]);
+                    mechanicalDraftPerformanceCurveFileData.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate = double.Parse(data["Tower Design Point"]["WaterFlowRate"]);
+                    mechanicalDraftPerformanceCurveFileData.DesignData.MechanicalDraftPerformanceCurveData.HotWaterTemperature = double.Parse(data["Tower Design Point"]["HWT"]);
+                    mechanicalDraftPerformanceCurveFileData.DesignData.MechanicalDraftPerformanceCurveData.ColdWaterTemperature = double.Parse(data["Tower Design Point"]["CWT"]);
+                    mechanicalDraftPerformanceCurveFileData.DesignData.MechanicalDraftPerformanceCurveData.WetBulbTemperature = double.Parse(data["Tower Design Point"]["WBT"]);
+                    mechanicalDraftPerformanceCurveFileData.DesignData.MechanicalDraftPerformanceCurveData.DryBulbTemperature = double.Parse(data["Tower Design Point"]["DBT"]);
+                    mechanicalDraftPerformanceCurveFileData.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower = double.Parse(data["Tower Design Point"]["FanDriverPower"]);
+                    mechanicalDraftPerformanceCurveFileData.DesignData.MechanicalDraftPerformanceCurveData.BarometricPressure = double.Parse(data["Tower Design Point"]["BarometricPressure"]);
+                    mechanicalDraftPerformanceCurveFileData.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio = double.Parse(data["Tower Design Point"]["LG"]);
 
                     int numberOfRanges = int.Parse(data["Curve Data"]["NumRanges"]);
                     for(int i = 0; i < numberOfRanges; i++)
@@ -72,19 +72,19 @@ namespace IniFileConverter
                         switch (i)
                         {
                             case 0:
-                                mechanicalDraftPerformanceCurveData.DesignData.Range1 = double.Parse(data["Curve Data"]["Range1"]);
+                                mechanicalDraftPerformanceCurveFileData.DesignData.Range1 = double.Parse(data["Curve Data"]["Range1"]);
                                 break;
                             case 1:
-                                mechanicalDraftPerformanceCurveData.DesignData.Range2 = double.Parse(data["Curve Data"]["Range2"]);
+                                mechanicalDraftPerformanceCurveFileData.DesignData.Range2 = double.Parse(data["Curve Data"]["Range2"]);
                                 break;
                             case 2:
-                                mechanicalDraftPerformanceCurveData.DesignData.Range3 = double.Parse(data["Curve Data"]["Range3"]);
+                                mechanicalDraftPerformanceCurveFileData.DesignData.Range3 = double.Parse(data["Curve Data"]["Range3"]);
                                 break;
                             case 3:
-                                mechanicalDraftPerformanceCurveData.DesignData.Range4 = double.Parse(data["Curve Data"]["Range4"]);
+                                mechanicalDraftPerformanceCurveFileData.DesignData.Range4 = double.Parse(data["Curve Data"]["Range4"]);
                                 break;
                             case 4:
-                                mechanicalDraftPerformanceCurveData.DesignData.Range5 = double.Parse(data["Curve Data"]["Range5"]);
+                                mechanicalDraftPerformanceCurveFileData.DesignData.Range5 = double.Parse(data["Curve Data"]["Range5"]);
                                 break;
                         }
                     }
@@ -253,7 +253,7 @@ namespace IniFileConverter
                             }
                             wetBlubNumber++;
                         }
-                        mechanicalDraftPerformanceCurveData.DesignData.RangedTemperaturesDesignData.Add(rangedTemperaturesDesignData);
+                        mechanicalDraftPerformanceCurveFileData.DesignData.RangedTemperaturesDesignData.Add(rangedTemperaturesDesignData);
                     }
 
                     int numberOfTests = int.Parse(data["Tests"]["NumTests"]);
@@ -262,18 +262,18 @@ namespace IniFileConverter
                         string testName = string.Format("TestPoint{0}", testNumber+1);
                         if (data[testName]["Date"].Contains("Test Data"))
                         {
-                            mechanicalDraftPerformanceCurveData.TestData.WaterFlowRate = double.Parse(data[testName]["WaterFlowRate"]);
-                            mechanicalDraftPerformanceCurveData.TestData.HotWaterTemperature = double.Parse(data[testName]["HWT"]);
-                            mechanicalDraftPerformanceCurveData.TestData.ColdWaterTemperature = double.Parse(data[testName]["CWT"]);
-                            mechanicalDraftPerformanceCurveData.TestData.WetBulbTemperature = double.Parse(data[testName]["WBT"]);
-                            mechanicalDraftPerformanceCurveData.TestData.DryBulbTemperature = double.Parse(data[testName]["DBT"]);
-                            mechanicalDraftPerformanceCurveData.TestData.FanDriverPower = double.Parse(data[testName]["FanDriverPower"]);
-                            mechanicalDraftPerformanceCurveData.TestData.BarometricPressure = double.Parse(data[testName]["BarometricPressure"]);
+                            mechanicalDraftPerformanceCurveFileData.TestData.WaterFlowRate = double.Parse(data[testName]["WaterFlowRate"]);
+                            mechanicalDraftPerformanceCurveFileData.TestData.HotWaterTemperature = double.Parse(data[testName]["HWT"]);
+                            mechanicalDraftPerformanceCurveFileData.TestData.ColdWaterTemperature = double.Parse(data[testName]["CWT"]);
+                            mechanicalDraftPerformanceCurveFileData.TestData.WetBulbTemperature = double.Parse(data[testName]["WBT"]);
+                            mechanicalDraftPerformanceCurveFileData.TestData.DryBulbTemperature = double.Parse(data[testName]["DBT"]);
+                            mechanicalDraftPerformanceCurveFileData.TestData.FanDriverPower = double.Parse(data[testName]["FanDriverPower"]);
+                            mechanicalDraftPerformanceCurveFileData.TestData.BarometricPressure = double.Parse(data[testName]["BarometricPressure"]);
                         }
                     }
 
                     string convertedFileName = Path.Combine(OutputFolder, Path.GetFileNameWithoutExtension(fileName) + ".json");
-                    File.WriteAllText(convertedFileName, JsonConvert.SerializeObject(mechanicalDraftPerformanceCurveData, Formatting.Indented));
+                    File.WriteAllText(convertedFileName, JsonConvert.SerializeObject(mechanicalDraftPerformanceCurveFileData, Formatting.Indented));
 
                     ConvertListBox.Items.Add(string.Format("Converted file: {0} saved as {1}", fileName, convertedFileName));
             }

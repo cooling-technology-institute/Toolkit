@@ -433,7 +433,7 @@ namespace CalculationLibrary
         }
 
 
-        public double CalculateRelativeHumidity(bool isInternationalSystemOfUnits_SI, double barometricPressure, double WetBulbTemperature, double DryBulbTemperature)
+        public double CalculateRelativeHumidity(bool isInternationalSystemOfUnits_SI, double barometricPressure, double DryBulbTemperature, double WetBulbTemperature)
         {
             if (barometricPressure == 0.0)
             {
@@ -747,14 +747,14 @@ namespace CalculationLibrary
             }
         }
 
-        public double CalculateTestLiquidToGasRatio(MechanicalDraftPerformanceCurveData data, PsychrometricsData testPsychrometricsData, PsychrometricsData designPsychrometricsData)
+        public double CalculateTestLiquidToGasRatio(MechanicalDraftPerformanceCurveFileData data, PsychrometricsData testPsychrometricsData, PsychrometricsData designPsychrometricsData)
         {
             double liquidToGasRatio = 0;
 
-            if ((data.DesignData.WaterFlowRate != 0) && (data.DesignData.FanDriverPower != 0) && (designPsychrometricsData.Density != 0) && (designPsychrometricsData.SpecificVolume != 0))
+            if ((data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate != 0) && (data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower != 0) && (designPsychrometricsData.Density != 0) && (designPsychrometricsData.SpecificVolume != 0))
             {
-                liquidToGasRatio = data.DesignData.LiquidToGasRatio * (data.TestData.WaterFlowRate / data.DesignData.WaterFlowRate)
-                                   * Math.Pow((data.DesignData.FanDriverPower / data.TestData.FanDriverPower), (1.0 / 3.0))
+                liquidToGasRatio = data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio * (data.TestData.WaterFlowRate / data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate)
+                                   * Math.Pow((data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower / data.TestData.FanDriverPower), (1.0 / 3.0))
                                    * (testPsychrometricsData.Density / designPsychrometricsData.Density)
                                    * Math.Pow((testPsychrometricsData.SpecificVolume / designPsychrometricsData.SpecificVolume), (1.0 / 3.0));
 
@@ -767,7 +767,7 @@ namespace CalculationLibrary
             return testWaterFlowRate * Math.Pow((designFanDriverPower / testFanDriverPower), (1.0 / 3.0)) * Math.Pow((testAirDensity / designAirDensity), (1.0 / 3.0));
         }
 
-        public double DetermineAdjustedTestFlow(MechanicalDraftPerformanceCurveData data, PsychrometricsData testPsychrometricsData, PsychrometricsData designPsychrometricsData, MechanicalDraftPerformanceCurveOutput output)
+        public double DetermineAdjustedTestFlow(MechanicalDraftPerformanceCurveFileData data, PsychrometricsData testPsychrometricsData, PsychrometricsData designPsychrometricsData, MechanicalDraftPerformanceCurveOutput output)
         {
             double Cpw = (data.IsInternationalSystemOfUnits_SI) ? 4.186 : 1.0; // specific heat at constant pressure
             StringBuilder stringBuilder = new StringBuilder();
@@ -805,7 +805,7 @@ namespace CalculationLibrary
 
                 //'First determine Design Leaving Air Density, designPsychrometricsData.Density  *****************************
                 //'first step is determine Leaving air Enthalpy Design, HOutD                
-                designPsychrometricsData.RootEnthalpy = designPsychrometricsData.Enthalpy + data.DesignData.LiquidToGasRatio * Cpw * (data.DesignData.HotWaterTemperature - data.DesignData.ColdWaterTemperature);
+                designPsychrometricsData.RootEnthalpy = designPsychrometricsData.Enthalpy + data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio * Cpw * (data.DesignData.MechanicalDraftPerformanceCurveData.HotWaterTemperature - data.DesignData.MechanicalDraftPerformanceCurveData.ColdWaterTemperature);
 
                 stringBuilder.AppendFormat("HOutD {0}\n", designPsychrometricsData.RootEnthalpy);
 
@@ -846,13 +846,13 @@ namespace CalculationLibrary
 
                     //'Calculate L/G Test
                     //'Equation 5.1, Liquid to Gas ratio Test
-                    if ((data.DesignData.WaterFlowRate == 0.0) || (designPsychrometricsData.Density == 0.0) || (data.TestData.FanDriverPower == 0.0) || (designPsychrometricsData.SpecificVolume == 0.0))
+                    if ((data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate == 0.0) || (designPsychrometricsData.Density == 0.0) || (data.TestData.FanDriverPower == 0.0) || (designPsychrometricsData.SpecificVolume == 0.0))
                     {
                         output.LiquidToGasRatio = 0.0;
                     }
                     else
                     {
-                        output.LiquidToGasRatio = data.DesignData.LiquidToGasRatio * (data.TestData.WaterFlowRate / data.DesignData.WaterFlowRate) * Math.Pow((output.Density / designPsychrometricsData.Density * data.DesignData.FanDriverPower / data.TestData.FanDriverPower), (1.0 / 3.0)) * (output.SpecificVolume / designPsychrometricsData.SpecificVolume);
+                        output.LiquidToGasRatio = data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio * (data.TestData.WaterFlowRate / data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate) * Math.Pow((output.Density / designPsychrometricsData.Density * data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower / data.TestData.FanDriverPower), (1.0 / 3.0)) * (output.SpecificVolume / designPsychrometricsData.SpecificVolume);
                     }
 
                     testPsychrometricsData.RootEnthalpy = testPsychrometricsData.Enthalpy + output.LiquidToGasRatio * Cpw * (data.TestData.HotWaterTemperature - data.TestData.ColdWaterTemperature);

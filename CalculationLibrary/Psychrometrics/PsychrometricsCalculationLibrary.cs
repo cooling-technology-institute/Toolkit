@@ -56,7 +56,7 @@ namespace CalculationLibrary
                     data.Enthalpy = -999.0;
                 }
 
-                data.BarometricPressure = UnitConverter.CalculatePressureFahrenheit(data.BarometricPressure);
+                data.BarometricPressure = UnitConverter.CalculatePsiToInchesOfMercury(data.BarometricPressure);
             }
 
             return Psychrometrics_CheckCalculationValues(data, out errorMessage);
@@ -77,7 +77,7 @@ namespace CalculationLibrary
 
             if(!data.IsInternationalSystemOfUnits_SI)
             { 
-                data.BarometricPressure = UnitConverter.CalculatePressureFahrenheit(data.BarometricPressure);
+                data.BarometricPressure = UnitConverter.CalculatePsiToInchesOfMercury(data.BarometricPressure);
             }
 
             return Psychrometrics_CheckCalculationValues(data, out errorMessage);
@@ -99,7 +99,7 @@ namespace CalculationLibrary
 
             if (!data.IsInternationalSystemOfUnits_SI)
             {
-                data.BarometricPressure = UnitConverter.CalculatePressureFahrenheit(data.BarometricPressure);
+                data.BarometricPressure = UnitConverter.CalculatePsiToInchesOfMercury(data.BarometricPressure);
             }
 
             return Psychrometrics_CheckCalculationValues(data, out errorMessage);

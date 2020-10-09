@@ -14,13 +14,13 @@ namespace CalculationLibraryUnitTest
         {
             bool methodThrew = false;
             double ratio = 0.0;
-            MechanicalDraftPerformanceCurveData data = new MechanicalDraftPerformanceCurveData(true);
+            MechanicalDraftPerformanceCurveFileData data = new MechanicalDraftPerformanceCurveFileData(true);
             PsychrometricsData designPsychrometricsData = new PsychrometricsData();
             PsychrometricsData testPsychrometricsData = new PsychrometricsData();
 
-            data.DesignData.WaterFlowRate = 3583.0;
-            data.DesignData.FanDriverPower = 107.0;
-            data.DesignData.LiquidToGasRatio = 1.3;
+            data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate = 3583.0;
+            data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower = 107.0;
+            data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio = 1.3;
 
             data.TestData.WaterFlowRate = 3623.0;
             data.TestData.FanDriverPower = 113.0;
@@ -63,13 +63,13 @@ namespace CalculationLibraryUnitTest
         {
             bool methodThrew = false;
             double ratio = 0.0;
-            MechanicalDraftPerformanceCurveData data = new MechanicalDraftPerformanceCurveData(true);
+            MechanicalDraftPerformanceCurveFileData data = new MechanicalDraftPerformanceCurveFileData(true);
             PsychrometricsData designPsychrometricsData = new PsychrometricsData();
             PsychrometricsData testPsychrometricsData = new PsychrometricsData();
 
-            data.DesignData.WaterFlowRate = 0.0;
-            data.DesignData.FanDriverPower = 107.0;
-            data.DesignData.LiquidToGasRatio = 1.3;
+            data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate = 0.0;
+            data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower = 107.0;
+            data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio = 1.3;
 
             data.TestData.WaterFlowRate = 3623.0;
             data.TestData.FanDriverPower = 113.0;
@@ -99,13 +99,13 @@ namespace CalculationLibraryUnitTest
         {
             bool methodThrew = false;
             double ratio = 0.0;
-            MechanicalDraftPerformanceCurveData data = new MechanicalDraftPerformanceCurveData(true);
+            MechanicalDraftPerformanceCurveFileData data = new MechanicalDraftPerformanceCurveFileData(true);
             PsychrometricsData designPsychrometricsData = new PsychrometricsData();
             PsychrometricsData testPsychrometricsData = new PsychrometricsData();
 
-            data.DesignData.WaterFlowRate = 3583.0;
-            data.DesignData.FanDriverPower = 0.0;
-            data.DesignData.LiquidToGasRatio = 1.3;
+            data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate = 3583.0;
+            data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower = 0.0;
+            data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio = 1.3;
 
             data.TestData.WaterFlowRate = 3623.0;
             data.TestData.FanDriverPower = 113.0;
@@ -135,13 +135,13 @@ namespace CalculationLibraryUnitTest
         {
             bool methodThrew = false;
             double ratio = 0.0;
-            MechanicalDraftPerformanceCurveData data = new MechanicalDraftPerformanceCurveData(true);
+            MechanicalDraftPerformanceCurveFileData data = new MechanicalDraftPerformanceCurveFileData(true);
             PsychrometricsData designPsychrometricsData = new PsychrometricsData();
             PsychrometricsData testPsychrometricsData = new PsychrometricsData();
 
-            data.DesignData.WaterFlowRate = 3583.0;
-            data.DesignData.FanDriverPower = 107.0;
-            data.DesignData.LiquidToGasRatio = 1.3;
+            data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate = 3583.0;
+            data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower = 107.0;
+            data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio = 1.3;
 
             data.TestData.WaterFlowRate = 3623.0;
             data.TestData.FanDriverPower = 113.0;
@@ -171,13 +171,13 @@ namespace CalculationLibraryUnitTest
         {
             bool methodThrew = false;
             double ratio = 0.0;
-            MechanicalDraftPerformanceCurveData data = new MechanicalDraftPerformanceCurveData(true);
+            MechanicalDraftPerformanceCurveFileData data = new MechanicalDraftPerformanceCurveFileData(true);
             PsychrometricsData designPsychrometricsData = new PsychrometricsData();
             PsychrometricsData testPsychrometricsData = new PsychrometricsData();
 
-            data.DesignData.WaterFlowRate = 3583.0;
-            data.DesignData.FanDriverPower = 107.0;
-            data.DesignData.LiquidToGasRatio = 1.3;
+            data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate = 3583.0;
+            data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower = 107.0;
+            data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio = 1.3;
 
             data.TestData.WaterFlowRate = 3623.0;
             data.TestData.FanDriverPower = 113.0;

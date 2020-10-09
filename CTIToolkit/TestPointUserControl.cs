@@ -61,14 +61,14 @@ namespace CTIToolkit
             return true;
         }
 
-        public bool LoadData(MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData, out string errorMessage)
+        public bool LoadData(MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData, out string errorMessage)
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
 
-            if (mechanicalDraftPerformanceCurveData != null)
+            if (mechanicalDraftPerformanceCurveFileData != null)
             {
-                if (!MechanicalDraftPerformanceCurveViewModel.LoadData(string.Empty, mechanicalDraftPerformanceCurveData, out errorMessage))
+                if (!MechanicalDraftPerformanceCurveViewModel.LoadData(string.Empty, mechanicalDraftPerformanceCurveFileData, out errorMessage))
                 {
                     stringBuilder.AppendLine(errorMessage);
                     returnValue = false;

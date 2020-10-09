@@ -272,9 +272,9 @@ namespace ViewModels
         
         #endregion DataValue
 
-        public bool LoadData(string fileName, MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData, out string errorMessage)
+        public bool LoadData(string fileName, MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputData.LoadData(fileName, mechanicalDraftPerformanceCurveData, out errorMessage);
+            return MechanicalDraftPerformanceCurveInputData.LoadData(fileName, mechanicalDraftPerformanceCurveFileData, out errorMessage);
         }
 
         public bool SaveDataFile(out string errorMessage)
@@ -300,15 +300,15 @@ namespace ViewModels
             bool returnValue = true;
             try
             {
-                MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData = new MechanicalDraftPerformanceCurveData(IsInternationalSystemOfUnits_SI);
+                MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData = new MechanicalDraftPerformanceCurveFileData(IsInternationalSystemOfUnits_SI);
 
                 // validate test data
-                if (!mechanicalDraftPerformanceCurveTowerDesignViewModel.FillAndValidate(mechanicalDraftPerformanceCurveData.DesignData, out errorMessage))
+                if (!mechanicalDraftPerformanceCurveTowerDesignViewModel.FillAndValidate(mechanicalDraftPerformanceCurveFileData.DesignData, out errorMessage))
                 {
 
                 }
 
-                if (!MechanicalDraftPerformanceCurveInputData.FillAndValidate(mechanicalDraftPerformanceCurveData, out errorMessage))
+                if (!MechanicalDraftPerformanceCurveInputData.FillAndValidate(mechanicalDraftPerformanceCurveFileData, out errorMessage))
                 {
 
                 }
@@ -316,7 +316,7 @@ namespace ViewModels
 
                 MechanicalDraftPerformanceCurveCalculationLibrary mechanicalDraftPerformanceCurveCalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
 
-                mechanicalDraftPerformanceCurveCalculationLibrary.MechanicalDraftPerformanceCurveCalculation(mechanicalDraftPerformanceCurveData, MechanicalDraftPerformanceCurveOutputData.MechanicalDraftPerformanceCurveOutput);
+                mechanicalDraftPerformanceCurveCalculationLibrary.MechanicalDraftPerformanceCurveCalculation(mechanicalDraftPerformanceCurveFileData, MechanicalDraftPerformanceCurveOutputData.MechanicalDraftPerformanceCurveOutput);
             }
             catch (Exception exception)
             {
