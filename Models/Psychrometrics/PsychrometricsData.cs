@@ -47,5 +47,28 @@ namespace Models
             WsWetBulb = 0.0;
             WsDryBulb = 0.0;
         }
+
+        public PsychrometricsData(MechanicalDraftPerformanceCurveData data)
+        {
+            IsInternationalSystemOfUnits_SI = data.IsInternationalSystemOfUnits_SI;
+            Elevation = 0.0;
+            WetBulbTemperature = data.WetBulbTemperature;
+            DryBulbTemperature = data.DryBulbTemperature;
+            BarometricPressure = data.BarometricPressure;
+            HumidityRatio = 0.0;
+            RelativeHumidity = 0.0;
+            Enthalpy = 0.0;
+            RootEnthalpy = 0.0;
+            SpecificVolume = 0.0;
+            Density = 0.0;
+            DewPoint = 0.0;
+            DegreeOfSaturation = 0.0;
+            SaturationVaporPressureWetBulb = 0.0;
+            SaturationVaporPressureDryBulb = 0.0;
+            FsWetBulb = 0.0;
+            FsDryBulb = 0.0;
+            WsWetBulb = 0.0;
+            WsDryBulb = 0.0;
+        }
     }
 }

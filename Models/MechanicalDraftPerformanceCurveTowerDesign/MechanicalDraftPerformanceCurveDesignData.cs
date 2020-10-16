@@ -15,14 +15,7 @@ namespace Models
         [Newtonsoft.Json.JsonConverter(typeof(StringEnumAsIntConverter))]
         public TOWER_TYPE TowerType { set; get; }
 
-        public double WaterFlowRate { set; get; }
-        public double ColdWaterTemperature { set; get; }
-        public double HotWaterTemperature { set; get; }
-        public double WetBulbTemperature { set; get; } 
-        public double DryBulbTemperature { set; get; }
-        public double FanDriverPower { set; get; }
-        public double BarometricPressure { set; get; }
-        public double LiquidToGasRatio { set; get; }
+        public MechanicalDraftPerformanceCurveData MechanicalDraftPerformanceCurveData { set; get; }
 
         public double Range1 { set; get; }
         public double Range2 { set; get; }
@@ -43,15 +36,8 @@ namespace Models
             TowerManufacturer = string.Empty;
             TowerType = TOWER_TYPE.Forced;
 
-            WaterFlowRate = 0.0;
-            HotWaterTemperature = 0.0;
-            ColdWaterTemperature = 0.0;
-            WetBulbTemperature = 0.0;
-            DryBulbTemperature = 0.0;
-            FanDriverPower = 0.0;
-            BarometricPressure = 0.0;
-            LiquidToGasRatio = 0.0;
-
+            MechanicalDraftPerformanceCurveData = new MechanicalDraftPerformanceCurveData();
+ 
             RangeCount = 0;
             LastValidRange = 0;
             RangeLessThan = false;

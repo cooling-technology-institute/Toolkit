@@ -3,7 +3,6 @@
 using Models;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -12,7 +11,7 @@ namespace ViewModels
 {
     public class MechanicalDraftPerformanceCurveInputData
     {
-        private MechanicalDraftPerformanceCurveData MechanicalDraftPerformanceCurveData { get; set; }
+        private MechanicalDraftPerformanceCurveFileData MechanicalDraftPerformanceCurveFileData { get; set; }
 
         public WaterFlowRateDataValue WaterFlowRateDataValue { get; set; }
         public HotWaterTemperatureDataValue HotWaterTemperatureDataValue { get; set; }
@@ -28,11 +27,11 @@ namespace ViewModels
         public bool IsDemo { get; set; }
         public bool IsInternationalSystemOfUnits_SI { get; set; }
 
-        public MechanicalDraftPerformanceCurveData Data
+        public MechanicalDraftPerformanceCurveFileData Data
         {
             get
             {
-                return MechanicalDraftPerformanceCurveData;
+                return MechanicalDraftPerformanceCurveFileData;
             }
         }
 
@@ -40,8 +39,8 @@ namespace ViewModels
         {
             IsDemo = isDemo;
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
-            
-            MechanicalDraftPerformanceCurveData = new MechanicalDraftPerformanceCurveData(IsInternationalSystemOfUnits_SI);
+
+            MechanicalDraftPerformanceCurveFileData = new MechanicalDraftPerformanceCurveFileData(IsInternationalSystemOfUnits_SI);
 
             WaterFlowRateDataValue = new WaterFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
             HotWaterTemperatureDataValue = new HotWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
@@ -80,7 +79,7 @@ namespace ViewModels
             errorMessage = string.Empty;
             try
             {
-                File.WriteAllText(MechanicalDraftPerformanceCurveDataFile, JsonConvert.SerializeObject(MechanicalDraftPerformanceCurveData));
+                File.WriteAllText(MechanicalDraftPerformanceCurveDataFile, JsonConvert.SerializeObject(MechanicalDraftPerformanceCurveFileData));
             }
             catch(Exception e)
             {
@@ -104,7 +103,7 @@ namespace ViewModels
             }
         }
 
-        public bool LoadData(string fileName, MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData, out string errorMessage)
+        public bool LoadData(string fileName, MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData, out string errorMessage)
         {
             errorMessage = string.Empty;
             bool returnValue = true;
@@ -114,9 +113,9 @@ namespace ViewModels
             try
             {
                 MechanicalDraftPerformanceCurveDataFile = fileName;
-                if(IsInternationalSystemOfUnits_SI != mechanicalDraftPerformanceCurveData.IsInternationalSystemOfUnits_SI)
+                if(IsInternationalSystemOfUnits_SI != mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI)
                 {
-                    IsInternationalSystemOfUnits_SI = mechanicalDraftPerformanceCurveData.IsInternationalSystemOfUnits_SI;
+                    IsInternationalSystemOfUnits_SI = mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI;
                     WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
                     HotWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
                     ColdWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
@@ -127,56 +126,56 @@ namespace ViewModels
                     LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
                 }
 
-                if (!WaterFlowRateDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveData.TestData.WaterFlowRate, out errorMessage))
+                if (!WaterFlowRateDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveFileData.TestData.WaterFlowRate, out errorMessage))
                 {
                     returnValue = false;
                     stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
-                if (!HotWaterTemperatureDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveData.TestData.HotWaterTemperature, out errorMessage))
+                if (!HotWaterTemperatureDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveFileData.TestData.HotWaterTemperature, out errorMessage))
                 {
                     returnValue = false;
                     stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
-                if (!ColdWaterTemperatureDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveData.TestData.ColdWaterTemperature, out errorMessage))
+                if (!ColdWaterTemperatureDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveFileData.TestData.ColdWaterTemperature, out errorMessage))
                 {
                     returnValue = false;
                     stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
-                if (!WetBulbTemperatureDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveData.TestData.WetBulbTemperature, out errorMessage))
+                if (!WetBulbTemperatureDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveFileData.TestData.WetBulbTemperature, out errorMessage))
                 {
                     returnValue = false;
                     stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
-                if (!DryBulbTemperatureDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveData.TestData.DryBulbTemperature, out errorMessage))
+                if (!DryBulbTemperatureDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveFileData.TestData.DryBulbTemperature, out errorMessage))
                 {
                     returnValue = false;
                     stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
-                if (!FanDriverPowerDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveData.TestData.FanDriverPower, out errorMessage))
+                if (!FanDriverPowerDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveFileData.TestData.FanDriverPower, out errorMessage))
                 {
                     returnValue = false;
                     stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
-                if (!BarometricPressureDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveData.TestData.BarometricPressure, out errorMessage))
+                if (!BarometricPressureDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveFileData.TestData.BarometricPressure, out errorMessage))
                 {
                     returnValue = false;
                     stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
 
-                if (!LiquidToGasRatioDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveData.TestData.LiquidToGasRatio, out errorMessage))
+                if (!LiquidToGasRatioDataValue.UpdateCurrentValue(mechanicalDraftPerformanceCurveFileData.TestData.LiquidToGasRatio, out errorMessage))
                 {
                     returnValue = false;
                     stringBuilder.AppendLine(label + errorMessage);
@@ -218,21 +217,21 @@ namespace ViewModels
             IsDemo = value;
         }
 
-        public bool FillAndValidate(MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData, out string errorMessage)
+        public bool FillAndValidate(MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData, out string errorMessage)
         {
             errorMessage = string.Empty;
             bool returnValue = true;
 
             try
             {
-                mechanicalDraftPerformanceCurveData.TestData.WaterFlowRate = WaterFlowRateDataValue.Current;
-                mechanicalDraftPerformanceCurveData.TestData.HotWaterTemperature = HotWaterTemperatureDataValue.Current;
-                mechanicalDraftPerformanceCurveData.TestData.ColdWaterTemperature = ColdWaterTemperatureDataValue.Current;
-                mechanicalDraftPerformanceCurveData.TestData.WetBulbTemperature = WetBulbTemperatureDataValue.Current;
-                mechanicalDraftPerformanceCurveData.TestData.DryBulbTemperature = DryBulbTemperatureDataValue.Current;
-                mechanicalDraftPerformanceCurveData.TestData.FanDriverPower = FanDriverPowerDataValue.Current;
-                mechanicalDraftPerformanceCurveData.TestData.BarometricPressure = BarometricPressureDataValue.Current;
-                mechanicalDraftPerformanceCurveData.TestData.LiquidToGasRatio = LiquidToGasRatioDataValue.Current;
+                mechanicalDraftPerformanceCurveFileData.TestData.WaterFlowRate = WaterFlowRateDataValue.Current;
+                mechanicalDraftPerformanceCurveFileData.TestData.HotWaterTemperature = HotWaterTemperatureDataValue.Current;
+                mechanicalDraftPerformanceCurveFileData.TestData.ColdWaterTemperature = ColdWaterTemperatureDataValue.Current;
+                mechanicalDraftPerformanceCurveFileData.TestData.WetBulbTemperature = WetBulbTemperatureDataValue.Current;
+                mechanicalDraftPerformanceCurveFileData.TestData.DryBulbTemperature = DryBulbTemperatureDataValue.Current;
+                mechanicalDraftPerformanceCurveFileData.TestData.FanDriverPower = FanDriverPowerDataValue.Current;
+                mechanicalDraftPerformanceCurveFileData.TestData.BarometricPressure = BarometricPressureDataValue.Current;
+                mechanicalDraftPerformanceCurveFileData.TestData.LiquidToGasRatio = LiquidToGasRatioDataValue.Current;
             }
             catch (Exception exception)
             {

@@ -52,11 +52,11 @@ namespace CTIToolkit
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
 
-            MechanicalDraftPerformanceCurveData data;
+            MechanicalDraftPerformanceCurveFileData data;
 
             try
             {
-                data = JsonConvert.DeserializeObject<MechanicalDraftPerformanceCurveData>(File.ReadAllText(fileName));
+                data = JsonConvert.DeserializeObject<MechanicalDraftPerformanceCurveFileData>(File.ReadAllText(fileName));
             }
             catch (Exception e)
             {

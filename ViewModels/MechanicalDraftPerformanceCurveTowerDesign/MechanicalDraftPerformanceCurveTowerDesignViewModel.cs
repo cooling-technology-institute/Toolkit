@@ -717,9 +717,9 @@ namespace ViewModels
 
         #endregion DataValueAccess
 
-        public bool LoadData(MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData, out string errorMessage)
+        public bool LoadData(MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveTowerDesignInputData.LoadData(mechanicalDraftPerformanceCurveData, out errorMessage);
+            return MechanicalDraftPerformanceCurveTowerDesignInputData.LoadData(mechanicalDraftPerformanceCurveFileData, out errorMessage);
         }
 
         public bool FillAndValidate(MechanicalDraftPerformanceCurveDesignData mechanicalDraftPerformanceCurveDesignData, out string errorMessage)

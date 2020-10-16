@@ -47,32 +47,32 @@ namespace CTIToolkit
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
 
-            MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData;
+            MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData;
 
             try
             {
-                mechanicalDraftPerformanceCurveData = JsonConvert.DeserializeObject<MechanicalDraftPerformanceCurveData>(File.ReadAllText(fileName));
+                mechanicalDraftPerformanceCurveFileData = JsonConvert.DeserializeObject<MechanicalDraftPerformanceCurveFileData>(File.ReadAllText(fileName));
             }
             catch (Exception e)
             {
                 errorMessage = string.Format("Failure to read file: {0}. Exception: {1}", Path.GetFileName(fileName), e.ToString());
                 return false;
             }
-            if(mechanicalDraftPerformanceCurveData != null)
+            if(mechanicalDraftPerformanceCurveFileData != null)
             {
-                if (IsInternationalSystemOfUnits_SI_ != mechanicalDraftPerformanceCurveData.IsInternationalSystemOfUnits_SI)
+                if (IsInternationalSystemOfUnits_SI_ != mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI)
                 {
-                    IsInternationalSystemOfUnits_SI_ = mechanicalDraftPerformanceCurveData.IsInternationalSystemOfUnits_SI;
+                    IsInternationalSystemOfUnits_SI_ = mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI;
                 }
 
-                if (!MechanicalDraftPerformanceCurveViewModel.LoadData(fileName, mechanicalDraftPerformanceCurveData, out errorMessage))
+                if (!MechanicalDraftPerformanceCurveViewModel.LoadData(fileName, mechanicalDraftPerformanceCurveFileData, out errorMessage))
                 {
                     stringBuilder.AppendLine(errorMessage);
                     returnValue = false;
                     errorMessage = string.Empty;
                 }
 
-                if (!TowerDesignDataUserControl.LoadData(mechanicalDraftPerformanceCurveData, out errorMessage))
+                if (!TowerDesignDataUserControl.LoadData(mechanicalDraftPerformanceCurveFileData, out errorMessage))
                 {
                     stringBuilder.AppendLine(errorMessage);
                     returnValue = false;

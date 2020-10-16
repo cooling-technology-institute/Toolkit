@@ -25,11 +25,11 @@ namespace CTIToolkit
         private void AddTestPointButton_Click(object sender, EventArgs e)
         {
             string errorMessage;
-            AddTabPage(TestPointName.Text, new MechanicalDraftPerformanceCurveData(false), out errorMessage);
+            AddTabPage(TestPointName.Text, new MechanicalDraftPerformanceCurveFileData(false), out errorMessage);
             TestPointName.Text = string.Empty;
         }
 
-        private bool AddTabPage(string title, MechanicalDraftPerformanceCurveData data, out string errorMessage)
+        private bool AddTabPage(string title, MechanicalDraftPerformanceCurveFileData data, out string errorMessage)
         {
             bool returnValue = true;
 

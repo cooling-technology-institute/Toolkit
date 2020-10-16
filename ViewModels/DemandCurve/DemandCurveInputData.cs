@@ -81,7 +81,7 @@ namespace ViewModels
                     }
                     else
                     {
-                        value = UnitConverter.CalculatePressureFahrenheit(UnitConverter.ConvertElevationInFeetToBarometricPressure(ElevationDataValue.Current));
+                        value = UnitConverter.CalculatePsiToInchesOfMercury(UnitConverter.ConvertElevationInFeetToBarometricPressure(ElevationDataValue.Current));
                     }
                     BarometricPressureDataValue.UpdateCurrentValue(value, out errorMessage);
                 }
