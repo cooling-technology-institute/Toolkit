@@ -32,7 +32,7 @@ namespace CalculationLibrary
 
             data.TestData.LiquidToGasRatio = CalculateTestLiquidToGasRatio(data, testPsychrometricsData, designPsychrometricsData);
 
-			DetermineAdjustedTestFlow(data, testPsychrometricsData, designPsychrometricsData, output);
+			DetermineAdjustedTestFlow(data, output);
 
 //			m_filePerfData.m_designData.m_fnGetCWTArray(CWT, !data.IsInternationalSystemOfUnits_SI);
 //			m_filePerfData.m_designData.m_fnGetRangeArray(R, !data.IsInternationalSystemOfUnits_SI);
