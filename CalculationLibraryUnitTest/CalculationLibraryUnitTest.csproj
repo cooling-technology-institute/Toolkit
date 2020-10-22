@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnthalpySearchUnitTest.cs" />
     <Compile Include="CalculateFsUnitTest.cs" />
     <Compile Include="CalculateSaturatedHumidityRatioUnitTest.cs" />
     <Compile Include="CalculateDegreeOfSaturationUnitTest.cs" />
