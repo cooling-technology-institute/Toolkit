@@ -143,14 +143,14 @@ namespace CalculationLibrary
         // (double pressure, double temperatureDryBulb, double temperatureWetBulb)
         public double CalculateWetBulbTemperature(PsychrometricsData data)
         {
-            double temptolerance = .0005;
-            double RHtolerance = .00005;
-            double RHmid;
+            double temperatureTolerance = .0005;
+            double relativeHumdityDryBulbTolerance = .00005;
+            double relativeHumdityMidpoint;
 
-            double RHhigh = CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.DryBulbTemperature, data.DryBulbTemperature);
+            double relativeHumdityDryBulb = CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.DryBulbTemperature, data.DryBulbTemperature);
 
             //Calculate saturation value and compare to program and tolerance limits
-            if (Math.Abs(RHhigh - (data.RelativeHumidity / 100)) <= RHtolerance)
+            if (Math.Abs(relativeHumdityDryBulb - (data.RelativeHumidity / 100)) <= relativeHumdityDryBulbTolerance)
             {
                 return data.DryBulbTemperature;
             }
@@ -161,20 +161,20 @@ namespace CalculationLibrary
             double trtbis = t1;
             double DT = t2 - t1;
             double tmid;
-            double RelativeHumidity;
+            double relativeHumidity;
 
             do
             {
                 DT /= 2;
                 tmid = trtbis + DT;
-                RelativeHumidity = CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, tmid, data.DryBulbTemperature);
-                RHmid = data.RelativeHumidity - RelativeHumidity;
-                if (RHmid >= 0.0)
+                relativeHumidity = CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.DryBulbTemperature, tmid);
+                relativeHumdityMidpoint = data.RelativeHumidity - relativeHumidity;
+                if (relativeHumdityMidpoint >= 0.0)
                 {
                     trtbis = tmid;
                 }
             }
-            while ((Math.Abs(DT) >= temptolerance) && (RHmid != 0.0));
+            while ((Math.Abs(DT) >= temperatureTolerance) && (relativeHumdityMidpoint != 0.0));
 
             // found wet bulb
             return tmid;
@@ -264,7 +264,7 @@ namespace CalculationLibrary
             //'****** Uses bisection method to search for roots.  Limits -20 to 60 øC ****
             //'Establish tolerance on enthalpy search
 
-            double temptolerance = (data.IsInternationalSystemOfUnits_SI) ? 0.00001 : 0.0001;
+            double temperatureTolerance = (data.IsInternationalSystemOfUnits_SI) ? 0.00001 : 0.0001;
             double Htolerance = 0.00005;
             double temperatureCold = (data.IsInternationalSystemOfUnits_SI) ? -20.0 : 0.0; // cold
             double temperatureHot = (data.IsInternationalSystemOfUnits_SI) ? 60.0 : 140;  // hot
@@ -343,12 +343,13 @@ namespace CalculationLibrary
             //Begin bisection root search procedure from Numerical Recipes in BASIC, p 193
             double trtbis = temperatureCold;
             double DT = temperatureHot - temperatureCold;
-            double hmid;
+            double enthalpyMidPoint;
 
             do
             {
                 DT /= 2.0;
                 data.WetBulbTemperature = trtbis + DT;
+
                 if (saturation)
                 {
                     data.DryBulbTemperature = data.WetBulbTemperature;
@@ -356,14 +357,14 @@ namespace CalculationLibrary
 
                 CalculateProperties(data);
 
-                hmid = data.RootEnthalpy - data.Enthalpy;
+                enthalpyMidPoint = data.RootEnthalpy - data.Enthalpy;
 
-                if (hmid >= 0.0)
+                if (enthalpyMidPoint >= 0.0)
                 {
                     trtbis = data.WetBulbTemperature;
                 }
             } 
-            while ((Math.Abs(DT) >= temptolerance) && (hmid != 0.0));
+            while ((Math.Abs(DT) >= temperatureTolerance) && (enthalpyMidPoint != 0.0));
 
             if (saturation)
             {
@@ -649,147 +650,147 @@ namespace CalculationLibrary
             return data.DewPoint;
         }
 
-        public void CalculatePerformanceData(int INUM, double[] X, double[] YMEAS, double XREAL, ref double YFIT, double[] Y2)
-        {
-            //'						I			I			I				I				O			O
-            //'  EXAMPLE:			4			2			112
-            //'						9			113
-            //'						16			114
-            //'						23			115
-            //'     DIM YMEASP(INUM)
+        //public void CalculatePerformanceData(int INUM, double[] X, double[] YMEAS, double XREAL, ref double YFIT, double[] Y2)
+        //{
+        //    //'						I			I			I				I				O			O
+        //    //'  EXAMPLE:			4			2			112
+        //    //'						9			113
+        //    //'						16			114
+        //    //'						23			115
+        //    //'     DIM YMEASP(INUM)
 
-            //' DETERMINE THE SECOND DERIVITATIVES FOR THE SPLINE INTERPOLATION
+        //    //' DETERMINE THE SECOND DERIVITATIVES FOR THE SPLINE INTERPOLATION
 
-            SPLINE(X, YMEAS, INUM, 1E+31, 1E+31, Y2);
+        //    SPLINE(X, YMEAS, INUM, 1E+31, 1E+31, Y2);
 
-            //' DETERMINE INTERPOLATED VALUES
-            SPLINT(X, YMEAS, Y2, INUM, XREAL, ref YFIT);
+        //    //' DETERMINE INTERPOLATED VALUES
+        //    SPLINT(X, YMEAS, Y2, INUM, XREAL, ref YFIT);
 
-            //'ERASE YMEASP
-        }
+        //    //'ERASE YMEASP
+        //}
 
-        public void SPLINE(double[] X, double[] Y, int INUM, double YP1, double YPN, double[] Y2)
-        {
-            //'Cubic Spline subroutine from Numerical Recipes in BASIC (1994), p43
-            double QN;
-            double UN;
-            double[] U = new double[INUM];
-            int I;
+        //public void SPLINE(double[] X, double[] Y, int INUM, double YP1, double YPN, double[] Y2)
+        //{
+        //    //'Cubic Spline subroutine from Numerical Recipes in BASIC (1994), p43
+        //    double QN;
+        //    double UN;
+        //    double[] U = new double[INUM];
+        //    int I;
 
-            // Check preconditions
-            if (INUM < 2)
-            {
-                //todo ASSERT(0);
-                return;
-            }
-            for (I = 1; I < INUM; I++)
-            {
-                if (X[I - 1] >= X[I])
-                {
-                    //todo ASSERT(0);
-                    return;
-                }
-            }
+        //    // Check preconditions
+        //    if (INUM < 2)
+        //    {
+        //        //todo ASSERT(0);
+        //        return;
+        //    }
+        //    for (I = 1; I < INUM; I++)
+        //    {
+        //        if (X[I - 1] >= X[I])
+        //        {
+        //            //todo ASSERT(0);
+        //            return;
+        //        }
+        //    }
 
-            if (YP1 > 9.9E+29)
-            {
-                Y2[0] = 0.0;
-                U[0] = 0.0;
-            }
-            else
-            {
-                Y2[0] = -.5;
-                U[0] = (3.0 / (X[1] - X[0])) * ((Y[1] - Y[0]) / (X[1] - X[0]) - YP1);
-            }
+        //    if (YP1 > 9.9E+29)
+        //    {
+        //        Y2[0] = 0.0;
+        //        U[0] = 0.0;
+        //    }
+        //    else
+        //    {
+        //        Y2[0] = -.5;
+        //        U[0] = (3.0 / (X[1] - X[0])) * ((Y[1] - Y[0]) / (X[1] - X[0]) - YP1);
+        //    }
 
-            for (I = 1; I < INUM - 1; I++)
-            {
-                double SIG = (X[I] - X[I - 1]) / (X[I + 1] - X[I - 1]);
-                double P = SIG * Y2[I - 1] + 2.0;
-                Y2[I] = (SIG - 1.0) / P;
-                double DUM1 = (Y[I + 1] - Y[I]) / (X[I + 1] - X[I]);
-                double DUM2 = (Y[I] - Y[I - 1]) / (X[I] - X[I - 1]);
-                U[I] = (6.0 * (DUM1 - DUM2) / (X[I + 1] - X[I - 1]) - SIG * U[I - 1]) / P;
-            }
+        //    for (I = 1; I < INUM - 1; I++)
+        //    {
+        //        double SIG = (X[I] - X[I - 1]) / (X[I + 1] - X[I - 1]);
+        //        double P = SIG * Y2[I - 1] + 2.0;
+        //        Y2[I] = (SIG - 1.0) / P;
+        //        double DUM1 = (Y[I + 1] - Y[I]) / (X[I + 1] - X[I]);
+        //        double DUM2 = (Y[I] - Y[I - 1]) / (X[I] - X[I - 1]);
+        //        U[I] = (6.0 * (DUM1 - DUM2) / (X[I + 1] - X[I - 1]) - SIG * U[I - 1]) / P;
+        //    }
 
-            if (YPN > 9.9E+29)
-            {
-                QN = 0.0;
-                UN = 0.0;
-            }
-            else
-            {
-                QN = .5;
-                //todo is it IN or INUM UN = (3.0 / (X[INUM - 1] - X[INUM - 2])) * (YPN - (Y[INUM - 1] - Y[IN - 2]) / (X[INUM - 1] - X[INUM - 2]));
-                UN = (3.0 / (X[INUM - 1] - X[INUM - 2])) * (YPN - (Y[INUM - 1] - Y[INUM - 2]) / (X[INUM - 1] - X[INUM - 2]));
-            }
+        //    if (YPN > 9.9E+29)
+        //    {
+        //        QN = 0.0;
+        //        UN = 0.0;
+        //    }
+        //    else
+        //    {
+        //        QN = .5;
+        //        //todo is it IN or INUM UN = (3.0 / (X[INUM - 1] - X[INUM - 2])) * (YPN - (Y[INUM - 1] - Y[IN - 2]) / (X[INUM - 1] - X[INUM - 2]));
+        //        UN = (3.0 / (X[INUM - 1] - X[INUM - 2])) * (YPN - (Y[INUM - 1] - Y[INUM - 2]) / (X[INUM - 1] - X[INUM - 2]));
+        //    }
 
-            Y2[INUM - 1] = (UN - QN * U[INUM - 2]) / (QN * Y2[INUM - 2] + 1.0);
+        //    Y2[INUM - 1] = (UN - QN * U[INUM - 2]) / (QN * Y2[INUM - 2] + 1.0);
 
-            for (int K = INUM - 2; K >= 0; K--)
-            {
-                Y2[K] = Y2[K] * Y2[K + 1] + U[K];
-            }
-        }
+        //    for (int K = INUM - 2; K >= 0; K--)
+        //    {
+        //        Y2[K] = Y2[K] * Y2[K + 1] + U[K];
+        //    }
+        //}
 
-        public void SPLINT(double[] XA, double[] YA, double[] Y2A, int INUM, double X, ref double Y)
-        {
-            //' Determine interpolated Y value
-            //' Rev: 2-22-99 to handle either Increasing or Decreasing XA array
-            if ((INUM < 2) || (XA[0] == XA[1]))
-            {
-                //todo //todo ASSERT(0);
-                return;
-            }
+        //public void SPLINT(double[] XA, double[] YA, double[] Y2A, int INUM, double X, ref double Y)
+        //{
+        //    //' Determine interpolated Y value
+        //    //' Rev: 2-22-99 to handle either Increasing or Decreasing XA array
+        //    if ((INUM < 2) || (XA[0] == XA[1]))
+        //    {
+        //        //todo //todo ASSERT(0);
+        //        return;
+        //    }
 
-            int ILO = 0;
-            int IHI = (INUM - 1);
-            bool bIncreasingX = (XA[1] > XA[0]);
+        //    int ILO = 0;
+        //    int IHI = (INUM - 1);
+        //    bool bIncreasingX = (XA[1] > XA[0]);
 
-            while (IHI - ILO > 1)
-            {
-                int II = ((IHI + ILO) / 2);
-                if (bIncreasingX)
-                {
-                    if (XA[II] > X)
-                    {
-                        IHI = II;
-                    }
-                    else
-                    {
-                        ILO = II;
-                    }
-                }
-                else               //X DECREASING
-                {
-                    if (XA[II] > X)
-                    {
-                        ILO = II;
-                    }
-                    else
-                    {
-                        IHI = II;
-                    }
-                }
-            }
+        //    while (IHI - ILO > 1)
+        //    {
+        //        int II = ((IHI + ILO) / 2);
+        //        if (bIncreasingX)
+        //        {
+        //            if (XA[II] > X)
+        //            {
+        //                IHI = II;
+        //            }
+        //            else
+        //            {
+        //                ILO = II;
+        //            }
+        //        }
+        //        else               //X DECREASING
+        //        {
+        //            if (XA[II] > X)
+        //            {
+        //                ILO = II;
+        //            }
+        //            else
+        //            {
+        //                IHI = II;
+        //            }
+        //        }
+        //    }
 
-            double DX = (XA[IHI] - XA[ILO]);
-            if (DX == 0.0)
-            {
-                //todo ASSERT(0); //"BAD XA INPUT"
-                return;
-            }
-            double A = ((XA[IHI] - X) / DX);
-            double B = ((X - XA[ILO]) / DX);
-            Y = A * YA[ILO] + B * YA[IHI];
+        //    double DX = (XA[IHI] - XA[ILO]);
+        //    if (DX == 0.0)
+        //    {
+        //        //todo ASSERT(0); //"BAD XA INPUT"
+        //        return;
+        //    }
+        //    double A = ((XA[IHI] - X) / DX);
+        //    double B = ((X - XA[ILO]) / DX);
+        //    Y = A * YA[ILO] + B * YA[IHI];
 
-            // Change suggested by Rich Harrison on Aug. 3, 2001:
-            // Do just the linear fit (last calc above) if x is beyond array range
-            if (((bIncreasingX) && (X > XA[0]) && (X < XA[INUM - 1])) || ((!bIncreasingX) && (X > XA[INUM - 1]) && (X < XA[0])))
-            {
-                Y += ((Math.Pow(A, 3.0) - A) * Y2A[ILO] + (Math.Pow(B, 3.0) - B) * Y2A[IHI]) * (Math.Pow(DX, 2.0)) / 6.0;
-            }
-        }
+        //    // Change suggested by Rich Harrison on Aug. 3, 2001:
+        //    // Do just the linear fit (last calc above) if x is beyond array range
+        //    if (((bIncreasingX) && (X > XA[0]) && (X < XA[INUM - 1])) || ((!bIncreasingX) && (X > XA[INUM - 1]) && (X < XA[0])))
+        //    {
+        //        Y += ((Math.Pow(A, 3.0) - A) * Y2A[ILO] + (Math.Pow(B, 3.0) - B) * Y2A[IHI]) * (Math.Pow(DX, 2.0)) / 6.0;
+        //    }
+        //}
 
         public double CalculateTestLiquidToGasRatio(MechanicalDraftPerformanceCurveFileData data, PsychrometricsData testPsychrometricsData, PsychrometricsData designPsychrometricsData)
         {
@@ -824,6 +825,12 @@ namespace CalculationLibrary
                 designPsychrometricsData.BarometricPressure = UnitConverter.ConvertBarometricPressureToPsi(designPsychrometricsData.BarometricPressure);
                 testPsychrometricsData.BarometricPressure = UnitConverter.ConvertBarometricPressureToPsi(testPsychrometricsData.BarometricPressure);
             }
+
+            PsychrometricsData searchDesignPsychrometricsData = new PsychrometricsData()
+            {
+                IsInternationalSystemOfUnits_SI = designPsychrometricsData.IsInternationalSystemOfUnits_SI,
+                BarometricPressure = designPsychrometricsData.BarometricPressure
+            };
 
             CalculateProperties(designPsychrometricsData);
             CalculateProperties(testPsychrometricsData);
@@ -860,17 +867,16 @@ namespace CalculationLibrary
 
                 //'First determine Design Leaving Air Density, designPsychrometricsData.Density  *****************************
                 //'first step is determine Leaving air Enthalpy Design, HOutD                
-                designPsychrometricsData.RootEnthalpy = designPsychrometricsData.Enthalpy 
+                searchDesignPsychrometricsData.RootEnthalpy = designPsychrometricsData.Enthalpy 
                                                         + data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio 
                                                         * Cpw 
                                                         * (data.DesignData.MechanicalDraftPerformanceCurveData.HotWaterTemperature - data.DesignData.MechanicalDraftPerformanceCurveData.ColdWaterTemperature);
-
 
                 //EnthalpysearchIP(int sat, double P,                                    double RootEnthalpy, ref double OutputEnthalpy, ref double temperatureWetBulb, ref double temperatureDryBulb, ref double humidityRatio, ref double relativeHumidity, ref double specificVolume, ref double Density, ref double DEWPoint)
                 //EnthalpysearchIP(1,       designPsychrometricsData.BarometricPressure, HOutD,               ref OutputEnthalpy,        ref LWBD,                      ref LDBD,                      ref humidityRatio,        ref relativeHumidity,        ref designPsychrometricsData.SpecificVolume,                ref designPsychrometricsData.Density,        ref DEWPoint);
 
                 //'Call Enthalpy Search subroutine with calculated HOutD value
-                EnthalpySearch(true, designPsychrometricsData, stringBuilder);
+                EnthalpySearch(true, searchDesignPsychrometricsData, stringBuilder);
 
                 //    //'Store Density Out as Density Design and SV Out as SV Design
                 output.Density = designPsychrometricsData.Density;
@@ -880,6 +886,12 @@ namespace CalculationLibrary
                 //    //'Initial guess of Leaving Wet Bulb is average of Test Entering and Leaving temperature
                 testPsychrometricsData.WetBulbTemperature = testPsychrometricsData.DryBulbTemperature = (data.TestData.HotWaterTemperature + data.TestData.ColdWaterTemperature) / 2.0;
                 double enthalpy = testPsychrometricsData.Enthalpy;
+
+                PsychrometricsData testSearchPsychrometricsData = new PsychrometricsData()
+                {
+                    IsInternationalSystemOfUnits_SI = designPsychrometricsData.IsInternationalSystemOfUnits_SI,
+                    BarometricPressure = testPsychrometricsData.BarometricPressure
+                };
 
                 bool bGoto200 = true;
                 while (bGoto200)
@@ -908,20 +920,36 @@ namespace CalculationLibrary
                     {
                         output.LiquidToGasRatio = data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio
                                                   * (data.TestData.WaterFlowRate / data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate)
-                                                  * Math.Pow((testPsychrometricsData.Density / designPsychrometricsData.Density * data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower / data.TestData.FanDriverPower), (1.0 / 3.0))
-                                                  * (testPsychrometricsData.SpecificVolume / designPsychrometricsData.SpecificVolume);
+                                                  * Math.Pow((testPsychrometricsData.Density / searchDesignPsychrometricsData.Density * data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower / data.TestData.FanDriverPower), (1.0 / 3.0))
+                                                  * (testPsychrometricsData.SpecificVolume / searchDesignPsychrometricsData.SpecificVolume);
                     }
 
                     stringBuilder.AppendFormat("LiquidToGasRatio {0}\n", output.LiquidToGasRatio.ToString("F6"));
+                    stringBuilder.AppendFormat("LinGD {0}\n", data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio.ToString("F6"));
+                    stringBuilder.AppendFormat("FLOWt {0}\n", data.TestData.WaterFlowRate.ToString("F6"));
+                    stringBuilder.AppendFormat("FLOWd {0}\n", data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate.ToString("F6"));
+                    stringBuilder.AppendFormat("DenOutT {0}\n", testPsychrometricsData.Density.ToString("F6"));
+                    stringBuilder.AppendFormat("DenOutD {0}\n", searchDesignPsychrometricsData.Density.ToString("F6"));
+                    stringBuilder.AppendFormat("BHPd {0}\n", data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower.ToString("F6"));
+                    stringBuilder.AppendFormat("BHPt {0}\n", data.TestData.FanDriverPower.ToString("F6"));
+                    stringBuilder.AppendFormat("SVOutT {0}\n", testPsychrometricsData.SpecificVolume.ToString("F6"));
+                    stringBuilder.AppendFormat("SVOutD {0}\n", searchDesignPsychrometricsData.SpecificVolume.ToString("F6"));
 
                     // HCalcT = HInT + LinGt * Cpw * (EWTt - LWTt);
-                    testPsychrometricsData.RootEnthalpy = enthalpy + output.LiquidToGasRatio * Cpw * (data.TestData.HotWaterTemperature - data.TestData.ColdWaterTemperature);
+                    testSearchPsychrometricsData.RootEnthalpy = enthalpy + output.LiquidToGasRatio * Cpw * (data.TestData.HotWaterTemperature - data.TestData.ColdWaterTemperature);
+
+                    stringBuilder.AppendFormat("HCalcT {0}\n", testSearchPsychrometricsData.RootEnthalpy.ToString("F6"));
+                    stringBuilder.AppendFormat("HInT {0}\n", enthalpy.ToString("F6"));
+                    stringBuilder.AppendFormat("LinGt {0}\n", output.LiquidToGasRatio.ToString("F6"));
+                    stringBuilder.AppendFormat("Cpw {0}\n", Cpw.ToString("F6"));
+                    stringBuilder.AppendFormat("EWTt {0}\n", data.TestData.HotWaterTemperature.ToString("F6"));
+                    stringBuilder.AppendFormat("LWTt {0}\n", data.TestData.ColdWaterTemperature.ToString("F6"));
 
                     //'Call Enthalpy Search subroutine for calculated Href value
-                    EnthalpySearch(true, testPsychrometricsData, stringBuilder);
+                    EnthalpySearch(true, testSearchPsychrometricsData, stringBuilder);
 
                     //'Check to see if Enthalpy  of Leaving Wet Bulb Test (testPsychrometricsData.Enthalpy) converged to calculated value (HCalcT)
-                    if (Math.Abs(testPsychrometricsData.RootEnthalpy - testPsychrometricsData.Enthalpy) > 0.0002)
+                    if (Math.Abs(testSearchPsychrometricsData.RootEnthalpy - testSearchPsychrometricsData.Enthalpy) > 0.0002)
                     {
                         testPsychrometricsData.WetBulbTemperature = testPsychrometricsData.DryBulbTemperature = testPsychrometricsData.WetBulbTemperature;
                         bGoto200 = true;
@@ -956,14 +984,17 @@ namespace CalculationLibrary
             //'Equation 6.1, Adjusted TestFlow
 
             stringBuilder.AppendFormat(" test FanDriverPower {0} \n", data.TestData.FanDriverPower.ToString("F6"));
-            stringBuilder.AppendFormat(" design Density {0} \n", designPsychrometricsData.Density.ToString("F6"));
+            stringBuilder.AppendFormat(" design Density {0} \n", searchDesignPsychrometricsData.Density.ToString("F6"));
             stringBuilder.AppendFormat(" test WaterFlowRate {0} \n", data.TestData.WaterFlowRate.ToString("F6"));
             stringBuilder.AppendFormat(" design FanDriverPower {0} \n", data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower.ToString("F6"));
             stringBuilder.AppendFormat(" test Density {0} \n", testPsychrometricsData.Density.ToString("F6"));
             double adjustedFlow = ((data.TestData.FanDriverPower == 0.0) || (designPsychrometricsData.Density == 0.0)) ? 0.0 : 
-                data.TestData.WaterFlowRate * Math.Pow(data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower / data.TestData.FanDriverPower * testPsychrometricsData.Density / designPsychrometricsData.Density, (1.0 / 3.0));
+                data.TestData.WaterFlowRate * Math.Pow(data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower / data.TestData.FanDriverPower * testPsychrometricsData.Density / searchDesignPsychrometricsData.Density, (1.0 / 3.0));
 
             File.WriteAllText("adjNew.txt", stringBuilder.ToString());
+            output.AdjustedFlow = adjustedFlow;
+            output.Density = testPsychrometricsData.Density;
+            output.ColdWaterTemperatureDeviation = 
             return adjustedFlow;
         }
 
