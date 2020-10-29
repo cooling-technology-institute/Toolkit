@@ -71,9 +71,7 @@ namespace CalculationLibraryUnitTest
 			Assert.AreEqual(39.941644668579102, output.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
 			Assert.AreEqual(1.0791204854438692, output.Density, "Density value does not match");
 			Assert.AreEqual(1.2839296953830412, output.LiquidToGasRatio, "LiquidToGasRatio value does not match");
-			//Assert.AreEqual(3549.8089648534847, output.PredictedFlow, "PredictedFlow value does not match");
 			Assert.AreEqual(0.96780162756832133, output.SpecificVolume, "SpecificVolume value does not match");
-			//Assert.AreEqual(0.96780162756832133, output.TowerCapability, "TowerCapability value does not match");
 			Assert.AreEqual(152.00262906811440, output.WetBulbTemperature, "WetBulbTemperature value does not match");
 		}
 
@@ -134,14 +132,12 @@ namespace CalculationLibraryUnitTest
 			}
 
 			Assert.IsFalse(methodThrew, "Method threw");
-			Assert.AreEqual(3549.8089648534847, output.AdjustedFlow, "AdjustedFlow value does not match");
-			Assert.AreEqual(39.941644668579102, output.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
-			Assert.AreEqual(1.0791204854438692, output.Density, "Density value does not match");
-			Assert.AreEqual(1.2839296953830412, output.LiquidToGasRatio, "LiquidToGasRatio value does not match");
-			Assert.AreEqual(3549.8089648534847, output.PredictedFlow, "PredictedFlow value does not match");
+			Assert.AreEqual(51028.716619350191, output.AdjustedFlow, "AdjustedFlow value does not match");
+			Assert.AreEqual(102.01949119567871, output.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
+			Assert.AreEqual(0.067379633634750025, output.Density, "Density value does not match");
+			Assert.AreEqual(1.1643467203016296, output.LiquidToGasRatio, "LiquidToGasRatio value does not match");
 			Assert.AreEqual(0.96780162756832133, output.SpecificVolume, "SpecificVolume value does not match");
-			//Assert.AreEqual(0.96780162756832133, output.TowerCapability, "TowerCapability value does not match");
-			Assert.AreEqual(152.00262906811440, output.WetBulbTemperature, "WetBulbTemperature value does not match");
+			Assert.AreEqual(73.037664309523052, output.WetBulbTemperature, "WetBulbTemperature value does not match");
 		}
 	}
 }

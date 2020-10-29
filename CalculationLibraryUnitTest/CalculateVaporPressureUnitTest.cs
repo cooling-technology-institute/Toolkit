@@ -9,6 +9,27 @@ namespace CalculationLibraryUnitTest
         CalculationLibrary.CalculationLibrary CalculationLibrary { get; set; }
 
         [TestMethod]
+        public void SI_CalculateVaporPressureTest()
+        {
+            double returnValue = 0.0;
+            bool methodThrew = false;
+            double airTemperature = 50;
+
+            try
+            {
+                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                returnValue = CalculationLibrary.CalculateVaporPressure(true, airTemperature);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.AreEqual(12.349856207156227, returnValue, "Returned value does not match");
+        }
+
+        [TestMethod]
         public void SI_CalculateVaporPressure_BelowFreezingTest()
         {
             double returnValue = 0.0;
@@ -156,11 +177,74 @@ namespace CalculationLibraryUnitTest
         }
 
         [TestMethod]
+        public void SI_CalculateVaporPressure_BelowMiniumTemperatureTest()
+        {
+            double returnValue = 0.0;
+            bool methodThrew = false;
+            double airTemperature = -274;
+
+            try
+            {
+                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                returnValue = CalculationLibrary.CalculateVaporPressure(true, airTemperature);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.AreEqual(0.0, returnValue, "Returned value does not match");
+        }
+
+        [TestMethod]
+        public void IP_CalculateVaporPressureTest()
+        {
+            double returnValue = 0.0;
+            bool methodThrew = false;
+            double airTemperature = 50;
+
+            try
+            {
+                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                returnValue = CalculationLibrary.CalculateVaporPressure(false, airTemperature);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.AreEqual(0.17810563146813432, returnValue, "Returned value does not match");
+        }
+
+        [TestMethod]
         public void IP_CalculateVaporPressure_MiniumTemperatureTest()
         {
             double returnValue = 0.0;
             bool methodThrew = false;
             double airTemperature = -459.67;
+
+            try
+            {
+                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                returnValue = CalculationLibrary.CalculateVaporPressure(false, airTemperature);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.AreEqual(0.0, returnValue, "Returned value does not match");
+        }
+
+        [TestMethod]
+        public void IP_CalculateVaporPressure_BelowMiniumTemperatureTest()
+        {
+            double returnValue = 0.0;
+            bool methodThrew = false;
+            double airTemperature = -460;
 
             try
             {

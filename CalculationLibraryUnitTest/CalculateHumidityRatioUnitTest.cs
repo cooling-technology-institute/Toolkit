@@ -40,35 +40,6 @@ namespace CalculationLibraryUnitTest
         }
 
         [TestMethod]
-        public void IP_CalculateHumidityRatioTest()
-        {
-            bool methodThrew = false;
-
-            PsychrometricsData data = new PsychrometricsData()
-            {
-                IsInternationalSystemOfUnits_SI = false,
-                DryBulbTemperature = 70,
-                WetBulbTemperature = 90,
-                BarometricPressure = 29.145
-            };
-
-            try
-            {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                CalculationLibrary.CalculateVariables(data);
-
-                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureWetBulb, data.FsWetBulb, data.DryBulbTemperature, data.WetBulbTemperature);
-            }
-            catch
-            {
-                methodThrew = true;
-            }
-
-            Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(0.020187846371028835, data.HumidityRatio, "HumidityRatio value does not match");
-        }
-
-        [TestMethod]
         public void SI_CalculateHumidityRatio_ZeroTest()
         {
             bool methodThrew = false;
@@ -97,6 +68,36 @@ namespace CalculationLibraryUnitTest
             Assert.IsFalse(methodThrew, "Method threw");
             Assert.AreEqual(0.0, data.HumidityRatio, "HumidityRatio value does not match");
         }
+
+        [TestMethod]
+        public void IP_CalculateHumidityRatioTest()
+        {
+            bool methodThrew = false;
+
+            PsychrometricsData data = new PsychrometricsData()
+            {
+                IsInternationalSystemOfUnits_SI = false,
+                DryBulbTemperature = 70,
+                WetBulbTemperature = 90,
+                BarometricPressure = 29.145
+            };
+
+            try
+            {
+                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary.CalculateVariables(data);
+
+                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.SaturationVaporPressureWetBulb, data.FsWetBulb, data.DryBulbTemperature, data.WetBulbTemperature);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.AreEqual(0.020187846371028835, data.HumidityRatio, "HumidityRatio value does not match");
+        }
+
 
         [TestMethod]
         public void IP_CalculateHumidityRatio_ZeroTest()
