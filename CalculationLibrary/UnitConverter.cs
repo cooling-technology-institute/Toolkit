@@ -35,7 +35,7 @@ namespace CalculationLibrary
 
         public static double ConvertBarometricPressureToPsi(double barometricPressure)
         {
-            return SeaLevelBasePressure * barometricPressure / OneAtmosphere;
+            return SeaLevelBasePressure * barometricPressure / BarometricPressure;
         }
 
         public static double ConvertBarometricPressureToElevationInFeet(double barometricPressure)

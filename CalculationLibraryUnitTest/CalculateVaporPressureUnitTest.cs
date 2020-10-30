@@ -202,7 +202,7 @@ namespace CalculationLibraryUnitTest
         {
             double returnValue = 0.0;
             bool methodThrew = false;
-            double airTemperature = 50;
+            double airTemperature = 78.78;
 
             try
             {
@@ -215,7 +215,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(0.17810563146813432, returnValue, "Returned value does not match");
+            Assert.AreEqual(0.48746047777005813, returnValue, "Returned value does not match");
         }
 
         [TestMethod]
