@@ -1,6 +1,4 @@
-﻿using System;
-using CalculationLibrary;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
 
 namespace CalculationLibraryUnitTest
@@ -64,7 +62,36 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(40.345922298440044, data.DewPoint, "DewPoint value does not match");
+            Assert.AreEqual(0.0, data.DewPoint, "DewPoint value does not match");
+        }
+
+        [TestMethod]
+        public void SI_CalculateDewPointFreezingTest()
+        {
+            bool methodThrew = false;
+
+            PsychrometricsData data = new PsychrometricsData()
+            {
+                IsInternationalSystemOfUnits_SI = true,
+                DryBulbTemperature = -13,
+                WetBulbTemperature = -1,
+                BarometricPressure = 14.56
+            };
+
+            try
+            {
+                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary.CalculateVariables(data);
+                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data);
+                data.DewPoint = CalculationLibrary.CalculateDewPoint(data);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.AreEqual(1.2920507862745469, data.DewPoint, "DewPoint value does not match");
         }
 
         [TestMethod]
@@ -121,7 +148,36 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(40.345922298440044, data.DewPoint, "DewPoint value does not match");
+            Assert.AreEqual(0.0, data.DewPoint, "DewPoint value does not match");
+        }
+
+        [TestMethod]
+        public void IP_CalculateDewPointFreezingTest()
+        {
+            bool methodThrew = false;
+
+            PsychrometricsData data = new PsychrometricsData()
+            {
+                IsInternationalSystemOfUnits_SI = false,
+                DryBulbTemperature = -20,
+                WetBulbTemperature = 31,
+                BarometricPressure = 29.145
+            };
+
+            try
+            {
+                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary.CalculateVariables(data);
+                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data);
+                data.DewPoint = CalculationLibrary.CalculateDewPoint(data);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.AreEqual(85.878779107265359, data.DewPoint, "DewPoint value does not match");
         }
     }
 }

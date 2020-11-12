@@ -555,106 +555,123 @@ namespace CalculationLibrary
             double derivativeOfHumidityRatio;
             double fsDewPoint;
 
-            double C1 = (data.IsInternationalSystemOfUnits_SI) ? -5674.5359 : -10214.16462;
-            double C3 = (data.IsInternationalSystemOfUnits_SI) ? -.009677843 : -0.00537657944;
-            double C4 = (data.IsInternationalSystemOfUnits_SI) ? .00000062215701 : .000000192023769;
-            double C5 = (data.IsInternationalSystemOfUnits_SI) ? .0000000020747825 : 3.55758316E-10;
-            double C6 = (data.IsInternationalSystemOfUnits_SI) ? -9.484024000000001E-13 : -9.03446883E-14;
-            double C7 = 4.1635019;
-
-            double C8 = (data.IsInternationalSystemOfUnits_SI) ? -5800.2206 : -10440.39708;
-            double C10 = (data.IsInternationalSystemOfUnits_SI) ? -.048640239 : -0.027022355;
-            double C11 = (data.IsInternationalSystemOfUnits_SI) ? .000041764768 : 0.00001289036;
-            double C12 = (data.IsInternationalSystemOfUnits_SI) ? -.000000014452093 : -0.000000002478068;
-            double C13 = 6.5459673;
-
-            double C14 = (data.IsInternationalSystemOfUnits_SI) ? 6.54 : 100.45;
-            double C15 = (data.IsInternationalSystemOfUnits_SI) ? 14.526 : 33.193;
-            double C16 = (data.IsInternationalSystemOfUnits_SI) ? 0.7389 : 2.319;
-            double C17 = (data.IsInternationalSystemOfUnits_SI) ? 0.09486 : 0.17074;
-            double C18 = (data.IsInternationalSystemOfUnits_SI) ? 0.4569 : 1.2063;
-            
-            double denominator;
-            double freezing = (data.IsInternationalSystemOfUnits_SI) ? 0.0 : 32.0;
-            double c1 = (data.IsInternationalSystemOfUnits_SI) ? 6.09 : 90.12;
-            double c2 = (data.IsInternationalSystemOfUnits_SI) ? 0.4959 : 0.8927;
-            double c3 = (data.IsInternationalSystemOfUnits_SI) ? 12.608 : 26.142;
-
             // Method to determine Dew Point - Fs varies with temp - Process in iterative passes.
             double dewPoint = data.WetBulbTemperature;
 
-            fsDewPoint = CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.WetBulbTemperature);
-
-            for (iLoop = 1; iLoop <= 2; iLoop++)      // Makes exactly two passes to get best first estimate
+            if (data.HumidityRatio <= 0.0)
             {
-                // Calculate dew point pressure
-                denominator = (fsDewPoint * (.62198 + data.HumidityRatio));
-                dewPointPressure = (denominator == 0.0) ? 0.0 : (data.BarometricPressure * data.HumidityRatio / denominator);  //ASHRAE Eq.(34)
+                dewPoint = 0.0;
+            }
+            else
+            {
+                double C1 = (data.IsInternationalSystemOfUnits_SI) ? -5674.5359 : -10214.16462;
+                double C3 = (data.IsInternationalSystemOfUnits_SI) ? -0.009677843 : -0.00537657944;
+                double C4 = (data.IsInternationalSystemOfUnits_SI) ? 0.00000062215701 : 0.000000192023769;
+                double C5 = (data.IsInternationalSystemOfUnits_SI) ? 0.0000000020747825 : 3.55758316E-10;
+                double C6 = (data.IsInternationalSystemOfUnits_SI) ? -9.484024000000001E-13 : -9.03446883E-14;
+                double C7 = 4.1635019;
 
-                if(dewPointPressure > 0)
+                double C8 = (data.IsInternationalSystemOfUnits_SI) ? -5800.2206 : -10440.39708;
+                double C10 = (data.IsInternationalSystemOfUnits_SI) ? -0.048640239 : -0.027022355;
+                double C11 = (data.IsInternationalSystemOfUnits_SI) ? 0.000041764768 : 0.00001289036;
+                double C12 = (data.IsInternationalSystemOfUnits_SI) ? -0.000000014452093 : -0.000000002478068;
+                double C13 = 6.5459673;
+
+                double C14 = (data.IsInternationalSystemOfUnits_SI) ? 6.54 : 100.45;
+                double C15 = (data.IsInternationalSystemOfUnits_SI) ? 14.526 : 33.193;
+                double C16 = (data.IsInternationalSystemOfUnits_SI) ? 0.7389 : 2.319;
+                double C17 = (data.IsInternationalSystemOfUnits_SI) ? 0.09486 : 0.17074;
+                double C18 = (data.IsInternationalSystemOfUnits_SI) ? 0.4569 : 1.2063;
+
+                double denominator;
+                double freezing = (data.IsInternationalSystemOfUnits_SI) ? 0.0 : 32.0;
+                double c1 = (data.IsInternationalSystemOfUnits_SI) ? 6.09 : 90.12;
+                double c2 = (data.IsInternationalSystemOfUnits_SI) ? 0.4959 : 0.8927;
+                double c3 = (data.IsInternationalSystemOfUnits_SI) ? 12.608 : 26.142;
+
+                double temperature = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertCelsiusToFahrenheit(dewPoint) : dewPoint;
+                double psi = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertKilopascalToBarometricPressure(data.BarometricPressure) : data.BarometricPressure;
+
+                fsDewPoint = CalculateFs(false, psi, temperature);
+
+                for (iLoop = 1; iLoop <= 2; iLoop++)      // Makes exactly two passes to get best first estimate
                 {
-                    // Calculate dew point temperature - check above and below ice point
-                    if (dewPoint < freezing)
+                    // Calculate dew point pressure
+                    denominator = (fsDewPoint * (0.62198 + data.HumidityRatio));
+                    dewPointPressure = (denominator == 0.0) ? 0.0 : (data.BarometricPressure * data.HumidityRatio / denominator);  //ASHRAE Eq.(34)
+
+                    if (dewPointPressure > 0)
                     {
-                        lnpw = Math.Log(dewPointPressure);
-                        dewPoint = c1 + c3 * lnpw + c2 * Math.Pow(lnpw, 2.0);   //ASHRAE Eq.(36)
+                        // Calculate dew point temperature - check above and below ice point
+                        if (dewPoint < freezing)
+                        {
+                            lnpw = Math.Log(dewPointPressure);
+                            dewPoint = c1 + c3 * lnpw + c2 * Math.Pow(lnpw, 2.0);   //ASHRAE Eq.(36)
+                        }
+                        else
+                        {
+                            lnpw = Math.Log(dewPointPressure);
+                            dewPoint = C14 + C15 * lnpw + C16 * Math.Pow(lnpw, 2.0) + C17 * Math.Pow(lnpw, 3.0) + C18 * Math.Pow(dewPointPressure, 0.1984);  //ASHRAE Eq.(36)
+                        }
                     }
                     else
                     {
-                        lnpw = Math.Log(dewPointPressure);
-                        dewPoint = C14 + C15 * lnpw + C16 * Math.Pow(lnpw, 2.0) + C17 * Math.Pow(lnpw, 3.0) + C18 * Math.Pow(dewPointPressure, 0.1984);  //ASHRAE Eq.(36)
+                        dewPoint = 0;
                     }
+
+                    temperature = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertCelsiusToFahrenheit(dewPoint) : dewPoint;
+                    fsDewPoint = CalculateFs(false, psi, temperature);
                 }
 
-                fsDewPoint = CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, dewPoint);
-            }
-
-            vaporPressureDewPoint = CalculateVaporPressure(data.IsInternationalSystemOfUnits_SI, dewPoint);
-            denominator = (data.BarometricPressure - vaporPressureDewPoint * fsDewPoint);
-            wsDewPoint = (denominator == 0.0) ? 0.0 : (0.62198 * vaporPressureDewPoint * fsDewPoint / denominator);
-            deltaT = 1.0;
-
-            // DavidL, 04/26/2001: Fixed the loop conditions to mimic IPDEWPoint()
-            while ((wsDewPoint != 0.0) &&  ((Math.Abs(data.HumidityRatio / wsDewPoint - 1.0) >= .000001) || (Math.Abs(deltaT) >= .0001)))
-            {
                 vaporPressureDewPoint = CalculateVaporPressure(data.IsInternationalSystemOfUnits_SI, dewPoint);
-                fsDewPoint = CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, dewPoint);
-
                 denominator = (data.BarometricPressure - vaporPressureDewPoint * fsDewPoint);
                 wsDewPoint = (denominator == 0.0) ? 0.0 : (0.62198 * vaporPressureDewPoint * fsDewPoint / denominator);
+                deltaT = 1.0;
 
-                //Calculate DERivative of Vapor Pressure
-                t = dewPoint + ((data.IsInternationalSystemOfUnits_SI) ? 273.15 : 459.67);
+                // DavidL, 04/26/2001: Fixed the loop conditions to mimic IPDEWPoint()
+                while ((wsDewPoint != 0.0) && ((Math.Abs(data.HumidityRatio / wsDewPoint - 1.0) >= 0.000001) || (Math.Abs(deltaT) >= 0.0001)))
+                {
+                    vaporPressureDewPoint = CalculateVaporPressure(data.IsInternationalSystemOfUnits_SI, dewPoint);
+                    
+                    temperature = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertCelsiusToFahrenheit(dewPoint) : dewPoint;
+                    
+                    fsDewPoint = CalculateFs(false, psi, temperature);
 
-                if (t == 0.0)
-                {
-                    derivativeOfVaporPressure = 0.0;
-                }
-                else
-                {
-                    if (dewPoint >= freezing)
+                    denominator = (data.BarometricPressure - vaporPressureDewPoint * fsDewPoint);
+                    wsDewPoint = (denominator == 0.0) ? 0.0 : (0.62198 * vaporPressureDewPoint * fsDewPoint / denominator);
+
+                    //Calculate DERivative of Vapor Pressure
+                    t = dewPoint + ((data.IsInternationalSystemOfUnits_SI) ? 273.15 : 459.67);
+
+                    if (t == 0.0)
                     {
-                        derivativeOfVaporPressure = vaporPressureDewPoint * (-C8 / Math.Pow(t, 2.0) + C10 + 2.0 * C11 * t + 3.0 * C12 * t * t + C13 / t);
+                        derivativeOfVaporPressure = 0.0;
                     }
                     else
                     {
-                        derivativeOfVaporPressure = vaporPressureDewPoint * (-C1 / Math.Pow(t, 2.0) + C3 + 2.0 * C4 * t + 3.0 * C5 * t * t + 4.0 * C6 * Math.Pow(t, 3.0) + C7 / t);
+                        if (dewPoint >= freezing)
+                        {
+                            derivativeOfVaporPressure = vaporPressureDewPoint * (-C8 / Math.Pow(t, 2.0) + C10 + 2.0 * C11 * t + 3.0 * C12 * t * t + C13 / t);
+                        }
+                        else
+                        {
+                            derivativeOfVaporPressure = vaporPressureDewPoint * (-C1 / Math.Pow(t, 2.0) + C3 + 2.0 * C4 * t + 3.0 * C5 * t * t + 4.0 * C6 * Math.Pow(t, 3.0) + C7 / t);
+                        }
                     }
+
+                    //*****************************************************************************
+
+                    //Calculate DERivative of Humidity Ratio
+                    denominator = Math.Pow((data.BarometricPressure - fsDewPoint * vaporPressureDewPoint), 2.0);
+                    derivativeOfHumidityRatio = (denominator == 0.0) ? 0.0 : ((data.BarometricPressure - vaporPressureDewPoint * fsDewPoint) * 0.62198 * fsDewPoint * derivativeOfVaporPressure - (0.62198 * fsDewPoint * vaporPressureDewPoint) * (-fsDewPoint * derivativeOfVaporPressure)) / denominator;
+
+                    //Converge to given humidityRatio using Newton-Raphson Method
+                    //Yields abref one order of magnitude correction per iteration
+                    deltaT = derivativeOfHumidityRatio != 0.0 ? ((data.HumidityRatio - wsDewPoint) / derivativeOfHumidityRatio) : 0.0;
+                    dewPoint += deltaT;
                 }
-
-                //*****************************************************************************
-
-                //Calculate DERivative of Humidity Ratio
-                denominator = Math.Pow((data.BarometricPressure - fsDewPoint * vaporPressureDewPoint), 2.0);
-                derivativeOfHumidityRatio = (denominator == 0.0) ? 0.0 : ((data.BarometricPressure - vaporPressureDewPoint * fsDewPoint) * 0.62198 * fsDewPoint * derivativeOfVaporPressure - (0.62198 * fsDewPoint * vaporPressureDewPoint) * (-fsDewPoint * derivativeOfVaporPressure)) / denominator;
-
-                //Converge to given humidityRatio using Newton-Raphson Method
-                //Yields abref one order of magnitude correction per iteration
-
-                deltaT = derivativeOfHumidityRatio != 0.0 ? ((data.HumidityRatio - wsDewPoint) / derivativeOfHumidityRatio) : 0.0;
-                dewPoint += deltaT;
             }
-            
+
             data.DewPoint = dewPoint;
 
             return data.DewPoint;
