@@ -74,7 +74,7 @@ namespace CalculationLibraryUnitTest
 
             Assert.IsFalse(methodThrew, "Method threw");
             Assert.AreEqual(0.0, data.HumidityRatio, "HumidityRatio value does not match");
-            Assert.AreEqual(0.21582111084374225, data.DegreeOfSaturation, "DegreeOfSaturation value does not match");
+            Assert.AreEqual(0.0, data.DegreeOfSaturation, "DegreeOfSaturation value does not match");
             Assert.AreEqual(0.0, data.RelativeHumidity, "RelativeHumidity value does not match");
             Assert.AreEqual(6.6258445178571419, data.SpecificVolume, "SpecificVolume value does not match");
             Assert.AreEqual(0.15092415726099909, data.Density, "Density value does not match");

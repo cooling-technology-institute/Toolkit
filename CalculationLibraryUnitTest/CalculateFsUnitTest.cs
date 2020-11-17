@@ -54,27 +54,5 @@ namespace CalculationLibraryUnitTest
             Assert.IsFalse(methodThrew, "Method threw");
             Assert.AreEqual(1.0072504161537958, fs, "Fs value does not match");
         }
-
-        [TestMethod]
-        public void IP_FsZeroTest()
-        {
-            bool methodThrew = false;
-            double fs = 0.0;
-            double temperature = -1;
-            double pressure = 0;
-
-            try
-            {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                fs = CalculationLibrary.CalculateFs(false, pressure, temperature);
-            }
-            catch
-            {
-                methodThrew = true;
-            }
-
-            Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(1.0072504161537958, fs, "Fs value does not match");
-        }
     }
 }

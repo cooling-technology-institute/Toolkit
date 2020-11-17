@@ -11,21 +11,30 @@ namespace CalculationLibrary
     {
         public void MechanicalDraftPerformanceCurveCalculation(MechanicalDraftPerformanceCurveFileData data, MechanicalDraftPerformanceCurveOutput output)
         {
-            PsychrometricsData testPsychrometricsData = new PsychrometricsData()
-            {
-                IsInternationalSystemOfUnits_SI = data.IsInternationalSystemOfUnits_SI,
-                BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertBarometricPressureToKilopascal(data.TestData.BarometricPressure): data.TestData.BarometricPressure,
-                DryBulbTemperature = data.TestData.DryBulbTemperature,
-                WetBulbTemperature = data.TestData.WetBulbTemperature
-            };
+            //PsychrometricsData testPsychrometricsData = new PsychrometricsData()
+            //{
+            //    IsInternationalSystemOfUnits_SI = data.IsInternationalSystemOfUnits_SI,
+            //    BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertBarometricPressureToKilopascal(data.TestData.BarometricPressure): data.TestData.BarometricPressure,
+            //    DryBulbTemperature = data.TestData.DryBulbTemperature,
+            //    WetBulbTemperature = data.TestData.WetBulbTemperature
+            //};
 
-            PsychrometricsData designPsychrometricsData = new PsychrometricsData()
+            //PsychrometricsData designPsychrometricsData = new PsychrometricsData()
+            //{
+            //    IsInternationalSystemOfUnits_SI = data.IsInternationalSystemOfUnits_SI,
+            //    BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertBarometricPressureToKilopascal(data.DesignData.MechanicalDraftPerformanceCurveData.BarometricPressure) : data.DesignData.MechanicalDraftPerformanceCurveData.BarometricPressure,
+            //    DryBulbTemperature = data.DesignData.MechanicalDraftPerformanceCurveData.DryBulbTemperature,
+            //    WetBulbTemperature = data.DesignData.MechanicalDraftPerformanceCurveData.WetBulbTemperature
+            //};
+
+            PsychrometricsData testPsychrometricsData = new PsychrometricsData(data.TestData);
+            PsychrometricsData designPsychrometricsData = new PsychrometricsData(data.DesignData.MechanicalDraftPerformanceCurveData);
+
+            if (!data.IsInternationalSystemOfUnits_SI)
             {
-                IsInternationalSystemOfUnits_SI = data.IsInternationalSystemOfUnits_SI,
-                BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertBarometricPressureToKilopascal(data.DesignData.MechanicalDraftPerformanceCurveData.BarometricPressure) : data.DesignData.MechanicalDraftPerformanceCurveData.BarometricPressure,
-                DryBulbTemperature = data.DesignData.MechanicalDraftPerformanceCurveData.DryBulbTemperature,
-                WetBulbTemperature = data.DesignData.MechanicalDraftPerformanceCurveData.WetBulbTemperature
-            };
+                designPsychrometricsData.BarometricPressure = UnitConverter.ConvertBarometricPressureToPsi(designPsychrometricsData.BarometricPressure);
+                testPsychrometricsData.BarometricPressure = UnitConverter.ConvertBarometricPressureToPsi(testPsychrometricsData.BarometricPressure);
+            }
 
             CalculateProperties(testPsychrometricsData);
             CalculateProperties(designPsychrometricsData);
