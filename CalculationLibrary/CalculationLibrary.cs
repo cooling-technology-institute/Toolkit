@@ -785,24 +785,24 @@ namespace CalculationLibrary
         {
             double liquidToGasRatio = 0;
             double oneThird = (1.0 / 3.0);
-            if ((data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate != 0) && (data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower != 0) && (designPsychrometricsData.Density != 0) && (designPsychrometricsData.SpecificVolume != 0))
+            if ((data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate != 0) 
+             && (data.TestData.FanDriverPower != 0) 
+             && (designPsychrometricsData.Density != 0) 
+             && (designPsychrometricsData.SpecificVolume != 0))
             {
-                liquidToGasRatio = data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio * (data.TestData.WaterFlowRate / data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate)
+                liquidToGasRatio = data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio 
+                                   * (data.TestData.WaterFlowRate / data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate)
                                    * Math.Pow((data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower / data.TestData.FanDriverPower), oneThird)
-                                   * (testPsychrometricsData.Density / designPsychrometricsData.Density)
-                                   * Math.Pow((testPsychrometricsData.SpecificVolume / designPsychrometricsData.SpecificVolume), oneThird);
-                //LiquidToGasRatio= data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio * (data.TestData.WaterFlowRate / data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate)
-                //                 * Math.Pow((testPsychrometricsData.Density / searchDesignPsychrometricsData.Density 
-                //                 * data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower / data.TestData.FanDriverPower), (1.0 / 3.0))
-                //                 * (testPsychrometricsData.SpecificVolume / searchDesignPsychrometricsData.SpecificVolume);
-
+                                   * Math.Pow((testPsychrometricsData.Density / designPsychrometricsData.Density), oneThird)
+                                   * (testPsychrometricsData.SpecificVolume / designPsychrometricsData.SpecificVolume);
             }
             return liquidToGasRatio;
         }
 
         public double CalculateAdjustedFlow(double testWaterFlowRate, double designFanDriverPower, double testFanDriverPower, double designAirDensity, double testAirDensity)
         {
-            return testWaterFlowRate * Math.Pow((designFanDriverPower / testFanDriverPower), (1.0 / 3.0)) * Math.Pow((testAirDensity / designAirDensity), (1.0 / 3.0));
+            double oneThird = (1.0 / 3.0);
+            return testWaterFlowRate * Math.Pow((designFanDriverPower / testFanDriverPower), oneThird) * Math.Pow((testAirDensity / designAirDensity), oneThird);
         }
 
         public double DetermineAdjustedTestFlow(MechanicalDraftPerformanceCurveFileData data, MechanicalDraftPerformanceCurveOutput output)
@@ -846,8 +846,8 @@ namespace CalculationLibrary
                 //    //'Store Density Out as Density Design and SV Out as SV Design
                 output.Density = searchDesignPsychrometricsData.Density;
 
-                //    //'Next Iterate to find Test Leaving Wet bulb and testPsychrometricsData.Density
-                //    //'Initial guess of Leaving Wet Bulb is average of Test Entering and Leaving temperature
+                // Next Iterate to find Test Leaving Wet bulb and testPsychrometricsData.Density
+                // Initial guess of Leaving Wet Bulb is average of Test Entering and Leaving temperature
                 testPsychrometricsData.WetBulbTemperature = testPsychrometricsData.DryBulbTemperature = (data.TestData.HotWaterTemperature + data.TestData.ColdWaterTemperature) / 2.0;
                 double enthalpy = testPsychrometricsData.Enthalpy;
 
