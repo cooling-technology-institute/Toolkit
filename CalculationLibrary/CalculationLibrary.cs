@@ -2,6 +2,7 @@
 
 using Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -639,147 +640,147 @@ namespace CalculationLibrary
             return data.DewPoint;
         }
 
-        //public void CalculatePerformanceData(int INUM, double[] X, double[] YMEAS, double XREAL, ref double YFIT, double[] Y2)
-        //{
-        //    //'						I			I			I				I				O			O
-        //    //'  EXAMPLE:			4			2			112
-        //    //'						9			113
-        //    //'						16			114
-        //    //'						23			115
-        //    //'     DIM YMEASP(INUM)
+        public void CalculatePerformanceData(int inum, List<double> x, List<double> ymeas, double xreal, ref double yfit, List<double> y2)
+        {
+            //'						I			I			I				I				O			O
+            //'  EXAMPLE:			4			2			112
+            //'						9			113
+            //'						16			114
+            //'						23			115
+            //'     DIM YMEASP(INUM)
 
-        //    //' DETERMINE THE SECOND DERIVITATIVES FOR THE SPLINE INTERPOLATION
+            //' DETERMINE THE SECOND DERIVITATIVES FOR THE SPLINE INTERPOLATION
 
-        //    SPLINE(X, YMEAS, INUM, 1E+31, 1E+31, Y2);
+            Spline(x, ymeas, inum, 1E+31, 1E+31, y2);
 
-        //    //' DETERMINE INTERPOLATED VALUES
-        //    SPLINT(X, YMEAS, Y2, INUM, XREAL, ref YFIT);
+            //' DETERMINE INTERPOLATED VALUES
+            Splint(x, ymeas, y2, inum, xreal, ref yfit);
 
-        //    //'ERASE YMEASP
-        //}
+            //'ERASE YMEASP
+        }
 
-        //public void SPLINE(double[] X, double[] Y, int INUM, double YP1, double YPN, double[] Y2)
-        //{
-        //    //'Cubic Spline subroutine from Numerical Recipes in BASIC (1994), p43
-        //    double QN;
-        //    double UN;
-        //    double[] U = new double[INUM];
-        //    int I;
+        public void Spline(List<double> x, List<double> y, int inum, double yp1, double ypn, List<double> y2)
+        {
+            //'Cubic Spline subroutine from Numerical Recipes in BASIC (1994), p43
+            double qn;
+            double un;
+            double[] u = new double[inum];
+            int i;
 
-        //    // Check preconditions
-        //    if (INUM < 2)
-        //    {
-        //        //todo ASSERT(0);
-        //        return;
-        //    }
-        //    for (I = 1; I < INUM; I++)
-        //    {
-        //        if (X[I - 1] >= X[I])
-        //        {
-        //            //todo ASSERT(0);
-        //            return;
-        //        }
-        //    }
+            // Check preconditions
+            if (inum < 2)
+            {
+                //todo ASSERT(0);
+                return;
+            }
+            for (i = 1; i < inum; i++)
+            {
+                if (x[i - 1] >= x[i])
+                {
+                    //todo ASSERT(0);
+                    return;
+                }
+            }
 
-        //    if (YP1 > 9.9E+29)
-        //    {
-        //        Y2[0] = 0.0;
-        //        U[0] = 0.0;
-        //    }
-        //    else
-        //    {
-        //        Y2[0] = -.5;
-        //        U[0] = (3.0 / (X[1] - X[0])) * ((Y[1] - Y[0]) / (X[1] - X[0]) - YP1);
-        //    }
+            if (yp1 > 9.9E+29)
+            {
+                y2[0] = 0.0;
+                u[0] = 0.0;
+            }
+            else
+            {
+                y2[0] = -.5;
+                u[0] = (3.0 / (x[1] - x[0])) * ((y[1] - y[0]) / (x[1] - x[0]) - yp1);
+            }
 
-        //    for (I = 1; I < INUM - 1; I++)
-        //    {
-        //        double SIG = (X[I] - X[I - 1]) / (X[I + 1] - X[I - 1]);
-        //        double P = SIG * Y2[I - 1] + 2.0;
-        //        Y2[I] = (SIG - 1.0) / P;
-        //        double DUM1 = (Y[I + 1] - Y[I]) / (X[I + 1] - X[I]);
-        //        double DUM2 = (Y[I] - Y[I - 1]) / (X[I] - X[I - 1]);
-        //        U[I] = (6.0 * (DUM1 - DUM2) / (X[I + 1] - X[I - 1]) - SIG * U[I - 1]) / P;
-        //    }
+            for (i = 1; i < inum - 1; i++)
+            {
+                double SIG = (x[i] - x[i - 1]) / (x[i + 1] - x[i - 1]);
+                double P = SIG * y2[i - 1] + 2.0;
+                y2[i] = (SIG - 1.0) / P;
+                double DUM1 = (y[i + 1] - y[i]) / (x[i + 1] - x[i]);
+                double DUM2 = (y[i] - y[i - 1]) / (x[i] - x[i - 1]);
+                u[i] = (6.0 * (DUM1 - DUM2) / (x[i + 1] - x[i - 1]) - SIG * u[i - 1]) / P;
+            }
 
-        //    if (YPN > 9.9E+29)
-        //    {
-        //        QN = 0.0;
-        //        UN = 0.0;
-        //    }
-        //    else
-        //    {
-        //        QN = .5;
-        //        //todo is it IN or INUM UN = (3.0 / (X[INUM - 1] - X[INUM - 2])) * (YPN - (Y[INUM - 1] - Y[IN - 2]) / (X[INUM - 1] - X[INUM - 2]));
-        //        UN = (3.0 / (X[INUM - 1] - X[INUM - 2])) * (YPN - (Y[INUM - 1] - Y[INUM - 2]) / (X[INUM - 1] - X[INUM - 2]));
-        //    }
+            if (ypn > 9.9E+29)
+            {
+                qn = 0.0;
+                un = 0.0;
+            }
+            else
+            {
+                qn = .5;
+                //todo is it IN or INUM UN = (3.0 / (X[INUM - 1] - X[INUM - 2])) * (YPN - (Y[INUM - 1] - Y[IN - 2]) / (X[INUM - 1] - X[INUM - 2]));
+                un = (3.0 / (x[inum - 1] - x[inum - 2])) * (ypn - (y[inum - 1] - y[inum - 2]) / (x[inum - 1] - x[inum - 2]));
+            }
 
-        //    Y2[INUM - 1] = (UN - QN * U[INUM - 2]) / (QN * Y2[INUM - 2] + 1.0);
+            y2[inum - 1] = (un - qn * u[inum - 2]) / (qn * y2[inum - 2] + 1.0);
 
-        //    for (int K = INUM - 2; K >= 0; K--)
-        //    {
-        //        Y2[K] = Y2[K] * Y2[K + 1] + U[K];
-        //    }
-        //}
+            for (int K = inum - 2; K >= 0; K--)
+            {
+                y2[K] = y2[K] * y2[K + 1] + u[K];
+            }
+        }
 
-        //public void SPLINT(double[] XA, double[] YA, double[] Y2A, int INUM, double X, ref double Y)
-        //{
-        //    //' Determine interpolated Y value
-        //    //' Rev: 2-22-99 to handle either Increasing or Decreasing XA array
-        //    if ((INUM < 2) || (XA[0] == XA[1]))
-        //    {
-        //        //todo //todo ASSERT(0);
-        //        return;
-        //    }
+        public void Splint(List<double> xa, List<double> ya, List<double> y2a, int inum, double x, ref double y)
+        {
+            //' Determine interpolated Y value
+            //' Rev: 2-22-99 to handle either Increasing or Decreasing XA array
+            if ((inum < 2) || (xa[0] == xa[1]))
+            {
+                //todo //todo ASSERT(0);
+                return;
+            }
 
-        //    int ILO = 0;
-        //    int IHI = (INUM - 1);
-        //    bool bIncreasingX = (XA[1] > XA[0]);
+            int iLow = 0;
+            int iHigh = (inum - 1);
+            bool increasingX = (xa[1] > xa[0]);
 
-        //    while (IHI - ILO > 1)
-        //    {
-        //        int II = ((IHI + ILO) / 2);
-        //        if (bIncreasingX)
-        //        {
-        //            if (XA[II] > X)
-        //            {
-        //                IHI = II;
-        //            }
-        //            else
-        //            {
-        //                ILO = II;
-        //            }
-        //        }
-        //        else               //X DECREASING
-        //        {
-        //            if (XA[II] > X)
-        //            {
-        //                ILO = II;
-        //            }
-        //            else
-        //            {
-        //                IHI = II;
-        //            }
-        //        }
-        //    }
+            while (iHigh - iLow > 1)
+            {
+                int II = ((iHigh + iLow) / 2);
+                if (increasingX)
+                {
+                    if (xa[II] > x)
+                    {
+                        iHigh = II;
+                    }
+                    else
+                    {
+                        iLow = II;
+                    }
+                }
+                else               //X DECREASING
+                {
+                    if (xa[II] > x)
+                    {
+                        iLow = II;
+                    }
+                    else
+                    {
+                        iHigh = II;
+                    }
+                }
+            }
 
-        //    double DX = (XA[IHI] - XA[ILO]);
-        //    if (DX == 0.0)
-        //    {
-        //        //todo ASSERT(0); //"BAD XA INPUT"
-        //        return;
-        //    }
-        //    double A = ((XA[IHI] - X) / DX);
-        //    double B = ((X - XA[ILO]) / DX);
-        //    Y = A * YA[ILO] + B * YA[IHI];
+            double dx = (xa[iHigh] - xa[iLow]);
+            if (dx == 0.0)
+            {
+                //todo ASSERT(0); //"BAD XA INPUT"
+                return;
+            }
+            double a = ((xa[iHigh] - x) / dx);
+            double b = ((x - xa[iLow]) / dx);
+            y = a * ya[iLow] + b * ya[iHigh];
 
-        //    // Change suggested by Rich Harrison on Aug. 3, 2001:
-        //    // Do just the linear fit (last calc above) if x is beyond array range
-        //    if (((bIncreasingX) && (X > XA[0]) && (X < XA[INUM - 1])) || ((!bIncreasingX) && (X > XA[INUM - 1]) && (X < XA[0])))
-        //    {
-        //        Y += ((Math.Pow(A, 3.0) - A) * Y2A[ILO] + (Math.Pow(B, 3.0) - B) * Y2A[IHI]) * (Math.Pow(DX, 2.0)) / 6.0;
-        //    }
-        //}
+            // Change suggested by Rich Harrison on Aug. 3, 2001:
+            // Do just the linear fit (last calc above) if x is beyond array range
+            if (((increasingX) && (x > xa[0]) && (x < xa[inum - 1])) || ((!increasingX) && (x > xa[inum - 1]) && (x < xa[0])))
+            {
+                y += ((Math.Pow(a, 3.0) - a) * y2a[iLow] + (Math.Pow(b, 3.0) - b) * y2a[iHigh]) * (Math.Pow(dx, 2.0)) / 6.0;
+            }
+        }
 
         public double CalculateTestLiquidToGasRatio(MechanicalDraftPerformanceCurveFileData data, PsychrometricsData testPsychrometricsData, PsychrometricsData designPsychrometricsData)
         {

@@ -67,6 +67,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CalculateVariablesUnitTest.cs" />
     <Compile Include="CalculateTestLiquidToGasRatioUnitTest.cs" />
+    <Compile Include="CalculatePerformanceDataUnitTest.cs" />
+    <Compile Include="SplineUnitTest.cs" />
+    <Compile Include="SplintUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

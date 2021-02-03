@@ -40,5 +40,20 @@ namespace CTIToolkit
                 }
             }
         }
+
+        private void TowerDesignDataOkButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TowerDesignDataCancelButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddFlowRateButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

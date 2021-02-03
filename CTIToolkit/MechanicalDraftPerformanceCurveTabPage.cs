@@ -411,7 +411,7 @@ namespace CTIToolkit
                 if (MechanicalDraftPerformanceCurveViewModel.GetDataTable() != null)
                 {
                     // Set a DataGrid control's DataSource to the DataView.
-                    MechanicalDraftPerformanceCurveGridView.DataSource = new DataView(MechanicalDraftPerformanceCurveViewModel.GetDataTable());
+//                    MechanicalDraftPerformanceCurveGridView.DataSource = new DataView(MechanicalDraftPerformanceCurveViewModel.GetDataTable());
                 }
             }
             else

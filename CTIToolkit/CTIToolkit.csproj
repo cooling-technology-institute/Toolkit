@@ -51,12 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MechanicalDraftPerformanceCurveSplitTabPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MechanicalDraftPerformanceCurveSplitTabPage.Designer.cs">
-      <DependentUpon>MechanicalDraftPerformanceCurveSplitTabPage.cs</DependentUpon>
-    </Compile>
     <Compile Include="MoreTests.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -65,9 +59,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MechanicalDraftPerformanceCurveSplitTabPage.resx">
-      <DependentUpon>MechanicalDraftPerformanceCurveSplitTabPage.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MoreTests.resx">
       <DependentUpon>MoreTests.cs</DependentUpon>
     </EmbeddedResource>

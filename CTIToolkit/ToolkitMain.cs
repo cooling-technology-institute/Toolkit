@@ -11,7 +11,6 @@ namespace CTIToolkit
         MerkelTabPage MerkelUserControl { get; set; }
         DemandCurveTabPage DemandCurveUserControl { get; set; }
         MechanicalDraftPerformanceCurveTabPage MechanicalDraftPerformanceCurveUserControl { get; set; }
-        MechanicalDraftPerformanceCurveSplitTabPage MechanicalDraftPerformanceCurveSplitTabPage { get; set; }
         MoreTests MoreTests { get; set; }
 
         public ToolkitMain()
@@ -100,10 +99,10 @@ namespace CTIToolkit
                     {
                         MessageBox.Show(errorMessage);
                     }
-                    if (!MechanicalDraftPerformanceCurveSplitTabPage.OpenDataFile(openFileDialog.FileName, out errorMessage))
-                    {
-                        MessageBox.Show(errorMessage);
-                    }
+//                    if (!MechanicalDraftPerformanceCurveSplitTabPage.OpenDataFile(openFileDialog.FileName, out errorMessage))
+  //                  {
+    //                    MessageBox.Show(errorMessage);
+      //              }
                 }
             }
         }
