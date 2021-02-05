@@ -640,7 +640,7 @@ namespace CalculationLibrary
             return data.DewPoint;
         }
 
-        public void CalculatePerformanceData(int inum, List<double> x, List<double> ymeas, double xreal, ref double yfit, List<double> y2)
+        public void CalculatePerformanceData(List<double> x, List<double> ymeas, double xreal, ref double yfit, List<double> y2, StringBuilder errorMessage)
         {
             //'						I			I			I				I				O			O
             //'  EXAMPLE:			4			2			112
@@ -651,37 +651,53 @@ namespace CalculationLibrary
 
             //' DETERMINE THE SECOND DERIVITATIVES FOR THE SPLINE INTERPOLATION
 
-            Spline(x, ymeas, inum, 1E+31, 1E+31, y2);
+            Spline(x, ymeas, 1E+31, 1E+31, y2, errorMessage);
 
             //' DETERMINE INTERPOLATED VALUES
-            Splint(x, ymeas, y2, inum, xreal, ref yfit);
+            Splint(x, ymeas, y2, xreal, ref yfit, errorMessage);
 
             //'ERASE YMEASP
         }
 
-        public void Spline(List<double> x, List<double> y, int inum, double yp1, double ypn, List<double> y2)
+        public void Spline(List<double> x, List<double> y, double yp1, double ypn, List<double> y2, StringBuilder errorMessage)
         {
-            //'Cubic Spline subroutine from Numerical Recipes in BASIC (1994), p43
+            // 3.3 Cubic Spline Interpolation from Numerical Recipes in C, p43 Second Edition
             double qn;
             double un;
-            double[] u = new double[inum];
+            List<double> u = new List<double>();
             int i;
 
             // Check preconditions
-            if (inum < 2)
+            if (x.Count != y.Count)
             {
-                //todo ASSERT(0);
+                errorMessage.AppendLine("The x and y array size must be equal to perform the calculation.");
                 return;
             }
-            for (i = 1; i < inum; i++)
+
+            // make sure there are at least 2 values
+            if (x.Count < 2)
             {
-                if (x[i - 1] >= x[i])
+                errorMessage.AppendLine("There must be at least 2 values to perform the calculation.");
+                return;
+            }
+
+            // make sure the are ascending values
+            for (i = 0; i < x.Count - 1; i++)
+            {
+                if (x[i] >= x[i+1])
                 {
-                    //todo ASSERT(0);
+                    errorMessage.AppendLine("The values must be in ascending order to perform the calculation.");
                     return;
                 }
             }
 
+            for (i = 0; i < x.Count; i++)
+            {
+                u.Add(0.0);
+                y2.Add(0.0);
+            }
+
+            //The lower boundary condition is set either to be “natural” or else to have a specified first derivative
             if (yp1 > 9.9E+29)
             {
                 y2[0] = 0.0;
@@ -689,18 +705,20 @@ namespace CalculationLibrary
             }
             else
             {
-                y2[0] = -.5;
+                y2[0] = -0.5;
                 u[0] = (3.0 / (x[1] - x[0])) * ((y[1] - y[0]) / (x[1] - x[0]) - yp1);
             }
 
-            for (i = 1; i < inum - 1; i++)
+            // Convert number down by 1
+            // This is the decomposition loop of the tridiagonal algorithm. y2 and u are used for temporary storage of the decomposed factors.
+            for (i = 1; i < x.Count - 1; i++)
             {
-                double SIG = (x[i] - x[i - 1]) / (x[i + 1] - x[i - 1]);
-                double P = SIG * y2[i - 1] + 2.0;
-                y2[i] = (SIG - 1.0) / P;
-                double DUM1 = (y[i + 1] - y[i]) / (x[i + 1] - x[i]);
-                double DUM2 = (y[i] - y[i - 1]) / (x[i] - x[i - 1]);
-                u[i] = (6.0 * (DUM1 - DUM2) / (x[i + 1] - x[i - 1]) - SIG * u[i - 1]) / P;
+                double sig = (x[i] - x[i - 1]) / (x[i + 1] - x[i - 1]);
+                double p = sig * y2[i - 1] + 2.0;
+                y2[i] = (sig - 1.0) / p;
+                double value1 = (y[i + 1] - y[i]) / (x[i + 1] - x[i]);
+                double value2 = (y[i] - y[i - 1]) / (x[i] - x[i - 1]);
+                u[i] = (6.0 * (value1 - value2) / (x[i + 1] - x[i - 1]) - sig * u[i - 1]) / p;
             }
 
             if (ypn > 9.9E+29)
@@ -710,75 +728,94 @@ namespace CalculationLibrary
             }
             else
             {
-                qn = .5;
-                //todo is it IN or INUM UN = (3.0 / (X[INUM - 1] - X[INUM - 2])) * (YPN - (Y[INUM - 1] - Y[IN - 2]) / (X[INUM - 1] - X[INUM - 2]));
-                un = (3.0 / (x[inum - 1] - x[inum - 2])) * (ypn - (y[inum - 1] - y[inum - 2]) / (x[inum - 1] - x[inum - 2]));
+                qn = 0.5;
+                un = (3.0 / (x[x.Count - 1] - x[x.Count - 2])) * (ypn - (y[y.Count - 1] - y[y.Count - 2]) / (x[x.Count - 1] - x[x.Count - 2]));
             }
 
-            y2[inum - 1] = (un - qn * u[inum - 2]) / (qn * y2[inum - 2] + 1.0);
+            // This is the backsubstitution loop of the tridiagonal algorithm.
+            y2[x.Count - 1] = (un - qn * u[x.Count - 2]) / (qn * y2[x.Count - 2] + 1.0);
 
-            for (int K = inum - 2; K >= 0; K--)
+            for (int k = x.Count - 2; k >= 0; k--)
             {
-                y2[K] = y2[K] * y2[K + 1] + u[K];
+                y2[k] = y2[k] * y2[k + 1] + u[k];
             }
         }
 
-        public void Splint(List<double> xa, List<double> ya, List<double> y2a, int inum, double x, ref double y)
+        public void Splint(List<double> xa, List<double> ya, List<double> y2a, double x, ref double y, StringBuilder errorMessage)
         {
             //' Determine interpolated Y value
             //' Rev: 2-22-99 to handle either Increasing or Decreasing XA array
-            if ((inum < 2) || (xa[0] == xa[1]))
+            // Check preconditions
+            if (xa.Count != ya.Count)
             {
-                //todo //todo ASSERT(0);
+                errorMessage.AppendLine("The xa and ya array size must be equal to perform the calculation.");
                 return;
             }
 
-            int iLow = 0;
-            int iHigh = (inum - 1);
+            // make sure there are at least 2 values
+            if (xa.Count < 2)
+            {
+                errorMessage.AppendLine("There must be at least 2 values in order to perform the calculation.");
+                return;
+            }
+
+            // make sure the first 2 values are not equal
+            if (xa[0] == xa[1])
+            {
+                errorMessage.AppendLine("The first two values must be not equal in order to perform the calculation.");
+                return;
+            }
+
+            int kLow = 0;
+            int kHigh = (xa.Count - 1);
             bool increasingX = (xa[1] > xa[0]);
 
-            while (iHigh - iLow > 1)
+            //We will find the right place in the table by means of bisection.This is optimal if sequential calls to this
+            //routine are at random values of x. If sequential calls are in order, and closely spaced, one would do better
+            //to store previous values of klo and khi and test if they remain appropriate on the next call.
+            while (kHigh - kLow > 1)
             {
-                int II = ((iHigh + iLow) / 2);
+                int k = ((kHigh + kLow) / 2);
                 if (increasingX)
                 {
-                    if (xa[II] > x)
+                    if (xa[k] > x)
                     {
-                        iHigh = II;
+                        kHigh = k;
                     }
                     else
                     {
-                        iLow = II;
+                        kLow = k;
                     }
                 }
                 else               //X DECREASING
                 {
-                    if (xa[II] > x)
+                    if (xa[k] > x)
                     {
-                        iLow = II;
+                        kLow = k;
                     }
                     else
                     {
-                        iHigh = II;
+                        kHigh = k;
                     }
                 }
             }
 
-            double dx = (xa[iHigh] - xa[iLow]);
-            if (dx == 0.0)
+            double h = (xa[kHigh] - xa[kLow]);
+            if (h == 0.0)
             {
-                //todo ASSERT(0); //"BAD XA INPUT"
+                errorMessage.AppendLine("The xa values must be unique in order to perform the calculation.");
                 return;
             }
-            double a = ((xa[iHigh] - x) / dx);
-            double b = ((x - xa[iLow]) / dx);
-            y = a * ya[iLow] + b * ya[iHigh];
+
+            double a = ((xa[kHigh] - x) / h);
+            double b = ((x - xa[kLow]) / h);
+            y = a * ya[kLow] + b * ya[kHigh];
 
             // Change suggested by Rich Harrison on Aug. 3, 2001:
             // Do just the linear fit (last calc above) if x is beyond array range
-            if (((increasingX) && (x > xa[0]) && (x < xa[inum - 1])) || ((!increasingX) && (x > xa[inum - 1]) && (x < xa[0])))
+            if (((increasingX) && (x > xa[0]) && (x < xa[xa.Count - 1])) || ((!increasingX) && (x > xa[xa.Count - 1]) && (x < xa[0])))
             {
-                y += ((Math.Pow(a, 3.0) - a) * y2a[iLow] + (Math.Pow(b, 3.0) - b) * y2a[iHigh]) * (Math.Pow(dx, 2.0)) / 6.0;
+                y += ((Math.Pow(a, 3.0) - a) * y2a[kLow] + (Math.Pow(b, 3.0) - b) * y2a[kHigh]) * (Math.Pow(h, 2.0)) / 6.0;
             }
         }
 
