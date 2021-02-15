@@ -650,7 +650,6 @@ namespace CalculationLibrary
             //'     DIM YMEASP(INUM)
 
             //' DETERMINE THE SECOND DERIVITATIVES FOR THE SPLINE INTERPOLATION
-
             Spline(x, ymeas, 1E+31, 1E+31, y2, errorMessage);
 
             //' DETERMINE INTERPOLATED VALUES
@@ -743,12 +742,14 @@ namespace CalculationLibrary
 
         public void Splint(List<double> xa, List<double> ya, List<double> y2a, double x, ref double y, StringBuilder errorMessage)
         {
+            y = 0.0;
+
             //' Determine interpolated Y value
             //' Rev: 2-22-99 to handle either Increasing or Decreasing XA array
             // Check preconditions
-            if (xa.Count != ya.Count)
+            if ((xa.Count != ya.Count) || (xa.Count != y2a.Count))
             {
-                errorMessage.AppendLine("The xa and ya array size must be equal to perform the calculation.");
+                errorMessage.AppendLine("The array sizes must be equal to perform the calculation.");
                 return;
             }
 
@@ -770,7 +771,7 @@ namespace CalculationLibrary
             int kHigh = (xa.Count - 1);
             bool increasingX = (xa[1] > xa[0]);
 
-            //We will find the right place in the table by means of bisection.This is optimal if sequential calls to this
+            //We will find the right place in the table by means of bisection. This is optimal if sequential calls to this
             //routine are at random values of x. If sequential calls are in order, and closely spaced, one would do better
             //to store previous values of klo and khi and test if they remain appropriate on the next call.
             while (kHigh - kLow > 1)
@@ -803,7 +804,7 @@ namespace CalculationLibrary
             double h = (xa[kHigh] - xa[kLow]);
             if (h == 0.0)
             {
-                errorMessage.AppendLine("The xa values must be unique in order to perform the calculation.");
+                errorMessage.AppendLine("The bisection values must be unique in order to perform the calculation.");
                 return;
             }
 
@@ -816,6 +817,19 @@ namespace CalculationLibrary
             if (((increasingX) && (x > xa[0]) && (x < xa[xa.Count - 1])) || ((!increasingX) && (x > xa[xa.Count - 1]) && (x < xa[0])))
             {
                 y += ((Math.Pow(a, 3.0) - a) * y2a[kLow] + (Math.Pow(b, 3.0) - b) * y2a[kHigh]) * (Math.Pow(h, 2.0)) / 6.0;
+            }
+            else
+            {
+                if (increasingX)
+                {
+                    errorMessage.AppendLine("X value is out of range of the increasing XA values.");
+                    return;
+                }
+                else
+                {
+                    errorMessage.AppendLine("X value is out of range of the decreasing XA values.");
+                    return;
+                }
             }
         }
 

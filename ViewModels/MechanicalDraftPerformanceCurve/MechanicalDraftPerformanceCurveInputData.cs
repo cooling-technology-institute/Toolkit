@@ -57,18 +57,22 @@ namespace ViewModels
         public string GetFilename()
         {
             string mechanicalDraftPerformanceCurveDataFile = string.Empty;
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
             int fileCount = 0;
+
             do
             {
                 if (fileCount == 0)
                 {
-                    mechanicalDraftPerformanceCurveDataFile = Path.Combine(Application.UserAppDataPath, "MechanicalDraftPerformanceData.json");
+                    mechanicalDraftPerformanceCurveDataFile = Path.Combine(path, "MechanicalDraftPerformanceData.json");
                 }
                 else
                 {
-                    mechanicalDraftPerformanceCurveDataFile = Path.Combine(Application.UserAppDataPath, string.Format("MechanicalDraftPerformanceData({0}).json", fileCount));
+                    mechanicalDraftPerformanceCurveDataFile = Path.Combine(path, string.Format("MechanicalDraftPerformanceData({0}).json", fileCount));
                 }
+
                 fileCount++;
+
             } while (File.Exists(mechanicalDraftPerformanceCurveDataFile));
 
             return mechanicalDraftPerformanceCurveDataFile;

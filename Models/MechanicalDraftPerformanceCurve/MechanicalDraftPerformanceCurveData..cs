@@ -32,5 +32,18 @@ namespace Models
             BarometricPressure = 0.0;
             LiquidToGasRatio = 0.0;
         }
+
+        public MechanicalDraftPerformanceCurveData(MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData)
+        {
+            IsInternationalSystemOfUnits_SI = mechanicalDraftPerformanceCurveData.IsInternationalSystemOfUnits_SI;
+            WaterFlowRate = mechanicalDraftPerformanceCurveData.WaterFlowRate;
+            HotWaterTemperature = mechanicalDraftPerformanceCurveData.HotWaterTemperature;
+            ColdWaterTemperature = mechanicalDraftPerformanceCurveData.ColdWaterTemperature;
+            WetBulbTemperature = mechanicalDraftPerformanceCurveData.WetBulbTemperature;
+            DryBulbTemperature = mechanicalDraftPerformanceCurveData.DryBulbTemperature;
+            FanDriverPower = mechanicalDraftPerformanceCurveData.FanDriverPower;
+            BarometricPressure = mechanicalDraftPerformanceCurveData.BarometricPressure;
+            LiquidToGasRatio = mechanicalDraftPerformanceCurveData.LiquidToGasRatio;
+        }
     }
 }

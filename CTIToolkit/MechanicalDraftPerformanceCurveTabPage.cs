@@ -383,6 +383,23 @@ namespace CTIToolkit
         private void PerformanceCurveDesignDataButton_Click(object sender, EventArgs e)
         {
             string errorMessage;
+            // design data
+
+            //TowerDesignDataForm.TowerDesignDataOwnerName.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.OwnerNameInputValue;
+            //PerformanceCurveProjectNameField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.ProjectNameInputValue;
+            //PerformanceCurveLocationField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.LocationInputValue;
+            //PerformanceCurveTowerManufacturerField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.TowerManufacturerInputValue;
+            //PerformanceCurveTowerTypeField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.TowerTypeInputValue.ToString();
+
+            //PerformanceCurveDesignWaterFlowRate.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.WaterFlowRateDataValueInputValue;
+            //PerformanceCurveDesignHotWaterTemperature.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.HotWaterTemperatureDataValueInputValue;
+            //PerformanceCurveDesignColdWaterTemperature.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.ColdWaterTemperatureDataValueInputValue;
+            //PerformanceCurveDesignWetBulbTemperature.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.WetBulbTemperatureDataValueInputValue;
+            //PerformanceCurveDesignDryBulbTemperature.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.DryBulbTemperatureDataValueInputValue;
+            //PerformanceCurveDesignFanDriverPower.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.FanDriverPowerDataValueInputValue;
+            //PerformanceCurveDesignBarometricPressure.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.BarometricPressureDataValueInputValue;
+            //PerformanceCurveDesignLiquidToGasRatio.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.LiquidToGasRatioDataValueInputValue;
+
 
             // set data
             if (TowerDesignDataForm.ShowDialog(this) == DialogResult.OK)
