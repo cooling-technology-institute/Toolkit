@@ -157,7 +157,7 @@ namespace CTIToolkit
                 toolTip1.SetToolTip(TowerDesignDataRange5, MechanicalDraftPerformanceCurveTowerDesignViewModel.RangeDataValue5Tooltip);
 
                 // build tab pages
-                TowerDesignDataCurveDataTabControl.TabPages.Clear();
+                TowerDesignDataTabControl.TabPages.Clear();
                 foreach (RangedTemperatureDesignViewModel rangedTemperatureDesignViewModel in RangedTemperatureDesignViewModels)
                 {
                     AddTabPage(rangedTemperatureDesignViewModel, out errorMessage);
@@ -184,6 +184,7 @@ namespace CTIToolkit
                 TabPage tabPage = new TabPage();
 
                 RangedTemperatureDesignUserControl towerDesignCurveDataUserControl = new RangedTemperatureDesignUserControl(IsDemo, IsInternationalSystemOfUnits_SI);
+                towerDesignCurveDataUserControl.Dock = DockStyle.Fill;
                 towerDesignCurveDataUserControl.RangedColdWaterTemperatureVisibility(MechanicalDraftPerformanceCurveTowerDesignViewModel.CountRanges());
                 towerDesignCurveDataUserControl.RangedColdWaterTemperatureEnable(rangedTemperatureDesignViewModel.CountWetBulbTemperatures());
                 towerDesignCurveDataUserControl.RangedTemperatureDesignViewModel = rangedTemperatureDesignViewModel;
@@ -194,7 +195,7 @@ namespace CTIToolkit
 
                 }
 
-                TowerDesignDataCurveDataTabControl.TabPages.Add(tabPage);
+                TowerDesignDataTabControl.TabPages.Add(tabPage);
             }
             catch (Exception e)
             {
@@ -467,23 +468,23 @@ namespace CTIToolkit
             }
         }
 
-        private void WaterFlowRateValue_Validated(object sender, EventArgs e)
+        private void TowerDesignDataAddWaterFlowRate_Validated(object sender, EventArgs e)
         {
-            errorProvider1.SetError(AddWaterFlowRateValue, "");
+            errorProvider1.SetError(TowerDesignDataAddWaterFlowRate, "");
         }
 
-        private void WaterFlowRateValue_Validating(object sender, CancelEventArgs e)
+        private void TowerDesignDataAddWaterFlowRate_Validating(object sender, CancelEventArgs e)
         {
             string errorMessage = string.Empty;
 
-            if (!MechanicalDraftPerformanceCurveTowerDesignViewModel.AddWaterFlowRateDataValueUpdateValue(AddWaterFlowRateValue.Text, out errorMessage))
+            if (!MechanicalDraftPerformanceCurveTowerDesignViewModel.AddWaterFlowRateDataValueUpdateValue(TowerDesignDataAddWaterFlowRate.Text, out errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
-                AddWaterFlowRateValue.Select(0, AddWaterFlowRateValue.Text.Length);
+                TowerDesignDataAddWaterFlowRate.Select(0, TowerDesignDataAddWaterFlowRate.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(AddWaterFlowRateValue, errorMessage);
+                this.errorProvider1.SetError(TowerDesignDataAddWaterFlowRate, errorMessage);
             }
         }
 
@@ -512,34 +513,57 @@ namespace CTIToolkit
         private void AddWaterFlowRate()
         {
             string errorMessage = string.Empty;
-
-            RangedTemperatureDesignViewModel rangedTemperatureDesignViewModel = new RangedTemperatureDesignViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
-            RangedTemperaturesDesignData rangedTemperaturesDesignData = new RangedTemperaturesDesignData();
-            WaterFlowRateDataValue waterFlowRateDataValue = new WaterFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
-            if (waterFlowRateDataValue.UpdateValue(AddWaterFlowRateValue.Text, out errorMessage))
+            object sender = new object();
+            CancelEventArgs e = new CancelEventArgs()
             {
-                rangedTemperaturesDesignData.WaterFlowRate = waterFlowRateDataValue.Current;
-
-                if (!rangedTemperatureDesignViewModel.LoadData(IsInternationalSystemOfUnits_SI, rangedTemperaturesDesignData, out errorMessage))
+                Cancel = false
+            };
+            TowerDesignDataAddWaterFlowRate_Validating(sender, e);
+            if(!e.Cancel)
+            {
+                RangedTemperatureDesignViewModel rangedTemperatureDesignViewModel = new RangedTemperatureDesignViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
+                RangedTemperaturesDesignData rangedTemperaturesDesignData = new RangedTemperaturesDesignData();
+                WaterFlowRateDataValue waterFlowRateDataValue = new WaterFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+                if (waterFlowRateDataValue.UpdateValue(TowerDesignDataAddWaterFlowRate.Text, out errorMessage))
                 {
-                    MessageBox.Show(errorMessage);
+                    rangedTemperaturesDesignData.WaterFlowRate = waterFlowRateDataValue.Current;
+
+                    if (!rangedTemperatureDesignViewModel.LoadData(IsInternationalSystemOfUnits_SI, rangedTemperaturesDesignData, out errorMessage))
+                    {
+                        MessageBox.Show(errorMessage);
+                    }
+                    else
+                    {
+                        RangedTemperatureDesignViewModels.Add(rangedTemperatureDesignViewModel);
+                        AddTabPage(rangedTemperatureDesignViewModel, out errorMessage);
+                        TowerDesignDataTabControl.SelectedIndex = TowerDesignDataTabControl.TabPages.Count;
+                    }
                 }
                 else
                 {
-                    RangedTemperatureDesignViewModels.Add(rangedTemperatureDesignViewModel);
-                    AddTabPage(rangedTemperatureDesignViewModel, out errorMessage);
-                    TowerDesignDataCurveDataTabControl.SelectedIndex = TowerDesignDataCurveDataTabControl.TabPages.Count;
+                    MessageBox.Show(errorMessage);
                 }
-            }
-            else
-            {
-                MessageBox.Show(errorMessage);
             }
         }
 
-        private void AddFlowRateButton_Click(object sender, EventArgs e)
+        private void TowerDesignDataAddWaterFlowRateButton_Click(object sender, EventArgs e)
         {
             AddWaterFlowRate();
+        }
+
+        private void TowerDesignDataOkButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TowerDesignDataCancelButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TowerDesignDataTabPage_DoubleClick(object sender, EventArgs e)
+        {
+
         }
     }
 }

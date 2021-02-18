@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace ViewModels
 {
-    public class MechanicalDraftPerformanceCurveInputData
+    public class MechanicalDraftPerformanceCurveInputDataViewModel
     {
         private MechanicalDraftPerformanceCurveFileData MechanicalDraftPerformanceCurveFileData { get; set; }
 
@@ -35,7 +35,7 @@ namespace ViewModels
             }
         }
 
-        public MechanicalDraftPerformanceCurveInputData(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        public MechanicalDraftPerformanceCurveInputDataViewModel(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;

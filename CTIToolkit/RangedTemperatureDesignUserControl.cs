@@ -942,7 +942,36 @@ namespace CTIToolkit
                 this.errorProvider1.SetError(TowerDesignDataRange5ColdWaterTemperature6, errorMessage);
             }
         }
-        
+
         #endregion DataValidation
+
+        private void TowerDesignDataUpdateWaterFlowRateButton_Click(object sender, EventArgs e)
+        {
+
+        }
+        //public bool WaterFlowRateDataValue_UpdateValue(string value, out string errorMessage)
+        //{
+        //    RangedTemperatureDesignViewModel.WaterFlowRateDataValue.UpdateValue(value, out errorMessage);
+        //}
+
+        private void TowerDesignDataUpdateWaterFlowRate_Vaildating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            //if (!WaterFlowRateDataValue_UpdateValue(TowerDesignDataUpdateWaterFlowRate.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                TowerDesignDataUpdateWaterFlowRate.Select(0, TowerDesignDataUpdateWaterFlowRate.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(TowerDesignDataUpdateWaterFlowRate, errorMessage);
+            }
+        }
+
+        private void TowerDesignDataUpdateWaterFlowRate_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(TowerDesignDataUpdateWaterFlowRate, "");
+        }
     }
 }

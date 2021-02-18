@@ -9,6 +9,39 @@ namespace Models
 {
     public class MechanicalDraftPerformanceCurveData
     {
+        const double WATER_FLOW_RATE_MIN_IP = 0.1;
+        const double WATER_FLOW_RATE_MAX_IP = double.MaxValue;
+        const double WATER_FLOW_RATE_MIN_SI = 0.1;
+        const double WATER_FLOW_RATE_MAX_SI = double.MaxValue;
+        const double HOT_WATER_TEMPERATURE_MIN_IP = 32.0;
+        const double HOT_WATER_TEMPERATURE_MAX_IP = 212.0;
+        const double HOT_WATER_TEMPERATURE_MIN_SI = 0.0;
+        const double HOT_WATER_TEMPERATURE_MAX_SI = 100.0;
+        const double COLD_WATER_TEMPERATURE_MIN_IP = 32.0;
+        const double COLD_WATER_TEMPERATURE_MAX_IP = 212.0;
+        const double COLD_WATER_TEMPERATURE_MIN_SI = 0.0;
+        const double COLD_WATER_TEMPERATURE_MAX_SI = 100.0;
+        const double WetBulbTemperature_MIN_IP = 0.0;
+        const double WetBulbTemperature_MAX_IP = 200.0;
+        const double WetBulbTemperature_MIN_SI = -18.0;
+        const double WetBulbTemperature_MAX_SI = 93.0;
+        const double DryBulbTemperature_MIN_IP = 0.0;
+        const double DryBulbTemperature_MAX_IP = 200.0;
+        const double DryBulbTemperature_MIN_SI = -18.0;
+        const double DryBulbTemperature_MAX_SI = 93.0;
+        const double FAN_DRIVER_POWER_MIN_IP = 0.0001;
+        const double FAN_DRIVER_POWER_MAX_IP = 1000.0;
+        const double FAN_DRIVER_POWER_MIN_SI = 0.0001;
+        const double FAN_DRIVER_POWER_MAX_SI = 745.7;
+        const double BAROMETRIC_PRESSURE_MIN_IP = 5.0;
+        const double BAROMETRIC_PRESSURE_MAX_IP = 31.5;
+        const double BAROMETRIC_PRESSURE_MIN_SI = 16.932;
+        const double BAROMETRIC_PRESSURE_MAX_SI = 103.285;
+        const double LiquidGasRatio_MIN_IP = 0.01;
+        const double LiquidGasRatio_MAX_IP = 20.0;
+        const double LiquidGasRatio_MIN_SI = 0.01;
+        const double LiquidGasRatio_MAX_SI = 20.0;
+
         public bool IsInternationalSystemOfUnits_SI { get; set; }
 
         public double WaterFlowRate { set; get; }
