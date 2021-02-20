@@ -12,8 +12,8 @@ namespace ViewModels
 {
     public class MechanicalDraftPerformanceCurveViewModel
     {
-        public MechanicalDraftPerformanceCurveInputDataViewModel MechanicalDraftPerformanceCurveInputData { get; set; }
-        public MechanicalDraftPerformanceCurveOutputData MechanicalDraftPerformanceCurveOutputData { get; set; }
+        public MechanicalDraftPerformanceCurveInputDataViewModel MechanicalDraftPerformanceCurveInputDataViewModel { get; set; }
+        public MechanicalDraftPerformanceCurveOutputDataViewModel MechanicalDraftPerformanceCurveOutputDataViewModel { get; set; }
 
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_SI { get; set; }
@@ -23,8 +23,8 @@ namespace ViewModels
             IsDemo = isDemo;
             IsInternationalSystemOfUnits_SI = IsInternationalSystemOfUnits_SI;
 
-            MechanicalDraftPerformanceCurveInputData = new MechanicalDraftPerformanceCurveInputDataViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
-            MechanicalDraftPerformanceCurveOutputData = new MechanicalDraftPerformanceCurveOutputData(IsInternationalSystemOfUnits_SI);
+            MechanicalDraftPerformanceCurveInputDataViewModel = new MechanicalDraftPerformanceCurveInputDataViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
+            MechanicalDraftPerformanceCurveOutputDataViewModel = new MechanicalDraftPerformanceCurveOutputDataViewModel(IsInternationalSystemOfUnits_SI);
         }
 
         #region DataValues
@@ -33,7 +33,7 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.WaterFlowRateDataValue.InputMessage;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.WaterFlowRateDataValue.InputMessage;
             }
         }
 
@@ -41,20 +41,20 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.WaterFlowRateDataValue.InputValue;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.WaterFlowRateDataValue.InputValue;
             }
         }
 
         public bool WaterFlowRateDataValueUpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputData.WaterFlowRateDataValue.UpdateValue(value, out errorMessage);
+            return MechanicalDraftPerformanceCurveInputDataViewModel.WaterFlowRateDataValue.UpdateValue(value, out errorMessage);
         }
 
         public string WaterFlowRateDataValueTooltip
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.WaterFlowRateDataValue.ToolTip;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.WaterFlowRateDataValue.ToolTip;
             }
         }
 
@@ -63,7 +63,7 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.HotWaterTemperatureDataValue.InputMessage;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.HotWaterTemperatureDataValue.InputMessage;
             }
         }
 
@@ -71,20 +71,20 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.HotWaterTemperatureDataValue.InputValue;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.HotWaterTemperatureDataValue.InputValue;
             }
         }
 
         public bool HotWaterTemperatureDataValueUpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputData.HotWaterTemperatureDataValue.UpdateValue(value, out errorMessage);
+            return MechanicalDraftPerformanceCurveInputDataViewModel.HotWaterTemperatureDataValue.UpdateValue(value, out errorMessage);
         }
 
         public string HotWaterTemperatureDataValueTooltip
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.HotWaterTemperatureDataValue.ToolTip;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.HotWaterTemperatureDataValue.ToolTip;
             }
         }
 
@@ -92,7 +92,7 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.ColdWaterTemperatureDataValue.InputMessage;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.ColdWaterTemperatureDataValue.InputMessage;
             }
         }
 
@@ -100,7 +100,7 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.ColdWaterTemperatureDataValue.InputValue;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.ColdWaterTemperatureDataValue.InputValue;
             }
         }
 
@@ -108,20 +108,20 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.ColdWaterTemperatureDataValue.ToolTip;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.ColdWaterTemperatureDataValue.ToolTip;
             }
         }
 
         public bool ColdWaterTemperatureDataValueUpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputData.ColdWaterTemperatureDataValue.UpdateValue(value, out errorMessage);
+            return MechanicalDraftPerformanceCurveInputDataViewModel.ColdWaterTemperatureDataValue.UpdateValue(value, out errorMessage);
         }
 
         public string WetBulbTemperatureDataValueInputMessage
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.WetBulbTemperatureDataValue.InputMessage;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.WetBulbTemperatureDataValue.InputMessage;
             }
         }
 
@@ -129,7 +129,7 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.WetBulbTemperatureDataValue.InputValue;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.WetBulbTemperatureDataValue.InputValue;
             }
         }
 
@@ -137,20 +137,20 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.WetBulbTemperatureDataValue.ToolTip;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.WetBulbTemperatureDataValue.ToolTip;
             }
         }
 
         public bool WetBulbTemperatureDataValueUpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputData.WetBulbTemperatureDataValue.UpdateValue(value, out errorMessage);
+            return MechanicalDraftPerformanceCurveInputDataViewModel.WetBulbTemperatureDataValue.UpdateValue(value, out errorMessage);
         }
 
         public string DryBulbTemperatureDataValueInputMessage
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.DryBulbTemperatureDataValue.InputMessage;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.DryBulbTemperatureDataValue.InputMessage;
             }
         }
 
@@ -158,7 +158,7 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.DryBulbTemperatureDataValue.InputValue;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.DryBulbTemperatureDataValue.InputValue;
             }
         }
 
@@ -166,20 +166,20 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.DryBulbTemperatureDataValue.ToolTip;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.DryBulbTemperatureDataValue.ToolTip;
             }
         }
 
         public bool DryBulbTemperatureDataValueUpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputData.DryBulbTemperatureDataValue.UpdateValue(value, out errorMessage);
+            return MechanicalDraftPerformanceCurveInputDataViewModel.DryBulbTemperatureDataValue.UpdateValue(value, out errorMessage);
         }
 
         public string FanDriverPowerDataValueInputMessage
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.FanDriverPowerDataValue.InputMessage;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.FanDriverPowerDataValue.InputMessage;
             }
         }
 
@@ -187,7 +187,7 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.FanDriverPowerDataValue.InputValue;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.FanDriverPowerDataValue.InputValue;
             }
         }
 
@@ -195,20 +195,20 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.FanDriverPowerDataValue.ToolTip;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.FanDriverPowerDataValue.ToolTip;
             }
         }
 
         public bool FanDriverPowerDataValueUpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputData.FanDriverPowerDataValue.UpdateValue(value, out errorMessage);
+            return MechanicalDraftPerformanceCurveInputDataViewModel.FanDriverPowerDataValue.UpdateValue(value, out errorMessage);
         }
 
         public string BarometricPressureDataValueInputMessage
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.BarometricPressureDataValue.InputMessage;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.BarometricPressureDataValue.InputMessage;
             }
         }
 
@@ -216,7 +216,7 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.BarometricPressureDataValue.InputValue;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.BarometricPressureDataValue.InputValue;
             }
         }
 
@@ -224,20 +224,20 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.BarometricPressureDataValue.ToolTip;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.BarometricPressureDataValue.ToolTip;
             }
         }
 
         public bool BarometricPressureDataValueUpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputData.BarometricPressureDataValue.UpdateValue(value, out errorMessage);
+            return MechanicalDraftPerformanceCurveInputDataViewModel.BarometricPressureDataValue.UpdateValue(value, out errorMessage);
         }
 
         public string LiquidToGasRatioDataValueInputMessage
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.LiquidToGasRatioDataValue.InputMessage;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.LiquidToGasRatioDataValue.InputMessage;
             }
         }
 
@@ -245,7 +245,7 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.LiquidToGasRatioDataValue.InputValue;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.LiquidToGasRatioDataValue.InputValue;
             }
         }
 
@@ -253,20 +253,20 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputData.LiquidToGasRatioDataValue.ToolTip;
+                return MechanicalDraftPerformanceCurveInputDataViewModel.LiquidToGasRatioDataValue.ToolTip;
             }
         }
 
         public bool LiquidToGasRatioDataValueUpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputData.LiquidToGasRatioDataValue.UpdateValue(value, out errorMessage);
+            return MechanicalDraftPerformanceCurveInputDataViewModel.LiquidToGasRatioDataValue.UpdateValue(value, out errorMessage);
         }
 
         public string DataFilenameInputValue
         {
             get
             {
-                return Path.GetFileName(MechanicalDraftPerformanceCurveInputData.MechanicalDraftPerformanceCurveDataFile);
+                return Path.GetFileName(MechanicalDraftPerformanceCurveInputDataViewModel.MechanicalDraftPerformanceCurveDataFile);
             }
         }
         
@@ -274,17 +274,17 @@ namespace ViewModels
 
         public bool LoadData(string fileName, MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputData.LoadData(fileName, mechanicalDraftPerformanceCurveFileData, out errorMessage);
+            return MechanicalDraftPerformanceCurveInputDataViewModel.LoadData(fileName, mechanicalDraftPerformanceCurveFileData, out errorMessage);
         }
 
         public bool SaveDataFile(out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputData.SaveDataFile(out errorMessage);
+            return MechanicalDraftPerformanceCurveInputDataViewModel.SaveDataFile(out errorMessage);
         }
 
         public bool SaveAsDataFile(string fileName, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputData.SaveAsDataFile(fileName, out errorMessage);
+            return MechanicalDraftPerformanceCurveInputDataViewModel.SaveAsDataFile(fileName, out errorMessage);
         }
 
         public bool FillAndValidate(MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData, out string errorMessage)
@@ -308,7 +308,7 @@ namespace ViewModels
 
                 }
 
-                if (!MechanicalDraftPerformanceCurveInputData.FillAndValidate(mechanicalDraftPerformanceCurveFileData, out errorMessage))
+                if (!MechanicalDraftPerformanceCurveInputDataViewModel.FillAndValidate(mechanicalDraftPerformanceCurveFileData, out errorMessage))
                 {
 
                 }
@@ -316,7 +316,7 @@ namespace ViewModels
 
                 MechanicalDraftPerformanceCurveCalculationLibrary mechanicalDraftPerformanceCurveCalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
 
-                mechanicalDraftPerformanceCurveCalculationLibrary.MechanicalDraftPerformanceCurveCalculation(mechanicalDraftPerformanceCurveFileData, MechanicalDraftPerformanceCurveOutputData.MechanicalDraftPerformanceCurveOutput);
+                mechanicalDraftPerformanceCurveCalculationLibrary.MechanicalDraftPerformanceCurveCalculation(mechanicalDraftPerformanceCurveFileData, MechanicalDraftPerformanceCurveOutputDataViewModel.MechanicalDraftPerformanceCurveOutput);
             }
             catch (Exception exception)
             {
@@ -327,7 +327,7 @@ namespace ViewModels
 
         public DataTable GetDataTable()
         {
-            return MechanicalDraftPerformanceCurveOutputData.NameValueUnitsDataTable.DataTable;
+            return MechanicalDraftPerformanceCurveOutputDataViewModel.NameValueUnitsDataTable.DataTable;
         }
 
         // Check design or test data, optionally prompting the user with bounds if errors are found.

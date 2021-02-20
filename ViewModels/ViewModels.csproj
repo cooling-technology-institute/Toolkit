@@ -61,7 +61,7 @@
     <Compile Include="MaximumDataValue.cs" />
     <Compile Include="MechanicalDraftPerformanceCurveTowerDesign\RangedTemperatureDesignViewModel.cs" />
     <Compile Include="MechanicalDraftPerformanceCurveTowerDesign\RangedTemperatureDesignInputData.cs" />
-    <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveOutputData.cs" />
+    <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveOutputDataViewModel.cs" />
     <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveInputDataViewModel.cs" />
     <Compile Include="MechanicalDraftPerformanceCurveTowerDesign\MechanicalDraftPerformanceCurveTowerDesignCurveInputData.cs" />
     <Compile Include="MechanicalDraftPerformanceCurveTowerDesign\MechanicalDraftPerformanceCurveTowerDesignFlowRateInputData.cs" />
