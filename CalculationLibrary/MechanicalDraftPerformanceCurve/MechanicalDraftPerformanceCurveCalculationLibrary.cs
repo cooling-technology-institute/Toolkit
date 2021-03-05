@@ -9,9 +9,9 @@ namespace CalculationLibrary
 {
     public class MechanicalDraftPerformanceCurveCalculationLibrary : CalculationLibrary
     {
-		public void MechanicalDraftPerformanceCurveCalculation(MechanicalDraftPerformanceCurveFileData data, MechanicalDraftPerformanceCurveOutput output)
+		public void MechanicalDraftPerformanceCurveCalculation(int testIndex, MechanicalDraftPerformanceCurveFileData data, MechanicalDraftPerformanceCurveOutput output)
         {
-			DetermineAdjustedTestFlow(data, output);
+			DetermineAdjustedTestFlow(testIndex, data, output);
 
 			//if(data.DesignData.ValidateRanges())
 

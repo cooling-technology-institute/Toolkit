@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Models
 {
-    public class MechanicalDraftPerformanceCurveData
+    public class TowerSpecifications
     {
         public bool IsInternationalSystemOfUnits_SI { get; set; }
 
@@ -20,7 +20,7 @@ namespace Models
         public double BarometricPressure { set; get; }
         public double LiquidToGasRatio { set; get; }
 
-        public MechanicalDraftPerformanceCurveData()
+        public TowerSpecifications()
         {
             IsInternationalSystemOfUnits_SI = false;
             WaterFlowRate = 0.0;
@@ -33,7 +33,7 @@ namespace Models
             LiquidToGasRatio = 0.0;
         }
 
-        public MechanicalDraftPerformanceCurveData(MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData)
+        public TowerSpecifications(TowerSpecifications mechanicalDraftPerformanceCurveData)
         {
             IsInternationalSystemOfUnits_SI = mechanicalDraftPerformanceCurveData.IsInternationalSystemOfUnits_SI;
             WaterFlowRate = mechanicalDraftPerformanceCurveData.WaterFlowRate;

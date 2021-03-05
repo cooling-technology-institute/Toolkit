@@ -46,7 +46,7 @@ namespace Models
         const double LIQUID_GAS_RATIO_MIN_SI = 0.01;
         const double LIQUID_GAS_RATIO_MAX_SI = 20.0;
 
-        MechanicalDraftPerformanceCurveData MechanicalDraftPerformanceCurveData_MinIP = new MechanicalDraftPerformanceCurveData()
+        TowerSpecifications MechanicalDraftPerformanceCurveData_MinIP = new TowerSpecifications()
         {
             IsInternationalSystemOfUnits_SI = false,
             WaterFlowRate = WATER_FLOW_RATE_MIN_IP,
@@ -59,7 +59,7 @@ namespace Models
             LiquidToGasRatio = LIQUID_GAS_RATIO_MIN_IP,
         };
 
-        MechanicalDraftPerformanceCurveData MechanicalDraftPerformanceCurveData_MaxIP = new MechanicalDraftPerformanceCurveData()
+        TowerSpecifications MechanicalDraftPerformanceCurveData_MaxIP = new TowerSpecifications()
         {
             IsInternationalSystemOfUnits_SI = false,
             WaterFlowRate = WATER_FLOW_RATE_MAX_IP,
@@ -72,7 +72,7 @@ namespace Models
             LiquidToGasRatio = LIQUID_GAS_RATIO_MAX_IP,
         };
 
-        MechanicalDraftPerformanceCurveData MechanicalDraftPerformanceCurveData_MinSI = new MechanicalDraftPerformanceCurveData()
+        TowerSpecifications MechanicalDraftPerformanceCurveData_MinSI = new TowerSpecifications()
         {
             IsInternationalSystemOfUnits_SI = true,
             WaterFlowRate = WATER_FLOW_RATE_MIN_SI,
@@ -85,7 +85,7 @@ namespace Models
             LiquidToGasRatio = LIQUID_GAS_RATIO_MIN_SI,
         };
 
-        MechanicalDraftPerformanceCurveData MechanicalDraftPerformanceCurveData_MaxSI = new MechanicalDraftPerformanceCurveData()
+        TowerSpecifications MechanicalDraftPerformanceCurveData_MaxSI = new TowerSpecifications()
         {
             IsInternationalSystemOfUnits_SI = true,
             WaterFlowRate = WATER_FLOW_RATE_MAX_SI,
@@ -108,7 +108,7 @@ namespace Models
         public bool isLiquidGasRatioError = false;
 
         // Check design or test data, optionally prompting the user with bounds if errors are found.
-        public bool ValidateDataWithinRange(MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData, bool isDesignData, StringBuilder errorMessage)
+        public bool ValidateDataWithinRange(TowerSpecifications mechanicalDraftPerformanceCurveData, bool isDesignData, StringBuilder errorMessage)
         {
             isWaterFlowRateError = false;
             isHotWaterTemperatureError = false;
@@ -119,8 +119,8 @@ namespace Models
             isBarometricPressureError = false;
             isLiquidGasRatioError = false;
 
-            MechanicalDraftPerformanceCurveData minimum = new MechanicalDraftPerformanceCurveData();
-            MechanicalDraftPerformanceCurveData maximum = new MechanicalDraftPerformanceCurveData();
+            TowerSpecifications minimum = new TowerSpecifications();
+            TowerSpecifications maximum = new TowerSpecifications();
 
             if (mechanicalDraftPerformanceCurveData.IsInternationalSystemOfUnits_SI)
             {

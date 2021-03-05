@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace CTIToolkit
@@ -85,7 +86,8 @@ namespace CTIToolkit
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.InitialDirectory = Application.UserAppDataPath;
+                //openFileDialog.InitialDirectory = Application.UserAppDataPath;
+                openFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
                 openFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
                 openFileDialog.FilterIndex = 2;
                 openFileDialog.AddExtension = true;

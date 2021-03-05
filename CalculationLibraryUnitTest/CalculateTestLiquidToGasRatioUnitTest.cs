@@ -18,12 +18,13 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData designPsychrometricsData = new PsychrometricsData();
             PsychrometricsData testPsychrometricsData = new PsychrometricsData();
 
-            data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate = 3583.0;
-            data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower = 107.0;
-            data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio = 1.3;
+            data.DesignData.TowerSpecifications.WaterFlowRate = 3583.0;
+            data.DesignData.TowerSpecifications.FanDriverPower = 107.0;
+            data.DesignData.TowerSpecifications.LiquidToGasRatio = 1.3;
 
-            data.TestData.WaterFlowRate = 3623.0;
-            data.TestData.FanDriverPower = 113.0;
+            data.TestData.Add(new TowerTestData(true));
+            data.TestData[0].TowerSpecifications.WaterFlowRate = 3623.0;
+            data.TestData[0].TowerSpecifications.FanDriverPower = 113.0;
 
             designPsychrometricsData.Density = 1.1501296596771431;
             designPsychrometricsData.SpecificVolume = 0.88656371124694966;
@@ -34,7 +35,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data, testPsychrometricsData, designPsychrometricsData);
+                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(0, data, testPsychrometricsData, designPsychrometricsData);
             }
             catch
             {
@@ -54,12 +55,13 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData designPsychrometricsData = new PsychrometricsData();
             PsychrometricsData testPsychrometricsData = new PsychrometricsData();
 
-            data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate = 0.0;
-            data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower = 107.0;
-            data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio = 1.3;
+            data.DesignData.TowerSpecifications.WaterFlowRate = 0.0;
+            data.DesignData.TowerSpecifications.FanDriverPower = 107.0;
+            data.DesignData.TowerSpecifications.LiquidToGasRatio = 1.3;
 
-            data.TestData.WaterFlowRate = 3623.0;
-            data.TestData.FanDriverPower = 113.0;
+            data.TestData.Add(new TowerTestData(true));
+            data.TestData[0].TowerSpecifications.WaterFlowRate = 3623.0;
+            data.TestData[0].TowerSpecifications.FanDriverPower = 113.0;
 
             designPsychrometricsData.Density = 1.1501296596771431;
             designPsychrometricsData.SpecificVolume = 0.88656371124694966;
@@ -70,7 +72,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data, testPsychrometricsData, designPsychrometricsData);
+                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(0, data, testPsychrometricsData, designPsychrometricsData);
             }
             catch
             {
@@ -90,12 +92,13 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData designPsychrometricsData = new PsychrometricsData();
             PsychrometricsData testPsychrometricsData = new PsychrometricsData();
 
-            data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate = 3583.0;
-            data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower = 107.0;
-            data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio = 1.3;
+            data.DesignData.TowerSpecifications.WaterFlowRate = 3583.0;
+            data.DesignData.TowerSpecifications.FanDriverPower = 107.0;
+            data.DesignData.TowerSpecifications.LiquidToGasRatio = 1.3;
 
-            data.TestData.WaterFlowRate = 3623.0;
-            data.TestData.FanDriverPower = 0.0;
+            data.TestData.Add(new TowerTestData(true));
+            data.TestData[0].TowerSpecifications.WaterFlowRate = 3623.0;
+            data.TestData[0].TowerSpecifications.FanDriverPower = 0.0;
 
             designPsychrometricsData.Density = 1.1501296596771431;
             designPsychrometricsData.SpecificVolume = 0.88656371124694966;
@@ -106,7 +109,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data, testPsychrometricsData, designPsychrometricsData);
+                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(0, data, testPsychrometricsData, designPsychrometricsData);
             }
             catch
             {
@@ -126,12 +129,13 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData designPsychrometricsData = new PsychrometricsData();
             PsychrometricsData testPsychrometricsData = new PsychrometricsData();
 
-            data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate = 3583.0;
-            data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower = 107.0;
-            data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio = 1.3;
+            data.DesignData.TowerSpecifications.WaterFlowRate = 3583.0;
+            data.DesignData.TowerSpecifications.FanDriverPower = 107.0;
+            data.DesignData.TowerSpecifications.LiquidToGasRatio = 1.3;
 
-            data.TestData.WaterFlowRate = 3623.0;
-            data.TestData.FanDriverPower = 113.0;
+            data.TestData.Add(new TowerTestData(true));
+            data.TestData[0].TowerSpecifications.WaterFlowRate = 3623.0;
+            data.TestData[0].TowerSpecifications.FanDriverPower = 113.0;
 
             designPsychrometricsData.Density = 0.0;
             designPsychrometricsData.SpecificVolume = 0.88656371124694966;
@@ -142,7 +146,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data, testPsychrometricsData, designPsychrometricsData);
+                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(0, data, testPsychrometricsData, designPsychrometricsData);
             }
             catch
             {
@@ -162,12 +166,13 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData designPsychrometricsData = new PsychrometricsData();
             PsychrometricsData testPsychrometricsData = new PsychrometricsData();
 
-            data.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate = 3583.0;
-            data.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower = 107.0;
-            data.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio = 1.3;
+            data.DesignData.TowerSpecifications.WaterFlowRate = 3583.0;
+            data.DesignData.TowerSpecifications.FanDriverPower = 107.0;
+            data.DesignData.TowerSpecifications.LiquidToGasRatio = 1.3;
 
-            data.TestData.WaterFlowRate = 3623.0;
-            data.TestData.FanDriverPower = 113.0;
+            data.TestData.Add(new TowerTestData(true));
+            data.TestData[0].TowerSpecifications.WaterFlowRate = 3623.0;
+            data.TestData[0].TowerSpecifications.FanDriverPower = 113.0;
 
             designPsychrometricsData.Density = 1.1501296596771431;
             designPsychrometricsData.SpecificVolume = 0.0;
@@ -178,7 +183,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data, testPsychrometricsData, designPsychrometricsData);
+                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(0, data, testPsychrometricsData, designPsychrometricsData);
             }
             catch
             {

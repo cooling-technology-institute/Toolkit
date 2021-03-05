@@ -1,7 +1,8 @@
-﻿// Copyright Cooling Technology Institute 2019-2020
+﻿// Copyright Cooling Technology Institute 2019-2021
 
 using CalculationLibrary;
 using Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,19 +13,67 @@ namespace ViewModels
 {
     public class MechanicalDraftPerformanceCurveViewModel
     {
-        public MechanicalDraftPerformanceCurveInputDataViewModel MechanicalDraftPerformanceCurveInputDataViewModel { get; set; }
+        public TowerDesignData DesignData { get; set; }
+        public TowerTestPoint TestPoint { get; set; }
         public MechanicalDraftPerformanceCurveOutputDataViewModel MechanicalDraftPerformanceCurveOutputDataViewModel { get; set; }
+        public List<string> TestNames { get; set; }
 
-        private bool IsDemo { get; set; }
-        private bool IsInternationalSystemOfUnits_SI { get; set; }
+        public string DataFileName { get; set; }
+        
+        MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData;
+
+        public bool IsDemo { get; set; }
+        public bool IsInternationalSystemOfUnits_SI { get; set; }
 
         public MechanicalDraftPerformanceCurveViewModel(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
             IsInternationalSystemOfUnits_SI = IsInternationalSystemOfUnits_SI;
 
-            MechanicalDraftPerformanceCurveInputDataViewModel = new MechanicalDraftPerformanceCurveInputDataViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
+            DesignData = new TowerDesignData(IsDemo, IsInternationalSystemOfUnits_SI);
+            TestPoint = new TowerTestPoint(IsDemo, IsInternationalSystemOfUnits_SI);
+            TestNames = new List<string>();
+
             MechanicalDraftPerformanceCurveOutputDataViewModel = new MechanicalDraftPerformanceCurveOutputDataViewModel(IsInternationalSystemOfUnits_SI);
+        }
+
+        public bool OpenDataFile(string fileName, out string errorMessage)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            bool returnValue = true;
+
+            try
+            {
+                mechanicalDraftPerformanceCurveFileData = JsonConvert.DeserializeObject<MechanicalDraftPerformanceCurveFileData>(File.ReadAllText(fileName));
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("Failure to read file: {0}. Exception: {1}", Path.GetFileName(fileName), e.ToString());
+                return false;
+            }
+
+            if (mechanicalDraftPerformanceCurveFileData != null)
+            {
+                if (IsInternationalSystemOfUnits_SI != mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI)
+                {
+                    IsInternationalSystemOfUnits_SI = mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI;
+                }
+
+                if (!LoadData(-1, mechanicalDraftPerformanceCurveFileData, out errorMessage))
+                {
+                    stringBuilder.AppendLine(errorMessage);
+                    returnValue = false;
+                    errorMessage = string.Empty;
+                }
+            }
+            else
+            {
+                stringBuilder.AppendLine("Unable to load file. File contains invalid data");
+            }
+
+            errorMessage = stringBuilder.ToString();
+
+            return returnValue;
         }
 
         #region DataValues
@@ -33,7 +82,7 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.WaterFlowRateDataValue.InputMessage;
+                return DesignData.WaterFlowRateDataValue.InputMessage;
             }
         }
 
@@ -41,20 +90,20 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.WaterFlowRateDataValue.InputValue;
+                return DesignData.WaterFlowRateDataValue.InputValue;
             }
         }
 
         public bool WaterFlowRateDataValueUpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputDataViewModel.WaterFlowRateDataValue.UpdateValue(value, out errorMessage);
+            return DesignData.WaterFlowRateDataValue.UpdateValue(value, out errorMessage);
         }
 
         public string WaterFlowRateDataValueTooltip
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.WaterFlowRateDataValue.ToolTip;
+                return DesignData.WaterFlowRateDataValue.ToolTip;
             }
         }
 
@@ -63,7 +112,7 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.HotWaterTemperatureDataValue.InputMessage;
+                return DesignData.HotWaterTemperatureDataValue.InputMessage;
             }
         }
 
@@ -71,20 +120,20 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.HotWaterTemperatureDataValue.InputValue;
+                return DesignData.HotWaterTemperatureDataValue.InputValue;
             }
         }
 
         public bool HotWaterTemperatureDataValueUpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputDataViewModel.HotWaterTemperatureDataValue.UpdateValue(value, out errorMessage);
+            return DesignData.HotWaterTemperatureDataValue.UpdateValue(value, out errorMessage);
         }
 
         public string HotWaterTemperatureDataValueTooltip
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.HotWaterTemperatureDataValue.ToolTip;
+                return DesignData.HotWaterTemperatureDataValue.ToolTip;
             }
         }
 
@@ -92,7 +141,7 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.ColdWaterTemperatureDataValue.InputMessage;
+                return DesignData.ColdWaterTemperatureDataValue.InputMessage;
             }
         }
 
@@ -100,7 +149,7 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.ColdWaterTemperatureDataValue.InputValue;
+                return DesignData.ColdWaterTemperatureDataValue.InputValue;
             }
         }
 
@@ -108,20 +157,20 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.ColdWaterTemperatureDataValue.ToolTip;
+                return DesignData.ColdWaterTemperatureDataValue.ToolTip;
             }
         }
 
         public bool ColdWaterTemperatureDataValueUpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputDataViewModel.ColdWaterTemperatureDataValue.UpdateValue(value, out errorMessage);
+            return DesignData.ColdWaterTemperatureDataValue.UpdateValue(value, out errorMessage);
         }
 
         public string WetBulbTemperatureDataValueInputMessage
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.WetBulbTemperatureDataValue.InputMessage;
+                return DesignData.WetBulbTemperatureDataValue.InputMessage;
             }
         }
 
@@ -129,7 +178,7 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.WetBulbTemperatureDataValue.InputValue;
+                return DesignData.WetBulbTemperatureDataValue.InputValue;
             }
         }
 
@@ -137,20 +186,20 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.WetBulbTemperatureDataValue.ToolTip;
+                return DesignData.WetBulbTemperatureDataValue.ToolTip;
             }
         }
 
         public bool WetBulbTemperatureDataValueUpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputDataViewModel.WetBulbTemperatureDataValue.UpdateValue(value, out errorMessage);
+            return DesignData.WetBulbTemperatureDataValue.UpdateValue(value, out errorMessage);
         }
 
         public string DryBulbTemperatureDataValueInputMessage
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.DryBulbTemperatureDataValue.InputMessage;
+                return DesignData.DryBulbTemperatureDataValue.InputMessage;
             }
         }
 
@@ -158,7 +207,7 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.DryBulbTemperatureDataValue.InputValue;
+                return DesignData.DryBulbTemperatureDataValue.InputValue;
             }
         }
 
@@ -166,20 +215,20 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.DryBulbTemperatureDataValue.ToolTip;
+                return DesignData.DryBulbTemperatureDataValue.ToolTip;
             }
         }
 
         public bool DryBulbTemperatureDataValueUpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputDataViewModel.DryBulbTemperatureDataValue.UpdateValue(value, out errorMessage);
+            return DesignData.DryBulbTemperatureDataValue.UpdateValue(value, out errorMessage);
         }
 
         public string FanDriverPowerDataValueInputMessage
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.FanDriverPowerDataValue.InputMessage;
+                return DesignData.FanDriverPowerDataValue.InputMessage;
             }
         }
 
@@ -187,7 +236,7 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.FanDriverPowerDataValue.InputValue;
+                return DesignData.FanDriverPowerDataValue.InputValue;
             }
         }
 
@@ -195,20 +244,20 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.FanDriverPowerDataValue.ToolTip;
+                return DesignData.FanDriverPowerDataValue.ToolTip;
             }
         }
 
         public bool FanDriverPowerDataValueUpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputDataViewModel.FanDriverPowerDataValue.UpdateValue(value, out errorMessage);
+            return DesignData.FanDriverPowerDataValue.UpdateValue(value, out errorMessage);
         }
 
         public string BarometricPressureDataValueInputMessage
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.BarometricPressureDataValue.InputMessage;
+                return DesignData.BarometricPressureDataValue.InputMessage;
             }
         }
 
@@ -216,7 +265,7 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.BarometricPressureDataValue.InputValue;
+                return DesignData.BarometricPressureDataValue.InputValue;
             }
         }
 
@@ -224,20 +273,20 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.BarometricPressureDataValue.ToolTip;
+                return DesignData.BarometricPressureDataValue.ToolTip;
             }
         }
 
         public bool BarometricPressureDataValueUpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputDataViewModel.BarometricPressureDataValue.UpdateValue(value, out errorMessage);
+            return DesignData.BarometricPressureDataValue.UpdateValue(value, out errorMessage);
         }
 
         public string LiquidToGasRatioDataValueInputMessage
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.LiquidToGasRatioDataValue.InputMessage;
+                return DesignData.LiquidToGasRatioDataValue.InputMessage;
             }
         }
 
@@ -245,7 +294,7 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.LiquidToGasRatioDataValue.InputValue;
+                return DesignData.LiquidToGasRatioDataValue.InputValue;
             }
         }
 
@@ -253,70 +302,100 @@ namespace ViewModels
         {
             get
             {
-                return MechanicalDraftPerformanceCurveInputDataViewModel.LiquidToGasRatioDataValue.ToolTip;
+                return DesignData.LiquidToGasRatioDataValue.ToolTip;
             }
         }
 
         public bool LiquidToGasRatioDataValueUpdateValue(string value, out string errorMessage)
         {
-            return MechanicalDraftPerformanceCurveInputDataViewModel.LiquidToGasRatioDataValue.UpdateValue(value, out errorMessage);
+            return DesignData.LiquidToGasRatioDataValue.UpdateValue(value, out errorMessage);
         }
 
         public string DataFilenameInputValue
         {
             get
             {
-                return Path.GetFileName(MechanicalDraftPerformanceCurveInputDataViewModel.MechanicalDraftPerformanceCurveDataFile);
+                return Path.GetFileName(DataFileName);
             }
         }
         
         #endregion DataValue
 
-        public bool LoadData(string fileName, MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData, out string errorMessage)
-        {
-            return MechanicalDraftPerformanceCurveInputDataViewModel.LoadData(fileName, mechanicalDraftPerformanceCurveFileData, out errorMessage);
-        }
-
-        public bool SaveDataFile(out string errorMessage)
-        {
-            return MechanicalDraftPerformanceCurveInputDataViewModel.SaveDataFile(out errorMessage);
-        }
-
-        public bool SaveAsDataFile(string fileName, out string errorMessage)
-        {
-            return MechanicalDraftPerformanceCurveInputDataViewModel.SaveAsDataFile(fileName, out errorMessage);
-        }
-
-        public bool FillAndValidate(MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData, out string errorMessage)
+        public bool LoadData(int testIndex, MechanicalDraftPerformanceCurveFileData fileData, out string errorMessage)
         {
             errorMessage = string.Empty;
             bool returnValue = true;
+            StringBuilder stringBuilder = new StringBuilder();
+
+            TestNames.Clear();
+            foreach (Models.TowerTestData test in fileData.TestData)
+            {
+                TestNames.Add(test.TestName);
+            }
+
+            if(!DesignData.LoadData(fileData.DesignData, out errorMessage))
+            {
+                returnValue = false;
+                stringBuilder.AppendLine(errorMessage);
+                errorMessage = string.Empty;
+            }
+
+            if (!TestPoint.LoadData(testIndex, fileData.TestData, out errorMessage))
+            {
+                returnValue = false;
+                stringBuilder.AppendLine(errorMessage);
+                errorMessage = string.Empty;
+            }
+
             return returnValue;
         }
 
-        public bool CalculatePerformanceCurve(MechanicalDraftPerformanceCurveTowerDesignViewModel mechanicalDraftPerformanceCurveTowerDesignViewModel, out string errorMessage)
+        public bool FillAndValidate(int testIndex, MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+            bool returnValue = true;
+            StringBuilder stringBuilder = new StringBuilder();
+
+            if (!DesignData.FillAndValidate(mechanicalDraftPerformanceCurveFileData.DesignData, out errorMessage))
+            {
+                returnValue = false;
+                stringBuilder.AppendLine(errorMessage);
+                errorMessage = string.Empty;
+            }
+
+            if (!TestPoint.FillAndValidate(mechanicalDraftPerformanceCurveFileData.TestData[testIndex], out errorMessage))
+            {
+                returnValue = false;
+                stringBuilder.AppendLine(errorMessage);
+                errorMessage = string.Empty;
+            }
+
+            return returnValue;
+        }
+
+        public bool CalculatePerformanceCurve(int testIndex, MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData, out string errorMessage)
         {
             errorMessage = string.Empty;
             bool returnValue = true;
             try
             {
-                MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData = new MechanicalDraftPerformanceCurveFileData(IsInternationalSystemOfUnits_SI);
+                //MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData = new MechanicalDraftPerformanceCurveFileData(IsInternationalSystemOfUnits_SI);
 
-                // validate test data
-                if (!mechanicalDraftPerformanceCurveTowerDesignViewModel.FillAndValidate(mechanicalDraftPerformanceCurveFileData.DesignData, out errorMessage))
-                {
+                //// validate test data
+                //if (!mechanicalDraftPerformanceCurveTowerDesignViewModel.FillAndValidate(mechanicalDraftPerformanceCurveFileData.DesignData, out errorMessage))
+                //{
 
-                }
+                //}
 
-                if (!MechanicalDraftPerformanceCurveInputDataViewModel.FillAndValidate(mechanicalDraftPerformanceCurveFileData, out errorMessage))
-                {
+                //if (!DesignData.FillAndValidate(mechanicalDraftPerformanceCurveFileData, out errorMessage))
+                //{
 
-                }
+                //}
 
 
                 MechanicalDraftPerformanceCurveCalculationLibrary mechanicalDraftPerformanceCurveCalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
 
-                mechanicalDraftPerformanceCurveCalculationLibrary.MechanicalDraftPerformanceCurveCalculation(mechanicalDraftPerformanceCurveFileData, MechanicalDraftPerformanceCurveOutputDataViewModel.MechanicalDraftPerformanceCurveOutput);
+                mechanicalDraftPerformanceCurveCalculationLibrary.MechanicalDraftPerformanceCurveCalculation(testIndex, mechanicalDraftPerformanceCurveFileData, MechanicalDraftPerformanceCurveOutputDataViewModel.MechanicalDraftPerformanceCurveOutput);
             }
             catch (Exception exception)
             {
@@ -331,7 +410,7 @@ namespace ViewModels
         }
 
         // Check design or test data, optionally prompting the user with bounds if errors are found.
-        bool ValidateData(MechanicalDraftPerformanceCurveData mechanicalDraftPerformanceCurveData, bool isDesignData, StringBuilder errorMessage)
+        bool ValidateData(Models.TowerSpecifications mechanicalDraftPerformanceCurveData, bool isDesignData, StringBuilder errorMessage)
         {
             //bool isError = (isWaterFlowRateError || isHotWaterTemperatureError || isColdWaterTemperatureError || isWetBulbTemperatureError || isDryBulbTemperatureError || isFanDriverPowerError ||
             //    isBarometricPressureError || isLiquidGasRatioError);

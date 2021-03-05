@@ -48,7 +48,7 @@ namespace Models
             WsDryBulb = 0.0;
         }
 
-        public PsychrometricsData(MechanicalDraftPerformanceCurveData data)
+        public PsychrometricsData(TowerSpecifications data)
         {
             IsInternationalSystemOfUnits_SI = data.IsInternationalSystemOfUnits_SI;
             Elevation = 0.0;

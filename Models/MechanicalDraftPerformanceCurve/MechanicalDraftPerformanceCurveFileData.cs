@@ -13,15 +13,15 @@ namespace Models
         public const string DataType = "MechanicalDraftPerformanceCurveData";
         public const string Version = "1.0";
 
-        public MechanicalDraftPerformanceCurveData TestData { get; set; }
-        public MechanicalDraftPerformanceCurveDesignData DesignData { get; set; }
+        public List<TowerTestData> TestData { get; set; }
+        public DesignData DesignData { get; set; }
 
         public MechanicalDraftPerformanceCurveFileData(bool isInternationalSystemOfUnits_IS_)
         {
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
 
-            TestData = new MechanicalDraftPerformanceCurveData();
-            DesignData = new MechanicalDraftPerformanceCurveDesignData();
+            TestData = new List<TowerTestData>();
+            DesignData = new DesignData();
         }
     }
 }

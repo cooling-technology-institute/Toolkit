@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -58,6 +57,7 @@ namespace CTIToolkit
                 errorMessage = string.Format("Failure to read file: {0}. Exception: {1}", Path.GetFileName(fileName), e.ToString());
                 return false;
             }
+
             if(mechanicalDraftPerformanceCurveFileData != null)
             {
                 if (IsInternationalSystemOfUnits_SI_ != mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI)
@@ -65,14 +65,15 @@ namespace CTIToolkit
                     IsInternationalSystemOfUnits_SI_ = mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI;
                 }
 
-                if (!MechanicalDraftPerformanceCurveViewModel.LoadData(fileName, mechanicalDraftPerformanceCurveFileData, out errorMessage))
+                if (!MechanicalDraftPerformanceCurveViewModel.LoadData(-1, mechanicalDraftPerformanceCurveFileData, out errorMessage))
                 {
+                    //TestWaterFlowRate_Validating(null, null);
                     stringBuilder.AppendLine(errorMessage);
                     returnValue = false;
                     errorMessage = string.Empty;
                 }
 
-                if (!TowerDesignDataUserControl.LoadData(mechanicalDraftPerformanceCurveFileData, out errorMessage))
+                if (!TowerDesignDataUserControl.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData, out errorMessage))
                 {
                     stringBuilder.AppendLine(errorMessage);
                     returnValue = false;
@@ -102,12 +103,12 @@ namespace CTIToolkit
             bool returnValue = true;
             errorMessage = string.Empty;
 
-            if (!MechanicalDraftPerformanceCurveViewModel.SaveDataFile(out errorMessage))
-            {
-                stringBuilder.AppendLine(errorMessage);
-                returnValue = false;
-                errorMessage = string.Empty;
-            }
+            //if (!MechanicalDraftPerformanceCurveViewModel.SaveDataFile(out errorMessage))
+            //{
+            //    stringBuilder.AppendLine(errorMessage);
+            //    returnValue = false;
+            //    errorMessage = string.Empty;
+            //}
 
             if (!Setup(out errorMessage))
             {
@@ -121,30 +122,30 @@ namespace CTIToolkit
             return returnValue;
         }
 
-        public bool SaveAsDataFile(string fileName, out string errorMessage)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            bool returnValue = true;
-            errorMessage = string.Empty;
+        //public bool SaveAsDataFile(string fileName, out string errorMessage)
+        //{
+        //    StringBuilder stringBuilder = new StringBuilder();
+        //    bool returnValue = true;
+        //    errorMessage = string.Empty;
             
-            if (!MechanicalDraftPerformanceCurveViewModel.SaveAsDataFile(fileName, out errorMessage))
-            {
-                stringBuilder.AppendLine(errorMessage);
-                returnValue = false;
-                errorMessage = string.Empty;
-            }
+        //    if (!MechanicalDraftPerformanceCurveViewModel.SaveAsDataFile(fileName, out errorMessage))
+        //    {
+        //        stringBuilder.AppendLine(errorMessage);
+        //        returnValue = false;
+        //        errorMessage = string.Empty;
+        //    }
 
-            if (!Setup(out errorMessage))
-            {
-                stringBuilder.AppendLine(errorMessage);
-                returnValue = false;
-                errorMessage = string.Empty;
-            }
+        //    if (!Setup(out errorMessage))
+        //    {
+        //        stringBuilder.AppendLine(errorMessage);
+        //        returnValue = false;
+        //        errorMessage = string.Empty;
+        //    }
 
-            errorMessage = stringBuilder.ToString();
+        //    errorMessage = stringBuilder.ToString();
 
-            return returnValue;
-        }
+        //    return returnValue;
+        //}
 
         private bool Setup(out string errorMessage)
         {
@@ -193,22 +194,31 @@ namespace CTIToolkit
 
                 // design data
 
-                OwnerNameField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.OwnerNameInputValue;
-                ProjectNameField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.ProjectNameInputValue;
-                LocationField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.LocationInputValue;
-                TowerManufacturerField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.TowerManufacturerInputValue;
-                TowerTypeField.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.TowerTypeInputValue.ToString();
+                OwnerNameField.Text = TowerDesignDataUserControl.TowerDesignData.OwnerNameValue;
+                ProjectNameField.Text = TowerDesignDataUserControl.TowerDesignData.ProjectNameValue;
+                LocationField.Text = TowerDesignDataUserControl.TowerDesignData.LocationValue;
+                TowerManufacturerField.Text = TowerDesignDataUserControl.TowerDesignData.TowerManufacturerValue;
+                TowerTypeField.Text = TowerDesignDataUserControl.TowerDesignData.TowerTypeValue.ToString();
 
-                DesignWaterFlowRate.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.WaterFlowRateDataValueInputValue;
-                DesignHotWaterTemperature.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.HotWaterTemperatureDataValueInputValue;
-                DesignColdWaterTemperature.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.ColdWaterTemperatureDataValueInputValue;
-                DesignWetBulbTemperature.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.WetBulbTemperatureDataValueInputValue;
-                DesignDryBulbTemperature.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.DryBulbTemperatureDataValueInputValue;
-                DesignFanDriverPower.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.FanDriverPowerDataValueInputValue;
-                DesignBarometricPressure.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.BarometricPressureDataValueInputValue;
-                DesignLiquidToGasRatio.Text = TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel.LiquidToGasRatioDataValueInputValue;
+                DesignWaterFlowRate.Text = TowerDesignDataUserControl.TowerDesignData.WaterFlowRateDataValue.InputValue;
+                DesignHotWaterTemperature.Text = TowerDesignDataUserControl.TowerDesignData.HotWaterTemperatureDataValue.InputValue;
+                DesignColdWaterTemperature.Text = TowerDesignDataUserControl.TowerDesignData.ColdWaterTemperatureDataValue.InputValue;
+                DesignWetBulbTemperature.Text = TowerDesignDataUserControl.TowerDesignData.WetBulbTemperatureDataValue.InputValue;
+                DesignDryBulbTemperature.Text = TowerDesignDataUserControl.TowerDesignData.DryBulbTemperatureDataValue.InputValue;
+                DesignFanDriverPower.Text = TowerDesignDataUserControl.TowerDesignData.FanDriverPowerDataValue.InputValue;
+                DesignBarometricPressure.Text = TowerDesignDataUserControl.TowerDesignData.BarometricPressureDataValue.InputValue;
+                DesignLiquidToGasRatio.Text = TowerDesignDataUserControl.TowerDesignData.LiquidToGasRatioDataValue.InputValue;
 
                 DataFilename.Text = MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue;
+
+                TestSelector.Items.Clear();
+                TestSelector.Items.Add("");
+                TestSelector.Items.Add("New Test");
+
+                foreach(string testName in MechanicalDraftPerformanceCurveViewModel.TestNames)
+                {
+                    TestSelector.Items.Add(testName);
+                }
 
                 TestResultsGroupBox.Text = string.Format("Test Results ({0})", (IsInternationalSystemOfUnits_SI_) ? "SI" : "IP");
             }
@@ -423,22 +433,27 @@ namespace CTIToolkit
         {
             string errorMessage = string.Empty;
 
-            if(MechanicalDraftPerformanceCurveViewModel.CalculatePerformanceCurve(TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel, out errorMessage))
-            {
-                if (MechanicalDraftPerformanceCurveViewModel.GetDataTable() != null)
-                {
-                    // Set a DataGrid control's DataSource to the DataView.
-//                    MechanicalDraftPerformanceCurveGridView.DataSource = new DataView(MechanicalDraftPerformanceCurveViewModel.GetDataTable());
-                }
-            }
-            else
-            {
-                MessageBox.Show(errorMessage, "Mechanical Draft Performance Curve Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+//            if(MechanicalDraftPerformanceCurveViewModel.CalculatePerformanceCurve(TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel, out errorMessage))
+//            {
+//                if (MechanicalDraftPerformanceCurveViewModel.GetDataTable() != null)
+//                {
+//                    // Set a DataGrid control's DataSource to the DataView.
+////                    MechanicalDraftPerformanceCurveGridView.DataSource = new DataView(MechanicalDraftPerformanceCurveViewModel.GetDataTable());
+//                }
+//            }
+//            else
+//            {
+//                MessageBox.Show(errorMessage, "Mechanical Draft Performance Curve Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+//            }
         }
 
         private void ViewGraph_Click(object sender, EventArgs e)
         {
+        }
+
+        private void TestSelector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

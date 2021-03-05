@@ -48,9 +48,10 @@
     <Compile Include="DemandCurve\DemandCurveData.cs" />
     <Compile Include="DemandCurve\SeriesData.cs" />
     <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveDataMinimumMaximum.cs" />
-    <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveData..cs" />
+    <Compile Include="MechanicalDraftPerformanceCurve\TowerTestData.cs" />
+    <Compile Include="MechanicalDraftPerformanceCurve\TowerSpecifications.cs" />
     <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveFileData.cs" />
-    <Compile Include="MechanicalDraftPerformanceCurveTowerDesign\MechanicalDraftPerformanceCurveDesignData.cs" />
+    <Compile Include="MechanicalDraftPerformanceCurveTowerDesign\DesignData.cs" />
     <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveOutput.cs" />
     <Compile Include="MechanicalDraftPerformanceCurveTowerDesign\MechanicalDraftPerformanceTowerType.cs" />
     <Compile Include="MechanicalDraftPerformanceCurveTowerDesign\RangedTemperatureDesignData.cs" />

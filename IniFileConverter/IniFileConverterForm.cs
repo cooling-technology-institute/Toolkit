@@ -56,15 +56,15 @@ namespace IniFileConverter
                     {
                         mechanicalDraftPerformanceCurveFileData.DesignData.TowerType = TOWER_TYPE.Forced;
                     }
-
-                    mechanicalDraftPerformanceCurveFileData.DesignData.MechanicalDraftPerformanceCurveData.WaterFlowRate = double.Parse(data["Tower Design Point"]["WaterFlowRate"]);
-                    mechanicalDraftPerformanceCurveFileData.DesignData.MechanicalDraftPerformanceCurveData.HotWaterTemperature = double.Parse(data["Tower Design Point"]["HWT"]);
-                    mechanicalDraftPerformanceCurveFileData.DesignData.MechanicalDraftPerformanceCurveData.ColdWaterTemperature = double.Parse(data["Tower Design Point"]["CWT"]);
-                    mechanicalDraftPerformanceCurveFileData.DesignData.MechanicalDraftPerformanceCurveData.WetBulbTemperature = double.Parse(data["Tower Design Point"]["WBT"]);
-                    mechanicalDraftPerformanceCurveFileData.DesignData.MechanicalDraftPerformanceCurveData.DryBulbTemperature = double.Parse(data["Tower Design Point"]["DBT"]);
-                    mechanicalDraftPerformanceCurveFileData.DesignData.MechanicalDraftPerformanceCurveData.FanDriverPower = double.Parse(data["Tower Design Point"]["FanDriverPower"]);
-                    mechanicalDraftPerformanceCurveFileData.DesignData.MechanicalDraftPerformanceCurveData.BarometricPressure = double.Parse(data["Tower Design Point"]["BarometricPressure"]);
-                    mechanicalDraftPerformanceCurveFileData.DesignData.MechanicalDraftPerformanceCurveData.LiquidToGasRatio = double.Parse(data["Tower Design Point"]["LG"]);
+                    mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.IsInternationalSystemOfUnits_SI = mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI;
+                    mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.WaterFlowRate = double.Parse(data["Tower Design Point"]["WaterFlowRate"]);
+                    mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.HotWaterTemperature = double.Parse(data["Tower Design Point"]["HWT"]);
+                    mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.ColdWaterTemperature = double.Parse(data["Tower Design Point"]["CWT"]);
+                    mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.WetBulbTemperature = double.Parse(data["Tower Design Point"]["WBT"]);
+                    mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.DryBulbTemperature = double.Parse(data["Tower Design Point"]["DBT"]);
+                    mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.FanDriverPower = double.Parse(data["Tower Design Point"]["FanDriverPower"]);
+                    mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.BarometricPressure = double.Parse(data["Tower Design Point"]["BarometricPressure"]);
+                    mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.LiquidToGasRatio = double.Parse(data["Tower Design Point"]["LG"]);
 
                     int numberOfRanges = int.Parse(data["Curve Data"]["NumRanges"]);
                     for(int i = 0; i < numberOfRanges; i++)
@@ -260,16 +260,16 @@ namespace IniFileConverter
                     for(int testNumber = 0; testNumber < numberOfTests; testNumber++)
                     {
                         string testName = string.Format("TestPoint{0}", testNumber+1);
-                        if (data[testName]["Date"].Contains("Test Data"))
-                        {
-                            mechanicalDraftPerformanceCurveFileData.TestData.WaterFlowRate = double.Parse(data[testName]["WaterFlowRate"]);
-                            mechanicalDraftPerformanceCurveFileData.TestData.HotWaterTemperature = double.Parse(data[testName]["HWT"]);
-                            mechanicalDraftPerformanceCurveFileData.TestData.ColdWaterTemperature = double.Parse(data[testName]["CWT"]);
-                            mechanicalDraftPerformanceCurveFileData.TestData.WetBulbTemperature = double.Parse(data[testName]["WBT"]);
-                            mechanicalDraftPerformanceCurveFileData.TestData.DryBulbTemperature = double.Parse(data[testName]["DBT"]);
-                            mechanicalDraftPerformanceCurveFileData.TestData.FanDriverPower = double.Parse(data[testName]["FanDriverPower"]);
-                            mechanicalDraftPerformanceCurveFileData.TestData.BarometricPressure = double.Parse(data[testName]["BarometricPressure"]);
-                        }
+                        TowerTestData towerTestData = new TowerTestData(mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI);
+                        towerTestData.TestName = data[testName]["Date"];
+                        towerTestData.TowerSpecifications.WaterFlowRate = double.Parse(data[testName]["WaterFlowRate"]);
+                        towerTestData.TowerSpecifications.HotWaterTemperature = double.Parse(data[testName]["HWT"]);
+                        towerTestData.TowerSpecifications.ColdWaterTemperature = double.Parse(data[testName]["CWT"]);
+                        towerTestData.TowerSpecifications.WetBulbTemperature = double.Parse(data[testName]["WBT"]);
+                        towerTestData.TowerSpecifications.DryBulbTemperature = double.Parse(data[testName]["DBT"]);
+                        towerTestData.TowerSpecifications.FanDriverPower = double.Parse(data[testName]["FanDriverPower"]);
+                        towerTestData.TowerSpecifications.BarometricPressure = double.Parse(data[testName]["BarometricPressure"]);
+                        mechanicalDraftPerformanceCurveFileData.TestData.Add(towerTestData);
                     }
 
                     string convertedFileName = Path.Combine(OutputFolder, Path.GetFileNameWithoutExtension(fileName) + ".json");
@@ -352,6 +352,17 @@ namespace IniFileConverter
                     this.errorProvider1.SetError(InputDirectory, "Invalid directory");
                 }
             }
+        }
+
+        private void OutputDirectory_TextChanged(object sender, EventArgs e)
+        {
+            OutputFolder = OutputDirectory.Text;
+
+        }
+
+        private void InputDirectory_TextChanged(object sender, EventArgs e)
+        {
+            InputFolder = InputDirectory.Text;
         }
     }
 }

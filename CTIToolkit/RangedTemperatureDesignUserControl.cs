@@ -8,7 +8,7 @@ namespace CTIToolkit
 {
     public partial class RangedTemperatureDesignUserControl : UserControl
     {
-        public RangedTemperatureDesignViewModel RangedTemperatureDesignViewModel { get; set; }
+        public TowerDesignCurveData RangedTemperatureDesignViewModel { get; set; }
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_SI_ { get; set; }
 
@@ -19,7 +19,7 @@ namespace CTIToolkit
 
             InitializeComponent();
 
-            RangedTemperatureDesignViewModel = new RangedTemperatureDesignViewModel(IsDemo, IsInternationalSystemOfUnits_SI_);
+            RangedTemperatureDesignViewModel = new TowerDesignCurveData(IsDemo, IsInternationalSystemOfUnits_SI_);
 
             string errorMessage = string.Empty;
             

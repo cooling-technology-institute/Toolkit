@@ -56,6 +56,7 @@
             this.InputDirectory.Name = "InputDirectory";
             this.InputDirectory.Size = new System.Drawing.Size(506, 20);
             this.InputDirectory.TabIndex = 1;
+            this.InputDirectory.TextChanged += new System.EventHandler(this.InputDirectory_TextChanged);
             this.InputDirectory.Validating += new System.ComponentModel.CancelEventHandler(this.InputDirectory_Validating);
             this.InputDirectory.Validated += new System.EventHandler(this.InputDirectory_Validated);
             // 
@@ -95,6 +96,7 @@
             this.OutputDirectory.Name = "OutputDirectory";
             this.OutputDirectory.Size = new System.Drawing.Size(506, 20);
             this.OutputDirectory.TabIndex = 6;
+            this.OutputDirectory.TextChanged += new System.EventHandler(this.OutputDirectory_TextChanged);
             this.OutputDirectory.Validating += new System.ComponentModel.CancelEventHandler(this.OutputDirectory_Validating);
             this.OutputDirectory.Validated += new System.EventHandler(this.OutputDirectory_Validated);
             // 

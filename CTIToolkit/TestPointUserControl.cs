@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
+﻿using Models;
+using System;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ViewModels;
-using Models;
 
 namespace CTIToolkit
 {
@@ -68,7 +62,7 @@ namespace CTIToolkit
 
             if (mechanicalDraftPerformanceCurveFileData != null)
             {
-                if (!MechanicalDraftPerformanceCurveViewModel.LoadData(string.Empty, mechanicalDraftPerformanceCurveFileData, out errorMessage))
+                if (!MechanicalDraftPerformanceCurveViewModel.LoadData(-1, mechanicalDraftPerformanceCurveFileData, out errorMessage))
                 {
                     stringBuilder.AppendLine(errorMessage);
                     returnValue = false;

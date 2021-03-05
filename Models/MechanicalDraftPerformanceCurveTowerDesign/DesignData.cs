@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Models
 {
-    public class MechanicalDraftPerformanceCurveDesignData
+    public class DesignData
     {
         public string OwnerName { set; get; }
         public string ProjectName { set; get; }
@@ -15,7 +15,7 @@ namespace Models
         [Newtonsoft.Json.JsonConverter(typeof(StringEnumAsIntConverter))]
         public TOWER_TYPE TowerType { set; get; }
 
-        public MechanicalDraftPerformanceCurveData MechanicalDraftPerformanceCurveData { set; get; }
+        public TowerSpecifications TowerSpecifications { set; get; }
 
         public double Range1 { set; get; }
         public double Range2 { set; get; }
@@ -27,8 +27,8 @@ namespace Models
         public bool RangeLessThan { set; get; }
 
         public List<RangedTemperaturesDesignData> RangedTemperaturesDesignData { set; get; }
-	
-        public MechanicalDraftPerformanceCurveDesignData()
+        
+        public DesignData()
         {
             OwnerName = string.Empty;
             ProjectName = string.Empty;
@@ -36,7 +36,7 @@ namespace Models
             TowerManufacturer = string.Empty;
             TowerType = TOWER_TYPE.Forced;
 
-            MechanicalDraftPerformanceCurveData = new MechanicalDraftPerformanceCurveData();
+            TowerSpecifications = new TowerSpecifications();
  
             RangeCount = 0;
             LastValidRange = 0;
