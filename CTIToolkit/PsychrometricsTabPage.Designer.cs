@@ -130,7 +130,7 @@
             // 
             // PsychrometricsCalculate
             // 
-            this.PsychrometricsCalculate.Location = new System.Drawing.Point(650, 19);
+            this.PsychrometricsCalculate.Location = new System.Drawing.Point(662, 19);
             this.PsychrometricsCalculate.Name = "PsychrometricsCalculate";
             this.PsychrometricsCalculate.Size = new System.Drawing.Size(75, 23);
             this.PsychrometricsCalculate.TabIndex = 0;

@@ -34,10 +34,13 @@ namespace CTIToolkit
             TowerDesignDataForm.Controls.Add(TowerDesignDataUserControl);
             TowerDesignDataForm.AddControlEvents();
 
-            string errorMessage = string.Empty;
-            if(Setup(out errorMessage))
-            {
+            TestPointTabControl.TabPages.Clear();
 
+            string errorMessage = string.Empty;
+            LoadTestPoints(out errorMessage);
+
+            if (Setup(out errorMessage))
+            {
             }
         }
 
@@ -46,11 +49,11 @@ namespace CTIToolkit
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
 
-            MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData;
+            MechanicalDraftPerformanceCurveFileData fileData;
 
             try
             {
-                mechanicalDraftPerformanceCurveFileData = JsonConvert.DeserializeObject<MechanicalDraftPerformanceCurveFileData>(File.ReadAllText(fileName));
+                fileData = JsonConvert.DeserializeObject<MechanicalDraftPerformanceCurveFileData>(File.ReadAllText(fileName));
             }
             catch (Exception e)
             {
@@ -58,14 +61,14 @@ namespace CTIToolkit
                 return false;
             }
 
-            if(mechanicalDraftPerformanceCurveFileData != null)
+            if(fileData != null)
             {
-                if (IsInternationalSystemOfUnits_SI_ != mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI)
+                if (IsInternationalSystemOfUnits_SI_ != fileData.IsInternationalSystemOfUnits_SI)
                 {
-                    IsInternationalSystemOfUnits_SI_ = mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI;
+                    IsInternationalSystemOfUnits_SI_ = fileData.IsInternationalSystemOfUnits_SI;
                 }
 
-                if (!MechanicalDraftPerformanceCurveViewModel.LoadData(-1, mechanicalDraftPerformanceCurveFileData, out errorMessage))
+                if (!MechanicalDraftPerformanceCurveViewModel.LoadData(fileData, out errorMessage))
                 {
                     //TestWaterFlowRate_Validating(null, null);
                     stringBuilder.AppendLine(errorMessage);
@@ -74,6 +77,23 @@ namespace CTIToolkit
                 }
 
                 if (!TowerDesignDataUserControl.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData, out errorMessage))
+                {
+                    stringBuilder.AppendLine(errorMessage);
+                    returnValue = false;
+                    errorMessage = string.Empty;
+                }
+
+                // enable controls
+                AddTestPointButton.Enabled = true;
+                AddTestPointName.Enabled = true;
+
+                if (MechanicalDraftPerformanceCurveViewModel.TestPoints.Count > 0)
+                {
+                    Calculate.Enabled = true;
+                    ViewGraph.Enabled = true;
+                }
+
+                if (!LoadTestPoints(out errorMessage))
                 {
                     stringBuilder.AppendLine(errorMessage);
                     returnValue = false;
@@ -94,6 +114,35 @@ namespace CTIToolkit
 
             errorMessage = stringBuilder.ToString();
 
+            return returnValue;
+        }
+
+        public bool LoadTestPoints(out string errorMessage)
+        {
+            bool returnValue = true;
+
+            errorMessage = string.Empty;
+
+            TestPointTabControl.TabPages.Clear();
+            foreach (TowerTestPoint towerTestPoint in MechanicalDraftPerformanceCurveViewModel.TestPoints)
+            {
+                //TabPage tabPage = new TabPage();
+                //tabPage.Text = title;
+                //TestPointUserControl testPointUserControl = new TestPointUserControl();
+                //testPointUserControl.LoadData(data, out errorMessage);
+                //tabPage.Controls.Add(testPointUserControl);
+                //TestPointTabControl.TabPages.Add(tabPage);
+
+                TestPointUserControl testPointUserControl = new TestPointUserControl();
+                if(!testPointUserControl.LoadData(towerTestPoint, out errorMessage))
+                {
+                    returnValue = false;
+                }
+                TabPage tabPage = new TabPage();
+                tabPage.Controls.Add(testPointUserControl);
+                tabPage.Text = towerTestPoint.TestName;
+                TestPointTabControl.TabPages.Add(tabPage);
+            }
             return returnValue;
         }
 
@@ -152,45 +201,45 @@ namespace CTIToolkit
             errorMessage = string.Empty;
             try
             {
-                WaterFlowRateLabel.Text = MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueInputMessage + ":";
-                WaterFlowRateLabel.TextAlign = ContentAlignment.MiddleRight;
-                TestWaterFlowRate.Text = MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueInputValue;
-                toolTip1.SetToolTip(TestWaterFlowRate, MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueTooltip);
+                //WaterFlowRateLabel.Text = MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueInputMessage + ":";
+                //WaterFlowRateLabel.TextAlign = ContentAlignment.MiddleRight;
+                //TestWaterFlowRate.Text = MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueInputValue;
+                //toolTip1.SetToolTip(TestWaterFlowRate, MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueTooltip);
 
-                HotWaterTemperatureLabel.Text = MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValueInputMessage + ":";
-                HotWaterTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
-                TestHotWaterTemperature.Text = MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValueInputValue;
-                toolTip1.SetToolTip(TestHotWaterTemperature, MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValueTooltip);
+                //HotWaterTemperatureLabel.Text = MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValueInputMessage + ":";
+                //HotWaterTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
+                //TestHotWaterTemperature.Text = MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValueInputValue;
+                //toolTip1.SetToolTip(TestHotWaterTemperature, MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValueTooltip);
 
-                ColdWaterTemperatureLabel.Text = MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValueInputMessage + ":";
-                ColdWaterTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
-                TestColdWaterTemperature.Text = MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValueInputValue;
-                toolTip1.SetToolTip(TestColdWaterTemperature, MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValueTooltip);
+                //ColdWaterTemperatureLabel.Text = MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValueInputMessage + ":";
+                //ColdWaterTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
+                //TestColdWaterTemperature.Text = MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValueInputValue;
+                //toolTip1.SetToolTip(TestColdWaterTemperature, MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValueTooltip);
 
-                WetBulbTemperatureLabel.Text = MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValueInputMessage + ":";
-                WetBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
-                TestWetBulbTemperature.Text = MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValueInputValue;
-                toolTip1.SetToolTip(TestWetBulbTemperature, MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValueTooltip);
+                //WetBulbTemperatureLabel.Text = MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValueInputMessage + ":";
+                //WetBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
+                //TestWetBulbTemperature.Text = MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValueInputValue;
+                //toolTip1.SetToolTip(TestWetBulbTemperature, MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValueTooltip);
 
-                DryBulbTemperatureLabel.Text = MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValueInputMessage + ":";
-                DryBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
-                TestDryBulbTemperature.Text = MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValueInputValue;
-                toolTip1.SetToolTip(TestDryBulbTemperature, MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValueTooltip);
+                //DryBulbTemperatureLabel.Text = MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValueInputMessage + ":";
+                //DryBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
+                //TestDryBulbTemperature.Text = MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValueInputValue;
+                //toolTip1.SetToolTip(TestDryBulbTemperature, MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValueTooltip);
 
-                FanDriverPowerLabel.Text = MechanicalDraftPerformanceCurveViewModel.FanDriverPowerDataValueInputMessage + ":";
-                FanDriverPowerLabel.TextAlign = ContentAlignment.MiddleRight;
-                TestFanDriverPower.Text = MechanicalDraftPerformanceCurveViewModel.FanDriverPowerDataValueInputValue;
-                toolTip1.SetToolTip(TestFanDriverPower, MechanicalDraftPerformanceCurveViewModel.FanDriverPowerDataValueTooltip);
+                //FanDriverPowerLabel.Text = MechanicalDraftPerformanceCurveViewModel.FanDriverPowerDataValueInputMessage + ":";
+                //FanDriverPowerLabel.TextAlign = ContentAlignment.MiddleRight;
+                //TestFanDriverPower.Text = MechanicalDraftPerformanceCurveViewModel.FanDriverPowerDataValueInputValue;
+                //toolTip1.SetToolTip(TestFanDriverPower, MechanicalDraftPerformanceCurveViewModel.FanDriverPowerDataValueTooltip);
 
-                BarometricPressureLabel.Text = MechanicalDraftPerformanceCurveViewModel.BarometricPressureDataValueInputMessage + ":";
-                BarometricPressureLabel.TextAlign = ContentAlignment.MiddleRight;
-                TestBarometricPressure.Text = MechanicalDraftPerformanceCurveViewModel.BarometricPressureDataValueInputValue;
-                toolTip1.SetToolTip(TestBarometricPressure, MechanicalDraftPerformanceCurveViewModel.BarometricPressureDataValueTooltip);
+                //BarometricPressureLabel.Text = MechanicalDraftPerformanceCurveViewModel.BarometricPressureDataValueInputMessage + ":";
+                //BarometricPressureLabel.TextAlign = ContentAlignment.MiddleRight;
+                //TestBarometricPressure.Text = MechanicalDraftPerformanceCurveViewModel.BarometricPressureDataValueInputValue;
+                //toolTip1.SetToolTip(TestBarometricPressure, MechanicalDraftPerformanceCurveViewModel.BarometricPressureDataValueTooltip);
 
-                LiquidToGasRatioLabel.Text = MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueInputMessage + ":";
-                LiquidToGasRatioLabel.TextAlign = ContentAlignment.MiddleRight;
-                TestLiquidToGasRatio.Text = MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueInputValue;
-                toolTip1.SetToolTip(TestLiquidToGasRatio, MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueTooltip);
+                //LiquidToGasRatioLabel.Text = MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueInputMessage + ":";
+                //LiquidToGasRatioLabel.TextAlign = ContentAlignment.MiddleRight;
+                //TestLiquidToGasRatio.Text = MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueInputValue;
+                //toolTip1.SetToolTip(TestLiquidToGasRatio, MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueTooltip);
 
                 // design data
 
@@ -211,15 +260,6 @@ namespace CTIToolkit
 
                 DataFilename.Text = MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue;
 
-                TestSelector.Items.Clear();
-                TestSelector.Items.Add("");
-                TestSelector.Items.Add("New Test");
-
-                foreach(string testName in MechanicalDraftPerformanceCurveViewModel.TestNames)
-                {
-                    TestSelector.Items.Add(testName);
-                }
-
                 TestResultsGroupBox.Text = string.Format("Test Results ({0})", (IsInternationalSystemOfUnits_SI_) ? "SI" : "IP");
             }
             catch (Exception e)
@@ -230,165 +270,165 @@ namespace CTIToolkit
             return true;
         }
 
-        private void TestWaterFlowRate_Validated(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(TestWaterFlowRate, "");
-        }
+        //private void TestWaterFlowRate_Validated(object sender, EventArgs e)
+        //{
+        //    errorProvider1.SetError(TestWaterFlowRate, "");
+        //}
 
-        private void TestWaterFlowRate_Validating(object sender, CancelEventArgs e)
-        {
-            string errorMessage = string.Empty;
+        //private void TestWaterFlowRate_Validating(object sender, CancelEventArgs e)
+        //{
+        //    string errorMessage = string.Empty;
 
-            if (!MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueUpdateValue(TestWaterFlowRate.Text, out errorMessage))
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                TestWaterFlowRate.Select(0, TestWaterFlowRate.Text.Length);
+        //    if (!MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueUpdateValue(TestWaterFlowRate.Text, out errorMessage))
+        //    {
+        //        // Cancel the event and select the text to be corrected by the user.
+        //        e.Cancel = true;
+        //        TestWaterFlowRate.Select(0, TestWaterFlowRate.Text.Length);
 
-                // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(TestWaterFlowRate, errorMessage);
-            }
-        }
+        //        // Set the ErrorProvider error with the text to display. 
+        //        this.errorProvider1.SetError(TestWaterFlowRate, errorMessage);
+        //    }
+        //}
 
-        private void TestHotWaterTemperature_Validated(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(TestHotWaterTemperature, "");
-        }
+        //private void TestHotWaterTemperature_Validated(object sender, EventArgs e)
+        //{
+        //    errorProvider1.SetError(TestHotWaterTemperature, "");
+        //}
 
-        private void TestHotWaterTemperature_Validating(object sender, CancelEventArgs e)
-        {
-            string errorMessage = string.Empty;
+        //private void TestHotWaterTemperature_Validating(object sender, CancelEventArgs e)
+        //{
+        //    string errorMessage = string.Empty;
 
-            if (!MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValueUpdateValue(TestHotWaterTemperature.Text, out errorMessage))
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                TestHotWaterTemperature.Select(0, TestHotWaterTemperature.Text.Length);
+        //    if (!MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValueUpdateValue(TestHotWaterTemperature.Text, out errorMessage))
+        //    {
+        //        // Cancel the event and select the text to be corrected by the user.
+        //        e.Cancel = true;
+        //        TestHotWaterTemperature.Select(0, TestHotWaterTemperature.Text.Length);
 
-                // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(TestHotWaterTemperature, errorMessage);
-            }
-        }
+        //        // Set the ErrorProvider error with the text to display. 
+        //        this.errorProvider1.SetError(TestHotWaterTemperature, errorMessage);
+        //    }
+        //}
 
-        private void TestColdWaterTemperature_Validated(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(TestColdWaterTemperature, "");
-        }
+        //private void TestColdWaterTemperature_Validated(object sender, EventArgs e)
+        //{
+        //    errorProvider1.SetError(TestColdWaterTemperature, "");
+        //}
 
-        private void TestColdWaterTemperature_Validating(object sender, CancelEventArgs e)
-        {
-            string errorMessage = string.Empty;
+        //private void TestColdWaterTemperature_Validating(object sender, CancelEventArgs e)
+        //{
+        //    string errorMessage = string.Empty;
 
-            if (!MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValueUpdateValue(TestColdWaterTemperature.Text, out errorMessage))
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                TestColdWaterTemperature.Select(0, TestColdWaterTemperature.Text.Length);
+        //    if (!MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValueUpdateValue(TestColdWaterTemperature.Text, out errorMessage))
+        //    {
+        //        // Cancel the event and select the text to be corrected by the user.
+        //        e.Cancel = true;
+        //        TestColdWaterTemperature.Select(0, TestColdWaterTemperature.Text.Length);
 
-                // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(TestColdWaterTemperature, errorMessage);
-            }
-        }
+        //        // Set the ErrorProvider error with the text to display. 
+        //        this.errorProvider1.SetError(TestColdWaterTemperature, errorMessage);
+        //    }
+        //}
 
-        private void TestWetBulbTemperature_Validated(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(TestWetBulbTemperature, "");
-        }
+        //private void TestWetBulbTemperature_Validated(object sender, EventArgs e)
+        //{
+        //    errorProvider1.SetError(TestWetBulbTemperature, "");
+        //}
 
-        private void TestWetBulbTemperature_Validating(object sender, CancelEventArgs e)
-        {
-            string errorMessage = string.Empty;
+        //private void TestWetBulbTemperature_Validating(object sender, CancelEventArgs e)
+        //{
+        //    string errorMessage = string.Empty;
 
-            if (!MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValueUpdateValue(TestWetBulbTemperature.Text, out errorMessage))
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                TestWetBulbTemperature.Select(0, TestWetBulbTemperature.Text.Length);
+        //    if (!MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValueUpdateValue(TestWetBulbTemperature.Text, out errorMessage))
+        //    {
+        //        // Cancel the event and select the text to be corrected by the user.
+        //        e.Cancel = true;
+        //        TestWetBulbTemperature.Select(0, TestWetBulbTemperature.Text.Length);
 
-                // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(TestWetBulbTemperature, errorMessage);
-            }
-        }
+        //        // Set the ErrorProvider error with the text to display. 
+        //        this.errorProvider1.SetError(TestWetBulbTemperature, errorMessage);
+        //    }
+        //}
 
-        private void TestDryBulbTemperature_Validated(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(TestDryBulbTemperature, "");
-        }
+        //private void TestDryBulbTemperature_Validated(object sender, EventArgs e)
+        //{
+        //    errorProvider1.SetError(TestDryBulbTemperature, "");
+        //}
 
-        private void TestDryBulbTemperature_Validating(object sender, CancelEventArgs e)
-        {
-            string errorMessage = string.Empty;
+        //private void TestDryBulbTemperature_Validating(object sender, CancelEventArgs e)
+        //{
+        //    string errorMessage = string.Empty;
 
-            if (!MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValueUpdateValue(TestDryBulbTemperature.Text, out errorMessage))
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                TestDryBulbTemperature.Select(0, TestDryBulbTemperature.Text.Length);
+        //    if (!MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValueUpdateValue(TestDryBulbTemperature.Text, out errorMessage))
+        //    {
+        //        // Cancel the event and select the text to be corrected by the user.
+        //        e.Cancel = true;
+        //        TestDryBulbTemperature.Select(0, TestDryBulbTemperature.Text.Length);
 
-                // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(TestDryBulbTemperature, errorMessage);
-            }
-        }
+        //        // Set the ErrorProvider error with the text to display. 
+        //        this.errorProvider1.SetError(TestDryBulbTemperature, errorMessage);
+        //    }
+        //}
 
-        private void TestFanDriverPower_Validated(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(TestFanDriverPower, "");
-        }
+        //private void TestFanDriverPower_Validated(object sender, EventArgs e)
+        //{
+        //    errorProvider1.SetError(TestFanDriverPower, "");
+        //}
 
-        private void TestFanDriverPower_Validating(object sender, CancelEventArgs e)
-        {
-            string errorMessage = string.Empty;
+        //private void TestFanDriverPower_Validating(object sender, CancelEventArgs e)
+        //{
+        //    string errorMessage = string.Empty;
 
-            if (!MechanicalDraftPerformanceCurveViewModel.FanDriverPowerDataValueUpdateValue(TestFanDriverPower.Text, out errorMessage))
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                TestFanDriverPower.Select(0, TestFanDriverPower.Text.Length);
+        //    if (!MechanicalDraftPerformanceCurveViewModel.FanDriverPowerDataValueUpdateValue(TestFanDriverPower.Text, out errorMessage))
+        //    {
+        //        // Cancel the event and select the text to be corrected by the user.
+        //        e.Cancel = true;
+        //        TestFanDriverPower.Select(0, TestFanDriverPower.Text.Length);
 
-                // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(TestFanDriverPower, errorMessage);
-            }
-        }
+        //        // Set the ErrorProvider error with the text to display. 
+        //        this.errorProvider1.SetError(TestFanDriverPower, errorMessage);
+        //    }
+        //}
 
-        private void TestBarometricPressure_Validated(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(TestBarometricPressure, "");
-        }
+        //private void TestBarometricPressure_Validated(object sender, EventArgs e)
+        //{
+        //    errorProvider1.SetError(TestBarometricPressure, "");
+        //}
 
-        private void TestBarometricPressure_Validating(object sender, CancelEventArgs e)
-        {
-            string errorMessage = string.Empty;
+        //private void TestBarometricPressure_Validating(object sender, CancelEventArgs e)
+        //{
+        //    string errorMessage = string.Empty;
 
-            if (!MechanicalDraftPerformanceCurveViewModel.BarometricPressureDataValueUpdateValue(TestBarometricPressure.Text, out errorMessage))
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                TestBarometricPressure.Select(0, TestBarometricPressure.Text.Length);
+        //    if (!MechanicalDraftPerformanceCurveViewModel.BarometricPressureDataValueUpdateValue(TestBarometricPressure.Text, out errorMessage))
+        //    {
+        //        // Cancel the event and select the text to be corrected by the user.
+        //        e.Cancel = true;
+        //        TestBarometricPressure.Select(0, TestBarometricPressure.Text.Length);
 
-                // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(TestBarometricPressure, errorMessage);
-            }
-        }
+        //        // Set the ErrorProvider error with the text to display. 
+        //        this.errorProvider1.SetError(TestBarometricPressure, errorMessage);
+        //    }
+        //}
 
-        private void TestLiquidToGasRatio_Validated(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(TestLiquidToGasRatio, "");
-        }
+        //private void TestLiquidToGasRatio_Validated(object sender, EventArgs e)
+        //{
+        //    errorProvider1.SetError(TestLiquidToGasRatio, "");
+        //}
 
-        private void TestLiquidToGasRatio_Validating(object sender, CancelEventArgs e)
-        {
-            string errorMessage = string.Empty;
+        //private void TestLiquidToGasRatio_Validating(object sender, CancelEventArgs e)
+        //{
+        //    string errorMessage = string.Empty;
 
-            if (!MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueUpdateValue(TestLiquidToGasRatio.Text, out errorMessage))
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                TestLiquidToGasRatio.Select(0, TestLiquidToGasRatio.Text.Length);
+        //    if (!MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueUpdateValue(TestLiquidToGasRatio.Text, out errorMessage))
+        //    {
+        //        // Cancel the event and select the text to be corrected by the user.
+        //        e.Cancel = true;
+        //        TestLiquidToGasRatio.Select(0, TestLiquidToGasRatio.Text.Length);
 
-                // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(TestLiquidToGasRatio, errorMessage);
-            }
-        }
+        //        // Set the ErrorProvider error with the text to display. 
+        //        this.errorProvider1.SetError(TestLiquidToGasRatio, errorMessage);
+        //    }
+        //}
 
         private void DesignDataButton_Click(object sender, EventArgs e)
         {
@@ -416,6 +456,10 @@ namespace CTIToolkit
             {
                 if(TowerDesignDataUserControl.IsChanged)
                 {
+                    // enable controls
+                    AddTestPointButton.Enabled = true;
+                    AddTestPointName.Enabled = true;
+
                     // update data on this page
                     if (Setup(out errorMessage))
                     {
@@ -454,6 +498,38 @@ namespace CTIToolkit
         private void TestSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void AddTestPointButton_Click(object sender, EventArgs e)
+        {
+            string errorMessage;
+
+            AddTabPage(AddTestPointName.Text, out errorMessage);
+            AddTestPointName.Text = string.Empty;
+        }
+
+        private bool AddTabPage(string testName, out string errorMessage)
+        {
+            bool returnValue = true;
+
+            try
+            {
+                MechanicalDraftPerformanceCurveViewModel.AddTestPoint(testName, out errorMessage);
+                TabPage tabPage = new TabPage();
+                tabPage.Text = testName;
+                TestPointUserControl testPointUserControl = new TestPointUserControl();
+                testPointUserControl.LoadData(MechanicalDraftPerformanceCurveViewModel.TestPoints[MechanicalDraftPerformanceCurveViewModel.TestPoints.Count - 1], out errorMessage);
+                tabPage.Controls.Add(testPointUserControl);
+                TestPointTabControl.TabPages.Add(tabPage);
+                TestPointTabControl.SelectedIndex = TestPointTabControl.TabPages.Count - 1;
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("Tower design page setup failed. Exception: {0} ", e.ToString());
+                returnValue = false;
+            }
+
+            return returnValue;
         }
     }
 }

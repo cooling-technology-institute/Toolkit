@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.DemandCurveCalculate = new System.Windows.Forms.Button();
             this.DemandCurveDataFileLabel = new System.Windows.Forms.Label();
@@ -67,7 +67,6 @@
             this.DemandCurve_ElevationRadio = new System.Windows.Forms.RadioButton();
             this.DemandCurveChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.InputPropertiesGroupBox.SuspendLayout();
@@ -79,7 +78,6 @@
             this.groupBoxPressureElevation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DemandCurveChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,7 +89,7 @@
             // 
             // DemandCurveCalculate
             // 
-            this.DemandCurveCalculate.Location = new System.Drawing.Point(754, 29);
+            this.DemandCurveCalculate.Location = new System.Drawing.Point(815, 19);
             this.DemandCurveCalculate.Name = "DemandCurveCalculate";
             this.DemandCurveCalculate.Size = new System.Drawing.Size(75, 23);
             this.DemandCurveCalculate.TabIndex = 15;
@@ -176,7 +174,7 @@
             // DemandCurveElevationPressureUnits
             // 
             this.DemandCurveElevationPressureUnits.AutoSize = true;
-            this.DemandCurveElevationPressureUnits.Location = new System.Drawing.Point(196, 80);
+            this.DemandCurveElevationPressureUnits.Location = new System.Drawing.Point(204, 80);
             this.DemandCurveElevationPressureUnits.Name = "DemandCurveElevationPressureUnits";
             this.DemandCurveElevationPressureUnits.Size = new System.Drawing.Size(13, 13);
             this.DemandCurveElevationPressureUnits.TabIndex = 16;
@@ -194,7 +192,7 @@
             // DemandCurveTemperatureWebBulbUnits
             // 
             this.DemandCurveTemperatureWebBulbUnits.AutoSize = true;
-            this.DemandCurveTemperatureWebBulbUnits.Location = new System.Drawing.Point(196, 28);
+            this.DemandCurveTemperatureWebBulbUnits.Location = new System.Drawing.Point(204, 28);
             this.DemandCurveTemperatureWebBulbUnits.Name = "DemandCurveTemperatureWebBulbUnits";
             this.DemandCurveTemperatureWebBulbUnits.Size = new System.Drawing.Size(17, 13);
             this.DemandCurveTemperatureWebBulbUnits.TabIndex = 18;
@@ -289,7 +287,7 @@
             this.TowerOrFillCharacteristicsGroupBox.Controls.Add(this.SlopeLabel);
             this.TowerOrFillCharacteristicsGroupBox.Controls.Add(this.DemandCurve_C_C1_Value);
             this.TowerOrFillCharacteristicsGroupBox.Controls.Add(this.CLabel);
-            this.TowerOrFillCharacteristicsGroupBox.Location = new System.Drawing.Point(403, 64);
+            this.TowerOrFillCharacteristicsGroupBox.Location = new System.Drawing.Point(397, 64);
             this.TowerOrFillCharacteristicsGroupBox.Name = "TowerOrFillCharacteristicsGroupBox";
             this.TowerOrFillCharacteristicsGroupBox.Size = new System.Drawing.Size(255, 106);
             this.TowerOrFillCharacteristicsGroupBox.TabIndex = 21;
@@ -332,7 +330,7 @@
             // 
             // DemandCurve_Slope_C2_Value
             // 
-            this.DemandCurve_Slope_C2_Value.Location = new System.Drawing.Point(60, 49);
+            this.DemandCurve_Slope_C2_Value.Location = new System.Drawing.Point(52, 49);
             this.DemandCurve_Slope_C2_Value.Name = "DemandCurve_Slope_C2_Value";
             this.DemandCurve_Slope_C2_Value.Size = new System.Drawing.Size(50, 20);
             this.DemandCurve_Slope_C2_Value.TabIndex = 3;
@@ -351,7 +349,7 @@
             // 
             // DemandCurve_C_C1_Value
             // 
-            this.DemandCurve_C_C1_Value.Location = new System.Drawing.Point(59, 22);
+            this.DemandCurve_C_C1_Value.Location = new System.Drawing.Point(51, 22);
             this.DemandCurve_C_C1_Value.Name = "DemandCurve_C_C1_Value";
             this.DemandCurve_C_C1_Value.Size = new System.Drawing.Size(50, 20);
             this.DemandCurve_C_C1_Value.TabIndex = 1;
@@ -380,7 +378,7 @@
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.DemandCurveRangeUnits);
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.DemandCurveElevationPressureUnits);
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.DemandCurve_Elevation_Value);
-            this.ThermalDesignConditionsGroupBox.Location = new System.Drawing.Point(24, 64);
+            this.ThermalDesignConditionsGroupBox.Location = new System.Drawing.Point(14, 64);
             this.ThermalDesignConditionsGroupBox.Name = "ThermalDesignConditionsGroupBox";
             this.ThermalDesignConditionsGroupBox.Size = new System.Drawing.Size(373, 106);
             this.ThermalDesignConditionsGroupBox.TabIndex = 20;
@@ -392,9 +390,9 @@
             this.groupBoxPressureElevation.BackColor = System.Drawing.Color.Transparent;
             this.groupBoxPressureElevation.Controls.Add(this.DemandCurve_PressureRadio);
             this.groupBoxPressureElevation.Controls.Add(this.DemandCurve_ElevationRadio);
-            this.groupBoxPressureElevation.Location = new System.Drawing.Point(229, 13);
+            this.groupBoxPressureElevation.Location = new System.Drawing.Point(244, 13);
             this.groupBoxPressureElevation.Name = "groupBoxPressureElevation";
-            this.groupBoxPressureElevation.Size = new System.Drawing.Size(138, 84);
+            this.groupBoxPressureElevation.Size = new System.Drawing.Size(123, 84);
             this.groupBoxPressureElevation.TabIndex = 21;
             this.groupBoxPressureElevation.TabStop = false;
             // 
@@ -425,34 +423,27 @@
             this.DemandCurveChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea3.Name = "ChartArea1";
-            this.DemandCurveChart.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.DemandCurveChart.Legends.Add(legend3);
-            this.DemandCurveChart.Location = new System.Drawing.Point(9, 303);
+            chartArea2.Name = "ChartArea1";
+            this.DemandCurveChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.DemandCurveChart.Legends.Add(legend2);
+            this.DemandCurveChart.Location = new System.Drawing.Point(9, 204);
             this.DemandCurveChart.Name = "DemandCurveChart";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.DemandCurveChart.Series.Add(series3);
-            this.DemandCurveChart.Size = new System.Drawing.Size(896, 560);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.DemandCurveChart.Series.Add(series2);
+            this.DemandCurveChart.Size = new System.Drawing.Size(896, 498);
             this.DemandCurveChart.TabIndex = 12;
             this.DemandCurveChart.Text = "DemandCurveChart";
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(9, 204);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 779);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(878, 93);
             this.dataGridView1.TabIndex = 13;
-            // 
-            // trackBar1
-            // 
-            this.trackBar1.Location = new System.Drawing.Point(83, 869);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(671, 45);
-            this.trackBar1.TabIndex = 14;
             // 
             // errorProvider1
             // 
@@ -460,7 +451,6 @@
             // 
             // DemandCurveTabPage
             // 
-            this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.DemandCurveChart);
             this.Controls.Add(this.InputPropertiesGroupBox);
@@ -479,10 +469,8 @@
             this.groupBoxPressureElevation.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DemandCurveChart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -522,7 +510,6 @@
         private System.Windows.Forms.RadioButton DemandCurve_PressureRadio;
         private System.Windows.Forms.RadioButton DemandCurve_ElevationRadio;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.HelpProvider helpProvider1;
     }

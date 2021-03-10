@@ -2,13 +2,14 @@
 
 using Models;
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace ViewModels
 {
     public class TowerTestPoint
     {
+        public string TestName { get; set; }
+
         public WaterFlowRateDataValue WaterFlowRateDataValue { get; set; }
         public HotWaterTemperatureDataValue HotWaterTemperatureDataValue { get; set; }
         public ColdWaterTemperatureDataValue ColdWaterTemperatureDataValue { get; set; }
@@ -21,11 +22,14 @@ namespace ViewModels
         public bool IsDemo { get; set; }
         public bool IsInternationalSystemOfUnits_SI { get; set; }
 
-        public TowerTestPoint(bool isDemo, bool isInternationalSystemOfUnits_IS_, Models.TowerSpecifications mechanicalDraftPerformanceCurveData = null)
+        private TowerTestData TowerTestData { get; set; }
+
+        public TowerTestPoint(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
-
+            
+            TestName = string.Empty;
             WaterFlowRateDataValue = new WaterFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
             HotWaterTemperatureDataValue = new HotWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
             ColdWaterTemperatureDataValue = new ColdWaterTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
@@ -34,147 +38,84 @@ namespace ViewModels
             FanDriverPowerDataValue = new FanDriverPowerDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
             BarometricPressureDataValue = new BarometricPressureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
             LiquidToGasRatioDataValue = new LiquidToGasRatioDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
-  
-            if(mechanicalDraftPerformanceCurveData != null)
-            {
-                WaterFlowRateDataValue.Current = mechanicalDraftPerformanceCurveData.WaterFlowRate;
-                HotWaterTemperatureDataValue.Current = mechanicalDraftPerformanceCurveData.HotWaterTemperature;
-                ColdWaterTemperatureDataValue.Current = mechanicalDraftPerformanceCurveData.ColdWaterTemperature;
-                WetBulbTemperatureDataValue.Current = mechanicalDraftPerformanceCurveData.WetBulbTemperature;
-                DryBulbTemperatureDataValue.Current = mechanicalDraftPerformanceCurveData.DryBulbTemperature;
-                FanDriverPowerDataValue.Current = mechanicalDraftPerformanceCurveData.FanDriverPower;
-                BarometricPressureDataValue.Current = mechanicalDraftPerformanceCurveData.BarometricPressure;
-                LiquidToGasRatioDataValue.Current = mechanicalDraftPerformanceCurveData.LiquidToGasRatio;
-            }
-        }
-/*
-        public string GetFilename()
-        {
-            string mechanicalDraftPerformanceCurveDataFile = string.Empty;
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
-            int fileCount = 0;
-
-            do
-            {
-                if (fileCount == 0)
-                {
-                    mechanicalDraftPerformanceCurveDataFile = Path.Combine(path, "MechanicalDraftPerformanceData.json");
-                }
-                else
-                {
-                    mechanicalDraftPerformanceCurveDataFile = Path.Combine(path, string.Format("MechanicalDraftPerformanceData({0}).json", fileCount));
-                }
-
-                fileCount++;
-
-            } while (File.Exists(mechanicalDraftPerformanceCurveDataFile));
-
-            return mechanicalDraftPerformanceCurveDataFile;
         }
 
-        public bool SaveDataFile(out string errorMessage)
-        {
-            errorMessage = string.Empty;
-            try
-            {
-                File.WriteAllText(MechanicalDraftPerformanceCurveDataFile, JsonConvert.SerializeObject(MechanicalDraftPerformanceCurveFileData));
-            }
-            catch(Exception e)
-            {
-                errorMessage = string.Format("Failed to write Mechanical Draft Performance Curve Data to file {0}. Exception {1}", Path.GetFileName(MechanicalDraftPerformanceCurveDataFile), e.ToString());
-                return false;
-            }
-            return true;
-        }
-
-        public bool SaveAsDataFile(string fileName, out string errorMessage)
-        {
-            try
-            {
-                MechanicalDraftPerformanceCurveDataFile = fileName;
-                return SaveDataFile(out errorMessage);
-            }
-            catch (Exception e)
-            {
-                errorMessage = string.Format("Failed to write Mechanical Draft Performance Curve Data to file {0}. Exception {1}", Path.GetFileName(MechanicalDraftPerformanceCurveDataFile), e.ToString());
-                return false;
-            }
-        }
-*/
-        public bool LoadData(int testIndex, List<Models.TowerTestData> testData, out string errorMessage)
+        public bool LoadData(bool isInternationalSystemOfUnits_SI, TowerTestData testData, out string errorMessage)
         {
             errorMessage = string.Empty;
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
-            string label = "Test Data: ";
+
+            if (IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_SI)
+            {
+                IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
+                WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                HotWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                ColdWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                DryBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                FanDriverPowerDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+            }
 
             try
             {
-                if(testData != null && testData.Count > testIndex)
+                if (testData != null)
                 {
-                    if (IsInternationalSystemOfUnits_SI != testData[testIndex].TowerSpecifications.IsInternationalSystemOfUnits_SI)
-                    {
-                        IsInternationalSystemOfUnits_SI = testData[testIndex].TowerSpecifications.IsInternationalSystemOfUnits_SI;
-                        WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                        HotWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                        ColdWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                        WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                        DryBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                        FanDriverPowerDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                        BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                        LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                    }
+                    TestName = testData.TestName;
+                    string label = string.Format("Test Data {0} : ", TestName);
 
-                    if (!WaterFlowRateDataValue.UpdateCurrentValue(testData[testIndex].TowerSpecifications.WaterFlowRate, out errorMessage))
+                    if (!WaterFlowRateDataValue.UpdateCurrentValue(testData.TowerSpecifications.WaterFlowRate, out errorMessage))
                     {
                         returnValue = false;
                         stringBuilder.AppendLine(label + errorMessage);
                         errorMessage = string.Empty;
                     }
 
-                    if (!HotWaterTemperatureDataValue.UpdateCurrentValue(testData[testIndex].TowerSpecifications.HotWaterTemperature, out errorMessage))
+                    if (!HotWaterTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.HotWaterTemperature, out errorMessage))
                     {
                         returnValue = false;
                         stringBuilder.AppendLine(label + errorMessage);
                         errorMessage = string.Empty;
                     }
 
-                    if (!ColdWaterTemperatureDataValue.UpdateCurrentValue(testData[testIndex].TowerSpecifications.ColdWaterTemperature, out errorMessage))
+                    if (!ColdWaterTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.ColdWaterTemperature, out errorMessage))
                     {
                         returnValue = false;
                         stringBuilder.AppendLine(label + errorMessage);
                         errorMessage = string.Empty;
                     }
 
-                    if (!WetBulbTemperatureDataValue.UpdateCurrentValue(testData[testIndex].TowerSpecifications.WetBulbTemperature, out errorMessage))
+                    if (!WetBulbTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.WetBulbTemperature, out errorMessage))
                     {
                         returnValue = false;
                         stringBuilder.AppendLine(label + errorMessage);
                         errorMessage = string.Empty;
                     }
 
-                    if (!DryBulbTemperatureDataValue.UpdateCurrentValue(testData[testIndex].TowerSpecifications.DryBulbTemperature, out errorMessage))
+                    if (!DryBulbTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.DryBulbTemperature, out errorMessage))
                     {
                         returnValue = false;
                         stringBuilder.AppendLine(label + errorMessage);
                         errorMessage = string.Empty;
                     }
 
-                    if (!FanDriverPowerDataValue.UpdateCurrentValue(testData[testIndex].TowerSpecifications.FanDriverPower, out errorMessage))
+                    if (!FanDriverPowerDataValue.UpdateCurrentValue(testData.TowerSpecifications.FanDriverPower, out errorMessage))
                     {
                         returnValue = false;
                         stringBuilder.AppendLine(label + errorMessage);
                         errorMessage = string.Empty;
                     }
 
-                    if (!BarometricPressureDataValue.UpdateCurrentValue(testData[testIndex].TowerSpecifications.BarometricPressure, out errorMessage))
+                    if (!BarometricPressureDataValue.UpdateCurrentValue(testData.TowerSpecifications.BarometricPressure, out errorMessage))
                     {
                         returnValue = false;
                         stringBuilder.AppendLine(label + errorMessage);
                         errorMessage = string.Empty;
                     }
 
-                    if (!LiquidToGasRatioDataValue.UpdateCurrentValue(testData[testIndex].TowerSpecifications.LiquidToGasRatio, out errorMessage))
+                    if (!LiquidToGasRatioDataValue.UpdateCurrentValue(testData.TowerSpecifications.LiquidToGasRatio, out errorMessage))
                     {
                         returnValue = false;
                         stringBuilder.AppendLine(label + errorMessage);
@@ -223,6 +164,7 @@ namespace ViewModels
 
             try
             {
+                towerTestData.TestName = TestName;
                 towerTestData.TowerSpecifications.WaterFlowRate = WaterFlowRateDataValue.Current;
                 towerTestData.TowerSpecifications.HotWaterTemperature = HotWaterTemperatureDataValue.Current;
                 towerTestData.TowerSpecifications.ColdWaterTemperature = ColdWaterTemperatureDataValue.Current;
@@ -234,9 +176,246 @@ namespace ViewModels
             }
             catch (Exception exception)
             {
-                errorMessage = string.Format("Failure to fill and validate Mechanical Draft Performance Curve Data. Exception {0}.", exception.ToString());
+                errorMessage = string.Format("Failure to fill and validate Test Data '{0}'. Exception {1}.", TestName, exception.ToString());
             }
             return returnValue;
         }
+
+        //#region DataValues
+
+        //public string WaterFlowRateDataValueInputMessage
+        //{
+        //    get
+        //    {
+        //        return WaterFlowRateDataValue.InputMessage;
+        //    }
+        //}
+
+        //public string WaterFlowRateDataValueInputValue
+        //{
+        //    get
+        //    {
+        //        return WaterFlowRateDataValue.InputValue;
+        //    }
+        //}
+
+        //public bool WaterFlowRateDataValueUpdateValue(string value, out string errorMessage)
+        //{
+        //    return WaterFlowRateDataValue.UpdateValue(value, out errorMessage);
+        //}
+
+        //public string WaterFlowRateDataValueTooltip
+        //{
+        //    get
+        //    {
+        //        return WaterFlowRateDataValue.ToolTip;
+        //    }
+        //}
+
+
+        //public string HotWaterTemperatureDataValueInputMessage
+        //{
+        //    get
+        //    {
+        //        return HotWaterTemperatureDataValue.InputMessage;
+        //    }
+        //}
+
+        //public string HotWaterTemperatureDataValueInputValue
+        //{
+        //    get
+        //    {
+        //        return HotWaterTemperatureDataValue.InputValue;
+        //    }
+        //}
+
+        //public bool HotWaterTemperatureDataValueUpdateValue(string value, out string errorMessage)
+        //{
+        //    return HotWaterTemperatureDataValue.UpdateValue(value, out errorMessage);
+        //}
+
+        //public string HotWaterTemperatureDataValueTooltip
+        //{
+        //    get
+        //    {
+        //        return HotWaterTemperatureDataValue.ToolTip;
+        //    }
+        //}
+
+        //public string ColdWaterTemperatureDataValueInputMessage
+        //{
+        //    get
+        //    {
+        //        return ColdWaterTemperatureDataValue.InputMessage;
+        //    }
+        //}
+
+        //public string ColdWaterTemperatureDataValueInputValue
+        //{
+        //    get
+        //    {
+        //        return ColdWaterTemperatureDataValue.InputValue;
+        //    }
+        //}
+
+        //public string ColdWaterTemperatureDataValueTooltip
+        //{
+        //    get
+        //    {
+        //        return ColdWaterTemperatureDataValue.ToolTip;
+        //    }
+        //}
+
+        //public bool ColdWaterTemperatureDataValueUpdateValue(string value, out string errorMessage)
+        //{
+        //    return ColdWaterTemperatureDataValue.UpdateValue(value, out errorMessage);
+        //}
+
+        //public string WetBulbTemperatureDataValueInputMessage
+        //{
+        //    get
+        //    {
+        //        return WetBulbTemperatureDataValue.InputMessage;
+        //    }
+        //}
+
+        //public string WetBulbTemperatureDataValueInputValue
+        //{
+        //    get
+        //    {
+        //        return WetBulbTemperatureDataValue.InputValue;
+        //    }
+        //}
+
+        //public string WetBulbTemperatureDataValueTooltip
+        //{
+        //    get
+        //    {
+        //        return WetBulbTemperatureDataValue.ToolTip;
+        //    }
+        //}
+
+        //public bool WetBulbTemperatureDataValueUpdateValue(string value, out string errorMessage)
+        //{
+        //    return WetBulbTemperatureDataValue.UpdateValue(value, out errorMessage);
+        //}
+
+        //public string DryBulbTemperatureDataValueInputMessage
+        //{
+        //    get
+        //    {
+        //        return DryBulbTemperatureDataValue.InputMessage;
+        //    }
+        //}
+
+        //public string DryBulbTemperatureDataValueInputValue
+        //{
+        //    get
+        //    {
+        //        return DryBulbTemperatureDataValue.InputValue;
+        //    }
+        //}
+
+        //public string DryBulbTemperatureDataValueTooltip
+        //{
+        //    get
+        //    {
+        //        return DryBulbTemperatureDataValue.ToolTip;
+        //    }
+        //}
+
+        //public bool DryBulbTemperatureDataValueUpdateValue(string value, out string errorMessage)
+        //{
+        //    return DryBulbTemperatureDataValue.UpdateValue(value, out errorMessage);
+        //}
+
+        //public string FanDriverPowerDataValueInputMessage
+        //{
+        //    get
+        //    {
+        //        return FanDriverPowerDataValue.InputMessage;
+        //    }
+        //}
+
+        //public string FanDriverPowerDataValueInputValue
+        //{
+        //    get
+        //    {
+        //        return FanDriverPowerDataValue.InputValue;
+        //    }
+        //}
+
+        //public string FanDriverPowerDataValueTooltip
+        //{
+        //    get
+        //    {
+        //        return FanDriverPowerDataValue.ToolTip;
+        //    }
+        //}
+
+        //public bool FanDriverPowerDataValueUpdateValue(string value, out string errorMessage)
+        //{
+        //    return FanDriverPowerDataValue.UpdateValue(value, out errorMessage);
+        //}
+
+        //public string BarometricPressureDataValueInputMessage
+        //{
+        //    get
+        //    {
+        //        return BarometricPressureDataValue.InputMessage;
+        //    }
+        //}
+
+        //public string BarometricPressureDataValueInputValue
+        //{
+        //    get
+        //    {
+        //        return BarometricPressureDataValue.InputValue;
+        //    }
+        //}
+
+        //public string BarometricPressureDataValueTooltip
+        //{
+        //    get
+        //    {
+        //        return BarometricPressureDataValue.ToolTip;
+        //    }
+        //}
+
+        //public bool BarometricPressureDataValueUpdateValue(string value, out string errorMessage)
+        //{
+        //    return BarometricPressureDataValue.UpdateValue(value, out errorMessage);
+        //}
+
+        //public string LiquidToGasRatioDataValueInputMessage
+        //{
+        //    get
+        //    {
+        //        return LiquidToGasRatioDataValue.InputMessage;
+        //    }
+        //}
+
+        //public string LiquidToGasRatioDataValueInputValue
+        //{
+        //    get
+        //    {
+        //        return LiquidToGasRatioDataValue.InputValue;
+        //    }
+        //}
+
+        //public string LiquidToGasRatioDataValueTooltip
+        //{
+        //    get
+        //    {
+        //        return LiquidToGasRatioDataValue.ToolTip;
+        //    }
+        //}
+
+        //public bool LiquidToGasRatioDataValueUpdateValue(string value, out string errorMessage)
+        //{
+        //    return LiquidToGasRatioDataValue.UpdateValue(value, out errorMessage);
+        //}
+
+        //#endregion DataValues
     }
 }

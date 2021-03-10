@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.MerkelGridView = new System.Windows.Forms.DataGridView();
             this.InputPropertiesGroupBox = new System.Windows.Forms.GroupBox();
+            this.MerkelCalculate = new System.Windows.Forms.Button();
             this.MerkelElevationPressureLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.MerkleBarometricPressureRadio = new System.Windows.Forms.RadioButton();
@@ -49,7 +50,6 @@
             this.TemperatureColdWaterLabel = new System.Windows.Forms.Label();
             this.TemperatureHotWaterLabel = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.MerkelCalculate = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)(this.MerkelGridView)).BeginInit();
@@ -97,10 +97,20 @@
             this.InputPropertiesGroupBox.TabStop = false;
             this.InputPropertiesGroupBox.Text = "Input Properties";
             // 
-            // MerkleElevationPressureLabel
+            // MerkelCalculate
+            // 
+            this.MerkelCalculate.Location = new System.Drawing.Point(662, 19);
+            this.MerkelCalculate.Name = "MerkelCalculate";
+            this.MerkelCalculate.Size = new System.Drawing.Size(75, 23);
+            this.MerkelCalculate.TabIndex = 15;
+            this.MerkelCalculate.Text = "Calculate";
+            this.MerkelCalculate.UseVisualStyleBackColor = true;
+            this.MerkelCalculate.Click += new System.EventHandler(this.MerkelCalculate_Click);
+            // 
+            // MerkelElevationPressureLabel
             // 
             this.MerkelElevationPressureLabel.Location = new System.Drawing.Point(36, 117);
-            this.MerkelElevationPressureLabel.Name = "MerkleElevationPressureLabel";
+            this.MerkelElevationPressureLabel.Name = "MerkelElevationPressureLabel";
             this.MerkelElevationPressureLabel.Size = new System.Drawing.Size(110, 13);
             this.MerkelElevationPressureLabel.TabIndex = 23;
             this.MerkelElevationPressureLabel.Text = "Elevation:";
@@ -260,16 +270,6 @@
             this.TemperatureHotWaterLabel.TabIndex = 0;
             this.TemperatureHotWaterLabel.Text = "Hot Water Temperature:";
             this.TemperatureHotWaterLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // MerkelCalculate
-            // 
-            this.MerkelCalculate.Location = new System.Drawing.Point(649, 19);
-            this.MerkelCalculate.Name = "MerkelCalculate";
-            this.MerkelCalculate.Size = new System.Drawing.Size(75, 23);
-            this.MerkelCalculate.TabIndex = 15;
-            this.MerkelCalculate.Text = "Calculate";
-            this.MerkelCalculate.UseVisualStyleBackColor = true;
-            this.MerkelCalculate.Click += new System.EventHandler(this.MerkelCalculate_Click);
             // 
             // errorProvider1
             // 

@@ -8,44 +8,45 @@ namespace CTIToolkit
 {
     public partial class TestPointUserControl : UserControl
     {
-        public MechanicalDraftPerformanceCurveViewModel MechanicalDraftPerformanceCurveViewModel { get; set; }
+        public TowerTestPoint TowerTestPoint { get; set; }
 
+        //public bool IsDemo { get; set; }
+        //public bool IsInternationalSystemOfUnits_SI { get; set; }
 
         public TestPointUserControl()
         {
-            MechanicalDraftPerformanceCurveViewModel = new MechanicalDraftPerformanceCurveViewModel(false, false);
             InitializeComponent();
         }
 
         private bool Setup(out string errorMessage)
         {
             errorMessage = string.Empty;
+            
             try
             {
-                PerformanceCurveTestWaterFlowRate.Text = MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueInputValue;
-                toolTip1.SetToolTip(PerformanceCurveTestWaterFlowRate, MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueTooltip);
+                WaterFlowRate.Text = TowerTestPoint.WaterFlowRateDataValue.InputValue;
+                toolTip1.SetToolTip(WaterFlowRate, TowerTestPoint.WaterFlowRateDataValue.ToolTip);
 
-                PerformanceCurveTestHotWaterTemperature.Text = MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValueInputValue;
-                toolTip1.SetToolTip(PerformanceCurveTestHotWaterTemperature, MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValueTooltip);
+                HotWaterTemperature.Text = TowerTestPoint.HotWaterTemperatureDataValue.InputValue;
+                toolTip1.SetToolTip(HotWaterTemperature, TowerTestPoint.HotWaterTemperatureDataValue.ToolTip);
 
-                PerformanceCurveTestColdWaterTemperature.Text = MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValueInputValue;
-                toolTip1.SetToolTip(PerformanceCurveTestColdWaterTemperature, MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValueTooltip);
+                ColdWaterTemperature.Text = TowerTestPoint.ColdWaterTemperatureDataValue.InputValue;
+                toolTip1.SetToolTip(ColdWaterTemperature, TowerTestPoint.ColdWaterTemperatureDataValue.ToolTip);
 
-                PerformanceCurveTestWetBulbTemperature.Text = MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValueInputValue;
-                toolTip1.SetToolTip(PerformanceCurveTestWetBulbTemperature, MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValueTooltip);
+                WetBulbTemperature.Text = TowerTestPoint.WetBulbTemperatureDataValue.InputValue;
+                toolTip1.SetToolTip(WetBulbTemperature, TowerTestPoint.WetBulbTemperatureDataValue.ToolTip);
 
-                PerformanceCurveTestDryBulbTemperature.Text = MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValueInputValue;
-                toolTip1.SetToolTip(PerformanceCurveTestDryBulbTemperature, MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValueTooltip);
+                DryBulbTemperature.Text = TowerTestPoint.DryBulbTemperatureDataValue.InputValue;
+                toolTip1.SetToolTip(DryBulbTemperature, TowerTestPoint.DryBulbTemperatureDataValue.ToolTip);
 
-                PerformanceCurveTestFanDriverPower.Text = MechanicalDraftPerformanceCurveViewModel.FanDriverPowerDataValueInputValue;
-                toolTip1.SetToolTip(PerformanceCurveTestFanDriverPower, MechanicalDraftPerformanceCurveViewModel.FanDriverPowerDataValueTooltip);
+                FanDriverPower.Text = TowerTestPoint.FanDriverPowerDataValue.InputValue;
+                toolTip1.SetToolTip(FanDriverPower, TowerTestPoint.FanDriverPowerDataValue.ToolTip);
 
-                PerformanceCurveTestBarometricPressure.Text = MechanicalDraftPerformanceCurveViewModel.BarometricPressureDataValueInputValue;
-                toolTip1.SetToolTip(PerformanceCurveTestBarometricPressure, MechanicalDraftPerformanceCurveViewModel.BarometricPressureDataValueTooltip);
+                BarometricPressure.Text = TowerTestPoint.BarometricPressureDataValue.InputValue;
+                toolTip1.SetToolTip(BarometricPressure, TowerTestPoint.BarometricPressureDataValue.ToolTip);
 
-                PerformanceCurveTestLiquidToGasRatio.Text = MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueInputValue;
-                toolTip1.SetToolTip(PerformanceCurveTestLiquidToGasRatio, MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueTooltip);
-
+                LiquidToGasRatio.Text = TowerTestPoint.LiquidToGasRatioDataValue.InputValue;
+                toolTip1.SetToolTip(LiquidToGasRatio, TowerTestPoint.LiquidToGasRatioDataValue.ToolTip);
             }
             catch (Exception e)
             {
@@ -55,21 +56,16 @@ namespace CTIToolkit
             return true;
         }
 
-        public bool LoadData(MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData, out string errorMessage)
+        public bool LoadData(TowerTestPoint towerTestPoint, out string errorMessage)
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
 
-            if (mechanicalDraftPerformanceCurveFileData != null)
-            {
-                if (!MechanicalDraftPerformanceCurveViewModel.LoadData(-1, mechanicalDraftPerformanceCurveFileData, out errorMessage))
-                {
-                    stringBuilder.AppendLine(errorMessage);
-                    returnValue = false;
-                    errorMessage = string.Empty;
-                }
+            TowerTestPoint = towerTestPoint;
 
-                if (!Setup(out errorMessage))
+            if (TowerTestPoint != null)
+            {
+                 if (!Setup(out errorMessage))
                 {
                     stringBuilder.AppendLine(errorMessage);
                     returnValue = false;
@@ -78,12 +74,190 @@ namespace CTIToolkit
             }
             else
             {
-                stringBuilder.AppendLine("Unable to load file. File contains invalid data");
+                stringBuilder.AppendLine("Unable to load file. File contains invalid data.");
             }
 
             errorMessage = stringBuilder.ToString();
 
             return returnValue;
+        }
+
+        private void WaterFlowRate_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(WaterFlowRate, "");
+        }
+
+        private void WaterFlowRate_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!TowerTestPoint.WaterFlowRateDataValue.UpdateValue(WaterFlowRate.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                WaterFlowRate.Select(0, WaterFlowRate.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(WaterFlowRate, errorMessage);
+            }
+        }
+
+        private void HotWaterTemperature_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(HotWaterTemperature, "");
+        }
+
+        private void HotWaterTemperature_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!TowerTestPoint.HotWaterTemperatureDataValue.UpdateValue(HotWaterTemperature.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                HotWaterTemperature.Select(0, HotWaterTemperature.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(HotWaterTemperature, errorMessage);
+            }
+            else if(TowerTestPoint.HotWaterTemperatureDataValue.Current <= TowerTestPoint.ColdWaterTemperatureDataValue.Current) 
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                HotWaterTemperature.Select(0, HotWaterTemperature.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(HotWaterTemperature, "Hot Water Temperature must be greater than the Cold Water Temperature.");
+            }
+        }
+
+        private void ColdWaterTemperature_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(ColdWaterTemperature, "");
+        }
+
+        private void ColdWaterTemperature_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!TowerTestPoint.ColdWaterTemperatureDataValue.UpdateValue(ColdWaterTemperature.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                ColdWaterTemperature.Select(0, ColdWaterTemperature.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(ColdWaterTemperature, errorMessage);
+            }
+            else if (TowerTestPoint.ColdWaterTemperatureDataValue.Current >= TowerTestPoint.HotWaterTemperatureDataValue.Current)
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                ColdWaterTemperature.Select(0, ColdWaterTemperature.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(ColdWaterTemperature, "Cold Water Temperature must be less than the Hot Water Temperature.");
+            }
+        }
+
+        private void WetBulbTemperature_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(WetBulbTemperature, "");
+        }
+
+        private void WetBulbTemperature_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!TowerTestPoint.WetBulbTemperatureDataValue.UpdateValue(WetBulbTemperature.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                WetBulbTemperature.Select(0, WetBulbTemperature.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(WetBulbTemperature, errorMessage);
+            }
+        }
+
+        private void DryBulbTemperature_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(DryBulbTemperature, "");
+        }
+
+        private void DryBulbTemperature_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!TowerTestPoint.DryBulbTemperatureDataValue.UpdateValue(DryBulbTemperature.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                DryBulbTemperature.Select(0, DryBulbTemperature.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(DryBulbTemperature, errorMessage);
+            }
+        }
+
+        private void FanDriverPower_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(FanDriverPower, "");
+        }
+
+        private void FanDriverPower_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!TowerTestPoint.FanDriverPowerDataValue.UpdateValue(FanDriverPower.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                FanDriverPower.Select(0, FanDriverPower.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(FanDriverPower, errorMessage);
+            }
+        }
+
+        private void BarometricPressure_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(BarometricPressure, "");
+        }
+
+        private void BarometricPressure_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!TowerTestPoint.BarometricPressureDataValue.UpdateValue(BarometricPressure.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                BarometricPressure.Select(0, BarometricPressure.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(BarometricPressure, errorMessage);
+            }
+        }
+
+        private void LiquidToGasRatio_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(LiquidToGasRatio, "");
+        }
+
+        private void LiquidToGasRatio_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string errorMessage = string.Empty;
+
+            if (!TowerTestPoint.LiquidToGasRatioDataValue.UpdateValue(LiquidToGasRatio.Text, out errorMessage))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                LiquidToGasRatio.Select(0, LiquidToGasRatio.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(LiquidToGasRatio, errorMessage);
+            }
         }
     }
 }

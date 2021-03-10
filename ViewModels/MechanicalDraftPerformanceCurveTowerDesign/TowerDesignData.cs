@@ -7,6 +7,12 @@ using System.Text;
 
 namespace ViewModels
 {
+    public enum Order
+    {
+        Ascending,
+        Descending
+    };
+
     public class TowerDesignData
     {
         const int MIN_FLOW_COUNT = 3;
@@ -38,6 +44,9 @@ namespace ViewModels
         public WaterFlowRateDataValue AddWaterFlowRateDataValue { get; set; }
 
         public List<TowerDesignCurveData> TowerDesignCurveData { set; get; }
+
+        public Order RangeOrder { get; set; }
+        public Order WaterFlowRateOrder { get; set; }
 
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_SI { get; set; }
@@ -74,6 +83,9 @@ namespace ViewModels
             LiquidToGasRatioDataValue = new LiquidToGasRatioDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
 
             AddWaterFlowRateDataValue = new WaterFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+
+            RangeOrder = Order.Ascending;
+            WaterFlowRateOrder = Order.Ascending;
         }
 
         public bool LoadData(DesignData data, out string errorMessage)
@@ -208,6 +220,134 @@ namespace ViewModels
             }
             return returnValue;
         }
+
+        public bool CheckRangeOrder()
+        {
+            return ValidAscendingOrder() || ValidDescendingOrder();
+        }
+
+        public bool ValidAscendingOrder()
+        {
+            bool inOrder = true;
+
+            double testValue = 0.0;
+
+            if(Range1Value.Current > testValue)
+            {
+                testValue = Range1Value.Current;
+            }
+            if(Range2Value.Current != 0.0)
+            {
+                if(Range2Value.Current < testValue)
+                {
+                    inOrder = false;
+                }
+                else
+                {
+                    testValue = Range2Value.Current;
+                }
+            }
+            if (Range3Value.Current != 0.0)
+            {
+                if (Range3Value.Current < testValue)
+                {
+                    inOrder = false;
+                }
+                else
+                {
+                    testValue = Range3Value.Current;
+                }
+            }
+            if (Range4Value.Current != 0.0)
+            {
+                if (Range4Value.Current < testValue)
+                {
+                    inOrder = false;
+                }
+                else
+                {
+                    testValue = Range4Value.Current;
+                }
+            }
+            if (Range5Value.Current != 0.0)
+            {
+                if (Range5Value.Current < testValue)
+                {
+                    inOrder = false;
+                }
+                else
+                {
+                    testValue = Range5Value.Current;
+                }
+            }
+            if(inOrder)
+            {
+                RangeOrder = Order.Ascending;
+            }
+            return inOrder;
+        }
+
+        public bool ValidDescendingOrder()
+        {
+            bool inOrder = true;
+
+            double testValue = 0.0;
+
+            if (Range1Value.Current != testValue)
+            {
+                testValue = Range1Value.Current;
+            }
+            if (Range2Value.Current != 0.0)
+            {
+                if (Range2Value.Current < testValue)
+                {
+                    inOrder = false;
+                }
+                else
+                {
+                    testValue = Range2Value.Current;
+                }
+            }
+            if (Range3Value.Current != 0.0)
+            {
+                if (Range3Value.Current < testValue)
+                {
+                    inOrder = false;
+                }
+                else
+                {
+                    testValue = Range3Value.Current;
+                }
+            }
+            if (Range4Value.Current != 0.0)
+            {
+                if (Range4Value.Current < testValue)
+                {
+                    inOrder = false;
+                }
+                else
+                {
+                    testValue = Range4Value.Current;
+                }
+            }
+            if (Range5Value.Current != 0.0)
+            {
+                if (Range5Value.Current < testValue)
+                {
+                    inOrder = false;
+                }
+                else
+                {
+                    testValue = Range5Value.Current;
+                }
+            }
+            if (inOrder)
+            {
+                RangeOrder = Order.Descending;
+            }
+            return inOrder;
+        }
+
 
         public int CountRanges()
         {

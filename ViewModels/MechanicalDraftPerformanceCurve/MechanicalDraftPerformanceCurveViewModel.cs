@@ -14,9 +14,9 @@ namespace ViewModels
     public class MechanicalDraftPerformanceCurveViewModel
     {
         public TowerDesignData DesignData { get; set; }
-        public TowerTestPoint TestPoint { get; set; }
+        public List<TowerTestPoint> TestPoints { get; set; }
+
         public MechanicalDraftPerformanceCurveOutputDataViewModel MechanicalDraftPerformanceCurveOutputDataViewModel { get; set; }
-        public List<string> TestNames { get; set; }
 
         public string DataFileName { get; set; }
         
@@ -31,8 +31,7 @@ namespace ViewModels
             IsInternationalSystemOfUnits_SI = IsInternationalSystemOfUnits_SI;
 
             DesignData = new TowerDesignData(IsDemo, IsInternationalSystemOfUnits_SI);
-            TestPoint = new TowerTestPoint(IsDemo, IsInternationalSystemOfUnits_SI);
-            TestNames = new List<string>();
+            TestPoints = new List<TowerTestPoint>();
 
             MechanicalDraftPerformanceCurveOutputDataViewModel = new MechanicalDraftPerformanceCurveOutputDataViewModel(IsInternationalSystemOfUnits_SI);
         }
@@ -59,7 +58,7 @@ namespace ViewModels
                     IsInternationalSystemOfUnits_SI = mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI;
                 }
 
-                if (!LoadData(-1, mechanicalDraftPerformanceCurveFileData, out errorMessage))
+                if (!LoadData(mechanicalDraftPerformanceCurveFileData, out errorMessage))
                 {
                     stringBuilder.AppendLine(errorMessage);
                     returnValue = false;
@@ -321,17 +320,11 @@ namespace ViewModels
         
         #endregion DataValue
 
-        public bool LoadData(int testIndex, MechanicalDraftPerformanceCurveFileData fileData, out string errorMessage)
+        public bool LoadData(MechanicalDraftPerformanceCurveFileData fileData, out string errorMessage)
         {
             errorMessage = string.Empty;
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
-
-            TestNames.Clear();
-            foreach (Models.TowerTestData test in fileData.TestData)
-            {
-                TestNames.Add(test.TestName);
-            }
 
             if(!DesignData.LoadData(fileData.DesignData, out errorMessage))
             {
@@ -340,35 +333,60 @@ namespace ViewModels
                 errorMessage = string.Empty;
             }
 
-            if (!TestPoint.LoadData(testIndex, fileData.TestData, out errorMessage))
+            foreach (TowerTestData testData in fileData.TestData)
             {
-                returnValue = false;
-                stringBuilder.AppendLine(errorMessage);
-                errorMessage = string.Empty;
+                TowerTestPoint towerTestPoint = new TowerTestPoint(IsDemo, IsInternationalSystemOfUnits_SI);
+                if (!towerTestPoint.LoadData(IsInternationalSystemOfUnits_SI, testData, out errorMessage))
+                {
+                    returnValue = false;
+                    stringBuilder.AppendLine(string.Format("Test {0}: {1}", towerTestPoint.TestName, errorMessage));
+                    errorMessage = string.Empty;
+                }
+                TestPoints.Add(towerTestPoint);
             }
+                //if (!TestPoint.LoadData(testIndex, fileData.TestData, out errorMessage))
+                //{
+                //    returnValue = false;
+                //    stringBuilder.AppendLine(errorMessage);
+                //    errorMessage = string.Empty;
+                //}
 
-            return returnValue;
+             return returnValue;
         }
 
-        public bool FillAndValidate(int testIndex, MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData, out string errorMessage)
+        public bool FillAndValidate(int testIndex, MechanicalDraftPerformanceCurveFileData fileData, out string errorMessage)
         {
             errorMessage = string.Empty;
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
 
-            if (!DesignData.FillAndValidate(mechanicalDraftPerformanceCurveFileData.DesignData, out errorMessage))
+            if (!DesignData.FillAndValidate(fileData.DesignData, out errorMessage))
             {
                 returnValue = false;
                 stringBuilder.AppendLine(errorMessage);
                 errorMessage = string.Empty;
             }
 
-            if (!TestPoint.FillAndValidate(mechanicalDraftPerformanceCurveFileData.TestData[testIndex], out errorMessage))
+            fileData.TestData.Clear();
+
+            foreach (TowerTestPoint towerTestPoint in TestPoints)
             {
-                returnValue = false;
-                stringBuilder.AppendLine(errorMessage);
-                errorMessage = string.Empty;
+                TowerTestData towerTestData = new TowerTestData(IsInternationalSystemOfUnits_SI);
+                if (!towerTestPoint.FillAndValidate(towerTestData, out errorMessage))
+                {
+                    returnValue = false;
+                    stringBuilder.AppendLine(string.Format("Test {0}: {1}", towerTestPoint.TestName, errorMessage));
+                    errorMessage = string.Empty;
+                }
+                fileData.TestData.Add(towerTestData);
             }
+
+            //if (!TestPoints.FillAndValidate(mechanicalDraftPerformanceCurveFileData.TestData[testIndex], out errorMessage))
+            //{
+            //    returnValue = false;
+            //    stringBuilder.AppendLine(errorMessage);
+            //    errorMessage = string.Empty;
+            //}
 
             return returnValue;
         }
@@ -458,5 +476,26 @@ namespace ViewModels
             //}
             return true;// !isError;
         }
+
+        public bool AddTestPoint(string testName, out string errorMessage)
+        {
+            bool returnValue = true;
+
+            try
+            {
+                TowerTestPoint towerTestPoint = new TowerTestPoint(IsDemo, IsInternationalSystemOfUnits_SI);
+                towerTestPoint.TestName = testName;
+                TestPoints.Add(towerTestPoint);
+                errorMessage = string.Empty;
+            }
+            catch (Exception e)
+            {
+                errorMessage = string.Format("Tower design page setup failed. Exception: {0} ", e.ToString());
+                returnValue = false;
+            }
+
+            return returnValue;
+        }
+
     }
 }
