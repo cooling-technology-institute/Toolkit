@@ -37,8 +37,18 @@
             this.LocationLabel = new System.Windows.Forms.Label();
             this.TowerManufacturerLabel = new System.Windows.Forms.Label();
             this.TestResultsGroupBox = new System.Windows.Forms.GroupBox();
+            this.AddTestPointButton = new System.Windows.Forms.Button();
+            this.AddTestPointName = new System.Windows.Forms.TextBox();
             this.TestPointTabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.DesignGroupBox = new System.Windows.Forms.GroupBox();
             this.DesignFanDriverPower = new System.Windows.Forms.TextBox();
@@ -64,18 +74,6 @@
             this.UnitsDryBulbTemperature = new System.Windows.Forms.Label();
             this.UnitsBarometricPressure = new System.Windows.Forms.Label();
             this.UnitsFanDriverPower = new System.Windows.Forms.Label();
-            this.ColdWaterTemperatureDeviationUnitLabel = new System.Windows.Forms.Label();
-            this.TowerCapabilityUnitLabel = new System.Windows.Forms.Label();
-            this.PredictedFlowRateUnitLabel = new System.Windows.Forms.Label();
-            this.AdjustedFlowRateUnitLabel = new System.Windows.Forms.Label();
-            this.ColdWaterTemperatureDeviation = new System.Windows.Forms.TextBox();
-            this.ColdWaterTemperatureDeviationLabel = new System.Windows.Forms.Label();
-            this.TowerCapability = new System.Windows.Forms.TextBox();
-            this.TowerCapabilityLabel = new System.Windows.Forms.Label();
-            this.PredictedFlowRate = new System.Windows.Forms.TextBox();
-            this.PredictedFlowRateLabel = new System.Windows.Forms.Label();
-            this.AdjustedFlowRate = new System.Windows.Forms.TextBox();
-            this.AdjustedFlowRateLabel = new System.Windows.Forms.Label();
             this.UnitsLiquidToGasRatio = new System.Windows.Forms.Label();
             this.DesignDataButton = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
@@ -89,30 +87,20 @@
             this.TowerTypeField = new System.Windows.Forms.TextBox();
             this.DataFilename = new System.Windows.Forms.TextBox();
             this.TowerDataGroupBox = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.AddTestPointName = new System.Windows.Forms.TextBox();
-            this.AddTestPointButton = new System.Windows.Forms.Button();
+            this.DataGridView = new System.Windows.Forms.DataGridView();
             this.TestResultsGroupBox.SuspendLayout();
             this.TestPointTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.DesignGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.TowerDataGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // DataFileLabel
             // 
             this.DataFileLabel.AutoSize = true;
-            this.DataFileLabel.Location = new System.Drawing.Point(14, 21);
+            this.DataFileLabel.Location = new System.Drawing.Point(0, 23);
             this.DataFileLabel.Name = "DataFileLabel";
             this.DataFileLabel.Size = new System.Drawing.Size(118, 13);
             this.DataFileLabel.TabIndex = 0;
@@ -152,7 +140,7 @@
             // ProjectNameLabel
             // 
             this.ProjectNameLabel.AutoSize = true;
-            this.ProjectNameLabel.Location = new System.Drawing.Point(14, 48);
+            this.ProjectNameLabel.Location = new System.Drawing.Point(14, 44);
             this.ProjectNameLabel.Name = "ProjectNameLabel";
             this.ProjectNameLabel.Size = new System.Drawing.Size(74, 13);
             this.ProjectNameLabel.TabIndex = 7;
@@ -161,7 +149,7 @@
             // LocationLabel
             // 
             this.LocationLabel.AutoSize = true;
-            this.LocationLabel.Location = new System.Drawing.Point(14, 76);
+            this.LocationLabel.Location = new System.Drawing.Point(16, 72);
             this.LocationLabel.Name = "LocationLabel";
             this.LocationLabel.Size = new System.Drawing.Size(51, 13);
             this.LocationLabel.TabIndex = 9;
@@ -170,7 +158,7 @@
             // TowerManufacturerLabel
             // 
             this.TowerManufacturerLabel.AutoSize = true;
-            this.TowerManufacturerLabel.Location = new System.Drawing.Point(14, 104);
+            this.TowerManufacturerLabel.Location = new System.Drawing.Point(14, 98);
             this.TowerManufacturerLabel.Name = "TowerManufacturerLabel";
             this.TowerManufacturerLabel.Size = new System.Drawing.Size(106, 13);
             this.TowerManufacturerLabel.TabIndex = 15;
@@ -197,21 +185,40 @@
             this.TestResultsGroupBox.Controls.Add(this.UnitsDryBulbTemperature);
             this.TestResultsGroupBox.Controls.Add(this.UnitsBarometricPressure);
             this.TestResultsGroupBox.Controls.Add(this.UnitsFanDriverPower);
-            this.TestResultsGroupBox.Location = new System.Drawing.Point(17, 220);
+            this.TestResultsGroupBox.Location = new System.Drawing.Point(3, 209);
             this.TestResultsGroupBox.Name = "TestResultsGroupBox";
-            this.TestResultsGroupBox.Size = new System.Drawing.Size(678, 364);
+            this.TestResultsGroupBox.Size = new System.Drawing.Size(810, 311);
             this.TestResultsGroupBox.TabIndex = 14;
             this.TestResultsGroupBox.TabStop = false;
             this.TestResultsGroupBox.Text = "Test Results";
+            // 
+            // AddTestPointButton
+            // 
+            this.AddTestPointButton.Enabled = false;
+            this.AddTestPointButton.Location = new System.Drawing.Point(682, 277);
+            this.AddTestPointButton.Name = "AddTestPointButton";
+            this.AddTestPointButton.Size = new System.Drawing.Size(110, 23);
+            this.AddTestPointButton.TabIndex = 34;
+            this.AddTestPointButton.Text = "Add Test Point";
+            this.AddTestPointButton.UseVisualStyleBackColor = true;
+            this.AddTestPointButton.Click += new System.EventHandler(this.AddTestPointButton_Click);
+            // 
+            // AddTestPointName
+            // 
+            this.AddTestPointName.Enabled = false;
+            this.AddTestPointName.Location = new System.Drawing.Point(396, 277);
+            this.AddTestPointName.Name = "AddTestPointName";
+            this.AddTestPointName.Size = new System.Drawing.Size(279, 20);
+            this.AddTestPointName.TabIndex = 33;
             // 
             // TestPointTabControl
             // 
             this.TestPointTabControl.Controls.Add(this.tabPage1);
             this.TestPointTabControl.Controls.Add(this.tabPage2);
-            this.TestPointTabControl.Location = new System.Drawing.Point(300, 40);
+            this.TestPointTabControl.Location = new System.Drawing.Point(300, 14);
             this.TestPointTabControl.Name = "TestPointTabControl";
             this.TestPointTabControl.SelectedIndex = 0;
-            this.TestPointTabControl.Size = new System.Drawing.Size(363, 289);
+            this.TestPointTabControl.Size = new System.Drawing.Size(494, 256);
             this.TestPointTabControl.TabIndex = 32;
             // 
             // tabPage1
@@ -227,17 +234,74 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(355, 263);
+            this.tabPage1.Size = new System.Drawing.Size(486, 230);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(15, 204);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(70, 20);
+            this.textBox1.TabIndex = 21;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(15, 21);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(70, 20);
+            this.textBox2.TabIndex = 14;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(15, 47);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(70, 20);
+            this.textBox3.TabIndex = 15;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(15, 73);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(70, 20);
+            this.textBox4.TabIndex = 16;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(15, 99);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(70, 20);
+            this.textBox5.TabIndex = 17;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(15, 125);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(70, 20);
+            this.textBox6.TabIndex = 18;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(15, 177);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(70, 20);
+            this.textBox7.TabIndex = 20;
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(15, 151);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(70, 20);
+            this.textBox8.TabIndex = 19;
             // 
             // tabPage2
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(342, 263);
+            this.tabPage2.Size = new System.Drawing.Size(355, 263);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -252,16 +316,16 @@
             this.DesignGroupBox.Controls.Add(this.DesignWetBulbTemperature);
             this.DesignGroupBox.Controls.Add(this.DesignLiquidToGasRatio);
             this.DesignGroupBox.Controls.Add(this.DesignWaterFlowRate);
-            this.DesignGroupBox.Location = new System.Drawing.Point(146, 56);
+            this.DesignGroupBox.Location = new System.Drawing.Point(146, 30);
             this.DesignGroupBox.Name = "DesignGroupBox";
-            this.DesignGroupBox.Size = new System.Drawing.Size(116, 273);
+            this.DesignGroupBox.Size = new System.Drawing.Size(116, 240);
             this.DesignGroupBox.TabIndex = 8;
             this.DesignGroupBox.TabStop = false;
             this.DesignGroupBox.Text = "Design";
             // 
             // DesignFanDriverPower
             // 
-            this.DesignFanDriverPower.Location = new System.Drawing.Point(15, 177);
+            this.DesignFanDriverPower.Location = new System.Drawing.Point(15, 157);
             this.DesignFanDriverPower.Name = "DesignFanDriverPower";
             this.DesignFanDriverPower.ReadOnly = true;
             this.DesignFanDriverPower.Size = new System.Drawing.Size(70, 20);
@@ -269,7 +333,7 @@
             // 
             // DesignHotWaterTemperature
             // 
-            this.DesignHotWaterTemperature.Location = new System.Drawing.Point(15, 57);
+            this.DesignHotWaterTemperature.Location = new System.Drawing.Point(15, 53);
             this.DesignHotWaterTemperature.Name = "DesignHotWaterTemperature";
             this.DesignHotWaterTemperature.ReadOnly = true;
             this.DesignHotWaterTemperature.Size = new System.Drawing.Size(70, 20);
@@ -277,7 +341,7 @@
             // 
             // DesignColdWaterTemperature
             // 
-            this.DesignColdWaterTemperature.Location = new System.Drawing.Point(15, 87);
+            this.DesignColdWaterTemperature.Location = new System.Drawing.Point(15, 79);
             this.DesignColdWaterTemperature.Name = "DesignColdWaterTemperature";
             this.DesignColdWaterTemperature.ReadOnly = true;
             this.DesignColdWaterTemperature.Size = new System.Drawing.Size(70, 20);
@@ -285,7 +349,7 @@
             // 
             // DesignBarometricPressure
             // 
-            this.DesignBarometricPressure.Location = new System.Drawing.Point(15, 207);
+            this.DesignBarometricPressure.Location = new System.Drawing.Point(15, 183);
             this.DesignBarometricPressure.Name = "DesignBarometricPressure";
             this.DesignBarometricPressure.ReadOnly = true;
             this.DesignBarometricPressure.Size = new System.Drawing.Size(70, 20);
@@ -293,7 +357,7 @@
             // 
             // DesignDryBulbTemperature
             // 
-            this.DesignDryBulbTemperature.Location = new System.Drawing.Point(15, 147);
+            this.DesignDryBulbTemperature.Location = new System.Drawing.Point(15, 131);
             this.DesignDryBulbTemperature.Name = "DesignDryBulbTemperature";
             this.DesignDryBulbTemperature.ReadOnly = true;
             this.DesignDryBulbTemperature.Size = new System.Drawing.Size(70, 20);
@@ -301,7 +365,7 @@
             // 
             // DesignWetBulbTemperature
             // 
-            this.DesignWetBulbTemperature.Location = new System.Drawing.Point(15, 117);
+            this.DesignWetBulbTemperature.Location = new System.Drawing.Point(15, 105);
             this.DesignWetBulbTemperature.Name = "DesignWetBulbTemperature";
             this.DesignWetBulbTemperature.ReadOnly = true;
             this.DesignWetBulbTemperature.Size = new System.Drawing.Size(70, 20);
@@ -309,7 +373,7 @@
             // 
             // DesignLiquidToGasRatio
             // 
-            this.DesignLiquidToGasRatio.Location = new System.Drawing.Point(15, 237);
+            this.DesignLiquidToGasRatio.Location = new System.Drawing.Point(15, 210);
             this.DesignLiquidToGasRatio.Name = "DesignLiquidToGasRatio";
             this.DesignLiquidToGasRatio.ReadOnly = true;
             this.DesignLiquidToGasRatio.Size = new System.Drawing.Size(70, 20);
@@ -326,7 +390,7 @@
             // WaterFlowRateLabel
             // 
             this.WaterFlowRateLabel.AutoSize = true;
-            this.WaterFlowRateLabel.Location = new System.Drawing.Point(14, 90);
+            this.WaterFlowRateLabel.Location = new System.Drawing.Point(14, 60);
             this.WaterFlowRateLabel.Name = "WaterFlowRateLabel";
             this.WaterFlowRateLabel.Size = new System.Drawing.Size(90, 13);
             this.WaterFlowRateLabel.TabIndex = 2;
@@ -335,7 +399,7 @@
             // UnitsWaterFlowRate
             // 
             this.UnitsWaterFlowRate.AutoSize = true;
-            this.UnitsWaterFlowRate.Location = new System.Drawing.Point(268, 86);
+            this.UnitsWaterFlowRate.Location = new System.Drawing.Point(268, 60);
             this.UnitsWaterFlowRate.Name = "UnitsWaterFlowRate";
             this.UnitsWaterFlowRate.Size = new System.Drawing.Size(27, 13);
             this.UnitsWaterFlowRate.TabIndex = 13;
@@ -344,7 +408,7 @@
             // HotWaterTemperatureLabel
             // 
             this.HotWaterTemperatureLabel.AutoSize = true;
-            this.HotWaterTemperatureLabel.Location = new System.Drawing.Point(14, 119);
+            this.HotWaterTemperatureLabel.Location = new System.Drawing.Point(14, 86);
             this.HotWaterTemperatureLabel.Name = "HotWaterTemperatureLabel";
             this.HotWaterTemperatureLabel.Size = new System.Drawing.Size(122, 13);
             this.HotWaterTemperatureLabel.TabIndex = 1;
@@ -353,7 +417,7 @@
             // UnitsHotWaterTemperature
             // 
             this.UnitsHotWaterTemperature.AutoSize = true;
-            this.UnitsHotWaterTemperature.Location = new System.Drawing.Point(268, 116);
+            this.UnitsHotWaterTemperature.Location = new System.Drawing.Point(268, 86);
             this.UnitsHotWaterTemperature.Name = "UnitsHotWaterTemperature";
             this.UnitsHotWaterTemperature.Size = new System.Drawing.Size(17, 13);
             this.UnitsHotWaterTemperature.TabIndex = 12;
@@ -362,7 +426,7 @@
             // ColdWaterTemperatureLabel
             // 
             this.ColdWaterTemperatureLabel.AutoSize = true;
-            this.ColdWaterTemperatureLabel.Location = new System.Drawing.Point(14, 148);
+            this.ColdWaterTemperatureLabel.Location = new System.Drawing.Point(14, 112);
             this.ColdWaterTemperatureLabel.Name = "ColdWaterTemperatureLabel";
             this.ColdWaterTemperatureLabel.Size = new System.Drawing.Size(126, 13);
             this.ColdWaterTemperatureLabel.TabIndex = 0;
@@ -371,7 +435,7 @@
             // WetBulbTemperatureLabel
             // 
             this.WetBulbTemperatureLabel.AutoSize = true;
-            this.WetBulbTemperatureLabel.Location = new System.Drawing.Point(14, 177);
+            this.WetBulbTemperatureLabel.Location = new System.Drawing.Point(14, 138);
             this.WetBulbTemperatureLabel.Name = "WetBulbTemperatureLabel";
             this.WetBulbTemperatureLabel.Size = new System.Drawing.Size(117, 13);
             this.WetBulbTemperatureLabel.TabIndex = 5;
@@ -380,7 +444,7 @@
             // UnitsColdWaterTemperature
             // 
             this.UnitsColdWaterTemperature.AutoSize = true;
-            this.UnitsColdWaterTemperature.Location = new System.Drawing.Point(268, 146);
+            this.UnitsColdWaterTemperature.Location = new System.Drawing.Point(268, 112);
             this.UnitsColdWaterTemperature.Name = "UnitsColdWaterTemperature";
             this.UnitsColdWaterTemperature.Size = new System.Drawing.Size(17, 13);
             this.UnitsColdWaterTemperature.TabIndex = 11;
@@ -389,7 +453,7 @@
             // DryBulbTemperatureLabel
             // 
             this.DryBulbTemperatureLabel.AutoSize = true;
-            this.DryBulbTemperatureLabel.Location = new System.Drawing.Point(14, 206);
+            this.DryBulbTemperatureLabel.Location = new System.Drawing.Point(14, 164);
             this.DryBulbTemperatureLabel.Name = "DryBulbTemperatureLabel";
             this.DryBulbTemperatureLabel.Size = new System.Drawing.Size(113, 13);
             this.DryBulbTemperatureLabel.TabIndex = 4;
@@ -398,7 +462,7 @@
             // FanDriverPowerLabel
             // 
             this.FanDriverPowerLabel.AutoSize = true;
-            this.FanDriverPowerLabel.Location = new System.Drawing.Point(14, 235);
+            this.FanDriverPowerLabel.Location = new System.Drawing.Point(14, 190);
             this.FanDriverPowerLabel.Name = "FanDriverPowerLabel";
             this.FanDriverPowerLabel.Size = new System.Drawing.Size(92, 13);
             this.FanDriverPowerLabel.TabIndex = 3;
@@ -407,7 +471,7 @@
             // UnitsWetBulbTemperature
             // 
             this.UnitsWetBulbTemperature.AutoSize = true;
-            this.UnitsWetBulbTemperature.Location = new System.Drawing.Point(268, 176);
+            this.UnitsWetBulbTemperature.Location = new System.Drawing.Point(268, 138);
             this.UnitsWetBulbTemperature.Name = "UnitsWetBulbTemperature";
             this.UnitsWetBulbTemperature.Size = new System.Drawing.Size(17, 13);
             this.UnitsWetBulbTemperature.TabIndex = 16;
@@ -416,7 +480,7 @@
             // BarometricPressureLabel
             // 
             this.BarometricPressureLabel.AutoSize = true;
-            this.BarometricPressureLabel.Location = new System.Drawing.Point(14, 264);
+            this.BarometricPressureLabel.Location = new System.Drawing.Point(14, 216);
             this.BarometricPressureLabel.Name = "BarometricPressureLabel";
             this.BarometricPressureLabel.Size = new System.Drawing.Size(104, 13);
             this.BarometricPressureLabel.TabIndex = 6;
@@ -425,7 +489,7 @@
             // LiquidToGasRatioLabel
             // 
             this.LiquidToGasRatioLabel.AutoSize = true;
-            this.LiquidToGasRatioLabel.Location = new System.Drawing.Point(14, 293);
+            this.LiquidToGasRatioLabel.Location = new System.Drawing.Point(16, 243);
             this.LiquidToGasRatioLabel.Name = "LiquidToGasRatioLabel";
             this.LiquidToGasRatioLabel.Size = new System.Drawing.Size(104, 13);
             this.LiquidToGasRatioLabel.TabIndex = 7;
@@ -434,7 +498,7 @@
             // UnitsDryBulbTemperature
             // 
             this.UnitsDryBulbTemperature.AutoSize = true;
-            this.UnitsDryBulbTemperature.Location = new System.Drawing.Point(268, 206);
+            this.UnitsDryBulbTemperature.Location = new System.Drawing.Point(268, 164);
             this.UnitsDryBulbTemperature.Name = "UnitsDryBulbTemperature";
             this.UnitsDryBulbTemperature.Size = new System.Drawing.Size(17, 13);
             this.UnitsDryBulbTemperature.TabIndex = 15;
@@ -443,7 +507,7 @@
             // UnitsBarometricPressure
             // 
             this.UnitsBarometricPressure.AutoSize = true;
-            this.UnitsBarometricPressure.Location = new System.Drawing.Point(268, 266);
+            this.UnitsBarometricPressure.Location = new System.Drawing.Point(267, 216);
             this.UnitsBarometricPressure.Name = "UnitsBarometricPressure";
             this.UnitsBarometricPressure.Size = new System.Drawing.Size(26, 13);
             this.UnitsBarometricPressure.TabIndex = 17;
@@ -452,115 +516,11 @@
             // UnitsFanDriverPower
             // 
             this.UnitsFanDriverPower.AutoSize = true;
-            this.UnitsFanDriverPower.Location = new System.Drawing.Point(268, 236);
+            this.UnitsFanDriverPower.Location = new System.Drawing.Point(268, 190);
             this.UnitsFanDriverPower.Name = "UnitsFanDriverPower";
             this.UnitsFanDriverPower.Size = new System.Drawing.Size(25, 13);
             this.UnitsFanDriverPower.TabIndex = 14;
             this.UnitsFanDriverPower.Text = "bhp";
-            // 
-            // ColdWaterTemperatureDeviationUnitLabel
-            // 
-            this.ColdWaterTemperatureDeviationUnitLabel.AutoSize = true;
-            this.ColdWaterTemperatureDeviationUnitLabel.Location = new System.Drawing.Point(1055, 662);
-            this.ColdWaterTemperatureDeviationUnitLabel.Name = "ColdWaterTemperatureDeviationUnitLabel";
-            this.ColdWaterTemperatureDeviationUnitLabel.Size = new System.Drawing.Size(17, 13);
-            this.ColdWaterTemperatureDeviationUnitLabel.TabIndex = 30;
-            this.ColdWaterTemperatureDeviationUnitLabel.Text = "°F";
-            // 
-            // TowerCapabilityUnitLabel
-            // 
-            this.TowerCapabilityUnitLabel.AutoSize = true;
-            this.TowerCapabilityUnitLabel.Location = new System.Drawing.Point(984, 631);
-            this.TowerCapabilityUnitLabel.Name = "TowerCapabilityUnitLabel";
-            this.TowerCapabilityUnitLabel.Size = new System.Drawing.Size(15, 13);
-            this.TowerCapabilityUnitLabel.TabIndex = 29;
-            this.TowerCapabilityUnitLabel.Text = "%";
-            // 
-            // PredictedFlowRateUnitLabel
-            // 
-            this.PredictedFlowRateUnitLabel.AutoSize = true;
-            this.PredictedFlowRateUnitLabel.Location = new System.Drawing.Point(984, 601);
-            this.PredictedFlowRateUnitLabel.Name = "PredictedFlowRateUnitLabel";
-            this.PredictedFlowRateUnitLabel.Size = new System.Drawing.Size(19, 13);
-            this.PredictedFlowRateUnitLabel.TabIndex = 28;
-            this.PredictedFlowRateUnitLabel.Text = "l/s";
-            // 
-            // AdjustedFlowRateUnitLabel
-            // 
-            this.AdjustedFlowRateUnitLabel.AutoSize = true;
-            this.AdjustedFlowRateUnitLabel.Location = new System.Drawing.Point(984, 571);
-            this.AdjustedFlowRateUnitLabel.Name = "AdjustedFlowRateUnitLabel";
-            this.AdjustedFlowRateUnitLabel.Size = new System.Drawing.Size(19, 13);
-            this.AdjustedFlowRateUnitLabel.TabIndex = 27;
-            this.AdjustedFlowRateUnitLabel.Text = "l/s";
-            // 
-            // ColdWaterTemperatureDeviation
-            // 
-            this.ColdWaterTemperatureDeviation.Location = new System.Drawing.Point(980, 658);
-            this.ColdWaterTemperatureDeviation.Name = "ColdWaterTemperatureDeviation";
-            this.ColdWaterTemperatureDeviation.ReadOnly = true;
-            this.ColdWaterTemperatureDeviation.Size = new System.Drawing.Size(69, 20);
-            this.ColdWaterTemperatureDeviation.TabIndex = 26;
-            // 
-            // ColdWaterTemperatureDeviationLabel
-            // 
-            this.ColdWaterTemperatureDeviationLabel.AutoSize = true;
-            this.ColdWaterTemperatureDeviationLabel.Location = new System.Drawing.Point(800, 662);
-            this.ColdWaterTemperatureDeviationLabel.Name = "ColdWaterTemperatureDeviationLabel";
-            this.ColdWaterTemperatureDeviationLabel.Size = new System.Drawing.Size(174, 13);
-            this.ColdWaterTemperatureDeviationLabel.TabIndex = 25;
-            this.ColdWaterTemperatureDeviationLabel.Text = "Cold Water Temperature Deviation:";
-            // 
-            // TowerCapability
-            // 
-            this.TowerCapability.Location = new System.Drawing.Point(909, 628);
-            this.TowerCapability.Name = "TowerCapability";
-            this.TowerCapability.ReadOnly = true;
-            this.TowerCapability.Size = new System.Drawing.Size(69, 20);
-            this.TowerCapability.TabIndex = 24;
-            // 
-            // TowerCapabilityLabel
-            // 
-            this.TowerCapabilityLabel.AutoSize = true;
-            this.TowerCapabilityLabel.Location = new System.Drawing.Point(800, 631);
-            this.TowerCapabilityLabel.Name = "TowerCapabilityLabel";
-            this.TowerCapabilityLabel.Size = new System.Drawing.Size(88, 13);
-            this.TowerCapabilityLabel.TabIndex = 23;
-            this.TowerCapabilityLabel.Text = "Tower Capability:";
-            // 
-            // PredictedFlowRate
-            // 
-            this.PredictedFlowRate.Location = new System.Drawing.Point(909, 598);
-            this.PredictedFlowRate.Name = "PredictedFlowRate";
-            this.PredictedFlowRate.ReadOnly = true;
-            this.PredictedFlowRate.Size = new System.Drawing.Size(69, 20);
-            this.PredictedFlowRate.TabIndex = 22;
-            // 
-            // PredictedFlowRateLabel
-            // 
-            this.PredictedFlowRateLabel.AutoSize = true;
-            this.PredictedFlowRateLabel.Location = new System.Drawing.Point(800, 601);
-            this.PredictedFlowRateLabel.Name = "PredictedFlowRateLabel";
-            this.PredictedFlowRateLabel.Size = new System.Drawing.Size(106, 13);
-            this.PredictedFlowRateLabel.TabIndex = 21;
-            this.PredictedFlowRateLabel.Text = "Predicted Flow Rate:";
-            // 
-            // AdjustedFlowRate
-            // 
-            this.AdjustedFlowRate.Location = new System.Drawing.Point(909, 568);
-            this.AdjustedFlowRate.Name = "AdjustedFlowRate";
-            this.AdjustedFlowRate.ReadOnly = true;
-            this.AdjustedFlowRate.Size = new System.Drawing.Size(69, 20);
-            this.AdjustedFlowRate.TabIndex = 20;
-            // 
-            // AdjustedFlowRateLabel
-            // 
-            this.AdjustedFlowRateLabel.AutoSize = true;
-            this.AdjustedFlowRateLabel.Location = new System.Drawing.Point(800, 571);
-            this.AdjustedFlowRateLabel.Name = "AdjustedFlowRateLabel";
-            this.AdjustedFlowRateLabel.Size = new System.Drawing.Size(102, 13);
-            this.AdjustedFlowRateLabel.TabIndex = 19;
-            this.AdjustedFlowRateLabel.Text = "Adjusted Flow Rate:";
             // 
             // UnitsLiquidToGasRatio
             // 
@@ -587,7 +547,7 @@
             // TowerTypeLabel
             // 
             this.TowerTypeLabel.AutoSize = true;
-            this.TowerTypeLabel.Location = new System.Drawing.Point(14, 132);
+            this.TowerTypeLabel.Location = new System.Drawing.Point(14, 124);
             this.TowerTypeLabel.Name = "TowerTypeLabel";
             this.TowerTypeLabel.Size = new System.Drawing.Size(67, 13);
             this.TowerTypeLabel.TabIndex = 17;
@@ -603,7 +563,7 @@
             // 
             // ProjectNameField
             // 
-            this.ProjectNameField.Location = new System.Drawing.Point(134, 45);
+            this.ProjectNameField.Location = new System.Drawing.Point(134, 43);
             this.ProjectNameField.Name = "ProjectNameField";
             this.ProjectNameField.ReadOnly = true;
             this.ProjectNameField.Size = new System.Drawing.Size(423, 20);
@@ -611,7 +571,7 @@
             // 
             // LocationField
             // 
-            this.LocationField.Location = new System.Drawing.Point(134, 73);
+            this.LocationField.Location = new System.Drawing.Point(134, 69);
             this.LocationField.Name = "LocationField";
             this.LocationField.ReadOnly = true;
             this.LocationField.Size = new System.Drawing.Size(423, 20);
@@ -619,7 +579,7 @@
             // 
             // TowerManufacturerField
             // 
-            this.TowerManufacturerField.Location = new System.Drawing.Point(134, 101);
+            this.TowerManufacturerField.Location = new System.Drawing.Point(134, 95);
             this.TowerManufacturerField.Name = "TowerManufacturerField";
             this.TowerManufacturerField.ReadOnly = true;
             this.TowerManufacturerField.Size = new System.Drawing.Size(423, 20);
@@ -627,7 +587,7 @@
             // 
             // TowerTypeField
             // 
-            this.TowerTypeField.Location = new System.Drawing.Point(134, 129);
+            this.TowerTypeField.Location = new System.Drawing.Point(134, 121);
             this.TowerTypeField.Name = "TowerTypeField";
             this.TowerTypeField.ReadOnly = true;
             this.TowerTypeField.Size = new System.Drawing.Size(423, 20);
@@ -635,10 +595,10 @@
             // 
             // DataFilename
             // 
-            this.DataFilename.Location = new System.Drawing.Point(138, 18);
+            this.DataFilename.Location = new System.Drawing.Point(137, 20);
             this.DataFilename.Name = "DataFilename";
             this.DataFilename.ReadOnly = true;
-            this.DataFilename.Size = new System.Drawing.Size(416, 20);
+            this.DataFilename.Size = new System.Drawing.Size(423, 20);
             this.DataFilename.TabIndex = 24;
             // 
             // TowerDataGroupBox
@@ -653,124 +613,36 @@
             this.TowerDataGroupBox.Controls.Add(this.TowerTypeLabel);
             this.TowerDataGroupBox.Controls.Add(this.ProjectNameField);
             this.TowerDataGroupBox.Controls.Add(this.OwnerNameField);
-            this.TowerDataGroupBox.Location = new System.Drawing.Point(17, 52);
+            this.TowerDataGroupBox.Location = new System.Drawing.Point(3, 52);
             this.TowerDataGroupBox.Name = "TowerDataGroupBox";
-            this.TowerDataGroupBox.Size = new System.Drawing.Size(574, 162);
+            this.TowerDataGroupBox.Size = new System.Drawing.Size(574, 151);
             this.TowerDataGroupBox.TabIndex = 25;
             this.TowerDataGroupBox.TabStop = false;
             this.TowerDataGroupBox.Text = "Tower Data";
             // 
-            // dataGridView1
+            // DataGridView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(17, 571);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(729, 150);
-            this.dataGridView1.TabIndex = 26;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(15, 231);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(70, 20);
-            this.textBox1.TabIndex = 21;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(15, 21);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(70, 20);
-            this.textBox2.TabIndex = 14;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(15, 51);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(70, 20);
-            this.textBox3.TabIndex = 15;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(15, 81);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(70, 20);
-            this.textBox4.TabIndex = 16;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(15, 111);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(70, 20);
-            this.textBox5.TabIndex = 17;
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(15, 141);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(70, 20);
-            this.textBox6.TabIndex = 18;
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(15, 201);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(70, 20);
-            this.textBox7.TabIndex = 20;
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(15, 171);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(70, 20);
-            this.textBox8.TabIndex = 19;
-            // 
-            // AddTestPointName
-            // 
-            this.AddTestPointName.Enabled = false;
-            this.AddTestPointName.Location = new System.Drawing.Point(304, 7);
-            this.AddTestPointName.Name = "AddTestPointName";
-            this.AddTestPointName.Size = new System.Drawing.Size(233, 20);
-            this.AddTestPointName.TabIndex = 33;
-            // 
-            // AddTestPointButton
-            // 
-            this.AddTestPointButton.Enabled = false;
-            this.AddTestPointButton.Location = new System.Drawing.Point(544, 7);
-            this.AddTestPointButton.Name = "AddTestPointButton";
-            this.AddTestPointButton.Size = new System.Drawing.Size(110, 23);
-            this.AddTestPointButton.TabIndex = 34;
-            this.AddTestPointButton.Text = "Add Test Point";
-            this.AddTestPointButton.UseVisualStyleBackColor = true;
-            this.AddTestPointButton.Click += new System.EventHandler(this.AddTestPointButton_Click);
+            this.DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridView.Location = new System.Drawing.Point(3, 526);
+            this.DataGridView.Name = "DataGridView";
+            this.DataGridView.Size = new System.Drawing.Size(810, 129);
+            this.DataGridView.TabIndex = 26;
             // 
             // MechanicalDraftPerformanceCurveTabPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.DataGridView);
             this.Controls.Add(this.TowerDataGroupBox);
-            this.Controls.Add(this.ColdWaterTemperatureDeviationUnitLabel);
             this.Controls.Add(this.DataFilename);
-            this.Controls.Add(this.TowerCapabilityUnitLabel);
             this.Controls.Add(this.DesignDataButton);
-            this.Controls.Add(this.PredictedFlowRateUnitLabel);
             this.Controls.Add(this.TestResultsGroupBox);
-            this.Controls.Add(this.AdjustedFlowRateUnitLabel);
             this.Controls.Add(this.ViewGraph);
-            this.Controls.Add(this.ColdWaterTemperatureDeviation);
             this.Controls.Add(this.Calculate);
-            this.Controls.Add(this.ColdWaterTemperatureDeviationLabel);
             this.Controls.Add(this.DataFileLabel);
-            this.Controls.Add(this.TowerCapability);
-            this.Controls.Add(this.AdjustedFlowRateLabel);
-            this.Controls.Add(this.TowerCapabilityLabel);
             this.Controls.Add(this.UnitsLiquidToGasRatio);
-            this.Controls.Add(this.PredictedFlowRate);
-            this.Controls.Add(this.AdjustedFlowRate);
-            this.Controls.Add(this.PredictedFlowRateLabel);
             this.Name = "MechanicalDraftPerformanceCurveTabPage";
-            this.Size = new System.Drawing.Size(1199, 720);
+            this.Size = new System.Drawing.Size(819, 662);
             this.TestResultsGroupBox.ResumeLayout(false);
             this.TestResultsGroupBox.PerformLayout();
             this.TestPointTabControl.ResumeLayout(false);
@@ -781,7 +653,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.TowerDataGroupBox.ResumeLayout(false);
             this.TowerDataGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -834,22 +706,10 @@
         private System.Windows.Forms.TextBox OwnerNameField;
         private System.Windows.Forms.TextBox DataFilename;
         private System.Windows.Forms.GroupBox TowerDataGroupBox;
-        private System.Windows.Forms.Label ColdWaterTemperatureDeviationUnitLabel;
-        private System.Windows.Forms.Label TowerCapabilityUnitLabel;
-        private System.Windows.Forms.Label PredictedFlowRateUnitLabel;
-        private System.Windows.Forms.Label AdjustedFlowRateUnitLabel;
-        private System.Windows.Forms.TextBox ColdWaterTemperatureDeviation;
-        private System.Windows.Forms.Label ColdWaterTemperatureDeviationLabel;
-        private System.Windows.Forms.TextBox TowerCapability;
-        private System.Windows.Forms.Label TowerCapabilityLabel;
-        private System.Windows.Forms.TextBox PredictedFlowRate;
-        private System.Windows.Forms.Label PredictedFlowRateLabel;
-        private System.Windows.Forms.TextBox AdjustedFlowRate;
-        private System.Windows.Forms.Label AdjustedFlowRateLabel;
         private System.Windows.Forms.TabControl TestPointTabControl;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView DataGridView;
         private System.Windows.Forms.Button AddTestPointButton;
         private System.Windows.Forms.TextBox AddTestPointName;
         private System.Windows.Forms.TextBox textBox1;

@@ -45,7 +45,7 @@
             // LiquidToGasRatio
             // 
             this.LiquidToGasRatio.Enabled = false;
-            this.LiquidToGasRatio.Location = new System.Drawing.Point(13, 229);
+            this.LiquidToGasRatio.Location = new System.Drawing.Point(13, 201);
             this.LiquidToGasRatio.Name = "LiquidToGasRatio";
             this.LiquidToGasRatio.Size = new System.Drawing.Size(70, 20);
             this.LiquidToGasRatio.TabIndex = 7;
@@ -63,7 +63,7 @@
             // 
             // HotWaterTemperature
             // 
-            this.HotWaterTemperature.Location = new System.Drawing.Point(13, 49);
+            this.HotWaterTemperature.Location = new System.Drawing.Point(13, 45);
             this.HotWaterTemperature.Name = "HotWaterTemperature";
             this.HotWaterTemperature.Size = new System.Drawing.Size(70, 20);
             this.HotWaterTemperature.TabIndex = 1;
@@ -72,7 +72,7 @@
             // 
             // ColdWaterTemperature
             // 
-            this.ColdWaterTemperature.Location = new System.Drawing.Point(13, 79);
+            this.ColdWaterTemperature.Location = new System.Drawing.Point(13, 71);
             this.ColdWaterTemperature.Name = "ColdWaterTemperature";
             this.ColdWaterTemperature.Size = new System.Drawing.Size(70, 20);
             this.ColdWaterTemperature.TabIndex = 2;
@@ -81,7 +81,7 @@
             // 
             // WetBulbTemperature
             // 
-            this.WetBulbTemperature.Location = new System.Drawing.Point(13, 109);
+            this.WetBulbTemperature.Location = new System.Drawing.Point(13, 97);
             this.WetBulbTemperature.Name = "WetBulbTemperature";
             this.WetBulbTemperature.Size = new System.Drawing.Size(70, 20);
             this.WetBulbTemperature.TabIndex = 3;
@@ -90,7 +90,7 @@
             // 
             // DryBulbTemperature
             // 
-            this.DryBulbTemperature.Location = new System.Drawing.Point(13, 139);
+            this.DryBulbTemperature.Location = new System.Drawing.Point(13, 123);
             this.DryBulbTemperature.Name = "DryBulbTemperature";
             this.DryBulbTemperature.Size = new System.Drawing.Size(70, 20);
             this.DryBulbTemperature.TabIndex = 4;
@@ -99,7 +99,7 @@
             // 
             // BarometricPressure
             // 
-            this.BarometricPressure.Location = new System.Drawing.Point(13, 199);
+            this.BarometricPressure.Location = new System.Drawing.Point(13, 175);
             this.BarometricPressure.Name = "BarometricPressure";
             this.BarometricPressure.Size = new System.Drawing.Size(70, 20);
             this.BarometricPressure.TabIndex = 6;
@@ -108,7 +108,7 @@
             // 
             // FanDriverPower
             // 
-            this.FanDriverPower.Location = new System.Drawing.Point(13, 169);
+            this.FanDriverPower.Location = new System.Drawing.Point(13, 149);
             this.FanDriverPower.Name = "FanDriverPower";
             this.FanDriverPower.Size = new System.Drawing.Size(70, 20);
             this.FanDriverPower.TabIndex = 5;
@@ -132,7 +132,7 @@
             this.Controls.Add(this.WetBulbTemperature);
             this.Controls.Add(this.DryBulbTemperature);
             this.Name = "TestPointUserControl";
-            this.Size = new System.Drawing.Size(125, 266);
+            this.Size = new System.Drawing.Size(125, 230);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

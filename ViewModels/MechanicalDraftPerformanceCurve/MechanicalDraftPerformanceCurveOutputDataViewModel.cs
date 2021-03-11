@@ -1,6 +1,7 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 
 using Models;
+using System.Data;
 
 namespace ViewModels
 {
@@ -33,6 +34,11 @@ namespace ViewModels
             NameValueUnitsDataTable.AddRow("Predicted Flow", data.PredictedFlow.ToString("F1"), Units.FlowRate);
             NameValueUnitsDataTable.AddRow("Tower Capability", data.TowerCapability.ToString("F2"), ConstantUnits.Percentage);
             NameValueUnitsDataTable.AddRow("Cold Water Temperature Deviation", data.ColdWaterTemperatureDeviation.ToString("1"), Units.Temperature);
+        }
+
+        public DataTable GetDataTable()
+        {
+            return NameValueUnitsDataTable.DataTable;
         }
     }
 }

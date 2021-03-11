@@ -2,7 +2,6 @@
 
 using Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Text;
@@ -171,20 +170,20 @@ namespace CTIToolkit
 
             try
             {
-                TabPage tabPage = new TabPage();
-
-                RangedTemperatureDesignUserControl towerDesignCurveDataUserControl = new RangedTemperatureDesignUserControl(IsDemo, IsInternationalSystemOfUnits_SI);
-                towerDesignCurveDataUserControl.Dock = DockStyle.Fill;
-                towerDesignCurveDataUserControl.RangedColdWaterTemperatureVisibility(TowerDesignData.CountRanges());
-                towerDesignCurveDataUserControl.RangedColdWaterTemperatureEnable(towerDesignCurveData.CountWetBulbTemperatures());
-                towerDesignCurveDataUserControl.RangedTemperatureDesignViewModel = towerDesignCurveData;
-                tabPage.Text = towerDesignCurveData.WaterFlowRateDataValueInputValue;
-                tabPage.Controls.Add(towerDesignCurveDataUserControl);
-                if (!towerDesignCurveDataUserControl.Setup(out errorMessage))
+                RangedTemperatureDesignUserControlTabPage tabPage = new RangedTemperatureDesignUserControlTabPage(new RangedTemperatureDesignUserControl(IsDemo, IsInternationalSystemOfUnits_SI));
+                tabPage.UserControl.Dock = DockStyle.Fill;
+                tabPage.UserControl.RangeVisible(1, (TowerDesignData.Range1Value.Current != 0.0));
+                tabPage.UserControl.RangeVisible(2, (TowerDesignData.Range2Value.Current != 0.0));
+                tabPage.UserControl.RangeVisible(3, (TowerDesignData.Range3Value.Current != 0.0));
+                tabPage.UserControl.RangeVisible(4, (TowerDesignData.Range4Value.Current != 0.0));
+                tabPage.UserControl.RangeVisible(5, (TowerDesignData.Range5Value.Current != 0.0));
+                //tabPage.UserControl.ColdWaterTemperaturesVisible();
+                tabPage.UserControl.TowerDesignCurveData = towerDesignCurveData;
+                tabPage.Text = towerDesignCurveData.WaterFlowRateDataValue.InputValue;
+                if (!tabPage.UserControl.Setup(out errorMessage))
                 {
 
                 }
-
                 TowerDesignDataTabControl.TabPages.Add(tabPage);
             }
             catch (Exception e)
@@ -440,13 +439,9 @@ namespace CTIToolkit
         {
             errorProvider1.SetError(Range1, "");
 
-            if (TowerDesignData.Range2Value.Current == 0.0)
+            foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
             {
-                // disable range 2 values
-            }
-            else
-            {
-
+                tabPage.UserControl.RangeVisible(1, (TowerDesignData.Range1Value.Current != 0.0));
             }
         }
 
@@ -486,13 +481,9 @@ namespace CTIToolkit
         private void Range2_Validated(object sender, EventArgs e)
         {
             errorProvider1.SetError(Range2, "");
-            if (TowerDesignData.Range2Value.Current == 0.0)
+            foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
             {
-                // disable range 2 values
-            }
-            else
-            {
-
+                tabPage.UserControl.RangeVisible(2, (TowerDesignData.Range2Value.Current != 0.0));
             }
         }
 
@@ -532,6 +523,10 @@ namespace CTIToolkit
         private void Range3_Validated(object sender, EventArgs e)
         {
             errorProvider1.SetError(Range3, "");
+            foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
+            {
+                tabPage.UserControl.RangeVisible(3, (TowerDesignData.Range3Value.Current != 0.0));
+            }
         }
 
         private void Range3_Validating(object sender, CancelEventArgs e)
@@ -566,6 +561,10 @@ namespace CTIToolkit
         private void Range4_Validated(object sender, EventArgs e)
         {
             errorProvider1.SetError(Range4, "");
+            foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
+            {
+                tabPage.UserControl.RangeVisible(4, (TowerDesignData.Range4Value.Current != 0.0));
+            }
         }
 
         private void Range4_Validating(object sender, CancelEventArgs e)
@@ -600,6 +599,10 @@ namespace CTIToolkit
         private void Range5_Validated(object sender, EventArgs e)
         {
             errorProvider1.SetError(Range5, "");
+            foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
+            {
+                tabPage.UserControl.RangeVisible(5, (TowerDesignData.Range5Value.Current != 0.0));
+            }
         }
 
         private void Range5_Validating(object sender, CancelEventArgs e)
@@ -686,7 +689,7 @@ namespace CTIToolkit
             {
                 rangedTemperaturesDesignData.WaterFlowRate = waterFlowRateDataValue.Current;
 
-                if (!towerDesignCurveData.LoadData(IsInternationalSystemOfUnits_SI, rangedTemperaturesDesignData, out errorMessage))
+                if (!towerDesignCurveData.LoadData(rangedTemperaturesDesignData, out errorMessage))
                 {
                     MessageBox.Show(errorMessage);
                 }
@@ -714,13 +717,19 @@ namespace CTIToolkit
             if(IsChanged)
             {
                 // Are you sure?
-                MessageBox.Show("Are you sure you want to discard your changes?");
+                var result = MessageBox.Show("Are you sure you want to discard your changes?", "Cancel Updates",
+                                                 MessageBoxButtons.YesNo,
+                                                 MessageBoxIcon.Question);
 
-                // you could create your own class here and pass the object to your main form if you wanted
-                FormClosingEventArgs eventArgs = new FormClosingEventArgs(CloseReason.None, false);
+                // If the yes button was pressed ...
+                if (result == DialogResult.Yes)
+                {
+                    // you could create your own class here and pass the object to your main form if you wanted
+                    FormClosingEventArgs eventArgs = new FormClosingEventArgs(CloseReason.UserClosing, false);
 
-                // tell host form to close itself
-                CloseFormEvent(this, eventArgs);
+                    // tell host form to close itself
+                    CloseFormEvent(this, eventArgs);
+                }
             }
         }
 

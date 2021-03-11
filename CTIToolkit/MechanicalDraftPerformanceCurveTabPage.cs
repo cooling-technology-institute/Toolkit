@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -477,18 +478,29 @@ namespace CTIToolkit
         {
             string errorMessage = string.Empty;
 
-//            if(MechanicalDraftPerformanceCurveViewModel.CalculatePerformanceCurve(TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel, out errorMessage))
-//            {
-//                if (MechanicalDraftPerformanceCurveViewModel.GetDataTable() != null)
-//                {
-//                    // Set a DataGrid control's DataSource to the DataView.
-////                    MechanicalDraftPerformanceCurveGridView.DataSource = new DataView(MechanicalDraftPerformanceCurveViewModel.GetDataTable());
-//                }
-//            }
-//            else
-//            {
-//                MessageBox.Show(errorMessage, "Mechanical Draft Performance Curve Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-//            }
+            if (MechanicalDraftPerformanceCurveViewModel.GetDataTable() != null)
+            {
+                DataGridView.DataSource = null;
+            }
+
+            if (MechanicalDraftPerformanceCurveViewModel.GetDataTable() != null)
+            {
+                // Set a DataGrid control's DataSource to the DataView.
+                DataGridView.DataSource = new DataView(MechanicalDraftPerformanceCurveViewModel.GetDataTable());
+            }
+
+            //            if(MechanicalDraftPerformanceCurveViewModel.CalculatePerformanceCurve(TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel, out errorMessage))
+            //            {
+            //                if (MechanicalDraftPerformanceCurveViewModel.GetDataTable() != null)
+            //                {
+            //                    // Set a DataGrid control's DataSource to the DataView.
+            ////                    MechanicalDraftPerformanceCurveGridView.DataSource = new DataView(MechanicalDraftPerformanceCurveViewModel.GetDataTable());
+            //                }
+            //            }
+            //            else
+            //            {
+            //                MessageBox.Show(errorMessage, "Mechanical Draft Performance Curve Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //            }
         }
 
         private void ViewGraph_Click(object sender, EventArgs e)

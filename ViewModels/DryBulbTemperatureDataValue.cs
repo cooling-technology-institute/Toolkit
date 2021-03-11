@@ -21,7 +21,7 @@ namespace ViewModels
         public const double DryBulbTemperatureDefault_InternationalSystemOfUnits_IS_Demo = 26.67;
         public const double DryBulbTemperatureMinimum_InternationalSystemOfUnits_IS_Demo = 24.0;
         public const double DryBulbTemperatureMaximum_InternationalSystemOfUnits_IS_Demo = 27.0;
-        public const string DryBulbTemperatureToolTipFormat = "Dry Bulb Temperature (DBT).\nValue should be between {0} and {1}.\nValue should be less than the Wet Bulb Temperature.";
+        public const string DryBulbTemperatureToolTipFormat = "Dry Bulb Temperature (DBT).\nValue should be between {0} and {1}.\nValue should be greater than the Wet Bulb Temperature.";
 
         public DryBulbTemperatureDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {

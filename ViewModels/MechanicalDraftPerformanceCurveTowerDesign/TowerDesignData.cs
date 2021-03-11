@@ -84,6 +84,8 @@ namespace ViewModels
 
             AddWaterFlowRateDataValue = new WaterFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
 
+            TowerDesignCurveData = new List<TowerDesignCurveData>();
+
             RangeOrder = Order.Ascending;
             WaterFlowRateOrder = Order.Ascending;
         }
@@ -212,6 +214,20 @@ namespace ViewModels
                 }
 
                 CountRanges();
+
+                TowerDesignCurveData.Clear();
+                foreach (RangedTemperaturesDesignData rangedTemperaturesDesignData in data.RangedTemperaturesDesignData)
+                {
+                    TowerDesignCurveData towerDesignCurveData = new TowerDesignCurveData(IsDemo, IsInternationalSystemOfUnits_SI);
+                    if (!towerDesignCurveData.LoadData(rangedTemperaturesDesignData, out errorMessage))
+                    {
+                        returnValue = false;
+                        stringBuilder.AppendLine(label + errorMessage);
+                        errorMessage = string.Empty;
+                    }
+                    TowerDesignCurveData.Add(towerDesignCurveData);
+                }
+
             }
             catch (Exception e)
             {
@@ -238,7 +254,7 @@ namespace ViewModels
             }
             if(Range2Value.Current != 0.0)
             {
-                if(Range2Value.Current < testValue)
+                if(Range2Value.Current <= testValue)
                 {
                     inOrder = false;
                 }
@@ -249,7 +265,7 @@ namespace ViewModels
             }
             if (Range3Value.Current != 0.0)
             {
-                if (Range3Value.Current < testValue)
+                if (Range3Value.Current <= testValue)
                 {
                     inOrder = false;
                 }
@@ -260,7 +276,7 @@ namespace ViewModels
             }
             if (Range4Value.Current != 0.0)
             {
-                if (Range4Value.Current < testValue)
+                if (Range4Value.Current <= testValue)
                 {
                     inOrder = false;
                 }
@@ -271,7 +287,7 @@ namespace ViewModels
             }
             if (Range5Value.Current != 0.0)
             {
-                if (Range5Value.Current < testValue)
+                if (Range5Value.Current <= testValue)
                 {
                     inOrder = false;
                 }
@@ -290,7 +306,7 @@ namespace ViewModels
         public bool ValidDescendingOrder()
         {
             bool inOrder = true;
-
+    
             double testValue = 0.0;
 
             if (Range1Value.Current != testValue)
@@ -299,7 +315,7 @@ namespace ViewModels
             }
             if (Range2Value.Current != 0.0)
             {
-                if (Range2Value.Current < testValue)
+                if (Range2Value.Current <= testValue)
                 {
                     inOrder = false;
                 }
@@ -310,7 +326,7 @@ namespace ViewModels
             }
             if (Range3Value.Current != 0.0)
             {
-                if (Range3Value.Current < testValue)
+                if (Range3Value.Current <= testValue)
                 {
                     inOrder = false;
                 }
@@ -321,7 +337,7 @@ namespace ViewModels
             }
             if (Range4Value.Current != 0.0)
             {
-                if (Range4Value.Current < testValue)
+                if (Range4Value.Current <= testValue)
                 {
                     inOrder = false;
                 }
@@ -332,7 +348,7 @@ namespace ViewModels
             }
             if (Range5Value.Current != 0.0)
             {
-                if (Range5Value.Current < testValue)
+                if (Range5Value.Current <= testValue)
                 {
                     inOrder = false;
                 }
