@@ -243,7 +243,7 @@
             this.Range5GroupBox.Location = new System.Drawing.Point(450, 18);
             this.Range5GroupBox.Name = "Range5GroupBox";
             this.Range5GroupBox.Size = new System.Drawing.Size(104, 168);
-            this.Range5GroupBox.TabIndex = 0;
+            this.Range5GroupBox.TabIndex = 4;
             this.Range5GroupBox.TabStop = false;
             this.Range5GroupBox.Text = "Range 5";
             // 
@@ -300,7 +300,7 @@
             this.Range4GroupBox.Location = new System.Drawing.Point(341, 18);
             this.Range4GroupBox.Name = "Range4GroupBox";
             this.Range4GroupBox.Size = new System.Drawing.Size(104, 168);
-            this.Range4GroupBox.TabIndex = 0;
+            this.Range4GroupBox.TabIndex = 3;
             this.Range4GroupBox.TabStop = false;
             this.Range4GroupBox.Text = "Range 4";
             // 
@@ -357,7 +357,7 @@
             this.Range3GroupBox.Location = new System.Drawing.Point(232, 18);
             this.Range3GroupBox.Name = "Range3GroupBox";
             this.Range3GroupBox.Size = new System.Drawing.Size(104, 168);
-            this.Range3GroupBox.TabIndex = 0;
+            this.Range3GroupBox.TabIndex = 2;
             this.Range3GroupBox.TabStop = false;
             this.Range3GroupBox.Text = "Range 3";
             // 
@@ -414,7 +414,7 @@
             this.Range2GroupBox.Location = new System.Drawing.Point(123, 18);
             this.Range2GroupBox.Name = "Range2GroupBox";
             this.Range2GroupBox.Size = new System.Drawing.Size(104, 168);
-            this.Range2GroupBox.TabIndex = 0;
+            this.Range2GroupBox.TabIndex = 1;
             this.Range2GroupBox.TabStop = false;
             this.Range2GroupBox.Text = "Range 2";
             // 

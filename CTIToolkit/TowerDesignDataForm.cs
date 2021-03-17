@@ -34,23 +34,45 @@ namespace CTIToolkit
             }
         }
 
-        private void TowerDesignDataOkButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TowerDesignDataCancelButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AddFlowRateButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void TowerDesignDataForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            bool isChanged = false;
+
+            if (e.CloseReason == CloseReason.None)
+            {
+                foreach (Control control in Controls)
+                {
+                    if (control is TowerDesignDataUserControl)
+                    {
+                        isChanged |= ((TowerDesignDataUserControl)control).HasDataChanged;
+                    }
+                }
+
+                if (isChanged)
+                {
+                    // Are you sure?
+                    var result = MessageBox.Show("Are you sure you want to discard your changes?", "Cancel Updates",
+                                                     MessageBoxButtons.YesNo,
+                                                     MessageBoxIcon.Question);
+
+                    // If the yes button was pressed ...
+                    if (result == DialogResult.No)
+                    {
+                        e.Cancel = true;
+                    }
+                    else
+                    {
+                        foreach (Control control in Controls)
+                        {
+                            if (control is TowerDesignDataUserControl)
+                            {
+                                ((TowerDesignDataUserControl)control).ClearIsChanged();
+                            }
+                        }
+                    }
+                }
+
+            }
         }
     }
 }

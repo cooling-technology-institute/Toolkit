@@ -10,7 +10,7 @@ using ViewModels;
 
 namespace CTIToolkit
 {
-    public partial class MerkelTabPage: UserControl
+    public partial class MerkelTabPage: CalculatePrintUserControl
     {
         private MerkelViewModel MerkelViewModel { get; set; }
         private bool IsDemo { get; set; }
@@ -26,7 +26,7 @@ namespace CTIToolkit
 
             Setup();
 
-            CalculateMerkel();
+            Calculate();
 
         }
 
@@ -107,7 +107,7 @@ namespace CTIToolkit
             }
         }
 
-        private void CalculateMerkel()
+        public override void Calculate()
         {
             string errorMessage = string.Empty;
             try
@@ -136,9 +136,13 @@ namespace CTIToolkit
             }
         }
 
-        private void MerkelCalculate_Click(object sender, EventArgs e)
+        public override void Print()
         {
-            CalculateMerkel();
+        }
+
+        public void MerkelCalculate_Click(object sender, EventArgs e)
+        {
+            Calculate();
         }
 
         private void Merkel_LiquidtoGasRatio_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)

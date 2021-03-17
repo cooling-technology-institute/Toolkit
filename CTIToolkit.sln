@@ -8,9 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{0543EE4D-7322-439D-9BF1-F820AC4D2139}"
 	ProjectSection(SolutionItems) = preProject
 		Data\Appendix C.bbp = Data\Appendix C.bbp
-		Data\Appendix C.json = Data\Appendix C.json
+		Data\Appendix C.mdpc = Data\Appendix C.mdpc
 		Data\Appendix D.bbp = Data\Appendix D.bbp
-		Data\Appendix D.json = Data\Appendix D.json
+		Data\Appendix D.mdpc = Data\Appendix D.mdpc
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{70534718-9183-4478-9FB7-410936784EBB}"

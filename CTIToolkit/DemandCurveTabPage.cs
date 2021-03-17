@@ -10,7 +10,7 @@ using ViewModels;
 
 namespace CTIToolkit
 {
-    public partial class DemandCurveTabPage : UserControl
+    public partial class DemandCurveTabPage : CalculatePrintUserControl
     {
         const int INDEX_TARGETAPPROACH = 18;
         const int INDEX_USERAPPROACH = 19;
@@ -86,7 +86,7 @@ namespace CTIToolkit
             toolTip1.SetToolTip(DemandCurve_LiquidToGasRatio_Value, DemandCurveViewModel.LiquidToGasRatioDataValueTooltip);
         }
 
-        private void CalculateDemandCurve()
+        public override void Calculate()
         {
             try
             {
@@ -230,9 +230,13 @@ namespace CTIToolkit
             }
         }
 
-        private void DemandCurveCalculate_Click(object sender, EventArgs e)
+        public override void Print()
         {
-            CalculateDemandCurve();
+        }
+
+        public void DemandCurveCalculate_Click(object sender, EventArgs e)
+        {
+            Calculate();
         }
 
         private void DemandCurveChart_Click(object sender, EventArgs e)

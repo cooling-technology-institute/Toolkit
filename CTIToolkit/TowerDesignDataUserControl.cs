@@ -10,13 +10,26 @@ using ViewModels;
 
 namespace CTIToolkit
 {
-    public partial class TowerDesignDataUserControl : UserControl
+    public partial class TowerDesignDataUserControl : CalculatePrintUserControl
     {
         public event FormClosingEventHandler CloseFormEvent;
 
         public TowerDesignData TowerDesignData { get; set; }
 
-        public bool IsChanged { get; set; }
+        private bool IsChanged { get; set; }
+
+        public bool HasDataChanged 
+        {
+            get 
+            { 
+                return IsChanged || HasTabPageChanged();
+            }
+            //set 
+            //{ 
+            //    IsChanged = value;
+            //}
+        } 
+
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_SI { get; set; }
 
@@ -656,26 +669,6 @@ namespace CTIToolkit
 
         #endregion Validating
 
-        private void SaveButton_Click(object sender, EventArgs e)
-        {
-            // save data to file?
-
-            // you could create your own class here and pass the object to your main form if you wanted
-            FormClosingEventArgs eventArgs = new FormClosingEventArgs(CloseReason.UserClosing, false);
-
-            // tell host form to close itself
-            CloseFormEvent(this, eventArgs);
-        }
-
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
-            // you could create your own class here and pass the object to your main form if you wanted
-            FormClosingEventArgs eventArgs = new FormClosingEventArgs(CloseReason.None, false);
-
-            // tell host form to close itself
-            CloseFormEvent(this, eventArgs);
-        }
-
         private void AddWaterFlowRate()
         {
             string errorMessage = string.Empty;
@@ -707,14 +700,44 @@ namespace CTIToolkit
             AddWaterFlowRate();
         }
 
-        private void OkButton_Click(object sender, EventArgs e)
+        public bool HasTabPageChanged()
         {
-
+            bool isChanged = false;
+            foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
+            {
+                if (tabPage.UserControl.IsChanged)
+                {
+                    isChanged = true;
+                }
+            }
+            return isChanged;
         }
 
-        private void TowerDesignDataCancelButton_Click(object sender, EventArgs e)
+        public void ClearIsChanged()
         {
-            if(IsChanged)
+            IsChanged = false;
+            foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
+            {
+                tabPage.UserControl.IsChanged = false;
+            }
+        }
+
+        private void OkButton_Click(object sender, EventArgs e)
+        {
+            IsChanged |= HasTabPageChanged();
+
+           // you could create your own class here and pass the object to your main form if you wanted
+            FormClosingEventArgs eventArgs = new FormClosingEventArgs(CloseReason.UserClosing, false);
+
+            // tell host form to close itself
+            CloseFormEvent(this, eventArgs);
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            IsChanged |= HasTabPageChanged();
+
+            if (IsChanged)
             {
                 // Are you sure?
                 var result = MessageBox.Show("Are you sure you want to discard your changes?", "Cancel Updates",
@@ -725,10 +748,12 @@ namespace CTIToolkit
                 if (result == DialogResult.Yes)
                 {
                     // you could create your own class here and pass the object to your main form if you wanted
-                    FormClosingEventArgs eventArgs = new FormClosingEventArgs(CloseReason.UserClosing, false);
+                    FormClosingEventArgs eventArgs = new FormClosingEventArgs(CloseReason.None, false);
 
                     // tell host form to close itself
                     CloseFormEvent(this, eventArgs);
+
+                    ClearIsChanged();
                 }
             }
         }
@@ -741,11 +766,19 @@ namespace CTIToolkit
         private void TypeInduced_CheckedChanged(object sender, EventArgs e)
         {
             IsChanged = true;
+            if (TowerTypeInduced.Checked)
+            {
+                TowerDesignData.TowerTypeValue = TOWER_TYPE.Induced;
+            }
         }
 
         private void TypeForced_CheckedChanged(object sender, EventArgs e)
         {
             IsChanged = true;
+            if(TowerTypeForced.Checked)
+            {
+                TowerDesignData.TowerTypeValue = TOWER_TYPE.Forced;
+            }
         }
 
         private void TowerDesignDataTabControl_MouseUp(object sender, MouseEventArgs e)
@@ -818,6 +851,30 @@ namespace CTIToolkit
         {
             CustomMenuItem customMenuItem = sender as CustomMenuItem;
             TowerDesignDataTabControl.TabPages.Remove(TowerDesignDataTabControl.TabPages[customMenuItem.TabIndex]);
+        }
+
+        private void OwnerName_TextChanged(object sender, EventArgs e)
+        {
+            IsChanged = true;
+            TowerDesignData.OwnerNameValue = OwnerName.Text;
+        }
+
+        private void ProjectName_TextChanged(object sender, EventArgs e)
+        {
+            IsChanged = true;
+            TowerDesignData.ProjectNameValue = ProjectName.Text;
+        }
+
+        private void TowerLocation_TextChanged(object sender, EventArgs e)
+        {
+            IsChanged = true;
+            TowerDesignData.LocationValue = TowerLocation.Text;
+        }
+
+        private void TowerManufacturer_TextChanged(object sender, EventArgs e)
+        {
+            IsChanged = true;
+            TowerDesignData.TowerManufacturerValue = TowerManufacturer.Text;
         }
     }
 }

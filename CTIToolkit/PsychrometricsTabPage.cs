@@ -8,7 +8,7 @@ using ViewModels;
 
 namespace CTIToolkit
 {
-    public partial class PsychrometricsTabPage: UserControl
+    public partial class PsychrometricsTabPage: CalculatePrintUserControl
     {
         PsychrometricsViewModel PsychrometricsViewModel { get; set; }
         private bool IsDemo { get; set; }
@@ -249,7 +249,15 @@ namespace CTIToolkit
             }
         }
 
-        private void PsychrometricsCalculate_Click(object sender, EventArgs e)
+        public override void Calculate()
+        {
+        }
+
+        public override void Print()
+        {
+        }
+
+        public void PsychrometricsCalculate_Click(object sender, EventArgs e)
         {
             string errorMessage = string.Empty;
             ClearDataSource();

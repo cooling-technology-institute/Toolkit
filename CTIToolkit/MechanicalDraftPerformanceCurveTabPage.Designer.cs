@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.DataFileLabel = new System.Windows.Forms.Label();
-            this.Calculate = new System.Windows.Forms.Button();
+            this.CalculateButton = new System.Windows.Forms.Button();
             this.ViewGraph = new System.Windows.Forms.Button();
             this.OwnerNameLabel = new System.Windows.Forms.Label();
             this.ProjectNameLabel = new System.Windows.Forms.Label();
@@ -108,14 +108,14 @@
             // 
             // Calculate
             // 
-            this.Calculate.Enabled = false;
-            this.Calculate.Location = new System.Drawing.Point(597, 18);
-            this.Calculate.Name = "Calculate";
-            this.Calculate.Size = new System.Drawing.Size(74, 23);
-            this.Calculate.TabIndex = 3;
-            this.Calculate.Text = "Calculate";
-            this.Calculate.UseVisualStyleBackColor = true;
-            this.Calculate.Click += new System.EventHandler(this.Calculate_Click);
+            this.CalculateButton.Enabled = false;
+            this.CalculateButton.Location = new System.Drawing.Point(597, 18);
+            this.CalculateButton.Name = "Calculate";
+            this.CalculateButton.Size = new System.Drawing.Size(74, 23);
+            this.CalculateButton.TabIndex = 3;
+            this.CalculateButton.Text = "Calculate";
+            this.CalculateButton.UseVisualStyleBackColor = true;
+            this.CalculateButton.Click += new System.EventHandler(this.Calculate_Click);
             // 
             // ViewGraph
             // 
@@ -638,7 +638,7 @@
             this.Controls.Add(this.DesignDataButton);
             this.Controls.Add(this.TestResultsGroupBox);
             this.Controls.Add(this.ViewGraph);
-            this.Controls.Add(this.Calculate);
+            this.Controls.Add(this.CalculateButton);
             this.Controls.Add(this.DataFileLabel);
             this.Controls.Add(this.UnitsLiquidToGasRatio);
             this.Name = "MechanicalDraftPerformanceCurveTabPage";
@@ -662,7 +662,7 @@
         #endregion
 
         private System.Windows.Forms.Label DataFileLabel;
-        private System.Windows.Forms.Button Calculate;
+        private System.Windows.Forms.Button CalculateButton;
         private System.Windows.Forms.Button ViewGraph;
         private System.Windows.Forms.Label OwnerNameLabel;
         private System.Windows.Forms.Label ProjectNameLabel;

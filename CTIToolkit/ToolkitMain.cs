@@ -20,13 +20,13 @@ namespace CTIToolkit
             ApplicationSettings.Read();
             if (ApplicationSettings.UnitsSelection == UnitsSelection.United_States_Customary_Units_IP)
             {
-                unitedStatesCustomaryUnitsIPToolStripMenuItem.Checked = true;
-                internationalSystemOfUnitsSIToolStripMenuItem.Checked = false;
+                UnitedStatesCustomaryUnitsIPMenuItem.Checked = true;
+                internationalSystemOfUnitsSIMenuItem.Checked = false;
             }
             else
             {
-                unitedStatesCustomaryUnitsIPToolStripMenuItem.Checked = false;
-                internationalSystemOfUnitsSIToolStripMenuItem.Checked = true;
+                UnitedStatesCustomaryUnitsIPMenuItem.Checked = false;
+                internationalSystemOfUnitsSIMenuItem.Checked = true;
             }
 
             PsychrometricsUserControl = new PsychrometricsTabPage(ApplicationSettings);
@@ -60,16 +60,16 @@ namespace CTIToolkit
 
         private void unitedStatesCustomaryUnitsIPToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            internationalSystemOfUnitsSIToolStripMenuItem.Checked = false;
-            unitedStatesCustomaryUnitsIPToolStripMenuItem.Checked = true;
+            internationalSystemOfUnitsSIMenuItem.Checked = false;
+            UnitedStatesCustomaryUnitsIPMenuItem.Checked = true;
             ApplicationSettings.UnitsSelection = UnitsSelection.United_States_Customary_Units_IP;
             updateSettings();
         }
 
         private void internationalSystemOfUnitsSIToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            internationalSystemOfUnitsSIToolStripMenuItem.Checked = true;
-            unitedStatesCustomaryUnitsIPToolStripMenuItem.Checked = false;
+            internationalSystemOfUnitsSIMenuItem.Checked = true;
+            UnitedStatesCustomaryUnitsIPMenuItem.Checked = false;
             ApplicationSettings.UnitsSelection = UnitsSelection.International_System_Of_Units_SI;
             updateSettings();
         }
@@ -81,17 +81,46 @@ namespace CTIToolkit
             DemandCurveUserControl.SetUnitsStandard(ApplicationSettings);
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NewFile_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
+                //                saveFileDialog.InitialDirectory = Application.UserAppDataPath;
+                saveFileDialog.Filter = "Mechanical Draft Performance Curve files (*.mdpc)|*.mdpc|All files (*.*)|*.*";
+                saveFileDialog.FilterIndex = 1;
+                saveFileDialog.DefaultExt = "mdpc";
+                saveFileDialog.OverwritePrompt = true;
+                saveFileDialog.CheckPathExists = true;
+                saveFileDialog.Title = "New Mechanical Draft Performance Curve File";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string errorMessage = string.Empty;
+
+                    if (!MechanicalDraftPerformanceCurveUserControl.OpenNewDataFile(saveFileDialog.FileName, out errorMessage))
+                    {
+                        MessageBox.Show(errorMessage);
+                    }
+                }
+            }
+        }
+
+        private void OpenMenuItem_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 //openFileDialog.InitialDirectory = Application.UserAppDataPath;
                 openFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
-                openFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
-                openFileDialog.FilterIndex = 2;
+                //MechanicalDraftPerformanceCurve .mdpc
+                openFileDialog.Filter = "Mechanical Draft Performance Curve files (*.mdpc)|*.mdpc|All files (*.*)|*.*";
+                openFileDialog.FilterIndex = 1;
                 openFileDialog.AddExtension = true;
-                openFileDialog.DefaultExt = "json";
-
+                openFileDialog.CheckFileExists = true;
+                openFileDialog.CheckPathExists = true;
+                openFileDialog.DefaultExt = "mdpc";
+                openFileDialog.Title = "Open Mechanical Draft Performance Curve File";
+                 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     string errorMessage = string.Empty;
@@ -108,27 +137,7 @@ namespace CTIToolkit
             }
         }
 
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.InitialDirectory = Application.UserAppDataPath;
-                openFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
-                openFileDialog.FilterIndex = 2;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    string errorMessage = string.Empty;
-
-                    if (!MechanicalDraftPerformanceCurveUserControl.OpenDataFile(openFileDialog.FileName, out errorMessage))
-                    {
-                        MessageBox.Show(errorMessage);
-                    }
-                }
-            }
-        }
-
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveMenuItem_Click(object sender, EventArgs e)
         {
             string errorMessage = string.Empty;
 
@@ -138,13 +147,18 @@ namespace CTIToolkit
             }
         }
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveAsMenuItem_Click(object sender, EventArgs e)
         {
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
-                saveFileDialog.InitialDirectory = Application.UserAppDataPath;
-                saveFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
-                saveFileDialog.FilterIndex = 2;
+                saveFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
+//                saveFileDialog.InitialDirectory = Application.UserAppDataPath;
+                saveFileDialog.Filter = "Mechanical Draft Performance Curve files (*.mdpc)|*.mdpc|All files (*.*)|*.*";
+                saveFileDialog.FilterIndex = 1;
+                saveFileDialog.DefaultExt = "mdpc";
+                saveFileDialog.OverwritePrompt = true;
+                saveFileDialog.CheckPathExists = true;
+                saveFileDialog.Title = "Save Mechanical Draft Performance Curve File As";
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -158,24 +172,64 @@ namespace CTIToolkit
             }
         }
 
-        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PrintMenuItem_Click(object sender, EventArgs e)
+        {
+            // determine which is the current tab call it caculate click method
+            foreach(Control control in tabControl1.TabPages[tabControl1.SelectedIndex].Controls)
+            {
+                if (control is CalculatePrintUserControl)
+                {
+                    CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
+                    calculatePrintUserControl.Print();
+                    break;
+                }
+            }
+        }
+
+        private void PrintPreviewMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void printPreviewToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PrintSetupMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void printSetupToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
+
+        private void OpenFileButton_Click(object sender, EventArgs e)
+        {
+            OpenMenuItem_Click(sender, e);
+        }
+
+        private void NewButton_Click(object sender, EventArgs e)
+        {
+            NewFile_Click(sender, e);
+        }
+
+        private void SaveFileButton_Click(object sender, EventArgs e)
+        {
+            SaveMenuItem_Click(sender, e);
+        }
+
+        private void SaveAsFileButton_Click(object sender, EventArgs e)
+        {
+            SaveAsMenuItem_Click(sender, e);
+        }
+
+        private void PrintButton_Click(object sender, EventArgs e)
+        {
+            PrintMenuItem_Click(sender, e);
+        }
+
+        private void Calculate_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

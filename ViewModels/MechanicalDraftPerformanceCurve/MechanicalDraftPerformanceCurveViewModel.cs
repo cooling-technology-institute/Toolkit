@@ -18,9 +18,11 @@ namespace ViewModels
 
         public MechanicalDraftPerformanceCurveOutputDataViewModel MechanicalDraftPerformanceCurveOutputDataViewModel { get; set; }
 
+        private MechanicalDraftPerformanceCurveFileData fileData { get; set; }
+
         public string DataFileName { get; set; }
         
-        MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData;
+        MechanicalDraftPerformanceCurveFileData MechanicalDraftPerformanceCurveFileData;
 
         public bool IsDemo { get; set; }
         public bool IsInternationalSystemOfUnits_SI { get; set; }
@@ -34,6 +36,26 @@ namespace ViewModels
             TestPoints = new List<TowerTestPoint>();
 
             MechanicalDraftPerformanceCurveOutputDataViewModel = new MechanicalDraftPerformanceCurveOutputDataViewModel(IsInternationalSystemOfUnits_SI);
+
+            BuildFilename();
+
+            fileData = new MechanicalDraftPerformanceCurveFileData(isInternationalSystemOfUnits_IS_);
+        }
+
+        public void BuildFilename()
+        {
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
+            int i = 1;
+
+            do
+            {
+                DataFileName = Path.Combine(path, string.Format("MechanicalDraftPerformanceCurve{0}.mdpc", i++));
+                if(File.Exists(DataFileName))
+                {
+                    DataFileName = string.Empty;
+                }
+
+            } while (string.IsNullOrEmpty(DataFileName));
         }
 
         public bool OpenDataFile(string fileName, out string errorMessage)
@@ -41,24 +63,54 @@ namespace ViewModels
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
 
+            DataFileName = fileName;
+
             try
             {
-                mechanicalDraftPerformanceCurveFileData = JsonConvert.DeserializeObject<MechanicalDraftPerformanceCurveFileData>(File.ReadAllText(fileName));
+                MechanicalDraftPerformanceCurveFileData = JsonConvert.DeserializeObject<MechanicalDraftPerformanceCurveFileData>(File.ReadAllText(DataFileName));
             }
             catch (Exception e)
             {
-                errorMessage = string.Format("Failure to read file: {0}. Exception: {1}", Path.GetFileName(fileName), e.ToString());
+                errorMessage = string.Format("Failure to read file: {0}. Exception: {1}", Path.GetFileName(DataFileName), e.ToString());
                 return false;
             }
 
-            if (mechanicalDraftPerformanceCurveFileData != null)
+            if (MechanicalDraftPerformanceCurveFileData != null)
             {
-                if (IsInternationalSystemOfUnits_SI != mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI)
+                if (IsInternationalSystemOfUnits_SI != MechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI)
                 {
-                    IsInternationalSystemOfUnits_SI = mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI;
+                    IsInternationalSystemOfUnits_SI = MechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI;
                 }
 
-                if (!LoadData(mechanicalDraftPerformanceCurveFileData, out errorMessage))
+                if (!LoadData(out errorMessage))
+                {
+                    stringBuilder.AppendLine(errorMessage);
+                    returnValue = false;
+                    errorMessage = string.Empty;
+                }
+
+            }
+            else
+            {
+                stringBuilder.AppendLine("Unable to load file. File contains invalid data");
+            }
+
+            errorMessage = stringBuilder.ToString();
+
+            return returnValue;
+        }
+
+        public bool OpenNewDataFile(string fileName, out string errorMessage)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            bool returnValue = true;
+
+            DataFileName = fileName;
+            MechanicalDraftPerformanceCurveFileData = new MechanicalDraftPerformanceCurveFileData(IsInternationalSystemOfUnits_SI);
+
+            if (MechanicalDraftPerformanceCurveFileData != null)
+            {
+                if (!LoadData(out errorMessage))
                 {
                     stringBuilder.AppendLine(errorMessage);
                     returnValue = false;
@@ -67,7 +119,7 @@ namespace ViewModels
             }
             else
             {
-                stringBuilder.AppendLine("Unable to load file. File contains invalid data");
+                stringBuilder.AppendLine("Unable to create new file.");
             }
 
             errorMessage = stringBuilder.ToString();
@@ -320,38 +372,34 @@ namespace ViewModels
         
         #endregion DataValue
 
-        public bool LoadData(MechanicalDraftPerformanceCurveFileData fileData, out string errorMessage)
+        public bool LoadData(out string errorMessage)
         {
             errorMessage = string.Empty;
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
 
-            if(!DesignData.LoadData(fileData.DesignData, out errorMessage))
+            if(MechanicalDraftPerformanceCurveFileData != null)
             {
-                returnValue = false;
-                stringBuilder.AppendLine(errorMessage);
-                errorMessage = string.Empty;
-            }
-
-            foreach (TowerTestData testData in fileData.TestData)
-            {
-                TowerTestPoint towerTestPoint = new TowerTestPoint(IsDemo, IsInternationalSystemOfUnits_SI);
-                if (!towerTestPoint.LoadData(IsInternationalSystemOfUnits_SI, testData, out errorMessage))
+                if (!DesignData.LoadData(MechanicalDraftPerformanceCurveFileData.DesignData, out errorMessage))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(string.Format("Test {0}: {1}", towerTestPoint.TestName, errorMessage));
+                    stringBuilder.AppendLine(errorMessage);
                     errorMessage = string.Empty;
                 }
-                TestPoints.Add(towerTestPoint);
-            }
-                //if (!TestPoint.LoadData(testIndex, fileData.TestData, out errorMessage))
-                //{
-                //    returnValue = false;
-                //    stringBuilder.AppendLine(errorMessage);
-                //    errorMessage = string.Empty;
-                //}
 
-             return returnValue;
+                foreach (TowerTestData testData in MechanicalDraftPerformanceCurveFileData.TestData)
+                {
+                    TowerTestPoint towerTestPoint = new TowerTestPoint(IsDemo, IsInternationalSystemOfUnits_SI);
+                    if (!towerTestPoint.LoadData(IsInternationalSystemOfUnits_SI, testData, out errorMessage))
+                    {
+                        returnValue = false;
+                        stringBuilder.AppendLine(string.Format("Test {0}: {1}", towerTestPoint.TestName, errorMessage));
+                        errorMessage = string.Empty;
+                    }
+                    TestPoints.Add(towerTestPoint);
+                }
+            }
+            return returnValue;
         }
 
         public bool FillAndValidate(int testIndex, MechanicalDraftPerformanceCurveFileData fileData, out string errorMessage)
