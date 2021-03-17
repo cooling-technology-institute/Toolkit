@@ -7,9 +7,9 @@ using System.Windows.Forms;
 
 namespace CTIToolkit
 {
-    public class CalculatePrintUserControl : UserControl
+    public abstract class CalculatePrintUserControl : UserControl
     {
-        public virtual void Print() { }
-        public virtual void Calculate() { }
+        public abstract void Print();
+        public abstract void Calculate();
     }
 }
