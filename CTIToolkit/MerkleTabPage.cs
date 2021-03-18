@@ -56,10 +56,10 @@ namespace CTIToolkit
         public void SetUnitsStandard(ApplicationSettings applicationSettings)
         {
             IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
-            SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_();
+            SwitchUnits();
         }
 
-        private void SwitchUnitedStatesCustomaryUnits_IP_InternationalSystemOfUnits_IS_()
+        private void SwitchUnits()
         {
             string errorMessage = string.Empty;
             if (MerkelViewModel.ConvertValues(IsInternationalSystemOfUnits_SI_, MerkleElevationRadio.Checked, out errorMessage))

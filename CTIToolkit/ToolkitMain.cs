@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CTIToolkit.Properties;
+using System;
 using System.IO;
 using System.Windows.Forms;
 
@@ -18,16 +19,7 @@ namespace CTIToolkit
             InitializeComponent();
 
             ApplicationSettings.Read();
-            if (ApplicationSettings.UnitsSelection == UnitsSelection.United_States_Customary_Units_IP)
-            {
-                UnitedStatesCustomaryUnitsIPMenuItem.Checked = true;
-                internationalSystemOfUnitsSIMenuItem.Checked = false;
-            }
-            else
-            {
-                UnitedStatesCustomaryUnitsIPMenuItem.Checked = false;
-                internationalSystemOfUnitsSIMenuItem.Checked = true;
-            }
+            UpdateUnits(ApplicationSettings.UnitsSelection);
 
             PsychrometricsUserControl = new PsychrometricsTabPage(ApplicationSettings);
             PsychrometricsUserControl.Dock = DockStyle.Top;
@@ -58,27 +50,55 @@ namespace CTIToolkit
             about.ShowDialog();
         }
 
-        private void unitedStatesCustomaryUnitsIPToolStripMenuItem_Click(object sender, EventArgs e)
+        private void UnitedStatesCustomaryUnitsIPToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            internationalSystemOfUnitsSIMenuItem.Checked = false;
-            UnitedStatesCustomaryUnitsIPMenuItem.Checked = true;
-            ApplicationSettings.UnitsSelection = UnitsSelection.United_States_Customary_Units_IP;
-            updateSettings();
+            UpdateUnits(UnitsSelection.United_States_Customary_Units_IP);
+            UpdateSettings();
         }
 
-        private void internationalSystemOfUnitsSIToolStripMenuItem_Click(object sender, EventArgs e)
+        private void InternationalSystemOfUnitsSIToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            internationalSystemOfUnitsSIMenuItem.Checked = true;
-            UnitedStatesCustomaryUnitsIPMenuItem.Checked = false;
-            ApplicationSettings.UnitsSelection = UnitsSelection.International_System_Of_Units_SI;
-            updateSettings();
+            UpdateUnits(UnitsSelection.International_System_Of_Units_SI);
+            UpdateSettings();
         }
 
-        private void updateSettings()
+        private void UnitedStatesCustomaryUnitsIPButton_Click(object sender, EventArgs e)
+        {
+            UnitedStatesCustomaryUnitsIPToolStripMenuItem_Click(sender, e);
+        }
+
+        private void InternationalSystemOfUnitsSIButton_Click(object sender, EventArgs e)
+        {
+            InternationalSystemOfUnitsSIToolStripMenuItem_Click(sender, e);
+        }
+
+        private void UpdateUnits(UnitsSelection units)
+        {
+            ApplicationSettings.UnitsSelection = units;
+            if (ApplicationSettings.UnitsSelection == UnitsSelection.United_States_Customary_Units_IP)
+            {
+                UnitedStatesCustomaryUnitsIPMenuItem.Checked = true;
+                InternationalSystemOfUnitsSIMenuItem.Checked = false;
+
+                UnitedStatesCustomaryUnitsIPButton.Image = Resources.IPselected;
+                InternationalSystemOfUnitsSIButton.Image = Resources.SI;
+            }
+            else
+            {
+                InternationalSystemOfUnitsSIMenuItem.Checked = true;
+                UnitedStatesCustomaryUnitsIPMenuItem.Checked = false;
+
+                UnitedStatesCustomaryUnitsIPButton.Image = Resources.IP;
+                InternationalSystemOfUnitsSIButton.Image = Resources.SIselected;
+            }
+        }
+
+        private void UpdateSettings()
         {
             PsychrometricsUserControl.SetUnitsStandard(ApplicationSettings);
             MerkelUserControl.SetUnitsStandard(ApplicationSettings);
             DemandCurveUserControl.SetUnitsStandard(ApplicationSettings);
+            MechanicalDraftPerformanceCurveUserControl.SetUnitsStandard(ApplicationSettings);
         }
 
         private void NewFile_Click(object sender, EventArgs e)
@@ -230,6 +250,5 @@ namespace CTIToolkit
         {
 
         }
-
     }
 }

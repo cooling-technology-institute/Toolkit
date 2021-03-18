@@ -10,7 +10,7 @@ using ViewModels;
 
 namespace CTIToolkit
 {
-    public partial class TowerDesignDataUserControl : CalculatePrintUserControl
+    public partial class TowerDesignDataUserControl : UserControl
     {
         public event FormClosingEventHandler CloseFormEvent;
 

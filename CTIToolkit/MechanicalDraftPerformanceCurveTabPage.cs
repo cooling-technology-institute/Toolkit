@@ -15,8 +15,6 @@ namespace CTIToolkit
     {
         private MechanicalDraftPerformanceCurveViewModel MechanicalDraftPerformanceCurveViewModel { get; set; }
 
-        private TowerDesignDataUserControl TowerDesignDataUserControl { get; set; }
-
         private TowerDesignDataForm TowerDesignDataForm { get; set; }
 
         private bool IsDemo { get; set; }
@@ -30,10 +28,7 @@ namespace CTIToolkit
 
             MechanicalDraftPerformanceCurveViewModel = new MechanicalDraftPerformanceCurveViewModel(IsDemo, IsInternationalSystemOfUnits_SI_);
 
-            TowerDesignDataForm = new TowerDesignDataForm();
-            TowerDesignDataUserControl = new TowerDesignDataUserControl(IsDemo, IsInternationalSystemOfUnits_SI_);
-            TowerDesignDataForm.Controls.Add(TowerDesignDataUserControl);
-            TowerDesignDataForm.AddControlEvents();
+            TowerDesignDataForm = new TowerDesignDataForm(IsDemo, IsInternationalSystemOfUnits_SI_);
 
             TestPointTabControl.TabPages.Clear();
 
@@ -45,6 +40,11 @@ namespace CTIToolkit
             }
         }
 
+        public void SetUnitsStandard(ApplicationSettings applicationSettings)
+        {
+            IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+        }
+
         public bool OpenDataFile(string fileName, out string errorMessage)
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -52,7 +52,7 @@ namespace CTIToolkit
 
             if(MechanicalDraftPerformanceCurveViewModel.OpenDataFile(fileName, out errorMessage))
             {
-                if (!TowerDesignDataUserControl.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData, out errorMessage))
+                if (!TowerDesignDataForm.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData, out errorMessage))
                 {
                     stringBuilder.AppendLine(errorMessage);
                     returnValue = false;
@@ -101,7 +101,7 @@ namespace CTIToolkit
 
             if (MechanicalDraftPerformanceCurveViewModel.OpenNewDataFile(fileName, out errorMessage))
             {
-                if (!TowerDesignDataUserControl.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData, out errorMessage))
+                if (!TowerDesignDataForm.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData, out errorMessage))
                 {
                     stringBuilder.AppendLine(errorMessage);
                     returnValue = false;
@@ -221,20 +221,20 @@ namespace CTIToolkit
             try
             {
                 // design data
-                OwnerNameField.Text = TowerDesignDataUserControl.TowerDesignData.OwnerNameValue;
-                ProjectNameField.Text = TowerDesignDataUserControl.TowerDesignData.ProjectNameValue;
-                LocationField.Text = TowerDesignDataUserControl.TowerDesignData.LocationValue;
-                TowerManufacturerField.Text = TowerDesignDataUserControl.TowerDesignData.TowerManufacturerValue;
-                TowerTypeField.Text = TowerDesignDataUserControl.TowerDesignData.TowerTypeValue.ToString();
+                OwnerNameField.Text = TowerDesignDataForm.TowerDesignData.OwnerNameValue;
+                ProjectNameField.Text = TowerDesignDataForm.TowerDesignData.ProjectNameValue;
+                LocationField.Text = TowerDesignDataForm.TowerDesignData.LocationValue;
+                TowerManufacturerField.Text = TowerDesignDataForm.TowerDesignData.TowerManufacturerValue;
+                TowerTypeField.Text = TowerDesignDataForm.TowerDesignData.TowerTypeValue.ToString();
 
-                DesignWaterFlowRate.Text = TowerDesignDataUserControl.TowerDesignData.WaterFlowRateDataValue.InputValue;
-                DesignHotWaterTemperature.Text = TowerDesignDataUserControl.TowerDesignData.HotWaterTemperatureDataValue.InputValue;
-                DesignColdWaterTemperature.Text = TowerDesignDataUserControl.TowerDesignData.ColdWaterTemperatureDataValue.InputValue;
-                DesignWetBulbTemperature.Text = TowerDesignDataUserControl.TowerDesignData.WetBulbTemperatureDataValue.InputValue;
-                DesignDryBulbTemperature.Text = TowerDesignDataUserControl.TowerDesignData.DryBulbTemperatureDataValue.InputValue;
-                DesignFanDriverPower.Text = TowerDesignDataUserControl.TowerDesignData.FanDriverPowerDataValue.InputValue;
-                DesignBarometricPressure.Text = TowerDesignDataUserControl.TowerDesignData.BarometricPressureDataValue.InputValue;
-                DesignLiquidToGasRatio.Text = TowerDesignDataUserControl.TowerDesignData.LiquidToGasRatioDataValue.InputValue;
+                DesignWaterFlowRate.Text = TowerDesignDataForm.TowerDesignData.WaterFlowRateDataValue.InputValue;
+                DesignHotWaterTemperature.Text = TowerDesignDataForm.TowerDesignData.HotWaterTemperatureDataValue.InputValue;
+                DesignColdWaterTemperature.Text = TowerDesignDataForm.TowerDesignData.ColdWaterTemperatureDataValue.InputValue;
+                DesignWetBulbTemperature.Text = TowerDesignDataForm.TowerDesignData.WetBulbTemperatureDataValue.InputValue;
+                DesignDryBulbTemperature.Text = TowerDesignDataForm.TowerDesignData.DryBulbTemperatureDataValue.InputValue;
+                DesignFanDriverPower.Text = TowerDesignDataForm.TowerDesignData.FanDriverPowerDataValue.InputValue;
+                DesignBarometricPressure.Text = TowerDesignDataForm.TowerDesignData.BarometricPressureDataValue.InputValue;
+                DesignLiquidToGasRatio.Text = TowerDesignDataForm.TowerDesignData.LiquidToGasRatioDataValue.InputValue;
 
                 DataFilename.Text = MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue;
 
@@ -415,7 +415,7 @@ namespace CTIToolkit
             // set data
             if (TowerDesignDataForm.ShowDialog(this) == DialogResult.OK)
             {
-                if(TowerDesignDataUserControl.HasDataChanged)
+                if(TowerDesignDataForm.HasDataChanged)
                 {
                     // enable controls
                     AddTestPointButton.Enabled = true;
@@ -430,7 +430,7 @@ namespace CTIToolkit
             }
             else
             {
-                TowerDesignDataUserControl.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData, out errorMessage);
+                TowerDesignDataForm.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData, out errorMessage);
             }
         }
 

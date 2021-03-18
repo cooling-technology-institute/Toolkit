@@ -38,6 +38,7 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
@@ -211,6 +212,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\printer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IPselected.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SIselected.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\document.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

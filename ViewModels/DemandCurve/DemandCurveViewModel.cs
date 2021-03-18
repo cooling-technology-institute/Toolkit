@@ -344,5 +344,18 @@ namespace ViewModels
             }
             return false;
         }
+
+
+        public bool ConvertValues(bool isIS, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            if (IsInternationalSystemOfUnits_SI != isIS)
+            {
+                IsInternationalSystemOfUnits_SI = isIS;
+                return DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_SI, IsElevation, out errorMessage);
+            }
+            return false;
+        }
     }
 }

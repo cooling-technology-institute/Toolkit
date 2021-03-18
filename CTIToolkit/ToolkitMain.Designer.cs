@@ -45,7 +45,7 @@
             this.DocumentationMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SettingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UnitedStatesCustomaryUnitsIPMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.internationalSystemOfUnitsSIMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.InternationalSystemOfUnitsSIMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpContentMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,13 +53,16 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.NewButton = new System.Windows.Forms.ToolStripButton();
             this.OpenFileButton = new System.Windows.Forms.ToolStripButton();
             this.SaveFileButton = new System.Windows.Forms.ToolStripButton();
             this.SaveAsFileButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.UnitedStatesCustomaryUnitsIPButton = new System.Windows.Forms.ToolStripButton();
+            this.InternationalSystemOfUnitsSIButton = new System.Windows.Forms.ToolStripButton();
             this.PrintButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.CalculateButton = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -98,66 +101,66 @@
             // NewMenuItem
             // 
             this.NewMenuItem.Name = "NewMenuItem";
-            this.NewMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.NewMenuItem.Size = new System.Drawing.Size(143, 22);
             this.NewMenuItem.Text = "New";
             this.NewMenuItem.Click += new System.EventHandler(this.NewFile_Click);
             // 
             // OpenMenuItem
             // 
             this.OpenMenuItem.Name = "OpenMenuItem";
-            this.OpenMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.OpenMenuItem.Size = new System.Drawing.Size(143, 22);
             this.OpenMenuItem.Text = "Open";
             this.OpenMenuItem.Click += new System.EventHandler(this.OpenMenuItem_Click);
             // 
             // SaveMenuItem
             // 
             this.SaveMenuItem.Name = "SaveMenuItem";
-            this.SaveMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SaveMenuItem.Size = new System.Drawing.Size(143, 22);
             this.SaveMenuItem.Text = "Save";
             this.SaveMenuItem.Click += new System.EventHandler(this.SaveMenuItem_Click);
             // 
             // SaveAsMenuItem
             // 
             this.SaveAsMenuItem.Name = "SaveAsMenuItem";
-            this.SaveAsMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SaveAsMenuItem.Size = new System.Drawing.Size(143, 22);
             this.SaveAsMenuItem.Text = "Save As";
             this.SaveAsMenuItem.Click += new System.EventHandler(this.SaveAsMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(140, 6);
             // 
             // PrintMenuItem
             // 
             this.PrintMenuItem.Name = "PrintMenuItem";
-            this.PrintMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PrintMenuItem.Size = new System.Drawing.Size(143, 22);
             this.PrintMenuItem.Text = "Print ";
             this.PrintMenuItem.Click += new System.EventHandler(this.PrintMenuItem_Click);
             // 
             // PrintPreviewMenuItem
             // 
             this.PrintPreviewMenuItem.Name = "PrintPreviewMenuItem";
-            this.PrintPreviewMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PrintPreviewMenuItem.Size = new System.Drawing.Size(143, 22);
             this.PrintPreviewMenuItem.Text = "Print Preview";
             this.PrintPreviewMenuItem.Click += new System.EventHandler(this.PrintPreviewMenuItem_Click);
             // 
             // PrintSetupMenuItem
             // 
             this.PrintSetupMenuItem.Name = "PrintSetupMenuItem";
-            this.PrintSetupMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PrintSetupMenuItem.Size = new System.Drawing.Size(143, 22);
             this.PrintSetupMenuItem.Text = "Print Setup";
             this.PrintSetupMenuItem.Click += new System.EventHandler(this.PrintSetupMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(140, 6);
             // 
             // ExitMenuItem
             // 
             this.ExitMenuItem.Name = "ExitMenuItem";
-            this.ExitMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExitMenuItem.Size = new System.Drawing.Size(143, 22);
             this.ExitMenuItem.Text = "Exit";
             this.ExitMenuItem.Click += new System.EventHandler(this.ExitMenuItem_Click);
             // 
@@ -171,7 +174,7 @@
             // 
             this.SettingsMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.UnitedStatesCustomaryUnitsIPMenuItem,
-            this.internationalSystemOfUnitsSIMenuItem});
+            this.InternationalSystemOfUnitsSIMenuItem});
             this.SettingsMenuItem.Name = "SettingsMenuItem";
             this.SettingsMenuItem.Size = new System.Drawing.Size(56, 20);
             this.SettingsMenuItem.Text = "Setting";
@@ -184,15 +187,15 @@
             this.UnitedStatesCustomaryUnitsIPMenuItem.Name = "UnitedStatesCustomaryUnitsIPMenuItem";
             this.UnitedStatesCustomaryUnitsIPMenuItem.Size = new System.Drawing.Size(255, 22);
             this.UnitedStatesCustomaryUnitsIPMenuItem.Text = "United States Customary Units (IP)";
-            this.UnitedStatesCustomaryUnitsIPMenuItem.Click += new System.EventHandler(this.unitedStatesCustomaryUnitsIPToolStripMenuItem_Click);
+            this.UnitedStatesCustomaryUnitsIPMenuItem.Click += new System.EventHandler(this.UnitedStatesCustomaryUnitsIPToolStripMenuItem_Click);
             // 
-            // internationalSystemOfUnitsSIMenuItem
+            // InternationalSystemOfUnitsSIMenuItem
             // 
-            this.internationalSystemOfUnitsSIMenuItem.CheckOnClick = true;
-            this.internationalSystemOfUnitsSIMenuItem.Name = "internationalSystemOfUnitsSIMenuItem";
-            this.internationalSystemOfUnitsSIMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.internationalSystemOfUnitsSIMenuItem.Text = "International System of Units (SI)";
-            this.internationalSystemOfUnitsSIMenuItem.Click += new System.EventHandler(this.internationalSystemOfUnitsSIToolStripMenuItem_Click);
+            this.InternationalSystemOfUnitsSIMenuItem.CheckOnClick = true;
+            this.InternationalSystemOfUnitsSIMenuItem.Name = "InternationalSystemOfUnitsSIMenuItem";
+            this.InternationalSystemOfUnitsSIMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.InternationalSystemOfUnitsSIMenuItem.Text = "International System of Units (SI)";
+            this.InternationalSystemOfUnitsSIMenuItem.Click += new System.EventHandler(this.InternationalSystemOfUnitsSIToolStripMenuItem_Click);
             // 
             // HelpMenuItem
             // 
@@ -235,8 +238,11 @@
             this.SaveFileButton,
             this.SaveAsFileButton,
             this.toolStripSeparator3,
-            this.PrintButton,
+            this.UnitedStatesCustomaryUnitsIPButton,
+            this.InternationalSystemOfUnitsSIButton,
             this.toolStripSeparator4,
+            this.PrintButton,
+            this.toolStripSeparator5,
             this.CalculateButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
@@ -244,10 +250,25 @@
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+            // 
             // NewButton
             // 
             this.NewButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.NewButton.Image = ((System.Drawing.Image)(resources.GetObject("NewButton.Image")));
+            this.NewButton.Image = global::CTIToolkit.Properties.Resources.document;
             this.NewButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.NewButton.Name = "NewButton";
             this.NewButton.Size = new System.Drawing.Size(23, 22);
@@ -284,10 +305,25 @@
             this.SaveAsFileButton.Text = "Save As....";
             this.SaveAsFileButton.Click += new System.EventHandler(this.SaveAsFileButton_Click);
             // 
-            // toolStripSeparator3
+            // UnitedStatesCustomaryUnitsIPButton
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            this.UnitedStatesCustomaryUnitsIPButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.UnitedStatesCustomaryUnitsIPButton.Image = global::CTIToolkit.Properties.Resources.IP;
+            this.UnitedStatesCustomaryUnitsIPButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.UnitedStatesCustomaryUnitsIPButton.Name = "UnitedStatesCustomaryUnitsIPButton";
+            this.UnitedStatesCustomaryUnitsIPButton.Size = new System.Drawing.Size(23, 22);
+            this.UnitedStatesCustomaryUnitsIPButton.Text = "United States Customary Units (IP)";
+            this.UnitedStatesCustomaryUnitsIPButton.Click += new System.EventHandler(this.UnitedStatesCustomaryUnitsIPButton_Click);
+            // 
+            // InternationalSystemOfUnitsSIButton
+            // 
+            this.InternationalSystemOfUnitsSIButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.InternationalSystemOfUnitsSIButton.Image = global::CTIToolkit.Properties.Resources.SI;
+            this.InternationalSystemOfUnitsSIButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.InternationalSystemOfUnitsSIButton.Name = "InternationalSystemOfUnitsSIButton";
+            this.InternationalSystemOfUnitsSIButton.Size = new System.Drawing.Size(23, 22);
+            this.InternationalSystemOfUnitsSIButton.Text = "International System of Units (SI)";
+            this.InternationalSystemOfUnitsSIButton.Click += new System.EventHandler(this.InternationalSystemOfUnitsSIButton_Click);
             // 
             // PrintButton
             // 
@@ -298,11 +334,6 @@
             this.PrintButton.Size = new System.Drawing.Size(23, 22);
             this.PrintButton.Text = "Print...";
             this.PrintButton.Click += new System.EventHandler(this.PrintButton_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // CalculateButton
             // 
@@ -349,7 +380,7 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.ToolStripMenuItem UnitedStatesCustomaryUnitsIPMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem internationalSystemOfUnitsSIMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem InternationalSystemOfUnitsSIMenuItem;
         private System.Windows.Forms.ToolStripMenuItem NewMenuItem;
         private System.Windows.Forms.ToolStripMenuItem OpenMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SaveMenuItem;
@@ -369,5 +400,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton CalculateButton;
         private System.Windows.Forms.ToolStripButton NewButton;
+        private System.Windows.Forms.ToolStripButton UnitedStatesCustomaryUnitsIPButton;
+        private System.Windows.Forms.ToolStripButton InternationalSystemOfUnitsSIButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     }
 }

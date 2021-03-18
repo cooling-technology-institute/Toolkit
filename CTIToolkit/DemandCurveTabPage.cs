@@ -28,7 +28,6 @@ namespace CTIToolkit
             InitializeComponent();
 
             IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
-            IsInternationalSystemOfUnits_SI_ = false;
 
             DemandCurveViewModel = new DemandCurveViewModel(IsDemo, IsInternationalSystemOfUnits_SI_);
 
@@ -40,9 +39,15 @@ namespace CTIToolkit
         public void SetUnitsStandard(ApplicationSettings applicationSettings)
         {
             IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
-            IsInternationalSystemOfUnits_SI_ = false;
+            SwitchUnits();
         }
 
+        private void SwitchUnits()
+        {
+            string errorMessage;
+            DemandCurveViewModel.ConvertValues(IsInternationalSystemOfUnits_SI_, out errorMessage);
+        }
+        
         private void Setup()
         {
             DemandCurveWetBulbTemperatureLabel.Text = DemandCurveViewModel.WetBulbTemperatureDataValueInputMessage + ":";

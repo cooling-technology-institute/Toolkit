@@ -106,11 +106,12 @@
             this.DataFileLabel.TabIndex = 0;
             this.DataFileLabel.Text = "Performance Data  File:";
             // 
-            // Calculate
+            // CalculateButton
             // 
+            this.CalculateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CalculateButton.Enabled = false;
-            this.CalculateButton.Location = new System.Drawing.Point(597, 18);
-            this.CalculateButton.Name = "Calculate";
+            this.CalculateButton.Location = new System.Drawing.Point(723, 17);
+            this.CalculateButton.Name = "CalculateButton";
             this.CalculateButton.Size = new System.Drawing.Size(74, 23);
             this.CalculateButton.TabIndex = 3;
             this.CalculateButton.Text = "Calculate";
@@ -119,8 +120,9 @@
             // 
             // ViewGraph
             // 
+            this.ViewGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ViewGraph.Enabled = false;
-            this.ViewGraph.Location = new System.Drawing.Point(597, 54);
+            this.ViewGraph.Location = new System.Drawing.Point(723, 46);
             this.ViewGraph.Name = "ViewGraph";
             this.ViewGraph.Size = new System.Drawing.Size(74, 23);
             this.ViewGraph.TabIndex = 4;
@@ -187,7 +189,7 @@
             this.TestResultsGroupBox.Controls.Add(this.UnitsFanDriverPower);
             this.TestResultsGroupBox.Location = new System.Drawing.Point(3, 209);
             this.TestResultsGroupBox.Name = "TestResultsGroupBox";
-            this.TestResultsGroupBox.Size = new System.Drawing.Size(810, 311);
+            this.TestResultsGroupBox.Size = new System.Drawing.Size(804, 311);
             this.TestResultsGroupBox.TabIndex = 14;
             this.TestResultsGroupBox.TabStop = false;
             this.TestResultsGroupBox.Text = "Test Results";
@@ -218,7 +220,7 @@
             this.TestPointTabControl.Location = new System.Drawing.Point(300, 14);
             this.TestPointTabControl.Name = "TestPointTabControl";
             this.TestPointTabControl.SelectedIndex = 0;
-            this.TestPointTabControl.Size = new System.Drawing.Size(494, 256);
+            this.TestPointTabControl.Size = new System.Drawing.Size(498, 256);
             this.TestPointTabControl.TabIndex = 32;
             // 
             // tabPage1
@@ -234,7 +236,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(486, 230);
+            this.tabPage1.Size = new System.Drawing.Size(490, 230);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -301,7 +303,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(355, 263);
+            this.tabPage2.Size = new System.Drawing.Size(486, 230);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -532,7 +534,8 @@
             // 
             // DesignDataButton
             // 
-            this.DesignDataButton.Location = new System.Drawing.Point(597, 90);
+            this.DesignDataButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DesignDataButton.Location = new System.Drawing.Point(710, 75);
             this.DesignDataButton.Name = "DesignDataButton";
             this.DesignDataButton.Size = new System.Drawing.Size(87, 25);
             this.DesignDataButton.TabIndex = 10;
@@ -558,7 +561,7 @@
             this.OwnerNameField.Location = new System.Drawing.Point(134, 17);
             this.OwnerNameField.Name = "OwnerNameField";
             this.OwnerNameField.ReadOnly = true;
-            this.OwnerNameField.Size = new System.Drawing.Size(423, 20);
+            this.OwnerNameField.Size = new System.Drawing.Size(541, 20);
             this.OwnerNameField.TabIndex = 19;
             // 
             // ProjectNameField
@@ -566,7 +569,7 @@
             this.ProjectNameField.Location = new System.Drawing.Point(134, 43);
             this.ProjectNameField.Name = "ProjectNameField";
             this.ProjectNameField.ReadOnly = true;
-            this.ProjectNameField.Size = new System.Drawing.Size(423, 20);
+            this.ProjectNameField.Size = new System.Drawing.Size(541, 20);
             this.ProjectNameField.TabIndex = 20;
             // 
             // LocationField
@@ -574,7 +577,7 @@
             this.LocationField.Location = new System.Drawing.Point(134, 69);
             this.LocationField.Name = "LocationField";
             this.LocationField.ReadOnly = true;
-            this.LocationField.Size = new System.Drawing.Size(423, 20);
+            this.LocationField.Size = new System.Drawing.Size(541, 20);
             this.LocationField.TabIndex = 21;
             // 
             // TowerManufacturerField
@@ -582,7 +585,7 @@
             this.TowerManufacturerField.Location = new System.Drawing.Point(134, 95);
             this.TowerManufacturerField.Name = "TowerManufacturerField";
             this.TowerManufacturerField.ReadOnly = true;
-            this.TowerManufacturerField.Size = new System.Drawing.Size(423, 20);
+            this.TowerManufacturerField.Size = new System.Drawing.Size(541, 20);
             this.TowerManufacturerField.TabIndex = 22;
             // 
             // TowerTypeField
@@ -590,7 +593,7 @@
             this.TowerTypeField.Location = new System.Drawing.Point(134, 121);
             this.TowerTypeField.Name = "TowerTypeField";
             this.TowerTypeField.ReadOnly = true;
-            this.TowerTypeField.Size = new System.Drawing.Size(423, 20);
+            this.TowerTypeField.Size = new System.Drawing.Size(70, 20);
             this.TowerTypeField.TabIndex = 23;
             // 
             // DataFilename
@@ -598,7 +601,7 @@
             this.DataFilename.Location = new System.Drawing.Point(137, 20);
             this.DataFilename.Name = "DataFilename";
             this.DataFilename.ReadOnly = true;
-            this.DataFilename.Size = new System.Drawing.Size(423, 20);
+            this.DataFilename.Size = new System.Drawing.Size(541, 20);
             this.DataFilename.TabIndex = 24;
             // 
             // TowerDataGroupBox
@@ -615,7 +618,7 @@
             this.TowerDataGroupBox.Controls.Add(this.OwnerNameField);
             this.TowerDataGroupBox.Location = new System.Drawing.Point(3, 52);
             this.TowerDataGroupBox.Name = "TowerDataGroupBox";
-            this.TowerDataGroupBox.Size = new System.Drawing.Size(574, 151);
+            this.TowerDataGroupBox.Size = new System.Drawing.Size(685, 151);
             this.TowerDataGroupBox.TabIndex = 25;
             this.TowerDataGroupBox.TabStop = false;
             this.TowerDataGroupBox.Text = "Tower Data";

@@ -36,28 +36,6 @@ namespace CTIToolkit
         {
             Properties.Settings.Default.UnitsSelection = UnitsSelection.ToString();
             Properties.Settings.Default.Save();
-
-            //Load appsettings
-            //Configuration config = ConfigurationManager.OpenExeConfiguration(System.Reflection.Assembly.GetExecutingAssembly().Location);
-
-            ////Check if key exists in the settings
-            //if (config.AppSettings.Settings["UnitsSelection"] != null)
-            //{
-            //    config.AppSettings.Settings.Add("UnitsSelection", UnitsSelection.ToString());
-            //    //If key exists, delete it
-            //    //config.AppSettings.Settings.Remove("UnitsSelection");
-            //}
-            //else
-            //{
-            //    config.AppSettings.Settings["UnitsSelection"].Value = UnitsSelection.ToString();
-            //}
-
-            //////Add new key-value pair
-            ////config.AppSettings.Settings.Add("UnitsSelection", UnitsSelection.ToString());
-
-            ////Save the changed settings
-            //config.Save(ConfigurationSaveMode.Modified);
-            //ConfigurationManager.RefreshSection("appSettings");
         }
 
         public void Read()
