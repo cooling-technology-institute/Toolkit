@@ -40,6 +40,27 @@ namespace ViewModels
             LiquidToGasRatioDataValue = new LiquidToGasRatioDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
         }
 
+        public bool ConvertValues(bool isIS)
+        {
+            bool isChanged = false;
+
+            if (IsInternationalSystemOfUnits_SI != isIS)
+            {
+                IsInternationalSystemOfUnits_SI = isIS;
+                WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                HotWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                ColdWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                DryBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                FanDriverPowerDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                isChanged = true;
+            }
+
+            return isChanged;
+        }
+
         public bool LoadData(bool isInternationalSystemOfUnits_SI, TowerTestData testData, out string errorMessage)
         {
             errorMessage = string.Empty;
@@ -130,26 +151,6 @@ namespace ViewModels
                 errorMessage = string.Format("Failure to update page with data. Exception {0}.", exception.ToString());
             }
             return returnValue;
-        }
-
-        public bool ConvertValues(bool isIS)
-        {
-            bool isChanged = false;
-
-            if (IsInternationalSystemOfUnits_SI != isIS)
-            {
-                IsInternationalSystemOfUnits_SI = isIS;
-                WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                HotWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true); 
-                ColdWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                DryBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                FanDriverPowerDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                isChanged = true;
-            }
-            return isChanged;
         }
 
         public void SetDemo(bool value)

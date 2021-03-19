@@ -144,6 +144,55 @@ namespace ViewModels
             }
         }
 
+        public bool ConvertValues(bool isIS)
+        {
+            bool isChanged = false;
+
+            if (IsInternationalSystemOfUnits_SI != isIS)
+            {
+                isChanged = true;
+                IsInternationalSystemOfUnits_SI = isIS;
+                WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                WetBulbTemperatureDataValue1.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                WetBulbTemperatureDataValue2.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                WetBulbTemperatureDataValue3.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                WetBulbTemperatureDataValue4.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                WetBulbTemperatureDataValue5.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range1ColdWaterTemperatureDataValue1.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range1ColdWaterTemperatureDataValue2.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range1ColdWaterTemperatureDataValue3.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range1ColdWaterTemperatureDataValue4.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range1ColdWaterTemperatureDataValue5.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range1ColdWaterTemperatureDataValue6.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range2ColdWaterTemperatureDataValue1.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range2ColdWaterTemperatureDataValue2.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range2ColdWaterTemperatureDataValue3.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range2ColdWaterTemperatureDataValue4.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range2ColdWaterTemperatureDataValue5.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range2ColdWaterTemperatureDataValue6.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range3ColdWaterTemperatureDataValue1.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range3ColdWaterTemperatureDataValue2.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range3ColdWaterTemperatureDataValue3.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range3ColdWaterTemperatureDataValue4.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range3ColdWaterTemperatureDataValue5.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range3ColdWaterTemperatureDataValue6.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range4ColdWaterTemperatureDataValue1.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range4ColdWaterTemperatureDataValue2.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range4ColdWaterTemperatureDataValue3.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range4ColdWaterTemperatureDataValue4.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range4ColdWaterTemperatureDataValue5.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range4ColdWaterTemperatureDataValue6.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range5ColdWaterTemperatureDataValue1.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range5ColdWaterTemperatureDataValue2.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range5ColdWaterTemperatureDataValue3.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range5ColdWaterTemperatureDataValue4.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range5ColdWaterTemperatureDataValue5.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                Range5ColdWaterTemperatureDataValue6.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+            }
+            return isChanged;
+        }
+
+
         public bool LoadData(RangedTemperaturesDesignData rangedTemperaturesDesignData, out string errorMessage)
         {
             errorMessage = string.Empty;

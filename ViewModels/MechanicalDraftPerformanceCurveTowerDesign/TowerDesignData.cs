@@ -90,6 +90,32 @@ namespace ViewModels
             WaterFlowRateOrder = Order.Ascending;
         }
 
+        public bool ConvertValues(bool isIS)
+        {
+            bool isChanged = false;
+
+            if (IsInternationalSystemOfUnits_SI != isIS)
+            {
+                isChanged = true;
+                IsInternationalSystemOfUnits_SI = isIS;
+                WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                HotWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                ColdWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                DryBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                FanDriverPowerDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+
+                foreach(TowerDesignCurveData towerDesignCurveData in TowerDesignCurveData)
+                {
+                    isChanged |= towerDesignCurveData.ConvertValues(isIS);
+                }
+            }
+
+            return isChanged;
+        }
+
         public bool LoadData(DesignData data, out string errorMessage)
         {
             errorMessage = string.Empty;

@@ -11,5 +11,10 @@ namespace CTIToolkit
             UserControl = userControl;
             this.Controls.Add(userControl);
         }
+
+        public void SetUnitsStandard(ApplicationSettings applicationSettings)
+        {
+            UserControl.SetUnitsStandard(applicationSettings);
+        }
     }
 }

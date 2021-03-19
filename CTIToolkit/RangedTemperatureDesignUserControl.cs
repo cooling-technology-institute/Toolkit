@@ -28,6 +28,36 @@ namespace CTIToolkit
             Setup(out errorMessage);
         }
 
+        public void SetUnitsStandard(ApplicationSettings applicationSettings)
+        {
+            IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            SwitchUnits();
+        }
+
+        private void SwitchUnits()
+        {
+            string errorMessage = string.Empty;
+
+            if (IsInternationalSystemOfUnits_SI_)
+            {
+                UnitsWetWaterTemperature1.Text = ConstantUnits.TemperatureCelsius;
+                UnitsWetWaterTemperature2.Text = ConstantUnits.TemperatureCelsius;
+                UnitsWetWaterTemperature3.Text = ConstantUnits.TemperatureCelsius;
+                UnitsWetWaterTemperature4.Text = ConstantUnits.TemperatureCelsius;
+                UnitsWetWaterTemperature5.Text = ConstantUnits.TemperatureCelsius;
+                UnitsWetWaterTemperature6.Text = ConstantUnits.TemperatureCelsius;
+            }
+            else
+            {
+                UnitsWetWaterTemperature1.Text = ConstantUnits.TemperatureFahrenheit;
+                UnitsWetWaterTemperature2.Text = ConstantUnits.TemperatureFahrenheit;
+                UnitsWetWaterTemperature3.Text = ConstantUnits.TemperatureFahrenheit;
+                UnitsWetWaterTemperature4.Text = ConstantUnits.TemperatureFahrenheit;
+                UnitsWetWaterTemperature5.Text = ConstantUnits.TemperatureFahrenheit;
+                UnitsWetWaterTemperature6.Text = ConstantUnits.TemperatureFahrenheit;
+            }
+        }
+
         public bool LoadData(bool isInternationalSystemOfUnits_SI_, RangedTemperaturesDesignData rangedTemperaturesDesignData, out string errorMessage)
         {
             StringBuilder stringBuilder = new StringBuilder();

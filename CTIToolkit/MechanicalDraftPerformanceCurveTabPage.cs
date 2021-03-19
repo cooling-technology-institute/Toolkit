@@ -43,6 +43,34 @@ namespace CTIToolkit
         public void SetUnitsStandard(ApplicationSettings applicationSettings)
         {
             IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            SwitchUnits();
+            TowerDesignDataForm.SetUnitsStandard(applicationSettings);
+        }
+
+        private void SwitchUnits()
+        {
+            MechanicalDraftPerformanceCurveViewModel.ConvertValues(IsInternationalSystemOfUnits_SI_);
+
+            if (IsInternationalSystemOfUnits_SI_)
+            {
+                UnitsWaterFlowRate.Text = ConstantUnits.LitersPerSecond;
+                UnitsHotWaterTemperature.Text = ConstantUnits.TemperatureCelsius;
+                UnitsColdWaterTemperature.Text = ConstantUnits.TemperatureCelsius;
+                UnitsWetBulbTemperature.Text = ConstantUnits.TemperatureCelsius;
+                UnitsDryBulbTemperature.Text = ConstantUnits.TemperatureCelsius;
+                UnitsFanDriverPower.Text = ConstantUnits.Kilowatt;
+                UnitsBarometricPressure.Text = ConstantUnits.BarometricPressureKiloPascal;
+            }
+            else
+            {
+                UnitsWaterFlowRate.Text = ConstantUnits.GallonsPerMinute;
+                UnitsHotWaterTemperature.Text = ConstantUnits.TemperatureFahrenheit;
+                UnitsColdWaterTemperature.Text = ConstantUnits.TemperatureFahrenheit;
+                UnitsWetBulbTemperature.Text = ConstantUnits.TemperatureFahrenheit;
+                UnitsDryBulbTemperature.Text = ConstantUnits.TemperatureFahrenheit;
+                UnitsFanDriverPower.Text = ConstantUnits.BrakeHorsepower;
+                UnitsBarometricPressure.Text = ConstantUnits.BarometricPressureInchOfMercury;
+            }
         }
 
         public bool OpenDataFile(string fileName, out string errorMessage)

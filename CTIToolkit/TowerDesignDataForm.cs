@@ -42,6 +42,42 @@ namespace CTIToolkit
             Setup(out errorMessage);
         }
 
+        public void SetUnitsStandard(ApplicationSettings applicationSettings)
+        {
+            IsInternationalSystemOfUnits_SI = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            SwitchUnits();
+            foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
+            {
+                tabPage.SetUnitsStandard(applicationSettings);
+            }
+        }
+
+        private void SwitchUnits()
+        {
+            string errorMessage = string.Empty;
+
+            if (IsInternationalSystemOfUnits_SI)
+            {
+                WaterFlowRateUnits.Text = ConstantUnits.LitersPerSecond;
+                HotWaterTemperatureUnits.Text = ConstantUnits.TemperatureCelsius;
+                ColdWaterTemperatureUnits.Text = ConstantUnits.TemperatureCelsius;
+                WetBulbTemperatureUnits.Text = ConstantUnits.TemperatureCelsius;
+                DryBulbTemperatureUnits.Text = ConstantUnits.TemperatureCelsius;
+                FanDriverPowerUnits.Text = ConstantUnits.Kilowatt;
+                BarometricPressureUnits.Text = ConstantUnits.BarometricPressureKiloPascal;
+            }
+            else
+            {
+                WaterFlowRateUnits.Text = ConstantUnits.GallonsPerMinute;
+                HotWaterTemperatureUnits.Text = ConstantUnits.TemperatureFahrenheit;
+                ColdWaterTemperatureUnits.Text = ConstantUnits.TemperatureFahrenheit;
+                WetBulbTemperatureUnits.Text = ConstantUnits.TemperatureFahrenheit;
+                DryBulbTemperatureUnits.Text = ConstantUnits.TemperatureFahrenheit;
+                FanDriverPowerUnits.Text = ConstantUnits.BrakeHorsepower;
+                BarometricPressureUnits.Text = ConstantUnits.BarometricPressureInchOfMercury;
+            }
+        }
+
         protected void CloseFormCallback(object sender, FormClosingEventArgs e)
         {
             if(e.CloseReason == CloseReason.UserClosing)
@@ -52,7 +88,10 @@ namespace CTIToolkit
             {
                 DialogResult = DialogResult.Cancel;
             }
-            this.Close();
+            if(!e.Cancel)
+            {
+                this.Close();
+            }
         }
 
         //public void AddControlEvents()
@@ -66,34 +105,6 @@ namespace CTIToolkit
         //    }
         //}
 
-        private void CloseForm(object sender, FormClosingEventArgs e)
-        {
-            bool isChanged = false;
-
-            if (e.CloseReason == CloseReason.None)
-            {
-                isChanged |= HasDataChanged;
-
-                if (isChanged)
-                {
-                    // Are you sure?
-                    var result = MessageBox.Show("Are you sure you want to discard your changes?", "Cancel Updates",
-                                                     MessageBoxButtons.YesNo,
-                                                     MessageBoxIcon.Question);
-
-                    // If the yes button was pressed ...
-                    if (result == DialogResult.No)
-                    {
-                        e.Cancel = true;
-                    }
-                    else
-                    {
-                        ClearIsChanged();
-                    }
-                }
-
-            }
-        }
         public bool LoadData(TowerDesignData data, out string errorMessage)
         {
             TowerDesignData = data;
@@ -746,40 +757,44 @@ namespace CTIToolkit
             }
         }
 
+        private void CloseForm(object sender, FormClosingEventArgs e)
+        {
+            bool isChanged = false;
+
+            isChanged |= HasDataChanged;
+
+            if (this.DialogResult == DialogResult.Cancel)
+            {
+                if (isChanged)
+                {
+                    // Are you sure?
+                    var result = MessageBox.Show("Are you sure you want to discard your changes?", "Cancel Updates",
+                                                     MessageBoxButtons.YesNo,
+                                                     MessageBoxIcon.Question);
+
+                    // If the yes button was pressed ...
+                    if (result == DialogResult.No)
+                    {
+                        e.Cancel = true;
+                    }
+                    else
+                    {
+                        ClearIsChanged();
+                    }
+                }
+            }
+        }
+
         private void OkButton_Click(object sender, EventArgs e)
         {
-            IsChanged |= HasTabPageChanged();
-
-            // you could create your own class here and pass the object to your main form if you wanted
-            FormClosingEventArgs eventArgs = new FormClosingEventArgs(CloseReason.UserClosing, false);
-
-            // tell host form to close itself
-            CloseForm(this, eventArgs);
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            IsChanged |= HasTabPageChanged();
-
-            if (IsChanged)
-            {
-                // Are you sure?
-                var result = MessageBox.Show("Are you sure you want to discard your changes?", "Cancel Updates",
-                                                 MessageBoxButtons.YesNo,
-                                                 MessageBoxIcon.Question);
-
-                // If the yes button was pressed ...
-                if (result == DialogResult.Yes)
-                {
-                    // you could create your own class here and pass the object to your main form if you wanted
-                    FormClosingEventArgs eventArgs = new FormClosingEventArgs(CloseReason.None, false);
-
-                    // tell host form to close itself
-                    CloseForm(this, eventArgs);
-
-                    ClearIsChanged();
-                }
-            }
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
 
         private void TowerDesignDataTabPage_DoubleClick(object sender, EventArgs e)

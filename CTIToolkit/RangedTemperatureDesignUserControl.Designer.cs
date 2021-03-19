@@ -80,6 +80,12 @@
             this.Range1ColdWaterTemperature4 = new System.Windows.Forms.TextBox();
             this.Range1ColdWaterTemperature5 = new System.Windows.Forms.TextBox();
             this.Range1ColdWaterTemperature6 = new System.Windows.Forms.TextBox();
+            this.UnitsWetWaterTemperature1 = new System.Windows.Forms.Label();
+            this.UnitsWetWaterTemperature2 = new System.Windows.Forms.Label();
+            this.UnitsWetWaterTemperature3 = new System.Windows.Forms.Label();
+            this.UnitsWetWaterTemperature4 = new System.Windows.Forms.Label();
+            this.UnitsWetWaterTemperature5 = new System.Windows.Forms.Label();
+            this.UnitsWetWaterTemperature6 = new System.Windows.Forms.Label();
             this.WetBulbTemperatureGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.ColdWaterTemperaturesGroupBox.SuspendLayout();
@@ -119,7 +125,7 @@
             // 
             // WetBulbTemperature2
             // 
-            this.WetBulbTemperature2.Location = new System.Drawing.Point(8, 60);
+            this.WetBulbTemperature2.Location = new System.Drawing.Point(8, 59);
             this.WetBulbTemperature2.Name = "WetBulbTemperature2";
             this.WetBulbTemperature2.Size = new System.Drawing.Size(70, 20);
             this.WetBulbTemperature2.TabIndex = 2;
@@ -137,7 +143,7 @@
             // 
             // WetBulbTemperature4
             // 
-            this.WetBulbTemperature4.Location = new System.Drawing.Point(8, 110);
+            this.WetBulbTemperature4.Location = new System.Drawing.Point(8, 109);
             this.WetBulbTemperature4.Name = "WetBulbTemperature4";
             this.WetBulbTemperature4.Size = new System.Drawing.Size(70, 20);
             this.WetBulbTemperature4.TabIndex = 4;
@@ -173,7 +179,7 @@
             // 
             // WetBulbTemperature5
             // 
-            this.WetBulbTemperature5.Location = new System.Drawing.Point(8, 135);
+            this.WetBulbTemperature5.Location = new System.Drawing.Point(8, 134);
             this.WetBulbTemperature5.Name = "WetBulbTemperature5";
             this.WetBulbTemperature5.Size = new System.Drawing.Size(70, 20);
             this.WetBulbTemperature5.TabIndex = 5;
@@ -191,7 +197,7 @@
             // 
             // WetBulbTemperature6
             // 
-            this.WetBulbTemperature6.Location = new System.Drawing.Point(8, 160);
+            this.WetBulbTemperature6.Location = new System.Drawing.Point(8, 159);
             this.WetBulbTemperature6.Name = "WetBulbTemperature6";
             this.WetBulbTemperature6.Size = new System.Drawing.Size(70, 20);
             this.WetBulbTemperature6.TabIndex = 6;
@@ -517,11 +523,71 @@
             this.Range1ColdWaterTemperature6.Size = new System.Drawing.Size(70, 20);
             this.Range1ColdWaterTemperature6.TabIndex = 5;
             // 
+            // UnitsWetWaterTemperature1
+            // 
+            this.UnitsWetWaterTemperature1.AutoSize = true;
+            this.UnitsWetWaterTemperature1.Location = new System.Drawing.Point(176, 45);
+            this.UnitsWetWaterTemperature1.Name = "UnitsWetWaterTemperature1";
+            this.UnitsWetWaterTemperature1.Size = new System.Drawing.Size(17, 13);
+            this.UnitsWetWaterTemperature1.TabIndex = 18;
+            this.UnitsWetWaterTemperature1.Text = "°F";
+            // 
+            // UnitsWetWaterTemperature2
+            // 
+            this.UnitsWetWaterTemperature2.AutoSize = true;
+            this.UnitsWetWaterTemperature2.Location = new System.Drawing.Point(176, 69);
+            this.UnitsWetWaterTemperature2.Name = "UnitsWetWaterTemperature2";
+            this.UnitsWetWaterTemperature2.Size = new System.Drawing.Size(17, 13);
+            this.UnitsWetWaterTemperature2.TabIndex = 19;
+            this.UnitsWetWaterTemperature2.Text = "°F";
+            // 
+            // UnitsWetWaterTemperature3
+            // 
+            this.UnitsWetWaterTemperature3.AutoSize = true;
+            this.UnitsWetWaterTemperature3.Location = new System.Drawing.Point(176, 94);
+            this.UnitsWetWaterTemperature3.Name = "UnitsWetWaterTemperature3";
+            this.UnitsWetWaterTemperature3.Size = new System.Drawing.Size(17, 13);
+            this.UnitsWetWaterTemperature3.TabIndex = 20;
+            this.UnitsWetWaterTemperature3.Text = "°F";
+            // 
+            // UnitsWetWaterTemperature4
+            // 
+            this.UnitsWetWaterTemperature4.AutoSize = true;
+            this.UnitsWetWaterTemperature4.Location = new System.Drawing.Point(176, 119);
+            this.UnitsWetWaterTemperature4.Name = "UnitsWetWaterTemperature4";
+            this.UnitsWetWaterTemperature4.Size = new System.Drawing.Size(17, 13);
+            this.UnitsWetWaterTemperature4.TabIndex = 21;
+            this.UnitsWetWaterTemperature4.Text = "°F";
+            // 
+            // UnitsWetWaterTemperature5
+            // 
+            this.UnitsWetWaterTemperature5.AutoSize = true;
+            this.UnitsWetWaterTemperature5.Location = new System.Drawing.Point(176, 144);
+            this.UnitsWetWaterTemperature5.Name = "UnitsWetWaterTemperature5";
+            this.UnitsWetWaterTemperature5.Size = new System.Drawing.Size(17, 13);
+            this.UnitsWetWaterTemperature5.TabIndex = 22;
+            this.UnitsWetWaterTemperature5.Text = "°F";
+            // 
+            // UnitsWetWaterTemperature6
+            // 
+            this.UnitsWetWaterTemperature6.AutoSize = true;
+            this.UnitsWetWaterTemperature6.Location = new System.Drawing.Point(176, 169);
+            this.UnitsWetWaterTemperature6.Name = "UnitsWetWaterTemperature6";
+            this.UnitsWetWaterTemperature6.Size = new System.Drawing.Size(17, 13);
+            this.UnitsWetWaterTemperature6.TabIndex = 23;
+            this.UnitsWetWaterTemperature6.Text = "°F";
+            // 
             // RangedTemperatureDesignUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Controls.Add(this.UnitsWetWaterTemperature6);
+            this.Controls.Add(this.UnitsWetWaterTemperature5);
+            this.Controls.Add(this.UnitsWetWaterTemperature4);
+            this.Controls.Add(this.UnitsWetWaterTemperature3);
+            this.Controls.Add(this.UnitsWetWaterTemperature2);
+            this.Controls.Add(this.UnitsWetWaterTemperature1);
             this.Controls.Add(this.ColdWaterTemperaturesGroupBox);
             this.Controls.Add(this.WetBulbTemperatureGroupBox);
             this.Controls.Add(this.WetBulbTemperatureLabel6);
@@ -604,5 +670,11 @@
         private System.Windows.Forms.TextBox Range1ColdWaterTemperature4;
         private System.Windows.Forms.TextBox Range1ColdWaterTemperature5;
         private System.Windows.Forms.TextBox Range1ColdWaterTemperature6;
+        private System.Windows.Forms.Label UnitsWetWaterTemperature1;
+        private System.Windows.Forms.Label UnitsWetWaterTemperature6;
+        private System.Windows.Forms.Label UnitsWetWaterTemperature5;
+        private System.Windows.Forms.Label UnitsWetWaterTemperature4;
+        private System.Windows.Forms.Label UnitsWetWaterTemperature3;
+        private System.Windows.Forms.Label UnitsWetWaterTemperature2;
     }
 }

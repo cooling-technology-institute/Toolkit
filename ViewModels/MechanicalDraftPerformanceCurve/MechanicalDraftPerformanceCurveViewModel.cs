@@ -42,6 +42,23 @@ namespace ViewModels
             fileData = new MechanicalDraftPerformanceCurveFileData(isInternationalSystemOfUnits_IS_);
         }
 
+        public bool ConvertValues(bool isIS)
+        {
+            bool isChange = false;
+
+            if (IsInternationalSystemOfUnits_SI != isIS)
+            {
+                isChange = true;
+                IsInternationalSystemOfUnits_SI = isIS;
+                isChange |= DesignData.ConvertValues(IsInternationalSystemOfUnits_SI);
+                foreach (TowerTestPoint towerTestPoint in TestPoints)
+                {
+                    isChange |= towerTestPoint.ConvertValues(IsInternationalSystemOfUnits_SI);
+                }
+            }
+            return isChange;
+        }
+
         public void BuildFilename()
         {
             string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
