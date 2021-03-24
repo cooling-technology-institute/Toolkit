@@ -1,9 +1,5 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 
-using System;
-using System.Data;
-using System.Text;
-
 namespace Models
 {
     public class MechanicalDraftPerformanceCurveOutput
@@ -16,7 +12,7 @@ namespace Models
         public double SpecificVolume { set; get; }
         public double WetBulbTemperature { set; get; }
         public double LiquidToGasRatio { set; get; }
-
+        
         public MechanicalDraftPerformanceCurveOutput()
         {
             AdjustedFlow = 0.0;

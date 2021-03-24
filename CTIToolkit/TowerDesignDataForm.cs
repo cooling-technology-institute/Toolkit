@@ -1,4 +1,5 @@
-﻿using Models;
+﻿// Copyright Cooling Technology Institute 2019-2021
+using Models;
 using System;
 using System.ComponentModel;
 using System.Drawing;

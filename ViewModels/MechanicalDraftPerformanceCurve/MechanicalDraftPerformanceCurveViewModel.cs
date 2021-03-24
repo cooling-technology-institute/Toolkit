@@ -16,13 +16,11 @@ namespace ViewModels
         public TowerDesignData DesignData { get; set; }
         public List<TowerTestPoint> TestPoints { get; set; }
 
-        public MechanicalDraftPerformanceCurveOutputDataViewModel MechanicalDraftPerformanceCurveOutputDataViewModel { get; set; }
-
-        private MechanicalDraftPerformanceCurveFileData fileData { get; set; }
+        public MechanicalDraftPerformanceCurveOutputDataViewModel OutputDataViewModel { get; set; }
 
         public string DataFileName { get; set; }
         
-        MechanicalDraftPerformanceCurveFileData MechanicalDraftPerformanceCurveFileData;
+        public MechanicalDraftPerformanceCurveFileData MechanicalDraftPerformanceCurveFileData;
 
         public bool IsDemo { get; set; }
         public bool IsInternationalSystemOfUnits_SI { get; set; }
@@ -35,11 +33,11 @@ namespace ViewModels
             DesignData = new TowerDesignData(IsDemo, IsInternationalSystemOfUnits_SI);
             TestPoints = new List<TowerTestPoint>();
 
-            MechanicalDraftPerformanceCurveOutputDataViewModel = new MechanicalDraftPerformanceCurveOutputDataViewModel(IsInternationalSystemOfUnits_SI);
+            OutputDataViewModel = new MechanicalDraftPerformanceCurveOutputDataViewModel(IsInternationalSystemOfUnits_SI);
 
             BuildFilename();
 
-            fileData = new MechanicalDraftPerformanceCurveFileData(isInternationalSystemOfUnits_IS_);
+            MechanicalDraftPerformanceCurveFileData = new MechanicalDraftPerformanceCurveFileData(isInternationalSystemOfUnits_IS_);
         }
 
         public bool ConvertValues(bool isIS)
@@ -96,8 +94,10 @@ namespace ViewModels
             {
                 if (IsInternationalSystemOfUnits_SI != MechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI)
                 {
-                    IsInternationalSystemOfUnits_SI = MechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI;
-                }
+                    //IsInternationalSystemOfUnits_SI = MechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI;
+                    // convert values to match selected units
+
+                 }
 
                 if (!LoadData(out errorMessage))
                 {
@@ -419,20 +419,20 @@ namespace ViewModels
             return returnValue;
         }
 
-        public bool FillAndValidate(int testIndex, MechanicalDraftPerformanceCurveFileData fileData, out string errorMessage)
+        public bool FillAndValidate(out string errorMessage)
         {
             errorMessage = string.Empty;
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
 
-            if (!DesignData.FillAndValidate(fileData.DesignData, out errorMessage))
+            if (!DesignData.FillAndValidate(MechanicalDraftPerformanceCurveFileData.DesignData, out errorMessage))
             {
                 returnValue = false;
                 stringBuilder.AppendLine(errorMessage);
                 errorMessage = string.Empty;
             }
 
-            fileData.TestData.Clear();
+            MechanicalDraftPerformanceCurveFileData.TestData.Clear();
 
             foreach (TowerTestPoint towerTestPoint in TestPoints)
             {
@@ -443,7 +443,7 @@ namespace ViewModels
                     stringBuilder.AppendLine(string.Format("Test {0}: {1}", towerTestPoint.TestName, errorMessage));
                     errorMessage = string.Empty;
                 }
-                fileData.TestData.Add(towerTestData);
+                MechanicalDraftPerformanceCurveFileData.TestData.Add(towerTestData);
             }
 
             //if (!TestPoints.FillAndValidate(mechanicalDraftPerformanceCurveFileData.TestData[testIndex], out errorMessage))
@@ -456,29 +456,25 @@ namespace ViewModels
             return returnValue;
         }
 
-        public bool CalculatePerformanceCurve(int testIndex, MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData, out string errorMessage)
+        public bool CalculatePerformanceCurve(int testIndex, out string errorMessage)
         {
             errorMessage = string.Empty;
             bool returnValue = true;
             try
             {
-                //MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData = new MechanicalDraftPerformanceCurveFileData(IsInternationalSystemOfUnits_SI);
+                // get the data from table
+                if(FillAndValidate(out errorMessage))
+                {
+                    MechanicalDraftPerformanceCurveCalculationLibrary calculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
 
-                //// validate test data
-                //if (!mechanicalDraftPerformanceCurveTowerDesignViewModel.FillAndValidate(mechanicalDraftPerformanceCurveFileData.DesignData, out errorMessage))
-                //{
+                    calculationLibrary.MechanicalDraftPerformanceCurveCalculation(testIndex, MechanicalDraftPerformanceCurveFileData, OutputDataViewModel.MechanicalDraftPerformanceCurveOutput);
 
-                //}
-
-                //if (!DesignData.FillAndValidate(mechanicalDraftPerformanceCurveFileData, out errorMessage))
-                //{
-
-                //}
-
-
-                MechanicalDraftPerformanceCurveCalculationLibrary mechanicalDraftPerformanceCurveCalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
-
-                mechanicalDraftPerformanceCurveCalculationLibrary.MechanicalDraftPerformanceCurveCalculation(testIndex, mechanicalDraftPerformanceCurveFileData, MechanicalDraftPerformanceCurveOutputDataViewModel.MechanicalDraftPerformanceCurveOutput);
+                    OutputDataViewModel.FillTable();  
+                }
+                else
+                {
+                    returnValue = false;
+                }
             }
             catch (Exception exception)
             {
@@ -489,7 +485,7 @@ namespace ViewModels
 
         public DataTable GetDataTable()
         {
-            return MechanicalDraftPerformanceCurveOutputDataViewModel.NameValueUnitsDataTable.DataTable;
+            return OutputDataViewModel.NameValueUnitsDataTable.DataTable;
         }
 
         // Check design or test data, optionally prompting the user with bounds if errors are found.

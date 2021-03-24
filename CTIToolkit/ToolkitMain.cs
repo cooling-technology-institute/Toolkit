@@ -1,4 +1,5 @@
-﻿using CTIToolkit.Properties;
+﻿// Copyright Cooling Technology Institute 2019-2021
+using CTIToolkit.Properties;
 using System;
 using System.IO;
 using System.Windows.Forms;

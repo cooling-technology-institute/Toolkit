@@ -27,13 +27,13 @@ namespace ViewModels
             }
         }
 
-        public void FillTable(MechanicalDraftPerformanceCurveOutput data)
+        public void FillTable()
         {
             NameValueUnitsDataTable.DataTable.Clear();
-            NameValueUnitsDataTable.AddRow("Adjusted Flow", data.AdjustedFlow.ToString("F1"), Units.FlowRate);
-            NameValueUnitsDataTable.AddRow("Predicted Flow", data.PredictedFlow.ToString("F1"), Units.FlowRate);
-            NameValueUnitsDataTable.AddRow("Tower Capability", data.TowerCapability.ToString("F2"), ConstantUnits.Percentage);
-            NameValueUnitsDataTable.AddRow("Cold Water Temperature Deviation", data.ColdWaterTemperatureDeviation.ToString("1"), Units.Temperature);
+            NameValueUnitsDataTable.AddRow("Adjusted Flow", MechanicalDraftPerformanceCurveOutput.AdjustedFlow.ToString("F1"), Units.FlowRate);
+            NameValueUnitsDataTable.AddRow("Predicted Flow", MechanicalDraftPerformanceCurveOutput.PredictedFlow.ToString("F1"), Units.FlowRate);
+            NameValueUnitsDataTable.AddRow("Tower Capability", MechanicalDraftPerformanceCurveOutput.TowerCapability.ToString("F2"), ConstantUnits.Percentage);
+            NameValueUnitsDataTable.AddRow("Cold Water Temperature Deviation", MechanicalDraftPerformanceCurveOutput.ColdWaterTemperatureDeviation.ToString("1"), Units.Temperature);
         }
 
         public DataTable GetDataTable()

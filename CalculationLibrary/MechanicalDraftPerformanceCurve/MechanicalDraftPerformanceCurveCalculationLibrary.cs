@@ -11,10 +11,32 @@ namespace CalculationLibrary
     {
 		public void MechanicalDraftPerformanceCurveCalculation(int testIndex, MechanicalDraftPerformanceCurveFileData data, MechanicalDraftPerformanceCurveOutput output)
         {
+			string errorMessage = string.Empty;
+
 			DetermineAdjustedTestFlow(testIndex, data, output);
 
-			//if(data.DesignData.ValidateRanges())
+			if(data.DesignData.ValidateRanges(3, out errorMessage))
+            {
+				if (data.DesignData.ValidateRangedTemperatures(3, out errorMessage))
+				{
+					if (data.DesignData.ValidateWaterFlowRates(3, out errorMessage))
+					{
 
+					}
+					else
+					{
+
+					}
+				}
+				else
+				{
+
+				}
+			}
+			else
+            {
+
+            }
 			//if (m_filePerfData.m_designData.m_fnGetFlowCnt() < MIN_FLOW_COUNT)
 			//{
 			//	CString cstrMsg;

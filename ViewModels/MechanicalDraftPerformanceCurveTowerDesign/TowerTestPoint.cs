@@ -37,7 +37,11 @@ namespace ViewModels
             DryBulbTemperatureDataValue = new DryBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
             FanDriverPowerDataValue = new FanDriverPowerDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
             BarometricPressureDataValue = new BarometricPressureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+
+            string errorMessage;
             LiquidToGasRatioDataValue = new LiquidToGasRatioDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            LiquidToGasRatioDataValue.IsZeroValid = true;
+            LiquidToGasRatioDataValue.UpdateCurrentValue(0.0, out errorMessage);
         }
 
         public bool ConvertValues(bool isIS)
@@ -136,12 +140,13 @@ namespace ViewModels
                         errorMessage = string.Empty;
                     }
 
-                    if (!LiquidToGasRatioDataValue.UpdateCurrentValue(testData.TowerSpecifications.LiquidToGasRatio, out errorMessage))
-                    {
-                        returnValue = false;
-                        stringBuilder.AppendLine(label + errorMessage);
-                        errorMessage = string.Empty;
-                    }
+                    // the l/g is an output for a test point so should not be saved to file
+                    //if (!LiquidToGasRatioDataValue.UpdateCurrentValue(testData.TowerSpecifications.LiquidToGasRatio, out errorMessage))
+                    //{
+                    //    returnValue = false;
+                    //    stringBuilder.AppendLine(label + errorMessage);
+                    //    errorMessage = string.Empty;
+                    //}
 
                     errorMessage = stringBuilder.ToString();
                 }

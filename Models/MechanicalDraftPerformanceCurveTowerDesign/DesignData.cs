@@ -92,6 +92,71 @@ namespace Models
             return returnValue;
         }
 
+        public bool ValidateRangedTemperatures(int count, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+            StringBuilder stringBuilder = new StringBuilder();
+            bool returnValue = true;
+
+            // verify number of water flow rate
+            if (RangedTemperaturesDesignData.Count < count)
+            {
+                stringBuilder.AppendLine(string.Format("You must specify a minimum of {0} water flow rates.", count));
+            }
+
+            // verify ascending / decending order of water flow rate
+
+            // verify counts and ascending / decending order of wet bulb temperatures
+            foreach (RangedTemperaturesDesignData rangedTemperaturesDesignData in RangedTemperaturesDesignData)
+            {
+                if(rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature1 != 0.0)
+                {
+
+                }
+            }
+
+            if (RangeCount < count)
+            {
+                stringBuilder.AppendLine(string.Format("You must specify a minimum of {0} cold water temperatures in the Tower Design Data to calculate Tower Capability.", count));
+                returnValue = false;
+            }
+
+            errorMessage = stringBuilder.ToString();
+
+            return returnValue;
+        }
+
+        public bool ValidateWaterFlowRates(int count, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+            StringBuilder stringBuilder = new StringBuilder();
+            bool returnValue = true;
+
+            // verify number of water flow rate
+            if (RangedTemperaturesDesignData.Count < count)
+            {
+                stringBuilder.AppendLine(string.Format("You must specify a minimum of {0} water flow rates.", count));
+            }
+
+            // verify ascending / decending order of water flow rate
+
+            // verify counts and ascending / decending order of wet bulb temperatures
+            foreach (RangedTemperaturesDesignData rangedTemperaturesDesignData in RangedTemperaturesDesignData)
+            {
+                if (rangedTemperaturesDesignData.ColdWaterTemperaturesRange1)
+            }
+
+            if (RangeCount < count)
+            {
+                stringBuilder.AppendLine(string.Format("You must specify a minimum of {0} water flow rates in the Tower Design Data to calculate Tower Capability.", count));
+                returnValue = false;
+            }
+
+            errorMessage = stringBuilder.ToString();
+
+            return returnValue;
+        }
+
         bool CheckRange(int rangeNumber, double range, double previousRange, ref bool zeroDetected, StringBuilder stringBuilder)
         {
             bool returnValue = true;

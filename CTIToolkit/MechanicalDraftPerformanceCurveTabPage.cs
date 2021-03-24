@@ -1,10 +1,6 @@
-﻿using Models;
-using Newtonsoft.Json;
+﻿// Copyright Cooling Technology Institute 2019-2021
 using System;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using ViewModels;
@@ -276,166 +272,6 @@ namespace CTIToolkit
             return true;
         }
 
-        //private void TestWaterFlowRate_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider1.SetError(TestWaterFlowRate, "");
-        //}
-
-        //private void TestWaterFlowRate_Validating(object sender, CancelEventArgs e)
-        //{
-        //    string errorMessage = string.Empty;
-
-        //    if (!MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValueUpdateValue(TestWaterFlowRate.Text, out errorMessage))
-        //    {
-        //        // Cancel the event and select the text to be corrected by the user.
-        //        e.Cancel = true;
-        //        TestWaterFlowRate.Select(0, TestWaterFlowRate.Text.Length);
-
-        //        // Set the ErrorProvider error with the text to display. 
-        //        this.errorProvider1.SetError(TestWaterFlowRate, errorMessage);
-        //    }
-        //}
-
-        //private void TestHotWaterTemperature_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider1.SetError(TestHotWaterTemperature, "");
-        //}
-
-        //private void TestHotWaterTemperature_Validating(object sender, CancelEventArgs e)
-        //{
-        //    string errorMessage = string.Empty;
-
-        //    if (!MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValueUpdateValue(TestHotWaterTemperature.Text, out errorMessage))
-        //    {
-        //        // Cancel the event and select the text to be corrected by the user.
-        //        e.Cancel = true;
-        //        TestHotWaterTemperature.Select(0, TestHotWaterTemperature.Text.Length);
-
-        //        // Set the ErrorProvider error with the text to display. 
-        //        this.errorProvider1.SetError(TestHotWaterTemperature, errorMessage);
-        //    }
-        //}
-
-        //private void TestColdWaterTemperature_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider1.SetError(TestColdWaterTemperature, "");
-        //}
-
-        //private void TestColdWaterTemperature_Validating(object sender, CancelEventArgs e)
-        //{
-        //    string errorMessage = string.Empty;
-
-        //    if (!MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValueUpdateValue(TestColdWaterTemperature.Text, out errorMessage))
-        //    {
-        //        // Cancel the event and select the text to be corrected by the user.
-        //        e.Cancel = true;
-        //        TestColdWaterTemperature.Select(0, TestColdWaterTemperature.Text.Length);
-
-        //        // Set the ErrorProvider error with the text to display. 
-        //        this.errorProvider1.SetError(TestColdWaterTemperature, errorMessage);
-        //    }
-        //}
-
-        //private void TestWetBulbTemperature_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider1.SetError(TestWetBulbTemperature, "");
-        //}
-
-        //private void TestWetBulbTemperature_Validating(object sender, CancelEventArgs e)
-        //{
-        //    string errorMessage = string.Empty;
-
-        //    if (!MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValueUpdateValue(TestWetBulbTemperature.Text, out errorMessage))
-        //    {
-        //        // Cancel the event and select the text to be corrected by the user.
-        //        e.Cancel = true;
-        //        TestWetBulbTemperature.Select(0, TestWetBulbTemperature.Text.Length);
-
-        //        // Set the ErrorProvider error with the text to display. 
-        //        this.errorProvider1.SetError(TestWetBulbTemperature, errorMessage);
-        //    }
-        //}
-
-        //private void TestDryBulbTemperature_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider1.SetError(TestDryBulbTemperature, "");
-        //}
-
-        //private void TestDryBulbTemperature_Validating(object sender, CancelEventArgs e)
-        //{
-        //    string errorMessage = string.Empty;
-
-        //    if (!MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValueUpdateValue(TestDryBulbTemperature.Text, out errorMessage))
-        //    {
-        //        // Cancel the event and select the text to be corrected by the user.
-        //        e.Cancel = true;
-        //        TestDryBulbTemperature.Select(0, TestDryBulbTemperature.Text.Length);
-
-        //        // Set the ErrorProvider error with the text to display. 
-        //        this.errorProvider1.SetError(TestDryBulbTemperature, errorMessage);
-        //    }
-        //}
-
-        //private void TestFanDriverPower_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider1.SetError(TestFanDriverPower, "");
-        //}
-
-        //private void TestFanDriverPower_Validating(object sender, CancelEventArgs e)
-        //{
-        //    string errorMessage = string.Empty;
-
-        //    if (!MechanicalDraftPerformanceCurveViewModel.FanDriverPowerDataValueUpdateValue(TestFanDriverPower.Text, out errorMessage))
-        //    {
-        //        // Cancel the event and select the text to be corrected by the user.
-        //        e.Cancel = true;
-        //        TestFanDriverPower.Select(0, TestFanDriverPower.Text.Length);
-
-        //        // Set the ErrorProvider error with the text to display. 
-        //        this.errorProvider1.SetError(TestFanDriverPower, errorMessage);
-        //    }
-        //}
-
-        //private void TestBarometricPressure_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider1.SetError(TestBarometricPressure, "");
-        //}
-
-        //private void TestBarometricPressure_Validating(object sender, CancelEventArgs e)
-        //{
-        //    string errorMessage = string.Empty;
-
-        //    if (!MechanicalDraftPerformanceCurveViewModel.BarometricPressureDataValueUpdateValue(TestBarometricPressure.Text, out errorMessage))
-        //    {
-        //        // Cancel the event and select the text to be corrected by the user.
-        //        e.Cancel = true;
-        //        TestBarometricPressure.Select(0, TestBarometricPressure.Text.Length);
-
-        //        // Set the ErrorProvider error with the text to display. 
-        //        this.errorProvider1.SetError(TestBarometricPressure, errorMessage);
-        //    }
-        //}
-
-        //private void TestLiquidToGasRatio_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider1.SetError(TestLiquidToGasRatio, "");
-        //}
-
-        //private void TestLiquidToGasRatio_Validating(object sender, CancelEventArgs e)
-        //{
-        //    string errorMessage = string.Empty;
-
-        //    if (!MechanicalDraftPerformanceCurveViewModel.LiquidToGasRatioDataValueUpdateValue(TestLiquidToGasRatio.Text, out errorMessage))
-        //    {
-        //        // Cancel the event and select the text to be corrected by the user.
-        //        e.Cancel = true;
-        //        TestLiquidToGasRatio.Select(0, TestLiquidToGasRatio.Text.Length);
-
-        //        // Set the ErrorProvider error with the text to display. 
-        //        this.errorProvider1.SetError(TestLiquidToGasRatio, errorMessage);
-        //    }
-        //}
-
         private void DesignDataButton_Click(object sender, EventArgs e)
         {
             string errorMessage;
@@ -466,28 +302,43 @@ namespace CTIToolkit
         {
             string errorMessage = string.Empty;
 
-            if (MechanicalDraftPerformanceCurveViewModel.GetDataTable() != null)
-            {
-                DataGridView.DataSource = null;
-            }
+            int testIndex = TestPointTabControl.SelectedIndex;
 
-            if (MechanicalDraftPerformanceCurveViewModel.GetDataTable() != null)
+            //MechanicalDraftPerformanceCurveViewModel.TestPoints.Clear();
+
+            //// save the test points to view model
+            //foreach (TabPage tabPage in TestPointTabControl.TabPages)
+            //{
+            //    try
+            //    {
+            //        TestPointUserControl testPointUserControl = tabPage.Controls[0] as TestPointUserControl;
+            //        MechanicalDraftPerformanceCurveViewModel.TestPoints.Add(testPointUserControl.TowerTestPoint);
+            //    }
+            //    catch
+            //    { }
+            ////    if (!testPointUserControl.LoadData(towerTestPoint, out errorMessage))
+            ////    {
+            ////        returnValue = false;
+            ////    }
+            //}
+
+            if (MechanicalDraftPerformanceCurveViewModel.CalculatePerformanceCurve(TestPointTabControl.SelectedIndex, out errorMessage))
             {
-                // Set a DataGrid control's DataSource to the DataView.
-                DataGridView.DataSource = new DataView(MechanicalDraftPerformanceCurveViewModel.GetDataTable());
+                if (MechanicalDraftPerformanceCurveViewModel.GetDataTable() != null)
+                {
+                    DataGridView.DataSource = null;
+                }
+
+                if (MechanicalDraftPerformanceCurveViewModel.GetDataTable() != null)
+                {
+                    // Set a DataGrid control's DataSource to the DataView.
+                    DataGridView.DataSource = new DataView(MechanicalDraftPerformanceCurveViewModel.GetDataTable());
+                }
             }
-            //            if(MechanicalDraftPerformanceCurveViewModel.CalculatePerformanceCurve(TowerDesignDataUserControl.MechanicalDraftPerformanceCurveTowerDesignViewModel, out errorMessage))
-            //            {
-            //                if (MechanicalDraftPerformanceCurveViewModel.GetDataTable() != null)
-            //                {
-            //                    // Set a DataGrid control's DataSource to the DataView.
-            ////                    MechanicalDraftPerformanceCurveGridView.DataSource = new DataView(MechanicalDraftPerformanceCurveViewModel.GetDataTable());
-            //                }
-            //            }
-            //            else
-            //            {
-            //                MessageBox.Show(errorMessage, "Mechanical Draft Performance Curve Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //            }
+            else
+            {
+                MessageBox.Show(errorMessage, "Mechanical Draft Performance Curve Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public override void Print()
