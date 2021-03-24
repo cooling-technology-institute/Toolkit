@@ -31,6 +31,8 @@ namespace CTIToolkit
             string errorMessage = string.Empty;
             LoadTestPoints(out errorMessage);
 
+            SetUnits();
+
             if (Setup(out errorMessage))
             {
             }
@@ -45,8 +47,15 @@ namespace CTIToolkit
 
         private void SwitchUnits()
         {
-            MechanicalDraftPerformanceCurveViewModel.ConvertValues(IsInternationalSystemOfUnits_SI_);
+            string errorMessage = string.Empty;
 
+            MechanicalDraftPerformanceCurveViewModel.SwitchUnits(IsInternationalSystemOfUnits_SI_);
+            SetUnits();
+            Setup(out errorMessage);
+        }
+
+        private void SetUnits()
+        {
             if (IsInternationalSystemOfUnits_SI_)
             {
                 UnitsWaterFlowRate.Text = ConstantUnits.LitersPerSecond;

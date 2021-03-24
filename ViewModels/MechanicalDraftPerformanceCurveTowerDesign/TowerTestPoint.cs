@@ -51,14 +51,14 @@ namespace ViewModels
             if (IsInternationalSystemOfUnits_SI != isIS)
             {
                 IsInternationalSystemOfUnits_SI = isIS;
-                WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                HotWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                ColdWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                DryBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                FanDriverPowerDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                HotWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                ColdWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                DryBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                FanDriverPowerDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
                 isChanged = true;
             }
 
@@ -74,14 +74,14 @@ namespace ViewModels
             if (IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_SI)
             {
                 IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
-                WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                HotWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                ColdWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                DryBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                FanDriverPowerDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
+                WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                HotWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                ColdWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                DryBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                FanDriverPowerDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
             }
 
             try

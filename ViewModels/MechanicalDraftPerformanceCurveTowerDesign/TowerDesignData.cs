@@ -97,17 +97,23 @@ namespace ViewModels
             if (IsInternationalSystemOfUnits_SI != isIS)
             {
                 isChanged = true;
-                IsInternationalSystemOfUnits_SI = isIS;
-                WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                HotWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                ColdWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                DryBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                FanDriverPowerDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
 
-                foreach(TowerDesignCurveData towerDesignCurveData in TowerDesignCurveData)
+                IsInternationalSystemOfUnits_SI = isIS;
+                WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                HotWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                ColdWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                DryBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                FanDriverPowerDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                Range1Value.ConvertValue(IsInternationalSystemOfUnits_SI);
+                Range2Value.ConvertValue(IsInternationalSystemOfUnits_SI);
+                Range3Value.ConvertValue(IsInternationalSystemOfUnits_SI);
+                Range4Value.ConvertValue(IsInternationalSystemOfUnits_SI);
+                Range5Value.ConvertValue(IsInternationalSystemOfUnits_SI);
+
+                foreach (TowerDesignCurveData towerDesignCurveData in TowerDesignCurveData)
                 {
                     isChanged |= towerDesignCurveData.ConvertValues(isIS);
                 }
@@ -130,23 +136,7 @@ namespace ViewModels
                 TowerManufacturerValue = data.TowerManufacturer;
                 TowerTypeValue = data.TowerType;
 
-                if (IsInternationalSystemOfUnits_SI != data.TowerSpecifications.IsInternationalSystemOfUnits_SI)
-                {
-                    IsInternationalSystemOfUnits_SI = data.TowerSpecifications.IsInternationalSystemOfUnits_SI;
-                    WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                    HotWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                    ColdWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                    WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                    DryBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                    FanDriverPowerDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                    BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                    LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                    Range1Value.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                    Range2Value.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                    Range3Value.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                    Range4Value.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                    Range5Value.ConvertValue(IsInternationalSystemOfUnits_SI, false);
-                }
+                ConvertValues(IsInternationalSystemOfUnits_SI);
 
                 if (!WaterFlowRateDataValue.UpdateCurrentValue(data.TowerSpecifications.WaterFlowRate, out errorMessage))
                 {
@@ -245,7 +235,7 @@ namespace ViewModels
                 foreach (RangedTemperaturesDesignData rangedTemperaturesDesignData in data.RangedTemperaturesDesignData)
                 {
                     TowerDesignCurveData towerDesignCurveData = new TowerDesignCurveData(IsDemo, IsInternationalSystemOfUnits_SI);
-                    if (!towerDesignCurveData.LoadData(rangedTemperaturesDesignData, out errorMessage))
+                    if (!towerDesignCurveData.LoadData(IsInternationalSystemOfUnits_SI, rangedTemperaturesDesignData, out errorMessage))
                     {
                         returnValue = false;
                         stringBuilder.AppendLine(label + errorMessage);

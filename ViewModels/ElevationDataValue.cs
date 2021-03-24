@@ -19,12 +19,14 @@ namespace ViewModels
             IsDemo = isDemo;
             InputMessage = "Elevation";
             Format = "F4";
-            ConvertValue(isInternationalSystemOfUnits_IS_, false);
+            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            Current = Default;
+            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
         }
 
-        public override void ConvertValue(bool isSI, bool doConversion = false)
+        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_IS_)
         {
-            if (isSI)
+            if (isInternationalSystemOfUnits_IS_)
             {
                 Default = ElevationDefault;
                 Minimum = ElevationMinimumInternationalSystemOfUnits_IS_;
@@ -37,28 +39,32 @@ namespace ViewModels
                 Maximum = ElevationMaximum;
             }
 
-            if (doConversion)
+        }
+
+        public void SetInputAndTooltip(bool isInternationalSystemOfUnits_IS_)
+        {
+            InputValue = Current.ToString(Format);
+            ToolTip = string.Format(ElevationToolTipFormat, Minimum, Maximum);
+            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+        }
+
+        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_)
+        {
+            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            if (IsInternationalSystemOfUnits_SI_ != isInternationalSystemOfUnits_IS_)
             {
-                if (IsInternationalSystemOfUnits_SI_ && !isSI)
-                {
-                    // convert to United States Customary Units (IP)
-                    Current = UnitConverter.ConvertMetersToFeet(Current);
-                }
-                else
+                if (isInternationalSystemOfUnits_IS_)
                 {
                     // convert to InternationalSystemOfUnits_IS
                     Current = UnitConverter.ConvertFeetToMeters(Current);
                 }
+                else
+                {
+                    // convert to United States Customary Units (IP)
+                    Current = UnitConverter.ConvertMetersToFeet(Current);
+                }
             }
-            else
-            {
-                Current = Default;
-            }
-
-            InputValue = Current.ToString(Format);
-            ToolTip = string.Format(ElevationToolTipFormat, Minimum, Maximum);
-
-            IsInternationalSystemOfUnits_SI_ = isSI;
+            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
         }
     }
 }

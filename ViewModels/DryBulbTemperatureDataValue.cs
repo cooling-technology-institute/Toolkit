@@ -28,10 +28,12 @@ namespace ViewModels
             IsDemo = isDemo;
             InputMessage = "Dry Bulb Temperature";
             Format = "F2";
-            ConvertValue(isInternationalSystemOfUnits_IS_);
+            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            Current = Default;
+            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
         }
 
-        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_, bool doConversion = false)
+        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_IS_)
         {
             if (isInternationalSystemOfUnits_IS_)
             {
@@ -63,29 +65,32 @@ namespace ViewModels
                     Maximum = DryBulbTemperatureMaximum;
                 }
             }
+        }
 
-            if (doConversion)
+        public void SetInputAndTooltip(bool isInternationalSystemOfUnits_IS_)
+        {
+            InputValue = Current.ToString(Format);
+            ToolTip = string.Format(DryBulbTemperatureToolTipFormat, Minimum, Maximum);
+            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+        }
+
+        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_)
+        {
+            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            if (IsInternationalSystemOfUnits_SI_ != isInternationalSystemOfUnits_IS_)
             {
-                if (IsInternationalSystemOfUnits_SI_ && !isInternationalSystemOfUnits_IS_)
-                {
-                    // convert to United States Customary Units (IP)
-                    Current = UnitConverter.ConvertCelsiusToFahrenheit(Current);
-                }
-                else
+                if (isInternationalSystemOfUnits_IS_)
                 {
                     // convert to InternationalSystemOfUnits_IS
                     Current = UnitConverter.ConvertFahrenheitToCelsius(Current);
                 }
+                else
+                {
+                    // convert to United States Customary Units (IP)
+                    Current = UnitConverter.ConvertCelsiusToFahrenheit(Current);
+                }
             }
-            else
-            {
-                Current = Default;
-            }
-
-            InputValue = Current.ToString(Format);
-            ToolTip = string.Format(DryBulbTemperatureToolTipFormat, Minimum, Maximum);
-
-            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
         }
     }
 }

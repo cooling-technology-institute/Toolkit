@@ -19,21 +19,41 @@ namespace ViewModels
             IsDemo = isDemo;
             InputMessage = "Minimum";
             Format = "F1";
-            ConvertValue(isInternationalSystemOfUnits_IS_);
+            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            Current = Default;
+            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
         }
 
-        public override void ConvertValue(bool isIS, bool doConversion = false)
+        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_IS_)
         {
             Default = MinimumDefault;
             Minimum = MinimumMinimum;
             Maximum = MinimumMaximum;
+        }
 
-            Current = Default;
-
+        public void SetInputAndTooltip(bool isInternationalSystemOfUnits_IS_)
+        {
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(MinimumToolTipFormat, Minimum, Maximum);
+            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+        }
 
-            IsInternationalSystemOfUnits_SI_ = isIS;
+        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_)
+        {
+            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+
+            if (IsInternationalSystemOfUnits_SI_ != isInternationalSystemOfUnits_IS_)
+            {
+                if (isInternationalSystemOfUnits_IS_)
+                {
+                    // convert to InternationalSystemOfUnits_IS
+                }
+                else
+                {
+                    // convert to United States Customary Units (IP)
+                }
+            }
+            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace ViewModels
         public MechanicalDraftPerformanceCurveViewModel(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
-            IsInternationalSystemOfUnits_SI = IsInternationalSystemOfUnits_SI;
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
 
             DesignData = new TowerDesignData(IsDemo, IsInternationalSystemOfUnits_SI);
             TestPoints = new List<TowerTestPoint>();
@@ -37,23 +37,31 @@ namespace ViewModels
 
             BuildFilename();
 
-            MechanicalDraftPerformanceCurveFileData = new MechanicalDraftPerformanceCurveFileData(isInternationalSystemOfUnits_IS_);
+            MechanicalDraftPerformanceCurveFileData = new MechanicalDraftPerformanceCurveFileData(IsInternationalSystemOfUnits_SI);
+        }
+
+        public bool SwitchUnits(bool isIS)
+        {
+            bool isChange = false;
+
+            if (IsInternationalSystemOfUnits_SI != isIS)
+            {
+                IsInternationalSystemOfUnits_SI = isIS;
+                ConvertValues(isIS);
+            }
+            return isChange;
         }
 
         public bool ConvertValues(bool isIS)
         {
             bool isChange = false;
 
-            if (IsInternationalSystemOfUnits_SI != isIS)
+            isChange |= DesignData.ConvertValues(isIS);
+            foreach (TowerTestPoint towerTestPoint in TestPoints)
             {
-                isChange = true;
-                IsInternationalSystemOfUnits_SI = isIS;
-                isChange |= DesignData.ConvertValues(IsInternationalSystemOfUnits_SI);
-                foreach (TowerTestPoint towerTestPoint in TestPoints)
-                {
-                    isChange |= towerTestPoint.ConvertValues(IsInternationalSystemOfUnits_SI);
-                }
+                isChange |= towerTestPoint.ConvertValues(isIS);
             }
+
             return isChange;
         }
 
@@ -92,13 +100,6 @@ namespace ViewModels
 
             if (MechanicalDraftPerformanceCurveFileData != null)
             {
-                if (IsInternationalSystemOfUnits_SI != MechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI)
-                {
-                    //IsInternationalSystemOfUnits_SI = MechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI;
-                    // convert values to match selected units
-
-                 }
-
                 if (!LoadData(out errorMessage))
                 {
                     stringBuilder.AppendLine(errorMessage);
@@ -415,6 +416,8 @@ namespace ViewModels
                     }
                     TestPoints.Add(towerTestPoint);
                 }
+
+                ConvertValues(IsInternationalSystemOfUnits_SI);
             }
             return returnValue;
         }

@@ -33,7 +33,7 @@ namespace CTIToolkit
         public TowerDesignDataForm(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
-            IsInternationalSystemOfUnits_SI = IsInternationalSystemOfUnits_SI;
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
 
             InitializeComponent();
 
@@ -51,6 +51,8 @@ namespace CTIToolkit
             {
                 tabPage.SetUnitsStandard(applicationSettings);
             }
+            string errorMessage = string.Empty;
+            Setup(out errorMessage);
         }
 
         private void SwitchUnits()
@@ -718,7 +720,7 @@ namespace CTIToolkit
             {
                 rangedTemperaturesDesignData.WaterFlowRate = waterFlowRateDataValue.Current;
 
-                if (!towerDesignCurveData.LoadData(rangedTemperaturesDesignData, out errorMessage))
+                if (!towerDesignCurveData.LoadData(IsInternationalSystemOfUnits_SI, rangedTemperaturesDesignData, out errorMessage))
                 {
                     MessageBox.Show(errorMessage);
                 }

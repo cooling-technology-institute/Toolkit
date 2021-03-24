@@ -37,7 +37,7 @@ namespace ViewModels
             ToolTip = string.Empty;
         }
 
-        public abstract void ConvertValue(bool isInternationalSystemOfUnits_IS_, bool doConversion = false);
+        public abstract void ConvertValue(bool isInternationalSystemOfUnits_IS_);
 
         public bool UpdateValue(string input, out string errorMessage)
         {

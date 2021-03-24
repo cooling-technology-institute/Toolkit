@@ -682,7 +682,7 @@ namespace CTIToolkit
             {
                 rangedTemperaturesDesignData.WaterFlowRate = waterFlowRateDataValue.Current;
 
-                if (!towerDesignCurveData.LoadData(rangedTemperaturesDesignData, out errorMessage))
+                if (!towerDesignCurveData.LoadData(IsInternationalSystemOfUnits_SI, rangedTemperaturesDesignData, out errorMessage))
                 {
                     MessageBox.Show(errorMessage);
                 }

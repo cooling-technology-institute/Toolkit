@@ -63,7 +63,7 @@ namespace CTIToolkit
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
                
-            if(!TowerDesignCurveData.LoadData(rangedTemperaturesDesignData, out errorMessage))
+            if(!TowerDesignCurveData.LoadData(isInternationalSystemOfUnits_SI_, rangedTemperaturesDesignData, out errorMessage))
             {
                 stringBuilder.AppendLine(errorMessage);
                 errorMessage = string.Empty;

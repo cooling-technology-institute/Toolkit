@@ -15,10 +15,12 @@ namespace ViewModels
             IsDemo = isDemo;
             InputMessage = "Slope";
             Format = "F2";
-            ConvertValue(isInternationalSystemOfUnits_IS_);
+            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            Current = Default;
+            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
         }
 
-        public override void ConvertValue(bool isIS, bool doConversion = false)
+        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_IS_)
         {
             if (IsDemo)
             {
@@ -31,13 +33,20 @@ namespace ViewModels
 
             Minimum = -2;
             Maximum = 0;
+        }
 
-            Current = Default;
-
+        public void SetInputAndTooltip(bool isInternationalSystemOfUnits_IS_)
+        {
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(SlopeToolTipFormat, Minimum, Maximum);
+            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+        }
 
-            IsInternationalSystemOfUnits_SI_ = isIS;
+
+        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_)
+        {
+            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
         }
     }
 }

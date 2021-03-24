@@ -49,10 +49,10 @@ namespace ViewModels
             if (IsInternationalSystemOfUnits_SI != isIS)
             {
                 IsInternationalSystemOfUnits_SI = isIS;
-                LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                ElevationDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
-                BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI, true);
+                LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                ElevationDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
                 isChanged = true;
             }
 

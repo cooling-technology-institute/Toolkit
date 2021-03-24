@@ -1,5 +1,7 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 
+using CalculationLibrary;
+
 namespace ViewModels
 {
     public class WaterFlowRateDataValue : DataValue
@@ -27,10 +29,12 @@ namespace ViewModels
             IsDemo = isDemo;
             InputMessage = "Water Flow Rate";
             Format = "F2";
-            ConvertValue(isInternationalSystemOfUnits_IS_);
+            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            Current = Default;
+            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
         }
 
-        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_, bool doConversion = false)
+        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_IS_)
         {
             if (isInternationalSystemOfUnits_IS_)
             {
@@ -62,27 +66,34 @@ namespace ViewModels
                     Maximum = WaterFlowRateMaximum;
                 }
             }
+        }
 
-            if (doConversion)
+        public void SetInputAndTooltip(bool isInternationalSystemOfUnits_IS_)
+        {
+            InputValue = Current.ToString(Format);
+            ToolTip = string.Format(WaterFlowRateToolTipFormat, Minimum, Maximum);
+            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+        }
+
+        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_)
+        {
+            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+
+            if (IsInternationalSystemOfUnits_SI_ != isInternationalSystemOfUnits_IS_)
             {
-                if (IsInternationalSystemOfUnits_SI_ && !isInternationalSystemOfUnits_IS_)
+                if (isInternationalSystemOfUnits_IS_)
                 {
-                    // convert to United States Customary Units (IP)
+                    // convert to International System Of Units IS
+                    Current = UnitConverter.ConvertGallonsToLiters(Current);
                 }
                 else
                 {
-                    // convert to InternationalSystemOfUnits_IS
+                    // convert to United States Customary Units (IP)
+                    Current = UnitConverter.ConvertLitersToGallons(Current);
                 }
             }
-            else
-            {
-                Current = Default;
-            }
 
-            InputValue = Current.ToString(Format);
-            ToolTip = string.Format(WaterFlowRateToolTipFormat, Minimum, Maximum);
-
-            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
         }
     }
 }

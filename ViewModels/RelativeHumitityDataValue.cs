@@ -18,21 +18,38 @@ namespace ViewModels
             IsDemo = isDemo;
             InputMessage = "Relative Humidity";
             Format = "F2";
-            ConvertValue(isInternationalSystemOfUnits_IS_);
+            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            Current = Default;
+            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
         }
 
-        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_, bool doConversion = false)
+        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_IS_)
         {
             Default = RelativeHumidityDefault;
             Minimum = RelativeHumidityMinimum;
             Maximum = RelativeHumidityMaximum;
+        }
 
-            Current = Default;
-
+        public void SetInputAndTooltip(bool isInternationalSystemOfUnits_IS_)
+        {
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(RelativeHumidityToolTipFormat, Minimum, Maximum);
-
             IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+        }
+
+        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_)
+        {
+            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            if (IsInternationalSystemOfUnits_SI_ != isInternationalSystemOfUnits_IS_)
+            {
+                if (isInternationalSystemOfUnits_IS_)
+                {
+                }
+                else
+                {
+                }
+            }
+            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
         }
     }
 }

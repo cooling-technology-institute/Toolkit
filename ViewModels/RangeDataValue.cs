@@ -23,10 +23,12 @@ namespace ViewModels
             InputMessage = "Range";
             Format = "F2";
             IsZeroValid = true;
-            ConvertValue(isInternationalSystemOfUnits_IS_);
+            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            Current = Default;
+            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
         }
 
-        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_, bool doConversion = false)
+        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_IS_)
         {
             if (isInternationalSystemOfUnits_IS_)
             {
@@ -40,27 +42,34 @@ namespace ViewModels
                 Minimum = RangeMinimum;
                 Maximum = RangeMaximum;
             }
+        }
 
-            if (doConversion)
+        public void SetInputAndTooltip(bool isInternationalSystemOfUnits_IS_)
+        {
+            InputValue = Current.ToString(Format);
+            ToolTip = string.Format(RangeToolTipFormat, Minimum, Maximum);
+            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+        }
+
+        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_)
+        {
+            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+
+            if (IsInternationalSystemOfUnits_SI_ != isInternationalSystemOfUnits_IS_)
             {
-                if (IsInternationalSystemOfUnits_SI_ && !isInternationalSystemOfUnits_IS_)
+                if (isInternationalSystemOfUnits_IS_)
                 {
-                    // convert to United States Customary Units (IP)
-                    InitializeValue(UnitConverter.ConvertCelsiusToFahrenheit(Current));
+                    // convert to InternationalSystemOfUnits_IS
+                    Current /= 1.8;
                 }
                 else
                 {
-                    // convert to InternationalSystemOfUnits_IS
-                    InitializeValue(Current = UnitConverter.ConvertFahrenheitToCelsius(Current));
+                    // convert to United States Customary Units (IP)
+                    Current *= 1.8;
                 }
             }
-            else
-            {
-                InitializeValue(Default);
-            }
-            ToolTip = string.Format(RangeToolTipFormat, Minimum, Maximum);
 
-            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
         }
     }
 }

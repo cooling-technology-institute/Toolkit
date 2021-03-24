@@ -143,7 +143,9 @@ namespace Models
             // verify counts and ascending / decending order of wet bulb temperatures
             foreach (RangedTemperaturesDesignData rangedTemperaturesDesignData in RangedTemperaturesDesignData)
             {
-                if (rangedTemperaturesDesignData.ColdWaterTemperaturesRange1)
+                if (rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature1 == 0.0)
+                { 
+                }
             }
 
             if (RangeCount < count)

@@ -11,10 +11,12 @@ namespace ViewModels
             IsDemo = isDemo;
             InputMessage = "C";
             Format = "F1";
-            ConvertValue(isInternationalSystemOfUnits_IS_);
+            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            Current = Default;
+            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
         }
 
-        public override void ConvertValue(bool isIS, bool doConversion = false)
+        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_IS_)
         {
             if (IsDemo)
             {
@@ -26,14 +28,20 @@ namespace ViewModels
                 Default = 0;
                 Minimum = 0;
             }
-
             Maximum = 10;
-            Current = Default;
+        }
 
+        public void SetInputAndTooltip(bool isInternationalSystemOfUnits_IS_)
+        {
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(C1ToolTipFormat, Minimum, Maximum);
+            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+        }
 
-            IsInternationalSystemOfUnits_SI_ = isIS;
+        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_)
+        {
+            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
         }
     }
 }
