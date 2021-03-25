@@ -50,11 +50,13 @@ namespace ViewModels
 
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_SI { get; set; }
+        public string ErrorMessage { get; set; }
 
         public TowerDesignData(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
+            ErrorMessage = string.Empty;
 
             OwnerNameValue = string.Empty;
             ProjectNameValue = string.Empty;
@@ -115,19 +117,20 @@ namespace ViewModels
 
                 foreach (TowerDesignCurveData towerDesignCurveData in TowerDesignCurveData)
                 {
-                    isChanged |= towerDesignCurveData.ConvertValues(isIS);
+                    isChanged |= towerDesignCurveData.ConvertValues(IsInternationalSystemOfUnits_SI);
                 }
             }
 
             return isChanged;
         }
 
-        public bool LoadData(DesignData data, out string errorMessage)
+        public bool LoadData(bool isInternationalSystemOfUnits_SI, DesignData data)
         {
-            errorMessage = string.Empty;
+            string errorMessage = string.Empty;
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
             string label = "Design Data: ";
+            bool isSI = IsInternationalSystemOfUnits_SI;
             try
             {
                 OwnerNameValue = data.OwnerName;
@@ -136,7 +139,7 @@ namespace ViewModels
                 TowerManufacturerValue = data.TowerManufacturer;
                 TowerTypeValue = data.TowerType;
 
-                ConvertValues(IsInternationalSystemOfUnits_SI);
+                ConvertValues(isInternationalSystemOfUnits_SI);
 
                 if (!WaterFlowRateDataValue.UpdateCurrentValue(data.TowerSpecifications.WaterFlowRate, out errorMessage))
                 {
@@ -234,22 +237,26 @@ namespace ViewModels
                 TowerDesignCurveData.Clear();
                 foreach (RangedTemperaturesDesignData rangedTemperaturesDesignData in data.RangedTemperaturesDesignData)
                 {
-                    TowerDesignCurveData towerDesignCurveData = new TowerDesignCurveData(IsDemo, IsInternationalSystemOfUnits_SI);
-                    if (!towerDesignCurveData.LoadData(IsInternationalSystemOfUnits_SI, rangedTemperaturesDesignData, out errorMessage))
+                    TowerDesignCurveData towerDesignCurveData = new TowerDesignCurveData(IsDemo, isInternationalSystemOfUnits_SI);
+                    if (!towerDesignCurveData.LoadData(isInternationalSystemOfUnits_SI, rangedTemperaturesDesignData))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine(label + errorMessage);
+                        stringBuilder.AppendLine(label + towerDesignCurveData.ErrorMessage);
                         errorMessage = string.Empty;
                     }
                     TowerDesignCurveData.Add(towerDesignCurveData);
                 }
-
+                
+                ConvertValues(isSI);
             }
             catch (Exception e)
             {
-                errorMessage = string.Format("Failure to Mechanical Draft Performance Curve Design Data. Exception: {0}", e.ToString());
+                ErrorMessage = string.Format("Failure to Mechanical Draft Performance Curve Design Data. Exception: {0}", e.ToString());
                 returnValue = false;
             }
+            
+            ErrorMessage = stringBuilder.ToString();
+            
             return returnValue;
         }
 
@@ -432,9 +439,9 @@ namespace ViewModels
             return RangeCount;
         }
 
-        public bool FillAndValidate(DesignData data, out string errorMessage)
+        public bool FillAndValidate(DesignData data)
         {
-            errorMessage = string.Empty;
+            ErrorMessage = string.Empty;
             bool returnValue = true;
 
             try
@@ -466,13 +473,16 @@ namespace ViewModels
                 foreach (TowerDesignCurveData towerDesignCurveData in TowerDesignCurveData)
                 {
                     RangedTemperaturesDesignData rangedTemperaturesDesignData = new RangedTemperaturesDesignData();
-                    towerDesignCurveData.FillAndValidate(ref rangedTemperaturesDesignData, out errorMessage);
+                    if(!towerDesignCurveData.FillAndValidate(ref rangedTemperaturesDesignData))
+                    {
+                        ErrorMessage += towerDesignCurveData.ErrorMessage;
+                    }
                     data.RangedTemperaturesDesignData.Add(rangedTemperaturesDesignData);
                 }
             }
             catch (Exception exception)
             {
-                errorMessage = string.Format("Failure to fill and validate Mechanical Draft Performance Curve Design Data. Exception {0}.", exception.ToString());
+                ErrorMessage = string.Format("Failure to fill and validate Mechanical Draft Performance Curve Design Data. Exception {0}.", exception.ToString());
             }
             return returnValue;
         }

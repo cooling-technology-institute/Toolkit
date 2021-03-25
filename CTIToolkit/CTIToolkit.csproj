@@ -141,12 +141,6 @@
     <Compile Include="TowerDesignDataForm.Designer.cs">
       <DependentUpon>TowerDesignDataForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TowerDesignDataUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="TowerDesignDataUserControl.Designer.cs">
-      <DependentUpon>TowerDesignDataUserControl.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
@@ -173,9 +167,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TowerDesignDataForm.resx">
       <DependentUpon>TowerDesignDataForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TowerDesignDataUserControl.resx">
-      <DependentUpon>TowerDesignDataUserControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

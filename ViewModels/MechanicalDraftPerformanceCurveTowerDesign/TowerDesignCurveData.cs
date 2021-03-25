@@ -54,10 +54,12 @@ namespace ViewModels
 
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_SI { get; set; }
+        public string ErrorMessage { get; set; }
 
         public TowerDesignCurveData(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
+            ErrorMessage = string.Empty;
 
             WaterFlowRateDataValue = new WaterFlowRateDataValue(IsDemo, isInternationalSystemOfUnits_IS_);
             WetBulbTemperatureDataValue1 = new WetBulbTemperatureDataValue(IsDemo, isInternationalSystemOfUnits_IS_);
@@ -101,47 +103,6 @@ namespace ViewModels
             Range5ColdWaterTemperatureDataValue4 = new ColdWaterTemperatureDataValue(IsDemo, isInternationalSystemOfUnits_IS_);
             Range5ColdWaterTemperatureDataValue5 = new ColdWaterTemperatureDataValue(IsDemo, isInternationalSystemOfUnits_IS_);
             Range5ColdWaterTemperatureDataValue6 = new ColdWaterTemperatureDataValue(IsDemo, isInternationalSystemOfUnits_IS_);
-
-            if (IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_IS_)
-            {
-                IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
-                WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
-                WetBulbTemperatureDataValue1.ConvertValue(IsInternationalSystemOfUnits_SI);
-                WetBulbTemperatureDataValue2.ConvertValue(IsInternationalSystemOfUnits_SI);
-                WetBulbTemperatureDataValue3.ConvertValue(IsInternationalSystemOfUnits_SI);
-                WetBulbTemperatureDataValue4.ConvertValue(IsInternationalSystemOfUnits_SI);
-                WetBulbTemperatureDataValue5.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range1ColdWaterTemperatureDataValue1.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range1ColdWaterTemperatureDataValue2.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range1ColdWaterTemperatureDataValue3.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range1ColdWaterTemperatureDataValue4.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range1ColdWaterTemperatureDataValue5.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range1ColdWaterTemperatureDataValue6.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range2ColdWaterTemperatureDataValue1.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range2ColdWaterTemperatureDataValue2.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range2ColdWaterTemperatureDataValue3.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range2ColdWaterTemperatureDataValue4.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range2ColdWaterTemperatureDataValue5.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range2ColdWaterTemperatureDataValue6.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range3ColdWaterTemperatureDataValue1.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range3ColdWaterTemperatureDataValue2.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range3ColdWaterTemperatureDataValue3.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range3ColdWaterTemperatureDataValue4.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range3ColdWaterTemperatureDataValue5.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range3ColdWaterTemperatureDataValue6.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range4ColdWaterTemperatureDataValue1.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range4ColdWaterTemperatureDataValue2.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range4ColdWaterTemperatureDataValue3.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range4ColdWaterTemperatureDataValue4.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range4ColdWaterTemperatureDataValue5.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range4ColdWaterTemperatureDataValue6.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range5ColdWaterTemperatureDataValue1.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range5ColdWaterTemperatureDataValue2.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range5ColdWaterTemperatureDataValue3.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range5ColdWaterTemperatureDataValue4.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range5ColdWaterTemperatureDataValue5.ConvertValue(IsInternationalSystemOfUnits_SI);
-                Range5ColdWaterTemperatureDataValue6.ConvertValue(IsInternationalSystemOfUnits_SI);
-            }
         }
 
         public bool ConvertValues(bool isIS)
@@ -192,9 +153,9 @@ namespace ViewModels
             return isChanged;
         }
 
-        public bool LoadData(bool isIS, RangedTemperaturesDesignData rangedTemperaturesDesignData, out string errorMessage)
+        public bool LoadData(bool isIS, RangedTemperaturesDesignData rangedTemperaturesDesignData)
         {
-            errorMessage = string.Empty;
+            string errorMessage = string.Empty;
 
             WaterFlowRateDataValue.UpdateCurrentValue(rangedTemperaturesDesignData.WaterFlowRate, out errorMessage);
 
@@ -245,9 +206,9 @@ namespace ViewModels
             return true;
         }
 
-        public bool FillAndValidate(ref RangedTemperaturesDesignData rangedTemperaturesDesignData, out string errorMessage)
+        public bool FillAndValidate(ref RangedTemperaturesDesignData rangedTemperaturesDesignData)
         {
-            errorMessage = string.Empty;
+            ErrorMessage = string.Empty;
             bool returnValue = true;
 
             try
@@ -297,7 +258,7 @@ namespace ViewModels
             }
             catch (Exception e)
             {
-                errorMessage = string.Format("Tower Design Curve Data fill failed. Exception: {0} ", e.ToString());
+                ErrorMessage = string.Format("Tower Design Curve Data fill failed. Exception: {0} ", e.ToString());
             }
             return returnValue;
         }

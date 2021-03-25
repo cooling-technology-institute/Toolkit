@@ -15,46 +15,39 @@ namespace CTIToolkit
 
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_SI_ { get; set; }
+        public string ErrorMessage { get; set; }
 
         public MechanicalDraftPerformanceCurveTabPage(ApplicationSettings applicationSettings)
         {
             InitializeComponent();
 
             IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            ErrorMessage = string.Empty;
 
             MechanicalDraftPerformanceCurveViewModel = new MechanicalDraftPerformanceCurveViewModel(IsDemo, IsInternationalSystemOfUnits_SI_);
-
-            TowerDesignDataForm = new TowerDesignDataForm(IsDemo, IsInternationalSystemOfUnits_SI_);
-
+            TowerDesignDataForm = new TowerDesignDataForm(IsDemo, IsInternationalSystemOfUnits_SI_, MechanicalDraftPerformanceCurveViewModel.DesignData);
             TestPointTabControl.TabPages.Clear();
 
-            string errorMessage = string.Empty;
-            LoadTestPoints(out errorMessage);
-
-            SetUnits();
-
-            if (Setup(out errorMessage))
-            {
-            }
+            LoadTestPoints();
+            SetDisplayedUnits();
+            Setup();
         }
 
         public void SetUnitsStandard(ApplicationSettings applicationSettings)
         {
             IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
-            SwitchUnits();
             TowerDesignDataForm.SetUnitsStandard(applicationSettings);
+            SwitchUnits();
         }
 
         private void SwitchUnits()
         {
-            string errorMessage = string.Empty;
-
             MechanicalDraftPerformanceCurveViewModel.SwitchUnits(IsInternationalSystemOfUnits_SI_);
-            SetUnits();
-            Setup(out errorMessage);
+            SetDisplayedUnits();
+            Setup();
         }
 
-        private void SetUnits()
+        private void SetDisplayedUnits()
         {
             if (IsInternationalSystemOfUnits_SI_)
             {
@@ -78,18 +71,17 @@ namespace CTIToolkit
             }
         }
 
-        public bool OpenDataFile(string fileName, out string errorMessage)
+        public bool OpenDataFile(string fileName)
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
 
-            if(MechanicalDraftPerformanceCurveViewModel.OpenDataFile(fileName, out errorMessage))
+            if(MechanicalDraftPerformanceCurveViewModel.OpenDataFile(fileName))
             {
-                if (!TowerDesignDataForm.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData, out errorMessage))
+                if (!TowerDesignDataForm.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData))
                 {
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(TowerDesignDataForm.ErrorMessage);
                     returnValue = false;
-                    errorMessage = string.Empty;
                 }
 
                 // enable controls
@@ -102,43 +94,45 @@ namespace CTIToolkit
                     ViewGraph.Enabled = true;
                 }
 
-                if (!LoadTestPoints(out errorMessage))
+                if (!LoadTestPoints())
                 {
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(ErrorMessage);
                     returnValue = false;
-                    errorMessage = string.Empty;
+                    ErrorMessage = string.Empty;
                 }
 
-                if (!Setup(out errorMessage))
+                if (!Setup())
                 {
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(ErrorMessage);
                     returnValue = false;
-                    errorMessage = string.Empty;
+                    ErrorMessage = string.Empty;
                 }
 
             }
             else
             {
-                stringBuilder.AppendLine("Unable to load file. File contains invalid data");
+                stringBuilder.AppendLine("Unable to load file. File contains invalid data.");
             }
 
-            errorMessage = stringBuilder.ToString();
+            if(!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
 
             return returnValue;
         }
 
-        public bool OpenNewDataFile(string fileName, out string errorMessage)
+        public bool OpenNewDataFile(string fileName)
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
 
-            if (MechanicalDraftPerformanceCurveViewModel.OpenNewDataFile(fileName, out errorMessage))
+            if (MechanicalDraftPerformanceCurveViewModel.OpenNewDataFile(fileName))
             {
-                if (!TowerDesignDataForm.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData, out errorMessage))
+                if (!TowerDesignDataForm.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData))
                 {
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(TowerDesignDataForm.ErrorMessage);
                     returnValue = false;
-                    errorMessage = string.Empty;
                 }
 
                 // enable controls
@@ -151,43 +145,45 @@ namespace CTIToolkit
                     ViewGraph.Enabled = true;
                 }
 
-                if (!LoadTestPoints(out errorMessage))
+                if (!LoadTestPoints())
                 {
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(ErrorMessage);
                     returnValue = false;
-                    errorMessage = string.Empty;
                 }
 
-                if (!Setup(out errorMessage))
+                if (!Setup())
                 {
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(ErrorMessage);
                     returnValue = false;
-                    errorMessage = string.Empty;
                 }
-
             }
             else
             {
                 stringBuilder.AppendLine("Unable to load file. File contains invalid data");
+                returnValue = false;
             }
 
-            errorMessage = stringBuilder.ToString();
+            if (!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
 
             return returnValue;
         }
 
-        public bool LoadTestPoints(out string errorMessage)
+        public bool LoadTestPoints()
         {
+            StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
-
-            errorMessage = string.Empty;
+            ErrorMessage = string.Empty;
 
             TestPointTabControl.TabPages.Clear();
             foreach (TowerTestPoint towerTestPoint in MechanicalDraftPerformanceCurveViewModel.TestPoints)
             {
                 TestPointUserControl testPointUserControl = new TestPointUserControl();
-                if(!testPointUserControl.LoadData(towerTestPoint, out errorMessage))
+                if(!testPointUserControl.LoadData(towerTestPoint))
                 {
+                    stringBuilder.AppendLine(testPointUserControl.ErrorMessage);
                     returnValue = false;
                 }
                 TabPage tabPage = new TabPage();
@@ -195,14 +191,20 @@ namespace CTIToolkit
                 tabPage.Text = towerTestPoint.TestName;
                 TestPointTabControl.TabPages.Add(tabPage);
             }
+
+            if(!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
+
             return returnValue;
         }
 
-        public bool SaveDataFile(out string errorMessage)
+        public bool SaveDataFile()
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
-            errorMessage = string.Empty;
+            ErrorMessage = string.Empty;
 
             //if (!MechanicalDraftPerformanceCurveViewModel.SaveDataFile(out errorMessage))
             //{
@@ -211,14 +213,16 @@ namespace CTIToolkit
             //    errorMessage = string.Empty;
             //}
 
-            if (!Setup(out errorMessage))
+            if (!Setup())
             {
-                stringBuilder.AppendLine(errorMessage);
+                stringBuilder.AppendLine(ErrorMessage);
                 returnValue = false;
-                errorMessage = string.Empty;
             }
 
-            errorMessage = stringBuilder.ToString();
+            if (!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
 
             return returnValue;
         }
@@ -248,9 +252,8 @@ namespace CTIToolkit
         //    return returnValue;
         //}
 
-        private bool Setup(out string errorMessage)
+        private bool Setup()
         {
-            errorMessage = string.Empty;
             try
             {
                 // design data
@@ -275,7 +278,7 @@ namespace CTIToolkit
             }
             catch (Exception e)
             {
-                errorMessage = string.Format("Failure to load page. Exception: {0}", e.ToString());
+                ErrorMessage = string.Format("Failure to load page. Exception: {0}", e.ToString());
                 return false;
             }
             return true;
@@ -283,8 +286,6 @@ namespace CTIToolkit
 
         private void DesignDataButton_Click(object sender, EventArgs e)
         {
-            string errorMessage;
-
             // set data
             if (TowerDesignDataForm.ShowDialog(this) == DialogResult.OK)
             {
@@ -295,7 +296,7 @@ namespace CTIToolkit
                     AddTestPointName.Enabled = true;
 
                     // update data on this page
-                    if (Setup(out errorMessage))
+                    if (Setup())
                     {
 
                     }
@@ -303,7 +304,7 @@ namespace CTIToolkit
             }
             else
             {
-                TowerDesignDataForm.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData, out errorMessage);
+                TowerDesignDataForm.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData);
             }
         }
 
@@ -331,7 +332,7 @@ namespace CTIToolkit
             ////    }
             //}
 
-            if (MechanicalDraftPerformanceCurveViewModel.CalculatePerformanceCurve(TestPointTabControl.SelectedIndex, out errorMessage))
+            if (MechanicalDraftPerformanceCurveViewModel.CalculatePerformanceCurve(TestPointTabControl.SelectedIndex))
             {
                 if (MechanicalDraftPerformanceCurveViewModel.GetDataTable() != null)
                 {
@@ -346,7 +347,7 @@ namespace CTIToolkit
             }
             else
             {
-                MessageBox.Show(errorMessage, "Mechanical Draft Performance Curve Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(MechanicalDraftPerformanceCurveViewModel.ErrorMessage, "Mechanical Draft Performance Curve Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -370,31 +371,49 @@ namespace CTIToolkit
 
         private void AddTestPointButton_Click(object sender, EventArgs e)
         {
-            string errorMessage;
-
-            AddTabPage(AddTestPointName.Text, out errorMessage);
+            ErrorMessage = string.Empty;
+            if(!AddTabPage(AddTestPointName.Text))
+            {
+                //todo Message box
+            }
             AddTestPointName.Text = string.Empty;
         }
 
-        private bool AddTabPage(string testName, out string errorMessage)
+        private bool AddTabPage(string testName)
         {
             bool returnValue = true;
+            StringBuilder stringBuilder = new StringBuilder();
 
             try
             {
-                MechanicalDraftPerformanceCurveViewModel.AddTestPoint(testName, out errorMessage);
-                TabPage tabPage = new TabPage();
-                tabPage.Text = testName;
-                TestPointUserControl testPointUserControl = new TestPointUserControl();
-                testPointUserControl.LoadData(MechanicalDraftPerformanceCurveViewModel.TestPoints[MechanicalDraftPerformanceCurveViewModel.TestPoints.Count - 1], out errorMessage);
-                tabPage.Controls.Add(testPointUserControl);
-                TestPointTabControl.TabPages.Add(tabPage);
-                TestPointTabControl.SelectedIndex = TestPointTabControl.TabPages.Count - 1;
+                if(MechanicalDraftPerformanceCurveViewModel.AddTestPoint(testName))
+                {
+                    TabPage tabPage = new TabPage();
+                    tabPage.Text = testName;
+                    TestPointUserControl testPointUserControl = new TestPointUserControl();
+                    if (!testPointUserControl.LoadData(MechanicalDraftPerformanceCurveViewModel.TestPoints[MechanicalDraftPerformanceCurveViewModel.TestPoints.Count - 1]))
+                    {
+                        stringBuilder.AppendLine(testPointUserControl.ErrorMessage);
+                        returnValue = false;
+                    }
+                    tabPage.Controls.Add(testPointUserControl);
+                    TestPointTabControl.TabPages.Add(tabPage);
+                    TestPointTabControl.SelectedIndex = TestPointTabControl.TabPages.Count - 1;
+                }
+                else
+                {
+                    stringBuilder.AppendLine(MechanicalDraftPerformanceCurveViewModel.ErrorMessage);
+                }
             }
             catch (Exception e)
             {
-                errorMessage = string.Format("Tower design page setup failed. Exception: {0} ", e.ToString());
+                stringBuilder.AppendLine(string.Format("Tower design page setup failed. Exception: {0} ", e.ToString()));
                 returnValue = false;
+            }
+
+            if(!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
             }
 
             return returnValue;

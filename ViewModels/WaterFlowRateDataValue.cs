@@ -84,12 +84,12 @@ namespace ViewModels
                 if (isInternationalSystemOfUnits_IS_)
                 {
                     // convert to International System Of Units IS
-                    Current = UnitConverter.ConvertGallonsToLiters(Current);
+                    Current = UnitConverter.ConvertGallonPerMinuteToLitersPerSecond(Current);
                 }
                 else
                 {
                     // convert to United States Customary Units (IP)
-                    Current = UnitConverter.ConvertLitersToGallons(Current);
+                    Current = UnitConverter.ConvertLitersPerSecondToGallonPerMinute(Current);
                 }
             }
 

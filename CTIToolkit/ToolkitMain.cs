@@ -119,9 +119,9 @@ namespace CTIToolkit
                 {
                     string errorMessage = string.Empty;
 
-                    if (!MechanicalDraftPerformanceCurveUserControl.OpenNewDataFile(saveFileDialog.FileName, out errorMessage))
+                    if (!MechanicalDraftPerformanceCurveUserControl.OpenNewDataFile(saveFileDialog.FileName))
                     {
-                        MessageBox.Show(errorMessage);
+                        MessageBox.Show(MechanicalDraftPerformanceCurveUserControl.ErrorMessage);
                     }
                 }
             }
@@ -144,11 +144,9 @@ namespace CTIToolkit
                  
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    string errorMessage = string.Empty;
-
-                    if(!MechanicalDraftPerformanceCurveUserControl.OpenDataFile(openFileDialog.FileName, out errorMessage))
+                    if(!MechanicalDraftPerformanceCurveUserControl.OpenDataFile(openFileDialog.FileName))
                     {
-                        MessageBox.Show(errorMessage);
+                        MessageBox.Show(MechanicalDraftPerformanceCurveUserControl.ErrorMessage);
                     }
 //                    if (!MechanicalDraftPerformanceCurveSplitTabPage.OpenDataFile(openFileDialog.FileName, out errorMessage))
   //                  {
@@ -160,11 +158,9 @@ namespace CTIToolkit
 
         private void SaveMenuItem_Click(object sender, EventArgs e)
         {
-            string errorMessage = string.Empty;
-
-            if (!MechanicalDraftPerformanceCurveUserControl.SaveDataFile(out errorMessage))
+            if (!MechanicalDraftPerformanceCurveUserControl.SaveDataFile())
             {
-                MessageBox.Show(errorMessage);
+                MessageBox.Show(MechanicalDraftPerformanceCurveUserControl.ErrorMessage);
             }
         }
 
@@ -185,9 +181,9 @@ namespace CTIToolkit
                 {
                     string errorMessage = string.Empty;
 
-                    if (!MechanicalDraftPerformanceCurveUserControl.OpenDataFile(saveFileDialog.FileName, out errorMessage))
+                    if (!MechanicalDraftPerformanceCurveUserControl.OpenDataFile(saveFileDialog.FileName))
                     {
-                        MessageBox.Show(errorMessage);
+                        MessageBox.Show(MechanicalDraftPerformanceCurveUserControl.ErrorMessage);
                     }
                 }
             }

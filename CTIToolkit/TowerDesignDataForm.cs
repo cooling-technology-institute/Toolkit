@@ -1,9 +1,9 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
+
 using Models;
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using ViewModels;
 
@@ -12,6 +12,7 @@ namespace CTIToolkit
     public partial class TowerDesignDataForm : Form
     {
         public TowerDesignData TowerDesignData { get; set; }
+        public string ErrorMessage { get; set; }
 
         private bool IsChanged { get; set; }
 
@@ -30,35 +31,33 @@ namespace CTIToolkit
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_SI { get; set; }
 
-        public TowerDesignDataForm(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        public TowerDesignDataForm(bool isDemo, bool isInternationalSystemOfUnits_IS_, TowerDesignData towerDesignData)
         {
-            IsDemo = isDemo;
-            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
-
             InitializeComponent();
 
-            TowerDesignData = new TowerDesignData(IsDemo, IsInternationalSystemOfUnits_SI);
+            IsDemo = isDemo;
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
+            ErrorMessage = string.Empty;
 
-            string errorMessage;
-            Setup(out errorMessage);
+            TowerDesignData = towerDesignData;
+            SetDisplayedUnits();
+            Setup();
         }
 
         public void SetUnitsStandard(ApplicationSettings applicationSettings)
         {
             IsInternationalSystemOfUnits_SI = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
-            SwitchUnits();
+            SetDisplayedUnits();
+            TowerDesignData.ConvertValues(IsInternationalSystemOfUnits_SI);
             foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
             {
                 tabPage.SetUnitsStandard(applicationSettings);
             }
-            string errorMessage = string.Empty;
-            Setup(out errorMessage);
+            Setup();
         }
 
-        private void SwitchUnits()
+        private void SetDisplayedUnits()
         {
-            string errorMessage = string.Empty;
-
             if (IsInternationalSystemOfUnits_SI)
             {
                 WaterFlowRateUnits.Text = ConstantUnits.LitersPerSecond;
@@ -108,39 +107,24 @@ namespace CTIToolkit
         //    }
         //}
 
-        public bool LoadData(TowerDesignData data, out string errorMessage)
+        public bool LoadData(TowerDesignData data)
         {
             TowerDesignData = data;
             bool returnValue = true;
-            errorMessage = string.Empty;
-            StringBuilder stringBuilder = new StringBuilder();
-            //string label = "Design Data: ";
-
             IsChanged = false;
 
-            //IsInternationalSystemOfUnits_SI = data.IsInternationalSystemOfUnits_SI;
-
-            //if (!TowerDesignData.LoadData(data, out errorMessage))
-            //{
-            //    returnValue = false;
-            //    stringBuilder.AppendLine(label + errorMessage);
-            //    errorMessage = string.Empty;
-            //}
-
-            if (!Setup(out errorMessage))
+            if (!Setup())
             {
-                stringBuilder.AppendLine(errorMessage);
-                errorMessage = string.Empty;
                 returnValue = false;
             }
 
             return returnValue;
         }
 
-        private bool Setup(out string errorMessage)
+        private bool Setup()
         {
             bool returnValue = true;
-            errorMessage = string.Empty;
+            ErrorMessage = string.Empty;
 
             try
             {
@@ -221,7 +205,7 @@ namespace CTIToolkit
                 {
                     foreach (TowerDesignCurveData towerDesignCurveData in TowerDesignData.TowerDesignCurveData)
                     {
-                        AddTabPage(towerDesignCurveData, out errorMessage);
+                        AddTabPage(towerDesignCurveData);
                     }
                 }
 
@@ -232,14 +216,14 @@ namespace CTIToolkit
             }
             catch (Exception e)
             {
-                errorMessage = string.Format("Tower design page setup failed. Exception: {0} ", e.ToString());
+                ErrorMessage = string.Format("Tower design page setup failed. Exception: {0} ", e.ToString());
                 returnValue = false;
             }
 
             return returnValue;
         }
 
-        private bool AddTabPage(TowerDesignCurveData towerDesignCurveData, out string errorMessage)
+        private bool AddTabPage(TowerDesignCurveData towerDesignCurveData)
         {
             bool returnValue = true;
 
@@ -252,10 +236,9 @@ namespace CTIToolkit
                 tabPage.UserControl.RangeVisible(3, (TowerDesignData.Range3Value.Current != 0.0));
                 tabPage.UserControl.RangeVisible(4, (TowerDesignData.Range4Value.Current != 0.0));
                 tabPage.UserControl.RangeVisible(5, (TowerDesignData.Range5Value.Current != 0.0));
-                //tabPage.UserControl.ColdWaterTemperaturesVisible();
-                tabPage.UserControl.TowerDesignCurveData = towerDesignCurveData;
-                tabPage.Text = towerDesignCurveData.WaterFlowRateDataValue.InputValue;
-                if (!tabPage.UserControl.Setup(out errorMessage))
+                tabPage.UserControl.LoadData(IsInternationalSystemOfUnits_SI, towerDesignCurveData);
+                tabPage.Text = tabPage.UserControl.TowerDesignCurveData.WaterFlowRateDataValue.InputValue;
+                if (!tabPage.UserControl.Setup())
                 {
 
                 }
@@ -263,7 +246,7 @@ namespace CTIToolkit
             }
             catch (Exception e)
             {
-                errorMessage = string.Format("Tower design page setup failed. Exception: {0} ", e.ToString());
+                ErrorMessage = string.Format("Tower design page setup failed. Exception: {0} ", e.ToString());
                 returnValue = false;
             }
 
@@ -709,27 +692,34 @@ namespace CTIToolkit
 
         private void AddWaterFlowRate()
         {
-            string errorMessage = string.Empty;
-
             IsChanged = true;
+            string errorMessage = string.Empty;
+            ErrorMessage = string.Empty;
 
             TowerDesignCurveData towerDesignCurveData = new TowerDesignCurveData(IsDemo, IsInternationalSystemOfUnits_SI);
             RangedTemperaturesDesignData rangedTemperaturesDesignData = new RangedTemperaturesDesignData();
             WaterFlowRateDataValue waterFlowRateDataValue = new WaterFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            
             if (waterFlowRateDataValue.UpdateValue(AddNewWaterFlowRate.Text, out errorMessage))
             {
                 rangedTemperaturesDesignData.WaterFlowRate = waterFlowRateDataValue.Current;
 
-                if (!towerDesignCurveData.LoadData(IsInternationalSystemOfUnits_SI, rangedTemperaturesDesignData, out errorMessage))
+                if (!towerDesignCurveData.LoadData(IsInternationalSystemOfUnits_SI, rangedTemperaturesDesignData))
                 {
-                    MessageBox.Show(errorMessage);
+                    MessageBox.Show(towerDesignCurveData.ErrorMessage);
                 }
                 else
                 {
                     //RangedTemperatureDesignViewModels.Add(rangedTemperatureDesignViewModel);
-                    AddTabPage(towerDesignCurveData, out errorMessage);
-                    TowerDesignDataTabControl.SelectedIndex = TowerDesignDataTabControl.TabPages.Count - 1;
+                    if(AddTabPage(towerDesignCurveData))
+                    {
+                        TowerDesignDataTabControl.SelectedIndex = TowerDesignDataTabControl.TabPages.Count - 1;
+                    }
                 }
+            }
+            else
+            {
+                ErrorMessage = errorMessage;
             }
         }
 

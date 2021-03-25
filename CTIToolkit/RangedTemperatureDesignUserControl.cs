@@ -12,32 +12,32 @@ namespace CTIToolkit
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_SI_ { get; set; }
         public bool IsChanged { get; set; }
+        public string ErrorMessage { get; set; }
 
         public RangedTemperatureDesignUserControl(bool isDemo, bool isInternationalSystemOfUnits_SI_)
         {
+            InitializeComponent();
+
             IsDemo = isDemo;
             IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_SI_;
             IsChanged = false;
-
-            InitializeComponent();
+            ErrorMessage = string.Empty;
 
             TowerDesignCurveData = new TowerDesignCurveData(IsDemo, IsInternationalSystemOfUnits_SI_);
-
-            string errorMessage = string.Empty;
-            
-            Setup(out errorMessage);
+            SetDisplayedUnits();
+            Setup();
         }
 
         public void SetUnitsStandard(ApplicationSettings applicationSettings)
         {
             IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
-            SwitchUnits();
+            TowerDesignCurveData.ConvertValues(IsInternationalSystemOfUnits_SI_);
+            SetDisplayedUnits();
+            Setup();
         }
 
-        private void SwitchUnits()
+        private void SetDisplayedUnits()
         {
-            string errorMessage = string.Empty;
-
             if (IsInternationalSystemOfUnits_SI_)
             {
                 UnitsWetWaterTemperature1.Text = ConstantUnits.TemperatureCelsius;
@@ -58,33 +58,33 @@ namespace CTIToolkit
             }
         }
 
-        public bool LoadData(bool isInternationalSystemOfUnits_SI_, RangedTemperaturesDesignData rangedTemperaturesDesignData, out string errorMessage)
+        public bool LoadData(bool isInternationalSystemOfUnits_SI_, TowerDesignCurveData towerDesignCurveData)
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
-               
-            if(!TowerDesignCurveData.LoadData(isInternationalSystemOfUnits_SI_, rangedTemperaturesDesignData, out errorMessage))
+            ErrorMessage = string.Empty;
+
+            TowerDesignCurveData = towerDesignCurveData;
+            if(isInternationalSystemOfUnits_SI_ != IsInternationalSystemOfUnits_SI_)
             {
-                stringBuilder.AppendLine(errorMessage);
-                errorMessage = string.Empty;
-                returnValue = false;
-            }
-            if (!Setup(out errorMessage))
-            {
-                stringBuilder.AppendLine(errorMessage);
-                errorMessage = string.Empty;
-                returnValue = false;
+
             }
 
-            IsChanged = false;
+            if (!Setup())
+            {
+                stringBuilder.AppendLine(ErrorMessage);
+                returnValue = false;
+            }
             
+            ErrorMessage = stringBuilder.ToString();
+            IsChanged = false;
             return returnValue;
         }
 
-        public bool Setup(out string errorMessage)
+        public bool Setup()
         {
             bool returnValue = true;
-            errorMessage = string.Empty;
+            ErrorMessage = string.Empty;
             try
             {
                 WetBulbTemperature1.Text = TowerDesignCurveData.WetBulbTemperatureDataValue1.InputValue;
@@ -202,7 +202,7 @@ namespace CTIToolkit
             }
             catch(Exception e)
             {
-                errorMessage = string.Format("Tower design page setup failed. Exception: {0} ", e.ToString());
+                ErrorMessage = string.Format("Tower design page setup failed. Exception: {0} ", e.ToString());
                 returnValue = false;
             }
 

@@ -9,6 +9,7 @@ namespace CTIToolkit
     public partial class TestPointUserControl : UserControl
     {
         public TowerTestPoint TowerTestPoint { get; set; }
+        public string ErrorMessage { get; set; }
 
         //public bool IsDemo { get; set; }
         //public bool IsInternationalSystemOfUnits_SI { get; set; }
@@ -16,11 +17,12 @@ namespace CTIToolkit
         public TestPointUserControl()
         {
             InitializeComponent();
+            ErrorMessage = string.Empty;
         }
 
-        private bool Setup(out string errorMessage)
+        private bool Setup()
         {
-            errorMessage = string.Empty;
+            ErrorMessage = string.Empty;
             
             try
             {
@@ -50,13 +52,13 @@ namespace CTIToolkit
             }
             catch (Exception e)
             {
-                errorMessage = string.Format("Failure to load page. Exception: {0}", e.ToString());
+                ErrorMessage = string.Format("Failure to load page. Exception: {0}", e.ToString());
                 return false;
             }
             return true;
         }
 
-        public bool LoadData(TowerTestPoint towerTestPoint, out string errorMessage)
+        public bool LoadData(TowerTestPoint towerTestPoint)
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
@@ -65,11 +67,11 @@ namespace CTIToolkit
 
             if (TowerTestPoint != null)
             {
-                 if (!Setup(out errorMessage))
+                 if (!Setup())
                 {
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(ErrorMessage);
                     returnValue = false;
-                    errorMessage = string.Empty;
+                    ErrorMessage = string.Empty;
                 }
             }
             else
@@ -77,7 +79,7 @@ namespace CTIToolkit
                 stringBuilder.AppendLine("Unable to load file. File contains invalid data.");
             }
 
-            errorMessage = stringBuilder.ToString();
+            ErrorMessage = stringBuilder.ToString();
 
             return returnValue;
         }

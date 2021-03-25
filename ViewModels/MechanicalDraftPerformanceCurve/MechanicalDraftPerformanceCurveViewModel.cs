@@ -24,11 +24,13 @@ namespace ViewModels
 
         public bool IsDemo { get; set; }
         public bool IsInternationalSystemOfUnits_SI { get; set; }
+        public string ErrorMessage { get; set; }
 
         public MechanicalDraftPerformanceCurveViewModel(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             IsDemo = isDemo;
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
+            ErrorMessage = string.Empty;
 
             DesignData = new TowerDesignData(IsDemo, IsInternationalSystemOfUnits_SI);
             TestPoints = new List<TowerTestPoint>();
@@ -81,12 +83,13 @@ namespace ViewModels
             } while (string.IsNullOrEmpty(DataFileName));
         }
 
-        public bool OpenDataFile(string fileName, out string errorMessage)
+        public bool OpenDataFile(string fileName)
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
 
             DataFileName = fileName;
+            ErrorMessage = string.Empty;
 
             try
             {
@@ -94,17 +97,17 @@ namespace ViewModels
             }
             catch (Exception e)
             {
-                errorMessage = string.Format("Failure to read file: {0}. Exception: {1}", Path.GetFileName(DataFileName), e.ToString());
-                return false;
+                stringBuilder.AppendFormat("Failure to read file: {0}. Exception: {1}\n", Path.GetFileName(DataFileName), e.ToString());
+                returnValue = false;
             }
 
             if (MechanicalDraftPerformanceCurveFileData != null)
             {
-                if (!LoadData(out errorMessage))
+                if (!LoadData())
                 {
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(ErrorMessage);
                     returnValue = false;
-                    errorMessage = string.Empty;
+                    ErrorMessage = string.Empty;
                 }
 
             }
@@ -113,272 +116,47 @@ namespace ViewModels
                 stringBuilder.AppendLine("Unable to load file. File contains invalid data");
             }
 
-            errorMessage = stringBuilder.ToString();
+            if(!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
 
             return returnValue;
         }
 
-        public bool OpenNewDataFile(string fileName, out string errorMessage)
+        public bool OpenNewDataFile(string fileName)
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
+            ErrorMessage = string.Empty;
 
             DataFileName = fileName;
             MechanicalDraftPerformanceCurveFileData = new MechanicalDraftPerformanceCurveFileData(IsInternationalSystemOfUnits_SI);
 
             if (MechanicalDraftPerformanceCurveFileData != null)
             {
-                if (!LoadData(out errorMessage))
+                if (!LoadData())
                 {
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(ErrorMessage);
                     returnValue = false;
-                    errorMessage = string.Empty;
+                    ErrorMessage = string.Empty;
                 }
             }
             else
             {
                 stringBuilder.AppendLine("Unable to create new file.");
+                returnValue = false;
             }
 
-            errorMessage = stringBuilder.ToString();
+            if(!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
 
             return returnValue;
         }
 
         #region DataValues
-
-        public string WaterFlowRateDataValueInputMessage
-        {
-            get
-            {
-                return DesignData.WaterFlowRateDataValue.InputMessage;
-            }
-        }
-
-        public string WaterFlowRateDataValueInputValue
-        {
-            get
-            {
-                return DesignData.WaterFlowRateDataValue.InputValue;
-            }
-        }
-
-        public bool WaterFlowRateDataValueUpdateValue(string value, out string errorMessage)
-        {
-            return DesignData.WaterFlowRateDataValue.UpdateValue(value, out errorMessage);
-        }
-
-        public string WaterFlowRateDataValueTooltip
-        {
-            get
-            {
-                return DesignData.WaterFlowRateDataValue.ToolTip;
-            }
-        }
-
-
-        public string HotWaterTemperatureDataValueInputMessage
-        {
-            get
-            {
-                return DesignData.HotWaterTemperatureDataValue.InputMessage;
-            }
-        }
-
-        public string HotWaterTemperatureDataValueInputValue
-        {
-            get
-            {
-                return DesignData.HotWaterTemperatureDataValue.InputValue;
-            }
-        }
-
-        public bool HotWaterTemperatureDataValueUpdateValue(string value, out string errorMessage)
-        {
-            return DesignData.HotWaterTemperatureDataValue.UpdateValue(value, out errorMessage);
-        }
-
-        public string HotWaterTemperatureDataValueTooltip
-        {
-            get
-            {
-                return DesignData.HotWaterTemperatureDataValue.ToolTip;
-            }
-        }
-
-        public string ColdWaterTemperatureDataValueInputMessage
-        {
-            get
-            {
-                return DesignData.ColdWaterTemperatureDataValue.InputMessage;
-            }
-        }
-
-        public string ColdWaterTemperatureDataValueInputValue
-        {
-            get
-            {
-                return DesignData.ColdWaterTemperatureDataValue.InputValue;
-            }
-        }
-
-        public string ColdWaterTemperatureDataValueTooltip
-        {
-            get
-            {
-                return DesignData.ColdWaterTemperatureDataValue.ToolTip;
-            }
-        }
-
-        public bool ColdWaterTemperatureDataValueUpdateValue(string value, out string errorMessage)
-        {
-            return DesignData.ColdWaterTemperatureDataValue.UpdateValue(value, out errorMessage);
-        }
-
-        public string WetBulbTemperatureDataValueInputMessage
-        {
-            get
-            {
-                return DesignData.WetBulbTemperatureDataValue.InputMessage;
-            }
-        }
-
-        public string WetBulbTemperatureDataValueInputValue
-        {
-            get
-            {
-                return DesignData.WetBulbTemperatureDataValue.InputValue;
-            }
-        }
-
-        public string WetBulbTemperatureDataValueTooltip
-        {
-            get
-            {
-                return DesignData.WetBulbTemperatureDataValue.ToolTip;
-            }
-        }
-
-        public bool WetBulbTemperatureDataValueUpdateValue(string value, out string errorMessage)
-        {
-            return DesignData.WetBulbTemperatureDataValue.UpdateValue(value, out errorMessage);
-        }
-
-        public string DryBulbTemperatureDataValueInputMessage
-        {
-            get
-            {
-                return DesignData.DryBulbTemperatureDataValue.InputMessage;
-            }
-        }
-
-        public string DryBulbTemperatureDataValueInputValue
-        {
-            get
-            {
-                return DesignData.DryBulbTemperatureDataValue.InputValue;
-            }
-        }
-
-        public string DryBulbTemperatureDataValueTooltip
-        {
-            get
-            {
-                return DesignData.DryBulbTemperatureDataValue.ToolTip;
-            }
-        }
-
-        public bool DryBulbTemperatureDataValueUpdateValue(string value, out string errorMessage)
-        {
-            return DesignData.DryBulbTemperatureDataValue.UpdateValue(value, out errorMessage);
-        }
-
-        public string FanDriverPowerDataValueInputMessage
-        {
-            get
-            {
-                return DesignData.FanDriverPowerDataValue.InputMessage;
-            }
-        }
-
-        public string FanDriverPowerDataValueInputValue
-        {
-            get
-            {
-                return DesignData.FanDriverPowerDataValue.InputValue;
-            }
-        }
-
-        public string FanDriverPowerDataValueTooltip
-        {
-            get
-            {
-                return DesignData.FanDriverPowerDataValue.ToolTip;
-            }
-        }
-
-        public bool FanDriverPowerDataValueUpdateValue(string value, out string errorMessage)
-        {
-            return DesignData.FanDriverPowerDataValue.UpdateValue(value, out errorMessage);
-        }
-
-        public string BarometricPressureDataValueInputMessage
-        {
-            get
-            {
-                return DesignData.BarometricPressureDataValue.InputMessage;
-            }
-        }
-
-        public string BarometricPressureDataValueInputValue
-        {
-            get
-            {
-                return DesignData.BarometricPressureDataValue.InputValue;
-            }
-        }
-
-        public string BarometricPressureDataValueTooltip
-        {
-            get
-            {
-                return DesignData.BarometricPressureDataValue.ToolTip;
-            }
-        }
-
-        public bool BarometricPressureDataValueUpdateValue(string value, out string errorMessage)
-        {
-            return DesignData.BarometricPressureDataValue.UpdateValue(value, out errorMessage);
-        }
-
-        public string LiquidToGasRatioDataValueInputMessage
-        {
-            get
-            {
-                return DesignData.LiquidToGasRatioDataValue.InputMessage;
-            }
-        }
-
-        public string LiquidToGasRatioDataValueInputValue
-        {
-            get
-            {
-                return DesignData.LiquidToGasRatioDataValue.InputValue;
-            }
-        }
-
-        public string LiquidToGasRatioDataValueTooltip
-        {
-            get
-            {
-                return DesignData.LiquidToGasRatioDataValue.ToolTip;
-            }
-        }
-
-        public bool LiquidToGasRatioDataValueUpdateValue(string value, out string errorMessage)
-        {
-            return DesignData.LiquidToGasRatioDataValue.UpdateValue(value, out errorMessage);
-        }
 
         public string DataFilenameInputValue
         {
@@ -390,49 +168,53 @@ namespace ViewModels
         
         #endregion DataValue
 
-        public bool LoadData(out string errorMessage)
+        public bool LoadData()
         {
-            errorMessage = string.Empty;
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
 
             if(MechanicalDraftPerformanceCurveFileData != null)
             {
-                if (!DesignData.LoadData(MechanicalDraftPerformanceCurveFileData.DesignData, out errorMessage))
+                if(MechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI != IsInternationalSystemOfUnits_SI)
                 {
-                    returnValue = false;
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
+
                 }
 
+                if (!DesignData.LoadData(MechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI, MechanicalDraftPerformanceCurveFileData.DesignData))
+                {
+                    returnValue = false;
+                    stringBuilder.AppendLine(DesignData.ErrorMessage);
+                }
+                
+                TestPoints.Clear();
                 foreach (TowerTestData testData in MechanicalDraftPerformanceCurveFileData.TestData)
                 {
-                    TowerTestPoint towerTestPoint = new TowerTestPoint(IsDemo, IsInternationalSystemOfUnits_SI);
-                    if (!towerTestPoint.LoadData(IsInternationalSystemOfUnits_SI, testData, out errorMessage))
+                    TowerTestPoint towerTestPoint = new TowerTestPoint(IsDemo, MechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI);
+                    if (!towerTestPoint.LoadData(MechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI, testData))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine(string.Format("Test {0}: {1}", towerTestPoint.TestName, errorMessage));
-                        errorMessage = string.Empty;
+                        stringBuilder.AppendLine(string.Format("Test {0}: {1}", towerTestPoint.TestName, towerTestPoint.ErrorMessage));
                     }
                     TestPoints.Add(towerTestPoint);
                 }
+            }
 
-                ConvertValues(IsInternationalSystemOfUnits_SI);
+            if(!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
             }
             return returnValue;
         }
 
-        public bool FillAndValidate(out string errorMessage)
+        public bool FillAndValidate()
         {
-            errorMessage = string.Empty;
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
 
-            if (!DesignData.FillAndValidate(MechanicalDraftPerformanceCurveFileData.DesignData, out errorMessage))
+            if (!DesignData.FillAndValidate(MechanicalDraftPerformanceCurveFileData.DesignData))
             {
                 returnValue = false;
-                stringBuilder.AppendLine(errorMessage);
-                errorMessage = string.Empty;
+                stringBuilder.AppendLine(DesignData.ErrorMessage);
             }
 
             MechanicalDraftPerformanceCurveFileData.TestData.Clear();
@@ -440,33 +222,32 @@ namespace ViewModels
             foreach (TowerTestPoint towerTestPoint in TestPoints)
             {
                 TowerTestData towerTestData = new TowerTestData(IsInternationalSystemOfUnits_SI);
-                if (!towerTestPoint.FillAndValidate(towerTestData, out errorMessage))
+                if (!towerTestPoint.FillAndValidate(towerTestData))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(string.Format("Test {0}: {1}", towerTestPoint.TestName, errorMessage));
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(string.Format("Test {0}: {1}", towerTestPoint.TestName, towerTestPoint.ErrorMessage));
                 }
                 MechanicalDraftPerformanceCurveFileData.TestData.Add(towerTestData);
             }
 
-            //if (!TestPoints.FillAndValidate(mechanicalDraftPerformanceCurveFileData.TestData[testIndex], out errorMessage))
-            //{
-            //    returnValue = false;
-            //    stringBuilder.AppendLine(errorMessage);
-            //    errorMessage = string.Empty;
-            //}
+            if(!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
 
             return returnValue;
         }
 
-        public bool CalculatePerformanceCurve(int testIndex, out string errorMessage)
+        public bool CalculatePerformanceCurve(int testIndex)
         {
-            errorMessage = string.Empty;
+            ErrorMessage = string.Empty;
+            StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
+            
             try
             {
                 // get the data from table
-                if(FillAndValidate(out errorMessage))
+                if(FillAndValidate())
                 {
                     MechanicalDraftPerformanceCurveCalculationLibrary calculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
 
@@ -477,11 +258,17 @@ namespace ViewModels
                 else
                 {
                     returnValue = false;
+                    stringBuilder.AppendLine(ErrorMessage);
                 }
             }
             catch (Exception exception)
             {
-                errorMessage = string.Format("Error in Performance Curve calculation. Please check your input values. Exception Message: {0}", exception.Message);
+                stringBuilder.AppendFormat("Error in Performance Curve calculation. Please check your input values. Exception Message: {0}", exception.Message);
+            }
+
+            if(!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
             }
             return returnValue;
         }
@@ -541,20 +328,20 @@ namespace ViewModels
             return true;// !isError;
         }
 
-        public bool AddTestPoint(string testName, out string errorMessage)
+        public bool AddTestPoint(string testName)
         {
             bool returnValue = true;
+            ErrorMessage = string.Empty;
 
             try
             {
                 TowerTestPoint towerTestPoint = new TowerTestPoint(IsDemo, IsInternationalSystemOfUnits_SI);
                 towerTestPoint.TestName = testName;
                 TestPoints.Add(towerTestPoint);
-                errorMessage = string.Empty;
             }
             catch (Exception e)
             {
-                errorMessage = string.Format("Tower design page setup failed. Exception: {0} ", e.ToString());
+                ErrorMessage = string.Format("Tower design page setup failed. Exception: {0} ", e.ToString());
                 returnValue = false;
             }
 
