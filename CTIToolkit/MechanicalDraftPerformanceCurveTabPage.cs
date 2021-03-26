@@ -30,7 +30,7 @@ namespace CTIToolkit
 
             LoadTestPoints();
             SetDisplayedUnits();
-            Setup();
+            SetDisplayedValues();
         }
 
         public void SetUnitsStandard(ApplicationSettings applicationSettings)
@@ -44,7 +44,7 @@ namespace CTIToolkit
         {
             MechanicalDraftPerformanceCurveViewModel.SwitchUnits(IsInternationalSystemOfUnits_SI_);
             SetDisplayedUnits();
-            Setup();
+            SetDisplayedValues();
         }
 
         private void SetDisplayedUnits()
@@ -101,7 +101,7 @@ namespace CTIToolkit
                     ErrorMessage = string.Empty;
                 }
 
-                if (!Setup())
+                if (!SetDisplayedValues())
                 {
                     stringBuilder.AppendLine(ErrorMessage);
                     returnValue = false;
@@ -151,7 +151,7 @@ namespace CTIToolkit
                     returnValue = false;
                 }
 
-                if (!Setup())
+                if (!SetDisplayedValues())
                 {
                     stringBuilder.AppendLine(ErrorMessage);
                     returnValue = false;
@@ -213,7 +213,7 @@ namespace CTIToolkit
             //    errorMessage = string.Empty;
             //}
 
-            if (!Setup())
+            if (!SetDisplayedValues())
             {
                 stringBuilder.AppendLine(ErrorMessage);
                 returnValue = false;
@@ -252,7 +252,7 @@ namespace CTIToolkit
         //    return returnValue;
         //}
 
-        private bool Setup()
+        private bool SetDisplayedValues()
         {
             try
             {
@@ -296,7 +296,7 @@ namespace CTIToolkit
                     AddTestPointName.Enabled = true;
 
                     // update data on this page
-                    if (Setup())
+                    if (SetDisplayedValues())
                     {
 
                     }

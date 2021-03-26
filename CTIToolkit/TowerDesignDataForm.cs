@@ -41,7 +41,7 @@ namespace CTIToolkit
 
             TowerDesignData = towerDesignData;
             SetDisplayedUnits();
-            Setup();
+            SetDisplayedValues();
         }
 
         public void SetUnitsStandard(ApplicationSettings applicationSettings)
@@ -53,7 +53,7 @@ namespace CTIToolkit
             {
                 tabPage.SetUnitsStandard(applicationSettings);
             }
-            Setup();
+            SetDisplayedValues();
         }
 
         private void SetDisplayedUnits()
@@ -113,7 +113,7 @@ namespace CTIToolkit
             bool returnValue = true;
             IsChanged = false;
 
-            if (!Setup())
+            if (!SetDisplayedValues())
             {
                 returnValue = false;
             }
@@ -121,7 +121,7 @@ namespace CTIToolkit
             return returnValue;
         }
 
-        private bool Setup()
+        private bool SetDisplayedValues()
         {
             bool returnValue = true;
             ErrorMessage = string.Empty;
@@ -238,7 +238,7 @@ namespace CTIToolkit
                 tabPage.UserControl.RangeVisible(5, (TowerDesignData.Range5Value.Current != 0.0));
                 tabPage.UserControl.LoadData(IsInternationalSystemOfUnits_SI, towerDesignCurveData);
                 tabPage.Text = tabPage.UserControl.TowerDesignCurveData.WaterFlowRateDataValue.InputValue;
-                if (!tabPage.UserControl.Setup())
+                if (!tabPage.UserControl.SetDisplayedValues())
                 {
 
                 }
@@ -854,11 +854,24 @@ namespace CTIToolkit
 
         private void WaterFlowRateUpdate_Click(object sender, EventArgs e)
         {
-            CustomMenuItem customMenuItem = sender as CustomMenuItem;
-            string text = TowerDesignDataTabControl.TabPages[customMenuItem.TabIndex].Text;
+            string errorMessage;
 
-            MessageBox.Show(text);
-            //UpdateWaterFlowRate();
+            CustomMenuItem customMenuItem = sender as CustomMenuItem;
+            RangedTemperatureDesignUserControl rangedTemperatureDesignUserControl = TowerDesignDataTabControl.TabPages[customMenuItem.TabIndex].Controls[0] as RangedTemperatureDesignUserControl;
+
+            if(rangedTemperatureDesignUserControl != null)
+            {
+                UpdateWaterFlowRateForm updateWaterFlowRateForm = new UpdateWaterFlowRateForm(IsDemo, IsInternationalSystemOfUnits_SI, rangedTemperatureDesignUserControl.TowerDesignCurveData.WaterFlowRateDataValue.Current);
+
+                if (updateWaterFlowRateForm.ShowDialog(this) == DialogResult.OK)
+                {
+                    rangedTemperatureDesignUserControl.TowerDesignCurveData.WaterFlowRateDataValue.UpdateCurrentValue(updateWaterFlowRateForm.WaterFlowRateDataValue.Current, out errorMessage);
+                    TowerDesignDataTabControl.TabPages[customMenuItem.TabIndex].Text = updateWaterFlowRateForm.WaterFlowRateDataValue.InputValue;
+                    IsChanged = true;
+                }
+
+                updateWaterFlowRateForm.Dispose();
+            }
         }
 
         private void WaterFlowRateMoveLeft_Click(object sender, EventArgs e)

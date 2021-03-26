@@ -25,7 +25,7 @@ namespace CTIToolkit
 
             TowerDesignCurveData = new TowerDesignCurveData(IsDemo, IsInternationalSystemOfUnits_SI_);
             SetDisplayedUnits();
-            Setup();
+            SetDisplayedValues();
         }
 
         public void SetUnitsStandard(ApplicationSettings applicationSettings)
@@ -33,7 +33,7 @@ namespace CTIToolkit
             IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
             TowerDesignCurveData.ConvertValues(IsInternationalSystemOfUnits_SI_);
             SetDisplayedUnits();
-            Setup();
+            SetDisplayedValues();
         }
 
         private void SetDisplayedUnits()
@@ -70,7 +70,7 @@ namespace CTIToolkit
 
             }
 
-            if (!Setup())
+            if (!SetDisplayedValues())
             {
                 stringBuilder.AppendLine(ErrorMessage);
                 returnValue = false;
@@ -81,7 +81,7 @@ namespace CTIToolkit
             return returnValue;
         }
 
-        public bool Setup()
+        public bool SetDisplayedValues()
         {
             bool returnValue = true;
             ErrorMessage = string.Empty;

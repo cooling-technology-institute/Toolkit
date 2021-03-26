@@ -20,7 +20,7 @@ namespace CTIToolkit
             ErrorMessage = string.Empty;
         }
 
-        private bool Setup()
+        private bool SetDisplayedValues()
         {
             ErrorMessage = string.Empty;
             
@@ -67,7 +67,7 @@ namespace CTIToolkit
 
             if (TowerTestPoint != null)
             {
-                 if (!Setup())
+                 if (!SetDisplayedValues())
                 {
                     stringBuilder.AppendLine(ErrorMessage);
                     returnValue = false;

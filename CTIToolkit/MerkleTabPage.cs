@@ -24,13 +24,13 @@ namespace CTIToolkit
 
             MerkelViewModel = new MerkelViewModel(IsDemo, IsInternationalSystemOfUnits_SI_);
 
-            Setup();
+            SetDisplayedValues();
 
             Calculate();
 
         }
 
-        private void Setup()
+        private void SetDisplayedValues()
         {
             TemperatureHotWaterLabel.Text = MerkelViewModel.HotWaterTemperatureDataValueInputMessage + ":";
             TemperatureHotWaterLabel.TextAlign = ContentAlignment.MiddleRight;

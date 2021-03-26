@@ -47,7 +47,7 @@ namespace ViewModels
 
         public bool UpdateCurrentValue(double input, out string errorMessage)
         {
-            InputValue = input.ToString();
+            InputValue = input.ToString(Format);
             return IsValidValue(out errorMessage);
         }
 
@@ -88,7 +88,7 @@ namespace ViewModels
                 message = string.Format("The {0} input is not a valid number", InputMessage);
                 IsValid = false;
             }
-
+            
             return IsValid;
         }
 

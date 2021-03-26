@@ -24,7 +24,7 @@ namespace CTIToolkit
             PsychrometricsViewModel = new PsychrometricsViewModel(IsDemo, IsInternationalSystemOfUnits_SI_);
 
             string errorMessage;
-            Setup(out errorMessage);
+            SetDisplayedValues(out errorMessage);
         }
 
         private void SetupBarometericPressure(bool value)
@@ -77,7 +77,7 @@ namespace CTIToolkit
             WetBulbTemperatureUnits.Visible = value;
         }
 
-        private bool Setup(out string errorMessage)
+        private bool SetDisplayedValues(out string errorMessage)
         {
             errorMessage = string.Empty;
             try

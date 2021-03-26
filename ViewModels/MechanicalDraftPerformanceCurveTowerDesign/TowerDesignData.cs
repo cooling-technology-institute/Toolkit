@@ -94,12 +94,8 @@ namespace ViewModels
 
         public bool ConvertValues(bool isIS)
         {
-            bool isChanged = false;
-
             if (IsInternationalSystemOfUnits_SI != isIS)
             {
-                isChanged = true;
-
                 IsInternationalSystemOfUnits_SI = isIS;
                 WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
                 HotWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
@@ -117,11 +113,10 @@ namespace ViewModels
 
                 foreach (TowerDesignCurveData towerDesignCurveData in TowerDesignCurveData)
                 {
-                    isChanged |= towerDesignCurveData.ConvertValues(IsInternationalSystemOfUnits_SI);
+                    towerDesignCurveData.ConvertValues(IsInternationalSystemOfUnits_SI);
                 }
             }
-
-            return isChanged;
+            return false;
         }
 
         public bool LoadData(bool isInternationalSystemOfUnits_SI, DesignData data)
@@ -231,8 +226,6 @@ namespace ViewModels
                     stringBuilder.AppendLine(label + errorMessage);
                     errorMessage = string.Empty;
                 }
-
-                CountRanges();
 
                 TowerDesignCurveData.Clear();
                 foreach (RangedTemperaturesDesignData rangedTemperaturesDesignData in data.RangedTemperaturesDesignData)

@@ -671,6 +671,7 @@
             this.TowerDesignDataTabControl.Size = new System.Drawing.Size(845, 236);
             this.TowerDesignDataTabControl.TabIndex = 0;
             this.TowerDesignDataTabControl.TabStop = false;
+            this.TowerDesignDataTabControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TowerDesignDataTabControl_MouseUp);
             // 
             // TowerDesignDataTabPage
             // 

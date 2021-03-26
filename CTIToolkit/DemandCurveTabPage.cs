@@ -33,7 +33,7 @@ namespace CTIToolkit
 
             HasChanged = false;
 
-            Setup();
+            SetDisplayedValues();
         }
 
         public void SetUnitsStandard(ApplicationSettings applicationSettings)
@@ -48,7 +48,7 @@ namespace CTIToolkit
             DemandCurveViewModel.ConvertValues(IsInternationalSystemOfUnits_SI_, out errorMessage);
         }
         
-        private void Setup()
+        private void SetDisplayedValues()
         {
             DemandCurveWetBulbTemperatureLabel.Text = DemandCurveViewModel.WetBulbTemperatureDataValueInputMessage + ":";
             DemandCurveWetBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
