@@ -1,5 +1,4 @@
-﻿using Models;
-using System;
+﻿using System;
 using System.Text;
 using System.Windows.Forms;
 using ViewModels;
@@ -20,7 +19,7 @@ namespace CTIToolkit
             ErrorMessage = string.Empty;
         }
 
-        private bool SetDisplayedValues()
+        public bool SetDisplayedValues()
         {
             ErrorMessage = string.Empty;
             

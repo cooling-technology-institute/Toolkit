@@ -1,6 +1,7 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 using System;
 using System.Data;
+using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using ViewModels;
@@ -14,42 +15,47 @@ namespace CTIToolkit
         private TowerDesignDataForm TowerDesignDataForm { get; set; }
 
         private bool IsDemo { get; set; }
-        private bool IsInternationalSystemOfUnits_SI_ { get; set; }
+        private bool IsInternationalSystemOfUnits_SI { get; set; }
         public string ErrorMessage { get; set; }
+        private bool IsChanged { get; set; }
 
         public MechanicalDraftPerformanceCurveTabPage(ApplicationSettings applicationSettings)
         {
             InitializeComponent();
 
-            IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            IsInternationalSystemOfUnits_SI = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
             ErrorMessage = string.Empty;
 
-            MechanicalDraftPerformanceCurveViewModel = new MechanicalDraftPerformanceCurveViewModel(IsDemo, IsInternationalSystemOfUnits_SI_);
-            TowerDesignDataForm = new TowerDesignDataForm(IsDemo, IsInternationalSystemOfUnits_SI_, MechanicalDraftPerformanceCurveViewModel.DesignData);
+            MechanicalDraftPerformanceCurveViewModel = new MechanicalDraftPerformanceCurveViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
+            TowerDesignDataForm = new TowerDesignDataForm(IsDemo, IsInternationalSystemOfUnits_SI, MechanicalDraftPerformanceCurveViewModel.DesignData);
             TestPointTabControl.TabPages.Clear();
 
             LoadTestPoints();
             SetDisplayedUnits();
             SetDisplayedValues();
+            IsChanged = false;
         }
 
-        public void SetUnitsStandard(ApplicationSettings applicationSettings)
+        public void SetUnitsStandard(bool isInternationalSystemOfUnits_SI)
         {
-            IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
-            TowerDesignDataForm.SetUnitsStandard(applicationSettings);
-            SwitchUnits();
+            if (IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_SI)
+            {
+                IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
+                TowerDesignDataForm.SetUnitsStandard(IsInternationalSystemOfUnits_SI);
+                SwitchUnits();
+            }
         }
 
         private void SwitchUnits()
         {
-            MechanicalDraftPerformanceCurveViewModel.SwitchUnits(IsInternationalSystemOfUnits_SI_);
+            MechanicalDraftPerformanceCurveViewModel.SwitchUnits(IsInternationalSystemOfUnits_SI);
             SetDisplayedUnits();
             SetDisplayedValues();
         }
 
         private void SetDisplayedUnits()
         {
-            if (IsInternationalSystemOfUnits_SI_)
+            if (IsInternationalSystemOfUnits_SI)
             {
                 UnitsWaterFlowRate.Text = ConstantUnits.LitersPerSecond;
                 UnitsHotWaterTemperature.Text = ConstantUnits.TemperatureCelsius;
@@ -78,6 +84,15 @@ namespace CTIToolkit
 
             if(MechanicalDraftPerformanceCurveViewModel.OpenDataFile(fileName))
             {
+                if(MechanicalDraftPerformanceCurveViewModel.IsInternationalSystemOfUnits_SI != IsInternationalSystemOfUnits_SI)
+                {
+                    ToolkitMain main = this.Parent.Parent.Parent as ToolkitMain;
+                    if(main != null)
+                    {
+                        main.UpdateUnits(MechanicalDraftPerformanceCurveViewModel.IsInternationalSystemOfUnits_SI ? UnitsSelection.International_System_Of_Units_SI : UnitsSelection.United_States_Customary_Units_IP);
+                    }
+                }
+
                 if (!TowerDesignDataForm.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData))
                 {
                     stringBuilder.AppendLine(TowerDesignDataForm.ErrorMessage);
@@ -118,6 +133,7 @@ namespace CTIToolkit
             {
                 ErrorMessage = stringBuilder.ToString();
             }
+            IsChanged = false;
 
             return returnValue;
         }
@@ -167,6 +183,7 @@ namespace CTIToolkit
             {
                 ErrorMessage = stringBuilder.ToString();
             }
+            IsChanged = false;
 
             return returnValue;
         }
@@ -274,7 +291,21 @@ namespace CTIToolkit
 
                 DataFilename.Text = MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue;
 
-                TestResultsGroupBox.Text = string.Format("Test Results ({0})", (IsInternationalSystemOfUnits_SI_) ? "SI" : "IP");
+                TestResultsGroupBox.Text = string.Format("Test Results ({0})", (IsInternationalSystemOfUnits_SI) ? "SI" : "IP");
+
+                foreach (TabPage tabPage in TestPointTabControl.TabPages)
+                {
+                    try
+                    {
+                        TestPointUserControl testPointUserControl = tabPage.Controls[0] as TestPointUserControl;
+                        if(testPointUserControl != null)
+                        {
+                            testPointUserControl.SetDisplayedValues();
+                        }
+                    }
+                    catch
+                    { }
+                }
             }
             catch (Exception e)
             {
@@ -304,7 +335,10 @@ namespace CTIToolkit
             }
             else
             {
-                TowerDesignDataForm.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData);
+                if (TowerDesignDataForm.HasDataChanged)
+                {
+                    TowerDesignDataForm.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData);
+                }
             }
         }
 
@@ -312,11 +346,11 @@ namespace CTIToolkit
         {
             string errorMessage = string.Empty;
 
-            int testIndex = TestPointTabControl.SelectedIndex;
+            //int testIndex = TestPointTabControl.SelectedIndex;
 
             //MechanicalDraftPerformanceCurveViewModel.TestPoints.Clear();
 
-            //// save the test points to view model
+            // save the test points to view model
             //foreach (TabPage tabPage in TestPointTabControl.TabPages)
             //{
             //    try
@@ -326,10 +360,10 @@ namespace CTIToolkit
             //    }
             //    catch
             //    { }
-            ////    if (!testPointUserControl.LoadData(towerTestPoint, out errorMessage))
-            ////    {
-            ////        returnValue = false;
-            ////    }
+            //    //    if (!testPointUserControl.LoadData(towerTestPoint, out errorMessage))
+            //    //    {
+            //    //        returnValue = false;
+            //    //    }
             //}
 
             if (MechanicalDraftPerformanceCurveViewModel.CalculatePerformanceCurve(TestPointTabControl.SelectedIndex))
@@ -417,6 +451,88 @@ namespace CTIToolkit
             }
 
             return returnValue;
+        }
+        private void TestPointDelete_Click(object sender, EventArgs e)
+        {
+            CustomMenuItem customMenuItem = sender as CustomMenuItem;
+            TestPointTabControl.TabPages.Remove(TestPointTabControl.TabPages[customMenuItem.TabIndex]);
+        }
+
+        private void TestPointUpdate_Click(object sender, EventArgs e)
+        {
+            CustomMenuItem customMenuItem = sender as CustomMenuItem;
+            TestPointUserControl testPointUserControl = TestPointTabControl.TabPages[customMenuItem.TabIndex].Controls[0] as TestPointUserControl;
+
+            if (testPointUserControl != null)
+            {
+                UpdateTestPointTestNameForm updateTestPointForm = new UpdateTestPointTestNameForm(IsDemo, IsInternationalSystemOfUnits_SI, testPointUserControl.TowerTestPoint.TestName);
+
+                if (updateTestPointForm.ShowDialog(this) == DialogResult.OK)
+                {
+                    testPointUserControl.TowerTestPoint.TestName = updateTestPointForm.TestName;
+                    TestPointTabControl.TabPages[customMenuItem.TabIndex].Text = testPointUserControl.TowerTestPoint.TestName;
+                    IsChanged = true;
+                }
+
+                updateTestPointForm.Dispose();
+            }
+        }
+
+        private void TestPointMoveLeft_Click(object sender, EventArgs e)
+        {
+            CustomMenuItem customMenuItem = sender as CustomMenuItem;
+            TabPage tabPage = TestPointTabControl.TabPages[customMenuItem.TabIndex];
+            TestPointTabControl.TabPages[customMenuItem.TabIndex] = TestPointTabControl.TabPages[customMenuItem.TabIndex - 1];
+            TestPointTabControl.TabPages[customMenuItem.TabIndex - 1] = tabPage;
+            TestPointTabControl.SelectedIndex = customMenuItem.TabIndex - 1;
+        }
+
+        private void TestPointMoveRight_Click(object sender, EventArgs e)
+        {
+            CustomMenuItem customMenuItem = sender as CustomMenuItem;
+            TabPage tabPage = TestPointTabControl.TabPages[customMenuItem.TabIndex + 1];
+            TestPointTabControl.TabPages[customMenuItem.TabIndex + 1] = TestPointTabControl.TabPages[customMenuItem.TabIndex];
+            TestPointTabControl.TabPages[customMenuItem.TabIndex] = tabPage;
+            TestPointTabControl.SelectedIndex = customMenuItem.TabIndex + 1;
+        }
+
+        private void TestPointTabControl_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                // find tab then display menu next to tab
+                // iterate through all the tab pages
+                for (int i = 0; i < TestPointTabControl.TabCount; i++)
+                {
+                    // get their rectangle area and check if it contains the mouse cursor
+                    Rectangle r = TestPointTabControl.GetTabRect(i);
+
+                    if (r.Contains(e.Location))
+                    {
+                        ContextMenu contextMenu = new ContextMenu();
+                        contextMenu.MenuItems.Add(new CustomMenuItem("Update", new System.EventHandler(this.TestPointUpdate_Click), i));
+                        contextMenu.MenuItems.Add("-");
+                        if (i != 0)
+                        {
+                            contextMenu.MenuItems.Add(new CustomMenuItem("< Move Left", new System.EventHandler(this.TestPointMoveLeft_Click), i));
+                        }
+                        if (i != TestPointTabControl.TabCount - 1)
+                        {
+                            contextMenu.MenuItems.Add(new CustomMenuItem("> Move Right", new System.EventHandler(this.TestPointMoveRight_Click), i));
+                        }
+                        contextMenu.MenuItems.Add("-");
+                        contextMenu.MenuItems.Add(new CustomMenuItem("Delete", new System.EventHandler(this.TestPointDelete_Click), i));
+
+
+                        // show the context menu here
+                        contextMenu.Show(this.TestPointTabControl, e.Location);
+                    }
+                }
+            }
+            else
+            {
+
+            }
         }
     }
 }

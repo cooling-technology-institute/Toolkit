@@ -63,7 +63,6 @@ namespace ViewModels
             {
                 isChange |= towerTestPoint.ConvertValues(isIS);
             }
-
             return isChange;
         }
 
@@ -103,6 +102,12 @@ namespace ViewModels
 
             if (MechanicalDraftPerformanceCurveFileData != null)
             {
+                if(MechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI != IsInternationalSystemOfUnits_SI)
+                {
+                    //ToolkitMain,UpdateU
+                    SwitchUnits(MechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI);
+                }
+
                 if (!LoadData())
                 {
                     stringBuilder.AppendLine(ErrorMessage);
@@ -175,12 +180,7 @@ namespace ViewModels
 
             if(MechanicalDraftPerformanceCurveFileData != null)
             {
-                if(MechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI != IsInternationalSystemOfUnits_SI)
-                {
-
-                }
-
-                if (!DesignData.LoadData(MechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI, MechanicalDraftPerformanceCurveFileData.DesignData))
+                if (!DesignData.LoadData(MechanicalDraftPerformanceCurveFileData.DesignData))
                 {
                     returnValue = false;
                     stringBuilder.AppendLine(DesignData.ErrorMessage);
@@ -189,8 +189,8 @@ namespace ViewModels
                 TestPoints.Clear();
                 foreach (TowerTestData testData in MechanicalDraftPerformanceCurveFileData.TestData)
                 {
-                    TowerTestPoint towerTestPoint = new TowerTestPoint(IsDemo, MechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI);
-                    if (!towerTestPoint.LoadData(MechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI, testData))
+                    TowerTestPoint towerTestPoint = new TowerTestPoint(IsDemo, IsInternationalSystemOfUnits_SI);
+                    if (!towerTestPoint.LoadData(IsInternationalSystemOfUnits_SI, testData))
                     {
                         returnValue = false;
                         stringBuilder.AppendLine(string.Format("Test {0}: {1}", towerTestPoint.TestName, towerTestPoint.ErrorMessage));
@@ -206,12 +206,12 @@ namespace ViewModels
             return returnValue;
         }
 
-        public bool FillAndValidate()
+        public bool FillFileData()
         {
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
 
-            if (!DesignData.FillAndValidate(MechanicalDraftPerformanceCurveFileData.DesignData))
+            if (!DesignData.FillFileData(MechanicalDraftPerformanceCurveFileData.DesignData))
             {
                 returnValue = false;
                 stringBuilder.AppendLine(DesignData.ErrorMessage);
@@ -222,7 +222,7 @@ namespace ViewModels
             foreach (TowerTestPoint towerTestPoint in TestPoints)
             {
                 TowerTestData towerTestData = new TowerTestData(IsInternationalSystemOfUnits_SI);
-                if (!towerTestPoint.FillAndValidate(towerTestData))
+                if (!towerTestPoint.FillFileData(towerTestData))
                 {
                     returnValue = false;
                     stringBuilder.AppendLine(string.Format("Test {0}: {1}", towerTestPoint.TestName, towerTestPoint.ErrorMessage));
@@ -243,22 +243,50 @@ namespace ViewModels
             ErrorMessage = string.Empty;
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
-            
+            string errorMessage = string.Empty;
+
             try
             {
-                // get the data from table
-                if(FillAndValidate())
+                if (DesignData.ValidateRanges(3, out errorMessage))
                 {
-                    MechanicalDraftPerformanceCurveCalculationLibrary calculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+                    if (DesignData.ValidateWaterFlowRates(3, out errorMessage))
+                    {
+                        if (DesignData.ValidateRangedTemperatures(3, out errorMessage))
+                        {
+                            // get the data from table
+                            if (FillFileData())
+                            {
+                                MechanicalDraftPerformanceCurveCalculationLibrary calculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
 
-                    calculationLibrary.MechanicalDraftPerformanceCurveCalculation(testIndex, MechanicalDraftPerformanceCurveFileData, OutputDataViewModel.MechanicalDraftPerformanceCurveOutput);
+                                calculationLibrary.MechanicalDraftPerformanceCurveCalculation(testIndex, MechanicalDraftPerformanceCurveFileData, OutputDataViewModel.MechanicalDraftPerformanceCurveOutput);
 
-                    OutputDataViewModel.FillTable();  
+                                OutputDataViewModel.FillTable();
+                            }
+                            else
+                            {
+                                returnValue = false;
+                                stringBuilder.AppendLine(ErrorMessage);
+                            }
+                        }
+                        else
+                        {
+                            stringBuilder.AppendLine(errorMessage);
+                            errorMessage = string.Empty;
+                            returnValue = false;
+                        }
+                    }
+                    else
+                    {
+                        stringBuilder.AppendLine(errorMessage);
+                        errorMessage = string.Empty;
+                        returnValue = false;
+                    }
                 }
                 else
                 {
+                    stringBuilder.AppendLine(errorMessage);
+                    errorMessage = string.Empty;
                     returnValue = false;
-                    stringBuilder.AppendLine(ErrorMessage);
                 }
             }
             catch (Exception exception)

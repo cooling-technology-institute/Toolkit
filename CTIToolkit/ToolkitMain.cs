@@ -54,13 +54,11 @@ namespace CTIToolkit
         private void UnitedStatesCustomaryUnitsIPToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UpdateUnits(UnitsSelection.United_States_Customary_Units_IP);
-            UpdateSettings();
         }
 
         private void InternationalSystemOfUnitsSIToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UpdateUnits(UnitsSelection.International_System_Of_Units_SI);
-            UpdateSettings();
         }
 
         private void UnitedStatesCustomaryUnitsIPButton_Click(object sender, EventArgs e)
@@ -73,7 +71,7 @@ namespace CTIToolkit
             InternationalSystemOfUnitsSIToolStripMenuItem_Click(sender, e);
         }
 
-        private void UpdateUnits(UnitsSelection units)
+        public void UpdateUnits(UnitsSelection units)
         {
             ApplicationSettings.UnitsSelection = units;
             if (ApplicationSettings.UnitsSelection == UnitsSelection.United_States_Customary_Units_IP)
@@ -92,14 +90,28 @@ namespace CTIToolkit
                 UnitedStatesCustomaryUnitsIPButton.Image = Resources.IP;
                 InternationalSystemOfUnitsSIButton.Image = Resources.SIselected;
             }
+            UpdateSettings();
         }
 
         private void UpdateSettings()
         {
-            PsychrometricsUserControl.SetUnitsStandard(ApplicationSettings);
-            MerkelUserControl.SetUnitsStandard(ApplicationSettings);
-            DemandCurveUserControl.SetUnitsStandard(ApplicationSettings);
-            MechanicalDraftPerformanceCurveUserControl.SetUnitsStandard(ApplicationSettings);
+            bool isSI = ApplicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI;
+            if(PsychrometricsUserControl != null)
+            {
+                PsychrometricsUserControl.SetUnitsStandard(isSI);
+            }
+            if (MerkelUserControl != null)
+            {
+                MerkelUserControl.SetUnitsStandard(isSI);
+            }
+            if (DemandCurveUserControl != null)
+            {
+                DemandCurveUserControl.SetUnitsStandard(isSI);
+            }
+            if (MechanicalDraftPerformanceCurveUserControl != null)
+            {
+                MechanicalDraftPerformanceCurveUserControl.SetUnitsStandard(isSI);
+            }
         }
 
         private void NewFile_Click(object sender, EventArgs e)

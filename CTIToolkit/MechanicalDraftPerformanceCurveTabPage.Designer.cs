@@ -222,6 +222,7 @@
             this.TestPointTabControl.SelectedIndex = 0;
             this.TestPointTabControl.Size = new System.Drawing.Size(498, 256);
             this.TestPointTabControl.TabIndex = 32;
+            this.TestPointTabControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TestPointTabControl_MouseUp);
             // 
             // tabPage1
             // 

@@ -12,16 +12,16 @@ namespace CTIToolkit
     {
         PsychrometricsViewModel PsychrometricsViewModel { get; set; }
         private bool IsDemo { get; set; }
-        private bool IsInternationalSystemOfUnits_SI_ { get; set; }
+        private bool IsInternationalSystemOfUnits_SI { get; set; }
 
         public PsychrometricsTabPage(ApplicationSettings applicationSettings)
         {
-            IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            IsInternationalSystemOfUnits_SI = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
             IsDemo = applicationSettings.IsDemo;
 
             InitializeComponent();
 
-            PsychrometricsViewModel = new PsychrometricsViewModel(IsDemo, IsInternationalSystemOfUnits_SI_);
+            PsychrometricsViewModel = new PsychrometricsViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
 
             string errorMessage;
             SetDisplayedValues(out errorMessage);
@@ -152,18 +152,20 @@ namespace CTIToolkit
             return true;
         }
 
-        public void SetUnitsStandard(ApplicationSettings applicationSettings)
+        public void SetUnitsStandard(bool isInternationalSystemOfUnits_SI)
         {
-            IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
-
-            SwitchUnitsSelection();
+            if (IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_SI)
+            {
+                IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
+                SwitchUnitsSelection();
+            }
         }
 
         private void SwitchUnitsSelection()
         {
             RelativeHumidityUnits.Text = ConstantUnits.Percentage;
 
-            if (IsInternationalSystemOfUnits_SI_)
+            if (IsInternationalSystemOfUnits_SI)
             {
                 WetBulbTemperatureUnits.Text = ConstantUnits.TemperatureCelsius;
                 DryBulbTemperatureUnits.Text = ConstantUnits.TemperatureCelsius;

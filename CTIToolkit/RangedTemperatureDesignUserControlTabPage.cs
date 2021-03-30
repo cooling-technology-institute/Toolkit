@@ -12,9 +12,9 @@ namespace CTIToolkit
             this.Controls.Add(userControl);
         }
 
-        public void SetUnitsStandard(ApplicationSettings applicationSettings)
+        public void SetUnitsStandard(bool isInternationalSystemOfUnits_SI)
         {
-            UserControl.SetUnitsStandard(applicationSettings);
+            UserControl.SetUnitsStandard(isInternationalSystemOfUnits_SI);
         }
     }
 }

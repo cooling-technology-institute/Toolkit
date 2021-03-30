@@ -38,22 +38,26 @@ namespace CTIToolkit
             IsDemo = isDemo;
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
             ErrorMessage = string.Empty;
+            IsChanged = false;
 
             TowerDesignData = towerDesignData;
             SetDisplayedUnits();
             SetDisplayedValues();
         }
 
-        public void SetUnitsStandard(ApplicationSettings applicationSettings)
+        public void SetUnitsStandard(bool isInternationalSystemOfUnits_SI)
         {
-            IsInternationalSystemOfUnits_SI = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
-            SetDisplayedUnits();
-            TowerDesignData.ConvertValues(IsInternationalSystemOfUnits_SI);
-            foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
+            if(IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_SI)
             {
-                tabPage.SetUnitsStandard(applicationSettings);
+                IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
+                SetDisplayedUnits();
+                TowerDesignData.ConvertValues(IsInternationalSystemOfUnits_SI);
+                foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
+                {
+                    tabPage.SetUnitsStandard(IsInternationalSystemOfUnits_SI);
+                }
+                SetDisplayedValues();
             }
-            SetDisplayedValues();
         }
 
         private void SetDisplayedUnits()
@@ -236,7 +240,7 @@ namespace CTIToolkit
                 tabPage.UserControl.RangeVisible(3, (TowerDesignData.Range3Value.Current != 0.0));
                 tabPage.UserControl.RangeVisible(4, (TowerDesignData.Range4Value.Current != 0.0));
                 tabPage.UserControl.RangeVisible(5, (TowerDesignData.Range5Value.Current != 0.0));
-                tabPage.UserControl.LoadData(IsInternationalSystemOfUnits_SI, towerDesignCurveData);
+                tabPage.UserControl.LoadData(towerDesignCurveData);
                 tabPage.Text = tabPage.UserControl.TowerDesignCurveData.WaterFlowRateDataValue.InputValue;
                 if (!tabPage.UserControl.SetDisplayedValues())
                 {
@@ -704,7 +708,7 @@ namespace CTIToolkit
             {
                 rangedTemperaturesDesignData.WaterFlowRate = waterFlowRateDataValue.Current;
 
-                if (!towerDesignCurveData.LoadData(IsInternationalSystemOfUnits_SI, rangedTemperaturesDesignData))
+                if (!towerDesignCurveData.LoadData(rangedTemperaturesDesignData))
                 {
                     MessageBox.Show(towerDesignCurveData.ErrorMessage);
                 }
@@ -797,19 +801,25 @@ namespace CTIToolkit
 
         private void TypeInduced_CheckedChanged(object sender, EventArgs e)
         {
-            IsChanged = true;
             if (TowerTypeInduced.Checked)
             {
-                TowerDesignData.TowerTypeValue = TOWER_TYPE.Induced;
+                if(TowerDesignData.TowerTypeValue != TOWER_TYPE.Induced)
+                {
+                    IsChanged = true;
+                    TowerDesignData.TowerTypeValue = TOWER_TYPE.Induced;
+                }
             }
         }
 
         private void TypeForced_CheckedChanged(object sender, EventArgs e)
         {
-            IsChanged = true;
             if (TowerTypeForced.Checked)
             {
-                TowerDesignData.TowerTypeValue = TOWER_TYPE.Forced;
+                if (TowerDesignData.TowerTypeValue != TOWER_TYPE.Forced)
+                {
+                    IsChanged = true;
+                    TowerDesignData.TowerTypeValue = TOWER_TYPE.Forced;
+                }
             }
         }
 
@@ -900,26 +910,38 @@ namespace CTIToolkit
 
         private void OwnerName_TextChanged(object sender, EventArgs e)
         {
-            IsChanged = true;
-            TowerDesignData.OwnerNameValue = OwnerName.Text;
+            if(TowerDesignData.OwnerNameValue != OwnerName.Text)
+            {
+                IsChanged = true;
+                TowerDesignData.OwnerNameValue = OwnerName.Text;
+            }
         }
 
         private void ProjectName_TextChanged(object sender, EventArgs e)
         {
-            IsChanged = true;
-            TowerDesignData.ProjectNameValue = ProjectName.Text;
+            if (TowerDesignData.ProjectNameValue != ProjectName.Text)
+            {
+                IsChanged = true;
+                TowerDesignData.ProjectNameValue = ProjectName.Text;
+            }
         }
 
         private void TowerLocation_TextChanged(object sender, EventArgs e)
         {
-            IsChanged = true;
-            TowerDesignData.LocationValue = TowerLocation.Text;
+            if (TowerDesignData.LocationValue != TowerLocation.Text)
+            {
+                IsChanged = true;
+                TowerDesignData.LocationValue = TowerLocation.Text;
+            }
         }
 
         private void TowerManufacturer_TextChanged(object sender, EventArgs e)
         {
-            IsChanged = true;
-            TowerDesignData.TowerManufacturerValue = TowerManufacturer.Text;
+            if (TowerDesignData.TowerManufacturerValue != TowerManufacturer.Text)
+            {
+                IsChanged = true;
+                TowerDesignData.TowerManufacturerValue = TowerManufacturer.Text;
+            }
         }
     }
 }

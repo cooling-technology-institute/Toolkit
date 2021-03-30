@@ -119,6 +119,7 @@ namespace ViewModels
                 WetBulbTemperatureDataValue3.ConvertValue(IsInternationalSystemOfUnits_SI);
                 WetBulbTemperatureDataValue4.ConvertValue(IsInternationalSystemOfUnits_SI);
                 WetBulbTemperatureDataValue5.ConvertValue(IsInternationalSystemOfUnits_SI);
+                WetBulbTemperatureDataValue6.ConvertValue(IsInternationalSystemOfUnits_SI);
                 Range1ColdWaterTemperatureDataValue1.ConvertValue(IsInternationalSystemOfUnits_SI);
                 Range1ColdWaterTemperatureDataValue2.ConvertValue(IsInternationalSystemOfUnits_SI);
                 Range1ColdWaterTemperatureDataValue3.ConvertValue(IsInternationalSystemOfUnits_SI);
@@ -153,7 +154,7 @@ namespace ViewModels
             return isChanged;
         }
 
-        public bool LoadData(bool isIS, RangedTemperaturesDesignData rangedTemperaturesDesignData)
+        public bool LoadData(RangedTemperaturesDesignData rangedTemperaturesDesignData)
         {
             string errorMessage = string.Empty;
 
@@ -201,12 +202,10 @@ namespace ViewModels
             Range5ColdWaterTemperatureDataValue5.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature5, out errorMessage);
             Range5ColdWaterTemperatureDataValue6.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature6, out errorMessage);
 
-            ConvertValues(isIS);
-
             return true;
         }
 
-        public bool FillAndValidate(ref RangedTemperaturesDesignData rangedTemperaturesDesignData)
+        public bool FillFileData(ref RangedTemperaturesDesignData rangedTemperaturesDesignData)
         {
             ErrorMessage = string.Empty;
             bool returnValue = true;

@@ -10,7 +10,7 @@ namespace CTIToolkit
     {
         public TowerDesignCurveData TowerDesignCurveData { get; set; }
         private bool IsDemo { get; set; }
-        private bool IsInternationalSystemOfUnits_SI_ { get; set; }
+        private bool IsInternationalSystemOfUnits_SI { get; set; }
         public bool IsChanged { get; set; }
         public string ErrorMessage { get; set; }
 
@@ -19,26 +19,29 @@ namespace CTIToolkit
             InitializeComponent();
 
             IsDemo = isDemo;
-            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_SI_;
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI_;
             IsChanged = false;
             ErrorMessage = string.Empty;
 
-            TowerDesignCurveData = new TowerDesignCurveData(IsDemo, IsInternationalSystemOfUnits_SI_);
+            TowerDesignCurveData = new TowerDesignCurveData(IsDemo, IsInternationalSystemOfUnits_SI);
             SetDisplayedUnits();
             SetDisplayedValues();
         }
 
-        public void SetUnitsStandard(ApplicationSettings applicationSettings)
+        public void SetUnitsStandard(bool isInternationalSystemOfUnits_SI)
         {
-            IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
-            TowerDesignCurveData.ConvertValues(IsInternationalSystemOfUnits_SI_);
-            SetDisplayedUnits();
-            SetDisplayedValues();
+            if (IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_SI)
+            {
+                IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
+                TowerDesignCurveData.ConvertValues(IsInternationalSystemOfUnits_SI);
+                SetDisplayedUnits();
+                SetDisplayedValues();
+            }
         }
 
         private void SetDisplayedUnits()
         {
-            if (IsInternationalSystemOfUnits_SI_)
+            if (IsInternationalSystemOfUnits_SI)
             {
                 UnitsWetWaterTemperature1.Text = ConstantUnits.TemperatureCelsius;
                 UnitsWetWaterTemperature2.Text = ConstantUnits.TemperatureCelsius;
@@ -58,18 +61,13 @@ namespace CTIToolkit
             }
         }
 
-        public bool LoadData(bool isInternationalSystemOfUnits_SI_, TowerDesignCurveData towerDesignCurveData)
+        public bool LoadData(TowerDesignCurveData towerDesignCurveData)
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
             ErrorMessage = string.Empty;
 
             TowerDesignCurveData = towerDesignCurveData;
-            if(isInternationalSystemOfUnits_SI_ != IsInternationalSystemOfUnits_SI_)
-            {
-
-            }
-
             if (!SetDisplayedValues())
             {
                 stringBuilder.AppendLine(ErrorMessage);

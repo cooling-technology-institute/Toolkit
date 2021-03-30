@@ -164,7 +164,7 @@ namespace ViewModels
             IsDemo = value;
         }
 
-        public bool FillAndValidate(TowerTestData towerTestData)
+        public bool FillFileData(TowerTestData towerTestData)
         {
             ErrorMessage = string.Empty;
             bool returnValue = true;

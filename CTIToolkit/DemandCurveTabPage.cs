@@ -20,32 +20,35 @@ namespace CTIToolkit
 
         private DemandCurveViewModel DemandCurveViewModel { get; set; }
         private bool IsDemo { get; set; }
-        private bool IsInternationalSystemOfUnits_SI_ { get; set; }
+        private bool IsInternationalSystemOfUnits_SI { get; set; }
         private bool HasChanged { get; set; }
 
         public DemandCurveTabPage(ApplicationSettings applicationSettings)
         {
             InitializeComponent();
 
-            IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            IsInternationalSystemOfUnits_SI = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
 
-            DemandCurveViewModel = new DemandCurveViewModel(IsDemo, IsInternationalSystemOfUnits_SI_);
+            DemandCurveViewModel = new DemandCurveViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
 
             HasChanged = false;
 
             SetDisplayedValues();
         }
 
-        public void SetUnitsStandard(ApplicationSettings applicationSettings)
+        public void SetUnitsStandard(bool isInternationalSystemOfUnits_SI)
         {
-            IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
-            SwitchUnits();
+            if (IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_SI)
+            {
+                IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
+                SwitchUnits();
+            }
         }
 
         private void SwitchUnits()
         {
             string errorMessage;
-            DemandCurveViewModel.ConvertValues(IsInternationalSystemOfUnits_SI_, out errorMessage);
+            DemandCurveViewModel.ConvertValues(IsInternationalSystemOfUnits_SI, out errorMessage);
         }
         
         private void SetDisplayedValues()
@@ -362,7 +365,7 @@ namespace CTIToolkit
             {
                 DemandCurve_Elevation_Value.Text = DemandCurveViewModel.ElevationDataValueInputValue;
                 DemandCurveElevationPressureLabel.Text = DemandCurveViewModel.ElevationDataValueInputMessage;
-                if (IsInternationalSystemOfUnits_SI_)
+                if (IsInternationalSystemOfUnits_SI)
                 {
                     DemandCurveElevationPressureUnits.Text = ConstantUnits.Meter;
                 }
@@ -379,7 +382,7 @@ namespace CTIToolkit
             {
                 DemandCurve_Elevation_Value.Text = DemandCurveViewModel.BarometricPressureDataValueInputValue;
                 DemandCurveElevationPressureLabel.Text = DemandCurveViewModel.BarometricPressureDataValueInputMessage;
-                if (IsInternationalSystemOfUnits_SI_)
+                if (IsInternationalSystemOfUnits_SI)
                 {
                     DemandCurveElevationPressureUnits.Text = ConstantUnits.BarometricPressureKiloPascal;
                 }

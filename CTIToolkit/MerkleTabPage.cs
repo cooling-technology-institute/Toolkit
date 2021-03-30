@@ -14,15 +14,15 @@ namespace CTIToolkit
     {
         private MerkelViewModel MerkelViewModel { get; set; }
         private bool IsDemo { get; set; }
-        private bool IsInternationalSystemOfUnits_SI_ { get; set; }
+        private bool IsInternationalSystemOfUnits_SI { get; set; }
 
         public MerkelTabPage(ApplicationSettings applicationSettings)
         {
             InitializeComponent();
 
-            IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            IsInternationalSystemOfUnits_SI = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
 
-            MerkelViewModel = new MerkelViewModel(IsDemo, IsInternationalSystemOfUnits_SI_);
+            MerkelViewModel = new MerkelViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
 
             SetDisplayedValues();
 
@@ -53,21 +53,24 @@ namespace CTIToolkit
             toolTip1.SetToolTip(Merkel_LiquidtoGasRatio_Value, MerkelViewModel.LiquidtoGasRatioDataValueTooltip);
         }
 
-        public void SetUnitsStandard(ApplicationSettings applicationSettings)
+        public void SetUnitsStandard(bool isInternationalSystemOfUnits_SI)
         {
-            IsInternationalSystemOfUnits_SI_ = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
-            SwitchUnits();
+            if(IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_SI)
+            {
+                IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
+                SwitchUnits();
+            }
         }
 
         private void SwitchUnits()
         {
             string errorMessage = string.Empty;
-            if (MerkelViewModel.ConvertValues(IsInternationalSystemOfUnits_SI_, MerkleElevationRadio.Checked, out errorMessage))
+            if (MerkelViewModel.ConvertValues(IsInternationalSystemOfUnits_SI, MerkleElevationRadio.Checked, out errorMessage))
             {
                 SwitchCalculation();
             }
 
-            if (IsInternationalSystemOfUnits_SI_)
+            if (IsInternationalSystemOfUnits_SI)
             {
                 if (MerkleElevationRadio.Checked)
                 {
@@ -93,7 +96,7 @@ namespace CTIToolkit
 
         private void SwitchCalculation()
         {
-            if (IsInternationalSystemOfUnits_SI_)
+            if (IsInternationalSystemOfUnits_SI)
             {
                 MerkelTemperatureHotWaterUnits.Text = ConstantUnits.TemperatureCelsius;
                 MerkelTemperatureColdWaterUnits.Text = ConstantUnits.TemperatureCelsius;
@@ -275,7 +278,7 @@ namespace CTIToolkit
             {
                 Merkel_Elevation_Value.Text = MerkelViewModel.BarometricPressureDataValueInputValue;
                 MerkelElevationPressureLabel.Text = MerkelViewModel.BarometricPressureDataValueInputMessage;
-                if (IsInternationalSystemOfUnits_SI_)
+                if (IsInternationalSystemOfUnits_SI)
                 {
                     MerkelElevationPressureUnits.Text = ConstantUnits.BarometricPressureKiloPascal;
                 }
@@ -292,7 +295,7 @@ namespace CTIToolkit
             {
                 Merkel_Elevation_Value.Text = MerkelViewModel.ElevationDataValueInputValue;
                 MerkelElevationPressureLabel.Text = MerkelViewModel.ElevationDataValueInputMessage;
-                if (IsInternationalSystemOfUnits_SI_)
+                if (IsInternationalSystemOfUnits_SI)
                 {
                     MerkelElevationPressureUnits.Text = ConstantUnits.Meter;
                 }
