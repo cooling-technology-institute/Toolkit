@@ -33,7 +33,7 @@ namespace ViewModels
             NameValueUnitsDataTable.AddRow("Adjusted Flow", MechanicalDraftPerformanceCurveOutput.AdjustedFlow.ToString("F1"), Units.FlowRate);
             NameValueUnitsDataTable.AddRow("Predicted Flow", MechanicalDraftPerformanceCurveOutput.PredictedFlow.ToString("F1"), Units.FlowRate);
             NameValueUnitsDataTable.AddRow("Tower Capability", MechanicalDraftPerformanceCurveOutput.TowerCapability.ToString("F2"), ConstantUnits.Percentage);
-            NameValueUnitsDataTable.AddRow("Cold Water Temperature Deviation", MechanicalDraftPerformanceCurveOutput.ColdWaterTemperatureDeviation.ToString("1"), Units.Temperature);
+            NameValueUnitsDataTable.AddRow("Cold Water Temperature Deviation", MechanicalDraftPerformanceCurveOutput.ColdWaterTemperatureDeviation.ToString("F1"), Units.Temperature);
         }
 
         public DataTable GetDataTable()

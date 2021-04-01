@@ -28,41 +28,33 @@ namespace CalculationLibraryUnitTest
 				LiquidToGasRatio = 1.3,
 			};
 
-			TowerTestData test = new TowerTestData(true)
-			{
-				TestName = "test",
-				TowerSpecifications =
-                {
-					HotWaterTemperature = 46.5,
-					ColdWaterTemperature = 29.04,
-					WetBulbTemperature = 24.53,
-					DryBulbTemperature = 25.52,
-					BarometricPressure = 98.8,
-					WaterFlowRate = 3623.0,
-					FanDriverPower = 113.0,
-					LiquidToGasRatio = 0.0
-				}
-			};
-
-			DesignData designData = new DesignData()
-			{
-				TowerSpecifications = design,
-				TowerType = TOWER_TYPE.Induced
-			};
-
-			MechanicalDraftPerformanceCurveFileData data = new MechanicalDraftPerformanceCurveFileData(true)
+			TowerSpecifications test = new TowerSpecifications()
 			{
 				IsInternationalSystemOfUnits_SI = true,
-				DesignData = designData
+				HotWaterTemperature = 46.5,
+				ColdWaterTemperature = 29.04,
+				WetBulbTemperature = 24.53,
+				DryBulbTemperature = 25.52,
+				BarometricPressure = 98.8,
+				WaterFlowRate = 3623.0,
+				FanDriverPower = 113.0,
+				LiquidToGasRatio = 0.0
 			};
-			data.TestData.Add(test);
+
+			MechanicalDraftPerformanceCurveCalculationData data = new MechanicalDraftPerformanceCurveCalculationData()
+			{
+				IsInternationalSystemOfUnits_SI = true,
+				TowerType = TOWER_TYPE.Induced,
+				TowerDesignData = design,
+				TowerTestData = test,
+			};
 
 			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
 
 			try
 			{
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                CalculationLibrary.DetermineAdjustedTestFlow(0, data, output);
+                CalculationLibrary.DetermineAdjustedTestFlow(data, output);
             }
             catch
             {
@@ -97,41 +89,33 @@ namespace CalculationLibraryUnitTest
 				LiquidToGasRatio = 1.3,
 			};
 
-			TowerTestData test = new TowerTestData(true)
-			{
-				TestName = "test",
-				TowerSpecifications =
-				{
-					HotWaterTemperature = 46.5,
-					ColdWaterTemperature = 29.04,
-					WetBulbTemperature = 24.53,
-					DryBulbTemperature = 25.52,
-					BarometricPressure = 98.8,
-					WaterFlowRate = 3623.0,
-					FanDriverPower = 113.0,
-					LiquidToGasRatio = 0.0
-				}
-			};
-
-			DesignData designData = new DesignData()
-			{
-				TowerSpecifications = design,
-				TowerType = TOWER_TYPE.Induced
-			};
-
-			MechanicalDraftPerformanceCurveFileData data = new MechanicalDraftPerformanceCurveFileData(true)
+			TowerSpecifications test = new TowerSpecifications()
 			{
 				IsInternationalSystemOfUnits_SI = true,
-				DesignData = designData
+				HotWaterTemperature = 46.5,
+				ColdWaterTemperature = 29.04,
+				WetBulbTemperature = 24.53,
+				DryBulbTemperature = 25.52,
+				BarometricPressure = 98.8,
+				WaterFlowRate = 3623.0,
+				FanDriverPower = 113.0,
+				LiquidToGasRatio = 0.0
 			};
-			data.TestData.Add(test);
+
+			MechanicalDraftPerformanceCurveCalculationData data = new MechanicalDraftPerformanceCurveCalculationData()
+			{
+				IsInternationalSystemOfUnits_SI = true,
+				TowerType = TOWER_TYPE.Induced,
+				TowerDesignData = design,
+				TowerTestData = test
+			};
 
 			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
 
 			try
 			{
 				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(0, data, output);
+				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
 			}
 			catch
 			{
@@ -165,41 +149,33 @@ namespace CalculationLibraryUnitTest
 				LiquidToGasRatio = 1.3,
 			};
 
-			TowerTestData test = new TowerTestData(true)
-			{
-				TestName = "test",
-				TowerSpecifications =
-				{
-					HotWaterTemperature = 46.5,
-					ColdWaterTemperature = 29.04,
-					WetBulbTemperature = 24.53,
-					DryBulbTemperature = 25.52,
-					BarometricPressure = 98.8,
-					WaterFlowRate = 3623.0,
-					FanDriverPower = 113.0,
-					LiquidToGasRatio = 0.0
-				}
-			};
-
-			DesignData designData = new DesignData()
-			{
-				TowerSpecifications = design,
-				TowerType = TOWER_TYPE.Induced
-			};
-
-			MechanicalDraftPerformanceCurveFileData data = new MechanicalDraftPerformanceCurveFileData(true)
+			TowerSpecifications test = new TowerSpecifications()
 			{
 				IsInternationalSystemOfUnits_SI = true,
-				DesignData = designData
+				HotWaterTemperature = 46.5,
+				ColdWaterTemperature = 29.04,
+				WetBulbTemperature = 24.53,
+				DryBulbTemperature = 25.52,
+				BarometricPressure = 98.8,
+				WaterFlowRate = 3623.0,
+				FanDriverPower = 113.0,
+				LiquidToGasRatio = 0.0
 			};
-			data.TestData.Add(test);
+
+			MechanicalDraftPerformanceCurveCalculationData data = new MechanicalDraftPerformanceCurveCalculationData()
+			{
+				IsInternationalSystemOfUnits_SI = true,
+				TowerType = TOWER_TYPE.Induced,
+				TowerDesignData = design,
+				TowerTestData = test
+			};
 
 			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
 
 			try
 			{
 				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(0, data, output);
+				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
 			}
 			catch
 			{
@@ -233,41 +209,33 @@ namespace CalculationLibraryUnitTest
 				LiquidToGasRatio = 1.3,
 			};
 
-			TowerTestData test = new TowerTestData(true)
-			{
-				TestName = "test",
-				TowerSpecifications =
-				{
-					HotWaterTemperature = 46.5,
-					ColdWaterTemperature = 29.04,
-					WetBulbTemperature = 24.53,
-					DryBulbTemperature = 25.52,
-					BarometricPressure = 98.8,
-					WaterFlowRate = 3623.0,
-					FanDriverPower = 113.0,
-					LiquidToGasRatio = 0.0
-				}
-			};
-
-			DesignData designData = new DesignData()
-			{
-				TowerSpecifications = design,
-				TowerType = TOWER_TYPE.Induced
-			};
-
-			MechanicalDraftPerformanceCurveFileData data = new MechanicalDraftPerformanceCurveFileData(true)
+			TowerSpecifications test = new TowerSpecifications()
 			{
 				IsInternationalSystemOfUnits_SI = true,
-				DesignData = designData
+				HotWaterTemperature = 46.5,
+				ColdWaterTemperature = 29.04,
+				WetBulbTemperature = 24.53,
+				DryBulbTemperature = 25.52,
+				BarometricPressure = 98.8,
+				WaterFlowRate = 3623.0,
+				FanDriverPower = 113.0,
+				LiquidToGasRatio = 0.0
 			};
-			data.TestData.Add(test);
+
+			MechanicalDraftPerformanceCurveCalculationData data = new MechanicalDraftPerformanceCurveCalculationData()
+			{
+				IsInternationalSystemOfUnits_SI = true,
+				TowerType = TOWER_TYPE.Induced,
+				TowerDesignData = design,
+				TowerTestData = test
+			};
 
 			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
 
 			try
 			{
 				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(0, data, output);
+				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
 			}
 			catch
 			{
@@ -301,41 +269,33 @@ namespace CalculationLibraryUnitTest
 				LiquidToGasRatio = 1.3,
 			};
 
-			TowerTestData test = new TowerTestData(true)
-			{
-				TestName = "test",
-				TowerSpecifications =
-				{
-					HotWaterTemperature = 46.5,
-					ColdWaterTemperature = 29.04,
-					WetBulbTemperature = 24.53,
-					DryBulbTemperature = 25.52,
-					BarometricPressure = 98.8,
-					WaterFlowRate = 3623.0,
-					FanDriverPower = 0.0,
-					LiquidToGasRatio = 0.0
-				}
-			};
-
-			DesignData designData = new DesignData()
-			{
-				TowerSpecifications = design,
-				TowerType = TOWER_TYPE.Induced
-			};
-
-			MechanicalDraftPerformanceCurveFileData data = new MechanicalDraftPerformanceCurveFileData(true)
+			TowerSpecifications test = new TowerSpecifications()
 			{
 				IsInternationalSystemOfUnits_SI = true,
-				DesignData = designData
+				HotWaterTemperature = 46.5,
+				ColdWaterTemperature = 29.04,
+				WetBulbTemperature = 24.53,
+				DryBulbTemperature = 25.52,
+				BarometricPressure = 98.8,
+				WaterFlowRate = 3623.0,
+				FanDriverPower = 0.0,
+				LiquidToGasRatio = 0.0
 			};
-			data.TestData.Add(test);
+
+			MechanicalDraftPerformanceCurveCalculationData data = new MechanicalDraftPerformanceCurveCalculationData()
+			{
+				IsInternationalSystemOfUnits_SI = true,
+				TowerType = TOWER_TYPE.Induced,
+				TowerDesignData = design,
+				TowerTestData = test
+			};
 
 			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
 
 			try
 			{
 				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(0, data, output);
+				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
 			}
 			catch
 			{
@@ -369,42 +329,33 @@ namespace CalculationLibraryUnitTest
 				LiquidToGasRatio = 1.3,
 			};
 
-			TowerTestData test = new TowerTestData(true)
-			{
-				TestName = "test",
-				TowerSpecifications =
-				{
-					IsInternationalSystemOfUnits_SI = true,
-					HotWaterTemperature = 46.5,
-					ColdWaterTemperature = 29.04,
-					WetBulbTemperature = 24.53,
-					DryBulbTemperature = 25.52,
-					BarometricPressure = 98.8,
-					WaterFlowRate = 3623.0,
-					FanDriverPower = 113.0,
-					LiquidToGasRatio = 0.0
-				}
-			};
-
-			DesignData designData = new DesignData()
-			{
-				TowerSpecifications = design,
-				TowerType = TOWER_TYPE.Induced
-			};
-
-			MechanicalDraftPerformanceCurveFileData data = new MechanicalDraftPerformanceCurveFileData(true)
+			TowerSpecifications test = new TowerSpecifications()
 			{
 				IsInternationalSystemOfUnits_SI = true,
-				DesignData = designData
+				HotWaterTemperature = 46.5,
+				ColdWaterTemperature = 29.04,
+				WetBulbTemperature = 24.53,
+				DryBulbTemperature = 25.52,
+				BarometricPressure = 98.8,
+				WaterFlowRate = 3623.0,
+				FanDriverPower = 113.0,
+				LiquidToGasRatio = 0.0
 			};
-			data.TestData.Add(test);
+
+			MechanicalDraftPerformanceCurveCalculationData data = new MechanicalDraftPerformanceCurveCalculationData()
+			{
+				IsInternationalSystemOfUnits_SI = true,
+				TowerType = TOWER_TYPE.Induced,
+				TowerDesignData = design,
+				TowerTestData = test
+			};
 
 			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
 
 			try
 			{
 				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(0, data, output);
+				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
 			}
 			catch
 			{
@@ -438,41 +389,33 @@ namespace CalculationLibraryUnitTest
 				LiquidToGasRatio = 1.3,
 			};
 
-			TowerTestData test = new TowerTestData(true)
-			{
-				TestName = "test",
-				TowerSpecifications =
-				{
-					HotWaterTemperature = 46.5,
-					ColdWaterTemperature = 29.04,
-					WetBulbTemperature = 24.53,
-					DryBulbTemperature = 25.52,
-					BarometricPressure = 98.8,
-					WaterFlowRate = 3623.0,
-					FanDriverPower = 113.0,
-					LiquidToGasRatio = 0.0
-				}
-			};
-
-			DesignData designData = new DesignData()
-			{
-				TowerSpecifications = design,
-				TowerType = TOWER_TYPE.Forced
-			};
-
-			MechanicalDraftPerformanceCurveFileData data = new MechanicalDraftPerformanceCurveFileData(true)
+			TowerSpecifications test = new TowerSpecifications()
 			{
 				IsInternationalSystemOfUnits_SI = true,
-				DesignData = designData
+				HotWaterTemperature = 46.5,
+				ColdWaterTemperature = 29.04,
+				WetBulbTemperature = 24.53,
+				DryBulbTemperature = 25.52,
+				BarometricPressure = 98.8,
+				WaterFlowRate = 3623.0,
+				FanDriverPower = 113.0,
+				LiquidToGasRatio = 0.0
 			};
-			data.TestData.Add(test);
+
+			MechanicalDraftPerformanceCurveCalculationData data = new MechanicalDraftPerformanceCurveCalculationData()
+			{
+				IsInternationalSystemOfUnits_SI = true,
+				TowerType = TOWER_TYPE.Forced,
+				TowerDesignData = design,
+				TowerTestData = test
+			};
 
 			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
 
 			try
 			{
 				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(0, data, output);
+				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
 			}
 			catch
 			{
@@ -506,20 +449,17 @@ namespace CalculationLibraryUnitTest
 				LiquidToGasRatio = 1.3        // LinGD
 			};
 
-			TowerTestData test = new TowerTestData(false)
+			TowerSpecifications test = new TowerSpecifications()
 			{
-				TestName = "test",
-				TowerSpecifications =
-				{
-					HotWaterTemperature = 115.70, // EWTt
-					ColdWaterTemperature = 84.27, // LWTt
-					WetBulbTemperature = 76.18,   // EWBt
-					DryBulbTemperature = 77.94,   // EDBt
-					BarometricPressure = 29.18,   // BPt
-					WaterFlowRate = 57426.0,      // FLOWt
-					FanDriverPower = 151.5,       // BHPt
-					LiquidToGasRatio = 0.0        // LinGt
-				}
+				IsInternationalSystemOfUnits_SI = false,
+				HotWaterTemperature = 115.70, // EWTt
+				ColdWaterTemperature = 84.27, // LWTt
+				WetBulbTemperature = 76.18,   // EWBt
+				DryBulbTemperature = 77.94,   // EDBt
+				BarometricPressure = 29.18,   // BPt
+				WaterFlowRate = 57426.0,      // FLOWt
+				FanDriverPower = 151.5,       // BHPt
+				LiquidToGasRatio = 0.0        // LinGt
 			};
 
 			DesignData designData = new DesignData()
@@ -528,19 +468,20 @@ namespace CalculationLibraryUnitTest
 				TowerType = TOWER_TYPE.Induced
 			};
 
-			MechanicalDraftPerformanceCurveFileData data = new MechanicalDraftPerformanceCurveFileData(false)
+			MechanicalDraftPerformanceCurveCalculationData data = new MechanicalDraftPerformanceCurveCalculationData()
 			{
 				IsInternationalSystemOfUnits_SI = false,
-				DesignData = designData
+				TowerType = TOWER_TYPE.Induced,
+				TowerDesignData = design,
+				TowerTestData = test
 			};
-			data.TestData.Add(test);
 
 			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
 
 			try
 			{
 				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(0, data, output);
+				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
 			}
 			catch
 			{
@@ -574,41 +515,33 @@ namespace CalculationLibraryUnitTest
 				LiquidToGasRatio = 1.3        // LinGD
 			};
 
-			TowerTestData test = new TowerTestData(false)
-			{
-				TestName = "test",
-				TowerSpecifications =
-				{
-					HotWaterTemperature = 115.70, // EWTt
-					ColdWaterTemperature = 84.27, // LWTt
-					WetBulbTemperature = 76.18,   // EWBt
-					DryBulbTemperature = 77.94,   // EDBt
-					BarometricPressure = 29.18,   // BPt
-					WaterFlowRate = 57426.0,      // FLOWt
-					FanDriverPower = 151.5,       // BHPt
-					LiquidToGasRatio = 0.0        // LinGt
-				}
-			};
-
-			DesignData designData = new DesignData()
-			{
-				TowerSpecifications = design,
-				TowerType = TOWER_TYPE.Induced
-			};
-
-			MechanicalDraftPerformanceCurveFileData data = new MechanicalDraftPerformanceCurveFileData(false)
+			TowerSpecifications test = new TowerSpecifications()
 			{
 				IsInternationalSystemOfUnits_SI = false,
-				DesignData = designData
+				HotWaterTemperature = 115.70, // EWTt
+				ColdWaterTemperature = 84.27, // LWTt
+				WetBulbTemperature = 76.18,   // EWBt
+				DryBulbTemperature = 77.94,   // EDBt
+				BarometricPressure = 29.18,   // BPt
+				WaterFlowRate = 57426.0,      // FLOWt
+				FanDriverPower = 151.5,       // BHPt
+				LiquidToGasRatio = 0.0        // LinGt
 			};
-			data.TestData.Add(test);
+
+			MechanicalDraftPerformanceCurveCalculationData data = new MechanicalDraftPerformanceCurveCalculationData()
+			{
+				IsInternationalSystemOfUnits_SI = false,
+				TowerType = TOWER_TYPE.Induced,
+				TowerDesignData = design,
+				TowerTestData = test
+			};
 
 			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
 
 			try
 			{
 				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(0, data, output);
+				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
 			}
 			catch
 			{
@@ -642,41 +575,33 @@ namespace CalculationLibraryUnitTest
 				LiquidToGasRatio = 1.3        // LinGD
 			};
 
-			TowerTestData test = new TowerTestData(false)
-			{
-				TestName = "test",
-				TowerSpecifications =
-				{
-					HotWaterTemperature = 115.70, // EWTt
-					ColdWaterTemperature = 84.27, // LWTt
-					WetBulbTemperature = 76.18,   // EWBt
-					DryBulbTemperature = 77.94,   // EDBt
-					BarometricPressure = 29.18,   // BPt
-					WaterFlowRate = 57426.0,      // FLOWt
-					FanDriverPower = 0.0,       // BHPt
-					LiquidToGasRatio = 0.0        // LinGt
-				}
-			};
-
-			DesignData designData = new DesignData()
-			{
-				TowerSpecifications = design,
-				TowerType = TOWER_TYPE.Induced
-			};
-
-			MechanicalDraftPerformanceCurveFileData data = new MechanicalDraftPerformanceCurveFileData(false)
+			TowerSpecifications test = new TowerSpecifications()
 			{
 				IsInternationalSystemOfUnits_SI = false,
-				DesignData = designData
+				HotWaterTemperature = 115.70, // EWTt
+				ColdWaterTemperature = 84.27, // LWTt
+				WetBulbTemperature = 76.18,   // EWBt
+				DryBulbTemperature = 77.94,   // EDBt
+				BarometricPressure = 29.18,   // BPt
+				WaterFlowRate = 57426.0,      // FLOWt
+				FanDriverPower = 0.0,       // BHPt
+				LiquidToGasRatio = 0.0        // LinGt
 			};
-			data.TestData.Add(test);
+
+			MechanicalDraftPerformanceCurveCalculationData data = new MechanicalDraftPerformanceCurveCalculationData()
+			{
+				IsInternationalSystemOfUnits_SI = false,
+				TowerType = TOWER_TYPE.Induced,
+				TowerDesignData = design,
+				TowerTestData = test
+			};
 
 			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
 
 			try
 			{
 				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(0, data, output);
+				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
 			}
 			catch
 			{
@@ -710,20 +635,17 @@ namespace CalculationLibraryUnitTest
 				LiquidToGasRatio = 1.3        // LinGD
 			};
 
-			TowerTestData test = new TowerTestData(false)
+			TowerSpecifications test = new TowerSpecifications()
 			{
-				TestName = "test",
-				TowerSpecifications =
-				{
-					HotWaterTemperature = 115.70, // EWTt
-					ColdWaterTemperature = 84.27, // LWTt
-					WetBulbTemperature = 76.18,   // EWBt
-					DryBulbTemperature = 77.94,   // EDBt
-					BarometricPressure = 29.18,   // BPt
-					WaterFlowRate = 57426.0,      // FLOWt
-					FanDriverPower = 151.5,       // BHPt
-					LiquidToGasRatio = 0.0        // LinGt
-				}
+				IsInternationalSystemOfUnits_SI = false,
+				HotWaterTemperature = 115.70, // EWTt
+				ColdWaterTemperature = 84.27, // LWTt
+				WetBulbTemperature = 76.18,   // EWBt
+				DryBulbTemperature = 77.94,   // EDBt
+				BarometricPressure = 29.18,   // BPt
+				WaterFlowRate = 57426.0,      // FLOWt
+				FanDriverPower = 151.5,       // BHPt
+				LiquidToGasRatio = 0.0        // LinGt
 			};
 
 			DesignData designData = new DesignData()
@@ -732,19 +654,20 @@ namespace CalculationLibraryUnitTest
 				TowerType = TOWER_TYPE.Forced
 			};
 
-			MechanicalDraftPerformanceCurveFileData data = new MechanicalDraftPerformanceCurveFileData(false)
+			MechanicalDraftPerformanceCurveCalculationData data = new MechanicalDraftPerformanceCurveCalculationData()
 			{
 				IsInternationalSystemOfUnits_SI = false,
-				DesignData = designData
+				TowerType = TOWER_TYPE.Forced,
+				TowerDesignData = design,
+				TowerTestData = test
 			};
-			data.TestData.Add(test);
 
 			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
 
 			try
 			{
 				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(0, data, output);
+				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
 			}
 			catch
 			{

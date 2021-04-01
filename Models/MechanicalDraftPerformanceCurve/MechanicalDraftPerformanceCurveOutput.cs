@@ -15,6 +15,11 @@ namespace Models
         
         public MechanicalDraftPerformanceCurveOutput()
         {
+            Clear();
+        }
+
+        public void Clear()
+        {
             AdjustedFlow = 0.0;
             PredictedFlow = 0.0;
             TowerCapability = 0.0;

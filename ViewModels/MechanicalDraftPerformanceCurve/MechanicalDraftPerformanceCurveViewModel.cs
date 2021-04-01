@@ -238,6 +238,35 @@ namespace ViewModels
             return returnValue;
         }
 
+        public bool FillCalculationData(int testIndex, MechanicalDraftPerformanceCurveCalculationData calculationData)
+        {
+            bool returnValue = true;
+            StringBuilder stringBuilder = new StringBuilder();
+
+            calculationData.IsInternationalSystemOfUnits_SI = IsInternationalSystemOfUnits_SI;
+
+            if (!DesignData.FillCalculationData(calculationData))
+            {
+                returnValue = false;
+                stringBuilder.AppendLine(DesignData.ErrorMessage);
+            }
+
+            MechanicalDraftPerformanceCurveFileData.TestData.Clear();
+
+            if (!TestPoints[testIndex].FillCalculationData(calculationData))
+            {
+                returnValue = false;
+                stringBuilder.AppendLine(string.Format("Test {0}: {1}", TestPoints[testIndex].TestName, TestPoints[testIndex].ErrorMessage));
+            }
+
+            if (!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
+
+            return returnValue;
+        }
+
         public bool CalculatePerformanceCurve(int testIndex)
         {
             ErrorMessage = string.Empty;
@@ -253,12 +282,12 @@ namespace ViewModels
                     {
                         if (DesignData.ValidateRangedTemperatures(3, out errorMessage))
                         {
-                            // get the data from table
-                            if (FillFileData())
+                            MechanicalDraftPerformanceCurveCalculationData calculationData = new MechanicalDraftPerformanceCurveCalculationData();
+                            if (FillCalculationData(testIndex, calculationData))
                             {
                                 MechanicalDraftPerformanceCurveCalculationLibrary calculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
 
-                                calculationLibrary.MechanicalDraftPerformanceCurveCalculation(testIndex, MechanicalDraftPerformanceCurveFileData, OutputDataViewModel.MechanicalDraftPerformanceCurveOutput);
+                                calculationLibrary.MechanicalDraftPerformanceCurveCalculation(calculationData, OutputDataViewModel.MechanicalDraftPerformanceCurveOutput, true);
 
                                 OutputDataViewModel.FillTable();
                             }

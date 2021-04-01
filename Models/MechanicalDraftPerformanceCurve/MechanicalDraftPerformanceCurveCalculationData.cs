@@ -4,15 +4,28 @@ using System.Collections.Generic;
 
 namespace Models
 {
-    public class ColdWaterTemperatures
+    public class WetBulbTemperature
     {
-        public List<double> Temperatures { get; set; }
+        public double Temperature { get; set; }
+        public List<double> ColdWaterTemperatures { get; set; }
+        public WetBulbTemperature()
+        {
+            Temperature = 0.0;
+            ColdWaterTemperatures = new List<double>();
+        }
     }
 
-    public class WetBulbTemperatures
+    public class WaterFlowRate
     {
-        public List<double> Temperatures { get; set; }
-        public List<ColdWaterTemperatures> ColdTemperatures { get; set; }
+        public double FlowRate { get; set; }
+        public List<double> Yfit { get; set; }
+        public List<WetBulbTemperature> WetBulbTemperatures { get; set; }
+        public WaterFlowRate()
+        {
+            FlowRate = 0.0;
+            Yfit = new List<double>();
+            WetBulbTemperatures = new List<WetBulbTemperature>();
+        }
     }
 
     public class MechanicalDraftPerformanceCurveCalculationData
@@ -21,17 +34,20 @@ namespace Models
 
         public TowerSpecifications TowerTestData { set; get; }
         public TowerSpecifications TowerDesignData { set; get; }
-        public DesignData DesignData { get; set; }
         public List<double> Ranges { get; set; }
-        public List<WetBulbTemperatures> WetBulbTemperatures { get; set; }
-
+        public List<WaterFlowRate> WaterFlowRates { get; set; }
+        public TOWER_TYPE TowerType { get; set; }
+        public List<double> Y { get; set; }
+        public List<double> WetBulbTemperatureRange { get; set; }
 
         public MechanicalDraftPerformanceCurveCalculationData()
         {
             TowerTestData = new TowerSpecifications();
             TowerDesignData = new TowerSpecifications();
-            DesignData = new DesignData();
             Ranges = new List<double>();
+            WaterFlowRates = new List<WaterFlowRate>();
+            WetBulbTemperatureRange = new List<double>();
+            Y = new List<double>();
         }
     }
 }

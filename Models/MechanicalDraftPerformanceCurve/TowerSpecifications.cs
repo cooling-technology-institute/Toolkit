@@ -33,17 +33,17 @@ namespace Models
             LiquidToGasRatio = 0.0;
         }
 
-        public TowerSpecifications(TowerSpecifications mechanicalDraftPerformanceCurveData)
+        public TowerSpecifications(TowerSpecifications towerSpecifications)
         {
-            IsInternationalSystemOfUnits_SI = mechanicalDraftPerformanceCurveData.IsInternationalSystemOfUnits_SI;
-            WaterFlowRate = mechanicalDraftPerformanceCurveData.WaterFlowRate;
-            HotWaterTemperature = mechanicalDraftPerformanceCurveData.HotWaterTemperature;
-            ColdWaterTemperature = mechanicalDraftPerformanceCurveData.ColdWaterTemperature;
-            WetBulbTemperature = mechanicalDraftPerformanceCurveData.WetBulbTemperature;
-            DryBulbTemperature = mechanicalDraftPerformanceCurveData.DryBulbTemperature;
-            FanDriverPower = mechanicalDraftPerformanceCurveData.FanDriverPower;
-            BarometricPressure = mechanicalDraftPerformanceCurveData.BarometricPressure;
-            LiquidToGasRatio = mechanicalDraftPerformanceCurveData.LiquidToGasRatio;
+            IsInternationalSystemOfUnits_SI = towerSpecifications.IsInternationalSystemOfUnits_SI;
+            WaterFlowRate = towerSpecifications.WaterFlowRate;
+            HotWaterTemperature = towerSpecifications.HotWaterTemperature;
+            ColdWaterTemperature = towerSpecifications.ColdWaterTemperature;
+            WetBulbTemperature = towerSpecifications.WetBulbTemperature;
+            DryBulbTemperature = towerSpecifications.DryBulbTemperature;
+            FanDriverPower = towerSpecifications.FanDriverPower;
+            BarometricPressure = towerSpecifications.BarometricPressure;
+            LiquidToGasRatio = towerSpecifications.LiquidToGasRatio;
         }
     }
 }

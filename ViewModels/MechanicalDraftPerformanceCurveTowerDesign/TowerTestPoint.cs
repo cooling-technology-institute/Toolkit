@@ -188,5 +188,31 @@ namespace ViewModels
 
             return returnValue;
         }
+
+        public bool FillCalculationData(MechanicalDraftPerformanceCurveCalculationData calculationData)
+        {
+            ErrorMessage = string.Empty;
+            bool returnValue = true;
+
+            try
+            {
+                calculationData.TowerTestData.IsInternationalSystemOfUnits_SI = IsInternationalSystemOfUnits_SI;
+
+                calculationData.TowerTestData.WaterFlowRate = WaterFlowRateDataValue.Current;
+                calculationData.TowerTestData.HotWaterTemperature = HotWaterTemperatureDataValue.Current;
+                calculationData.TowerTestData.ColdWaterTemperature = ColdWaterTemperatureDataValue.Current;
+                calculationData.TowerTestData.WetBulbTemperature = WetBulbTemperatureDataValue.Current;
+                calculationData.TowerTestData.DryBulbTemperature = DryBulbTemperatureDataValue.Current;
+                calculationData.TowerTestData.FanDriverPower = FanDriverPowerDataValue.Current;
+                calculationData.TowerTestData.BarometricPressure = BarometricPressureDataValue.Current;
+                calculationData.TowerTestData.LiquidToGasRatio = LiquidToGasRatioDataValue.Current;
+            }
+            catch (Exception exception)
+            {
+                ErrorMessage = string.Format("Failure to fill and validate Test Data '{0}'. Exception {1}.", TestName, exception.ToString());
+            }
+
+            return returnValue;
+        }
     }
 }
