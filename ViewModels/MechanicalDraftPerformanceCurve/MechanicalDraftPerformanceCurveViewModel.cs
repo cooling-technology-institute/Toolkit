@@ -21,6 +21,7 @@ namespace ViewModels
         public string DataFileName { get; set; }
         
         public MechanicalDraftPerformanceCurveFileData MechanicalDraftPerformanceCurveFileData;
+        public MechanicalDraftPerformanceCurveCalculationData CalculationData { get; set; }
 
         public bool IsDemo { get; set; }
         public bool IsInternationalSystemOfUnits_SI { get; set; }
@@ -282,12 +283,12 @@ namespace ViewModels
                     {
                         if (DesignData.ValidateRangedTemperatures(3, out errorMessage))
                         {
-                            MechanicalDraftPerformanceCurveCalculationData calculationData = new MechanicalDraftPerformanceCurveCalculationData();
-                            if (FillCalculationData(testIndex, calculationData))
+                            CalculationData = new MechanicalDraftPerformanceCurveCalculationData();
+                            if (FillCalculationData(testIndex, CalculationData))
                             {
                                 MechanicalDraftPerformanceCurveCalculationLibrary calculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
 
-                                calculationLibrary.MechanicalDraftPerformanceCurveCalculation(calculationData, OutputDataViewModel.MechanicalDraftPerformanceCurveOutput, true);
+                                calculationLibrary.MechanicalDraftPerformanceCurveCalculation(CalculationData, OutputDataViewModel.MechanicalDraftPerformanceCurveOutput, true);
 
                                 OutputDataViewModel.FillTable();
                             }

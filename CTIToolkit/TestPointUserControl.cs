@@ -10,9 +10,6 @@ namespace CTIToolkit
         public TowerTestPoint TowerTestPoint { get; set; }
         public string ErrorMessage { get; set; }
 
-        //public bool IsDemo { get; set; }
-        //public bool IsInternationalSystemOfUnits_SI { get; set; }
-
         public TestPointUserControl()
         {
             InitializeComponent();
@@ -83,8 +80,23 @@ namespace CTIToolkit
             return returnValue;
         }
 
+        private void NotifyParentDataHasChanged()
+        {
+            try
+            {
+                MechanicalDraftPerformanceCurveTabPage parentTab = this.Parent.Parent.Parent.Parent as MechanicalDraftPerformanceCurveTabPage;
+                if (parentTab != null)
+                {
+                    parentTab.ValueHasChanged();
+                }
+            }
+            catch
+            { }
+        }
+
         private void WaterFlowRate_Validated(object sender, EventArgs e)
         {
+            NotifyParentDataHasChanged();
             errorProvider1.SetError(WaterFlowRate, "");
         }
 
@@ -105,6 +117,7 @@ namespace CTIToolkit
 
         private void HotWaterTemperature_Validated(object sender, EventArgs e)
         {
+            NotifyParentDataHasChanged();
             errorProvider1.SetError(HotWaterTemperature, "");
         }
 
@@ -134,6 +147,7 @@ namespace CTIToolkit
 
         private void ColdWaterTemperature_Validated(object sender, EventArgs e)
         {
+            NotifyParentDataHasChanged();
             errorProvider1.SetError(ColdWaterTemperature, "");
         }
 
@@ -163,6 +177,7 @@ namespace CTIToolkit
 
         private void WetBulbTemperature_Validated(object sender, EventArgs e)
         {
+            NotifyParentDataHasChanged();
             errorProvider1.SetError(WetBulbTemperature, "");
         }
 
@@ -183,6 +198,7 @@ namespace CTIToolkit
 
         private void DryBulbTemperature_Validated(object sender, EventArgs e)
         {
+            NotifyParentDataHasChanged();
             errorProvider1.SetError(DryBulbTemperature, "");
         }
 
@@ -203,6 +219,7 @@ namespace CTIToolkit
 
         private void FanDriverPower_Validated(object sender, EventArgs e)
         {
+            NotifyParentDataHasChanged();
             errorProvider1.SetError(FanDriverPower, "");
         }
 
@@ -223,6 +240,7 @@ namespace CTIToolkit
 
         private void BarometricPressure_Validated(object sender, EventArgs e)
         {
+            NotifyParentDataHasChanged();
             errorProvider1.SetError(BarometricPressure, "");
         }
 
@@ -243,6 +261,7 @@ namespace CTIToolkit
 
         private void LiquidToGasRatio_Validated(object sender, EventArgs e)
         {
+            NotifyParentDataHasChanged();
             errorProvider1.SetError(LiquidToGasRatio, "");
         }
 

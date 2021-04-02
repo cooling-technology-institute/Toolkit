@@ -122,11 +122,11 @@
             // 
             this.ViewGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ViewGraph.Enabled = false;
-            this.ViewGraph.Location = new System.Drawing.Point(723, 46);
+            this.ViewGraph.Location = new System.Drawing.Point(710, 46);
             this.ViewGraph.Name = "ViewGraph";
-            this.ViewGraph.Size = new System.Drawing.Size(74, 23);
+            this.ViewGraph.Size = new System.Drawing.Size(87, 23);
             this.ViewGraph.TabIndex = 4;
-            this.ViewGraph.Text = "View Graph";
+            this.ViewGraph.Text = "View Graphs...";
             this.ViewGraph.UseVisualStyleBackColor = true;
             this.ViewGraph.Click += new System.EventHandler(this.ViewGraph_Click);
             // 
@@ -222,6 +222,7 @@
             this.TestPointTabControl.SelectedIndex = 0;
             this.TestPointTabControl.Size = new System.Drawing.Size(498, 256);
             this.TestPointTabControl.TabIndex = 32;
+            this.TestPointTabControl.SelectedIndexChanged += new System.EventHandler(this.TestPointTabControl_SelectedIndexChanged);
             this.TestPointTabControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TestPointTabControl_MouseUp);
             // 
             // tabPage1

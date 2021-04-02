@@ -122,7 +122,7 @@ namespace CTIToolkit
                     returnValue = false;
                     ErrorMessage = string.Empty;
                 }
-
+                Calculate();
             }
             else
             {
@@ -396,6 +396,10 @@ namespace CTIToolkit
 
         private void ViewGraph_Click(object sender, EventArgs e)
         {
+            ViewGraphsForm viewGraphsForm = new ViewGraphsForm(MechanicalDraftPerformanceCurveViewModel.CalculationData);
+            if (viewGraphsForm.ShowDialog(this) == DialogResult.OK)
+            {
+            }
         }
 
         private void TestSelector_SelectedIndexChanged(object sender, EventArgs e)
@@ -533,6 +537,19 @@ namespace CTIToolkit
             {
 
             }
+        }
+
+        public void ValueHasChanged()
+        {
+            // Clear output data
+            DataGridView.DataSource = null;
+        }
+
+        private void TestPointTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Clear output data and calculate values
+            DataGridView.DataSource = null;
+            Calculate();
         }
     }
 }

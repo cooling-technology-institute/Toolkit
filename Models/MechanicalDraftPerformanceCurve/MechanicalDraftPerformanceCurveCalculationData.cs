@@ -1,5 +1,6 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 
+using System;
 using System.Collections.Generic;
 
 namespace Models
@@ -48,6 +49,64 @@ namespace Models
             WaterFlowRates = new List<WaterFlowRate>();
             WetBulbTemperatureRange = new List<double>();
             Y = new List<double>();
+        }
+
+        public double FindMinimumWetBulbTempurature(WaterFlowRate waterFlowRate)
+        {
+            double value = waterFlowRate.WetBulbTemperatures[0].Temperature;
+            foreach(WetBulbTemperature wetBulbTemperature in waterFlowRate.WetBulbTemperatures)
+            {
+                if(wetBulbTemperature.Temperature < value)
+                {
+                    value = wetBulbTemperature.Temperature;
+                }
+            }
+            return Math.Round(value, MidpointRounding.ToEven);
+        }
+
+        public double FindMaximumWetBulbTempurature(WaterFlowRate waterFlowRate)
+        {
+            double value = waterFlowRate.WetBulbTemperatures[0].Temperature;
+            foreach (WetBulbTemperature wetBulbTemperature in waterFlowRate.WetBulbTemperatures)
+            {
+                if (wetBulbTemperature.Temperature > value)
+                {
+                    value = wetBulbTemperature.Temperature;
+                }
+            }
+            return Math.Round(value, MidpointRounding.AwayFromZero);
+        }
+
+        public double FindMinimumColdWaterTempurature(WaterFlowRate waterFlowRate)
+        {
+            double value = waterFlowRate.WetBulbTemperatures[0].ColdWaterTemperatures[0];
+            foreach (WetBulbTemperature wetBulbTemperature in waterFlowRate.WetBulbTemperatures)
+            {
+                foreach (double coldWaterTemperature in wetBulbTemperature.ColdWaterTemperatures)
+                {
+                    if (coldWaterTemperature < value)
+                    {
+                        value = coldWaterTemperature;
+                    }
+                }
+            }
+            return Math.Round(value, MidpointRounding.ToEven);
+        }
+
+        public double FindMaximumColdWaterTempurature(WaterFlowRate waterFlowRate)
+        {
+            double value = waterFlowRate.WetBulbTemperatures[0].ColdWaterTemperatures[0];
+            foreach (WetBulbTemperature wetBulbTemperature in waterFlowRate.WetBulbTemperatures)
+            {
+                foreach (double coldWaterTemperature in wetBulbTemperature.ColdWaterTemperatures)
+                {
+                    if (coldWaterTemperature > value)
+                    {
+                        value = coldWaterTemperature;
+                    }
+                }
+            }
+            return Math.Round(value, MidpointRounding.AwayFromZero);
         }
     }
 }
