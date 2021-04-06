@@ -69,7 +69,6 @@
     <Compile Include="Merkel\MerkelViewModel.cs" />
     <Compile Include="MinimumDataValue.cs" />
     <Compile Include="NameValueUnitsDataTable.cs" />
-    <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Psychrometrics\PsychrometricsInputData.cs" />
     <Compile Include="Psychrometrics\PsychrometricsOutputData.cs" />

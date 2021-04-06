@@ -15,9 +15,9 @@ namespace ViewModels
 
     public class TowerDesignData
     {
-        const int MIN_FLOW_COUNT = 3;
-        const int MIN_RANGE_COUNT = 3;
-        const int MIN_WET_BULB_TEMPERTURE_COUNT = 3;	// Dean's notes say 5 ....
+        const int MINIMUM_WATER_FLOW_RATES_COUNT = 3;
+        const int MINIMUM_RANGE_COUNT = 3;
+        const int MINIMUM_WET_BULB_TEMPERTURE_COUNT = 3;	// Dean's notes say 5 ....
 
         public string OwnerNameValue { set; get; }
         public string ProjectNameValue { set; get; }
@@ -844,6 +844,29 @@ namespace ViewModels
             }
 
             return returnValue;
+        }
+
+        public bool IsValid(out string errorMessage)
+        {
+            bool isValid = false;
+            try
+            {
+                if (ValidateRanges(MINIMUM_RANGE_COUNT, out errorMessage))
+                {
+                    if (ValidateWaterFlowRates(MINIMUM_WATER_FLOW_RATES_COUNT, out errorMessage))
+                    {
+                        if (ValidateRangedTemperatures(MINIMUM_WET_BULB_TEMPERTURE_COUNT, out errorMessage))
+                        {
+                            isValid = true;
+                        }
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                errorMessage = string.Format("There has been some problem validating the design data. Exception: {0}", e.Message);
+            }
+            return isValid;
         }
 
         public bool ValidateWaterFlowRates(int count, out string errorMessage)

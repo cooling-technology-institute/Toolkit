@@ -15,7 +15,7 @@ namespace ViewModels
     {
         public TowerDesignData DesignData { get; set; }
         public List<TowerTestPoint> TestPoints { get; set; }
-
+        public bool IsDesignDataValid { get; set; }
         public MechanicalDraftPerformanceCurveOutputDataViewModel OutputDataViewModel { get; set; }
 
         public string DataFileName { get; set; }
@@ -32,6 +32,7 @@ namespace ViewModels
             IsDemo = isDemo;
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
             ErrorMessage = string.Empty;
+            IsDesignDataValid = false;
 
             DesignData = new TowerDesignData(IsDemo, IsInternationalSystemOfUnits_SI);
             TestPoints = new List<TowerTestPoint>();
@@ -178,6 +179,7 @@ namespace ViewModels
         {
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
+            string errorMessage;
 
             if(MechanicalDraftPerformanceCurveFileData != null)
             {
@@ -197,6 +199,13 @@ namespace ViewModels
                         stringBuilder.AppendLine(string.Format("Test {0}: {1}", towerTestPoint.TestName, towerTestPoint.ErrorMessage));
                     }
                     TestPoints.Add(towerTestPoint);
+                }
+
+                IsDesignDataValid = DesignData.IsValid(out errorMessage);
+
+                if(!IsDesignDataValid)
+                {
+                    stringBuilder.AppendLine(errorMessage);
                 }
             }
 
@@ -254,10 +263,13 @@ namespace ViewModels
 
             MechanicalDraftPerformanceCurveFileData.TestData.Clear();
 
-            if (!TestPoints[testIndex].FillCalculationData(calculationData))
+            if(testIndex >= 0)
             {
-                returnValue = false;
-                stringBuilder.AppendLine(string.Format("Test {0}: {1}", TestPoints[testIndex].TestName, TestPoints[testIndex].ErrorMessage));
+                if (!TestPoints[testIndex].FillCalculationData(calculationData))
+                {
+                    returnValue = false;
+                    stringBuilder.AppendLine(string.Format("Test {0}: {1}", TestPoints[testIndex].TestName, TestPoints[testIndex].ErrorMessage));
+                }
             }
 
             if (!returnValue)
@@ -277,39 +289,22 @@ namespace ViewModels
 
             try
             {
-                if (DesignData.ValidateRanges(3, out errorMessage))
+                if (DesignData.IsValid(out errorMessage))
                 {
-                    if (DesignData.ValidateWaterFlowRates(3, out errorMessage))
+                    CalculationData = new MechanicalDraftPerformanceCurveCalculationData();
+
+                    if (FillCalculationData(testIndex, CalculationData))
                     {
-                        if (DesignData.ValidateRangedTemperatures(3, out errorMessage))
-                        {
-                            CalculationData = new MechanicalDraftPerformanceCurveCalculationData();
-                            if (FillCalculationData(testIndex, CalculationData))
-                            {
-                                MechanicalDraftPerformanceCurveCalculationLibrary calculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+                        MechanicalDraftPerformanceCurveCalculationLibrary calculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
 
-                                calculationLibrary.MechanicalDraftPerformanceCurveCalculation(CalculationData, OutputDataViewModel.MechanicalDraftPerformanceCurveOutput, true);
+                        calculationLibrary.MechanicalDraftPerformanceCurveCalculation(CalculationData, OutputDataViewModel.MechanicalDraftPerformanceCurveOutput, true);
 
-                                OutputDataViewModel.FillTable();
-                            }
-                            else
-                            {
-                                returnValue = false;
-                                stringBuilder.AppendLine(ErrorMessage);
-                            }
-                        }
-                        else
-                        {
-                            stringBuilder.AppendLine(errorMessage);
-                            errorMessage = string.Empty;
-                            returnValue = false;
-                        }
+                        OutputDataViewModel.FillTable();
                     }
                     else
                     {
-                        stringBuilder.AppendLine(errorMessage);
-                        errorMessage = string.Empty;
                         returnValue = false;
+                        stringBuilder.AppendLine(ErrorMessage);
                     }
                 }
                 else
@@ -325,6 +320,52 @@ namespace ViewModels
             }
 
             if(!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
+            return returnValue;
+        }
+
+        public bool CalculateViewGraphs(int testIndex)
+        {
+            ErrorMessage = string.Empty;
+            StringBuilder stringBuilder = new StringBuilder();
+            bool returnValue = true;
+            string errorMessage;
+
+            try
+            {
+                MechanicalDraftPerformanceCurveCalculationLibrary calculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+
+                if (DesignData.IsValid(out errorMessage))
+                {
+                    CalculationData = new MechanicalDraftPerformanceCurveCalculationData();
+
+                    if (FillCalculationData(testIndex, CalculationData))
+                    {
+                        //calculationLibrary.MechanicalDraftPerformanceCurveCalculation(CalculationData);
+                        calculationLibrary.CalculateCrossPlot1(CalculationData);
+                        //calculationLibrary.CalculateCrossPlot2(CalculationData);
+                    }
+                    else
+                    {
+                        returnValue = false;
+                        stringBuilder.AppendLine(ErrorMessage);
+                    }
+                }
+                else
+                {
+                    stringBuilder.AppendLine(errorMessage);
+                    errorMessage = string.Empty;
+                    returnValue = false;
+                }
+            }
+            catch (Exception exception)
+            {
+                stringBuilder.AppendFormat("Error in Performance Curve calculation. Please check your input values. Exception Message: {0}", exception.Message);
+            }
+
+            if (!returnValue)
             {
                 ErrorMessage = stringBuilder.ToString();
             }

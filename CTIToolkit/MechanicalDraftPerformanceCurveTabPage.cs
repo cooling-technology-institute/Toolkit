@@ -106,6 +106,10 @@ namespace CTIToolkit
                 if (MechanicalDraftPerformanceCurveViewModel.TestPoints.Count > 0)
                 {
                     CalculateButton.Enabled = true;
+                }
+
+                if (MechanicalDraftPerformanceCurveViewModel.IsDesignDataValid)
+                {
                     ViewGraph.Enabled = true;
                 }
 
@@ -396,6 +400,8 @@ namespace CTIToolkit
 
         private void ViewGraph_Click(object sender, EventArgs e)
         {
+            MechanicalDraftPerformanceCurveViewModel.CalculateViewGraphs(TestPointTabControl.SelectedIndex);
+
             ViewGraphsForm viewGraphsForm = new ViewGraphsForm(MechanicalDraftPerformanceCurveViewModel.CalculationData);
             if (viewGraphsForm.ShowDialog(this) == DialogResult.OK)
             {
