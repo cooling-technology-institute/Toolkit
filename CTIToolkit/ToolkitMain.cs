@@ -1,6 +1,8 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 using CTIToolkit.Properties;
 using System;
+using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -129,7 +131,10 @@ namespace CTIToolkit
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    string errorMessage = string.Empty;
+                    if(tabControl1.SelectedIndex != 3)
+                    {
+                        tabControl1.SelectedIndex = 3;
+                    }
 
                     if (!MechanicalDraftPerformanceCurveUserControl.OpenNewDataFile(saveFileDialog.FileName))
                     {
@@ -156,7 +161,12 @@ namespace CTIToolkit
                  
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    if(!MechanicalDraftPerformanceCurveUserControl.OpenDataFile(openFileDialog.FileName))
+                    if (tabControl1.SelectedIndex != 3)
+                    {
+                        tabControl1.SelectedIndex = 3;
+                    }
+
+                    if (!MechanicalDraftPerformanceCurveUserControl.OpenDataFile(openFileDialog.FileName))
                     {
                         MessageBox.Show(MechanicalDraftPerformanceCurveUserControl.ErrorMessage);
                     }
@@ -191,7 +201,10 @@ namespace CTIToolkit
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    string errorMessage = string.Empty;
+                    if (tabControl1.SelectedIndex != 3)
+                    {
+                        tabControl1.SelectedIndex = 3;
+                    }
 
                     if (!MechanicalDraftPerformanceCurveUserControl.OpenDataFile(saveFileDialog.FileName))
                     {
@@ -204,21 +217,51 @@ namespace CTIToolkit
         private void PrintMenuItem_Click(object sender, EventArgs e)
         {
             // determine which is the current tab call it caculate click method
-            foreach(Control control in tabControl1.TabPages[tabControl1.SelectedIndex].Controls)
+            if (tabControl1.SelectedIndex != -1)
             {
-                if (control is CalculatePrintUserControl)
+                foreach (Control control in tabControl1.TabPages[tabControl1.SelectedIndex].Controls)
                 {
-                    CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
-                    calculatePrintUserControl.Print();
-                    break;
+                    if (control is CalculatePrintUserControl)
+                    {
+                        CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
+
+                        PrintDocument printDocument = new PrintDocument();
+                        printDocument.PrintPage += new PrintPageEventHandler(calculatePrintUserControl.PrintPage);
+                        printDocument.Print();
+                        break;
+                    }
+
                 }
+
             }
         }
 
         private void PrintPreviewMenuItem_Click(object sender, EventArgs e)
         {
+            if(tabControl1.SelectedIndex != -1)
+            {
+                foreach (Control control in tabControl1.TabPages[tabControl1.SelectedIndex].Controls)
+                {
+                    if (control is CalculatePrintUserControl)
+                    {
+                        CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
 
+                        PrintDocument printDocument = new PrintDocument();
+                        PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog()
+                        {
+                            ClientSize = new Size(600, 800)
+                        };
+                        printDocument.PrintPage += new PrintPageEventHandler(calculatePrintUserControl.PrintPage);
+                        printPreviewDialog.Document = printDocument;
+                        printPreviewDialog.ShowDialog();
+                        break;
+                    }
+
+                }
+
+            }
         }
+
 
         private void PrintSetupMenuItem_Click(object sender, EventArgs e)
         {

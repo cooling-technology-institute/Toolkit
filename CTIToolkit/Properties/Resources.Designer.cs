@@ -73,6 +73,16 @@ namespace CTIToolkit.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap colorlogo {
+            get {
+                object obj = ResourceManager.GetObject("colorlogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CTI_Logo {
             get {
                 object obj = ResourceManager.GetObject("CTI-Logo", resourceCulture);

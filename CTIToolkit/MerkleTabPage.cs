@@ -3,8 +3,10 @@
 using System;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Windows.Forms;
 using CalculationLibrary;
+using CTIToolkit.Properties;
 using Models;
 using ViewModels;
 
@@ -139,8 +141,20 @@ namespace CTIToolkit
             }
         }
 
-        public override void Print()
+        public override void PrintPage(object sender, PrintPageEventArgs e)
         {
+            Single yPos = 0;
+            Single leftMargin = e.MarginBounds.Left;
+            Single topMargin = e.MarginBounds.Top;
+            Object rm = Resources.ResourceManager.GetObject("colorlogo");
+            //Bitmap myImage = (Bitmap)rm;
+            Image img = (Image)rm;
+            Rectangle logo = new Rectangle(10, 10, 210, 210);
+            using (Font printFont = new Font("Arial", 10.0f))
+            {
+                e.Graphics.DrawImage(img, logo);
+                e.Graphics.DrawString("CTI Psychrometric Air Properties Report", printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
+            }
         }
 
         public void MerkelCalculate_Click(object sender, EventArgs e)

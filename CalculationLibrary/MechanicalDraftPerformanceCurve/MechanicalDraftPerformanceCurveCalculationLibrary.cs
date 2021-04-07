@@ -211,7 +211,7 @@ namespace CalculationLibrary
                 testX = rangeValue;
                 yfit = 0.0;
                 y2.Clear();
-                CalculatePerformanceData(data.Ranges, data.WaterFlowRates[flowRateIndex].Yfit, testX, ref yfit, y2, stringBuilder);
+                //CalculatePerformanceData(data.Ranges, data.WaterFlowRates[flowRateIndex].Yfit, testX, ref yfit, y2, stringBuilder);
                 data.CrossPlot1.Points.Add(new Point() { X = testX, Y = yfit });
 
                 //CalcPerfDat.a(iCnt, xAxis, yAxis, TestX, YFIT, Y2);

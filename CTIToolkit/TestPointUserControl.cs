@@ -102,9 +102,7 @@ namespace CTIToolkit
 
         private void WaterFlowRate_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
-            if (!TowerTestPoint.WaterFlowRateDataValue.UpdateValue(WaterFlowRate.Text, out errorMessage))
+            if (!TowerTestPoint.WaterFlowRateDataValue.UpdateValue(WaterFlowRate.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -123,9 +121,7 @@ namespace CTIToolkit
 
         private void HotWaterTemperature_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
-            if (!TowerTestPoint.HotWaterTemperatureDataValue.UpdateValue(HotWaterTemperature.Text, out errorMessage))
+            if (!TowerTestPoint.HotWaterTemperatureDataValue.UpdateValue(HotWaterTemperature.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -153,9 +149,7 @@ namespace CTIToolkit
 
         private void ColdWaterTemperature_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
-            if (!TowerTestPoint.ColdWaterTemperatureDataValue.UpdateValue(ColdWaterTemperature.Text, out errorMessage))
+            if (!TowerTestPoint.ColdWaterTemperatureDataValue.UpdateValue(ColdWaterTemperature.Text, out string errorMessage ))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -183,9 +177,7 @@ namespace CTIToolkit
 
         private void WetBulbTemperature_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
-            if (!TowerTestPoint.WetBulbTemperatureDataValue.UpdateValue(WetBulbTemperature.Text, out errorMessage))
+            if (!TowerTestPoint.WetBulbTemperatureDataValue.UpdateValue(WetBulbTemperature.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -204,9 +196,7 @@ namespace CTIToolkit
 
         private void DryBulbTemperature_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
-            if (!TowerTestPoint.DryBulbTemperatureDataValue.UpdateValue(DryBulbTemperature.Text, out errorMessage))
+            if (!TowerTestPoint.DryBulbTemperatureDataValue.UpdateValue(DryBulbTemperature.Text, out string errorMessage ))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -225,9 +215,7 @@ namespace CTIToolkit
 
         private void FanDriverPower_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
-            if (!TowerTestPoint.FanDriverPowerDataValue.UpdateValue(FanDriverPower.Text, out errorMessage))
+            if (!TowerTestPoint.FanDriverPowerDataValue.UpdateValue(FanDriverPower.Text, out string errorMessage ))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -246,9 +234,7 @@ namespace CTIToolkit
 
         private void BarometricPressure_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
-            if (!TowerTestPoint.BarometricPressureDataValue.UpdateValue(BarometricPressure.Text, out errorMessage))
+            if (!TowerTestPoint.BarometricPressureDataValue.UpdateValue(BarometricPressure.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -267,9 +253,7 @@ namespace CTIToolkit
 
         private void LiquidToGasRatio_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
-            if (!TowerTestPoint.LiquidToGasRatioDataValue.UpdateValue(LiquidToGasRatio.Text, out errorMessage))
+            if (!TowerTestPoint.LiquidToGasRatioDataValue.UpdateValue(LiquidToGasRatio.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;

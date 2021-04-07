@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Text;
 using System.Windows.Forms;
 using ViewModels;
@@ -348,8 +349,6 @@ namespace CTIToolkit
 
         public override void Calculate()
         {
-            string errorMessage = string.Empty;
-
             //int testIndex = TestPointTabControl.SelectedIndex;
 
             //MechanicalDraftPerformanceCurveViewModel.TestPoints.Clear();
@@ -389,7 +388,7 @@ namespace CTIToolkit
             }
         }
 
-        public override void Print()
+        public override void PrintPage(object sender, PrintPageEventArgs e)
         {
         }
 
@@ -432,8 +431,10 @@ namespace CTIToolkit
             {
                 if(MechanicalDraftPerformanceCurveViewModel.AddTestPoint(testName))
                 {
-                    TabPage tabPage = new TabPage();
-                    tabPage.Text = testName;
+                    TabPage tabPage = new TabPage()
+                    {
+                        Text = testName
+                    };
                     TestPointUserControl testPointUserControl = new TestPointUserControl();
                     if (!testPointUserControl.LoadData(MechanicalDraftPerformanceCurveViewModel.TestPoints[MechanicalDraftPerformanceCurveViewModel.TestPoints.Count - 1]))
                     {

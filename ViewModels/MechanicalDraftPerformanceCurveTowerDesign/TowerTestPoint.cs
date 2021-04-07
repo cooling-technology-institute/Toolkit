@@ -40,10 +40,9 @@ namespace ViewModels
             FanDriverPowerDataValue = new FanDriverPowerDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
             BarometricPressureDataValue = new BarometricPressureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
 
-            string errorMessage;
             LiquidToGasRatioDataValue = new LiquidToGasRatioDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
             LiquidToGasRatioDataValue.IsZeroValid = true;
-            LiquidToGasRatioDataValue.UpdateCurrentValue(0.0, out errorMessage);
+            LiquidToGasRatioDataValue.UpdateCurrentValue(0.0, out string errorMessage);
         }
 
         public bool ConvertValues(bool isIS)

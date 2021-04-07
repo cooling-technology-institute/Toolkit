@@ -6,6 +6,8 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using ViewModels;
 using CalculationLibrary;
+using System.Drawing;
+using System.IO;
 
 namespace CTIToolkit
 {
@@ -41,11 +43,18 @@ namespace CTIToolkit
             chart.Titles.Add(string.Format("Flow = {0} {1}", waterFlowRate.FlowRate.ToString("F2"), (calculationData.IsInternationalSystemOfUnits_SI) ? ConstantUnits.LitersPerSecond : ConstantUnits.GallonsPerMinute));
             chart.Dock = DockStyle.Fill;
             chart.ChartAreas.Add(new ChartArea());
+            chart.ChartAreas[0].IsSameFontSizeForAllAxes = true;
 
             chart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
+            chart.ChartAreas[0].AxisX.MajorGrid.Interval = 1;
+            chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 1.0;
+            chart.ChartAreas[0].AxisX.MajorTickMark.IntervalOffset = 1.0;
+            chart.ChartAreas[0].AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
+            //chart.ChartAreas[0].AxisX.LabelAutoFitMaxFontSize = 8;
+            //chart.ChartAreas[0].AxisX.LabelAutoFitMinFontSize = 7;
+            //chart.ChartAreas[0].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.None;
             //chart.ChartAreas[0].AxisX.MinorGrid.Enabled = true;
-            //chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 1;
-            chart.ChartAreas[0].AxisX.MinorTickMark.Interval = 1;
+            chart.ChartAreas[0].AxisX.MinorTickMark.Interval = 0.1;
             chart.ChartAreas[0].AxisX.Minimum = calculationData.FindMinimumWetBulbTempurature(waterFlowRate);
             chart.ChartAreas[0].AxisX.Maximum = calculationData.FindMaximumWetBulbTempurature(waterFlowRate);
             chart.ChartAreas[0].AxisX.Title = "Wet Bulb Temperature";
@@ -54,9 +63,15 @@ namespace CTIToolkit
             chart.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
 
             chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
+            chart.ChartAreas[0].AxisY.MajorGrid.Interval = 1;
+            chart.ChartAreas[0].AxisY.MajorTickMark.Interval = 1.0;
+            chart.ChartAreas[0].AxisY.MajorTickMark.IntervalOffset = 1.0;
+            chart.ChartAreas[0].AxisY.IntervalAutoMode = IntervalAutoMode.VariableCount;
+            //chart.ChartAreas[0].AxisY.LabelAutoFitMaxFontSize = 8;
+            //chart.ChartAreas[0].AxisY.LabelAutoFitMinFontSize = 7;
+            //chart.ChartAreas[0].AxisY.LabelAutoFitStyle = LabelAutoFitStyles.None;
             //chart.ChartAreas[0].AxisY.MinorGrid.Enabled = true;
-            //chart.ChartAreas[0].AxisY.MajorTickMark.Interval = 1;
-            chart.ChartAreas[0].AxisY.MinorTickMark.Interval = 1;
+            chart.ChartAreas[0].AxisY.MinorTickMark.Interval = 0.1;
             chart.ChartAreas[0].AxisY.Minimum = calculationData.FindMinimumColdWaterTempurature(waterFlowRate);
             chart.ChartAreas[0].AxisY.Maximum = calculationData.FindMaximumColdWaterTempurature(waterFlowRate);
             chart.ChartAreas[0].AxisY.Title = "Cold Water Temperature";
@@ -74,7 +89,7 @@ namespace CTIToolkit
                 series.ChartType = SeriesChartType.Line;
                 series.Name = string.Format("Range {0} ({1})", rangeIndex + 1, calculationData.Ranges[rangeIndex].ToString("F2"));
 
-                foreach (Point point in waterFlowRate.RangePoints[rangeIndex].Points)
+                foreach (Models.Point point in waterFlowRate.RangePoints[rangeIndex].Points)
                 {
                     series.Points.AddXY(point.X, point.Y);
                 }
@@ -244,17 +259,106 @@ namespace CTIToolkit
 
         private void CopyButton_Click(object sender, EventArgs e)
         {
-
+            // get the tab control chart
+            if(TabControl.SelectedIndex != -1)
+            {
+                Chart chart = TabControl.TabPages[TabControl.SelectedIndex].Controls[0] as Chart;
+                if(chart != null)
+                {
+                    using (MemoryStream memoryStream = new MemoryStream())
+                    {
+                        chart.SaveImage(memoryStream, ChartImageFormat.Bmp);
+                        Bitmap bm = new Bitmap(memoryStream);
+                        Clipboard.SetImage(bm);
+                    }
+                }
+            }
         }
 
         private void ReverseButton_Click(object sender, EventArgs e)
         {
+            // get the tab control chart
+            foreach (TabPage tabpage in TabControl.TabPages)
+            {
+                Chart chart = tabpage.Controls[0] as Chart;
+                if (chart != null)
+                {
+                    if(chart.BackColor == Color.Black)
+                    {
+                        // set background to white and lines and text to black
+                        chart.BackColor = Color.White;
+                        if (chart.Legends.Count > 0)
+                        {
+                            chart.Legends[0].BackColor = Color.White;
+                            chart.Legends[0].ForeColor = Color.Black;
+                        }
 
+                        if (chart.Titles.Count > 0)
+                        {
+                            chart.Titles[0].BackColor = Color.White;
+                            chart.Titles[0].ForeColor = Color.Black;
+                        }
+
+                        if (chart.ChartAreas.Count > 0)
+                        {
+                            chart.ChartAreas[0].BackColor = Color.White;
+                            //chart.ChartAreas[0] = Color.Black;
+
+                            chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Black;
+                            chart.ChartAreas[0].AxisX.MajorTickMark.LineColor = Color.Black;
+                            chart.ChartAreas[0].AxisX.TitleForeColor = Color.Black;
+                            chart.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.Black;
+                            chart.ChartAreas[0].AxisX.LineColor = Color.Black;
+
+                            chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Black;
+                            chart.ChartAreas[0].AxisY.MajorTickMark.LineColor = Color.Black;
+                            chart.ChartAreas[0].AxisY.TitleForeColor = Color.Black;
+                            chart.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.Black;
+                            chart.ChartAreas[0].AxisY.LineColor = Color.Black;
+                        }
+                    }
+                    else
+                    {
+                        // set background to black and lines and text to white
+                        chart.BackColor = Color.Black;
+                        if (chart.Legends.Count > 0)
+                        {
+                            chart.Legends[0].BackColor = Color.Black;
+                            chart.Legends[0].ForeColor = Color.White;
+                        }
+
+                        if (chart.Titles.Count > 0)
+                        {
+                            chart.Titles[0].BackColor = Color.Black;
+                            chart.Titles[0].ForeColor = Color.White;
+                        }
+
+                        if (chart.ChartAreas.Count > 0)
+                        {
+                            chart.ChartAreas[0].BackColor = Color.Black;
+
+                            chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.White;
+                            chart.ChartAreas[0].AxisX.MajorTickMark.LineColor = Color.White;
+                            chart.ChartAreas[0].AxisX.TitleForeColor = Color.White;
+                            chart.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.White;
+                            chart.ChartAreas[0].AxisX.LineColor = Color.White;
+
+                            chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.White;
+                            chart.ChartAreas[0].AxisY.MajorTickMark.LineColor = Color.White;
+                            chart.ChartAreas[0].AxisY.TitleForeColor = Color.White;
+                            chart.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.White;
+                            chart.ChartAreas[0].AxisY.LineColor = Color.White;
+                        }
+                    }
+                    chart.Invalidate();
+                }
+            }
         }
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void ViewGraphsForm_Load(object sender, EventArgs e)

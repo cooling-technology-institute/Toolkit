@@ -2,9 +2,11 @@
 
 using System;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using CalculationLibrary;
+using CTIToolkit.Properties;
 using Models;
 using ViewModels;
 
@@ -47,8 +49,7 @@ namespace CTIToolkit
 
         private void SwitchUnits()
         {
-            string errorMessage;
-            DemandCurveViewModel.ConvertValues(IsInternationalSystemOfUnits_SI, out errorMessage);
+            DemandCurveViewModel.ConvertValues(IsInternationalSystemOfUnits_SI, out string errorMessage);
         }
         
         private void SetDisplayedValues()
@@ -187,13 +188,15 @@ namespace CTIToolkit
                         {
                             if (DemandCurveViewModel.DemandCurveCalculationLibrary.ApproachInRange[i])
                             {
-                                Series series = new Series();
-                                series.ChartArea = "ChartArea1";
-                                series.ChartType = SeriesChartType.Line;
-                                //series.Color = System.Drawing.Color.Yellow;
-                                series.Name = string.Format("{0}", DemandCurveViewModel.DemandCurveCalculationLibrary.InitialApproachXValues[i]);
-                                series.XValueMember = string.Format("L/G-{0}", DemandCurveViewModel.DemandCurveCalculationLibrary.InitialApproachXValues[i]);
-                                series.YValueMembers = string.Format("kaVL-{0}", DemandCurveViewModel.DemandCurveCalculationLibrary.InitialApproachXValues[i]);
+                                Series series = new Series()
+                                {
+                                    ChartArea = "ChartArea1",
+                                    ChartType = SeriesChartType.Line,
+                                    //series.Color = System.Drawing.Color.Yellow,
+                                    Name = string.Format("{0}", DemandCurveViewModel.DemandCurveCalculationLibrary.InitialApproachXValues[i]),
+                                    XValueMember = string.Format("L/G-{0}", DemandCurveViewModel.DemandCurveCalculationLibrary.InitialApproachXValues[i]),
+                                    YValueMembers = string.Format("kaVL-{0}", DemandCurveViewModel.DemandCurveCalculationLibrary.InitialApproachXValues[i]),
+                                };
                                 DemandCurveChart.Series.Add(series);
                             }
                         }
@@ -212,9 +215,11 @@ namespace CTIToolkit
 
 
                         DemandCurveChart.DataSource = DemandCurveViewModel.GetDataTable();
-                        BindingSource SBind = new BindingSource();
+                        BindingSource SBind = new BindingSource()
+                        {
+                            DataSource = DemandCurveViewModel.GetDataTable()
+                        };
 
-                        SBind.DataSource = DemandCurveViewModel.GetDataTable();
 
                         dataGridView1.AutoGenerateColumns = true;
                         dataGridView1.DataSource = DemandCurveViewModel.GetDataTable();
@@ -238,8 +243,20 @@ namespace CTIToolkit
             }
         }
 
-        public override void Print()
+        public override void PrintPage(object sender, PrintPageEventArgs e)
         {
+            Single yPos = 0;
+            Single leftMargin = e.MarginBounds.Left;
+            Single topMargin = e.MarginBounds.Top;
+            Object rm = Resources.ResourceManager.GetObject("colorlogo");
+            //Bitmap myImage = (Bitmap)rm;
+            Image img = (Image)rm;
+            Rectangle logo = new Rectangle(10, 10, 210, 210);
+            using (Font printFont = new Font("Arial", 10.0f))
+            {
+                e.Graphics.DrawImage(img, logo);
+                e.Graphics.DrawString("CTI Toolkit Demand Curve", printFont, Brushes.Black, leftMargin + 210, topMargin, new StringFormat());
+            }
         }
 
         public void DemandCurveCalculate_Click(object sender, EventArgs e)

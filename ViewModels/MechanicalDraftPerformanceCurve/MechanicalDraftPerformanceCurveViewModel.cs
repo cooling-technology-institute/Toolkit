@@ -179,7 +179,6 @@ namespace ViewModels
         {
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
-            string errorMessage;
 
             if(MechanicalDraftPerformanceCurveFileData != null)
             {
@@ -201,7 +200,7 @@ namespace ViewModels
                     TestPoints.Add(towerTestPoint);
                 }
 
-                IsDesignDataValid = DesignData.IsValid(out errorMessage);
+                IsDesignDataValid = DesignData.IsValid(out string errorMessage);
 
                 if(!IsDesignDataValid)
                 {
@@ -285,11 +284,10 @@ namespace ViewModels
             ErrorMessage = string.Empty;
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
-            string errorMessage = string.Empty;
 
             try
             {
-                if (DesignData.IsValid(out errorMessage))
+                if (DesignData.IsValid(out string errorMessage))
                 {
                     CalculationData = new MechanicalDraftPerformanceCurveCalculationData();
 
@@ -331,13 +329,12 @@ namespace ViewModels
             ErrorMessage = string.Empty;
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
-            string errorMessage;
 
             try
             {
                 MechanicalDraftPerformanceCurveCalculationLibrary calculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
 
-                if (DesignData.IsValid(out errorMessage))
+                if (DesignData.IsValid(out string errorMessage))
                 {
                     CalculationData = new MechanicalDraftPerformanceCurveCalculationData();
 
@@ -378,8 +375,8 @@ namespace ViewModels
         }
 
         // Check design or test data, optionally prompting the user with bounds if errors are found.
-        bool ValidateData(Models.TowerSpecifications mechanicalDraftPerformanceCurveData, bool isDesignData, StringBuilder errorMessage)
-        {
+        //bool ValidateData(Models.TowerSpecifications mechanicalDraftPerformanceCurveData, bool isDesignData, StringBuilder errorMessage)
+        //{
             //bool isError = (isWaterFlowRateError || isHotWaterTemperatureError || isColdWaterTemperatureError || isWetBulbTemperatureError || isDryBulbTemperatureError || isFanDriverPowerError ||
             //    isBarometricPressureError || isLiquidGasRatioError);
 
@@ -424,8 +421,8 @@ namespace ViewModels
             //        errorMessage.AppendFormat("{0}. Liquid to Gas Ratio:   min = {1},   max = {2}\n", i++, minimum.LiquidToGasRatio, maximum.LiquidToGasRatio);
             //    }
             //}
-            return true;// !isError;
-        }
+        //    return true;// !isError;
+        //}
 
         public bool AddTestPoint(string testName)
         {
@@ -434,8 +431,10 @@ namespace ViewModels
 
             try
             {
-                TowerTestPoint towerTestPoint = new TowerTestPoint(IsDemo, IsInternationalSystemOfUnits_SI);
-                towerTestPoint.TestName = testName;
+                TowerTestPoint towerTestPoint = new TowerTestPoint(IsDemo, IsInternationalSystemOfUnits_SI)
+                {
+                    TestName = testName
+                };
                 TestPoints.Add(towerTestPoint);
             }
             catch (Exception e)
