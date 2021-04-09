@@ -224,10 +224,50 @@ namespace CTIToolkit
                     if (control is CalculatePrintUserControl)
                     {
                         CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
+                        
+                        PrintDialog printDialog = new PrintDialog()
+                        {
+                            AllowSelection = true,
+                            AllowPrintToFile = true,
+                            AllowSomePages = true
+                        };
 
-                        PrintDocument printDocument = new PrintDocument();
+                        PrintDocument printDocument = new PrintDocument()
+                        {
+                            DocumentName = tabControl1.TabPages[tabControl1.SelectedIndex].Text,
+                        };
+
                         printDocument.PrintPage += new PrintPageEventHandler(calculatePrintUserControl.PrintPage);
-                        printDocument.Print();
+                        DialogResult userResponse = printDialog.ShowDialog();
+                        if (userResponse == DialogResult.OK)
+                        {
+                            //if (printDialog.PrinterSettings.PrinterName == "Microsoft Print to PDF")
+                            //{   // force a reasonable filename
+                            //    string basename = Path.GetFileNameWithoutExtension(myFileName);
+                            //    string directory = Path.GetDirectoryName(myFileName);
+                            //    printDocument.PrinterSettings.PrintToFile = true;
+                            //    // confirm the user wants to use that name
+                            //    SaveFileDialog pdfSaveDialog = new SaveFileDialog();
+                            //    pdfSaveDialog.InitialDirectory = directory;
+                            //    pdfSaveDialog.FileName = basename + ".pdf";
+                            //    pdfSaveDialog.Filter = "PDF File|*.pdf";
+                            //    userResponse = pdfSaveDialog.ShowDialog();
+                            //    if (userResponse != DialogResult.Cancel)
+                            //        printDocument.PrinterSettings.PrintFileName = pdfSaveDialog.FileName;
+                            //}
+                            //if (userResponse != DialogResult.Cancel)  // in case they canceled the save as dialog
+                            //{
+                            //    printDocument.Print();
+                            //}
+                            if (printDialog.PrintToFile)
+                            {
+                                //printDocument.PrinterSettings.PrinterName = printDialog.PrinterSettings.PrinterName;
+
+                                //printDocument.PrinterSettings.PrintToFile = true;
+                                //printDocument.PrinterSettings.PrintFileName = @"c:\temp\test.xps";
+                            }
+                            printDocument.Print();
+                        }
                         break;
                     }
 
@@ -258,7 +298,6 @@ namespace CTIToolkit
                     }
 
                 }
-
             }
         }
 
