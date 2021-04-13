@@ -72,13 +72,15 @@ namespace CalculationLibrary
 
         void InitializeApproachList(DemandCurveData data)
         {
-            MerkelData merkelData = new MerkelData(data.IsInternationalSystemOfUnits_SI_)
-            {
-                WetBulbTemperature = data.WetBulbTemperature,
-                Range = data.Range,
-                Elevation = data.Elevation,
-                LiquidToGasRatio = 0.1
-            };
+            MerkelData merkelData = new MerkelData(data.IsInternationalSystemOfUnits_SI_);
+            //{
+            //    WetBulbTemperature = data.WetBulbTemperature,
+            //    Range = data.Range,
+            //    Elevation = data.Elevation,
+            //    LiquidToGasRatio = 0.1
+            //};
+
+            MerkelConvertValues(merkelData, data);
 
             foreach (double approachValue in InitialApproachXValues)
             {
@@ -89,6 +91,34 @@ namespace CalculationLibrary
                 ApproachInRange.Add(approachInRange);
                 ApproachOutOfRange.Add(!approachInRange);
             }
+        }
+
+        private void MerkelConvertValues(MerkelData merkelData, DemandCurveData data)
+        {
+            if (data.IsInternationalSystemOfUnits_SI_)
+            {
+                //    WBT = fnCelcToFar(WBT);
+                //    T1 = fnCelcToFar(T1);
+                //    T2 = fnCelcToFar(T2);
+                merkelData.WetBulbTemperature = UnitConverter.ConvertCelsiusToFahrenheit(data.WetBulbTemperature);
+                merkelData.Range = data.Range;
+                merkelData.Elevation = data.Elevation;
+                merkelData.LiquidToGasRatio = 0.1;
+
+                //if (!isElevation)
+                //{
+                //    merkelData.Elevation = UnitConverter.ConvertMetersToFeet(UnitConverter.ConvertKilopascalToElevationInMeters(data.BarometricPressure));
+                //}
+            }
+            else
+            {
+                //if (!isElevation)
+                //{
+                //    merkelData.Elevation = UnitConverter.ConvertBarometricPressureToElevationInFeet(UnitConverter.CalculateInchesOfMercuryToPsi(data.BarometricPressure));
+                //}
+            }
+
+            merkelData.IsInternationalSystemOfUnits_SI = false;
         }
 
         void CalculateApproach(DemandCurveData data)
@@ -140,7 +170,7 @@ namespace CalculationLibrary
 
             MerkelData merkelData = new MerkelData(data.IsInternationalSystemOfUnits_SI_)
             {
-                WetBulbTemperature = 80, // data.WetBulbTemperature,
+                WetBulbTemperature = data.WetBulbTemperature,
                 Range = data.Range,
                 Elevation = data.Elevation,
                 LiquidToGasRatio = data.LiquidToGasRatio
@@ -164,15 +194,28 @@ namespace CalculationLibrary
                     {
                         merkelData.LiquidToGasRatio = liquidToGasRatio;
                         merkelData.Approach = InitialApproachXValues[i];
-                        if (data.IsInternationalSystemOfUnits_SI_)
-                        {
-                            merkelData.Approach *= 1.8;
-                        }
+                        //if (data.IsInternationalSystemOfUnits_SI_)
+                        //{
+                        //    merkelData.Approach *= 1.8;
+                        //}
 
                         if (liquidToGasRatio > 1.3 && liquidToGasRatio < 1.4)
                         {
                             stringBuilder.AppendLine();
                         }
+
+                        if (merkelData.IsInternationalSystemOfUnits_SI)
+                        {
+                            merkelData.WetBulbTemperature = UnitConverter.ConvertCelsiusToFahrenheit(merkelData.WetBulbTemperature);
+                            merkelData.HotWaterTemperature = UnitConverter.ConvertCelsiusToFahrenheit(merkelData.HotWaterTemperature); // T1
+                            merkelData.ColdWaterTemperature = UnitConverter.ConvertCelsiusToFahrenheit(merkelData.ColdWaterTemperature); // T2
+                            merkelData.Elevation = UnitConverter.ConvertMetersToFeet(merkelData.Elevation);
+                            merkelData.IsInternationalSystemOfUnits_SI = false;
+                        }
+
+                        //merkelData.Range = merkelData.HotWaterTemperature - merkelData.ColdWaterTemperature;
+                        //merkelData.Approach = merkelData.ColdWaterTemperature - merkelData.WetBulbTemperature;
+
                         stringBuilder.AppendFormat(" m_dblCurveWBT {0}, m_dblCurveRange {1}, App[iIndex] {2}, dLG {3}, m_dblAltitude {4} \n", merkelData.WetBulbTemperature.ToString("F6"), merkelData.Range.ToString("F6"), merkelData.Approach.ToString("F6"), merkelData.LiquidToGasRatio.ToString("F6"), merkelData.Elevation.ToString("F6"));
 
                         kaVL = CalculateMerkel(merkelData);

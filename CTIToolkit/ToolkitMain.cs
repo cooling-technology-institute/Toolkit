@@ -216,6 +216,8 @@ namespace CTIToolkit
 
         private void PrintMenuItem_Click(object sender, EventArgs e)
         {
+            string label = string.Empty;
+
             // determine which is the current tab call it caculate click method
             if (tabControl1.SelectedIndex != -1)
             {
@@ -224,6 +226,20 @@ namespace CTIToolkit
                     if (control is CalculatePrintUserControl)
                     {
                         CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
+                        calculatePrintUserControl.Label = string.Empty;
+                        calculatePrintUserControl.IsDesignData = false;
+
+                        PrintLabelForm printLabelForm = new PrintLabelForm();
+                        printLabelForm.Height = (tabControl1.SelectedIndex == 3) ? 105 : 170;
+
+                        if (printLabelForm.ShowDialog() == DialogResult.OK)
+                        {
+                            calculatePrintUserControl.Label = printLabelForm.GetLabel();
+                            if (tabControl1.SelectedIndex == 3)
+                            {
+                                calculatePrintUserControl.IsDesignData = printLabelForm.IsDesignData();
+                            }    
+                        }
                         
                         PrintDialog printDialog = new PrintDialog()
                         {
@@ -259,13 +275,14 @@ namespace CTIToolkit
                             //{
                             //    printDocument.Print();
                             //}
-                            if (printDialog.PrintToFile)
-                            {
-                                //printDocument.PrinterSettings.PrinterName = printDialog.PrinterSettings.PrinterName;
+                            //if (printDialog.PrintToFile)
+                            //{
+                            //    //printDocument.PrinterSettings.PrinterName = printDialog.PrinterSettings.PrinterName;
 
-                                //printDocument.PrinterSettings.PrintToFile = true;
-                                //printDocument.PrinterSettings.PrintFileName = @"c:\temp\test.xps";
-                            }
+                            //    //printDocument.PrinterSettings.PrintToFile = true;
+                            //    //printDocument.PrinterSettings.PrintFileName = @"c:\temp\test.xps";
+                            //}
+                            printDocument.PrinterSettings = printDialog.PrinterSettings;
                             printDocument.Print();
                         }
                         break;

@@ -5,7 +5,7 @@ namespace ViewModels
     public class LiquidToGasRatioDataValue : DataValue
     {
         //DDV_MinMaxDouble(pDX, m_dblMerkelLG, (ip min) 0.1, (ip max) 10.0, (is min) 0.1, (is max) 10.0, (decimal) 2);
-        public const double LiquidToGasRatioDefault = 1.0; //DDV_MinMaxDouble(pDX, m_dblLg, LiquidToGasRatio_P3_MIN_IP (0.0), LiquidToGasRatio_P3_MAX_IP (5.0), LiquidToGasRatio_P3_MIN_SI (0.0), LiquidToGasRatio_P3_MAX_SI (5.0), 2);
+        public const double LiquidToGasRatioDefault = 1.3; //DDV_MinMaxDouble(pDX, m_dblLg, LiquidToGasRatio_P3_MIN_IP (0.0), LiquidToGasRatio_P3_MAX_IP (5.0), LiquidToGasRatio_P3_MIN_SI (0.0), LiquidToGasRatio_P3_MAX_SI (5.0), 2);
         public const double LiquidToGasRatioMinimum = 0.0;
         public const double LiquidToGasRatioMaximum = 5.0;
 
@@ -13,7 +13,7 @@ namespace ViewModels
         public const double LiquidToGasRatioMinimumDemo = 1.0;
         public const double LiquidToGasRatioMaximumDemo = 5.0;
 
-        public const double LiquidToGasRatioDefault_InternationalSystemOfUnits_IS_ = 1.0;
+        public const double LiquidToGasRatioDefault_InternationalSystemOfUnits_IS_ = 1.3;
         public const double LiquidToGasRatioMinimum_InternationalSystemOfUnits_IS_ = 1.0;
         public const double LiquidToGasRatioMaximum_InternationalSystemOfUnits_IS_ = 5.0;
 

@@ -44,6 +44,7 @@ namespace CTIToolkit
             {
                 IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
                 SwitchUnits();
+                SetDisplayedValues();
             }
         }
 

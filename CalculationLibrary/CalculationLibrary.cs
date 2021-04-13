@@ -209,17 +209,6 @@ namespace CalculationLibrary
             double[] X = new double[4] { 0.9, 0.6, 0.4, 0.1 };
             double pressure = 14.696;
 
-            if (merkelData.IsInternationalSystemOfUnits_SI)
-            {
-                merkelData.WetBulbTemperature = UnitConverter.ConvertCelsiusToFahrenheit(merkelData.WetBulbTemperature);
-                merkelData.HotWaterTemperature = UnitConverter.ConvertCelsiusToFahrenheit(merkelData.HotWaterTemperature); // T1
-                merkelData.ColdWaterTemperature = UnitConverter.ConvertCelsiusToFahrenheit(merkelData.ColdWaterTemperature); // T2
-                merkelData.Elevation = UnitConverter.ConvertMetersToFeet(merkelData.Elevation);
-            }
-
-            merkelData.Range = merkelData.HotWaterTemperature - merkelData.ColdWaterTemperature;
-            merkelData.Approach = merkelData.ColdWaterTemperature - merkelData.WetBulbTemperature;
-
             if (merkelData.Elevation != 0)
             {
                 pressure = StandardAtmosphericPressure(merkelData.Elevation);

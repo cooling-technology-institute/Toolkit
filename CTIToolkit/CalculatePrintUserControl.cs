@@ -10,6 +10,8 @@ namespace CTIToolkit
 {
     public class CalculatePrintUserControl : UserControl
     {
+        public string Label { get; set; }
+        public bool IsDesignData { get; set; }
         public virtual void PrintPage(object sender, PrintPageEventArgs e) { }
         public virtual void Calculate() { }
     }

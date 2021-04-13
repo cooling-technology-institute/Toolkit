@@ -259,17 +259,19 @@ namespace CTIToolkit
 
         public override void PrintPage(object sender, PrintPageEventArgs e)
         {
-            Single yPos = 0;
-            Single leftMargin = e.MarginBounds.Left;
-            Single topMargin = e.MarginBounds.Top;
-            Object rm = Resources.ResourceManager.GetObject("colorlogo");
+            int iconOffset = 50;
+            int leftMargin = e.MarginBounds.Left;
+            int topMargin = e.MarginBounds.Top;
+
+            //Object rm = Resources.ResourceManager.GetObject("colorlogo");
             //Bitmap myImage = (Bitmap)rm;
-            Image img = (Image)rm;
-            Rectangle logo = new Rectangle(10, 10, 210, 210);
+            Image img = (Image) Resources.ResourceManager.GetObject("colorlogo");
+            Rectangle logo = new Rectangle(leftMargin, topMargin, iconOffset + leftMargin, iconOffset + topMargin);
             using (Font printFont = new Font("Arial", 10.0f))
             {
                 e.Graphics.DrawImage(img, logo);
-                e.Graphics.DrawString("CTI Psychrometric Air Properties Report", printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
+                e.Graphics.DrawString("CTI Psychrometric Air Properties Report", printFont, Brushes.Black, leftMargin + iconOffset + 100, topMargin + iconOffset + 50, new StringFormat());
+                e.Graphics.DrawString(this.Label, printFont, Brushes.Black, leftMargin + iconOffset + 50, topMargin + iconOffset + 100, new StringFormat());
             }
         }
 

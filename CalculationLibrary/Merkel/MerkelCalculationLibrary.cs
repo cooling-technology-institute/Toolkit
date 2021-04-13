@@ -39,6 +39,8 @@ namespace CalculationLibrary
                     data.Elevation = UnitConverter.ConvertBarometricPressureToElevationInFeet(UnitConverter.CalculateInchesOfMercuryToPsi(data.BarometricPressure));
                 }
             }
+
+            data.IsInternationalSystemOfUnits_SI = false;
         }
 
         public bool Merkel_CheckCalculationValues(MerkelData data, out string errorMessage)

@@ -59,6 +59,12 @@
     <Compile Include="CustomMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PrintLabelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintLabelForm.Designer.cs">
+      <DependentUpon>PrintLabelForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RangedTemperatureDesignUserControlTabPage.cs">
@@ -82,6 +88,9 @@
     <Compile Include="ViewGraphsForm.Designer.cs">
       <DependentUpon>ViewGraphsForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="PrintLabelForm.resx">
+      <DependentUpon>PrintLabelForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
