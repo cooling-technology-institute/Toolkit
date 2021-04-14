@@ -118,99 +118,120 @@ namespace CTIToolkit
 
         private void NewFile_Click(object sender, EventArgs e)
         {
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            foreach (Control control in tabControl1.TabPages[tabControl1.SelectedIndex].Controls)
             {
-                saveFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
-                //                saveFileDialog.InitialDirectory = Application.UserAppDataPath;
-                saveFileDialog.Filter = "Mechanical Draft Performance Curve files (*.mdpc)|*.mdpc|All files (*.*)|*.*";
-                saveFileDialog.FilterIndex = 1;
-                saveFileDialog.DefaultExt = "mdpc";
-                saveFileDialog.OverwritePrompt = true;
-                saveFileDialog.CheckPathExists = true;
-                saveFileDialog.Title = "New Mechanical Draft Performance Curve File";
-
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                if (control is CalculatePrintUserControl)
                 {
-                    if(tabControl1.SelectedIndex != 3)
-                    {
-                        tabControl1.SelectedIndex = 3;
-                    }
+                    CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
 
-                    if (!MechanicalDraftPerformanceCurveUserControl.OpenNewDataFile(saveFileDialog.FileName))
+                    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                     {
-                        MessageBox.Show(MechanicalDraftPerformanceCurveUserControl.ErrorMessage);
+                        saveFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
+                        saveFileDialog.Filter = calculatePrintUserControl.Filter;
+                        saveFileDialog.FilterIndex = 1;
+                        saveFileDialog.DefaultExt = calculatePrintUserControl.DefaultExt;
+                        saveFileDialog.OverwritePrompt = true;
+                        saveFileDialog.CheckPathExists = true;
+                        saveFileDialog.Title = "New " + calculatePrintUserControl.Title + " File";
+
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            if (tabControl1.SelectedIndex != 3)
+                            {
+                                tabControl1.SelectedIndex = 3;
+                            }
+
+                            if (!MechanicalDraftPerformanceCurveUserControl.OpenNewDataFile(saveFileDialog.FileName))
+                            {
+                                MessageBox.Show(MechanicalDraftPerformanceCurveUserControl.ErrorMessage);
+                            }
+                        }
                     }
+                    break;
                 }
             }
         }
 
         private void OpenMenuItem_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            foreach (Control control in tabControl1.TabPages[tabControl1.SelectedIndex].Controls)
             {
-                //openFileDialog.InitialDirectory = Application.UserAppDataPath;
-                openFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
-                //MechanicalDraftPerformanceCurve .mdpc
-                openFileDialog.Filter = "Mechanical Draft Performance Curve files (*.mdpc)|*.mdpc|All files (*.*)|*.*";
-                openFileDialog.FilterIndex = 1;
-                openFileDialog.AddExtension = true;
-                openFileDialog.CheckFileExists = true;
-                openFileDialog.CheckPathExists = true;
-                openFileDialog.DefaultExt = "mdpc";
-                openFileDialog.Title = "Open Mechanical Draft Performance Curve File";
-                 
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                if (control is CalculatePrintUserControl)
                 {
-                    if (tabControl1.SelectedIndex != 3)
-                    {
-                        tabControl1.SelectedIndex = 3;
-                    }
+                    CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
 
-                    if (!MechanicalDraftPerformanceCurveUserControl.OpenDataFile(openFileDialog.FileName))
+                    using (OpenFileDialog openFileDialog = new OpenFileDialog())
                     {
-                        MessageBox.Show(MechanicalDraftPerformanceCurveUserControl.ErrorMessage);
+                        openFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
+                        openFileDialog.Filter = calculatePrintUserControl.Filter;
+                        openFileDialog.FilterIndex = 1;
+                        openFileDialog.AddExtension = true;
+                        openFileDialog.CheckFileExists = true;
+                        openFileDialog.CheckPathExists = true;
+                        openFileDialog.DefaultExt = calculatePrintUserControl.DefaultExt;
+                        openFileDialog.Title = "Open " + calculatePrintUserControl.Title + " File";
+
+                        if (openFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            if (!calculatePrintUserControl.OpenDataFile(openFileDialog.FileName))
+                            {
+                                //MessageBox.Show(calculatePrintUserControl.ErrorMessage);
+                            }
+                            //                    if (!MechanicalDraftPerformanceCurveSplitTabPage.OpenDataFile(openFileDialog.FileName, out errorMessage))
+                            //                  {
+                            //                    MessageBox.Show(errorMessage);
+                            //              }
+                        }
                     }
-//                    if (!MechanicalDraftPerformanceCurveSplitTabPage.OpenDataFile(openFileDialog.FileName, out errorMessage))
-  //                  {
-    //                    MessageBox.Show(errorMessage);
-      //              }
+                    break;
                 }
             }
         }
 
         private void SaveMenuItem_Click(object sender, EventArgs e)
         {
-            if (!MechanicalDraftPerformanceCurveUserControl.SaveDataFile())
+            foreach (Control control in tabControl1.TabPages[tabControl1.SelectedIndex].Controls)
             {
-                MessageBox.Show(MechanicalDraftPerformanceCurveUserControl.ErrorMessage);
+                if (control is CalculatePrintUserControl)
+                {
+                    CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
+                    //if (!calculatePrintUserControl.SaveDataFile())
+                    //{
+                    //    MessageBox.Show(calculatePrintUserControl.ErrorMessage);
+                    //}
+                }
             }
         }
 
         private void SaveAsMenuItem_Click(object sender, EventArgs e)
         {
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            foreach (Control control in tabControl1.TabPages[tabControl1.SelectedIndex].Controls)
             {
-                saveFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
-//                saveFileDialog.InitialDirectory = Application.UserAppDataPath;
-                saveFileDialog.Filter = "Mechanical Draft Performance Curve files (*.mdpc)|*.mdpc|All files (*.*)|*.*";
-                saveFileDialog.FilterIndex = 1;
-                saveFileDialog.DefaultExt = "mdpc";
-                saveFileDialog.OverwritePrompt = true;
-                saveFileDialog.CheckPathExists = true;
-                saveFileDialog.Title = "Save Mechanical Draft Performance Curve File As";
-
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                if (control is CalculatePrintUserControl)
                 {
-                    if (tabControl1.SelectedIndex != 3)
-                    {
-                        tabControl1.SelectedIndex = 3;
-                    }
+                    CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
 
-                    if (!MechanicalDraftPerformanceCurveUserControl.OpenDataFile(saveFileDialog.FileName))
+                    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                     {
-                        MessageBox.Show(MechanicalDraftPerformanceCurveUserControl.ErrorMessage);
+                        saveFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
+
+                        saveFileDialog.Filter = calculatePrintUserControl.Filter;
+                        saveFileDialog.FilterIndex = 1;
+                        saveFileDialog.DefaultExt = calculatePrintUserControl.DefaultExt;
+                        saveFileDialog.OverwritePrompt = true;
+                        saveFileDialog.CheckPathExists = true;
+                        saveFileDialog.Title = "Save " + calculatePrintUserControl.Title + " File As";
+
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            if (!MechanicalDraftPerformanceCurveUserControl.OpenDataFile(saveFileDialog.FileName))
+                            {
+                                MessageBox.Show(MechanicalDraftPerformanceCurveUserControl.ErrorMessage);
+                            }
+                        }
                     }
                 }
+                break;
             }
         }
 

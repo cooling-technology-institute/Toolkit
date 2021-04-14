@@ -84,12 +84,12 @@ namespace ViewModels
                 if (isInternationalSystemOfUnits_IS_)
                 {
                     // convert to InternationalSystemOfUnits_IS
-                    Current = UnitConverter.ConvertFahrenheitToCelsius(UnitConverter.ConvertBarometricPressureToKilopascal(Current));
+                    Current = UnitConverter.CalculatePsiToInchesOfMercury(Current);
                 }
                 else
                 {
                     // convert to United States Customary Units (IP)
-                    Current = UnitConverter.ConvertCelsiusToFahrenheit(UnitConverter.ConvertKilopascalToBarometricPressure(Current));
+                    Current = UnitConverter.CalculateInchesOfMercuryToPsi(Current);
                 }
             }
 

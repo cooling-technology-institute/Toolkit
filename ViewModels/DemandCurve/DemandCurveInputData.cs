@@ -1,13 +1,11 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 
-using CalculationLibrary;
 using Models;
 
 namespace ViewModels
 {
     public class DemandCurveInputData
     {
-        //public PsychrometricsCalculationType CalculationType { get; set; }
         public bool IsDemo { get; set; }
         public bool IsInternationalSystemOfUnits_SI { get; set; }
         public bool IsElevation { get; set; }
@@ -49,6 +47,7 @@ namespace ViewModels
             if (IsInternationalSystemOfUnits_SI != isIS)
             {
                 IsInternationalSystemOfUnits_SI = isIS;
+                RangeDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
                 LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
                 ElevationDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
                 WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
@@ -60,31 +59,31 @@ namespace ViewModels
             {
                 IsElevation = isElevation;
 
-                double value = 0.0;
-                if (IsElevation)
-                {
-                    if (IsInternationalSystemOfUnits_SI)
-                    {
-                        value = UnitConverter.ConvertKilopascalToElevationInMeters(BarometricPressureDataValue.Current);
-                    }
-                    else
-                    {
-                        value = UnitConverter.ConvertBarometricPressureToElevationInFeet(BarometricPressureDataValue.Current);
-                    }
-                    ElevationDataValue.UpdateCurrentValue(value, out errorMessage);
-                }
-                else
-                {
-                    if (IsInternationalSystemOfUnits_SI)
-                    {
-                        value = UnitConverter.ConvertElevationInMetersToKilopascal(ElevationDataValue.Current);
-                    }
-                    else
-                    {
-                        value = UnitConverter.CalculatePsiToInchesOfMercury(UnitConverter.ConvertElevationInFeetToBarometricPressure(ElevationDataValue.Current));
-                    }
-                    BarometricPressureDataValue.UpdateCurrentValue(value, out errorMessage);
-                }
+                //double value = 0.0;
+                //if (IsElevation)
+                //{
+                //    if (IsInternationalSystemOfUnits_SI)
+                //    {
+                //        value = UnitConverter.ConvertKilopascalToElevationInMeters(BarometricPressureDataValue.Current);
+                //    }
+                //    else
+                //    {
+                //        value = UnitConverter.ConvertBarometricPressureToElevationInFeet(BarometricPressureDataValue.Current);
+                //    }
+                //    ElevationDataValue.UpdateCurrentValue(value, out errorMessage);
+                //}
+                //else
+                //{
+                //    if (IsInternationalSystemOfUnits_SI)
+                //    {
+                //        value = UnitConverter.ConvertElevationInMetersToKilopascal(ElevationDataValue.Current);
+                //    }
+                //    else
+                //    {
+                //        value = UnitConverter.CalculatePsiToInchesOfMercury(UnitConverter.ConvertElevationInFeetToBarometricPressure(ElevationDataValue.Current));
+                //    }
+                //    BarometricPressureDataValue.UpdateCurrentValue(value, out errorMessage);
+                //}
 
                 isChanged = true;
             }
@@ -92,7 +91,7 @@ namespace ViewModels
             return isChanged;
         }
 
-        public bool FillAndValidate(DemandCurveData data, bool isElevation, bool showUserApproach, out string errorMessage)
+        public bool FillAndValidate(DemandCurveData data, out string errorMessage)
         {
             errorMessage = string.Empty;
 

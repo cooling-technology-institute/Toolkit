@@ -11,7 +11,7 @@ namespace ViewModels
         public const double RangeMinimum = 0.1;
         public const double RangeMaximum = 160.0;
 
-        public const double RangeDefault_InternationalSystemOfUnits_IS_ = 10.0;
+        public const double RangeDefault_InternationalSystemOfUnits_IS_ = 5.56;
         public const double RangeMinimum_InternationalSystemOfUnits_IS_ = 0.2;
         public const double RangeMaximum_InternationalSystemOfUnits_IS_ = 88.9;
 

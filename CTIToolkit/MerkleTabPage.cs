@@ -5,9 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
-using CalculationLibrary;
 using CTIToolkit.Properties;
-using Models;
 using ViewModels;
 
 namespace CTIToolkit
@@ -22,14 +20,19 @@ namespace CTIToolkit
         {
             InitializeComponent();
 
+            IsDemo = applicationSettings.IsDemo;
             IsInternationalSystemOfUnits_SI = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+
+            Filter = "Merkel files (*.mrkl)|*.mrkl|All files (*.*)|*.*";
+            DefaultExt = "mrkl";
+            Title = "Merkel";
 
             MerkelViewModel = new MerkelViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
 
+            SwitchUnits();
             SetDisplayedValues();
 
             Calculate();
-
         }
 
         private void SetDisplayedValues()
@@ -115,10 +118,9 @@ namespace CTIToolkit
 
         public override void Calculate()
         {
-            string errorMessage = string.Empty;
             try
             {
-                if (MerkelViewModel.CalculateMerkel(MerkleElevationRadio.Checked, out errorMessage))
+                if (MerkelViewModel.CalculateMerkel(MerkleElevationRadio.Checked, out string errorMessage))
                 {
                     if (MerkelGridView.DataSource != null)
                     {
@@ -158,6 +160,24 @@ namespace CTIToolkit
             }
         }
 
+        public override bool OpenDataFile(string fileName)
+        {
+            return true;
+        }
+
+        public override bool OpenNewDataFile(string fileName)
+        {
+            return true;
+        }
+
+        public override void SaveDataFile()
+        {
+        }
+
+        public override void SaveAsDataFile(string fileName)
+        {
+        }
+
         public void MerkelCalculate_Click(object sender, EventArgs e)
         {
             Calculate();
@@ -165,9 +185,7 @@ namespace CTIToolkit
 
         private void Merkel_LiquidtoGasRatio_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
-            if (!MerkelViewModel.LiquidtoGasRatioDataValueUpdateValue(Merkel_LiquidtoGasRatio_Value.Text, out errorMessage))
+            if (!MerkelViewModel.LiquidtoGasRatioDataValueUpdateValue(Merkel_LiquidtoGasRatio_Value.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;

@@ -17,7 +17,6 @@ namespace CTIToolkit
 
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_SI { get; set; }
-        public string ErrorMessage { get; set; }
         private bool IsChanged { get; set; }
 
         public MechanicalDraftPerformanceCurveTabPage(ApplicationSettings applicationSettings)
@@ -26,6 +25,10 @@ namespace CTIToolkit
 
             IsInternationalSystemOfUnits_SI = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
             ErrorMessage = string.Empty;
+
+            Filter = "Mechanical Draft Performance Curve files (*.mdpc)|*.mdpc|All files (*.*)|*.*";
+            DefaultExt = "mdpc";
+            Title = "Mechanical Draft Performance Curve";
 
             MechanicalDraftPerformanceCurveViewModel = new MechanicalDraftPerformanceCurveViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
             TowerDesignDataForm = new TowerDesignDataForm(IsDemo, IsInternationalSystemOfUnits_SI, MechanicalDraftPerformanceCurveViewModel.DesignData);
@@ -78,7 +81,7 @@ namespace CTIToolkit
             }
         }
 
-        public bool OpenDataFile(string fileName)
+        public override bool OpenDataFile(string fileName)
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
@@ -143,7 +146,7 @@ namespace CTIToolkit
             return returnValue;
         }
 
-        public bool OpenNewDataFile(string fileName)
+        public override bool OpenNewDataFile(string fileName)
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
@@ -222,7 +225,7 @@ namespace CTIToolkit
             return returnValue;
         }
 
-        public bool SaveDataFile()
+        public override void SaveDataFile()
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
@@ -246,7 +249,7 @@ namespace CTIToolkit
                 ErrorMessage = stringBuilder.ToString();
             }
 
-            return returnValue;
+            //return returnValue;
         }
 
         //public bool SaveAsDataFile(string fileName, out string errorMessage)

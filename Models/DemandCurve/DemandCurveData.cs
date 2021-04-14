@@ -1,19 +1,9 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 
-using System.Collections.Generic;
-using System.Data;
-
 namespace Models
 {
     public class DemandCurveData
     {
-        public const string DataType = "DemandCurveData";
-        public const string Version = "1.0";
-
-        public bool IsInternationalSystemOfUnits_SI_ { get; set; }
-
-        public DataTable DataTable { get; set; }
-
         public double CurveC1 { set; get; }
         public double CurveC2 { set; get; }
         public double LiquidToGasRatio { set; get; } //L/G
@@ -30,42 +20,57 @@ namespace Models
         public bool IsCoef { get; set; } // coef
         public bool IsWaterAirRatio { get; set; } // lg
 
-        public List<SeriesData> SeriesData { get; set; }
-
         public double TargetApproach { get; set; }
         public double UserApproach { get; set; }
 
 
-        public DemandCurveData(bool isInternationalSystemOfUnits_IS_)
+        public DemandCurveData(/*bool isDemo, bool isInternationalSystemOfUnits_IS_*/)
         {
-            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
-            IsElevation = true;
-
-//#ifdef _DEMO_VERSION
-//            CurveC1 = 2.0;
-//            CurveC2 = (-0.75);
-//#else
-            CurveC1 = 0;
-            CurveC2 = 0;
-//#endif
-            LiquidToGasRatio = 1.0;
+            CurveC1 = 0.0;
+            CurveC2 = 0.0;
+            LiquidToGasRatio = 0.0;
             BarometricPressure = 0.0;
             Elevation = 0;
             KaV_L = 0;
-            CurveMinimum = 0.5;
-            CurveMaximum = 2.5;
-            if (IsInternationalSystemOfUnits_SI_)
-            {
-                WetBulbTemperature = 26.667;
-                Range = 18;
-            }
-            else
-            {
-                WetBulbTemperature = 80;
-                Range = 10;
-            }
+            CurveMinimum = 0;
+            CurveMaximum = 0;
+            WetBulbTemperature = 0.0;
+            Range = 0.0;
 
-            DataTable = new DataTable();
-        }
+            IsElevation = true;
+            IsWaterAirRatio = false;
+            IsCoef = false;
+
+            TargetApproach = 0.0;
+            UserApproach = 0.0;
+
+        //if (isDemo)
+        //{
+        //    CurveC1 = 2.0;
+        //    CurveC2 = -0.75;
+
+        //}
+        //else
+        //{
+        //    CurveC1 = 0;
+        //    CurveC2 = 0;
+        //}
+        //LiquidToGasRatio = 1.0;
+        //BarometricPressure = 0.0;
+        //Elevation = 0;
+        //KaV_L = 0;
+        //CurveMinimum = 0.5;
+        //CurveMaximum = 2.5;
+        //if (isInternationalSystemOfUnits_IS_)
+        //{
+        //    WetBulbTemperature = 26.667;
+        //    Range = 5.56;
+        //}
+        //else
+        //{
+        //    WetBulbTemperature = 80;
+        //    Range = 10;
+        //}
     }
+}
 }

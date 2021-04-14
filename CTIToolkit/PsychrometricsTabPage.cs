@@ -18,15 +18,18 @@ namespace CTIToolkit
 
         public PsychrometricsTabPage(ApplicationSettings applicationSettings)
         {
+            InitializeComponent();
+
             IsInternationalSystemOfUnits_SI = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
             IsDemo = applicationSettings.IsDemo;
 
-            InitializeComponent();
+            Filter = "Psychrometrics files (*.psy)|*.psy|All files (*.*)|*.*";
+            DefaultExt = "psy";
+            Title = "Psychrometrics";
 
             PsychrometricsViewModel = new PsychrometricsViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
 
-            string errorMessage;
-            SetDisplayedValues(out errorMessage);
+            SetDisplayedValues();
         }
 
         private void SetupBarometericPressure(bool value)
@@ -79,9 +82,8 @@ namespace CTIToolkit
             WetBulbTemperatureUnits.Visible = value;
         }
 
-        private bool SetDisplayedValues(out string errorMessage)
+        private bool SetDisplayedValues()
         {
-            errorMessage = string.Empty;
             try
             {
                 SwitchUnitsSelection();
@@ -146,9 +148,9 @@ namespace CTIToolkit
                 BarometericPressure_Value.Text = PsychrometricsViewModel.BarometricPressureDataValueInputValue;
                 toolTip1.SetToolTip(BarometericPressure_Value, PsychrometricsViewModel.BarometricPressureDataValueToolTip);
             }
-            catch (Exception e)
+            catch
             {
-                errorMessage = string.Format("Failure to load page. Exception: {0}", e.ToString());
+                //errorMessage = string.Format("Failure to load page. Exception: {0}", e.ToString());
                 return false;
             }
             return true;
@@ -160,6 +162,7 @@ namespace CTIToolkit
             {
                 IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
                 SwitchUnitsSelection();
+                SetDisplayedValues();
             }
         }
 
@@ -183,6 +186,46 @@ namespace CTIToolkit
                 ElevationUnits.Text = ConstantUnits.Foot;
                 DryBulbTemperatureUnits.Text = ConstantUnits.TemperatureFahrenheit;
                 BarometericPressureUnits.Text = ConstantUnits.BarometricPressureInchOfMercury;
+            }
+        }
+
+        public override void Calculate()
+        {
+        }
+
+        public override bool OpenDataFile(string fileName)
+        {
+            return true;
+        }
+        
+        public override bool OpenNewDataFile(string fileName) 
+        {
+            return true;
+        }
+
+        public override void SaveDataFile() 
+        { 
+        }
+        
+        public override void SaveAsDataFile(string fileName) 
+        { 
+        }
+
+        public override void PrintPage(object sender, PrintPageEventArgs e)
+        {
+            int iconOffset = 50;
+            int leftMargin = e.MarginBounds.Left;
+            int topMargin = e.MarginBounds.Top;
+
+            //Object rm = Resources.ResourceManager.GetObject("colorlogo");
+            //Bitmap myImage = (Bitmap)rm;
+            Image img = (Image) Resources.ResourceManager.GetObject("colorlogo");
+            Rectangle logo = new Rectangle(leftMargin, topMargin, iconOffset + leftMargin, iconOffset + topMargin);
+            using (Font printFont = new Font("Arial", 10.0f))
+            {
+                e.Graphics.DrawImage(img, logo);
+                e.Graphics.DrawString("CTI Psychrometric Air Properties Report", printFont, Brushes.Black, leftMargin + iconOffset + 100, topMargin + iconOffset + 50, new StringFormat());
+                e.Graphics.DrawString(this.Label, printFont, Brushes.Black, leftMargin + iconOffset + 50, topMargin + iconOffset + 100, new StringFormat());
             }
         }
 
@@ -250,28 +293,6 @@ namespace CTIToolkit
             if (Psychrometrics_GridView.DataSource != null)
             {
                 Psychrometrics_GridView.DataSource = null;
-            }
-        }
-
-        public override void Calculate()
-        {
-        }
-
-        public override void PrintPage(object sender, PrintPageEventArgs e)
-        {
-            int iconOffset = 50;
-            int leftMargin = e.MarginBounds.Left;
-            int topMargin = e.MarginBounds.Top;
-
-            //Object rm = Resources.ResourceManager.GetObject("colorlogo");
-            //Bitmap myImage = (Bitmap)rm;
-            Image img = (Image) Resources.ResourceManager.GetObject("colorlogo");
-            Rectangle logo = new Rectangle(leftMargin, topMargin, iconOffset + leftMargin, iconOffset + topMargin);
-            using (Font printFont = new Font("Arial", 10.0f))
-            {
-                e.Graphics.DrawImage(img, logo);
-                e.Graphics.DrawString("CTI Psychrometric Air Properties Report", printFont, Brushes.Black, leftMargin + iconOffset + 100, topMargin + iconOffset + 50, new StringFormat());
-                e.Graphics.DrawString(this.Label, printFont, Brushes.Black, leftMargin + iconOffset + 50, topMargin + iconOffset + 100, new StringFormat());
             }
         }
 

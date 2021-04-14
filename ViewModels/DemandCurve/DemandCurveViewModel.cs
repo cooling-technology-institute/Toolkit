@@ -2,31 +2,226 @@
 
 using CalculationLibrary;
 using Models;
+using Newtonsoft.Json;
 using System;
 using System.Data;
+using System.IO;
+using System.Text;
 
 namespace ViewModels
 {
     public class DemandCurveViewModel
     {
+        private DemandCurveFileData DemandCurveFileData { get; set; }
         private DemandCurveInputData DemandCurveInputData { get; set; }
         private DemandCurveOutputData DemandCurveOutputData { get; set; }
-        private DemandCurveData DemandCurveData { get; set; }
+        private DemandCurveCalculationData DemandCurveCalculationData { get; set; }
         public DemandCurveCalculationLibrary DemandCurveCalculationLibrary { get; set; }
         public bool IsDemo { get; set; }
         public bool IsInternationalSystemOfUnits_SI { get; set; }
         public bool IsElevation { get; set; }
+        public string ErrorMessage { get; set; }
+        public string DataFileName { get; set; }
 
         public DemandCurveViewModel(bool isDemo, bool isInternationalSystemOfUnits_IS_)
         {
             DemandCurveInputData = new DemandCurveInputData(isDemo, isInternationalSystemOfUnits_IS_);
             DemandCurveOutputData = new DemandCurveOutputData(isInternationalSystemOfUnits_IS_);
-            DemandCurveData = new DemandCurveData(isInternationalSystemOfUnits_IS_);
             DemandCurveCalculationLibrary = new DemandCurveCalculationLibrary();
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
             IsDemo = isDemo;
         }
 
+        public void BuildFilename()
+        {
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
+            int i = 1;
+
+            do
+            {
+                DataFileName = Path.Combine(path, string.Format("DemandCurve{0}.dc", i++));
+                if (File.Exists(DataFileName))
+                {
+                    DataFileName = string.Empty;
+                }
+
+            } while (string.IsNullOrEmpty(DataFileName));
+        }
+
+        public bool OpenDataFile(string fileName)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            bool returnValue = true;
+
+            DataFileName = fileName;
+            ErrorMessage = string.Empty;
+
+            try
+            {
+                DemandCurveFileData = JsonConvert.DeserializeObject<DemandCurveFileData>(File.ReadAllText(DataFileName));
+            }
+            catch (Exception e)
+            {
+                stringBuilder.AppendFormat("Failure to read file: {0}. Exception: {1}\n", Path.GetFileName(DataFileName), e.ToString());
+                returnValue = false;
+            }
+
+            if (DemandCurveFileData != null)
+            {
+                if (DemandCurveFileData.IsInternationalSystemOfUnits_SI != IsInternationalSystemOfUnits_SI)
+                {
+                    //ToolkitMain,UpdateU
+                    SwitchUnits(DemandCurveFileData.IsInternationalSystemOfUnits_SI);
+                }
+
+                if (!LoadData())
+                {
+                    stringBuilder.AppendLine(ErrorMessage);
+                    returnValue = false;
+                    ErrorMessage = string.Empty;
+                }
+
+            }
+            else
+            {
+                stringBuilder.AppendLine("Unable to load file. File contains invalid data");
+            }
+
+            if (!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
+
+            return returnValue;
+        }
+
+        public bool OpenNewDataFile(string fileName)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            bool returnValue = true;
+            ErrorMessage = string.Empty;
+
+            DataFileName = fileName;
+            DemandCurveFileData = new DemandCurveFileData(IsInternationalSystemOfUnits_SI);
+
+            if (DemandCurveFileData != null)
+            {
+                if (!LoadData())
+                {
+                    stringBuilder.AppendLine(ErrorMessage);
+                    returnValue = false;
+                    ErrorMessage = string.Empty;
+                }
+            }
+            else
+            {
+                stringBuilder.AppendLine("Unable to create new file.");
+                returnValue = false;
+            }
+
+            if (!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
+
+            return returnValue;
+        }
+
+        public bool SwitchUnits(bool isIS)
+        {
+            bool isChange = false;
+
+            if (IsInternationalSystemOfUnits_SI != isIS)
+            {
+                IsInternationalSystemOfUnits_SI = isIS;
+                ConvertValues();
+            }
+            return isChange;
+        }
+
+        public void ConvertValues()
+        {
+            WaterFlowRateDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+            HotWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+            ColdWaterTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+            WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+            DryBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+            FanDriverPowerDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+            BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+            LiquidToGasRatioDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+            Range1Value.ConvertValue(IsInternationalSystemOfUnits_SI);
+            Range2Value.ConvertValue(IsInternationalSystemOfUnits_SI);
+            Range3Value.ConvertValue(IsInternationalSystemOfUnits_SI);
+            Range4Value.ConvertValue(IsInternationalSystemOfUnits_SI);
+            Range5Value.ConvertValue(IsInternationalSystemOfUnits_SI);
+        }
+
+        public bool CalculateDemandCurve(bool isElevation, bool showUserApproach, out string errorMessage)
+        {
+            try
+            {
+                DemandCurveCalculationData = new DemandCurveCalculationData(IsInternationalSystemOfUnits_SI);
+
+                if (!FillAndValidate(isElevation, showUserApproach, out errorMessage))
+                {
+                    return false;
+                }
+
+                if (!DemandCurveCalculationLibrary.DemandCurveCalculation(isElevation, showUserApproach, DemandCurveCalculationData, out errorMessage))
+                {
+                    return false;
+                }
+
+                // output data in DemandCurveOutputData
+                DemandCurveOutputData.NameValueUnitsDataTable.DataTable.Clear();
+
+                //data.BarometricPressure = truncit(data.BarometricPressure, 5);
+                DemandCurveOutputData.NameValueUnitsDataTable.AddRow("KaV/L", DemandCurveData.KaV_L.ToString("F5"), string.Empty);
+
+                return true;
+            }
+            catch (Exception exception)
+            {
+                errorMessage = string.Format("Error in Demand Curve calculation. Please check your input values. Exception Message: {0}", exception.Message);
+                return false;
+            }
+        }
+
+        public bool FillAndValidate(bool isElevation, bool showUserApproach, out string errorMessage)
+        {
+            return DemandCurveInputData.FillAndValidate(DemandCurveData, out errorMessage);
+        }
+
+        public DataTable GetDataTable()
+        {
+            return DemandCurveData.DataTable;
+        }
+
+        public bool ConvertValues(bool isIS, bool isElevation, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            if ((IsInternationalSystemOfUnits_SI != isIS) || (IsElevation != isElevation))
+            {
+                IsInternationalSystemOfUnits_SI = isIS;
+                IsElevation = isElevation;
+                return DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_SI, IsElevation, out errorMessage);
+            }
+            return false;
+        }
+
+
+        public bool ConvertValues(bool isIS, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            if (IsInternationalSystemOfUnits_SI != isIS)
+            {
+                IsInternationalSystemOfUnits_SI = isIS;
+                return DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_SI, IsElevation, out errorMessage);
+            }
+            return false;
+        }
         #region DataValues
         public string WetBulbTemperatureDataValueInputMessage
         {
@@ -289,73 +484,5 @@ namespace ViewModels
             }
         }
         #endregion DataValues
-
-
-        public bool CalculateDemandCurve(bool isElevation, bool showUserApproach, out string errorMessage)
-        {
-            try
-            {
-                DemandCurveData = new DemandCurveData(IsInternationalSystemOfUnits_SI);
-
-                if (!FillAndValidate(isElevation, showUserApproach, out errorMessage))
-                {
-                    return false;
-                }
-
-                if (!DemandCurveCalculationLibrary.DemandCurveCalculation(isElevation, showUserApproach, DemandCurveData, out errorMessage))
-                {
-                    return false;
-                }
-
-                // output data in DemandCurveOutputData
-                DemandCurveOutputData.NameValueUnitsDataTable.DataTable.Clear();
-
-                //data.BarometricPressure = truncit(data.BarometricPressure, 5);
-                DemandCurveOutputData.NameValueUnitsDataTable.AddRow("KaV/L", DemandCurveData.KaV_L.ToString("F5"), string.Empty);
-
-                return true;
-            }
-            catch (Exception exception)
-            {
-                errorMessage = string.Format("Error in Demand Curve calculation. Please check your input values. Exception Message: {0}", exception.Message);
-                return false;
-            }
-        }
-
-        public bool FillAndValidate(bool isElevation, bool showUserApproach, out string errorMessage)
-        {
-            return DemandCurveInputData.FillAndValidate(DemandCurveData, isElevation, showUserApproach, out errorMessage);
-        }
-
-        public DataTable GetDataTable()
-        {
-            return DemandCurveData.DataTable;
-        }
-
-        public bool ConvertValues(bool isIS, bool isElevation, out string errorMessage)
-        {
-            errorMessage = string.Empty;
-
-            if ((IsInternationalSystemOfUnits_SI != isIS) || (IsElevation != isElevation))
-            {
-                IsInternationalSystemOfUnits_SI = isIS;
-                IsElevation = isElevation;
-                return DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_SI, IsElevation, out errorMessage);
-            }
-            return false;
-        }
-
-
-        public bool ConvertValues(bool isIS, out string errorMessage)
-        {
-            errorMessage = string.Empty;
-
-            if (IsInternationalSystemOfUnits_SI != isIS)
-            {
-                IsInternationalSystemOfUnits_SI = isIS;
-                return DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_SI, IsElevation, out errorMessage);
-            }
-            return false;
-        }
     }
 }
