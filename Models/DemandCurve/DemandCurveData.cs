@@ -17,14 +17,13 @@ namespace Models
         public double Approach { set; get; }
 
         public bool IsElevation { get; set; } // attitude
-        public bool IsCoef { get; set; } // coef
+        public bool IsApproach { get; set; } // coef
         public bool IsWaterAirRatio { get; set; } // lg
 
         public double TargetApproach { get; set; }
         public double UserApproach { get; set; }
 
-
-        public DemandCurveData(/*bool isDemo, bool isInternationalSystemOfUnits_IS_*/)
+        public DemandCurveData()
         {
             CurveC1 = 0.0;
             CurveC2 = 0.0;
@@ -39,7 +38,7 @@ namespace Models
 
             IsElevation = true;
             IsWaterAirRatio = false;
-            IsCoef = false;
+            IsApproach = true;
 
             TargetApproach = 0.0;
             UserApproach = 0.0;

@@ -21,10 +21,11 @@ namespace CalculationLibrary
 //        public readonly int[] InitialApproachXValues = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100 };
         public List<bool> ApproachInRange { get; private set; }
         public List<bool> ApproachOutOfRange { get; private set; }
+        public string ErrorMessage { get; set; }
 
-        public bool DemandCurveCalculation(bool isElevation, bool showUserApproach, DemandCurveCalculationData data, DemandCurveOutput output, out string errorMessage)
+        public bool DemandCurveCalculation(DemandCurveCalculationData data)
         {
-            errorMessage = string.Empty;
+            ErrorMessage = string.Empty;
 
             data.DemandCurveData.TargetApproach = 0;
             data.DemandCurveData.UserApproach = 0;
@@ -33,9 +34,9 @@ namespace CalculationLibrary
             ApproachInRange = new List<bool>();
             ApproachOutOfRange = new List<bool>();
 
-            output.DataTable.Clear();
+            data.DataTable.Clear();
 
-            InitializeApproachList(data.DemandCurveData);
+            InitializeApproachList(data);
 
             for (int i = 0; i < InitialApproachXValues.Length; i++)
             {
@@ -44,11 +45,11 @@ namespace CalculationLibrary
                     DataColumn dataColumn = new DataColumn();
                     dataColumn.ColumnName = string.Format("L/G-{0}", InitialApproachXValues[i]);
                     dataColumn.DataType = Type.GetType("System.Double");
-                    output.DataTable.Columns.Add(dataColumn);
+                    data.DataTable.Columns.Add(dataColumn);
                     dataColumn = new DataColumn();
                     dataColumn.ColumnName = string.Format("kaVL-{0}", InitialApproachXValues[i]);
                     dataColumn.DataType = Type.GetType("System.Double");
-                    output.DataTable.Columns.Add(dataColumn);
+                    data.DataTable.Columns.Add(dataColumn);
                 }
             }
 
@@ -57,15 +58,15 @@ namespace CalculationLibrary
                 DataColumn dataColumn = new DataColumn();
                 dataColumn.ColumnName = string.Format("L/G-COEF");
                 dataColumn.DataType = Type.GetType("System.Double");
-                output.DataTable.Columns.Add(dataColumn);
+                data.DataTable.Columns.Add(dataColumn);
                 dataColumn = new DataColumn();
                 dataColumn.ColumnName = "kaVL-COEF";
                 dataColumn.DataType = Type.GetType("System.Double");
-                output.DataTable.Columns.Add(dataColumn);
+                data.DataTable.Columns.Add(dataColumn);
             }
 
             CalculateApproach(data);
-            CalculateApproaches(data, output);
+            CalculateApproaches(data);
 
             return true;
         }
@@ -98,6 +99,7 @@ namespace CalculationLibrary
             if (data.IsInternationalSystemOfUnits_SI)
             {
                 merkelData.WetBulbTemperature = UnitConverter.ConvertCelsiusToFahrenheit(data.DemandCurveData.WetBulbTemperature);
+                merkelData.Range = data.DemandCurveData.Range * 1.8;
 
                 //if (!isElevation)
                 //{
@@ -107,13 +109,13 @@ namespace CalculationLibrary
             else
             {
                 merkelData.WetBulbTemperature = data.DemandCurveData.WetBulbTemperature;
+                merkelData.Range = data.DemandCurveData.Range;
 
                 //if (!isElevation)
                 //{
                 //    merkelData.Elevation = UnitConverter.ConvertBarometricPressureToElevationInFeet(UnitConverter.CalculateInchesOfMercuryToPsi(data.BarometricPressure));
                 //}
             }
-            merkelData.Range = data.DemandCurveData.Range;
             merkelData.Elevation = data.DemandCurveData.Elevation;
             merkelData.LiquidToGasRatio = 0.1;
 
@@ -122,13 +124,14 @@ namespace CalculationLibrary
 
         void CalculateApproach(DemandCurveCalculationData data)
         {
-            MerkelData merkelData = new MerkelData(data.IsInternationalSystemOfUnits_SI)
-            {
-                WetBulbTemperature = data.DemandCurveData.WetBulbTemperature,
-                Range = data.DemandCurveData.Range,
-                Elevation = data.DemandCurveData.Elevation,
-                LiquidToGasRatio = data.DemandCurveData.LiquidToGasRatio
-            };
+            MerkelData merkelData = new MerkelData(data.IsInternationalSystemOfUnits_SI);
+            MerkelConvertValues(merkelData, data);
+            //{
+            //    WetBulbTemperature = data.DemandCurveData.WetBulbTemperature,
+            //    Range = data.DemandCurveData.Range,
+            //    Elevation = data.DemandCurveData.Elevation,
+            //    LiquidToGasRatio = data.DemandCurveData.LiquidToGasRatio
+            //};
 
             if ((data.DemandCurveData.LiquidToGasRatio >= 0.1) && (data.DemandCurveData.LiquidToGasRatio <= 5.0))
             {
@@ -148,7 +151,7 @@ namespace CalculationLibrary
                         data.DemandCurveData.Approach = 0;
                     }
 
-                    if (!data.DemandCurveData.IsInternationalSystemOfUnits_SI)
+                    if (!data.IsInternationalSystemOfUnits_SI)
                     {
                         data.DemandCurveData.Approach *= 5.0 / 9.0;
                     }
@@ -156,9 +159,10 @@ namespace CalculationLibrary
             }
         }
 
-        void CalculateApproaches(DemandCurveCalculationData data, DemandCurveOutput output)
+        void CalculateApproaches(DemandCurveCalculationData data)
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder = new StringBuilder();
+
             const double liquidToGasRatio_MIN = 0.1;
             const double liquidToGasRatio_MAX = 5.0;
             const double kavl_MIN = 0.01;
@@ -167,13 +171,15 @@ namespace CalculationLibrary
             double calculatedLiquidToGasRatio = 0.0;
             double calculatedLiquidToGasRatio_MIN = 999.0;
 
-            MerkelData merkelData = new MerkelData(data.IsInternationalSystemOfUnits_SI)
-            {
-                WetBulbTemperature = data.DemandCurveData.WetBulbTemperature,
-                Range = data.DemandCurveData.Range,
-                Elevation = data.DemandCurveData.Elevation,
-                LiquidToGasRatio = data.DemandCurveData.LiquidToGasRatio
-            };
+            MerkelData merkelData = new MerkelData(data.IsInternationalSystemOfUnits_SI);
+            MerkelConvertValues(merkelData, data);
+            //MerkelData merkelData = new MerkelData(data.IsInternationalSystemOfUnits_SI)
+            //{
+            //    WetBulbTemperature = data.DemandCurveData.WetBulbTemperature,
+            //    Range = data.DemandCurveData.Range,
+            //    Elevation = data.DemandCurveData.Elevation,
+            //    LiquidToGasRatio = data.DemandCurveData.LiquidToGasRatio
+            //};
 
             //ApproachXValues[INDEX_TARGETAPPROACH] = TargetApproach;
             //ApproachXValues[INDEX_USERAPPROACH] = UserApproach;
@@ -182,11 +188,11 @@ namespace CalculationLibrary
             for (double liquidToGasRatio = liquidToGasRatio_MIN; liquidToGasRatio < liquidToGasRatio_MAX; liquidToGasRatio += .05)
             {
                 stringBuilder.AppendFormat("\ndLG {0} \n\n", liquidToGasRatio.ToString("F6"));
-                DataRow dataRow = output.DataTable.NewRow();
+                DataRow dataRow = data.DataTable.NewRow();
 
                 for(int i = 0; i < InitialApproachXValues.Length; i++)
                 {
-                    stringBuilder.AppendFormat("\niIndex {0}  getapp(iIndex) {1} App[iIndex] {2} \n", i, 1, ApproachOutOfRange[i] ? "0" : InitialApproachXValues[i].ToString("F0"));
+                    stringBuilder.AppendFormat("\niIndex {0}  getapp(iIndex) {1} App[iIndex] {2} ", i, 1, ApproachOutOfRange[i] ? "0" : InitialApproachXValues[i].ToString("F0"));
                     string approachXValue = ((int)InitialApproachXValues[i]).ToString();
 
                     if (ApproachInRange[i] && !ApproachOutOfRange[i])
@@ -203,24 +209,24 @@ namespace CalculationLibrary
                             stringBuilder.AppendLine();
                         }
 
-                        if (merkelData.IsInternationalSystemOfUnits_SI)
-                        {
-                            merkelData.WetBulbTemperature = UnitConverter.ConvertCelsiusToFahrenheit(merkelData.WetBulbTemperature);
-                            merkelData.HotWaterTemperature = UnitConverter.ConvertCelsiusToFahrenheit(merkelData.HotWaterTemperature); // T1
-                            merkelData.ColdWaterTemperature = UnitConverter.ConvertCelsiusToFahrenheit(merkelData.ColdWaterTemperature); // T2
-                            merkelData.Elevation = UnitConverter.ConvertMetersToFeet(merkelData.Elevation);
-                            merkelData.IsInternationalSystemOfUnits_SI = false;
-                        }
+                        //if (merkelData.IsInternationalSystemOfUnits_SI)
+                        //{
+                        //    merkelData.WetBulbTemperature = UnitConverter.ConvertCelsiusToFahrenheit(merkelData.WetBulbTemperature);
+                        //    merkelData.HotWaterTemperature = UnitConverter.ConvertCelsiusToFahrenheit(merkelData.HotWaterTemperature); // T1
+                        //    merkelData.ColdWaterTemperature = UnitConverter.ConvertCelsiusToFahrenheit(merkelData.ColdWaterTemperature); // T2
+                        //    merkelData.Elevation = UnitConverter.ConvertMetersToFeet(merkelData.Elevation);
+                        //    merkelData.IsInternationalSystemOfUnits_SI = false;
+                        //}
 
                         //merkelData.Range = merkelData.HotWaterTemperature - merkelData.ColdWaterTemperature;
                         //merkelData.Approach = merkelData.ColdWaterTemperature - merkelData.WetBulbTemperature;
 
-                        stringBuilder.AppendFormat(" m_dblCurveWBT {0}, m_dblCurveRange {1}, App[iIndex] {2}, dLG {3}, m_dblAltitude {4} \n", merkelData.WetBulbTemperature.ToString("F6"), merkelData.Range.ToString("F6"), merkelData.Approach.ToString("F6"), merkelData.LiquidToGasRatio.ToString("F6"), merkelData.Elevation.ToString("F6"));
+                        stringBuilder.AppendFormat("\n m_dblCurveWBT {0}, m_dblCurveRange {1}, App[iIndex] {2}, dLG {3}, m_dblAltitude {4} ", merkelData.WetBulbTemperature.ToString("F6"), merkelData.Range.ToString("F6"), merkelData.Approach.ToString("F6"), merkelData.LiquidToGasRatio.ToString("F6"), merkelData.Elevation.ToString("F6"));
 
                         kaVL = CalculateMerkel(merkelData);
 
-                        stringBuilder.AppendFormat(" m_dblCurveWBT {0}, m_dblCurveRange {1}, App[iIndex] {2}, dLG {3}, m_dblAltitude {4} \n", merkelData.WetBulbTemperature.ToString("F6"), merkelData.Range.ToString("F6"), merkelData.Approach.ToString("F6"), merkelData.LiquidToGasRatio.ToString("F6"), merkelData.Elevation.ToString("F6"));
-                        stringBuilder.AppendFormat("kavl {0} minVal {1} maxVal {2} dLG {3} App[iIndex] {4} \n", kaVL.ToString("F6"), kavl_MIN.ToString("F6"), kavl_MAX.ToString("F6"), liquidToGasRatio.ToString("F6"), InitialApproachXValues[i].ToString("F6"));
+                        stringBuilder.AppendFormat("\n m_dblCurveWBT {0}, m_dblCurveRange {1}, App[iIndex] {2}, dLG {3}, m_dblAltitude {4}", merkelData.WetBulbTemperature.ToString("F6"), merkelData.Range.ToString("F6"), merkelData.Approach.ToString("F6"), merkelData.LiquidToGasRatio.ToString("F6"), merkelData.Elevation.ToString("F6"));
+                        stringBuilder.AppendFormat("\n kavl {0} minVal {1} maxVal {2} dLG {3} App[iIndex] {4}", kaVL.ToString("F6"), kavl_MIN.ToString("F6"), kavl_MAX.ToString("F6"), liquidToGasRatio.ToString("F6"), InitialApproachXValues[i].ToString("F6"));
 
                         // ddp
                         if ((kaVL < kavl_MIN) || (kaVL >= kavl_MAX))
@@ -228,7 +234,7 @@ namespace CalculationLibrary
                             double dInterp;
                             for (dInterp = liquidToGasRatio; ((kaVL < kavl_MIN) || (kaVL >= kavl_MAX)) && (dInterp > .1); dInterp -= 0.0002)
                             {
-                                stringBuilder.AppendFormat("dInterp {0} kavl {1}\n", dInterp.ToString("F6"), kaVL.ToString("F6"));
+                                stringBuilder.AppendFormat("\n dInterp {0} kavl {1}", dInterp.ToString("F6"), kaVL.ToString("F6"));
                                 merkelData.Approach = InitialApproachXValues[i];
                                 if (data.IsInternationalSystemOfUnits_SI)
                                 {
@@ -245,26 +251,27 @@ namespace CalculationLibrary
                             calculatedLiquidToGasRatio = liquidToGasRatio;
                         }
 
-                        stringBuilder.AppendFormat("kavl {0} dLG {1} App[iIndex] {2} \n", kaVL.ToString("F6"), liquidToGasRatio.ToString("F6"), ApproachOutOfRange[i] ? "0.000000" : InitialApproachXValues[i].ToString("F6"));
+                        stringBuilder.AppendFormat("\n kavl {0} dLG {1} App[iIndex] {2}", kaVL.ToString("F6"), liquidToGasRatio.ToString("F6"), ApproachOutOfRange[i] ? "0.000000" : InitialApproachXValues[i].ToString("F6"));
 
                         if ((calculatedLiquidToGasRatio_MIN > kaVL) && (kaVL > .1))
                         {
                             calculatedLiquidToGasRatio_MIN = kaVL;
                         }
-                        stringBuilder.AppendFormat("sDLG {0} ", calculatedLiquidToGasRatio.ToString("F6"));
-                        stringBuilder.AppendFormat("min4Lg {0} \n", calculatedLiquidToGasRatio_MIN.ToString("F6"));
+                        stringBuilder.AppendFormat("\n sDLG {0} ", calculatedLiquidToGasRatio.ToString("F6"));
+                        stringBuilder.AppendFormat("min4Lg {0} ", calculatedLiquidToGasRatio_MIN.ToString("F6"));
 
                         if ((kaVL <= 10.0) && (kaVL >= .1))
                         {
-                            stringBuilder.AppendFormat("index {2} m_wndGraph {0} {1}\n", calculatedLiquidToGasRatio.ToString("F6"), kaVL.ToString("F6"), i);
+                            stringBuilder.AppendFormat("\n index {2} m_wndGraph {0} {1}", calculatedLiquidToGasRatio.ToString("F6"), kaVL.ToString("F6"), i);
                             dataRow[string.Format("L/G-{0}", approachXValue)] = calculatedLiquidToGasRatio;
                             dataRow[string.Format("kaVL-{0}", approachXValue)] = kaVL;
                         }
                     }
+                    stringBuilder.AppendLine();
                 }
                 stringBuilder.AppendLine("\niIndex 18  getapp(iIndex) 1 App[iIndex] 0 \n");
                 stringBuilder.AppendLine("iIndex 19  getapp(iIndex) 1 App[iIndex] 0 ");
-                output.DataTable.Rows.Add(dataRow);
+                data.DataTable.Rows.Add(dataRow);
             }
 
             ////---------------------------------------------------------------------

@@ -163,6 +163,45 @@ namespace ViewModels
             return returnValue;
         }
 
+        private bool SaveDataToFile()
+        {
+            bool returnValue = true;
+
+            MechanicalDraftPerformanceCurveFileData = new MechanicalDraftPerformanceCurveFileData(IsInternationalSystemOfUnits_SI);
+
+            if (MechanicalDraftPerformanceCurveFileData != null)
+            {
+                if (FillFileData())
+                {
+                    try
+                    {
+                        File.WriteAllText(DataFileName, JsonConvert.SerializeObject(MechanicalDraftPerformanceCurveFileData, Formatting.Indented));
+                    }
+                    catch (Exception e)
+                    {
+                        ErrorMessage = string.Format("Error saving data to file. Exception: {0}", e.Message);
+                    }
+                }
+            }
+            else
+            {
+                ErrorMessage = "Unable to save data to file.";
+                returnValue = false;
+            }
+            return returnValue;
+        }
+
+        public bool SaveDataFile()
+        {
+            return SaveDataToFile();
+        }
+
+        public bool SaveAsDataFile(string fileName)
+        {
+            DataFileName = fileName;
+            return SaveDataToFile();
+        }
+
         #region DataValues
 
         public string DataFilenameInputValue

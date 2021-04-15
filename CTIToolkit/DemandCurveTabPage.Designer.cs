@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.DemandCurveCalculate = new System.Windows.Forms.Button();
             this.DemandCurveDataFileLabel = new System.Windows.Forms.Label();
@@ -42,13 +42,13 @@
             this.DemandCurveWetBulbTemperatureLabel = new System.Windows.Forms.Label();
             this.ElevationValue = new System.Windows.Forms.TextBox();
             this.ElevationPressureUnits = new System.Windows.Forms.Label();
-            this.DemandCurveElevationPressureLabel = new System.Windows.Forms.Label();
+            this.ElevationPressureLabel = new System.Windows.Forms.Label();
             this.WebBulbTemperatureUnits = new System.Windows.Forms.Label();
             this.InputPropertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.DesignPointGroupBox = new System.Windows.Forms.GroupBox();
-            this.DemandCurve_KavLRadio = new System.Windows.Forms.RadioButton();
+            this.KavLRadio = new System.Windows.Forms.RadioButton();
             this.LiquidToGasRatioValue = new System.Windows.Forms.TextBox();
-            this.DemandCurve_ApproachRadio = new System.Windows.Forms.RadioButton();
+            this.ApproachRadio = new System.Windows.Forms.RadioButton();
             this.LiquidToGasRatioLabel = new System.Windows.Forms.Label();
             this.TowerOrFillCharacteristicsGroupBox = new System.Windows.Forms.GroupBox();
             this.UserApproachValue = new System.Windows.Forms.TextBox();
@@ -64,12 +64,13 @@
             this.ThermalDesignConditionsGroupBox = new System.Windows.Forms.GroupBox();
             this.RangeUnits = new System.Windows.Forms.Label();
             this.groupBoxPressureElevation = new System.Windows.Forms.GroupBox();
-            this.DemandCurve_PressureRadio = new System.Windows.Forms.RadioButton();
-            this.DemandCurve_ElevationRadio = new System.Windows.Forms.RadioButton();
+            this.BarometricPressureRadio = new System.Windows.Forms.RadioButton();
+            this.ElevationRadio = new System.Windows.Forms.RadioButton();
             this.DemandCurveChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.DataFilename = new System.Windows.Forms.TextBox();
+            this.CalculatedValue = new System.Windows.Forms.TextBox();
             this.InputPropertiesGroupBox.SuspendLayout();
             this.DesignPointGroupBox.SuspendLayout();
             this.TowerOrFillCharacteristicsGroupBox.SuspendLayout();
@@ -173,14 +174,14 @@
             this.ElevationPressureUnits.TabIndex = 16;
             this.ElevationPressureUnits.Text = "ft";
             // 
-            // DemandCurveElevationPressureLabel
+            // ElevationPressureLabel
             // 
-            this.DemandCurveElevationPressureLabel.Location = new System.Drawing.Point(9, 77);
-            this.DemandCurveElevationPressureLabel.Name = "DemandCurveElevationPressureLabel";
-            this.DemandCurveElevationPressureLabel.Size = new System.Drawing.Size(116, 13);
-            this.DemandCurveElevationPressureLabel.TabIndex = 17;
-            this.DemandCurveElevationPressureLabel.Text = "Elevation:";
-            this.DemandCurveElevationPressureLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ElevationPressureLabel.Location = new System.Drawing.Point(9, 77);
+            this.ElevationPressureLabel.Name = "ElevationPressureLabel";
+            this.ElevationPressureLabel.Size = new System.Drawing.Size(116, 13);
+            this.ElevationPressureLabel.TabIndex = 17;
+            this.ElevationPressureLabel.Text = "Elevation:";
+            this.ElevationPressureLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // WebBulbTemperatureUnits
             // 
@@ -205,9 +206,10 @@
             // 
             // DesignPointGroupBox
             // 
-            this.DesignPointGroupBox.Controls.Add(this.DemandCurve_KavLRadio);
+            this.DesignPointGroupBox.Controls.Add(this.CalculatedValue);
+            this.DesignPointGroupBox.Controls.Add(this.KavLRadio);
             this.DesignPointGroupBox.Controls.Add(this.LiquidToGasRatioValue);
-            this.DesignPointGroupBox.Controls.Add(this.DemandCurve_ApproachRadio);
+            this.DesignPointGroupBox.Controls.Add(this.ApproachRadio);
             this.DesignPointGroupBox.Controls.Add(this.LiquidToGasRatioLabel);
             this.DesignPointGroupBox.Location = new System.Drawing.Point(664, 20);
             this.DesignPointGroupBox.Name = "DesignPointGroupBox";
@@ -216,19 +218,19 @@
             this.DesignPointGroupBox.TabStop = false;
             this.DesignPointGroupBox.Text = "Design Point";
             // 
-            // DemandCurve_KavLRadio
+            // KavLRadio
             // 
-            this.DemandCurve_KavLRadio.Location = new System.Drawing.Point(18, 67);
-            this.DemandCurve_KavLRadio.Name = "DemandCurve_KavLRadio";
-            this.DemandCurve_KavLRadio.Size = new System.Drawing.Size(122, 17);
-            this.DemandCurve_KavLRadio.TabIndex = 1;
-            this.DemandCurve_KavLRadio.Text = "Kav/L";
-            this.DemandCurve_KavLRadio.UseVisualStyleBackColor = true;
-            this.DemandCurve_KavLRadio.CheckedChanged += new System.EventHandler(this.DemandCurve_KavLRadio_CheckedChanged);
+            this.KavLRadio.Location = new System.Drawing.Point(18, 73);
+            this.KavLRadio.Name = "KavLRadio";
+            this.KavLRadio.Size = new System.Drawing.Size(91, 17);
+            this.KavLRadio.TabIndex = 1;
+            this.KavLRadio.Text = "Kav/L";
+            this.KavLRadio.UseVisualStyleBackColor = true;
+            this.KavLRadio.CheckedChanged += new System.EventHandler(this.KavLRadio_CheckedChanged);
             // 
             // LiquidToGasRatioValue
             // 
-            this.LiquidToGasRatioValue.Location = new System.Drawing.Point(125, 21);
+            this.LiquidToGasRatioValue.Location = new System.Drawing.Point(125, 22);
             this.LiquidToGasRatioValue.Name = "LiquidToGasRatioValue";
             this.LiquidToGasRatioValue.Size = new System.Drawing.Size(39, 20);
             this.LiquidToGasRatioValue.TabIndex = 2;
@@ -236,17 +238,17 @@
             this.LiquidToGasRatioValue.Validating += new System.ComponentModel.CancelEventHandler(this.LiquidToGasRatioValue_Validating);
             this.LiquidToGasRatioValue.Validated += new System.EventHandler(this.LiquidToGasRatioValue_Validated);
             // 
-            // DemandCurve_ApproachRadio
+            // ApproachRadio
             // 
-            this.DemandCurve_ApproachRadio.Checked = true;
-            this.DemandCurve_ApproachRadio.Location = new System.Drawing.Point(18, 46);
-            this.DemandCurve_ApproachRadio.Name = "DemandCurve_ApproachRadio";
-            this.DemandCurve_ApproachRadio.Size = new System.Drawing.Size(122, 17);
-            this.DemandCurve_ApproachRadio.TabIndex = 0;
-            this.DemandCurve_ApproachRadio.TabStop = true;
-            this.DemandCurve_ApproachRadio.Text = "Approach";
-            this.DemandCurve_ApproachRadio.UseVisualStyleBackColor = true;
-            this.DemandCurve_ApproachRadio.CheckedChanged += new System.EventHandler(this.DemandCurve_ApproachRadio_CheckedChanged);
+            this.ApproachRadio.Checked = true;
+            this.ApproachRadio.Location = new System.Drawing.Point(18, 52);
+            this.ApproachRadio.Name = "ApproachRadio";
+            this.ApproachRadio.Size = new System.Drawing.Size(91, 17);
+            this.ApproachRadio.TabIndex = 0;
+            this.ApproachRadio.TabStop = true;
+            this.ApproachRadio.Text = "Approach";
+            this.ApproachRadio.UseVisualStyleBackColor = true;
+            this.ApproachRadio.CheckedChanged += new System.EventHandler(this.ApproachRadio_CheckedChanged);
             // 
             // LiquidToGasRatioLabel
             // 
@@ -379,7 +381,7 @@
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.RangeValue);
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.WebBulbTemperatureUnits);
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.WetBulbTemperatureValue);
-            this.ThermalDesignConditionsGroupBox.Controls.Add(this.DemandCurveElevationPressureLabel);
+            this.ThermalDesignConditionsGroupBox.Controls.Add(this.ElevationPressureLabel);
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.DemandCurveRangeUnits);
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.ElevationPressureUnits);
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.ElevationValue);
@@ -402,51 +404,51 @@
             // groupBoxPressureElevation
             // 
             this.groupBoxPressureElevation.BackColor = System.Drawing.Color.Transparent;
-            this.groupBoxPressureElevation.Controls.Add(this.DemandCurve_PressureRadio);
-            this.groupBoxPressureElevation.Controls.Add(this.DemandCurve_ElevationRadio);
+            this.groupBoxPressureElevation.Controls.Add(this.BarometricPressureRadio);
+            this.groupBoxPressureElevation.Controls.Add(this.ElevationRadio);
             this.groupBoxPressureElevation.Location = new System.Drawing.Point(244, 13);
             this.groupBoxPressureElevation.Name = "groupBoxPressureElevation";
             this.groupBoxPressureElevation.Size = new System.Drawing.Size(123, 84);
             this.groupBoxPressureElevation.TabIndex = 21;
             this.groupBoxPressureElevation.TabStop = false;
             // 
-            // DemandCurve_PressureRadio
+            // BarometricPressureRadio
             // 
-            this.DemandCurve_PressureRadio.Location = new System.Drawing.Point(6, 48);
-            this.DemandCurve_PressureRadio.Name = "DemandCurve_PressureRadio";
-            this.DemandCurve_PressureRadio.Size = new System.Drawing.Size(122, 17);
-            this.DemandCurve_PressureRadio.TabIndex = 1;
-            this.DemandCurve_PressureRadio.Text = "Barometric Pressure";
-            this.DemandCurve_PressureRadio.UseVisualStyleBackColor = true;
-            this.DemandCurve_PressureRadio.CheckedChanged += new System.EventHandler(this.DemandCurve_PressureRadio_CheckedChanged);
+            this.BarometricPressureRadio.Location = new System.Drawing.Point(6, 48);
+            this.BarometricPressureRadio.Name = "BarometricPressureRadio";
+            this.BarometricPressureRadio.Size = new System.Drawing.Size(122, 17);
+            this.BarometricPressureRadio.TabIndex = 1;
+            this.BarometricPressureRadio.Text = "Barometric Pressure";
+            this.BarometricPressureRadio.UseVisualStyleBackColor = true;
+            this.BarometricPressureRadio.CheckedChanged += new System.EventHandler(this.BarometricPressureRadio_CheckedChanged);
             // 
-            // DemandCurve_ElevationRadio
+            // ElevationRadio
             // 
-            this.DemandCurve_ElevationRadio.Checked = true;
-            this.DemandCurve_ElevationRadio.Location = new System.Drawing.Point(6, 19);
-            this.DemandCurve_ElevationRadio.Name = "DemandCurve_ElevationRadio";
-            this.DemandCurve_ElevationRadio.Size = new System.Drawing.Size(122, 17);
-            this.DemandCurve_ElevationRadio.TabIndex = 0;
-            this.DemandCurve_ElevationRadio.TabStop = true;
-            this.DemandCurve_ElevationRadio.Text = "Elevation";
-            this.DemandCurve_ElevationRadio.UseVisualStyleBackColor = true;
-            this.DemandCurve_ElevationRadio.CheckedChanged += new System.EventHandler(this.DemandCurve_ElevationRadio_CheckedChanged);
+            this.ElevationRadio.Checked = true;
+            this.ElevationRadio.Location = new System.Drawing.Point(6, 19);
+            this.ElevationRadio.Name = "ElevationRadio";
+            this.ElevationRadio.Size = new System.Drawing.Size(122, 17);
+            this.ElevationRadio.TabIndex = 0;
+            this.ElevationRadio.TabStop = true;
+            this.ElevationRadio.Text = "Elevation";
+            this.ElevationRadio.UseVisualStyleBackColor = true;
+            this.ElevationRadio.CheckedChanged += new System.EventHandler(this.ElevationRadio_CheckedChanged);
             // 
             // DemandCurveChart
             // 
             this.DemandCurveChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea7.Name = "ChartArea1";
-            this.DemandCurveChart.ChartAreas.Add(chartArea7);
-            legend7.Name = "Legend1";
-            this.DemandCurveChart.Legends.Add(legend7);
+            chartArea1.Name = "ChartArea1";
+            this.DemandCurveChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.DemandCurveChart.Legends.Add(legend1);
             this.DemandCurveChart.Location = new System.Drawing.Point(9, 180);
             this.DemandCurveChart.Name = "DemandCurveChart";
-            series7.ChartArea = "ChartArea1";
-            series7.Legend = "Legend1";
-            series7.Name = "Series1";
-            this.DemandCurveChart.Series.Add(series7);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.DemandCurveChart.Series.Add(series1);
             this.DemandCurveChart.Size = new System.Drawing.Size(896, 428);
             this.DemandCurveChart.TabIndex = 12;
             this.DemandCurveChart.Text = "DemandCurveChart";
@@ -462,6 +464,14 @@
             this.DataFilename.Name = "DataFilename";
             this.DataFilename.Size = new System.Drawing.Size(538, 20);
             this.DataFilename.TabIndex = 16;
+            // 
+            // CalculatedValue
+            // 
+            this.CalculatedValue.Enabled = false;
+            this.CalculatedValue.Location = new System.Drawing.Point(125, 60);
+            this.CalculatedValue.Name = "CalculatedValue";
+            this.CalculatedValue.Size = new System.Drawing.Size(39, 20);
+            this.CalculatedValue.TabIndex = 3;
             // 
             // DemandCurveTabPage
             // 
@@ -500,7 +510,7 @@
         private System.Windows.Forms.Label DemandCurveWetBulbTemperatureLabel;
         private System.Windows.Forms.TextBox ElevationValue;
         private System.Windows.Forms.Label ElevationPressureUnits;
-        private System.Windows.Forms.Label DemandCurveElevationPressureLabel;
+        private System.Windows.Forms.Label ElevationPressureLabel;
         private System.Windows.Forms.Label WebBulbTemperatureUnits;
         private System.Windows.Forms.GroupBox InputPropertiesGroupBox;
         private System.Windows.Forms.GroupBox ThermalDesignConditionsGroupBox;
@@ -516,17 +526,18 @@
         private System.Windows.Forms.Label MinimumLabel;
         private System.Windows.Forms.NumericUpDown MaximumValue;
         private System.Windows.Forms.NumericUpDown MinimumValue;
-        private System.Windows.Forms.RadioButton DemandCurve_KavLRadio;
-        private System.Windows.Forms.RadioButton DemandCurve_ApproachRadio;
+        private System.Windows.Forms.RadioButton KavLRadio;
+        private System.Windows.Forms.RadioButton ApproachRadio;
         private System.Windows.Forms.DataVisualization.Charting.Chart DemandCurveChart;
         private System.Windows.Forms.GroupBox groupBoxPressureElevation;
-        private System.Windows.Forms.RadioButton DemandCurve_PressureRadio;
-        private System.Windows.Forms.RadioButton DemandCurve_ElevationRadio;
+        private System.Windows.Forms.RadioButton BarometricPressureRadio;
+        private System.Windows.Forms.RadioButton ElevationRadio;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.HelpProvider helpProvider1;
         private System.Windows.Forms.Label RangeUnits;
         private System.Windows.Forms.TextBox DataFilename;
         private System.Windows.Forms.TextBox UserApproachValue;
         private System.Windows.Forms.Label UserApproachLabel;
+        private System.Windows.Forms.TextBox CalculatedValue;
     }
 }

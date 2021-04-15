@@ -48,7 +48,6 @@
     <Compile Include="DemandCurve\DemandCurveCalculationData.cs" />
     <Compile Include="DemandCurve\DemandCurveData.cs" />
     <Compile Include="DemandCurve\DemandCurveFileData.cs" />
-    <Compile Include="DemandCurve\DemandCurveOutput.cs" />
     <Compile Include="DemandCurve\SeriesData.cs" />
     <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveDataMinimumMaximum.cs" />
     <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveCalculationData.cs" />

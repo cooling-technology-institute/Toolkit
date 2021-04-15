@@ -16,6 +16,8 @@ namespace CalculationLibrary
         public const double Tboil = 212.0;
         public const double Patm = 14.696;
 
+        public StringBuilder stringBuilder { get; set; }
+
         //---------------------------------------------------------------------
         // Data calculations IP
         //---------------------------------------------------------------------
@@ -191,6 +193,11 @@ namespace CalculationLibrary
                 WetBulbTemperature = wetBulbTemperature
             };
 
+            if(stringBuilder != null)
+            {
+                stringBuilder.AppendFormat("\nIsSI {0}, pressure {1}, dryBulbTemperature {2}, wetBulbTemperature {3}", isSI, pressure.ToString("F6"), dryBulbTemperature.ToString("F6"), wetBulbTemperature.ToString("F6"));
+            }
+
             CalculateProperties(data);
 
             return data.Enthalpy;
@@ -234,6 +241,10 @@ namespace CalculationLibrary
                     return (999);
                 }
                 KaV += .25 / (Hw - Ha);
+                if (stringBuilder != null)
+                {
+                    stringBuilder.AppendFormat("\nRange {0}, Tw {1}, Hw {2}, Hain {3}, KaV {4}", merkelData.Range.ToString("F6"), Tw.ToString("F6"), Hw.ToString("F6"), Hain.ToString("F6"), KaV.ToString("F6"));
+                }
             }
 
             merkelData.KaV_L = KaV * merkelData.Range;
@@ -382,6 +393,11 @@ namespace CalculationLibrary
 
             // Calculate dew point temperature
             data.DewPoint = CalculateDewPoint(data);
+
+            if (stringBuilder != null)
+            {
+                stringBuilder.AppendFormat("\nEnthalpy {0}, TDB {1}, HumidRatio {2}\n", data.Enthalpy.ToString("F6"), data.DryBulbTemperature.ToString("F6"), data.HumidityRatio.ToString("F6"));
+            }
 
             if ((data.HumidityRatio < 0.0) && (Math.Abs(data.HumidityRatio) < .000001))
             {

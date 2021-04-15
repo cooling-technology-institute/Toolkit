@@ -203,12 +203,14 @@ namespace CTIToolkit
             return true;
         }
 
-        public override void SaveDataFile() 
-        { 
+        public override bool SaveDataFile()
+        {
+            return true;
         }
-        
-        public override void SaveAsDataFile(string fileName) 
-        { 
+
+        public override bool SaveAsDataFile(string fileName)
+        {
+            return true;
         }
 
         public override void PrintPage(object sender, PrintPageEventArgs e)

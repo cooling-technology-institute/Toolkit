@@ -49,7 +49,6 @@
     <Compile Include="C1DataValue.cs" />
     <Compile Include="ColdWaterTemperatureDataValue.cs" />
     <Compile Include="DataValue.cs" />
-    <Compile Include="DemandCurve\DemandCurveOutputData.cs" />
     <Compile Include="DemandCurve\DemandCurveViewModel.cs" />
     <Compile Include="DemandCurve\DemandCurveInputData.cs" />
     <Compile Include="DryBulbTemperatureDataValue.cs" />

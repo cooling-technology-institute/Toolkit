@@ -170,12 +170,14 @@ namespace CTIToolkit
             return true;
         }
 
-        public override void SaveDataFile()
+        public override bool SaveDataFile()
         {
+            return true;
         }
 
-        public override void SaveAsDataFile(string fileName)
+        public override bool SaveAsDataFile(string fileName)
         {
+            return true;
         }
 
         public void MerkelCalculate_Click(object sender, EventArgs e)

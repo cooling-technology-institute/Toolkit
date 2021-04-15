@@ -136,14 +136,9 @@ namespace CTIToolkit
 
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
-                            if (tabControl1.SelectedIndex != 3)
+                            if (!calculatePrintUserControl.OpenNewDataFile(saveFileDialog.FileName))
                             {
-                                tabControl1.SelectedIndex = 3;
-                            }
-
-                            if (!MechanicalDraftPerformanceCurveUserControl.OpenNewDataFile(saveFileDialog.FileName))
-                            {
-                                MessageBox.Show(MechanicalDraftPerformanceCurveUserControl.ErrorMessage);
+                                MessageBox.Show(calculatePrintUserControl.ErrorMessage);
                             }
                         }
                     }
@@ -175,12 +170,8 @@ namespace CTIToolkit
                         {
                             if (!calculatePrintUserControl.OpenDataFile(openFileDialog.FileName))
                             {
-                                //MessageBox.Show(calculatePrintUserControl.ErrorMessage);
+                                MessageBox.Show(calculatePrintUserControl.ErrorMessage);
                             }
-                            //                    if (!MechanicalDraftPerformanceCurveSplitTabPage.OpenDataFile(openFileDialog.FileName, out errorMessage))
-                            //                  {
-                            //                    MessageBox.Show(errorMessage);
-                            //              }
                         }
                     }
                     break;
@@ -195,10 +186,10 @@ namespace CTIToolkit
                 if (control is CalculatePrintUserControl)
                 {
                     CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
-                    //if (!calculatePrintUserControl.SaveDataFile())
-                    //{
-                    //    MessageBox.Show(calculatePrintUserControl.ErrorMessage);
-                    //}
+                    if (!calculatePrintUserControl.SaveDataFile())
+                    {
+                        MessageBox.Show(calculatePrintUserControl.ErrorMessage);
+                    }
                 }
             }
         }
@@ -224,9 +215,9 @@ namespace CTIToolkit
 
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
-                            if (!MechanicalDraftPerformanceCurveUserControl.OpenDataFile(saveFileDialog.FileName))
+                            if (!calculatePrintUserControl.SaveAsDataFile(saveFileDialog.FileName))
                             {
-                                MessageBox.Show(MechanicalDraftPerformanceCurveUserControl.ErrorMessage);
+                                MessageBox.Show(calculatePrintUserControl.ErrorMessage);
                             }
                         }
                     }

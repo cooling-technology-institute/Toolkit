@@ -225,7 +225,7 @@ namespace CTIToolkit
             return returnValue;
         }
 
-        public override void SaveDataFile()
+        public override bool SaveDataFile()
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
@@ -249,33 +249,24 @@ namespace CTIToolkit
                 ErrorMessage = stringBuilder.ToString();
             }
 
-            //return returnValue;
+            return returnValue;
         }
 
-        //public bool SaveAsDataFile(string fileName, out string errorMessage)
-        //{
-        //    StringBuilder stringBuilder = new StringBuilder();
-        //    bool returnValue = true;
-        //    errorMessage = string.Empty;
-            
-        //    if (!MechanicalDraftPerformanceCurveViewModel.SaveAsDataFile(fileName, out errorMessage))
-        //    {
-        //        stringBuilder.AppendLine(errorMessage);
-        //        returnValue = false;
-        //        errorMessage = string.Empty;
-        //    }
+        public override bool SaveAsDataFile(string fileName)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            bool returnValue = true;
 
-        //    if (!Setup(out errorMessage))
-        //    {
-        //        stringBuilder.AppendLine(errorMessage);
-        //        returnValue = false;
-        //        errorMessage = string.Empty;
-        //    }
+            if (!MechanicalDraftPerformanceCurveViewModel.SaveAsDataFile(fileName))
+            {
+                stringBuilder.AppendLine(MechanicalDraftPerformanceCurveViewModel.ErrorMessage);
+                returnValue = false;
+            }
 
-        //    errorMessage = stringBuilder.ToString();
+            ErrorMessage = stringBuilder.ToString();
 
-        //    return returnValue;
-        //}
+            return returnValue;
+        }
 
         private bool SetDisplayedValues()
         {
