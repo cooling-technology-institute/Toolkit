@@ -17,7 +17,7 @@ namespace ViewModels
         public string InputValue { get; set; }
         public string Format { get; set; }
         public string ToolTip { get; set; }
-        public bool IsInternationalSystemOfUnits_SI_ { get; set; }
+        public bool IsInternationalSystemOfUnits_SI { get; set; }
         public bool IsDemo { get; set; }
         public bool IsZeroValid { get; set; }
 
@@ -30,14 +30,14 @@ namespace ViewModels
             IsZeroValid = false;
             IsValid = false;
             IsDemo = true;
-            IsInternationalSystemOfUnits_SI_ = false;
+            IsInternationalSystemOfUnits_SI = false;
             InputMessage = string.Empty;
             InputValue = string.Empty;
             Format = string.Empty;
             ToolTip = string.Empty;
         }
 
-        public abstract void ConvertValue(bool isInternationalSystemOfUnits_IS_);
+        public abstract void ConvertValue(bool isInternationalSystemOfUnits_SI);
 
         public bool UpdateValue(string input, out string errorMessage)
         {

@@ -27,10 +27,10 @@ namespace ViewModels
         public bool IsInternationalSystemOfUnits_SI { get; set; }
         public string ErrorMessage { get; set; }
 
-        public MechanicalDraftPerformanceCurveViewModel(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        public MechanicalDraftPerformanceCurveViewModel(bool isDemo, bool isInternationalSystemOfUnits_SI)
         {
             IsDemo = isDemo;
-            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
             ErrorMessage = string.Empty;
             IsDesignDataValid = false;
 
@@ -38,8 +38,6 @@ namespace ViewModels
             TestPoints = new List<TowerTestPoint>();
 
             OutputDataViewModel = new MechanicalDraftPerformanceCurveOutputDataViewModel(IsInternationalSystemOfUnits_SI);
-
-            BuildFilename();
 
             MechanicalDraftPerformanceCurveFileData = new MechanicalDraftPerformanceCurveFileData(IsInternationalSystemOfUnits_SI);
         }
@@ -66,22 +64,6 @@ namespace ViewModels
                 isChange |= towerTestPoint.ConvertValues(isIS);
             }
             return isChange;
-        }
-
-        public void BuildFilename()
-        {
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
-            int i = 1;
-
-            do
-            {
-                DataFileName = Path.Combine(path, string.Format("MechanicalDraftPerformanceCurve{0}.mdpc", i++));
-                if(File.Exists(DataFileName))
-                {
-                    DataFileName = string.Empty;
-                }
-
-            } while (string.IsNullOrEmpty(DataFileName));
         }
 
         public bool OpenDataFile(string fileName)

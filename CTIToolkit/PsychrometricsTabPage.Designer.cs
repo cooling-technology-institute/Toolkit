@@ -47,8 +47,8 @@
             this.RelativeHumidity_Value = new System.Windows.Forms.TextBox();
             this.ElevationLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.PsychrometricsPressureRadio = new System.Windows.Forms.RadioButton();
-            this.PsychrometricsElevationRadio = new System.Windows.Forms.RadioButton();
+            this.BarometricPressureRadio = new System.Windows.Forms.RadioButton();
+            this.ElevationRadio = new System.Windows.Forms.RadioButton();
             this.ElevationUnits = new System.Windows.Forms.Label();
             this.DryBulbTemperatureUnits = new System.Windows.Forms.Label();
             this.WetBulbTemperatureUnits = new System.Windows.Forms.Label();
@@ -60,6 +60,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
+            this.DataFilename = new System.Windows.Forms.TextBox();
+            this.DataFileLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Psychrometrics_GridView)).BeginInit();
             this.PsychrometricPropertiesGroupBox.SuspendLayout();
             this.InputPropertiesGroupBox.SuspendLayout();
@@ -75,10 +77,10 @@
             this.Psychrometrics_GridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.Psychrometrics_GridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Psychrometrics_GridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Psychrometrics_GridView.Location = new System.Drawing.Point(10, 317);
+            this.Psychrometrics_GridView.Location = new System.Drawing.Point(9, 360);
             this.Psychrometrics_GridView.Name = "Psychrometrics_GridView";
             this.Psychrometrics_GridView.ReadOnly = true;
-            this.Psychrometrics_GridView.Size = new System.Drawing.Size(742, 294);
+            this.Psychrometrics_GridView.Size = new System.Drawing.Size(756, 294);
             this.Psychrometrics_GridView.TabIndex = 13;
             // 
             // PsychrometricPropertiesGroupBox
@@ -86,9 +88,9 @@
             this.PsychrometricPropertiesGroupBox.Controls.Add(this.Psychrometrics_Enthalpy);
             this.PsychrometricPropertiesGroupBox.Controls.Add(this.Psychrometrics_DryBulbTemperature_RelativeHumidity);
             this.PsychrometricPropertiesGroupBox.Controls.Add(this.Psychrometrics_WetBulbTemperature_DryBulbTemperature);
-            this.PsychrometricPropertiesGroupBox.Location = new System.Drawing.Point(10, 155);
+            this.PsychrometricPropertiesGroupBox.Location = new System.Drawing.Point(10, 198);
             this.PsychrometricPropertiesGroupBox.Name = "PsychrometricPropertiesGroupBox";
-            this.PsychrometricPropertiesGroupBox.Size = new System.Drawing.Size(742, 145);
+            this.PsychrometricPropertiesGroupBox.Size = new System.Drawing.Size(755, 145);
             this.PsychrometricPropertiesGroupBox.TabIndex = 12;
             this.PsychrometricPropertiesGroupBox.TabStop = false;
             this.PsychrometricPropertiesGroupBox.Text = "Calculate the psychrometric properties";
@@ -130,7 +132,7 @@
             // 
             // PsychrometricsCalculate
             // 
-            this.PsychrometricsCalculate.Location = new System.Drawing.Point(662, 19);
+            this.PsychrometricsCalculate.Location = new System.Drawing.Point(677, 12);
             this.PsychrometricsCalculate.Name = "PsychrometricsCalculate";
             this.PsychrometricsCalculate.Size = new System.Drawing.Size(75, 23);
             this.PsychrometricsCalculate.TabIndex = 0;
@@ -152,7 +154,6 @@
             this.InputPropertiesGroupBox.Controls.Add(this.ElevationLabel);
             this.InputPropertiesGroupBox.Controls.Add(this.groupBox2);
             this.InputPropertiesGroupBox.Controls.Add(this.ElevationUnits);
-            this.InputPropertiesGroupBox.Controls.Add(this.PsychrometricsCalculate);
             this.InputPropertiesGroupBox.Controls.Add(this.DryBulbTemperatureUnits);
             this.InputPropertiesGroupBox.Controls.Add(this.WetBulbTemperatureUnits);
             this.InputPropertiesGroupBox.Controls.Add(this.Elevation_Value);
@@ -160,9 +161,9 @@
             this.InputPropertiesGroupBox.Controls.Add(this.WetBulbTemperature_Value);
             this.InputPropertiesGroupBox.Controls.Add(this.DryBulbTemperatureLabel);
             this.InputPropertiesGroupBox.Controls.Add(this.WetBulbTemperatureLabel);
-            this.InputPropertiesGroupBox.Location = new System.Drawing.Point(9, 10);
+            this.InputPropertiesGroupBox.Location = new System.Drawing.Point(10, 52);
             this.InputPropertiesGroupBox.Name = "InputPropertiesGroupBox";
-            this.InputPropertiesGroupBox.Size = new System.Drawing.Size(743, 130);
+            this.InputPropertiesGroupBox.Size = new System.Drawing.Size(755, 130);
             this.InputPropertiesGroupBox.TabIndex = 11;
             this.InputPropertiesGroupBox.TabStop = false;
             this.InputPropertiesGroupBox.Text = "Input Properties";
@@ -273,35 +274,35 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox2.Controls.Add(this.PsychrometricsPressureRadio);
-            this.groupBox2.Controls.Add(this.PsychrometricsElevationRadio);
+            this.groupBox2.Controls.Add(this.BarometricPressureRadio);
+            this.groupBox2.Controls.Add(this.ElevationRadio);
             this.groupBox2.Location = new System.Drawing.Point(341, 29);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(164, 79);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             // 
-            // PsychrometricsPressureRadio
+            // BarometricPressureRadio
             // 
-            this.PsychrometricsPressureRadio.Location = new System.Drawing.Point(17, 50);
-            this.PsychrometricsPressureRadio.Name = "PsychrometricsPressureRadio";
-            this.PsychrometricsPressureRadio.Size = new System.Drawing.Size(130, 17);
-            this.PsychrometricsPressureRadio.TabIndex = 1;
-            this.PsychrometricsPressureRadio.Text = "Barometric Pressure";
-            this.PsychrometricsPressureRadio.UseVisualStyleBackColor = true;
-            this.PsychrometricsPressureRadio.CheckedChanged += new System.EventHandler(this.PsychrometricsPressureRadio_CheckedChanged);
+            this.BarometricPressureRadio.Location = new System.Drawing.Point(17, 50);
+            this.BarometricPressureRadio.Name = "BarometricPressureRadio";
+            this.BarometricPressureRadio.Size = new System.Drawing.Size(130, 17);
+            this.BarometricPressureRadio.TabIndex = 1;
+            this.BarometricPressureRadio.Text = "Barometric Pressure";
+            this.BarometricPressureRadio.UseVisualStyleBackColor = true;
+            this.BarometricPressureRadio.CheckedChanged += new System.EventHandler(this.PsychrometricsPressureRadio_CheckedChanged);
             // 
-            // PsychrometricsElevationRadio
+            // ElevationRadio
             // 
-            this.PsychrometricsElevationRadio.Checked = true;
-            this.PsychrometricsElevationRadio.Location = new System.Drawing.Point(17, 21);
-            this.PsychrometricsElevationRadio.Name = "PsychrometricsElevationRadio";
-            this.PsychrometricsElevationRadio.Size = new System.Drawing.Size(130, 17);
-            this.PsychrometricsElevationRadio.TabIndex = 0;
-            this.PsychrometricsElevationRadio.TabStop = true;
-            this.PsychrometricsElevationRadio.Text = "Elevation";
-            this.PsychrometricsElevationRadio.UseVisualStyleBackColor = true;
-            this.PsychrometricsElevationRadio.CheckedChanged += new System.EventHandler(this.PyschmetricsElevationRadio_CheckedChanged);
+            this.ElevationRadio.Checked = true;
+            this.ElevationRadio.Location = new System.Drawing.Point(17, 21);
+            this.ElevationRadio.Name = "ElevationRadio";
+            this.ElevationRadio.Size = new System.Drawing.Size(130, 17);
+            this.ElevationRadio.TabIndex = 0;
+            this.ElevationRadio.TabStop = true;
+            this.ElevationRadio.Text = "Elevation";
+            this.ElevationRadio.UseVisualStyleBackColor = true;
+            this.ElevationRadio.CheckedChanged += new System.EventHandler(this.PyschmetricsElevationRadio_CheckedChanged);
             // 
             // ElevationUnits
             // 
@@ -383,13 +384,33 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // DataFilename
+            // 
+            this.DataFilename.Location = new System.Drawing.Point(68, 15);
+            this.DataFilename.Name = "DataFilename";
+            this.DataFilename.ReadOnly = true;
+            this.DataFilename.Size = new System.Drawing.Size(541, 20);
+            this.DataFilename.TabIndex = 26;
+            // 
+            // DataFileLabel
+            // 
+            this.DataFileLabel.AutoSize = true;
+            this.DataFileLabel.Location = new System.Drawing.Point(7, 17);
+            this.DataFileLabel.Name = "DataFileLabel";
+            this.DataFileLabel.Size = new System.Drawing.Size(55, 13);
+            this.DataFileLabel.TabIndex = 25;
+            this.DataFileLabel.Text = "Data  File:";
+            // 
             // PsychrometricsTabPage
             // 
+            this.Controls.Add(this.DataFilename);
+            this.Controls.Add(this.DataFileLabel);
             this.Controls.Add(this.Psychrometrics_GridView);
             this.Controls.Add(this.PsychrometricPropertiesGroupBox);
             this.Controls.Add(this.InputPropertiesGroupBox);
+            this.Controls.Add(this.PsychrometricsCalculate);
             this.Name = "PsychrometricsTabPage";
-            this.Size = new System.Drawing.Size(767, 622);
+            this.Size = new System.Drawing.Size(781, 764);
             ((System.ComponentModel.ISupportInitialize)(this.Psychrometrics_GridView)).EndInit();
             this.PsychrometricPropertiesGroupBox.ResumeLayout(false);
             this.PsychrometricPropertiesGroupBox.PerformLayout();
@@ -398,6 +419,7 @@
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -411,8 +433,8 @@
         private System.Windows.Forms.GroupBox InputPropertiesGroupBox;
         private System.Windows.Forms.Label ElevationLabel;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton PsychrometricsPressureRadio;
-        private System.Windows.Forms.RadioButton PsychrometricsElevationRadio;
+        private System.Windows.Forms.RadioButton BarometricPressureRadio;
+        private System.Windows.Forms.RadioButton ElevationRadio;
         private System.Windows.Forms.Label ElevationUnits;
         private System.Windows.Forms.Label DryBulbTemperatureUnits;
         private System.Windows.Forms.Label WetBulbTemperatureUnits;
@@ -433,5 +455,7 @@
         private System.Windows.Forms.TextBox EnthalpyValue;
         private System.Windows.Forms.Label EnthalpyLabel;
         private System.Windows.Forms.Label EnthalpyUnits;
+        private System.Windows.Forms.TextBox DataFilename;
+        private System.Windows.Forms.Label DataFileLabel;
     }
 }

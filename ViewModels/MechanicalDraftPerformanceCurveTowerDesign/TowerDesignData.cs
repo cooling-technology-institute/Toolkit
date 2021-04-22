@@ -51,10 +51,10 @@ namespace ViewModels
         private bool IsInternationalSystemOfUnits_SI { get; set; }
         public string ErrorMessage { get; set; }
 
-        public TowerDesignData(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        public TowerDesignData(bool isDemo, bool isInternationalSystemOfUnits_SI)
         {
             IsDemo = isDemo;
-            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
             ErrorMessage = string.Empty;
 
             OwnerNameValue = string.Empty;

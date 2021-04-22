@@ -17,19 +17,19 @@ namespace ViewModels
         public const double EnthalpyMaximum_InternationalSystemOfUnits_IS_ = 6030;
         public const string EnthalpyToolTipFormat = "Enthalpy, a thermodynamic quantity equivalent to the total heat content of a system.\nValue should be between {0} and {1}.";
 
-        public EnthalpyDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        public EnthalpyDataValue(bool isDemo, bool isInternationalSystemOfUnits_SI)
         {
             IsDemo = isDemo;
             InputMessage = "Enthalpy";
             Format = "F4";
-            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            SetDefaultMinMax(isInternationalSystemOfUnits_SI);
             Current = Default;
-            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
+            SetInputAndTooltip(isInternationalSystemOfUnits_SI);
         }
 
-        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_IS_)
+        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_SI)
         {
-            if (isInternationalSystemOfUnits_IS_)
+            if (isInternationalSystemOfUnits_SI)
             {
                 Default = EnthalpyDefault_InternationalSystemOfUnits_IS_;
                 Minimum = EnthalpyMinimum_InternationalSystemOfUnits_IS_;
@@ -43,20 +43,20 @@ namespace ViewModels
             }
         }
 
-        public void SetInputAndTooltip(bool isInternationalSystemOfUnits_IS_)
+        public void SetInputAndTooltip(bool isInternationalSystemOfUnits_SI)
         {
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(EnthalpyToolTipFormat, Minimum, Maximum);
-            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
         }
 
-        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_)
+        public override void ConvertValue(bool isInternationalSystemOfUnits_SI)
         {
-            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            SetDefaultMinMax(isInternationalSystemOfUnits_SI);
 
-            if (IsInternationalSystemOfUnits_SI_ != isInternationalSystemOfUnits_IS_)
+            if (IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_SI)
             {
-                if (isInternationalSystemOfUnits_IS_)
+                if (isInternationalSystemOfUnits_SI)
                 {
                     // convert to United States Customary Units (IP)
                 }
@@ -65,7 +65,7 @@ namespace ViewModels
                     // convert to InternationalSystemOfUnits_IS
                 }
             }
-            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
+            SetInputAndTooltip(isInternationalSystemOfUnits_SI);
         }
     }
 }

@@ -2,8 +2,11 @@
 
 using CalculationLibrary;
 using Models;
+using Newtonsoft.Json;
 using System;
 using System.Data;
+using System.IO;
+using System.Text;
 
 namespace ViewModels
 {
@@ -13,9 +16,11 @@ namespace ViewModels
         private PsychrometricsOutputData PsychrometricsOutputData { get; set; }
         private PsychrometricsData PsychrometricsData { get; set; }
         private PsychrometricsCalculationLibrary PsychrometricsCalculationLibrary { get; set; }
-        private bool IsInternationalSystemOfUnits_SI_ { get; set; }
+        private PsychrometricsDataFile PsychrometricsDataFile { get; set; }
+        public bool IsInternationalSystemOfUnits_SI { get; set; }
         private bool IsDemo { get; set; }
-        public bool IsElevation { get; set; }
+        public string DataFileName { get; set; }
+        public string ErrorMessage { get; set; }
 
         public string EnthalpyDataValueInputMessage
         {
@@ -190,32 +195,49 @@ namespace ViewModels
             }
         }
 
-
-        public PsychrometricsViewModel(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        public void UpdateIsElevationValue(bool value)
         {
-            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+            PsychrometricsInputData.IsElevation = value;
+        }
+
+        public bool IsElevation()
+        {
+            return PsychrometricsInputData.IsElevation;
+        }
+
+        public string DataFilenameInputValue
+        {
+            get
+            {
+                return Path.GetFileName(DataFileName);
+            }
+        }
+
+        public PsychrometricsViewModel(bool isDemo, bool isInternationalSystemOfUnits_SI)
+        {
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
             IsDemo = isDemo;
-            PsychrometricsInputData = new PsychrometricsInputData(IsDemo, IsInternationalSystemOfUnits_SI_);
-            PsychrometricsOutputData = new PsychrometricsOutputData(IsInternationalSystemOfUnits_SI_);
+            ErrorMessage = string.Empty;
+            DataFileName = string.Empty;
+
+            PsychrometricsInputData = new PsychrometricsInputData(IsDemo, IsInternationalSystemOfUnits_SI);
+            PsychrometricsOutputData = new PsychrometricsOutputData(IsInternationalSystemOfUnits_SI);
             PsychrometricsCalculationLibrary = new PsychrometricsCalculationLibrary();
             PsychrometricsData = new PsychrometricsData();
         }
 
-        public bool ConvertValues(bool isInternationalSystemOfUnits_IS_)
+        public void SwitchUnits(bool isIS)
         {
-            if(IsInternationalSystemOfUnits_SI_ != isInternationalSystemOfUnits_IS_)
-            {
-                IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
-                return PsychrometricsInputData.ConvertValues(IsInternationalSystemOfUnits_SI_);
-            }
-            return false;
+            IsInternationalSystemOfUnits_SI = isIS;
+            PsychrometricsInputData.ConvertValues(IsInternationalSystemOfUnits_SI);
+            PsychrometricsOutputData.SwitchUnits(IsInternationalSystemOfUnits_SI);
         }
 
-        public bool CalculatePsychrometrics(bool isElevation, out string errorMessage)
+        public bool CalculatePsychrometrics(out string errorMessage)
         {
             try
             {
-                if (!FillAndValidate(isElevation, out errorMessage))
+                if (!FillAndValidate(out errorMessage))
                 {
                     return false;
                 }
@@ -236,9 +258,9 @@ namespace ViewModels
             }
         }
 
-        public bool FillAndValidate(bool isElevation, out string errorMessage)
+        public bool FillAndValidate( out string errorMessage)
         {
-            return PsychrometricsInputData.FillAndValidate(PsychrometricsData, isElevation, out errorMessage);
+            return PsychrometricsInputData.FillAndValidate(PsychrometricsData, out errorMessage);
         }
 
         public DataTable GetDataTable()
@@ -259,11 +281,176 @@ namespace ViewModels
                     break;
 
                 default:
-                    errorMessage = "Invalid psychrometrics calculation type";
+                    errorMessage = "Invalid psychrometrics calculation type.";
                     return false;
             }
 
             return true;
+        }
+
+        public PsychrometricsCalculationType CalculationType()
+        {
+            return PsychrometricsInputData.CalculationType;
+        }
+
+        public bool OpenDataFile(string fileName)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            bool returnValue = true;
+
+            DataFileName = fileName;
+            ErrorMessage = string.Empty;
+
+            try
+            {
+                PsychrometricsDataFile = JsonConvert.DeserializeObject<PsychrometricsDataFile>(File.ReadAllText(DataFileName));
+            }
+            catch (Exception e)
+            {
+                stringBuilder.AppendFormat("Failure to read file: {0}. Exception: {1}\n", Path.GetFileName(DataFileName), e.ToString());
+                returnValue = false;
+            }
+
+            if (PsychrometricsDataFile != null)
+            {
+                if (PsychrometricsDataFile.IsInternationalSystemOfUnits_SI != IsInternationalSystemOfUnits_SI)
+                {
+                    //ToolkitMain,UpdateU
+                    SwitchUnits(PsychrometricsDataFile.IsInternationalSystemOfUnits_SI);
+                }
+
+                if (!LoadData())
+                {
+                    stringBuilder.AppendLine(ErrorMessage);
+                    returnValue = false;
+                    ErrorMessage = string.Empty;
+                }
+
+            }
+            else
+            {
+                stringBuilder.AppendLine("Unable to load file. File contains invalid data");
+            }
+
+            if (!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
+
+            return returnValue;
+        }
+
+        public bool OpenNewDataFile(string fileName)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            bool returnValue = true;
+            ErrorMessage = string.Empty;
+
+            DataFileName = fileName;
+            PsychrometricsDataFile = new PsychrometricsDataFile(IsInternationalSystemOfUnits_SI);
+
+            if (PsychrometricsDataFile != null)
+            {
+                PsychrometricsInputData.SetDefaults(PsychrometricsDataFile);
+
+                if (!LoadData())
+                {
+                    stringBuilder.AppendLine(ErrorMessage);
+                    returnValue = false;
+                    ErrorMessage = string.Empty;
+                }
+            }
+            else
+            {
+                stringBuilder.AppendLine("Unable to create new file.");
+                returnValue = false;
+            }
+
+            if (!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
+
+            return returnValue;
+        }
+
+        private bool SaveDataToFile()
+        {
+            bool returnValue = true;
+
+            PsychrometricsDataFile = new PsychrometricsDataFile(IsInternationalSystemOfUnits_SI);
+
+            if (PsychrometricsDataFile != null)
+            {
+                if (FillFileData())
+                {
+                    try
+                    {
+                        File.WriteAllText(DataFileName, JsonConvert.SerializeObject(PsychrometricsDataFile, Formatting.Indented));
+                    }
+                    catch (Exception e)
+                    {
+                        ErrorMessage = string.Format("Error saving data to file. Exception: {0}", e.Message);
+                    }
+                }
+            }
+            else
+            {
+                ErrorMessage = "Unable to save data to file.";
+                returnValue = false;
+            }
+            return returnValue;
+        }
+
+        public bool SaveDataFile()
+        {
+            return SaveDataToFile();
+        }
+
+        public bool SaveAsDataFile(string fileName)
+        {
+            DataFileName = fileName;
+            return SaveDataToFile();
+        }
+
+        public bool LoadData()
+        {
+            bool returnValue = true;
+            StringBuilder stringBuilder = new StringBuilder();
+
+            if (PsychrometricsDataFile != null)
+            {
+                if(!PsychrometricsInputData.LoadData(PsychrometricsDataFile))
+                {
+                    returnValue = false;
+                    stringBuilder.AppendLine(PsychrometricsInputData.ErrorMessage);
+                }
+            }
+
+            if (!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
+            return returnValue;
+        }
+
+        public bool FillFileData()
+        {
+            bool returnValue = true;
+            StringBuilder stringBuilder = new StringBuilder();
+
+            if (!PsychrometricsInputData.FillFileData(PsychrometricsDataFile))
+            {
+                returnValue = false;
+                stringBuilder.AppendLine(PsychrometricsInputData.ErrorMessage);
+            }
+
+            if (!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
+
+            return returnValue;
         }
     }
 }

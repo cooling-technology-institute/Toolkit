@@ -17,20 +17,20 @@ namespace ViewModels
 
         public const string RangeToolTipFormat = "Range.\nValue should be between {0} and {1}.";
 
-        public RangeDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        public RangeDataValue(bool isDemo, bool isInternationalSystemOfUnits_SI)
         {
             IsDemo = isDemo;
             InputMessage = "Range";
             Format = "F2";
             IsZeroValid = true;
-            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            SetDefaultMinMax(isInternationalSystemOfUnits_SI);
             Current = Default;
-            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
+            SetInputAndTooltip(isInternationalSystemOfUnits_SI);
         }
 
-        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_IS_)
+        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_SI)
         {
-            if (isInternationalSystemOfUnits_IS_)
+            if (isInternationalSystemOfUnits_SI)
             {
                 Default = RangeDefault_InternationalSystemOfUnits_IS_;
                 Minimum = RangeMinimum_InternationalSystemOfUnits_IS_;
@@ -44,20 +44,20 @@ namespace ViewModels
             }
         }
 
-        public void SetInputAndTooltip(bool isInternationalSystemOfUnits_IS_)
+        public void SetInputAndTooltip(bool isInternationalSystemOfUnits_SI)
         {
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(RangeToolTipFormat, Minimum, Maximum);
-            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
         }
 
-        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_)
+        public override void ConvertValue(bool isInternationalSystemOfUnits_SI)
         {
-            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            SetDefaultMinMax(isInternationalSystemOfUnits_SI);
 
-            if (IsInternationalSystemOfUnits_SI_ != isInternationalSystemOfUnits_IS_)
+            if (IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_SI)
             {
-                if (isInternationalSystemOfUnits_IS_)
+                if (isInternationalSystemOfUnits_SI)
                 {
                     // convert to InternationalSystemOfUnits_IS
                     Current /= 1.8;
@@ -69,7 +69,7 @@ namespace ViewModels
                 }
             }
 
-            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
+            SetInputAndTooltip(isInternationalSystemOfUnits_SI);
         }
     }
 }

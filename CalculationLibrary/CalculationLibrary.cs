@@ -16,6 +16,8 @@ namespace CalculationLibrary
         public const double Tboil = 212.0;
         public const double Patm = 14.696;
 
+        public string ErrorMessage { get; set; }
+
         public StringBuilder stringBuilder { get; set; }
 
         //---------------------------------------------------------------------
@@ -203,53 +205,75 @@ namespace CalculationLibrary
             return data.Enthalpy;
         }
 
+        private void ConvertMerkelValues(MerkelCalculationData data)
+        {
+            if (data.IsInternationalSystemOfUnits_SI)
+            {
+                data.HotWaterTemperature = UnitConverter.ConvertCelsiusToFahrenheit(data.HotWaterTemperature);
+                data.ColdWaterTemperature = UnitConverter.ConvertCelsiusToFahrenheit(data.ColdWaterTemperature);
+                data.WetBulbTemperature = UnitConverter.ConvertCelsiusToFahrenheit(data.WetBulbTemperature);
+                data.Elevation = UnitConverter.ConvertMetersToFeet(data.Elevation);
+            }
+
+            data.Range = data.HotWaterTemperature - data.ColdWaterTemperature;
+            data.Approach = data.ColdWaterTemperature - data.WetBulbTemperature;
+            data.IsInternationalSystemOfUnits_SI = false;
+        }
 
         // double Twb - merkelData.WetBulbTemperature
         // double Ran - merkelData.Range
         // double Apr - merkelData.Approach
         // double LG - merkelData.WaterAirRatio
         // double Elev - merkelData.Elevation
-        public double CalculateMerkel(MerkelData merkelData)
+        public bool CalculateMerkel(MerkelCalculationData merkelCalculationData)
         {
-            short i;
+            ErrorMessage = string.Empty;
             double KaV, Ha, Haex, Hain, Hw, Tcold, Thot, Tw;
             double[] X = new double[4] { 0.9, 0.6, 0.4, 0.1 };
             double pressure = 14.696;
 
-            if (merkelData.Elevation != 0)
+            ConvertMerkelValues(merkelCalculationData);
+
+            if (merkelCalculationData.Elevation != 0)
             {
-                pressure = StandardAtmosphericPressure(merkelData.Elevation);
+                pressure = StandardAtmosphericPressure(merkelCalculationData.Elevation);
             }
 
-            Hain = CalculateEnthalpy(false, pressure, merkelData.WetBulbTemperature, merkelData.WetBulbTemperature);
-            Haex = Hain + merkelData.Range * merkelData.LiquidToGasRatio;
-            Tcold = merkelData.WetBulbTemperature + merkelData.Approach;
-            Thot = Tcold + merkelData.Range;
+            if (stringBuilder != null)
+            {
+                stringBuilder.AppendFormat("\nWetBulbTemperature {0}, Approach {1}, LiquidToGasRatio {2}", merkelCalculationData.WetBulbTemperature.ToString("F6"), merkelCalculationData.Approach.ToString("F6"), merkelCalculationData.LiquidToGasRatio.ToString("F6"));
+            }
+
+            Hain = CalculateEnthalpy(false, pressure, merkelCalculationData.WetBulbTemperature, merkelCalculationData.WetBulbTemperature);
+            Haex = Hain + merkelCalculationData.Range * merkelCalculationData.LiquidToGasRatio;
+            Tcold = merkelCalculationData.WetBulbTemperature + merkelCalculationData.Approach;
+            Thot = Tcold + merkelCalculationData.Range;
             if (Thot >= Tboil)
             {
-                return (999);
+                ErrorMessage = "The calculated Hot water temperature value is greater than or equal to the boiling point.";
+                return false;
             }
 
             KaV = 0;
-            for (i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
-                Tw = Tcold + X[i] * merkelData.Range;
+                Tw = Tcold + X[i] * merkelCalculationData.Range;
                 Hw = CalculateEnthalpy(false, pressure, Tw, Tw);
                 Ha = Hain + X[i] * (Haex - Hain);
                 if (Hw <= Ha)
                 {
-                    return (999);
+                    ErrorMessage = "The calculated Hw value is less than or equal to the Ha value.";
+                    return false;
                 }
                 KaV += .25 / (Hw - Ha);
                 if (stringBuilder != null)
                 {
-                    stringBuilder.AppendFormat("\nRange {0}, Tw {1}, Hw {2}, Hain {3}, KaV {4}", merkelData.Range.ToString("F6"), Tw.ToString("F6"), Hw.ToString("F6"), Hain.ToString("F6"), KaV.ToString("F6"));
+                    stringBuilder.AppendFormat("\nRange {0}, Tw {1}, Hw {2}, Hain {3}, KaV {4}", merkelCalculationData.Range.ToString("F6"), Tw.ToString("F6"), Hw.ToString("F6"), Hain.ToString("F6"), KaV.ToString("F6"));
                 }
             }
 
-            merkelData.KaV_L = KaV * merkelData.Range;
-
-            return merkelData.KaV_L;
+            merkelCalculationData.KaV_L = KaV * merkelCalculationData.Range;
+            return true;
         }
 
         public double StandardAtmosphericPressure(double Z)

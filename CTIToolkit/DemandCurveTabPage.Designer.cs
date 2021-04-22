@@ -32,6 +32,38 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.1D, 1.165443D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.15D, 1.188416D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.2D, 1.212499D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.25D, 1.237781D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.3D, 1.264365D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.35D, 1.292365D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint7 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.4D, 1.321911D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint8 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.45D, 1.353147D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint9 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.5D, 1.386241D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint10 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.55D, 1.42138D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint11 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.6D, 1.458783D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint12 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.65D, 1.498701D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint13 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.7D, 1.541424D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint14 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.75D, 1.587293D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint15 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.8D, 1.63671D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint16 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.85D, 1.690148D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint17 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.9D, 1.748178D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint18 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.95D, 1.811486D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint19 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1D, 1.880914D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint20 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1.05D, 1.9575D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint21 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1.1D, 2.042546D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint22 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1.15D, 2.13771D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint23 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1.2D, 2.245144D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint24 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1.25D, 2.367697D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint25 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1.3D, 2.509246D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint26 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1.35D, 2.675221D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint27 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1.4D, 2.873533D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint28 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1.45D, 3.11627D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint29 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1.5D, 3.423102D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint30 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1.55D, 3.828897D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint31 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1.6D, 4.403552D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint32 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1.6352D, 4.996141D);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.DemandCurveCalculate = new System.Windows.Forms.Button();
             this.DemandCurveDataFileLabel = new System.Windows.Forms.Label();
@@ -39,13 +71,14 @@
             this.RangeValue = new System.Windows.Forms.TextBox();
             this.WetBulbTemperatureValue = new System.Windows.Forms.TextBox();
             this.DemandCurveRangeUnits = new System.Windows.Forms.Label();
-            this.DemandCurveWetBulbTemperatureLabel = new System.Windows.Forms.Label();
+            this.WetBulbTemperatureLabel = new System.Windows.Forms.Label();
             this.ElevationValue = new System.Windows.Forms.TextBox();
             this.ElevationPressureUnits = new System.Windows.Forms.Label();
             this.ElevationPressureLabel = new System.Windows.Forms.Label();
             this.WebBulbTemperatureUnits = new System.Windows.Forms.Label();
             this.InputPropertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.DesignPointGroupBox = new System.Windows.Forms.GroupBox();
+            this.CalculatedValue = new System.Windows.Forms.TextBox();
             this.KavLRadio = new System.Windows.Forms.RadioButton();
             this.LiquidToGasRatioValue = new System.Windows.Forms.TextBox();
             this.ApproachRadio = new System.Windows.Forms.RadioButton();
@@ -70,7 +103,6 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.DataFilename = new System.Windows.Forms.TextBox();
-            this.CalculatedValue = new System.Windows.Forms.TextBox();
             this.InputPropertiesGroupBox.SuspendLayout();
             this.DesignPointGroupBox.SuspendLayout();
             this.TowerOrFillCharacteristicsGroupBox.SuspendLayout();
@@ -148,12 +180,12 @@
             // 
             // DemandCurveWetBulbTemperatureLabel
             // 
-            this.DemandCurveWetBulbTemperatureLabel.Location = new System.Drawing.Point(9, 25);
-            this.DemandCurveWetBulbTemperatureLabel.Name = "DemandCurveWetBulbTemperatureLabel";
-            this.DemandCurveWetBulbTemperatureLabel.Size = new System.Drawing.Size(119, 13);
-            this.DemandCurveWetBulbTemperatureLabel.TabIndex = 11;
-            this.DemandCurveWetBulbTemperatureLabel.Text = "Wet Bulb Temperature:";
-            this.DemandCurveWetBulbTemperatureLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.WetBulbTemperatureLabel.Location = new System.Drawing.Point(9, 25);
+            this.WetBulbTemperatureLabel.Name = "DemandCurveWetBulbTemperatureLabel";
+            this.WetBulbTemperatureLabel.Size = new System.Drawing.Size(119, 13);
+            this.WetBulbTemperatureLabel.TabIndex = 11;
+            this.WetBulbTemperatureLabel.Text = "Wet Bulb Temperature:";
+            this.WetBulbTemperatureLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ElevationValue
             // 
@@ -217,6 +249,14 @@
             this.DesignPointGroupBox.TabIndex = 22;
             this.DesignPointGroupBox.TabStop = false;
             this.DesignPointGroupBox.Text = "Design Point";
+            // 
+            // CalculatedValue
+            // 
+            this.CalculatedValue.Enabled = false;
+            this.CalculatedValue.Location = new System.Drawing.Point(125, 60);
+            this.CalculatedValue.Name = "CalculatedValue";
+            this.CalculatedValue.Size = new System.Drawing.Size(39, 20);
+            this.CalculatedValue.TabIndex = 3;
             // 
             // KavLRadio
             // 
@@ -376,7 +416,7 @@
             // 
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.RangeUnits);
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.groupBoxPressureElevation);
-            this.ThermalDesignConditionsGroupBox.Controls.Add(this.DemandCurveWetBulbTemperatureLabel);
+            this.ThermalDesignConditionsGroupBox.Controls.Add(this.WetBulbTemperatureLabel);
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.RangeLabel);
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.RangeValue);
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.WebBulbTemperatureUnits);
@@ -439,17 +479,65 @@
             this.DemandCurveChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea1.AxisX.IsLogarithmic = true;
+            chartArea1.AxisX.MajorGrid.Enabled = false;
+            chartArea1.AxisX.MajorGrid.Interval = 0D;
+            chartArea1.AxisX.MajorTickMark.Enabled = false;
+            chartArea1.AxisX.MajorTickMark.Interval = 0D;
+            chartArea1.AxisX.Maximum = 5D;
+            chartArea1.AxisX.Minimum = 0.1D;
+            chartArea1.AxisX.MinorGrid.Enabled = true;
+            chartArea1.AxisX.MinorGrid.Interval = 0.25D;
+            chartArea1.AxisX.MinorTickMark.Enabled = true;
+            chartArea1.AxisX.MinorTickMark.Interval = 0.25D;
+            chartArea1.AxisY.IsLogarithmic = true;
+            chartArea1.AxisY.Maximum = 5D;
+            chartArea1.AxisY.Minimum = 0.1D;
             chartArea1.Name = "ChartArea1";
             this.DemandCurveChart.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.DemandCurveChart.Legends.Add(legend1);
-            this.DemandCurveChart.Location = new System.Drawing.Point(9, 180);
+            this.DemandCurveChart.Location = new System.Drawing.Point(9, 181);
             this.DemandCurveChart.Name = "DemandCurveChart";
             series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
+            series1.MarkerBorderColor = System.Drawing.Color.White;
             series1.Name = "Series1";
+            series1.Points.Add(dataPoint1);
+            series1.Points.Add(dataPoint2);
+            series1.Points.Add(dataPoint3);
+            series1.Points.Add(dataPoint4);
+            series1.Points.Add(dataPoint5);
+            series1.Points.Add(dataPoint6);
+            series1.Points.Add(dataPoint7);
+            series1.Points.Add(dataPoint8);
+            series1.Points.Add(dataPoint9);
+            series1.Points.Add(dataPoint10);
+            series1.Points.Add(dataPoint11);
+            series1.Points.Add(dataPoint12);
+            series1.Points.Add(dataPoint13);
+            series1.Points.Add(dataPoint14);
+            series1.Points.Add(dataPoint15);
+            series1.Points.Add(dataPoint16);
+            series1.Points.Add(dataPoint17);
+            series1.Points.Add(dataPoint18);
+            series1.Points.Add(dataPoint19);
+            series1.Points.Add(dataPoint20);
+            series1.Points.Add(dataPoint21);
+            series1.Points.Add(dataPoint22);
+            series1.Points.Add(dataPoint23);
+            series1.Points.Add(dataPoint24);
+            series1.Points.Add(dataPoint25);
+            series1.Points.Add(dataPoint26);
+            series1.Points.Add(dataPoint27);
+            series1.Points.Add(dataPoint28);
+            series1.Points.Add(dataPoint29);
+            series1.Points.Add(dataPoint30);
+            series1.Points.Add(dataPoint31);
+            series1.Points.Add(dataPoint32);
             this.DemandCurveChart.Series.Add(series1);
-            this.DemandCurveChart.Size = new System.Drawing.Size(896, 428);
+            this.DemandCurveChart.Size = new System.Drawing.Size(896, 442);
             this.DemandCurveChart.TabIndex = 12;
             this.DemandCurveChart.Text = "DemandCurveChart";
             // 
@@ -464,14 +552,6 @@
             this.DataFilename.Name = "DataFilename";
             this.DataFilename.Size = new System.Drawing.Size(538, 20);
             this.DataFilename.TabIndex = 16;
-            // 
-            // CalculatedValue
-            // 
-            this.CalculatedValue.Enabled = false;
-            this.CalculatedValue.Location = new System.Drawing.Point(125, 60);
-            this.CalculatedValue.Name = "CalculatedValue";
-            this.CalculatedValue.Size = new System.Drawing.Size(39, 20);
-            this.CalculatedValue.TabIndex = 3;
             // 
             // DemandCurveTabPage
             // 
@@ -507,7 +587,7 @@
         private System.Windows.Forms.TextBox RangeValue;
         private System.Windows.Forms.TextBox WetBulbTemperatureValue;
         private System.Windows.Forms.Label DemandCurveRangeUnits;
-        private System.Windows.Forms.Label DemandCurveWetBulbTemperatureLabel;
+        private System.Windows.Forms.Label WetBulbTemperatureLabel;
         private System.Windows.Forms.TextBox ElevationValue;
         private System.Windows.Forms.Label ElevationPressureUnits;
         private System.Windows.Forms.Label ElevationPressureLabel;

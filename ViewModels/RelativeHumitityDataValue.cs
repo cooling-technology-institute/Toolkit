@@ -13,43 +13,43 @@ namespace ViewModels
         public const double RelativeHumidityDefault = 42.38;
         public const string RelativeHumidityToolTipFormat = "Relative Humidity, the amount of water vapor present in air expressed as a percentage of the amount needed for saturation at the same temperature.\nValue should be between {0} and {1}.";
 
-        public RelativeHumidityDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        public RelativeHumidityDataValue(bool isDemo, bool isInternationalSystemOfUnits_SI)
         {
             IsDemo = isDemo;
             InputMessage = "Relative Humidity";
             Format = "F2";
-            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            SetDefaultMinMax(isInternationalSystemOfUnits_SI);
             Current = Default;
-            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
+            SetInputAndTooltip(isInternationalSystemOfUnits_SI);
         }
 
-        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_IS_)
+        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_SI)
         {
             Default = RelativeHumidityDefault;
             Minimum = RelativeHumidityMinimum;
             Maximum = RelativeHumidityMaximum;
         }
 
-        public void SetInputAndTooltip(bool isInternationalSystemOfUnits_IS_)
+        public void SetInputAndTooltip(bool isInternationalSystemOfUnits_SI)
         {
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(RelativeHumidityToolTipFormat, Minimum, Maximum);
-            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
         }
 
-        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_)
+        public override void ConvertValue(bool isInternationalSystemOfUnits_SI)
         {
-            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
-            if (IsInternationalSystemOfUnits_SI_ != isInternationalSystemOfUnits_IS_)
+            SetDefaultMinMax(isInternationalSystemOfUnits_SI);
+            if (IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_SI)
             {
-                if (isInternationalSystemOfUnits_IS_)
+                if (isInternationalSystemOfUnits_SI)
                 {
                 }
                 else
                 {
                 }
             }
-            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
+            SetInputAndTooltip(isInternationalSystemOfUnits_SI);
         }
     }
 }

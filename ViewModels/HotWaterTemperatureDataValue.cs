@@ -23,19 +23,19 @@ namespace ViewModels
         public const double HotWaterTemperatureMaximum_InternationalSystemOfUnits_IS_Demo = 27.0;
         public const string HotWaterTemperatureToolTipFormat = "Hot Water Temperature (HWT).\nValue should be between {0} and {1}.\nValue should be greater than the Cold Water Temperature.";
 
-        public HotWaterTemperatureDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        public HotWaterTemperatureDataValue(bool isDemo, bool isInternationalSystemOfUnits_SI)
         {
             IsDemo = isDemo;
             InputMessage = "Hot Water Temperature";
             Format = "F2";
-            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            SetDefaultMinMax(isInternationalSystemOfUnits_SI);
             Current = Default;
-            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
+            SetInputAndTooltip(isInternationalSystemOfUnits_SI);
         }
 
-        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_IS_)
+        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_SI)
         {
-            if (isInternationalSystemOfUnits_IS_)
+            if (isInternationalSystemOfUnits_SI)
             {
                 if (IsDemo)
                 {
@@ -67,19 +67,19 @@ namespace ViewModels
             }
         }
 
-        public void SetInputAndTooltip(bool isInternationalSystemOfUnits_IS_)
+        public void SetInputAndTooltip(bool isInternationalSystemOfUnits_SI)
         {
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(HotWaterTemperatureToolTipFormat, Minimum, Maximum);
-            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
         }
 
-        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_)
+        public override void ConvertValue(bool isInternationalSystemOfUnits_SI)
         {
-            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
-            if (IsInternationalSystemOfUnits_SI_ != isInternationalSystemOfUnits_IS_)
+            SetDefaultMinMax(isInternationalSystemOfUnits_SI);
+            if (IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_SI)
             {
-                if (isInternationalSystemOfUnits_IS_)
+                if (isInternationalSystemOfUnits_SI)
                 {
                     // convert to InternationalSystemOfUnits_IS
                     Current = UnitConverter.ConvertFahrenheitToCelsius(Current);
@@ -90,7 +90,7 @@ namespace ViewModels
                     Current = UnitConverter.ConvertCelsiusToFahrenheit(Current);
                 }
             }
-            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
+            SetInputAndTooltip(isInternationalSystemOfUnits_SI);
         }
     }
 }

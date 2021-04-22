@@ -11,10 +11,15 @@ namespace ViewModels
         public NameValueUnitsDataTable NameValueUnitsDataTable { get; set; }
         Units Units { get; set; }
 
-        public MerkelOutputData(bool isInternationalSystemOfUnits_IS_)
+        public MerkelOutputData(bool isInternationalSystemOfUnits_SI)
         {
             NameValueUnitsDataTable = new NameValueUnitsDataTable();
-            if (isInternationalSystemOfUnits_IS_)
+            SwitchUnits(isInternationalSystemOfUnits_SI);
+        }
+
+        public void SwitchUnits(bool isInternationalSystemOfUnits_SI)
+        { 
+            if (isInternationalSystemOfUnits_SI)
             {
                 Units = new UnitsIS();
             }
@@ -24,7 +29,7 @@ namespace ViewModels
             }
         }
 
-        public void FillTable(MerkelData data)
+        public void FillTable(MerkelCalculationData data)
         {
             NameValueUnitsDataTable.DataTable.Clear();
 

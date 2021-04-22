@@ -9,10 +9,15 @@ namespace ViewModels
         public NameValueUnitsDataTable NameValueUnitsDataTable { get; set; }
         Units Units { get; set; }
 
-        public PsychrometricsOutputData(bool isInternationalSystemOfUnits_IS_)
+        public PsychrometricsOutputData(bool isInternationalSystemOfUnits_SI)
         {
             NameValueUnitsDataTable = new NameValueUnitsDataTable();
-            if(isInternationalSystemOfUnits_IS_)
+            SwitchUnits(isInternationalSystemOfUnits_SI);
+        }
+
+        public void SwitchUnits(bool isInternationalSystemOfUnits_SI)
+        {
+            if (isInternationalSystemOfUnits_SI)
             {
                 Units = new UnitsIS();
             }

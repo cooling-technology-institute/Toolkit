@@ -24,19 +24,19 @@ namespace ViewModels
 
         public const string BarometricPressureToolTipFormat = "Barometric Pressure, the pressure exerted by the weight of the atmosphere.\nValue should be between {0} and {1}.";
 
-        public BarometricPressureDataValue(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        public BarometricPressureDataValue(bool isDemo, bool isInternationalSystemOfUnits_SI)
         {
             IsDemo = isDemo;
             InputMessage = "Barometric Pressure";
             Format = "F3";
-            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            SetDefaultMinMax(isInternationalSystemOfUnits_SI);
             Current = Default;
-            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
+            SetInputAndTooltip(isInternationalSystemOfUnits_SI);
         }
 
-        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_IS_)
+        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_SI)
         {
-            if (isInternationalSystemOfUnits_IS_)
+            if (isInternationalSystemOfUnits_SI)
             {
                 if (IsDemo)
                 {
@@ -68,20 +68,20 @@ namespace ViewModels
             }
         }
 
-        public void SetInputAndTooltip(bool isInternationalSystemOfUnits_IS_)
+        public void SetInputAndTooltip(bool isInternationalSystemOfUnits_SI)
         {
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(BarometricPressureToolTipFormat, Minimum, Maximum);
-            IsInternationalSystemOfUnits_SI_ = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
         }
 
-        public override void ConvertValue(bool isInternationalSystemOfUnits_IS_)
+        public override void ConvertValue(bool isInternationalSystemOfUnits_SI)
         {
-            SetDefaultMinMax(isInternationalSystemOfUnits_IS_);
+            SetDefaultMinMax(isInternationalSystemOfUnits_SI);
 
-            if (IsInternationalSystemOfUnits_SI_ != isInternationalSystemOfUnits_IS_)
+            if (IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_SI)
             {
-                if (isInternationalSystemOfUnits_IS_)
+                if (isInternationalSystemOfUnits_SI)
                 {
                     // convert to InternationalSystemOfUnits_IS
                     Current = UnitConverter.CalculatePsiToInchesOfMercury(Current);
@@ -93,7 +93,7 @@ namespace ViewModels
                 }
             }
 
-            SetInputAndTooltip(isInternationalSystemOfUnits_IS_);
+            SetInputAndTooltip(isInternationalSystemOfUnits_SI);
         }
     }
 }

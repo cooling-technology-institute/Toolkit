@@ -49,6 +49,7 @@
     <Compile Include="DemandCurve\DemandCurveData.cs" />
     <Compile Include="DemandCurve\DemandCurveFileData.cs" />
     <Compile Include="DemandCurve\SeriesData.cs" />
+    <Compile Include="FileDataType.cs" />
     <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveDataMinimumMaximum.cs" />
     <Compile Include="MechanicalDraftPerformanceCurve\MechanicalDraftPerformanceCurveCalculationData.cs" />
     <Compile Include="MechanicalDraftPerformanceCurve\TowerTestData.cs" />
@@ -59,10 +60,12 @@
     <Compile Include="MechanicalDraftPerformanceCurveTowerDesign\MechanicalDraftPerformanceTowerType.cs" />
     <Compile Include="MechanicalDraftPerformanceCurveTowerDesign\RangedTemperatureDesignData.cs" />
     <Compile Include="MechanicalDraftPerformanceCurveTowerDesign\TemperatureDesignData.cs" />
-    <Compile Include="Merkel\MerkelData.cs" />
+    <Compile Include="Merkel\MerkelDataFile.cs" />
+    <Compile Include="Merkel\MerkelCalculationData.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Psychrometrics\PsychrometricsCalculationType.cs" />
+    <Compile Include="Psychrometrics\PsychrometricsDataFile.cs" />
     <Compile Include="Psychrometrics\PsychrometricsInputData.cs" />
     <Compile Include="Psychrometrics\PsychrometricsData.cs" />
     <Compile Include="StringEnumAsIntConverter.cs" />

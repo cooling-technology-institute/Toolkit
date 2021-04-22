@@ -29,10 +29,13 @@ namespace CTIToolkit
             Filter = "Mechanical Draft Performance Curve files (*.mdpc)|*.mdpc|All files (*.*)|*.*";
             DefaultExt = "mdpc";
             Title = "Mechanical Draft Performance Curve";
+            DefaultFileName = "MechanicalDraftPerformanceCurve";
 
             MechanicalDraftPerformanceCurveViewModel = new MechanicalDraftPerformanceCurveViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
             TowerDesignDataForm = new TowerDesignDataForm(IsDemo, IsInternationalSystemOfUnits_SI, MechanicalDraftPerformanceCurveViewModel.DesignData);
             TestPointTabControl.TabPages.Clear();
+
+            MechanicalDraftPerformanceCurveViewModel.DataFileName = BuildDefaultFileName();
 
             LoadTestPoints();
             SetDisplayedUnits();
@@ -384,6 +387,13 @@ namespace CTIToolkit
 
         public override void PrintPage(object sender, PrintPageEventArgs e)
         {
+            NameValueUnitsDataTable nameValueUnitsDataTable = new NameValueUnitsDataTable();
+            MechanicalDraftPerformanceCurveDataPrinterOutput printerOutput = new MechanicalDraftPerformanceCurveDataPrinterOutput(this.Label, nameValueUnitsDataTable, MechanicalDraftPerformanceCurveViewModel);
+            printerOutput.CreateControl();
+            var bm = new Bitmap(printerOutput.Width + MARGIN, printerOutput.Height + MARGIN);
+            printerOutput.DrawToBitmap(bm, new Rectangle(MARGIN, MARGIN, bm.Width + MARGIN, bm.Height + MARGIN));
+            e.Graphics.DrawImage(bm, 0, 0);
+
         }
 
         private void Calculate_Click(object sender, EventArgs e)

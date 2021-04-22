@@ -11,13 +11,13 @@ namespace ViewModels
         public NameValueUnitsDataTable NameValueUnitsDataTable { get; set; }
         public Units Units { get; set; }
 
-        public MechanicalDraftPerformanceCurveOutputDataViewModel(bool isInternationalSystemOfUnits_IS_)
+        public MechanicalDraftPerformanceCurveOutputDataViewModel(bool isInternationalSystemOfUnits_SI)
         {
             NameValueUnitsDataTable = new NameValueUnitsDataTable();
 
             MechanicalDraftPerformanceCurveOutput = new MechanicalDraftPerformanceCurveOutput();
 
-            if (isInternationalSystemOfUnits_IS_)
+            if (isInternationalSystemOfUnits_SI)
             {
                 Units = new UnitsIS();
             }

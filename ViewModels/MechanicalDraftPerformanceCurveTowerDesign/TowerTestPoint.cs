@@ -25,10 +25,10 @@ namespace ViewModels
 
         private TowerTestData TowerTestData { get; set; }
 
-        public TowerTestPoint(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        public TowerTestPoint(bool isDemo, bool isInternationalSystemOfUnits_SI)
         {
             IsDemo = isDemo;
-            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
             ErrorMessage = string.Empty;
             
             TestName = string.Empty;

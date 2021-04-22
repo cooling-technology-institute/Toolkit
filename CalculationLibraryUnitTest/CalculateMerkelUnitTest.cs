@@ -14,8 +14,9 @@ namespace CalculationLibraryUnitTest
         public void SI_CalculateMerkelTest()
         {
             bool methodThrew = false;
-            double merkel = 0.0;
-            MerkelData data = new MerkelData(true)
+            bool returnValue = false;
+
+            MerkelCalculationData data = new MerkelCalculationData(true)
             {
                 Elevation = 50.0,
                 BarometricPressure = 0.0,
@@ -28,7 +29,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                merkel = CalculationLibrary.CalculateMerkel(data);
+                returnValue = CalculationLibrary.CalculateMerkel(data);
             }
             catch
             {
@@ -36,15 +37,17 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(1.5576363962243127, merkel, "Merkel value does not match");
+            Assert.IsTrue(returnValue, "CalculateMerkel return value");
+            Assert.AreEqual(1.5576363962243127, data.KaV_L, "Merkel value does not match");
         }
 
         [TestMethod]
         public void IP_CalculateMerkelTest()
         {
             bool methodThrew = false;
-            double merkel = 0.0;
-            MerkelData data = new MerkelData(false)
+            bool returnValue = false;
+
+            MerkelCalculationData data = new MerkelCalculationData(false)
             {
                 Elevation = 50.0,
                 BarometricPressure = 0.0,
@@ -57,7 +60,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                merkel = CalculationLibrary.CalculateMerkel(data);
+                returnValue = CalculationLibrary.CalculateMerkel(data);
             }
             catch
             {
@@ -65,7 +68,8 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(2.1200361989715248, merkel, "Merkel value does not match");
+            Assert.IsTrue(returnValue, "CalculateMerkel return value");
+            Assert.AreEqual(2.1200361989715248, data.KaV_L, "Merkel value does not match");
         }
 
 
@@ -73,8 +77,8 @@ namespace CalculationLibraryUnitTest
         public void SI_CalculateMerkel_ElevationZeroTest()
         {
             bool methodThrew = false;
-            double merkel = 0.0;
-            MerkelData data = new MerkelData(true)
+            bool returnValue = false;
+            MerkelCalculationData data = new MerkelCalculationData(true)
             {
                 Elevation = 0.0,
                 BarometricPressure = 0.0,
@@ -87,7 +91,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                merkel = CalculationLibrary.CalculateMerkel(data);
+                returnValue = CalculationLibrary.CalculateMerkel(data);
             }
             catch
             {
@@ -95,15 +99,17 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(1.5724858232706995, merkel, "Merkel value does not match");
+            Assert.IsTrue(returnValue, "CalculateMerkel return value");
+            Assert.AreEqual(1.5724858232706995, data.KaV_L, "Merkel value does not match");
         }
 
         [TestMethod]
         public void IP_CalculateMerkel_ElevationZeroTest()
         {
             bool methodThrew = false;
-            double merkel = 0.0;
-            MerkelData data = new MerkelData(false)
+            bool returnValue = false;
+
+            MerkelCalculationData data = new MerkelCalculationData(false)
             {
                 Elevation = 0.0,
                 BarometricPressure = 0.0,
@@ -116,7 +122,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                merkel = CalculationLibrary.CalculateMerkel(data);
+                returnValue = CalculationLibrary.CalculateMerkel(data);
             }
             catch
             {
@@ -124,15 +130,16 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(2.1262455221481726, merkel, "Merkel value does not match");
+            Assert.IsTrue(returnValue, "CalculateMerkel return value");
+            Assert.AreEqual(2.1262455221481726, data.KaV_L, "Merkel value does not match");
         }
 
         [TestMethod]
         public void SI_CalculateMerkel_BoilingTest()
         {
             bool methodThrew = false;
-            double merkel = 0.0;
-            MerkelData data = new MerkelData(true)
+            bool returnValue = false;
+            MerkelCalculationData data = new MerkelCalculationData(true)
             {
                 Elevation = 0.0,
                 BarometricPressure = 0.0,
@@ -145,7 +152,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                merkel = CalculationLibrary.CalculateMerkel(data);
+                returnValue = CalculationLibrary.CalculateMerkel(data);
             }
             catch
             {
@@ -153,16 +160,16 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(999, merkel, "Merkel value does not match");
+            Assert.IsFalse(returnValue, "CalculateMerkel return value");
         }
 
         [TestMethod]
         public void IP_CalculateMerkel_BoilingTest()
         {
             bool methodThrew = false;
-            double merkel = 0.0;
+            bool returnValue = false;
 
-            MerkelData data = new MerkelData(false)
+            MerkelCalculationData data = new MerkelCalculationData(false)
             {
                 Elevation = 0.0,
                 BarometricPressure = 0.0,
@@ -175,7 +182,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                merkel = CalculationLibrary.CalculateMerkel(data);
+                returnValue = CalculationLibrary.CalculateMerkel(data);
             }
             catch
             {
@@ -183,15 +190,15 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(999, merkel, "Merkel value does not match");
+            Assert.IsFalse(returnValue, "CalculateMerkel return value");
         }
 
         [TestMethod]
         public void SI_CalculateMerkel_LoopRangeCheckTest()
         {
             bool methodThrew = false;
-            double merkel = 0.0;
-            MerkelData data = new MerkelData(true)
+            bool returnValue = false;
+            MerkelCalculationData data = new MerkelCalculationData(true)
             {
                 Elevation = 0.0,
                 BarometricPressure = 0.0,
@@ -204,7 +211,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                merkel = CalculationLibrary.CalculateMerkel(data);
+                returnValue = CalculationLibrary.CalculateMerkel(data);
             }
             catch
             {
@@ -212,16 +219,16 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(999, merkel, "Merkel value does not match");
+            Assert.IsFalse(returnValue, "CalculateMerkel return value");
         }
 
         [TestMethod]
         public void IP_CalculateMerkel_LoopRangeCheckTest()
         {
             bool methodThrew = false;
-            double merkel = 0.0;
+            bool returnValue = false;
 
-            MerkelData data = new MerkelData(false)
+            MerkelCalculationData data = new MerkelCalculationData(false)
             {
                 Elevation = 0.0,
                 BarometricPressure = 0.0,
@@ -234,7 +241,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                merkel = CalculationLibrary.CalculateMerkel(data);
+                returnValue = CalculationLibrary.CalculateMerkel(data);
             }
             catch
             {
@@ -242,7 +249,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(999, merkel, "Merkel value does not match");
+            Assert.IsFalse(returnValue, "CalculateMerkel return value");
         }
     }
 }

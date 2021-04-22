@@ -7,11 +7,9 @@ using System.Text;
 
 namespace Models
 {
-    public class MechanicalDraftPerformanceCurveFileData
+    public class MechanicalDraftPerformanceCurveFileData : FileDataType
     {
         public bool IsInternationalSystemOfUnits_SI { get; set; }
-        public const string DataType = "MechanicalDraftPerformanceCurveData";
-        public const string Version = "1.0";
 
         public List<TowerTestData> TestData { get; set; }
         public DesignData DesignData { get; set; }
@@ -19,6 +17,8 @@ namespace Models
         public MechanicalDraftPerformanceCurveFileData(bool isInternationalSystemOfUnits_IS_)
         {
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
+            DataType = "MechanicalDraftPerformanceCurveData";
+            Version = "1.0";
 
             TestData = new List<TowerTestData>();
             DesignData = new DesignData();

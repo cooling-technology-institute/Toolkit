@@ -59,14 +59,49 @@
     <Compile Include="CustomMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PrintLabelForm.cs">
+    <Compile Include="PrintableForms\DemandCurverPrinterOutput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PrintableForms\DemandCurverPrinterOutput.Designer.cs">
+      <DependentUpon>DemandCurverPrinterOutput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintableForms\MechanicalDraftPerformanceCurvePrinterOutput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PrintableForms\MechanicalDraftPerformanceCurvePrinterOutput.Designer.cs">
+      <DependentUpon>MechanicalDraftPerformanceCurvePrinterOutput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintableForms\MechanicalDraftPerformanceCurveDataPrinterOutput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PrintableForms\MechanicalDraftPerformanceCurveDataPrinterOutput.Designer.cs">
+      <DependentUpon>MechanicalDraftPerformanceCurveDataPrinterOutput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintableForms\MerkelPrinterOutput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PrintableForms\MerkelPrinterOutput.Designer.cs">
+      <DependentUpon>MerkelPrinterOutput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintableForms\PsychrometricPrinterOutput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PrintableForms\PsychrometricPrinterOutput.Designer.cs">
+      <DependentUpon>PsychrometricPrinterOutput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintableForms\PrintLabelForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintLabelForm.Designer.cs">
+    <Compile Include="PrintableForms\PrintLabelForm.Designer.cs">
       <DependentUpon>PrintLabelForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="RangedTemperatureDesignUserControlTabPage.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -88,19 +123,29 @@
     <Compile Include="ViewGraphsForm.Designer.cs">
       <DependentUpon>ViewGraphsForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="PrintLabelForm.resx">
+    <EmbeddedResource Include="PrintableForms\DemandCurverPrinterOutput.resx">
+      <DependentUpon>DemandCurverPrinterOutput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintableForms\MechanicalDraftPerformanceCurvePrinterOutput.resx">
+      <DependentUpon>MechanicalDraftPerformanceCurvePrinterOutput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintableForms\MechanicalDraftPerformanceCurveDataPrinterOutput.resx">
+      <DependentUpon>MechanicalDraftPerformanceCurveDataPrinterOutput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintableForms\MerkelPrinterOutput.resx">
+      <DependentUpon>MerkelPrinterOutput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintableForms\PsychrometricPrinterOutput.resx">
+      <DependentUpon>PsychrometricPrinterOutput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintableForms\PrintLabelForm.resx">
       <DependentUpon>PrintLabelForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="UpdateTestPointTestNameForm.resx">
       <DependentUpon>UpdateTestPointTestNameForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -142,11 +187,11 @@
     <Compile Include="MechanicalDraftPerformanceCurveTabPage.Designer.cs">
       <DependentUpon>MechanicalDraftPerformanceCurveTabPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="MerkleTabPage.cs">
+    <Compile Include="MerkelTabPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MerkleTabPage.Designer.cs">
-      <DependentUpon>MerkleTabPage.cs</DependentUpon>
+    <Compile Include="MerkelTabPage.Designer.cs">
+      <DependentUpon>MerkelTabPage.cs</DependentUpon>
     </Compile>
     <Compile Include="PsychrometricsTabPage.cs">
       <SubType>UserControl</SubType>
@@ -187,8 +232,8 @@
     <EmbeddedResource Include="MechanicalDraftPerformanceCurveTabPage.resx">
       <DependentUpon>MechanicalDraftPerformanceCurveTabPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MerkleTabPage.resx">
-      <DependentUpon>MerkleTabPage.cs</DependentUpon>
+    <EmbeddedResource Include="MerkelTabPage.resx">
+      <DependentUpon>MerkelTabPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PsychrometricsTabPage.resx">
       <DependentUpon>PsychrometricsTabPage.cs</DependentUpon>
@@ -259,6 +304,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\colorlogo.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Beta.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beta2.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -241,8 +241,8 @@ namespace CTIToolkit
                         calculatePrintUserControl.Label = string.Empty;
                         calculatePrintUserControl.IsDesignData = false;
 
-                        PrintLabelForm printLabelForm = new PrintLabelForm();
-                        printLabelForm.Height = (tabControl1.SelectedIndex == 3) ? 105 : 170;
+                        PrintLabelForm printLabelForm = new PrintLabelForm((tabControl1.SelectedIndex == 3));
+                        //printLabelForm.Height = (tabControl1.SelectedIndex == 3) ? 105 : 170;
 
                         if (printLabelForm.ShowDialog() == DialogResult.OK)
                         {
@@ -314,6 +314,18 @@ namespace CTIToolkit
                     if (control is CalculatePrintUserControl)
                     {
                         CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
+
+                        PrintLabelForm printLabelForm = new PrintLabelForm((tabControl1.SelectedIndex == 3));
+                        printLabelForm.Height = (tabControl1.SelectedIndex == 3) ? 105 : 170;
+
+                        if (printLabelForm.ShowDialog() == DialogResult.OK)
+                        {
+                            calculatePrintUserControl.Label = printLabelForm.GetLabel();
+                            if (tabControl1.SelectedIndex == 3)
+                            {
+                                calculatePrintUserControl.IsDesignData = printLabelForm.IsDesignData();
+                            }
+                        }
 
                         PrintDocument printDocument = new PrintDocument();
                         PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog()

@@ -2,11 +2,8 @@
 
 namespace Models
 {
-    public class MerkelData
+    public class MerkelCalculationData
     {
-        public const string DataType = "MerkelData";
-        public const string Version = "1.0";
-
         public bool IsInternationalSystemOfUnits_SI { get; set; }
 
         public double Elevation { set; get; }
@@ -20,7 +17,7 @@ namespace Models
         public double Range { set; get; }
         public double KaV_L { set; get; }
 
-        public MerkelData(bool isInternationalSystemOfUnits_IS_)
+        public MerkelCalculationData(bool isInternationalSystemOfUnits_IS_)
         {
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
 

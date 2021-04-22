@@ -6,7 +6,6 @@ using System.Drawing.Printing;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using CTIToolkit.Properties;
 using ViewModels;
 
 namespace CTIToolkit
@@ -31,11 +30,13 @@ namespace CTIToolkit
             Filter = "Demand Curve files (*.dc)|*.dc|All files (*.*)|*.*";
             DefaultExt = "dc";
             Title = "Demand Curve";
+            DefaultFileName = "DemandCurve";
 
             IsInternationalSystemOfUnits_SI = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
             IsDemo = applicationSettings.IsDemo;
 
             DemandCurveViewModel = new DemandCurveViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
+            DemandCurveViewModel.DataFileName = BuildDefaultFileName();
 
             HasChanged = false;
 
@@ -83,11 +84,9 @@ namespace CTIToolkit
             }
         }
 
-        private void SetDisplayedValues()
+        private void SetRadioButtons()
         {
-            DataFilename.Text = DemandCurveViewModel.DataFilenameInputValue;
-
-            if(DemandCurveViewModel.IsElevation)
+            if (DemandCurveViewModel.IsElevation)
             {
                 ElevationRadio.Checked = true;
                 BarometricPressureRadio.Checked = false;
@@ -108,11 +107,17 @@ namespace CTIToolkit
                 ApproachRadio.Checked = false;
                 KavLRadio.Checked = true;
             }
+        }
 
+        private void SetDisplayedValues()
+        {
+            DataFilename.Text = DemandCurveViewModel.DataFilenameInputValue;
+
+            SetRadioButtons();
             SwitchUnits();
 
-            DemandCurveWetBulbTemperatureLabel.Text = DemandCurveViewModel.WetBulbTemperatureDataValueInputMessage + ":";
-            DemandCurveWetBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
+            WetBulbTemperatureLabel.Text = DemandCurveViewModel.WetBulbTemperatureDataValueInputMessage + ":";
+            WetBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
             WetBulbTemperatureValue.Text = DemandCurveViewModel.WetBulbTemperatureDataValueInputValue;
             toolTip1.SetToolTip(WetBulbTemperatureValue, DemandCurveViewModel.WetBulbTemperatureDataValueTooltip);
 
@@ -207,7 +212,7 @@ namespace CTIToolkit
                     //series.YValueMembers = string.Format("Y{0}", i);
                 }
 
-                if (DemandCurveViewModel.CalculateDemandCurve(ElevationRadio.Checked, KavLRadio.Checked))
+                if (DemandCurveViewModel.CalculateDemandCurve())
                 {
                     // AxisX, AxisY, AxisX2 and AxisY2
                     //Primary X-Axis  Bottom horizontal axis.
@@ -218,8 +223,12 @@ namespace CTIToolkit
                     {
                         DemandCurveChart.ChartAreas[0].AxisX.IsLabelAutoFit = false;
                         DemandCurveChart.ChartAreas[0].AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(119)))), ((int)(((byte)(119)))));
-                        DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.Interval = 0.75D;
-                        DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+                        DemandCurveChart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
+                        DemandCurveChart.ChartAreas[0].AxisX.MajorGrid.Interval = 0.25D;
+                        //DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.Interval = 1.0;
+                        //DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.IntervalOffset = 1.0;
+                        //DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.Interval = 0.75D;
+                        //DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
                         DemandCurveChart.ChartAreas[0].AxisX.Maximum = 5D;
                         DemandCurveChart.ChartAreas[0].AxisX.Minimum = 0.1D;
                         DemandCurveChart.ChartAreas[0].AxisX.MinorTickMark.Enabled = true;
@@ -230,6 +239,8 @@ namespace CTIToolkit
                         DemandCurveChart.ChartAreas[0].AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
 
                         DemandCurveChart.ChartAreas[0].AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(119)))), ((int)(((byte)(119)))));
+                        DemandCurveChart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
+                        DemandCurveChart.ChartAreas[0].AxisY.MajorGrid.Interval = 0.25;
                         DemandCurveChart.ChartAreas[0].AxisY.MajorGrid.Interval = 0.75D;
                         DemandCurveChart.ChartAreas[0].AxisY.MajorTickMark.Interval = 0.5D;
                         DemandCurveChart.ChartAreas[0].AxisY.Maximum = 10D;
@@ -243,11 +254,17 @@ namespace CTIToolkit
                         DemandCurveChart.ChartAreas[0].AxisX.Minimum = 0.1;
                         DemandCurveChart.ChartAreas[0].AxisX.IsLogarithmic = true;
                         DemandCurveChart.ChartAreas[0].AxisX.Maximum = 5;
+
                         DemandCurveChart.ChartAreas[0].AxisY.Title = "KaV/L";
                         DemandCurveChart.ChartAreas[0].AxisY.Minimum = 0.1;
                         DemandCurveChart.ChartAreas[0].AxisY.IsLogarithmic = true;
 
                         DemandCurveChart.Legends[0].Title = "Approach";
+
+                        DemandCurveChart.ChartAreas[0].CursorX.AutoScroll = true;
+                        DemandCurveChart.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
+                        DemandCurveChart.ChartAreas[0].CursorY.AutoScroll = true;
+                        DemandCurveChart.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
 
                         for (int i = 0; i < DemandCurveViewModel.DemandCurveCalculationLibrary.InitialApproachXValues.Length; i++)
                         {
@@ -280,11 +297,6 @@ namespace CTIToolkit
 
 
                         DemandCurveChart.DataSource = DemandCurveViewModel.GetDataTable();
-                        BindingSource SBind = new BindingSource()
-                        {
-                            DataSource = DemandCurveViewModel.GetDataTable()
-                        };
-
 
                         //dataGridView1.AutoGenerateColumns = true;
                         //dataGridView1.DataSource = DemandCurveViewModel.GetDataTable();
@@ -411,16 +423,31 @@ namespace CTIToolkit
 
         public override void PrintPage(object sender, PrintPageEventArgs e)
         {
-            Single leftMargin = e.MarginBounds.Left;
-            Single topMargin = e.MarginBounds.Top;
-            Object rm = Resources.ResourceManager.GetObject("colorlogo");
-            //Bitmap myImage = (Bitmap)rm;
-            Image img = (Image)rm;
-            Rectangle logo = new Rectangle(10, 10, 210, 210);
-            using (Font printFont = new Font("Arial", 10.0f))
+            NameValueUnitsDataTable nameValueUnitsDataTable = new NameValueUnitsDataTable();
+
+            if (DemandCurveViewModel.GetDataTable() != null)
             {
-                e.Graphics.DrawImage(img, logo);
-                e.Graphics.DrawString("CTI Toolkit Demand Curve", printFont, Brushes.Black, leftMargin + 210, topMargin, new StringFormat());
+                nameValueUnitsDataTable.AddRow(DemandCurveViewModel.WetBulbTemperatureDataValueInputMessage, WetBulbTemperatureValue.Text, WebBulbTemperatureUnits.Text);
+                nameValueUnitsDataTable.AddRow(DemandCurveViewModel.RangeDataValueInputMessage, RangeValue.Text, RangeUnits.Text);
+
+                if (ElevationRadio.Checked)
+                {
+                    nameValueUnitsDataTable.AddRow(DemandCurveViewModel.ElevationDataValueInputMessage, DemandCurveViewModel.ElevationDataValueInputValue, ElevationPressureUnits.Text);
+                }
+                else
+                    nameValueUnitsDataTable.AddRow(DemandCurveViewModel.BarometricPressureDataValueInputMessage, DemandCurveViewModel.BarometricPressureDataValueInputValue, ElevationPressureUnits.Text);
+                {
+                }
+
+                DemandCurvePrinterOutput printerOutput = new DemandCurvePrinterOutput(this.Label, nameValueUnitsDataTable, DemandCurveViewModel);
+                printerOutput.CreateControl();
+                var bm = new Bitmap(printerOutput.Width, printerOutput.Height);
+                printerOutput.DrawToBitmap(bm, new Rectangle(0, 0, bm.Width, bm.Height));
+                e.Graphics.DrawImage(bm, MARGIN, MARGIN);
+            }
+            else
+            {
+                MessageBox.Show("You must run the calculation before printing.");
             }
         }
 

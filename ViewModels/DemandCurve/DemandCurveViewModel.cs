@@ -46,15 +46,17 @@ namespace ViewModels
         public string ErrorMessage { get; set; }
         public string DataFileName { get; set; }
 
-        public DemandCurveViewModel(bool isDemo, bool isInternationalSystemOfUnits_IS_)
+        public DemandCurveViewModel(bool isDemo, bool isInternationalSystemOfUnits_SI)
         {
-            DemandCurveInputData = new DemandCurveInputData(isDemo, isInternationalSystemOfUnits_IS_);
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
+            IsDemo = isDemo;
+            BuildFilename();
+
+            DemandCurveInputData = new DemandCurveInputData(isDemo, isInternationalSystemOfUnits_SI);
             DemandCurveCalculationLibrary = new DemandCurveCalculationLibrary();
             NameValueUnitsDataTable = new NameValueUnitsDataTable();
-            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
-            IsDemo = isDemo;
-            IsElevation = true;
-            BuildFilename();
+            DemandCurveFileData = new DemandCurveFileData(isInternationalSystemOfUnits_SI);
+            DemandCurveInputData.SetDefaults(DemandCurveFileData);
         }
 
         public void BuildFilename()
@@ -130,7 +132,9 @@ namespace ViewModels
 
             if (DemandCurveFileData != null)
             {
-                if (!LoadData(true))
+                DemandCurveInputData.SetDefaults(DemandCurveFileData);
+
+                if (!LoadData())
                 {
                     stringBuilder.AppendLine(ErrorMessage);
                     returnValue = false;
@@ -155,11 +159,9 @@ namespace ViewModels
         {
             bool returnValue = true;
 
-            DemandCurveFileData = new DemandCurveFileData(IsInternationalSystemOfUnits_SI);
-
             if (DemandCurveFileData != null)
             {
-                if (FillAndValidate(DemandCurveFileData.DemandCurveData))
+                if (FillFileData())
                 {
                     try
                     {
@@ -176,7 +178,7 @@ namespace ViewModels
                 ErrorMessage = "Unable to save data to file.";
                 returnValue = false;
             }
-            return returnValue;
+                return returnValue;
         }
 
         public bool SaveDataFile()
@@ -208,13 +210,13 @@ namespace ViewModels
             DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_SI, IsElevation, IsApproach);
         }
 
-        public bool LoadData(bool loadDefaults = false)
+        public bool LoadData()
         {
             bool returnValue = true;
 
             if (DemandCurveFileData != null)
             {
-                if (!DemandCurveInputData.LoadData(loadDefaults, DemandCurveFileData.IsInternationalSystemOfUnits_SI, DemandCurveFileData.DemandCurveData))
+                if (!DemandCurveInputData.LoadData(DemandCurveFileData))
                 {
                     ErrorMessage = DemandCurveInputData.ErrorMessage;
                     returnValue = false;
@@ -228,7 +230,7 @@ namespace ViewModels
             return returnValue;
         }
 
-        public bool CalculateDemandCurve(bool isElevation, bool IsKavl)
+        public bool CalculateDemandCurve()
         {
             try
             {
@@ -263,6 +265,25 @@ namespace ViewModels
         public bool FillAndValidate(DemandCurveData demandCurveData)
         {
             return DemandCurveInputData.FillAndValidate(demandCurveData);
+        }
+
+        public bool FillFileData()
+        {
+            bool returnValue = true;
+            StringBuilder stringBuilder = new StringBuilder();
+
+            if (!DemandCurveInputData.FillFileData(DemandCurveFileData))
+            {
+                returnValue = false;
+                stringBuilder.AppendLine(DemandCurveInputData.ErrorMessage);
+            }
+
+            if (!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
+
+            return returnValue;
         }
 
         public DataTable GetDataTable()
