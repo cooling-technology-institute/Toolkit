@@ -351,6 +351,9 @@ namespace CTIToolkit
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
 
+            PsychrometricsViewModel.DataFileName = fileName;
+            DataFilename.Text = PsychrometricsViewModel.DataFilenameInputValue;
+
             if (!PsychrometricsViewModel.SaveAsDataFile(fileName))
             {
                 stringBuilder.AppendLine(PsychrometricsViewModel.ErrorMessage);
@@ -398,7 +401,7 @@ namespace CTIToolkit
                     nameValueUnitsDataTable.AddRow(PsychrometricsViewModel.ElevationDataValueInputMessage, Elevation_Value.Text, ElevationUnits.Text);
                 }
 
-                PsychrometricPrinterOutput printerOutput = new PsychrometricPrinterOutput(calculationProperty, this.Label, nameValueUnitsDataTable, PsychrometricsViewModel);
+                PsychrometricPrinterOutput printerOutput = new PsychrometricPrinterOutput(calculationProperty, this.PrintControl.Label, nameValueUnitsDataTable, PsychrometricsViewModel);
                 printerOutput.CreateControl();
                 var bm = new Bitmap(printerOutput.Width, printerOutput.Height);
                 //bm.SetResolution(600, 600);

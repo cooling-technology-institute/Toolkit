@@ -1,4 +1,5 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
+
 using CTIToolkit.Properties;
 using System;
 using System.Drawing;
@@ -238,18 +239,18 @@ namespace CTIToolkit
                     if (control is CalculatePrintUserControl)
                     {
                         CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
-                        calculatePrintUserControl.Label = string.Empty;
-                        calculatePrintUserControl.IsDesignData = false;
+                        calculatePrintUserControl.PrintControl.Label = string.Empty;
+                        calculatePrintUserControl.PrintControl.IsDesignData = false;
 
                         PrintLabelForm printLabelForm = new PrintLabelForm((tabControl1.SelectedIndex == 3));
-                        //printLabelForm.Height = (tabControl1.SelectedIndex == 3) ? 105 : 170;
+                        printLabelForm.Height = (tabControl1.SelectedIndex == 3) ? 170 : 105;
 
                         if (printLabelForm.ShowDialog() == DialogResult.OK)
                         {
-                            calculatePrintUserControl.Label = printLabelForm.GetLabel();
+                            calculatePrintUserControl.PrintControl.Label = printLabelForm.GetLabel();
                             if (tabControl1.SelectedIndex == 3)
                             {
-                                calculatePrintUserControl.IsDesignData = printLabelForm.IsDesignData();
+                                calculatePrintUserControl.PrintControl.IsDesignData = printLabelForm.IsDesignData();
                             }    
                         }
                         
@@ -269,31 +270,6 @@ namespace CTIToolkit
                         DialogResult userResponse = printDialog.ShowDialog();
                         if (userResponse == DialogResult.OK)
                         {
-                            //if (printDialog.PrinterSettings.PrinterName == "Microsoft Print to PDF")
-                            //{   // force a reasonable filename
-                            //    string basename = Path.GetFileNameWithoutExtension(myFileName);
-                            //    string directory = Path.GetDirectoryName(myFileName);
-                            //    printDocument.PrinterSettings.PrintToFile = true;
-                            //    // confirm the user wants to use that name
-                            //    SaveFileDialog pdfSaveDialog = new SaveFileDialog();
-                            //    pdfSaveDialog.InitialDirectory = directory;
-                            //    pdfSaveDialog.FileName = basename + ".pdf";
-                            //    pdfSaveDialog.Filter = "PDF File|*.pdf";
-                            //    userResponse = pdfSaveDialog.ShowDialog();
-                            //    if (userResponse != DialogResult.Cancel)
-                            //        printDocument.PrinterSettings.PrintFileName = pdfSaveDialog.FileName;
-                            //}
-                            //if (userResponse != DialogResult.Cancel)  // in case they canceled the save as dialog
-                            //{
-                            //    printDocument.Print();
-                            //}
-                            //if (printDialog.PrintToFile)
-                            //{
-                            //    //printDocument.PrinterSettings.PrinterName = printDialog.PrinterSettings.PrinterName;
-
-                            //    //printDocument.PrinterSettings.PrintToFile = true;
-                            //    //printDocument.PrinterSettings.PrintFileName = @"c:\temp\test.xps";
-                            //}
                             printDocument.PrinterSettings = printDialog.PrinterSettings;
                             printDocument.Print();
                         }
@@ -316,14 +292,14 @@ namespace CTIToolkit
                         CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
 
                         PrintLabelForm printLabelForm = new PrintLabelForm((tabControl1.SelectedIndex == 3));
-                        printLabelForm.Height = (tabControl1.SelectedIndex == 3) ? 105 : 170;
+                        printLabelForm.Height = (tabControl1.SelectedIndex == 3) ? 170 : 105;
 
                         if (printLabelForm.ShowDialog() == DialogResult.OK)
                         {
-                            calculatePrintUserControl.Label = printLabelForm.GetLabel();
+                            calculatePrintUserControl.PrintControl.Label = printLabelForm.GetLabel();
                             if (tabControl1.SelectedIndex == 3)
                             {
-                                calculatePrintUserControl.IsDesignData = printLabelForm.IsDesignData();
+                                calculatePrintUserControl.PrintControl.IsDesignData = printLabelForm.IsDesignData();
                             }
                         }
 

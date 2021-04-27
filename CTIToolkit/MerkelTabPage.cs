@@ -182,7 +182,7 @@ namespace CTIToolkit
                     nameValueUnitsDataTable.AddRow(MerkelElevationPressureLabel.Text, Merkel_Elevation_Value.Text, MerkelElevationPressureUnits.Text);
                 }
 
-                MerkelPrinterOutput printerOutput = new MerkelPrinterOutput(this.Label, nameValueUnitsDataTable, MerkelViewModel);
+                MerkelPrinterOutput printerOutput = new MerkelPrinterOutput(this.PrintControl.Label, nameValueUnitsDataTable, MerkelViewModel);
                 printerOutput.CreateControl();
                 var bm = new Bitmap(printerOutput.Width, printerOutput.Height);
                 printerOutput.DrawToBitmap(bm, new Rectangle(0, 0, bm.Width, bm.Height));
@@ -283,6 +283,9 @@ namespace CTIToolkit
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
+
+            MerkelViewModel.DataFileName = fileName;
+            DataFilename.Text = MerkelViewModel.DataFilenameInputValue;
 
             if (!MerkelViewModel.SaveAsDataFile(fileName))
             {

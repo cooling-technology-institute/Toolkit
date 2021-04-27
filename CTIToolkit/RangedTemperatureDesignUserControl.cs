@@ -325,14 +325,12 @@ namespace CTIToolkit
 
         private void WetBulbTemperature1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (WetBulbTemperature1.Text != TowerDesignCurveData.WetBulbTemperatureDataValue1.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.WetBulbTemperatureDataValue1.UpdateValue(WetBulbTemperature1.Text, out errorMessage))
+            if (!TowerDesignCurveData.WetBulbTemperatureDataValue1.UpdateValue(WetBulbTemperature1.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -346,19 +344,16 @@ namespace CTIToolkit
         private void WetBulbTemperature2_Validated(object sender, EventArgs e)
         {
             errorProvider1.SetError(WetBulbTemperature2, "");
-            //ColdWaterTemperatureVisible(2, (TowerDesignCurveData.WetBulbTemperatureDataValue2.Current != 0.0));
         }
 
         private void WetBulbTemperature2_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (WetBulbTemperature2.Text != TowerDesignCurveData.WetBulbTemperatureDataValue2.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.WetBulbTemperatureDataValue2.UpdateValue(WetBulbTemperature2.Text, out errorMessage))
+            if (!TowerDesignCurveData.WetBulbTemperatureDataValue2.UpdateValue(WetBulbTemperature2.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -377,14 +372,12 @@ namespace CTIToolkit
 
         private void WetBulbTemperature3_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (WetBulbTemperature3.Text != TowerDesignCurveData.WetBulbTemperatureDataValue3.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.WetBulbTemperatureDataValue3.UpdateValue(WetBulbTemperature3.Text, out errorMessage))
+            if (!TowerDesignCurveData.WetBulbTemperatureDataValue3.UpdateValue(WetBulbTemperature3.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -403,14 +396,12 @@ namespace CTIToolkit
 
         private void WetBulbTemperature4_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (WetBulbTemperature4.Text != TowerDesignCurveData.WetBulbTemperatureDataValue4.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.WetBulbTemperatureDataValue4.UpdateValue(WetBulbTemperature4.Text, out errorMessage))
+            if (!TowerDesignCurveData.WetBulbTemperatureDataValue4.UpdateValue(WetBulbTemperature4.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -429,14 +420,12 @@ namespace CTIToolkit
 
         private void WetBulbTemperature5_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (WetBulbTemperature5.Text != TowerDesignCurveData.WetBulbTemperatureDataValue5.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.WetBulbTemperatureDataValue5.UpdateValue(WetBulbTemperature5.Text, out errorMessage))
+            if (!TowerDesignCurveData.WetBulbTemperatureDataValue5.UpdateValue(WetBulbTemperature5.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -455,14 +444,12 @@ namespace CTIToolkit
 
         private void WetBulbTemperature6_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (WetBulbTemperature6.Text != TowerDesignCurveData.WetBulbTemperatureDataValue6.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.WetBulbTemperatureDataValue6.UpdateValue(WetBulbTemperature6.Text, out errorMessage))
+            if (!TowerDesignCurveData.WetBulbTemperatureDataValue6.UpdateValue(WetBulbTemperature6.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -480,14 +467,12 @@ namespace CTIToolkit
 
         private void Range1ColdWaterTemperature1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range1ColdWaterTemperature1.Text != TowerDesignCurveData.Range1ColdWaterTemperatureDataValue1.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue1.UpdateValue(Range1ColdWaterTemperature1.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue1.UpdateValue(Range1ColdWaterTemperature1.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -505,14 +490,12 @@ namespace CTIToolkit
 
         private void Range1ColdWaterTemperature2_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range1ColdWaterTemperature2.Text != TowerDesignCurveData.Range1ColdWaterTemperatureDataValue2.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue2.UpdateValue(Range1ColdWaterTemperature2.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue2.UpdateValue(Range1ColdWaterTemperature2.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -530,14 +513,12 @@ namespace CTIToolkit
 
         private void Range1ColdWaterTemperature3_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range1ColdWaterTemperature3.Text != TowerDesignCurveData.Range1ColdWaterTemperatureDataValue3.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue3.UpdateValue(Range1ColdWaterTemperature3.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue3.UpdateValue(Range1ColdWaterTemperature3.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -555,14 +536,12 @@ namespace CTIToolkit
 
         private void Range1ColdWaterTemperature4_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range1ColdWaterTemperature4.Text != TowerDesignCurveData.Range1ColdWaterTemperatureDataValue4.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue4.UpdateValue(Range1ColdWaterTemperature4.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue4.UpdateValue(Range1ColdWaterTemperature4.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -580,14 +559,12 @@ namespace CTIToolkit
 
         private void Range1ColdWaterTemperature5_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range1ColdWaterTemperature5.Text != TowerDesignCurveData.Range1ColdWaterTemperatureDataValue5.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue5.UpdateValue(Range1ColdWaterTemperature5.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue5.UpdateValue(Range1ColdWaterTemperature5.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -605,14 +582,12 @@ namespace CTIToolkit
 
         private void Range1ColdWaterTemperature6_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range1ColdWaterTemperature6.Text != TowerDesignCurveData.Range1ColdWaterTemperatureDataValue6.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue6.UpdateValue(Range1ColdWaterTemperature6.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue6.UpdateValue(Range1ColdWaterTemperature6.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -630,14 +605,12 @@ namespace CTIToolkit
 
         private void Range2ColdWaterTemperature1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range2ColdWaterTemperature1.Text != TowerDesignCurveData.Range2ColdWaterTemperatureDataValue1.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue1.UpdateValue(Range2ColdWaterTemperature1.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue1.UpdateValue(Range2ColdWaterTemperature1.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -655,14 +628,12 @@ namespace CTIToolkit
 
         private void Range2ColdWaterTemperature2_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range2ColdWaterTemperature2.Text != TowerDesignCurveData.Range2ColdWaterTemperatureDataValue2.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue2.UpdateValue(Range2ColdWaterTemperature2.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue2.UpdateValue(Range2ColdWaterTemperature2.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -680,14 +651,12 @@ namespace CTIToolkit
 
         private void Range2ColdWaterTemperature3_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range2ColdWaterTemperature3.Text != TowerDesignCurveData.Range2ColdWaterTemperatureDataValue3.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue3.UpdateValue(Range2ColdWaterTemperature3.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue3.UpdateValue(Range2ColdWaterTemperature3.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -705,14 +674,12 @@ namespace CTIToolkit
 
         private void Range2ColdWaterTemperature4_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range2ColdWaterTemperature4.Text != TowerDesignCurveData.Range2ColdWaterTemperatureDataValue4.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue4.UpdateValue(Range2ColdWaterTemperature4.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue4.UpdateValue(Range2ColdWaterTemperature4.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -730,14 +697,12 @@ namespace CTIToolkit
 
         private void Range2ColdWaterTemperature5_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range2ColdWaterTemperature5.Text != TowerDesignCurveData.Range2ColdWaterTemperatureDataValue5.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue5.UpdateValue(Range2ColdWaterTemperature5.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue5.UpdateValue(Range2ColdWaterTemperature5.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -755,14 +720,12 @@ namespace CTIToolkit
 
         private void Range2ColdWaterTemperature6_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range2ColdWaterTemperature6.Text != TowerDesignCurveData.Range2ColdWaterTemperatureDataValue6.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue6.UpdateValue(Range2ColdWaterTemperature6.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue6.UpdateValue(Range2ColdWaterTemperature6.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -780,14 +743,12 @@ namespace CTIToolkit
 
         private void Range3ColdWaterTemperature1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range3ColdWaterTemperature1.Text != TowerDesignCurveData.Range3ColdWaterTemperatureDataValue1.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue1.UpdateValue(Range3ColdWaterTemperature1.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue1.UpdateValue(Range3ColdWaterTemperature1.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -805,14 +766,14 @@ namespace CTIToolkit
 
         private void Range3ColdWaterTemperature2_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
+            
 
             if (Range3ColdWaterTemperature2.Text != TowerDesignCurveData.Range3ColdWaterTemperatureDataValue2.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue2.UpdateValue(Range3ColdWaterTemperature2.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue2.UpdateValue(Range3ColdWaterTemperature2.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -830,14 +791,12 @@ namespace CTIToolkit
 
         private void Range3ColdWaterTemperature3_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
-            if (Range3ColdWaterTemperature3.Text != TowerDesignCurveData.Range3ColdWaterTemperatureDataValue3.InputValue)
+           if (Range3ColdWaterTemperature3.Text != TowerDesignCurveData.Range3ColdWaterTemperatureDataValue3.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue3.UpdateValue(Range3ColdWaterTemperature3.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue3.UpdateValue(Range3ColdWaterTemperature3.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -855,14 +814,12 @@ namespace CTIToolkit
 
         private void Range3ColdWaterTemperature4_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range3ColdWaterTemperature4.Text != TowerDesignCurveData.Range3ColdWaterTemperatureDataValue4.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue4.UpdateValue(Range3ColdWaterTemperature4.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue4.UpdateValue(Range3ColdWaterTemperature4.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -880,14 +837,12 @@ namespace CTIToolkit
 
         private void Range3ColdWaterTemperature5_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range3ColdWaterTemperature5.Text != TowerDesignCurveData.Range3ColdWaterTemperatureDataValue5.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue5.UpdateValue(Range3ColdWaterTemperature5.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue5.UpdateValue(Range3ColdWaterTemperature5.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -905,14 +860,12 @@ namespace CTIToolkit
 
         private void Range3ColdWaterTemperature6_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range3ColdWaterTemperature6.Text != TowerDesignCurveData.Range3ColdWaterTemperatureDataValue6.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue6.UpdateValue(Range3ColdWaterTemperature6.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue6.UpdateValue(Range3ColdWaterTemperature6.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -930,14 +883,12 @@ namespace CTIToolkit
 
         private void Range4ColdWaterTemperature1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range4ColdWaterTemperature1.Text != TowerDesignCurveData.Range4ColdWaterTemperatureDataValue1.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue1.UpdateValue(Range4ColdWaterTemperature1.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue1.UpdateValue(Range4ColdWaterTemperature1.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -955,14 +906,12 @@ namespace CTIToolkit
 
         private void Range4ColdWaterTemperature2_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range4ColdWaterTemperature2.Text != TowerDesignCurveData.Range4ColdWaterTemperatureDataValue2.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue2.UpdateValue(Range4ColdWaterTemperature2.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue2.UpdateValue(Range4ColdWaterTemperature2.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -980,14 +929,12 @@ namespace CTIToolkit
 
         private void Range4ColdWaterTemperature3_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range4ColdWaterTemperature3.Text != TowerDesignCurveData.Range4ColdWaterTemperatureDataValue3.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue3.UpdateValue(Range4ColdWaterTemperature3.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue3.UpdateValue(Range4ColdWaterTemperature3.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -1005,14 +952,12 @@ namespace CTIToolkit
 
         private void Range4ColdWaterTemperature4_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range4ColdWaterTemperature4.Text != TowerDesignCurveData.Range4ColdWaterTemperatureDataValue4.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue4.UpdateValue(Range4ColdWaterTemperature4.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue4.UpdateValue(Range4ColdWaterTemperature4.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -1030,14 +975,12 @@ namespace CTIToolkit
 
         private void Range4ColdWaterTemperature5_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range4ColdWaterTemperature5.Text != TowerDesignCurveData.Range4ColdWaterTemperatureDataValue5.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue5.UpdateValue(Range4ColdWaterTemperature5.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue5.UpdateValue(Range4ColdWaterTemperature5.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -1055,14 +998,12 @@ namespace CTIToolkit
 
         private void Range4ColdWaterTemperature6_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range4ColdWaterTemperature6.Text != TowerDesignCurveData.Range4ColdWaterTemperatureDataValue6.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue6.UpdateValue(Range4ColdWaterTemperature6.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue6.UpdateValue(Range4ColdWaterTemperature6.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -1080,14 +1021,12 @@ namespace CTIToolkit
 
         private void Range5ColdWaterTemperature1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range5ColdWaterTemperature1.Text != TowerDesignCurveData.Range5ColdWaterTemperatureDataValue1.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue1.UpdateValue(Range5ColdWaterTemperature1.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue1.UpdateValue(Range5ColdWaterTemperature1.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -1105,14 +1044,12 @@ namespace CTIToolkit
 
         private void Range5ColdWaterTemperature2_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range5ColdWaterTemperature2.Text != TowerDesignCurveData.Range5ColdWaterTemperatureDataValue2.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue2.UpdateValue(Range5ColdWaterTemperature2.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue2.UpdateValue(Range5ColdWaterTemperature2.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -1130,14 +1067,12 @@ namespace CTIToolkit
 
         private void Range5ColdWaterTemperature3_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range5ColdWaterTemperature3.Text != TowerDesignCurveData.Range5ColdWaterTemperatureDataValue3.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue3.UpdateValue(Range5ColdWaterTemperature3.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue3.UpdateValue(Range5ColdWaterTemperature3.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -1155,14 +1090,12 @@ namespace CTIToolkit
 
         private void Range5ColdWaterTemperature4_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range5ColdWaterTemperature4.Text != TowerDesignCurveData.Range5ColdWaterTemperatureDataValue4.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue4.UpdateValue(Range5ColdWaterTemperature4.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue4.UpdateValue(Range5ColdWaterTemperature4.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -1180,14 +1113,12 @@ namespace CTIToolkit
 
         private void Range5ColdWaterTemperature5_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range5ColdWaterTemperature5.Text != TowerDesignCurveData.Range5ColdWaterTemperatureDataValue5.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue5.UpdateValue(Range5ColdWaterTemperature5.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue5.UpdateValue(Range5ColdWaterTemperature5.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -1205,14 +1136,12 @@ namespace CTIToolkit
 
         private void Range5ColdWaterTemperature6_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range5ColdWaterTemperature6.Text != TowerDesignCurveData.Range5ColdWaterTemperatureDataValue6.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue6.UpdateValue(Range5ColdWaterTemperature6.Text, out errorMessage))
+            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue6.UpdateValue(Range5ColdWaterTemperature6.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;

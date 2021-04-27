@@ -95,6 +95,7 @@
     <Compile Include="PrintableForms\PrintLabelForm.Designer.cs">
       <DependentUpon>PrintLabelForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

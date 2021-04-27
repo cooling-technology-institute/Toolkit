@@ -1,5 +1,7 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
+using Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
@@ -234,12 +236,11 @@ namespace CTIToolkit
             bool returnValue = true;
             ErrorMessage = string.Empty;
 
-            //if (!MechanicalDraftPerformanceCurveViewModel.SaveDataFile(out errorMessage))
-            //{
-            //    stringBuilder.AppendLine(errorMessage);
-            //    returnValue = false;
-            //    errorMessage = string.Empty;
-            //}
+            if (!MechanicalDraftPerformanceCurveViewModel.SaveDataFile())
+            {
+                stringBuilder.AppendLine(MechanicalDraftPerformanceCurveViewModel.ErrorMessage);
+                returnValue = false;
+            }
 
             if (!SetDisplayedValues())
             {
@@ -259,6 +260,9 @@ namespace CTIToolkit
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
+
+            MechanicalDraftPerformanceCurveViewModel.DataFileName = fileName;
+            DataFilename.Text = MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue;
 
             if (!MechanicalDraftPerformanceCurveViewModel.SaveAsDataFile(fileName))
             {
@@ -324,6 +328,9 @@ namespace CTIToolkit
             {
                 if(TowerDesignDataForm.HasDataChanged)
                 {
+                    // save design data
+                    TowerDesignDataForm.SaveDesignData(MechanicalDraftPerformanceCurveViewModel.DesignData);
+
                     // enable controls
                     AddTestPointButton.Enabled = true;
                     AddTestPointName.Enabled = true;
@@ -385,14 +392,140 @@ namespace CTIToolkit
             }
         }
 
+        private DataTable BuildFlowRateDataTable(WaterFlowRate waterFlowRate, List<double> ranges)
+        {
+            DataTable DataTable = new DataTable();
+            DataColumn column;
+
+            // Create Name column
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Wet Bulb Temperature";
+            DataTable.Columns.Add(column);
+
+            foreach(double range in ranges)
+            {
+                // Create Value column.
+                column = new DataColumn();
+                column.DataType = Type.GetType("System.String");
+                column.ColumnName = string.Format("Range: {0}", range.ToString("F2"));
+                DataTable.Columns.Add(column);
+            }
+
+            // Create Units column.
+            column = new DataColumn();
+            column.DataType = Type.GetType("System.String");
+            column.ColumnName = "Units";
+            DataTable.Columns.Add(column);
+
+            foreach(WetBulbTemperature wetBulbTemperature in waterFlowRate.WetBulbTemperatures)
+            {
+                DataRow row = DataTable.NewRow();
+                row[0] = wetBulbTemperature.Temperature.ToString("F2");
+                int columnIndex = 1;
+                foreach(double temperature in wetBulbTemperature.ColdWaterTemperatures)
+                {
+                    row[columnIndex++] = temperature.ToString("F2");
+                }
+                if(IsInternationalSystemOfUnits_SI)
+                {
+                    row[columnIndex] = ConstantUnits.TemperatureCelsius;
+                }
+                else
+                {
+                    row[columnIndex] = ConstantUnits.TemperatureFahrenheit;
+                }
+                DataTable.Rows.Add(row);
+            }
+
+            return DataTable;
+        }
+
         public override void PrintPage(object sender, PrintPageEventArgs e)
         {
-            NameValueUnitsDataTable nameValueUnitsDataTable = new NameValueUnitsDataTable();
-            MechanicalDraftPerformanceCurveDataPrinterOutput printerOutput = new MechanicalDraftPerformanceCurveDataPrinterOutput(this.Label, nameValueUnitsDataTable, MechanicalDraftPerformanceCurveViewModel);
-            printerOutput.CreateControl();
-            var bm = new Bitmap(printerOutput.Width + MARGIN, printerOutput.Height + MARGIN);
-            printerOutput.DrawToBitmap(bm, new Rectangle(MARGIN, MARGIN, bm.Width + MARGIN, bm.Height + MARGIN));
-            e.Graphics.DrawImage(bm, 0, 0);
+            if(PrintControl.UserControl == null)
+            {
+                NameValueUnitsDataTable nameValueUnitsDataTable = new NameValueUnitsDataTable();
+                UserControl printerOutput;
+
+                if (PrintControl.IsDesignData)
+                {
+                    TowerDesignDataForm.FillNameValueUnitsDataTable(nameValueUnitsDataTable);
+                    //string[] designInfo = string[];
+                    //designInfo.Add(string.Format("{0} {1}"));
+                    MechanicalDraftPerformanceCurveDataPrinterOutput output = new MechanicalDraftPerformanceCurveDataPrinterOutput(this.PrintControl.Label, nameValueUnitsDataTable, MechanicalDraftPerformanceCurveViewModel);
+                    printerOutput = output;
+                    int bottom = 475;
+                    int index = 1;
+                    foreach (WaterFlowRate waterFlowRate in MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates)
+                    {
+                        bottom = output.AddWaterFlowRate(index++, bottom,
+                            string.Format("Water Flow Rate: {0} {1}", waterFlowRate.FlowRate, (IsInternationalSystemOfUnits_SI) ? ConstantUnits.LitersPerSecond : ConstantUnits.GallonsPerMinute),
+                            BuildFlowRateDataTable(waterFlowRate, MechanicalDraftPerformanceCurveViewModel.CalculationData.Ranges));
+                    }
+
+                }
+                else
+                {
+                    printerOutput = new MechanicalDraftPerformanceCurvePrinterOutput(this.PrintControl.Label, MechanicalDraftPerformanceCurveViewModel);
+     //               int bottom = 500;
+                }
+
+                printerOutput.CreateControl();
+                //float yLineTop = e.MarginBounds.Top;
+
+                //for (; _Line < 70; _Line++)
+                //{
+                //    if (yLineTop + lineHeight > e.MarginBounds.Bottom)
+                //    {
+                //        e.HasMorePages = true;
+                //        return;
+                //    }
+
+                //    e.Graphics.DrawString("TEST: " + _Line, myFont, Brushes.Black, new PointF(e.MarginBounds.Left, yLineTop));
+
+                //    yLineTop += lineHeight;
+                //}
+                //int height = 0;
+                //while(height < printerOutput.Height)
+                //{
+                //    //break into bitmap array
+                //}
+                //private void pd_PrintPage(object sender, PrintPageEventArgs ev)
+                //{
+                //    float linesPerPage = 0;
+                //    float yPos = 0;
+                //    int count = 0;
+                //    float leftMargin = ev.MarginBounds.Left;
+                //    float topMargin = ev.MarginBounds.Top;
+                //    string line = null;
+
+                //    // Calculate the number of lines per page.
+                //    linesPerPage = ev.MarginBounds.Height /
+                //       printFont.GetHeight(ev.Graphics);
+
+                //    // Print each line of the file.
+                //    while (count < linesPerPage &&
+                //       ((line = streamToPrint.ReadLine()) != null))
+                //    {
+                //        yPos = topMargin + (count *
+                //           printFont.GetHeight(ev.Graphics));
+                //        ev.Graphics.DrawString(line, printFont, Brushes.Black,
+                //           leftMargin, yPos, new StringFormat());
+                //        count++;
+                //    }
+
+                //    // If more lines exist, print another page.
+                //    if (line != null)
+                //        ev.HasMorePages = true;
+                //    else
+                //        ev.HasMorePages = false;
+                //}
+
+                PrintControl.Bitmap = new Bitmap(printerOutput.Width + MARGIN, printerOutput.Height + MARGIN);
+                printerOutput.DrawToBitmap(PrintControl.Bitmap, new Rectangle(MARGIN, MARGIN, PrintControl.Bitmap.Width + MARGIN, PrintControl.Bitmap.Height + MARGIN));
+            }
+            e.Graphics.DrawImage(PrintControl.Bitmap, 0, 0);
 
         }
 

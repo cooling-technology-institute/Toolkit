@@ -410,6 +410,9 @@ namespace CTIToolkit
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
+            
+            DemandCurveViewModel.DataFileName = fileName;
+            DataFilename.Text = DemandCurveViewModel.DataFilenameInputValue;
 
             if (!DemandCurveViewModel.SaveAsDataFile(fileName))
             {
@@ -423,6 +426,10 @@ namespace CTIToolkit
 
         public override void PrintPage(object sender, PrintPageEventArgs e)
         {
+            //if(PrintControl.UserControl == null)
+            //{
+
+            //}
             NameValueUnitsDataTable nameValueUnitsDataTable = new NameValueUnitsDataTable();
 
             if (DemandCurveViewModel.GetDataTable() != null)
@@ -439,7 +446,7 @@ namespace CTIToolkit
                 {
                 }
 
-                DemandCurvePrinterOutput printerOutput = new DemandCurvePrinterOutput(this.Label, nameValueUnitsDataTable, DemandCurveViewModel);
+                DemandCurvePrinterOutput printerOutput = new DemandCurvePrinterOutput(this.PrintControl.Label, nameValueUnitsDataTable, DemandCurveViewModel);
                 printerOutput.CreateControl();
                 var bm = new Bitmap(printerOutput.Width, printerOutput.Height);
                 printerOutput.DrawToBitmap(bm, new Rectangle(0, 0, bm.Width, bm.Height));

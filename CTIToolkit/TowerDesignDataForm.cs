@@ -2,6 +2,7 @@
 
 using Models;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -111,6 +112,18 @@ namespace CTIToolkit
         //    }
         //}
 
+        public void FillNameValueUnitsDataTable(NameValueUnitsDataTable nameValueUnitsDataTable)
+        {
+            nameValueUnitsDataTable.AddRow(TowerDesignData.WaterFlowRateDataValue.InputMessage, TowerDesignData.WaterFlowRateDataValue.InputValue, WaterFlowRateUnits.Text);
+            nameValueUnitsDataTable.AddRow(TowerDesignData.HotWaterTemperatureDataValue.InputMessage, TowerDesignData.HotWaterTemperatureDataValue.InputValue, HotWaterTemperatureUnits.Text);
+            nameValueUnitsDataTable.AddRow(TowerDesignData.ColdWaterTemperatureDataValue.InputMessage, TowerDesignData.ColdWaterTemperatureDataValue.InputValue, ColdWaterTemperatureUnits.Text);
+            nameValueUnitsDataTable.AddRow(TowerDesignData.WetBulbTemperatureDataValue.InputMessage, TowerDesignData.WetBulbTemperatureDataValue.InputValue, WetBulbTemperatureUnits.Text);
+            nameValueUnitsDataTable.AddRow(TowerDesignData.DryBulbTemperatureDataValue.InputMessage, TowerDesignData.DryBulbTemperatureDataValue.InputValue, DryBulbTemperatureUnits.Text);
+            nameValueUnitsDataTable.AddRow(TowerDesignData.FanDriverPowerDataValue.InputMessage, TowerDesignData.FanDriverPowerDataValue.InputValue, FanDriverPowerUnits.Text);
+            nameValueUnitsDataTable.AddRow(TowerDesignData.BarometricPressureDataValue.InputMessage, TowerDesignData.BarometricPressureDataValue.InputValue, BarometricPressureUnits.Text);
+            nameValueUnitsDataTable.AddRow(TowerDesignData.LiquidToGasRatioDataValue.InputMessage, TowerDesignData.LiquidToGasRatioDataValue.InputValue, string.Empty);
+        }
+
         public bool LoadData(TowerDesignData data)
         {
             TowerDesignData = data;
@@ -123,6 +136,24 @@ namespace CTIToolkit
             }
 
             return returnValue;
+        }
+
+        public void SaveDesignData(TowerDesignData data)
+        {
+            data = TowerDesignData;
+            //data.Range1Value = TowerDesignData.Range1Value;
+
+            if(data.TowerDesignCurveData == null)
+            {
+                data.TowerDesignCurveData = new List<TowerDesignCurveData>();
+            }
+            data.TowerDesignCurveData.Clear();
+            foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
+            {
+                data.TowerDesignCurveData.Add(tabPage.UserControl.TowerDesignCurveData);
+            }
+
+            IsChanged = false;
         }
 
         private bool SetDisplayedValues()
@@ -740,6 +771,7 @@ namespace CTIToolkit
                 if (tabPage.UserControl.IsChanged)
                 {
                     isChanged = true;
+                    break;
                 }
             }
             return isChanged;

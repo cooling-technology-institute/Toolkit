@@ -259,6 +259,8 @@
             this.Range5ColdWaterTemperature1.Name = "Range5ColdWaterTemperature1";
             this.Range5ColdWaterTemperature1.Size = new System.Drawing.Size(70, 20);
             this.Range5ColdWaterTemperature1.TabIndex = 0;
+            this.Range5ColdWaterTemperature1.Validating += new System.ComponentModel.CancelEventHandler(this.Range5ColdWaterTemperature1_Validating);
+            this.Range5ColdWaterTemperature1.Validated += new System.EventHandler(this.Range5ColdWaterTemperature1_Validated);
             // 
             // Range5ColdWaterTemperature2
             // 
@@ -266,6 +268,8 @@
             this.Range5ColdWaterTemperature2.Name = "Range5ColdWaterTemperature2";
             this.Range5ColdWaterTemperature2.Size = new System.Drawing.Size(70, 20);
             this.Range5ColdWaterTemperature2.TabIndex = 1;
+            this.Range5ColdWaterTemperature2.Validating += new System.ComponentModel.CancelEventHandler(this.Range5ColdWaterTemperature2_Validating);
+            this.Range5ColdWaterTemperature2.Validated += new System.EventHandler(this.Range5ColdWaterTemperature2_Validated);
             // 
             // Range5ColdWaterTemperature3
             // 
@@ -273,6 +277,8 @@
             this.Range5ColdWaterTemperature3.Name = "Range5ColdWaterTemperature3";
             this.Range5ColdWaterTemperature3.Size = new System.Drawing.Size(70, 20);
             this.Range5ColdWaterTemperature3.TabIndex = 2;
+            this.Range5ColdWaterTemperature3.Validating += new System.ComponentModel.CancelEventHandler(this.Range5ColdWaterTemperature3_Validating);
+            this.Range5ColdWaterTemperature3.Validated += new System.EventHandler(this.Range5ColdWaterTemperature3_Validated);
             // 
             // Range5ColdWaterTemperature4
             // 
@@ -280,6 +286,8 @@
             this.Range5ColdWaterTemperature4.Name = "Range5ColdWaterTemperature4";
             this.Range5ColdWaterTemperature4.Size = new System.Drawing.Size(70, 20);
             this.Range5ColdWaterTemperature4.TabIndex = 3;
+            this.Range5ColdWaterTemperature4.Validating += new System.ComponentModel.CancelEventHandler(this.Range5ColdWaterTemperature4_Validating);
+            this.Range5ColdWaterTemperature4.Validated += new System.EventHandler(this.Range5ColdWaterTemperature4_Validated);
             // 
             // Range5ColdWaterTemperature5
             // 
@@ -287,6 +295,8 @@
             this.Range5ColdWaterTemperature5.Name = "Range5ColdWaterTemperature5";
             this.Range5ColdWaterTemperature5.Size = new System.Drawing.Size(70, 20);
             this.Range5ColdWaterTemperature5.TabIndex = 4;
+            this.Range5ColdWaterTemperature5.Validating += new System.ComponentModel.CancelEventHandler(this.Range5ColdWaterTemperature5_Validating);
+            this.Range5ColdWaterTemperature5.Validated += new System.EventHandler(this.Range5ColdWaterTemperature5_Validated);
             // 
             // Range5ColdWaterTemperature6
             // 
@@ -294,6 +304,8 @@
             this.Range5ColdWaterTemperature6.Name = "Range5ColdWaterTemperature6";
             this.Range5ColdWaterTemperature6.Size = new System.Drawing.Size(70, 20);
             this.Range5ColdWaterTemperature6.TabIndex = 5;
+            this.Range5ColdWaterTemperature6.Validating += new System.ComponentModel.CancelEventHandler(this.Range5ColdWaterTemperature6_Validating);
+            this.Range5ColdWaterTemperature6.Validated += new System.EventHandler(this.Range5ColdWaterTemperature6_Validated);
             // 
             // Range4GroupBox
             // 
@@ -316,6 +328,8 @@
             this.Range4ColdWaterTemperature1.Name = "Range4ColdWaterTemperature1";
             this.Range4ColdWaterTemperature1.Size = new System.Drawing.Size(70, 20);
             this.Range4ColdWaterTemperature1.TabIndex = 0;
+            this.Range4ColdWaterTemperature1.Validating += new System.ComponentModel.CancelEventHandler(this.Range4ColdWaterTemperature1_Validating);
+            this.Range4ColdWaterTemperature1.Validated += new System.EventHandler(this.Range4ColdWaterTemperature1_Validated);
             // 
             // Range4ColdWaterTemperature2
             // 
@@ -323,6 +337,8 @@
             this.Range4ColdWaterTemperature2.Name = "Range4ColdWaterTemperature2";
             this.Range4ColdWaterTemperature2.Size = new System.Drawing.Size(70, 20);
             this.Range4ColdWaterTemperature2.TabIndex = 1;
+            this.Range4ColdWaterTemperature2.Validating += new System.ComponentModel.CancelEventHandler(this.Range4ColdWaterTemperature2_Validating);
+            this.Range4ColdWaterTemperature2.Validated += new System.EventHandler(this.Range4ColdWaterTemperature2_Validated);
             // 
             // Range4ColdWaterTemperature3
             // 
@@ -330,6 +346,8 @@
             this.Range4ColdWaterTemperature3.Name = "Range4ColdWaterTemperature3";
             this.Range4ColdWaterTemperature3.Size = new System.Drawing.Size(70, 20);
             this.Range4ColdWaterTemperature3.TabIndex = 2;
+            this.Range4ColdWaterTemperature3.Validating += new System.ComponentModel.CancelEventHandler(this.Range4ColdWaterTemperature3_Validating);
+            this.Range4ColdWaterTemperature3.Validated += new System.EventHandler(this.Range4ColdWaterTemperature3_Validated);
             // 
             // Range4ColdWaterTemperature4
             // 
@@ -337,6 +355,8 @@
             this.Range4ColdWaterTemperature4.Name = "Range4ColdWaterTemperature4";
             this.Range4ColdWaterTemperature4.Size = new System.Drawing.Size(70, 20);
             this.Range4ColdWaterTemperature4.TabIndex = 3;
+            this.Range4ColdWaterTemperature4.Validating += new System.ComponentModel.CancelEventHandler(this.Range4ColdWaterTemperature4_Validating);
+            this.Range4ColdWaterTemperature4.Validated += new System.EventHandler(this.Range4ColdWaterTemperature4_Validated);
             // 
             // Range4ColdWaterTemperature5
             // 
@@ -344,6 +364,8 @@
             this.Range4ColdWaterTemperature5.Name = "Range4ColdWaterTemperature5";
             this.Range4ColdWaterTemperature5.Size = new System.Drawing.Size(70, 20);
             this.Range4ColdWaterTemperature5.TabIndex = 4;
+            this.Range4ColdWaterTemperature5.Validating += new System.ComponentModel.CancelEventHandler(this.Range4ColdWaterTemperature5_Validating);
+            this.Range4ColdWaterTemperature5.Validated += new System.EventHandler(this.Range4ColdWaterTemperature5_Validated);
             // 
             // Range4ColdWaterTemperature6
             // 
@@ -351,6 +373,8 @@
             this.Range4ColdWaterTemperature6.Name = "Range4ColdWaterTemperature6";
             this.Range4ColdWaterTemperature6.Size = new System.Drawing.Size(70, 20);
             this.Range4ColdWaterTemperature6.TabIndex = 5;
+            this.Range4ColdWaterTemperature6.Validating += new System.ComponentModel.CancelEventHandler(this.Range4ColdWaterTemperature6_Validating);
+            this.Range4ColdWaterTemperature6.Validated += new System.EventHandler(this.Range4ColdWaterTemperature6_Validated);
             // 
             // Range3GroupBox
             // 
@@ -373,6 +397,8 @@
             this.Range3ColdWaterTemperature1.Name = "Range3ColdWaterTemperature1";
             this.Range3ColdWaterTemperature1.Size = new System.Drawing.Size(70, 20);
             this.Range3ColdWaterTemperature1.TabIndex = 0;
+            this.Range3ColdWaterTemperature1.Validating += new System.ComponentModel.CancelEventHandler(this.Range3ColdWaterTemperature1_Validating);
+            this.Range3ColdWaterTemperature1.Validated += new System.EventHandler(this.Range3ColdWaterTemperature1_Validated);
             // 
             // Range3ColdWaterTemperature2
             // 
@@ -380,6 +406,8 @@
             this.Range3ColdWaterTemperature2.Name = "Range3ColdWaterTemperature2";
             this.Range3ColdWaterTemperature2.Size = new System.Drawing.Size(70, 20);
             this.Range3ColdWaterTemperature2.TabIndex = 1;
+            this.Range3ColdWaterTemperature2.Validating += new System.ComponentModel.CancelEventHandler(this.Range3ColdWaterTemperature2_Validating);
+            this.Range3ColdWaterTemperature2.Validated += new System.EventHandler(this.Range3ColdWaterTemperature2_Validated);
             // 
             // Range3ColdWaterTemperature3
             // 
@@ -387,6 +415,8 @@
             this.Range3ColdWaterTemperature3.Name = "Range3ColdWaterTemperature3";
             this.Range3ColdWaterTemperature3.Size = new System.Drawing.Size(70, 20);
             this.Range3ColdWaterTemperature3.TabIndex = 2;
+            this.Range3ColdWaterTemperature3.Validating += new System.ComponentModel.CancelEventHandler(this.Range3ColdWaterTemperature3_Validating);
+            this.Range3ColdWaterTemperature3.Validated += new System.EventHandler(this.Range3ColdWaterTemperature3_Validated);
             // 
             // Range3ColdWaterTemperature4
             // 
@@ -394,6 +424,8 @@
             this.Range3ColdWaterTemperature4.Name = "Range3ColdWaterTemperature4";
             this.Range3ColdWaterTemperature4.Size = new System.Drawing.Size(70, 20);
             this.Range3ColdWaterTemperature4.TabIndex = 3;
+            this.Range3ColdWaterTemperature4.Validating += new System.ComponentModel.CancelEventHandler(this.Range3ColdWaterTemperature4_Validating);
+            this.Range3ColdWaterTemperature4.Validated += new System.EventHandler(this.Range3ColdWaterTemperature4_Validated);
             // 
             // Range3ColdWaterTemperature5
             // 
@@ -401,6 +433,8 @@
             this.Range3ColdWaterTemperature5.Name = "Range3ColdWaterTemperature5";
             this.Range3ColdWaterTemperature5.Size = new System.Drawing.Size(70, 20);
             this.Range3ColdWaterTemperature5.TabIndex = 4;
+            this.Range3ColdWaterTemperature5.Validating += new System.ComponentModel.CancelEventHandler(this.Range4ColdWaterTemperature5_Validating);
+            this.Range3ColdWaterTemperature5.Validated += new System.EventHandler(this.Range4ColdWaterTemperature5_Validated);
             // 
             // Range3ColdWaterTemperature6
             // 
@@ -408,6 +442,8 @@
             this.Range3ColdWaterTemperature6.Name = "Range3ColdWaterTemperature6";
             this.Range3ColdWaterTemperature6.Size = new System.Drawing.Size(70, 20);
             this.Range3ColdWaterTemperature6.TabIndex = 5;
+            this.Range3ColdWaterTemperature6.Validating += new System.ComponentModel.CancelEventHandler(this.Range3ColdWaterTemperature6_Validating);
+            this.Range3ColdWaterTemperature6.Validated += new System.EventHandler(this.Range3ColdWaterTemperature6_Validated);
             // 
             // Range2GroupBox
             // 
@@ -430,6 +466,8 @@
             this.Range2ColdWaterTemperature1.Name = "Range2ColdWaterTemperature1";
             this.Range2ColdWaterTemperature1.Size = new System.Drawing.Size(70, 20);
             this.Range2ColdWaterTemperature1.TabIndex = 0;
+            this.Range2ColdWaterTemperature1.Validating += new System.ComponentModel.CancelEventHandler(this.Range2ColdWaterTemperature1_Validating);
+            this.Range2ColdWaterTemperature1.Validated += new System.EventHandler(this.Range2ColdWaterTemperature1_Validated);
             // 
             // Range2ColdWaterTemperature2
             // 
@@ -437,6 +475,8 @@
             this.Range2ColdWaterTemperature2.Name = "Range2ColdWaterTemperature2";
             this.Range2ColdWaterTemperature2.Size = new System.Drawing.Size(70, 20);
             this.Range2ColdWaterTemperature2.TabIndex = 1;
+            this.Range2ColdWaterTemperature2.Validating += new System.ComponentModel.CancelEventHandler(this.Range2ColdWaterTemperature2_Validating);
+            this.Range2ColdWaterTemperature2.Validated += new System.EventHandler(this.Range2ColdWaterTemperature2_Validated);
             // 
             // Range2ColdWaterTemperature3
             // 
@@ -444,6 +484,8 @@
             this.Range2ColdWaterTemperature3.Name = "Range2ColdWaterTemperature3";
             this.Range2ColdWaterTemperature3.Size = new System.Drawing.Size(70, 20);
             this.Range2ColdWaterTemperature3.TabIndex = 2;
+            this.Range2ColdWaterTemperature3.Validating += new System.ComponentModel.CancelEventHandler(this.Range2ColdWaterTemperature3_Validating);
+            this.Range2ColdWaterTemperature3.Validated += new System.EventHandler(this.Range2ColdWaterTemperature3_Validated);
             // 
             // Range2ColdWaterTemperature4
             // 
@@ -451,6 +493,8 @@
             this.Range2ColdWaterTemperature4.Name = "Range2ColdWaterTemperature4";
             this.Range2ColdWaterTemperature4.Size = new System.Drawing.Size(70, 20);
             this.Range2ColdWaterTemperature4.TabIndex = 3;
+            this.Range2ColdWaterTemperature4.Validating += new System.ComponentModel.CancelEventHandler(this.Range2ColdWaterTemperature4_Validating);
+            this.Range2ColdWaterTemperature4.Validated += new System.EventHandler(this.Range2ColdWaterTemperature4_Validated);
             // 
             // Range2ColdWaterTemperature5
             // 
@@ -458,6 +502,8 @@
             this.Range2ColdWaterTemperature5.Name = "Range2ColdWaterTemperature5";
             this.Range2ColdWaterTemperature5.Size = new System.Drawing.Size(70, 20);
             this.Range2ColdWaterTemperature5.TabIndex = 4;
+            this.Range2ColdWaterTemperature5.Validating += new System.ComponentModel.CancelEventHandler(this.Range2ColdWaterTemperature5_Validating);
+            this.Range2ColdWaterTemperature5.Validated += new System.EventHandler(this.Range2ColdWaterTemperature5_Validated);
             // 
             // Range2ColdWaterTemperature6
             // 
@@ -465,6 +511,8 @@
             this.Range2ColdWaterTemperature6.Name = "Range2ColdWaterTemperature6";
             this.Range2ColdWaterTemperature6.Size = new System.Drawing.Size(70, 20);
             this.Range2ColdWaterTemperature6.TabIndex = 5;
+            this.Range2ColdWaterTemperature6.Validating += new System.ComponentModel.CancelEventHandler(this.Range2ColdWaterTemperature6_Validating);
+            this.Range2ColdWaterTemperature6.Validated += new System.EventHandler(this.Range2ColdWaterTemperature6_Validated);
             // 
             // Range1GroupBox
             // 
@@ -487,6 +535,8 @@
             this.Range1ColdWaterTemperature1.Name = "Range1ColdWaterTemperature1";
             this.Range1ColdWaterTemperature1.Size = new System.Drawing.Size(70, 20);
             this.Range1ColdWaterTemperature1.TabIndex = 0;
+            this.Range1ColdWaterTemperature1.Validating += new System.ComponentModel.CancelEventHandler(this.Range1ColdWaterTemperature1_Validating);
+            this.Range1ColdWaterTemperature1.Validated += new System.EventHandler(this.Range1ColdWaterTemperature1_Validated);
             // 
             // Range1ColdWaterTemperature2
             // 
@@ -494,6 +544,8 @@
             this.Range1ColdWaterTemperature2.Name = "Range1ColdWaterTemperature2";
             this.Range1ColdWaterTemperature2.Size = new System.Drawing.Size(70, 20);
             this.Range1ColdWaterTemperature2.TabIndex = 1;
+            this.Range1ColdWaterTemperature2.Validating += new System.ComponentModel.CancelEventHandler(this.Range1ColdWaterTemperature2_Validating);
+            this.Range1ColdWaterTemperature2.Validated += new System.EventHandler(this.Range1ColdWaterTemperature2_Validated);
             // 
             // Range1ColdWaterTemperature3
             // 
@@ -501,6 +553,8 @@
             this.Range1ColdWaterTemperature3.Name = "Range1ColdWaterTemperature3";
             this.Range1ColdWaterTemperature3.Size = new System.Drawing.Size(70, 20);
             this.Range1ColdWaterTemperature3.TabIndex = 2;
+            this.Range1ColdWaterTemperature3.Validating += new System.ComponentModel.CancelEventHandler(this.Range1ColdWaterTemperature3_Validating);
+            this.Range1ColdWaterTemperature3.Validated += new System.EventHandler(this.Range1ColdWaterTemperature3_Validated);
             // 
             // Range1ColdWaterTemperature4
             // 
@@ -508,6 +562,8 @@
             this.Range1ColdWaterTemperature4.Name = "Range1ColdWaterTemperature4";
             this.Range1ColdWaterTemperature4.Size = new System.Drawing.Size(70, 20);
             this.Range1ColdWaterTemperature4.TabIndex = 3;
+            this.Range1ColdWaterTemperature4.Validating += new System.ComponentModel.CancelEventHandler(this.Range1ColdWaterTemperature4_Validating);
+            this.Range1ColdWaterTemperature4.Validated += new System.EventHandler(this.Range1ColdWaterTemperature4_Validated);
             // 
             // Range1ColdWaterTemperature5
             // 
@@ -515,6 +571,8 @@
             this.Range1ColdWaterTemperature5.Name = "Range1ColdWaterTemperature5";
             this.Range1ColdWaterTemperature5.Size = new System.Drawing.Size(70, 20);
             this.Range1ColdWaterTemperature5.TabIndex = 4;
+            this.Range1ColdWaterTemperature5.Validating += new System.ComponentModel.CancelEventHandler(this.Range1ColdWaterTemperature5_Validating);
+            this.Range1ColdWaterTemperature5.Validated += new System.EventHandler(this.Range1ColdWaterTemperature5_Validated);
             // 
             // Range1ColdWaterTemperature6
             // 
@@ -522,6 +580,8 @@
             this.Range1ColdWaterTemperature6.Name = "Range1ColdWaterTemperature6";
             this.Range1ColdWaterTemperature6.Size = new System.Drawing.Size(70, 20);
             this.Range1ColdWaterTemperature6.TabIndex = 5;
+            this.Range1ColdWaterTemperature6.Validating += new System.ComponentModel.CancelEventHandler(this.Range1ColdWaterTemperature6_Validating);
+            this.Range1ColdWaterTemperature6.Validated += new System.EventHandler(this.Range1ColdWaterTemperature6_Validated);
             // 
             // UnitsWetWaterTemperature1
             // 

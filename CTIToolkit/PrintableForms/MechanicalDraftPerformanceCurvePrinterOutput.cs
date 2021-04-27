@@ -5,7 +5,7 @@ namespace CTIToolkit
 {
     public partial class MechanicalDraftPerformanceCurvePrinterOutput : UserControl
     {
-        public MechanicalDraftPerformanceCurvePrinterOutput(string optionalLabel, NameValueUnitsDataTable nameValueUnitsDataTable, MechanicalDraftPerformanceCurveViewModel viewModel)
+        public MechanicalDraftPerformanceCurvePrinterOutput(string optionalLabel, MechanicalDraftPerformanceCurveViewModel viewModel)
         {
             InitializeComponent();
         }

@@ -12,20 +12,24 @@ namespace CTIToolkit
     public class CalculatePrintUserControl : UserControl
     {
         public const int MARGIN = 10;
-        public string Label { get; set; }
+        public PrintControl PrintControl { get; set; }
         public string Filter { get; set; }
         public string DefaultExt { get; set; }
         public string Title { get; set; }
         public string DefaultFileName { get; set; }
         public string ErrorMessage { get; set; }
-        public bool IsDesignData { get; set; }
         public virtual void PrintPage(object sender, PrintPageEventArgs e) { }
         public virtual void Calculate() { }
         public virtual bool OpenDataFile(string fileName) { return false; }
         public virtual bool OpenNewDataFile(string fileName) { return false; }
         public virtual bool SaveDataFile() { return false; }
         public virtual bool SaveAsDataFile(string fileName) { return false; }
-
+        
+        public CalculatePrintUserControl()
+        {
+            PrintControl = new PrintControl();
+        }
+        
         public string BuildDefaultFileName()
         {
             string dataFileName = string.Empty;
