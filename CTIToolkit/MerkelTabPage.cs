@@ -1,13 +1,12 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 
+using CTIToolkit.PrintableForms;
 using System;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Text;
 using System.Windows.Forms;
-using CTIToolkit.PrintableForms;
-using CTIToolkit.Properties;
 using ViewModels;
 
 namespace CTIToolkit
@@ -182,11 +181,11 @@ namespace CTIToolkit
                     nameValueUnitsDataTable.AddRow(MerkelElevationPressureLabel.Text, Merkel_Elevation_Value.Text, MerkelElevationPressureUnits.Text);
                 }
 
-                MerkelPrinterOutput printerOutput = new MerkelPrinterOutput(this.PrintControl.Label, nameValueUnitsDataTable, MerkelViewModel);
+                MerkelPrinterOutput printerOutput = new MerkelPrinterOutput(e.PageBounds.Height - 80, this.PrintControl.Label, nameValueUnitsDataTable, MerkelViewModel);
                 printerOutput.CreateControl();
                 var bm = new Bitmap(printerOutput.Width, printerOutput.Height);
                 printerOutput.DrawToBitmap(bm, new Rectangle(0, 0, bm.Width, bm.Height));
-                e.Graphics.DrawImage(bm, MARGIN, MARGIN);
+                e.Graphics.DrawImage(bm, 40, 40);
             }
             else
             {

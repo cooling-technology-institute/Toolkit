@@ -253,7 +253,8 @@ namespace CTIToolkit
                                 calculatePrintUserControl.PrintControl.IsDesignData = printLabelForm.IsDesignData();
                             }    
                         }
-                        
+                        calculatePrintUserControl.PrintControl.UserControl = null;
+
                         PrintDialog printDialog = new PrintDialog()
                         {
                             AllowSelection = true,
@@ -302,6 +303,7 @@ namespace CTIToolkit
                                 calculatePrintUserControl.PrintControl.IsDesignData = printLabelForm.IsDesignData();
                             }
                         }
+                        calculatePrintUserControl.PrintControl.UserControl = null;
 
                         PrintDocument printDocument = new PrintDocument();
                         PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog()

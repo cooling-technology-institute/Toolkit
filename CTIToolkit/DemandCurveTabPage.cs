@@ -446,11 +446,11 @@ namespace CTIToolkit
                 {
                 }
 
-                DemandCurvePrinterOutput printerOutput = new DemandCurvePrinterOutput(this.PrintControl.Label, nameValueUnitsDataTable, DemandCurveViewModel);
+                DemandCurvePrinterOutput printerOutput = new DemandCurvePrinterOutput(e.PageBounds.Height - 80, this.PrintControl.Label, nameValueUnitsDataTable, DemandCurveViewModel);
                 printerOutput.CreateControl();
                 var bm = new Bitmap(printerOutput.Width, printerOutput.Height);
                 printerOutput.DrawToBitmap(bm, new Rectangle(0, 0, bm.Width, bm.Height));
-                e.Graphics.DrawImage(bm, MARGIN, MARGIN);
+                e.Graphics.DrawImage(bm, 40, 40);
             }
             else
             {

@@ -1,8 +1,5 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 
-using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Text;
 
 namespace Models
@@ -15,8 +12,12 @@ namespace Models
         public double Temperature4 { set; get; }
         public double Temperature5 { set; get; }
         public double Temperature6 { set; get; }
+        
+        [Newtonsoft.Json.JsonIgnore]
         public int TemperatureCount { set; get; }
+        [Newtonsoft.Json.JsonIgnore]
         public int LastValidTemperature { set; get; }
+        [Newtonsoft.Json.JsonIgnore]
         public bool TemperatureLessThan { set; get; }
 
         public TemperatureDesignData()

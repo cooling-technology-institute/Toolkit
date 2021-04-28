@@ -6,7 +6,7 @@ namespace CTIToolkit
 {
     public partial class MechanicalDraftPerformanceCurveDataPrinterOutput : UserControl
     {
-        public MechanicalDraftPerformanceCurveDataPrinterOutput(string optionalLabel, NameValueUnitsDataTable nameValueUnitsDataTable,  MechanicalDraftPerformanceCurveViewModel viewModel)
+        public MechanicalDraftPerformanceCurveDataPrinterOutput(int bottomOfPage, string optionalLabel, NameValueUnitsDataTable nameValueUnitsDataTable,  MechanicalDraftPerformanceCurveViewModel viewModel)
         {
             InitializeComponent();
             
@@ -22,23 +22,19 @@ namespace CTIToolkit
             {
                 InputPropertiesDataGridView.DataSource = nameValueUnitsDataTable.DataTable;
             }
-            
+
+            this.Height = bottomOfPage + 10;
+            Beta.Location = new System.Drawing.Point(0, bottomOfPage - Beta.Height);
         }
 
-        public int AddWaterFlowRate(int index, int bottom, string flowRate, DataTable dataTable)
+        public int AddWaterFlowRate(int index, int pageSize, int bottom, string flowRate, DataTable dataTable)
         {
-            //string waterflowratelabel = string.Format("WaterFlowRate{0}", index);
-            //Controls[waterflowratelabel].Text = flowRate;
-            //Controls[waterflowratelabel].Location = new System.Drawing.Point(10, bottom);
+            int controlSize = (dataTable.Rows.Count * 25) + 35;
+            if (bottom + controlSize >= pageSize)
+            {
+                bottom = pageSize + 40;
+            }
 
-            //bottom += 35;
-
-            //string waterFlowRateDataView1 = string.Format("WaterFlowRateDataView{0}", index);
-            //DataGridView dataGridView = Controls[waterFlowRateDataView1] as DataGridView;
-            //dataGridView.DataSource = dataTable;
-            //dataGridView.Location = new System.Drawing.Point(10, bottom);
-            //dataGridView.Location = new System.Drawing.Point(14, bottom);
-            //dataGridView.Size = new System.Drawing.Size(646, dataTable.Rows.Count * 30);
             Label WaterFlowRateLabel = new Label();
             // 
             // WaterFlowRate
@@ -59,32 +55,32 @@ namespace CTIToolkit
             
             WaterFlowRateDataView1.AllowUserToAddRows = false;
             WaterFlowRateDataView1.AllowUserToDeleteRows = false;
-            WaterFlowRateDataView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            WaterFlowRateDataView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             WaterFlowRateDataView1.BackgroundColor = System.Drawing.Color.White;
-            WaterFlowRateDataView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            WaterFlowRateDataView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            WaterFlowRateDataView1.BorderStyle = BorderStyle.None;
+            WaterFlowRateDataView1.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             WaterFlowRateDataView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            WaterFlowRateDataView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            WaterFlowRateDataView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
             WaterFlowRateDataView1.DefaultCellStyle = dataGridViewCellStyle4;
             WaterFlowRateDataView1.Enabled = false;
             WaterFlowRateDataView1.Name = string.Format("WaterFlowRateDataView{0}", bottom);
             WaterFlowRateDataView1.RowHeadersVisible = false;
-            WaterFlowRateDataView1.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            WaterFlowRateDataView1.Location = new System.Drawing.Point(14, bottom);
+            WaterFlowRateDataView1.ScrollBars = ScrollBars.None;
+            WaterFlowRateDataView1.Location = new System.Drawing.Point(28, bottom);
             WaterFlowRateDataView1.Size = new System.Drawing.Size(646, dataTable.Rows.Count * 30);
             //WaterFlowRateDataView1.TabIndex = 23;
 
@@ -92,7 +88,7 @@ namespace CTIToolkit
 
             Controls.Add(WaterFlowRateDataView1);
 
-            bottom += (dataTable.Rows.Count * 25) + 35;
+            bottom += controlSize;
 
             this.Height = bottom;
             
@@ -115,31 +111,31 @@ namespace CTIToolkit
         //DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
         //WaterFlowRateDataView1.AllowUserToAddRows = false;
         //WaterFlowRateDataView1.AllowUserToDeleteRows = false;
-        //WaterFlowRateDataView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+        //WaterFlowRateDataView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         //WaterFlowRateDataView1.BackgroundColor = System.Drawing.Color.White;
-        //WaterFlowRateDataView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-        //WaterFlowRateDataView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-        //dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        //WaterFlowRateDataView1.BorderStyle = BorderStyle.None;
+        //WaterFlowRateDataView1.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
+        //dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
         //dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
         //dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         //dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
         //dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
         //dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-        //dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+        //dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
         //WaterFlowRateDataView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-        //WaterFlowRateDataView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        //dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        //WaterFlowRateDataView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        //dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
         //dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
         //dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         //dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
         //dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
         //dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-        //dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+        //dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
         //WaterFlowRateDataView1.DefaultCellStyle = dataGridViewCellStyle4;
         //WaterFlowRateDataView1.Enabled = false;
         //WaterFlowRateDataView1.Name = string.Format("WaterFlowRateDataView1{0}", bottom);
         //WaterFlowRateDataView1.RowHeadersVisible = false;
-        //WaterFlowRateDataView1.ScrollBars = System.Windows.Forms.ScrollBars.None;
+        //WaterFlowRateDataView1.ScrollBars = ScrollBars.None;
         //WaterFlowRateDataView1.Location = new System.Drawing.Point(14, bottom);
         //WaterFlowRateDataView1.Size = new System.Drawing.Size(646, dataTable.Rows.Count * 20);
         ////WaterFlowRateDataView1.TabIndex = 23;

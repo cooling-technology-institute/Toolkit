@@ -8,7 +8,7 @@ namespace CTIToolkit
 {
     public partial class DemandCurvePrinterOutput : UserControl
     {
-        public DemandCurvePrinterOutput(string optionalLabel, NameValueUnitsDataTable nameValueUnitsDataTable, DemandCurveViewModel demandCurveViewModel)
+        public DemandCurvePrinterOutput(int bottomOfPage, string optionalLabel, NameValueUnitsDataTable nameValueUnitsDataTable, DemandCurveViewModel demandCurveViewModel)
         {
             InitializeComponent();
 
@@ -103,6 +103,9 @@ namespace CTIToolkit
 
                 DemandCurveChart.DataBind();
             }
+
+            this.Height = bottomOfPage + 10;
+            Beta.Location = new System.Drawing.Point(0, bottomOfPage - Beta.Height);
         }
     }
 }

@@ -29,8 +29,8 @@ namespace CTIToolkit
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.OptionalLabelTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -53,7 +53,7 @@ namespace CTIToolkit
             this.OptionalLabelTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.OptionalLabelTextBox.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OptionalLabelTextBox.ForeColor = System.Drawing.Color.Black;
-            this.OptionalLabelTextBox.Location = new System.Drawing.Point(143, 37);
+            this.OptionalLabelTextBox.Location = new System.Drawing.Point(143, 34);
             this.OptionalLabelTextBox.Name = "OptionalLabelTextBox";
             this.OptionalLabelTextBox.ReadOnly = true;
             this.OptionalLabelTextBox.Size = new System.Drawing.Size(620, 28);
@@ -65,7 +65,7 @@ namespace CTIToolkit
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(10, 187);
+            this.label1.Location = new System.Drawing.Point(3, 174);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(180, 19);
             this.label1.TabIndex = 20;
@@ -77,7 +77,7 @@ namespace CTIToolkit
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.ForeColor = System.Drawing.Color.Black;
-            this.textBox1.Location = new System.Drawing.Point(143, 3);
+            this.textBox1.Location = new System.Drawing.Point(143, 0);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(620, 28);
@@ -93,25 +93,25 @@ namespace CTIToolkit
             this.InputPropertiesDataGridView.BackgroundColor = System.Drawing.Color.White;
             this.InputPropertiesDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.InputPropertiesDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.InputPropertiesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.InputPropertiesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.InputPropertiesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.InputPropertiesDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.InputPropertiesDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
             this.InputPropertiesDataGridView.Enabled = false;
-            this.InputPropertiesDataGridView.Location = new System.Drawing.Point(14, 219);
+            this.InputPropertiesDataGridView.Location = new System.Drawing.Point(21, 206);
             this.InputPropertiesDataGridView.Name = "InputPropertiesDataGridView";
             this.InputPropertiesDataGridView.RowHeadersVisible = false;
             this.InputPropertiesDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -122,7 +122,7 @@ namespace CTIToolkit
             // 
             this.CTILogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.CTILogo.Image = global::CTIToolkit.Properties.Resources.colorlogo;
-            this.CTILogo.Location = new System.Drawing.Point(0, 3);
+            this.CTILogo.Location = new System.Drawing.Point(0, 0);
             this.CTILogo.Name = "CTILogo";
             this.CTILogo.Size = new System.Drawing.Size(137, 125);
             this.CTILogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -135,19 +135,18 @@ namespace CTIToolkit
             this.Beta.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Beta.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Beta.ForeColor = System.Drawing.Color.DarkRed;
-            this.Beta.Location = new System.Drawing.Point(227, 176);
+            this.Beta.Location = new System.Drawing.Point(0, 492);
             this.Beta.Name = "Beta";
             this.Beta.ReadOnly = true;
             this.Beta.Size = new System.Drawing.Size(462, 37);
             this.Beta.TabIndex = 22;
             this.Beta.Text = "CTI Toolkit 4.0 Beta Version";
-            this.Beta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(10, 443);
+            this.label2.Location = new System.Drawing.Point(3, 435);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(170, 19);
             this.label2.TabIndex = 24;
@@ -157,7 +156,7 @@ namespace CTIToolkit
             // 
             this.OwnerTextBox.BackColor = System.Drawing.Color.White;
             this.OwnerTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.OwnerTextBox.Location = new System.Drawing.Point(227, 74);
+            this.OwnerTextBox.Location = new System.Drawing.Point(218, 68);
             this.OwnerTextBox.Name = "OwnerTextBox";
             this.OwnerTextBox.ReadOnly = true;
             this.OwnerTextBox.Size = new System.Drawing.Size(462, 13);
@@ -169,7 +168,7 @@ namespace CTIToolkit
             // 
             this.ProjectTextBox.BackColor = System.Drawing.Color.White;
             this.ProjectTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ProjectTextBox.Location = new System.Drawing.Point(227, 93);
+            this.ProjectTextBox.Location = new System.Drawing.Point(218, 87);
             this.ProjectTextBox.Name = "ProjectTextBox";
             this.ProjectTextBox.ReadOnly = true;
             this.ProjectTextBox.Size = new System.Drawing.Size(462, 13);
@@ -181,7 +180,7 @@ namespace CTIToolkit
             // 
             this.LocationTextBox.BackColor = System.Drawing.Color.White;
             this.LocationTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.LocationTextBox.Location = new System.Drawing.Point(227, 112);
+            this.LocationTextBox.Location = new System.Drawing.Point(218, 106);
             this.LocationTextBox.Name = "LocationTextBox";
             this.LocationTextBox.ReadOnly = true;
             this.LocationTextBox.Size = new System.Drawing.Size(462, 13);
@@ -193,7 +192,7 @@ namespace CTIToolkit
             // 
             this.TowerManufacturerTextBox.BackColor = System.Drawing.Color.White;
             this.TowerManufacturerTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TowerManufacturerTextBox.Location = new System.Drawing.Point(227, 131);
+            this.TowerManufacturerTextBox.Location = new System.Drawing.Point(218, 125);
             this.TowerManufacturerTextBox.Name = "TowerManufacturerTextBox";
             this.TowerManufacturerTextBox.ReadOnly = true;
             this.TowerManufacturerTextBox.Size = new System.Drawing.Size(462, 13);
@@ -205,7 +204,7 @@ namespace CTIToolkit
             // 
             this.TowerTypeTextBox.BackColor = System.Drawing.Color.White;
             this.TowerTypeTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TowerTypeTextBox.Location = new System.Drawing.Point(227, 150);
+            this.TowerTypeTextBox.Location = new System.Drawing.Point(218, 144);
             this.TowerTypeTextBox.Name = "TowerTypeTextBox";
             this.TowerTypeTextBox.ReadOnly = true;
             this.TowerTypeTextBox.Size = new System.Drawing.Size(462, 13);
@@ -231,7 +230,7 @@ namespace CTIToolkit
             this.Controls.Add(this.InputPropertiesDataGridView);
             this.Controls.Add(this.CTILogo);
             this.Name = "MechanicalDraftPerformanceCurveDataPrinterOutput";
-            this.Size = new System.Drawing.Size(774, 489);
+            this.Size = new System.Drawing.Size(774, 532);
             ((System.ComponentModel.ISupportInitialize)(this.InputPropertiesDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CTILogo)).EndInit();
             this.ResumeLayout(false);

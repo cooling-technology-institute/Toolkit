@@ -401,12 +401,11 @@ namespace CTIToolkit
                     nameValueUnitsDataTable.AddRow(PsychrometricsViewModel.ElevationDataValueInputMessage, Elevation_Value.Text, ElevationUnits.Text);
                 }
 
-                PsychrometricPrinterOutput printerOutput = new PsychrometricPrinterOutput(calculationProperty, this.PrintControl.Label, nameValueUnitsDataTable, PsychrometricsViewModel);
+                PsychrometricPrinterOutput printerOutput = new PsychrometricPrinterOutput(e.PageBounds.Height - 80, calculationProperty, this.PrintControl.Label, nameValueUnitsDataTable, PsychrometricsViewModel);
                 printerOutput.CreateControl();
                 var bm = new Bitmap(printerOutput.Width, printerOutput.Height);
-                //bm.SetResolution(600, 600);
                 printerOutput.DrawToBitmap(bm, new Rectangle(0, 0, bm.Width, bm.Height));
-                e.Graphics.DrawImage(bm, MARGIN, MARGIN);
+                e.Graphics.DrawImage(bm, 40, 40);
             }
             else
             {

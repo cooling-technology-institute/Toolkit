@@ -1,4 +1,5 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
+
 using Models;
 using System;
 using System.Collections.Generic;
@@ -447,86 +448,84 @@ namespace CTIToolkit
             {
                 NameValueUnitsDataTable nameValueUnitsDataTable = new NameValueUnitsDataTable();
                 UserControl printerOutput;
+                
+                if(PrintControl.Bitmap != null)
+                {
+                    PrintControl.Bitmap.Dispose();
+                }
 
                 if (PrintControl.IsDesignData)
                 {
                     TowerDesignDataForm.FillNameValueUnitsDataTable(nameValueUnitsDataTable);
-                    //string[] designInfo = string[];
-                    //designInfo.Add(string.Format("{0} {1}"));
-                    MechanicalDraftPerformanceCurveDataPrinterOutput output = new MechanicalDraftPerformanceCurveDataPrinterOutput(this.PrintControl.Label, nameValueUnitsDataTable, MechanicalDraftPerformanceCurveViewModel);
+                    MechanicalDraftPerformanceCurveDataPrinterOutput output = new MechanicalDraftPerformanceCurveDataPrinterOutput(e.PageBounds.Height - 120, this.PrintControl.Label, nameValueUnitsDataTable, MechanicalDraftPerformanceCurveViewModel);
+                    PrintControl.X.Clear();
+                    PrintControl.PageIndex = 0;
                     printerOutput = output;
-                    int bottom = 475;
-                    int index = 1;
-                    foreach (WaterFlowRate waterFlowRate in MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates)
+                    if((MechanicalDraftPerformanceCurveViewModel.CalculationData != null) 
+                        && (MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates != null) 
+                        && (MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates.Count > 0))
                     {
-                        bottom = output.AddWaterFlowRate(index++, bottom,
-                            string.Format("Water Flow Rate: {0} {1}", waterFlowRate.FlowRate, (IsInternationalSystemOfUnits_SI) ? ConstantUnits.LitersPerSecond : ConstantUnits.GallonsPerMinute),
-                            BuildFlowRateDataTable(waterFlowRate, MechanicalDraftPerformanceCurveViewModel.CalculationData.Ranges));
-                    }
+                        int bottom = 475;
+                        int index = 2;
+                        int pageSize = output.Height;
+                        PrintControl.X.Add(0);
 
+                        //                    foreach (WaterFlowRate waterFlowRate in MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates)
+                        foreach (WaterFlowRate waterFlowRate in MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates)
+                        {
+                            bottom = output.AddWaterFlowRate(index++, pageSize, bottom,
+                                string.Format("Water Flow Rate: {0} {1}", waterFlowRate.FlowRate, (IsInternationalSystemOfUnits_SI) ? ConstantUnits.LitersPerSecond : ConstantUnits.GallonsPerMinute),
+                                BuildFlowRateDataTable(waterFlowRate, MechanicalDraftPerformanceCurveViewModel.CalculationData.Ranges));
+                            if(bottom > pageSize)
+                            {
+                                pageSize *= index++;
+                            }
+                            PrintControl.X.Add(bottom);
+                        }
+                        //PrintControl.X.Add(bottom);
+                    }
                 }
                 else
                 {
-                    printerOutput = new MechanicalDraftPerformanceCurvePrinterOutput(this.PrintControl.Label, MechanicalDraftPerformanceCurveViewModel);
+                    printerOutput = new MechanicalDraftPerformanceCurvePrinterOutput(e.PageBounds.Height - 120, this.PrintControl.Label, MechanicalDraftPerformanceCurveViewModel);
      //               int bottom = 500;
                 }
-
+                
+                PrintControl.UserControl = printerOutput;
                 printerOutput.CreateControl();
-                //float yLineTop = e.MarginBounds.Top;
-
-                //for (; _Line < 70; _Line++)
-                //{
-                //    if (yLineTop + lineHeight > e.MarginBounds.Bottom)
-                //    {
-                //        e.HasMorePages = true;
-                //        return;
-                //    }
-
-                //    e.Graphics.DrawString("TEST: " + _Line, myFont, Brushes.Black, new PointF(e.MarginBounds.Left, yLineTop));
-
-                //    yLineTop += lineHeight;
-                //}
-                //int height = 0;
-                //while(height < printerOutput.Height)
-                //{
-                //    //break into bitmap array
-                //}
-                //private void pd_PrintPage(object sender, PrintPageEventArgs ev)
-                //{
-                //    float linesPerPage = 0;
-                //    float yPos = 0;
-                //    int count = 0;
-                //    float leftMargin = ev.MarginBounds.Left;
-                //    float topMargin = ev.MarginBounds.Top;
-                //    string line = null;
-
-                //    // Calculate the number of lines per page.
-                //    linesPerPage = ev.MarginBounds.Height /
-                //       printFont.GetHeight(ev.Graphics);
-
-                //    // Print each line of the file.
-                //    while (count < linesPerPage &&
-                //       ((line = streamToPrint.ReadLine()) != null))
-                //    {
-                //        yPos = topMargin + (count *
-                //           printFont.GetHeight(ev.Graphics));
-                //        ev.Graphics.DrawString(line, printFont, Brushes.Black,
-                //           leftMargin, yPos, new StringFormat());
-                //        count++;
-                //    }
-
-                //    // If more lines exist, print another page.
-                //    if (line != null)
-                //        ev.HasMorePages = true;
-                //    else
-                //        ev.HasMorePages = false;
-                //}
-
-                PrintControl.Bitmap = new Bitmap(printerOutput.Width + MARGIN, printerOutput.Height + MARGIN);
-                printerOutput.DrawToBitmap(PrintControl.Bitmap, new Rectangle(MARGIN, MARGIN, PrintControl.Bitmap.Width + MARGIN, PrintControl.Bitmap.Height + MARGIN));
+                PrintControl.Bitmap = new Bitmap(printerOutput.Width, printerOutput.Height);
+                printerOutput.DrawToBitmap(PrintControl.Bitmap, new Rectangle(0, 0, PrintControl.Bitmap.Width, PrintControl.Bitmap.Height));
             }
-            e.Graphics.DrawImage(PrintControl.Bitmap, 0, 0);
+            
+            Bitmap bitmap;
 
+            if (PrintControl.PageIndex < PrintControl.X.Count)
+            {
+                //bitmap = PrintControl.Bitmap.Clone(new Rectangle(0, 0, PrintControl.Bitmap.Width, PrintControl.Bitmap.Height), PrintControl.Bitmap.PixelFormat);
+                int pageTop = PrintControl.X[PrintControl.PageIndex];
+                int pageBottom;
+                if (PrintControl.PageIndex+1 < PrintControl.X.Count)
+                {
+                    pageBottom = PrintControl.X[PrintControl.PageIndex + 1];
+                }
+                else
+                {
+                    pageBottom = PrintControl.Bitmap.Height;
+                }
+                //bitmap = PrintControl.Bitmap.Clone(new Rectangle(0, pageTop, PrintControl.Bitmap.Width, pageBottom), PrintControl.Bitmap.PixelFormat);
+                if (PrintControl.PageIndex < PrintControl.X.Count)
+                {
+                    e.HasMorePages = true;
+                }
+                e.Graphics.DrawImage(PrintControl.Bitmap, 40, 40);
+                //e.Graphics.DrawImage(PrintControl.Bitmap, 40, 40, new Rectangle(0, pageTop, PrintControl.Bitmap.Width, pageBottom), PrintControl.Bitmap.PixelFormat);
+                PrintControl.PageIndex++;
+            }
+            else
+            {
+                //bitmap = PrintControl.Bitmap.Clone(new Rectangle(0, 0, PrintControl.Bitmap.Width, PrintControl.Bitmap.Height), PrintControl.Bitmap.PixelFormat);
+                e.Graphics.DrawImage(PrintControl.Bitmap, 40, 40);
+            }
         }
 
         private void Calculate_Click(object sender, EventArgs e)
