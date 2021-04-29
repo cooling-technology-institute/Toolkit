@@ -18,7 +18,6 @@ namespace CTIToolkit
             TowerTypeTextBox.Text = string.Format("Tower Type: {0}", viewModel.DesignData.TowerTypeValue.ToString());
 
             this.Height = bottomOfPage + 10;
-            Beta.Location = new System.Drawing.Point(0, bottomOfPage - Beta.Height);
         }
     }
 }

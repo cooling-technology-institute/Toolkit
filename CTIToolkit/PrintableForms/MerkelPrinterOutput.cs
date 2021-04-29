@@ -14,7 +14,6 @@ namespace CTIToolkit.PrintableForms
             InputPropertiesDataGridView.DataSource = new DataView(nameValueUnitsDataTable.DataTable);
             DataGridView.DataSource = merkelViewModel.GetDataTable();
             this.Height = bottomOfPage + 10;
-            Beta.Location = new System.Drawing.Point(0, bottomOfPage - Beta.Height);
         }
     }
 }

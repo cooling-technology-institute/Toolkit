@@ -1,6 +1,7 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 
 using System;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Text;
@@ -60,6 +61,7 @@ namespace CTIToolkit
             {
                 WebBulbTemperatureUnits.Text = ConstantUnits.TemperatureCelsius;
                 RangeUnits.Text = ConstantUnits.RangeK;
+                UserApproachUnits.Text = ConstantUnits.RangeK;
                 if (ElevationRadio.Checked)
                 {
                     ElevationPressureUnits.Text = ConstantUnits.Meter;
@@ -73,6 +75,7 @@ namespace CTIToolkit
             {
                 WebBulbTemperatureUnits.Text = ConstantUnits.TemperatureFahrenheit;
                 RangeUnits.Text = ConstantUnits.TemperatureFahrenheit;
+                UserApproachUnits.Text = ConstantUnits.TemperatureFahrenheit;
                 if (ElevationRadio.Checked)
                 {
                     ElevationPressureUnits.Text = ConstantUnits.Foot;
@@ -165,44 +168,18 @@ namespace CTIToolkit
             LiquidToGasRatioLabel.TextAlign = ContentAlignment.MiddleRight;
             LiquidToGasRatioValue.Text = DemandCurveViewModel.LiquidToGasRatioDataValueInputValue;
             toolTip1.SetToolTip(LiquidToGasRatioValue, DemandCurveViewModel.LiquidToGasRatioDataValueTooltip);
+
+            UserApproachLabel.Text = DemandCurveViewModel.UserApproachDataValueInputMessage + ":";
+            UserApproachLabel.TextAlign = ContentAlignment.MiddleRight;
+            UserApproachValue.Text = DemandCurveViewModel.UserApproachDataValueInputValue;
+            toolTip1.SetToolTip(UserApproachValue, DemandCurveViewModel.UserApproachDataValueTooltip);
         }
 
         public override void Calculate()
         {
             try
             {
-                DemandCurveChart.ChartAreas[0].AxisX.Minimum = 0.1;
-                DemandCurveChart.ChartAreas[0].AxisX.Maximum = 10;
-                //DemandCurveChart.ChartAreas[0].AxisX.IsLogarithmic = true;
-                //DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.LineColor = Color.FromArgb(0xCC, 0xCC, 0xCC);
-                //DemandCurveChart.ChartAreas[0].AxisX.LineColor = Color.FromArgb(0x77, 0x77, 0x77);
-                //DemandCurveChart.ChartAreas[0].AxisX.TitleForeColor = Color.FromArgb(0x77, 0x77, 0x77);
-                //DemandCurveChart.ChartAreas[0].AxisX.Title = "KaV/L";
-                ////m_wndGraph.GetAxis().GetLeft().GetGridPen().SetStyle(psSolid);
-                ////m_wndGraph.GetAxis().GetLeft().GetGridPen().SetWidth(1);
-                ////m_wndGraph.GetAxis().GetTop().GetLabels().SetAngle(90);
-                ////m_wndGraph.GetAxis().GetLeft().GetLabels().GetFont().SetSize(6);
-                ////m_wndGraph.GetAxis().GetLeft().SetAutomaticMinimum(true);
-                ////m_wndGraph.GetAxis().GetLeft().SetAutomaticMaximum(true);
-                ////m_wndGraph.GetAxis().GetLeft().GetTitle().GetFont().SetSize(10);
-                ////m_wndGraph.GetAxis().GetLeft().GetTitle().GetFont().SetBold(true);
-
-                //DemandCurveChart.ChartAreas[0].AxisY.Minimum = 0.1;
-                //DemandCurveChart.ChartAreas[0].AxisY.Maximum = 10;
-                //DemandCurveChart.ChartAreas[0].AxisY.IsLogarithmic = true;
-                //DemandCurveChart.ChartAreas[0].AxisY.MajorTickMark.LineColor = Color.FromArgb(0xCC, 0xCC, 0xCC);
-                //DemandCurveChart.ChartAreas[0].AxisY.LineColor = Color.FromArgb(0x77, 0x77, 0x77);
-                //DemandCurveChart.ChartAreas[0].AxisY.TitleForeColor = Color.FromArgb(0x77, 0x77, 0x77);
-                //DemandCurveChart.ChartAreas[0].AxisY.Title = "L/G";
-
-                ////clear data set
-                //if (DemandCurveGridView.DataSource != null)
-                //{
-                //    DemandCurveGridView.DataSource = null;
-                //}
-
-
-                DemandCurveChart.Series.Clear();
+                Chart.Series.Clear();
 
                 for (int i = 1; i <= INDEX_KAVL; i++)
                 {
@@ -221,50 +198,47 @@ namespace CTIToolkit
                     //Secondary Y-Axis    Right vertical axis.
                     if (DemandCurveViewModel.GetDataTable() != null) //&& //DemandCurveData.DataTable.Rows != null && //DemandCurveData.DataTable.Rows.Count > 0)
                     {
-                        DemandCurveChart.ChartAreas[0].AxisX.IsLabelAutoFit = false;
-                        DemandCurveChart.ChartAreas[0].AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(119)))), ((int)(((byte)(119)))));
-                        DemandCurveChart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
-                        DemandCurveChart.ChartAreas[0].AxisX.MajorGrid.Interval = 0.25D;
-                        //DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.Interval = 1.0;
-                        //DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.IntervalOffset = 1.0;
-                        //DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.Interval = 0.75D;
-                        //DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-                        DemandCurveChart.ChartAreas[0].AxisX.Maximum = 5D;
-                        DemandCurveChart.ChartAreas[0].AxisX.Minimum = 0.1D;
-                        DemandCurveChart.ChartAreas[0].AxisX.MinorTickMark.Enabled = true;
-                        DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.Enabled = true;
-                        DemandCurveChart.ChartAreas[0].AxisX.MinorTickMark.Interval = 0.75D;
-                        DemandCurveChart.ChartAreas[0].AxisX.MinorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-                        DemandCurveChart.ChartAreas[0].AxisX.Title = "L/G";
-                        DemandCurveChart.ChartAreas[0].AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+                        Chart.ChartAreas[0].AxisX.Title = "L/G";
+                        Chart.ChartAreas[0].AxisX.IsLogarithmic = true;
+                        //DemandCurveChart.ChartAreas[0].AxisX.IsLabelAutoFit = false;
+                        ////DemandCurveChart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
+                        //DemandCurveChart.ChartAreas[0].AxisX.MajorGrid.Interval = 0.25D;
+                        ////DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.Interval = 1.0;
+                        ////DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.IntervalOffset = 1.0;
+                        ////DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.Interval = 0.75D;
+                        //DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.LineColor = Color.Gray;
+                        //DemandCurveChart.ChartAreas[0].AxisX.MinorTickMark.Enabled = true;
+                        //DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.Enabled = true;
+                        //DemandCurveChart.ChartAreas[0].AxisX.MinorTickMark.Interval = 0.75D;
+                        //DemandCurveChart.ChartAreas[0].AxisX.MinorTickMark.LineColor = Color.LightGray;
 
-                        DemandCurveChart.ChartAreas[0].AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(119)))), ((int)(((byte)(119)))));
-                        DemandCurveChart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
-                        DemandCurveChart.ChartAreas[0].AxisY.MajorGrid.Interval = 0.25;
-                        DemandCurveChart.ChartAreas[0].AxisY.MajorGrid.Interval = 0.75D;
-                        DemandCurveChart.ChartAreas[0].AxisY.MajorTickMark.Interval = 0.5D;
-                        DemandCurveChart.ChartAreas[0].AxisY.Maximum = 10D;
-                        DemandCurveChart.ChartAreas[0].AxisY.Minimum = 0.1D;
-                        DemandCurveChart.ChartAreas[0].AxisY.MinorTickMark.Enabled = true;
-                        DemandCurveChart.ChartAreas[0].AxisY.MinorTickMark.Interval = 0.75D;
-                        DemandCurveChart.ChartAreas[0].AxisY.MinorTickMark.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-                        DemandCurveChart.ChartAreas[0].AxisY.Title = "KaV/L";
-                        DemandCurveChart.ChartAreas[0].AxisY.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+                        Chart.ChartAreas[0].AxisY.Title = "KaV/L";
+                        Chart.ChartAreas[0].AxisY.IsLogarithmic = true;
+                        //DemandCurveChart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
+                        //DemandCurveChart.ChartAreas[0].AxisY.MajorGrid.Interval = 0.25;
+                        //DemandCurveChart.ChartAreas[0].AxisY.MajorGrid.Interval = 0.75D;
+                        //DemandCurveChart.ChartAreas[0].AxisY.MajorTickMark.Interval = 0.5D;
+                        //DemandCurveChart.ChartAreas[0].AxisY.MinorTickMark.Enabled = true;
+                        //DemandCurveChart.ChartAreas[0].AxisY.MinorTickMark.Interval = 0.75D;
+                        //DemandCurveChart.ChartAreas[0].AxisY.MajorTickMark.LineColor = Color.Gray;
+                        //DemandCurveChart.ChartAreas[0].AxisY.MinorTickMark.LineColor = Color.LightGray;
 
-                        DemandCurveChart.ChartAreas[0].AxisX.Minimum = 0.1;
-                        DemandCurveChart.ChartAreas[0].AxisX.IsLogarithmic = true;
-                        DemandCurveChart.ChartAreas[0].AxisX.Maximum = 5;
+                        Chart.Legends[0].Title = "Approach";
 
-                        DemandCurveChart.ChartAreas[0].AxisY.Title = "KaV/L";
-                        DemandCurveChart.ChartAreas[0].AxisY.Minimum = 0.1;
-                        DemandCurveChart.ChartAreas[0].AxisY.IsLogarithmic = true;
+                        Chart.ChartAreas[0].CursorX.AutoScroll = true;
+                        Chart.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
+                        Chart.ChartAreas[0].CursorY.AutoScroll = true;
+                        Chart.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
 
-                        DemandCurveChart.Legends[0].Title = "Approach";
-
-                        DemandCurveChart.ChartAreas[0].CursorX.AutoScroll = true;
-                        DemandCurveChart.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
-                        DemandCurveChart.ChartAreas[0].CursorY.AutoScroll = true;
-                        DemandCurveChart.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
+                        //int startOffset = -2;
+                        //int endOffset = 2;
+                        //for(double interval = 0.5; interval < 6.0; interval += 0.5)
+                        //{
+                        //    CustomLabel intervalLabel = new CustomLabel(startOffset, endOffset, interval.ToString("F2"), 0, LabelMarkStyle.LineSideMark);
+                        //    DemandCurveChart.ChartAreas[0].AxisY.CustomLabels.Add(intervalLabel);
+                        //    startOffset = startOffset + 25;
+                        //    endOffset = endOffset + 25;
+                        //}
 
                         for (int i = 0; i < DemandCurveViewModel.DemandCurveCalculationLibrary.InitialApproachXValues.Length; i++)
                         {
@@ -274,12 +248,11 @@ namespace CTIToolkit
                                 {
                                     ChartArea = "ChartArea1",
                                     ChartType = SeriesChartType.Line,
-                                    //series.Color = System.Drawing.Color.Yellow,
                                     Name = string.Format("{0}", DemandCurveViewModel.DemandCurveCalculationLibrary.InitialApproachXValues[i]),
                                     XValueMember = string.Format("L/G-{0}", DemandCurveViewModel.DemandCurveCalculationLibrary.InitialApproachXValues[i]),
                                     YValueMembers = string.Format("kaVL-{0}", DemandCurveViewModel.DemandCurveCalculationLibrary.InitialApproachXValues[i]),
                                 };
-                                DemandCurveChart.Series.Add(series);
+                                Chart.Series.Add(series);
                             }
                         }
                         //                    if (Display_COEF)
@@ -296,7 +269,7 @@ namespace CTIToolkit
                         }
 
 
-                        DemandCurveChart.DataSource = DemandCurveViewModel.GetDataTable();
+                        Chart.DataSource = DemandCurveViewModel.GetDataTable();
 
                         //dataGridView1.AutoGenerateColumns = true;
                         //dataGridView1.DataSource = DemandCurveViewModel.GetDataTable();
@@ -304,14 +277,19 @@ namespace CTIToolkit
                         //dataGridView1.DataSource = SBind;
                         //dataGridView1.Refresh();
 
-                        DemandCurveChart.DataBind();
+                        Chart.DataBind();
 
+                        if (DemandCurveViewModel.GetOutputDataTable() != null)
+                        {
+                            // Set a DataGrid control's DataSource to the DataView.
+                            OutputGridView.DataSource = new DataView(DemandCurveViewModel.GetOutputDataTable());
+                        }
                     }
                 }
                 else
                 {
-                    //DemandCurveChart.ChartAreas[0].AxisX.IsLogarithmic = false;
-                    //DemandCurveChart.ChartAreas[0].AxisY.IsLogarithmic = false;
+                    Chart.ChartAreas[0].AxisX.IsLogarithmic = false;
+                    Chart.ChartAreas[0].AxisY.IsLogarithmic = false;
                 }
             }
             catch (Exception exception)
@@ -636,7 +614,7 @@ namespace CTIToolkit
 
         private void UserApproachValue_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!DemandCurveViewModel.ApproachDataValueUpdateValue(UserApproachValue.Text, out string errorMessage))
+            if (!DemandCurveViewModel.UserApproachDataValueUpdateValue(UserApproachValue.Text, out string errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
@@ -673,11 +651,11 @@ namespace CTIToolkit
                 toolTip1.SetToolTip(ElevationValue, DemandCurveViewModel.BarometricPressureDataValueTooltip);
                 if (IsInternationalSystemOfUnits_SI)
                 {
-                    ElevationPressureUnits.Text = ConstantUnits.Meter;
+                    ElevationPressureUnits.Text = ConstantUnits.BarometricPressureKiloPascal;
                 }
                 else
                 {
-                    ElevationPressureUnits.Text = ConstantUnits.Foot;
+                    ElevationPressureUnits.Text = ConstantUnits.BarometricPressureInchOfMercury;
                 }
             }
         }
@@ -699,6 +677,79 @@ namespace CTIToolkit
                     ElevationPressureUnits.Text = ConstantUnits.Foot;
                 }
             }
+        }
+
+        private void DemandCurveChart_Resize(object sender, EventArgs e)
+        {
+            //if (cy < 550)
+            //{
+            //    m_wndGraph.GetAxis().GetLeft().SetIncrement(.75);
+            //}
+            //else if (cx < 850)
+            //{
+            //    m_wndGraph.GetAxis().GetLeft().SetIncrement(.5);
+            //}
+            //else
+            //{
+            //    m_wndGraph.GetAxis().GetLeft().SetIncrement(.25);
+            //}
+
+            //if (cx < 650)
+            //{
+            //    m_wndGraph.GetAxis().GetBottom().SetIncrement(.5);
+            //}
+            //else if (cx < 850)
+            //{
+            //    m_wndGraph.GetAxis().GetBottom().SetIncrement(.25);
+            //}
+            //else
+            //{
+            //    m_wndGraph.GetAxis().GetBottom().SetIncrement(.2);
+            //}
+        }
+
+        private void DemandCurveTabPage_Resize(object sender, EventArgs e)
+        {
+            if(sender is Control)
+            {
+                Control control = (Control) sender;
+
+                int width = Chart.Size.Width - Chart.Margin.Left - Chart.Margin.Right;
+                int height = Chart.Size.Height;
+                int controlHeight = control.Size.Height - Chart.Location.Y - Chart.Margin.Top - Chart.Margin.Bottom;
+                int controlWidth = control.Size.Width - Chart.Location.X - Chart.Margin.Left - Chart.Margin.Right;
+
+                if ((controlWidth > width) || (controlHeight > height))
+                {
+//                    Chart.Size = new Size(controlWidth, controlHeight);
+                }
+            }
+
+            //if (cy < 550)
+            //{
+            //    m_wndGraph.GetAxis().GetLeft().SetIncrement(.75);
+            //}
+            //else if (cx < 850)
+            //{
+            //    m_wndGraph.GetAxis().GetLeft().SetIncrement(.5);
+            //}
+            //else
+            //{
+            //    m_wndGraph.GetAxis().GetLeft().SetIncrement(.25);
+            //}
+
+            //if (cx < 650)
+            //{
+            //    m_wndGraph.GetAxis().GetBottom().SetIncrement(.5);
+            //}
+            //else if (cx < 850)
+            //{
+            //    m_wndGraph.GetAxis().GetBottom().SetIncrement(.25);
+            //}
+            //else
+            //{
+            //    m_wndGraph.GetAxis().GetBottom().SetIncrement(.2);
+            //}
         }
     }
 }

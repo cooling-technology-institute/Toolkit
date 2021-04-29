@@ -72,7 +72,7 @@
     <Compile Include="Psychrometrics\PsychrometricsInputData.cs" />
     <Compile Include="Psychrometrics\PsychrometricsOutputData.cs" />
     <Compile Include="Psychrometrics\PsychrometricsViewModel.cs" />
-    <Compile Include="ApproachDataValue.cs" />
+    <Compile Include="UserApproachDataValue.cs" />
     <Compile Include="RangeDataValue.cs" />
     <Compile Include="RelativeHumitityDataValue.cs" />
     <Compile Include="SeriesData.cs" />

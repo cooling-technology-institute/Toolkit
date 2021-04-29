@@ -205,18 +205,27 @@ namespace CalculationLibrary
             return data.Enthalpy;
         }
 
-        private void ConvertMerkelValues(MerkelCalculationData data)
+        protected void ConvertMerkelValues(MerkelCalculationData data)
         {
             if (data.IsInternationalSystemOfUnits_SI)
             {
                 data.HotWaterTemperature = UnitConverter.ConvertCelsiusToFahrenheit(data.HotWaterTemperature);
                 data.ColdWaterTemperature = UnitConverter.ConvertCelsiusToFahrenheit(data.ColdWaterTemperature);
                 data.WetBulbTemperature = UnitConverter.ConvertCelsiusToFahrenheit(data.WetBulbTemperature);
+                if (!data.IsElevation)
+                {
+                    data.Elevation = UnitConverter.ConvertKilopascalToElevationInMeters(data.BarometricPressure);
+                }
                 data.Elevation = UnitConverter.ConvertMetersToFeet(data.Elevation);
+            }
+            else if(!data.IsElevation)
+            {
+                data.Elevation = UnitConverter.ConvertBarometricPressureToElevationInFeet(UnitConverter.CalculateInchesOfMercuryToPsi(data.BarometricPressure));
             }
 
             data.Range = data.HotWaterTemperature - data.ColdWaterTemperature;
             data.Approach = data.ColdWaterTemperature - data.WetBulbTemperature;
+
             data.IsInternationalSystemOfUnits_SI = false;
         }
 
@@ -225,14 +234,17 @@ namespace CalculationLibrary
         // double Apr - merkelData.Approach
         // double LG - merkelData.WaterAirRatio
         // double Elev - merkelData.Elevation
-        public bool CalculateMerkel(MerkelCalculationData merkelCalculationData)
+        public bool CalculateMerkel(MerkelCalculationData merkelCalculationData, bool convert = false)
         {
             ErrorMessage = string.Empty;
             double KaV, Ha, Haex, Hain, Hw, Tcold, Thot, Tw;
             double[] X = new double[4] { 0.9, 0.6, 0.4, 0.1 };
             double pressure = 14.696;
 
-            ConvertMerkelValues(merkelCalculationData);
+            if(convert)
+            {
+                ConvertMerkelValues(merkelCalculationData);
+            }
 
             if (merkelCalculationData.Elevation != 0)
             {

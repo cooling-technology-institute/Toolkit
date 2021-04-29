@@ -39,7 +39,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.PrintMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PrintPreviewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.PrintSetupMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ExitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DocumentationMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,7 +90,6 @@
             this.toolStripSeparator1,
             this.PrintMenuItem,
             this.PrintPreviewMenuItem,
-            this.PrintSetupMenuItem,
             this.toolStripSeparator2,
             this.ExitMenuItem});
             this.FileMenuItem.Name = "FileMenuItem";
@@ -101,66 +99,59 @@
             // NewMenuItem
             // 
             this.NewMenuItem.Name = "NewMenuItem";
-            this.NewMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.NewMenuItem.Size = new System.Drawing.Size(143, 22);
             this.NewMenuItem.Text = "New";
             this.NewMenuItem.Click += new System.EventHandler(this.NewFile_Click);
             // 
             // OpenMenuItem
             // 
             this.OpenMenuItem.Name = "OpenMenuItem";
-            this.OpenMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.OpenMenuItem.Size = new System.Drawing.Size(143, 22);
             this.OpenMenuItem.Text = "Open";
             this.OpenMenuItem.Click += new System.EventHandler(this.OpenMenuItem_Click);
             // 
             // SaveMenuItem
             // 
             this.SaveMenuItem.Name = "SaveMenuItem";
-            this.SaveMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SaveMenuItem.Size = new System.Drawing.Size(143, 22);
             this.SaveMenuItem.Text = "Save";
             this.SaveMenuItem.Click += new System.EventHandler(this.SaveMenuItem_Click);
             // 
             // SaveAsMenuItem
             // 
             this.SaveAsMenuItem.Name = "SaveAsMenuItem";
-            this.SaveAsMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SaveAsMenuItem.Size = new System.Drawing.Size(143, 22);
             this.SaveAsMenuItem.Text = "Save As";
             this.SaveAsMenuItem.Click += new System.EventHandler(this.SaveAsMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(140, 6);
             // 
             // PrintMenuItem
             // 
             this.PrintMenuItem.Name = "PrintMenuItem";
-            this.PrintMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PrintMenuItem.Size = new System.Drawing.Size(143, 22);
             this.PrintMenuItem.Text = "Print ";
             this.PrintMenuItem.Click += new System.EventHandler(this.PrintMenuItem_Click);
             // 
             // PrintPreviewMenuItem
             // 
             this.PrintPreviewMenuItem.Name = "PrintPreviewMenuItem";
-            this.PrintPreviewMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PrintPreviewMenuItem.Size = new System.Drawing.Size(143, 22);
             this.PrintPreviewMenuItem.Text = "Print Preview";
             this.PrintPreviewMenuItem.Click += new System.EventHandler(this.PrintPreviewMenuItem_Click);
-            // 
-            // PrintSetupMenuItem
-            // 
-            this.PrintSetupMenuItem.Name = "PrintSetupMenuItem";
-            this.PrintSetupMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.PrintSetupMenuItem.Text = "Print Setup";
-            this.PrintSetupMenuItem.Click += new System.EventHandler(this.PrintSetupMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(140, 6);
             // 
             // ExitMenuItem
             // 
             this.ExitMenuItem.Name = "ExitMenuItem";
-            this.ExitMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExitMenuItem.Size = new System.Drawing.Size(143, 22);
             this.ExitMenuItem.Text = "Exit";
             this.ExitMenuItem.Click += new System.EventHandler(this.ExitMenuItem_Click);
             // 
@@ -227,7 +218,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 50);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(922, 799);
+            this.tabControl1.Size = new System.Drawing.Size(922, 925);
             this.tabControl1.TabIndex = 1;
             // 
             // toolStrip1
@@ -350,7 +341,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(922, 736);
+            this.ClientSize = new System.Drawing.Size(922, 862);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
@@ -388,7 +379,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem PrintMenuItem;
         private System.Windows.Forms.ToolStripMenuItem PrintPreviewMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem PrintSetupMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem ExitMenuItem;
         private System.Windows.Forms.ToolStrip toolStrip1;

@@ -29,9 +29,8 @@ namespace CTIToolkit
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.Beta = new System.Windows.Forms.TextBox();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.OptionalLabelTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -45,19 +44,6 @@ namespace CTIToolkit
             ((System.ComponentModel.ISupportInitialize)(this.InputPropertiesDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CTILogo)).BeginInit();
             this.SuspendLayout();
-            // 
-            // Beta
-            // 
-            this.Beta.BackColor = System.Drawing.Color.White;
-            this.Beta.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Beta.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Beta.ForeColor = System.Drawing.Color.DarkRed;
-            this.Beta.Location = new System.Drawing.Point(2, 551);
-            this.Beta.Name = "Beta";
-            this.Beta.ReadOnly = true;
-            this.Beta.Size = new System.Drawing.Size(417, 37);
-            this.Beta.TabIndex = 29;
-            this.Beta.Text = "CTI Toolkit 4.0 Beta Version";
             // 
             // OptionalLabelTextBox
             // 
@@ -105,23 +91,23 @@ namespace CTIToolkit
             this.InputPropertiesDataGridView.BackgroundColor = System.Drawing.Color.White;
             this.InputPropertiesDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.InputPropertiesDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.InputPropertiesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.InputPropertiesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.InputPropertiesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.InputPropertiesDataGridView.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.InputPropertiesDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.InputPropertiesDataGridView.Enabled = false;
             this.InputPropertiesDataGridView.Location = new System.Drawing.Point(21, 183);
             this.InputPropertiesDataGridView.Name = "InputPropertiesDataGridView";
@@ -211,7 +197,6 @@ namespace CTIToolkit
             this.Controls.Add(this.LocationTextBox);
             this.Controls.Add(this.ProjectTextBox);
             this.Controls.Add(this.OwnerTextBox);
-            this.Controls.Add(this.Beta);
             this.Controls.Add(this.OptionalLabelTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
@@ -227,8 +212,6 @@ namespace CTIToolkit
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox Beta;
         private System.Windows.Forms.TextBox OptionalLabelTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;

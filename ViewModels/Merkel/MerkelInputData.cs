@@ -50,43 +50,45 @@ namespace ViewModels
             ElevationDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
             WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
             BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+            ElevationDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
 
-            double value;
+            //double value;
 
-            if (IsElevation)
-            {
-                if (IsInternationalSystemOfUnits_SI)
-                {
-                    value = UnitConverter.ConvertKilopascalToElevationInMeters(BarometricPressureDataValue.Current);
-                }
-                else
-                {
-                    value = UnitConverter.ConvertBarometricPressureToElevationInFeet(UnitConverter.CalculateInchesOfMercuryToPsi(BarometricPressureDataValue.Current));
-                }
-                ElevationDataValue.UpdateCurrentValue(value, out string errorMessage);
-            }
-            else
-            {
-                if (IsInternationalSystemOfUnits_SI)
-                {
-                    value = UnitConverter.ConvertElevationInMetersToKilopascal(ElevationDataValue.Current);
-                }
-                else
-                {
-                    value = UnitConverter.CalculatePsiToInchesOfMercury(UnitConverter.ConvertElevationInFeetToBarometricPressure(ElevationDataValue.Current));
-                }
-                BarometricPressureDataValue.UpdateCurrentValue(value, out string errorMessage);
-            }
+            //if (IsElevation)
+            //{
+            //    if (IsInternationalSystemOfUnits_SI)
+            //    {
+            //        value = UnitConverter.ConvertKilopascalToElevationInMeters(BarometricPressureDataValue.Current);
+            //    }
+            //    else
+            //    {
+            //        value = UnitConverter.ConvertBarometricPressureToElevationInFeet(UnitConverter.CalculateInchesOfMercuryToPsi(BarometricPressureDataValue.Current));
+            //    }
+            //    ElevationDataValue.UpdateCurrentValue(value, out string errorMessage);
+            //}
+            //else
+            //{
+            //    if (IsInternationalSystemOfUnits_SI)
+            //    {
+            //        value = UnitConverter.ConvertElevationInMetersToKilopascal(ElevationDataValue.Current);
+            //    }
+            //    else
+            //    {
+            //        value = UnitConverter.CalculatePsiToInchesOfMercury(UnitConverter.ConvertElevationInFeetToBarometricPressure(ElevationDataValue.Current));
+            //    }
+            //    BarometricPressureDataValue.UpdateCurrentValue(value, out string errorMessage);
+            //}
         }
 
         public void FillMerkelData(MerkelCalculationData data)
         {
+            data.IsElevation = IsElevation;
             data.HotWaterTemperature = HotWaterTemperatureDataValue.Current;
             data.ColdWaterTemperature = ColdWaterTemperatureDataValue.Current;
             data.WetBulbTemperature = WetBulbTemperatureDataValue.Current;
             data.Elevation = ElevationDataValue.Current;
-            data.LiquidToGasRatio = LiquidToGasRatioDataValue .Current;
             data.BarometricPressure = BarometricPressureDataValue.Current;
+            data.LiquidToGasRatio = LiquidToGasRatioDataValue .Current;
         }
 
         public bool LoadData(MerkelDataFile merkelDataFile)

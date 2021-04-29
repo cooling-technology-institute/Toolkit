@@ -105,7 +105,6 @@ namespace CTIToolkit
             }
 
             this.Height = bottomOfPage + 10;
-            Beta.Location = new System.Drawing.Point(0, bottomOfPage - Beta.Height);
         }
     }
 }

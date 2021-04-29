@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.Psychrometrics_GridView = new System.Windows.Forms.DataGridView();
             this.PsychrometricPropertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.Psychrometrics_Enthalpy = new System.Windows.Forms.RadioButton();
             this.Psychrometrics_DryBulbTemperature_RelativeHumidity = new System.Windows.Forms.RadioButton();
@@ -62,26 +61,15 @@
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.DataFilename = new System.Windows.Forms.TextBox();
             this.DataFileLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.Psychrometrics_GridView)).BeginInit();
+            this.CalculatedValuesGroupBox = new System.Windows.Forms.GroupBox();
+            this.CalculatedValuesGridView = new System.Windows.Forms.DataGridView();
             this.PsychrometricPropertiesGroupBox.SuspendLayout();
             this.InputPropertiesGroupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.CalculatedValuesGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CalculatedValuesGridView)).BeginInit();
             this.SuspendLayout();
-            // 
-            // Psychrometrics_GridView
-            // 
-            this.Psychrometrics_GridView.AllowUserToAddRows = false;
-            this.Psychrometrics_GridView.AllowUserToDeleteRows = false;
-            this.Psychrometrics_GridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.Psychrometrics_GridView.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.Psychrometrics_GridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Psychrometrics_GridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Psychrometrics_GridView.Location = new System.Drawing.Point(9, 360);
-            this.Psychrometrics_GridView.Name = "Psychrometrics_GridView";
-            this.Psychrometrics_GridView.ReadOnly = true;
-            this.Psychrometrics_GridView.Size = new System.Drawing.Size(756, 294);
-            this.Psychrometrics_GridView.TabIndex = 13;
             // 
             // PsychrometricPropertiesGroupBox
             // 
@@ -401,30 +389,57 @@
             this.DataFileLabel.TabIndex = 25;
             this.DataFileLabel.Text = "Data  File:";
             // 
+            // CalculatedValuesGroupBox
+            // 
+            this.CalculatedValuesGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.CalculatedValuesGroupBox.Controls.Add(this.CalculatedValuesGridView);
+            this.CalculatedValuesGroupBox.Location = new System.Drawing.Point(10, 359);
+            this.CalculatedValuesGroupBox.Name = "CalculatedValuesGroupBox";
+            this.CalculatedValuesGroupBox.Size = new System.Drawing.Size(755, 298);
+            this.CalculatedValuesGroupBox.TabIndex = 31;
+            this.CalculatedValuesGroupBox.TabStop = false;
+            this.CalculatedValuesGroupBox.Text = "Calculated Values:";
+            // 
+            // CalculatedValuesGridView
+            // 
+            this.CalculatedValuesGridView.AllowUserToAddRows = false;
+            this.CalculatedValuesGridView.AllowUserToDeleteRows = false;
+            this.CalculatedValuesGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.CalculatedValuesGridView.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.CalculatedValuesGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.CalculatedValuesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.CalculatedValuesGridView.Location = new System.Drawing.Point(7, 20);
+            this.CalculatedValuesGridView.Name = "CalculatedValuesGridView";
+            this.CalculatedValuesGridView.ReadOnly = true;
+            this.CalculatedValuesGridView.Size = new System.Drawing.Size(735, 262);
+            this.CalculatedValuesGridView.TabIndex = 0;
+            this.CalculatedValuesGridView.TabStop = false;
+            // 
             // PsychrometricsTabPage
             // 
+            this.AutoSize = true;
+            this.Controls.Add(this.CalculatedValuesGroupBox);
             this.Controls.Add(this.DataFilename);
             this.Controls.Add(this.DataFileLabel);
-            this.Controls.Add(this.Psychrometrics_GridView);
             this.Controls.Add(this.PsychrometricPropertiesGroupBox);
             this.Controls.Add(this.InputPropertiesGroupBox);
             this.Controls.Add(this.PsychrometricsCalculate);
             this.Name = "PsychrometricsTabPage";
-            this.Size = new System.Drawing.Size(781, 764);
-            ((System.ComponentModel.ISupportInitialize)(this.Psychrometrics_GridView)).EndInit();
+            this.Size = new System.Drawing.Size(781, 674);
             this.PsychrometricPropertiesGroupBox.ResumeLayout(false);
             this.PsychrometricPropertiesGroupBox.PerformLayout();
             this.InputPropertiesGroupBox.ResumeLayout(false);
             this.InputPropertiesGroupBox.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.CalculatedValuesGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.CalculatedValuesGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView Psychrometrics_GridView;
         private System.Windows.Forms.GroupBox PsychrometricPropertiesGroupBox;
         private System.Windows.Forms.RadioButton Psychrometrics_Enthalpy;
         private System.Windows.Forms.RadioButton Psychrometrics_DryBulbTemperature_RelativeHumidity;
@@ -457,5 +472,7 @@
         private System.Windows.Forms.Label EnthalpyUnits;
         private System.Windows.Forms.TextBox DataFilename;
         private System.Windows.Forms.Label DataFileLabel;
+        private System.Windows.Forms.GroupBox CalculatedValuesGroupBox;
+        private System.Windows.Forms.DataGridView CalculatedValuesGridView;
     }
 }

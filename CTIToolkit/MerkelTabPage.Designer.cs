@@ -29,9 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.MerkelGridView = new System.Windows.Forms.DataGridView();
             this.InputPropertiesGroupBox = new System.Windows.Forms.GroupBox();
-            this.MerkelCalculate = new System.Windows.Forms.Button();
             this.MerkelElevationPressureLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.BarometricPressureRadio = new System.Windows.Forms.RadioButton();
@@ -49,30 +47,20 @@
             this.Merkel_HotWaterTemperature_Value = new System.Windows.Forms.TextBox();
             this.TemperatureColdWaterLabel = new System.Windows.Forms.Label();
             this.TemperatureHotWaterLabel = new System.Windows.Forms.Label();
+            this.MerkelCalculate = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.DataFilename = new System.Windows.Forms.TextBox();
             this.DataFileLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.MerkelGridView)).BeginInit();
+            this.CalculatedValuesGridView = new System.Windows.Forms.DataGridView();
+            this.CalculatedValuesGroupBox = new System.Windows.Forms.GroupBox();
             this.InputPropertiesGroupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CalculatedValuesGridView)).BeginInit();
+            this.CalculatedValuesGroupBox.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // MerkelGridView
-            // 
-            this.MerkelGridView.AllowUserToAddRows = false;
-            this.MerkelGridView.AllowUserToDeleteRows = false;
-            this.MerkelGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.MerkelGridView.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.MerkelGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.MerkelGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.MerkelGridView.Location = new System.Drawing.Point(9, 241);
-            this.MerkelGridView.Name = "MerkelGridView";
-            this.MerkelGridView.ReadOnly = true;
-            this.MerkelGridView.Size = new System.Drawing.Size(742, 294);
-            this.MerkelGridView.TabIndex = 13;
             // 
             // InputPropertiesGroupBox
             // 
@@ -97,16 +85,6 @@
             this.InputPropertiesGroupBox.TabIndex = 11;
             this.InputPropertiesGroupBox.TabStop = false;
             this.InputPropertiesGroupBox.Text = "Input Properties";
-            // 
-            // MerkelCalculate
-            // 
-            this.MerkelCalculate.Location = new System.Drawing.Point(677, 11);
-            this.MerkelCalculate.Name = "MerkelCalculate";
-            this.MerkelCalculate.Size = new System.Drawing.Size(75, 23);
-            this.MerkelCalculate.TabIndex = 15;
-            this.MerkelCalculate.Text = "Calculate";
-            this.MerkelCalculate.UseVisualStyleBackColor = true;
-            this.MerkelCalculate.Click += new System.EventHandler(this.MerkelCalculate_Click);
             // 
             // MerkelElevationPressureLabel
             // 
@@ -272,6 +250,16 @@
             this.TemperatureHotWaterLabel.Text = "Hot Water Temperature:";
             this.TemperatureHotWaterLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // MerkelCalculate
+            // 
+            this.MerkelCalculate.Location = new System.Drawing.Point(677, 11);
+            this.MerkelCalculate.Name = "MerkelCalculate";
+            this.MerkelCalculate.Size = new System.Drawing.Size(75, 23);
+            this.MerkelCalculate.TabIndex = 15;
+            this.MerkelCalculate.Text = "Calculate";
+            this.MerkelCalculate.UseVisualStyleBackColor = true;
+            this.MerkelCalculate.Click += new System.EventHandler(this.MerkelCalculate_Click);
+            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -293,28 +281,53 @@
             this.DataFileLabel.TabIndex = 27;
             this.DataFileLabel.Text = "Data  File:";
             // 
+            // CalculatedValuesGridView
+            // 
+            this.CalculatedValuesGridView.AllowUserToAddRows = false;
+            this.CalculatedValuesGridView.AllowUserToDeleteRows = false;
+            this.CalculatedValuesGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.CalculatedValuesGridView.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.CalculatedValuesGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.CalculatedValuesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.CalculatedValuesGridView.Location = new System.Drawing.Point(7, 20);
+            this.CalculatedValuesGridView.Name = "CalculatedValuesGridView";
+            this.CalculatedValuesGridView.ReadOnly = true;
+            this.CalculatedValuesGridView.Size = new System.Drawing.Size(730, 63);
+            this.CalculatedValuesGridView.TabIndex = 0;
+            this.CalculatedValuesGridView.TabStop = false;
+            // 
+            // CalculatedValuesGroupBox
+            // 
+            this.CalculatedValuesGroupBox.Controls.Add(this.CalculatedValuesGridView);
+            this.CalculatedValuesGroupBox.Location = new System.Drawing.Point(9, 241);
+            this.CalculatedValuesGroupBox.Name = "CalculatedValuesGroupBox";
+            this.CalculatedValuesGroupBox.Size = new System.Drawing.Size(743, 125);
+            this.CalculatedValuesGroupBox.TabIndex = 32;
+            this.CalculatedValuesGroupBox.TabStop = false;
+            this.CalculatedValuesGroupBox.Text = "Calculated Values:";
+            // 
             // MerkelTabPage
             // 
+            this.Controls.Add(this.CalculatedValuesGroupBox);
             this.Controls.Add(this.MerkelCalculate);
             this.Controls.Add(this.DataFilename);
             this.Controls.Add(this.DataFileLabel);
-            this.Controls.Add(this.MerkelGridView);
             this.Controls.Add(this.InputPropertiesGroupBox);
             this.Name = "MerkelTabPage";
             this.Size = new System.Drawing.Size(767, 554);
             this.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.MerkelTabPage_HelpRequested);
-            ((System.ComponentModel.ISupportInitialize)(this.MerkelGridView)).EndInit();
             this.InputPropertiesGroupBox.ResumeLayout(false);
             this.InputPropertiesGroupBox.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CalculatedValuesGridView)).EndInit();
+            this.CalculatedValuesGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView MerkelGridView;
         private System.Windows.Forms.GroupBox InputPropertiesGroupBox;
         private System.Windows.Forms.Label MerkelWetBulbTemperatureLabel;
         private System.Windows.Forms.Label MerkelTemperatureColdWaterUnits;
@@ -339,5 +352,7 @@
         private System.Windows.Forms.HelpProvider helpProvider1;
         private System.Windows.Forms.TextBox DataFilename;
         private System.Windows.Forms.Label DataFileLabel;
+        private System.Windows.Forms.GroupBox CalculatedValuesGroupBox;
+        private System.Windows.Forms.DataGridView CalculatedValuesGridView;
     }
 }

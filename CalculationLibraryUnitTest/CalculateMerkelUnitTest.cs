@@ -18,6 +18,7 @@ namespace CalculationLibraryUnitTest
 
             MerkelCalculationData data = new MerkelCalculationData(true)
             {
+                IsElevation = true,
                 Elevation = 50.0,
                 BarometricPressure = 0.0,
                 HotWaterTemperature = 40.0,
@@ -29,7 +30,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                returnValue = CalculationLibrary.CalculateMerkel(data);
+                returnValue = CalculationLibrary.CalculateMerkel(data, true);
             }
             catch
             {
@@ -42,6 +43,38 @@ namespace CalculationLibraryUnitTest
         }
 
         [TestMethod]
+        public void SI_CalculateMerkelLargeElevationTest()
+        {
+            bool methodThrew = false;
+            bool returnValue = false;
+
+            MerkelCalculationData data = new MerkelCalculationData(true)
+            {
+                IsElevation = true,
+                Elevation = 444.0,
+                BarometricPressure = 0.0,
+                HotWaterTemperature = 40.0,
+                ColdWaterTemperature = 30.0,
+                WetBulbTemperature = 25.0,
+                LiquidToGasRatio = 1.3
+            };
+
+            try
+            {
+                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                returnValue = CalculationLibrary.CalculateMerkel(data, true);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.IsTrue(returnValue, "CalculateMerkel return value");
+            Assert.AreEqual(1.4410303258277655, data.KaV_L, "Merkel value does not match");
+        }
+
+        [TestMethod]
         public void IP_CalculateMerkelTest()
         {
             bool methodThrew = false;
@@ -49,6 +82,7 @@ namespace CalculationLibraryUnitTest
 
             MerkelCalculationData data = new MerkelCalculationData(false)
             {
+                IsElevation = true,
                 Elevation = 50.0,
                 BarometricPressure = 0.0,
                 HotWaterTemperature = 100.0,
@@ -60,7 +94,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                returnValue = CalculationLibrary.CalculateMerkel(data);
+                returnValue = CalculationLibrary.CalculateMerkel(data, true);
             }
             catch
             {
@@ -72,6 +106,69 @@ namespace CalculationLibraryUnitTest
             Assert.AreEqual(2.1200361989715248, data.KaV_L, "Merkel value does not match");
         }
 
+        [TestMethod]
+        public void SI_CalculateMerkelBarometricPressureTest()
+        {
+            bool methodThrew = false;
+            bool returnValue = false;
+
+            MerkelCalculationData data = new MerkelCalculationData(true)
+            {
+                IsElevation = false,
+                Elevation = 0.0,
+                BarometricPressure = 14.0,
+                HotWaterTemperature = 40.0,
+                ColdWaterTemperature = 30.0,
+                WetBulbTemperature = 25.0,
+                LiquidToGasRatio = 1.3
+            };
+
+            try
+            {
+                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                returnValue = CalculationLibrary.CalculateMerkel(data, true);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.IsTrue(returnValue, "CalculateMerkel return value");
+            Assert.AreEqual(0.084193571669267636, data.KaV_L, "Merkel value does not match");
+        }
+
+        [TestMethod]
+        public void IP_CalculateMerkelBarometricPressureTest()
+        {
+            bool methodThrew = false;
+            bool returnValue = false;
+
+            MerkelCalculationData data = new MerkelCalculationData(false)
+            {
+                IsElevation = false,
+                Elevation = 0.0,
+                BarometricPressure = 14.0,
+                HotWaterTemperature = 100.0,
+                ColdWaterTemperature = 80.0,
+                WetBulbTemperature = 70.0,
+                LiquidToGasRatio = 1.3
+            };
+
+            try
+            {
+                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                returnValue = CalculationLibrary.CalculateMerkel(data, true);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.IsTrue(returnValue, "CalculateMerkel return value");
+            Assert.AreEqual(0.66440307482312777, data.KaV_L, "Merkel value does not match");
+        }
 
         [TestMethod]
         public void SI_CalculateMerkel_ElevationZeroTest()
@@ -80,6 +177,7 @@ namespace CalculationLibraryUnitTest
             bool returnValue = false;
             MerkelCalculationData data = new MerkelCalculationData(true)
             {
+                IsElevation = true,
                 Elevation = 0.0,
                 BarometricPressure = 0.0,
                 HotWaterTemperature = 40.0,
@@ -91,7 +189,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                returnValue = CalculationLibrary.CalculateMerkel(data);
+                returnValue = CalculationLibrary.CalculateMerkel(data, true);
             }
             catch
             {
@@ -111,6 +209,7 @@ namespace CalculationLibraryUnitTest
 
             MerkelCalculationData data = new MerkelCalculationData(false)
             {
+                IsElevation = true,
                 Elevation = 0.0,
                 BarometricPressure = 0.0,
                 HotWaterTemperature = 100.0,
@@ -122,7 +221,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                returnValue = CalculationLibrary.CalculateMerkel(data);
+                returnValue = CalculationLibrary.CalculateMerkel(data, true);
             }
             catch
             {
@@ -141,6 +240,7 @@ namespace CalculationLibraryUnitTest
             bool returnValue = false;
             MerkelCalculationData data = new MerkelCalculationData(true)
             {
+                IsElevation = true,
                 Elevation = 0.0,
                 BarometricPressure = 0.0,
                 HotWaterTemperature = 100.0,
@@ -152,7 +252,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                returnValue = CalculationLibrary.CalculateMerkel(data);
+                returnValue = CalculationLibrary.CalculateMerkel(data, true);
             }
             catch
             {
@@ -171,6 +271,7 @@ namespace CalculationLibraryUnitTest
 
             MerkelCalculationData data = new MerkelCalculationData(false)
             {
+                IsElevation = true,
                 Elevation = 0.0,
                 BarometricPressure = 0.0,
                 HotWaterTemperature = 212.0,
@@ -182,7 +283,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                returnValue = CalculationLibrary.CalculateMerkel(data);
+                returnValue = CalculationLibrary.CalculateMerkel(data, true);
             }
             catch
             {
@@ -211,7 +312,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                returnValue = CalculationLibrary.CalculateMerkel(data);
+                returnValue = CalculationLibrary.CalculateMerkel(data, true);
             }
             catch
             {
@@ -230,6 +331,7 @@ namespace CalculationLibraryUnitTest
 
             MerkelCalculationData data = new MerkelCalculationData(false)
             {
+                IsElevation = true,
                 Elevation = 0.0,
                 BarometricPressure = 0.0,
                 HotWaterTemperature = 112.0,
@@ -241,7 +343,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                returnValue = CalculationLibrary.CalculateMerkel(data);
+                returnValue = CalculationLibrary.CalculateMerkel(data, true);
             }
             catch
             {

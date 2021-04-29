@@ -88,6 +88,7 @@
             this.DataFilename = new System.Windows.Forms.TextBox();
             this.TowerDataGroupBox = new System.Windows.Forms.GroupBox();
             this.DataGridView = new System.Windows.Forms.DataGridView();
+            this.CalculatedValuesGroupBox = new System.Windows.Forms.GroupBox();
             this.TestResultsGroupBox.SuspendLayout();
             this.TestPointTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -95,6 +96,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.TowerDataGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
+            this.CalculatedValuesGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // DataFileLabel
@@ -110,7 +112,7 @@
             // 
             this.CalculateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CalculateButton.Enabled = false;
-            this.CalculateButton.Location = new System.Drawing.Point(723, 17);
+            this.CalculateButton.Location = new System.Drawing.Point(716, 17);
             this.CalculateButton.Name = "CalculateButton";
             this.CalculateButton.Size = new System.Drawing.Size(74, 23);
             this.CalculateButton.TabIndex = 3;
@@ -122,7 +124,7 @@
             // 
             this.ViewGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ViewGraph.Enabled = false;
-            this.ViewGraph.Location = new System.Drawing.Point(710, 46);
+            this.ViewGraph.Location = new System.Drawing.Point(703, 46);
             this.ViewGraph.Name = "ViewGraph";
             this.ViewGraph.Size = new System.Drawing.Size(87, 23);
             this.ViewGraph.TabIndex = 4;
@@ -537,7 +539,7 @@
             // DesignDataButton
             // 
             this.DesignDataButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DesignDataButton.Location = new System.Drawing.Point(710, 75);
+            this.DesignDataButton.Location = new System.Drawing.Point(703, 75);
             this.DesignDataButton.Name = "DesignDataButton";
             this.DesignDataButton.Size = new System.Drawing.Size(87, 25);
             this.DesignDataButton.TabIndex = 10;
@@ -629,16 +631,26 @@
             // 
             this.DataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGridView.Location = new System.Drawing.Point(3, 526);
+            this.DataGridView.Location = new System.Drawing.Point(6, 19);
             this.DataGridView.Name = "DataGridView";
-            this.DataGridView.Size = new System.Drawing.Size(810, 129);
+            this.DataGridView.Size = new System.Drawing.Size(786, 128);
             this.DataGridView.TabIndex = 26;
+            // 
+            // CalculatedValuesGroupBox
+            // 
+            this.CalculatedValuesGroupBox.Controls.Add(this.DataGridView);
+            this.CalculatedValuesGroupBox.Location = new System.Drawing.Point(3, 526);
+            this.CalculatedValuesGroupBox.Name = "CalculatedValuesGroupBox";
+            this.CalculatedValuesGroupBox.Size = new System.Drawing.Size(804, 156);
+            this.CalculatedValuesGroupBox.TabIndex = 31;
+            this.CalculatedValuesGroupBox.TabStop = false;
+            this.CalculatedValuesGroupBox.Text = "Calculated Values:";
             // 
             // MechanicalDraftPerformanceCurveTabPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.DataGridView);
+            this.Controls.Add(this.CalculatedValuesGroupBox);
             this.Controls.Add(this.TowerDataGroupBox);
             this.Controls.Add(this.DataFilename);
             this.Controls.Add(this.DesignDataButton);
@@ -648,7 +660,7 @@
             this.Controls.Add(this.DataFileLabel);
             this.Controls.Add(this.UnitsLiquidToGasRatio);
             this.Name = "MechanicalDraftPerformanceCurveTabPage";
-            this.Size = new System.Drawing.Size(819, 662);
+            this.Size = new System.Drawing.Size(812, 695);
             this.TestResultsGroupBox.ResumeLayout(false);
             this.TestResultsGroupBox.PerformLayout();
             this.TestPointTabControl.ResumeLayout(false);
@@ -660,6 +672,7 @@
             this.TowerDataGroupBox.ResumeLayout(false);
             this.TowerDataGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).EndInit();
+            this.CalculatedValuesGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -726,5 +739,6 @@
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.GroupBox CalculatedValuesGroupBox;
     }
 }

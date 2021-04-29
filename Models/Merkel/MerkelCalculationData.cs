@@ -6,6 +6,7 @@ namespace Models
     {
         public bool IsInternationalSystemOfUnits_SI { get; set; }
 
+        public bool IsElevation { set; get; }
         public double Elevation { set; get; }
         public double BarometricPressure { set; get; }
 
@@ -21,6 +22,7 @@ namespace Models
         {
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
 
+            IsElevation = true;
             Elevation = 0.0;
             BarometricPressure = 0.0;
             HotWaterTemperature = 0.0;

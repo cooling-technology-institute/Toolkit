@@ -139,15 +139,15 @@ namespace CTIToolkit
             {
                 if (MerkelViewModel.CalculateMerkel())
                 {
-                    if (MerkelGridView.DataSource != null)
+                    if (CalculatedValuesGridView.DataSource != null)
                     {
-                        MerkelGridView.DataSource = null;
+                        CalculatedValuesGridView.DataSource = null;
                     }
 
                     if (MerkelViewModel.GetDataTable() != null)
                     {
                         // Set a DataGrid control's DataSource to the DataView.
-                        MerkelGridView.DataSource = new DataView(MerkelViewModel.GetDataTable());
+                        CalculatedValuesGridView.DataSource = new DataView(MerkelViewModel.GetDataTable());
                     }
                 }
                 else
@@ -186,6 +186,17 @@ namespace CTIToolkit
                 var bm = new Bitmap(printerOutput.Width, printerOutput.Height);
                 printerOutput.DrawToBitmap(bm, new Rectangle(0, 0, bm.Width, bm.Height));
                 e.Graphics.DrawImage(bm, 40, 40);
+
+                e.Graphics.DrawString("CTI Toolkit 4.0 Beta Version",
+                                      new Font("Times New Roman", 16),
+                                      new SolidBrush(Color.Red),
+                                      40, e.PageSettings.Bounds.Height - 60);
+                Font font = new Font("Times New Roman", 8);
+                SizeF size = e.Graphics.MeasureString(MerkelViewModel.DataFilenameInputValue, font);
+                e.Graphics.DrawString(MerkelViewModel.DataFilenameInputValue,
+                                      font,
+                                      new SolidBrush(Color.Black),
+                                      e.PageSettings.Bounds.Width - size.Width - 40, e.PageSettings.Bounds.Height - 60);
             }
             else
             {

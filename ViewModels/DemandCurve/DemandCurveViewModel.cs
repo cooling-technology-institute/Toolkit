@@ -250,8 +250,19 @@ namespace ViewModels
                 // output data in DemandCurveOutputData
                 NameValueUnitsDataTable.DataTable.Clear();
 
-                //data.BarometricPressure = truncit(data.BarometricPressure, 5);
-                NameValueUnitsDataTable.AddRow("KaV/L", DemandCurveCalculationData.DemandCurveData.KaV_L.ToString("F5"), string.Empty);
+                if(IsApproach)
+                {
+                    NameValueUnitsDataTable.AddRow("Approach", (DemandCurveCalculationData.DemandCurveData.TargetApproach > 0.001) ?
+                        DemandCurveCalculationData.DemandCurveData.TargetApproach.ToString("F5") : string.Empty, 
+                        (DemandCurveCalculationData.IsInternationalSystemOfUnits_SI) ? ConstantUnits.RangeK : ConstantUnits.TemperatureFahrenheit);
+                }
+                else
+                {
+                    NameValueUnitsDataTable.AddRow("KaV/L", 
+                        (DemandCurveCalculationData.DemandCurveData.KaV_L > 0.001) ? DemandCurveCalculationData.DemandCurveData.KaV_L.ToString("F5") : string.Empty, 
+                        string.Empty);
+                }
+
 
                 return true;
             }
@@ -288,7 +299,26 @@ namespace ViewModels
 
         public DataTable GetDataTable()
         {
-            return DemandCurveCalculationData.DataTable;
+            if(DemandCurveCalculationData == null)
+            {
+                return null;
+            }
+            else
+            {
+                return DemandCurveCalculationData.DataTable;
+            }
+        }
+
+        public DataTable GetOutputDataTable()
+        {
+            if (DemandCurveCalculationData == null)
+            {
+                return null;
+            }
+            else
+            {
+                return NameValueUnitsDataTable.DataTable;
+            }
         }
 
         public bool ConvertValues(bool isIS)
@@ -564,33 +594,32 @@ namespace ViewModels
             }
         }
 
-
-        public string ApproachDataValueInputMessage
+        public string UserApproachDataValueInputMessage
         {
             get
             {
-                return DemandCurveInputData.ApproachDataValue.InputMessage;
+                return DemandCurveInputData.UserApproachDataValue.InputMessage;
             }
         }
 
-        public string ApproachDataValueInputValue
+        public string UserApproachDataValueInputValue
         {
             get
             {
-                return DemandCurveInputData.ApproachDataValue.InputValue;
+                return DemandCurveInputData.UserApproachDataValue.InputValue;
             }
         }
 
-        public bool ApproachDataValueUpdateValue(string value, out string errorMessage)
+        public bool UserApproachDataValueUpdateValue(string value, out string errorMessage)
         {
-            return DemandCurveInputData.ApproachDataValue.UpdateValue(value, out errorMessage);
+            return DemandCurveInputData.UserApproachDataValue.UpdateValue(value, out errorMessage);
         }
 
-        public string ApproachDataValueTooltip
+        public string UserApproachDataValueTooltip
         {
             get
             {
-                return DemandCurveInputData.ApproachDataValue.ToolTip;
+                return DemandCurveInputData.UserApproachDataValue.ToolTip;
             }
         }
 

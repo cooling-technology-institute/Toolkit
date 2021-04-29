@@ -237,7 +237,7 @@ namespace CTIToolkit
                     if (PsychrometricsViewModel.GetDataTable() != null)
                     {
                         // Set a DataGrid control's DataSource to the DataView.
-                        Psychrometrics_GridView.DataSource = new DataView(PsychrometricsViewModel.GetDataTable());
+                        CalculatedValuesGridView.DataSource = new DataView(PsychrometricsViewModel.GetDataTable());
                     }
                 }
                 else
@@ -406,6 +406,17 @@ namespace CTIToolkit
                 var bm = new Bitmap(printerOutput.Width, printerOutput.Height);
                 printerOutput.DrawToBitmap(bm, new Rectangle(0, 0, bm.Width, bm.Height));
                 e.Graphics.DrawImage(bm, 40, 40);
+
+                e.Graphics.DrawString("CTI Toolkit 4.0 Beta Version",
+                                      new Font("Times New Roman", 16),
+                                      new SolidBrush(Color.Red),
+                                      40, e.PageSettings.Bounds.Height - 60);
+                Font font = new Font("Times New Roman", 8);
+                SizeF size = e.Graphics.MeasureString(PsychrometricsViewModel.DataFilenameInputValue, font);
+                e.Graphics.DrawString(PsychrometricsViewModel.DataFilenameInputValue,
+                                      font,
+                                      new SolidBrush(Color.Black),
+                                      e.PageSettings.Bounds.Width - size.Width - 40, e.PageSettings.Bounds.Height - 60);
             }
             else
             {
@@ -478,9 +489,9 @@ namespace CTIToolkit
 
         private void ClearDataSource()
         {
-            if (Psychrometrics_GridView.DataSource != null)
+            if (CalculatedValuesGridView.DataSource != null)
             {
-                Psychrometrics_GridView.DataSource = null;
+                CalculatedValuesGridView.DataSource = null;
             }
         }
 

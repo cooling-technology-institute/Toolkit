@@ -16,7 +16,6 @@ namespace ViewModels
         
         public WetBulbTemperatureDataValue WetBulbTemperatureDataValue { get; set; }
         public RangeDataValue RangeDataValue { get; set; }
-        public ApproachDataValue ApproachDataValue { get; set; }
         public ElevationDataValue ElevationDataValue { get; set; }
         public LiquidToGasRatioDataValue LiquidToGasRatioDataValue { get; set; }
         public BarometricPressureDataValue BarometricPressureDataValue { get; set; }
@@ -24,6 +23,7 @@ namespace ViewModels
         public SlopeDataValue SlopeDataValue { get; set; }
         public MinimumDataValue MinimumDataValue { get; set; }
         public MaximumDataValue MaximumDataValue { get; set; }
+        public UserApproachDataValue UserApproachDataValue { get; set; }
 
         public DemandCurveInputData(bool isDemo, bool isInternationalSystemOfUnits_SI)
         {
@@ -43,7 +43,7 @@ namespace ViewModels
             MinimumDataValue = new MinimumDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
             MaximumDataValue = new MaximumDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
             LiquidToGasRatioDataValue = new LiquidToGasRatioDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
-            ApproachDataValue = new ApproachDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            UserApproachDataValue = new UserApproachDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
         }
 
         public bool ConvertValues(bool isIS, bool isElevation, bool isApproach)
@@ -236,8 +236,8 @@ namespace ViewModels
             data.CurveMaximum = MaximumDataValue.Current;
             data.WetBulbTemperature = WetBulbTemperatureDataValue.Current;
             data.Range = RangeDataValue.Current;
-            data.Approach = ApproachDataValue.Current;
             data.IsElevation = IsElevation;
+            data.UserApproach = UserApproachDataValue.Current;
             return true;
         }
 

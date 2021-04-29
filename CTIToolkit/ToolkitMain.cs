@@ -26,23 +26,25 @@ namespace CTIToolkit
             UpdateUnits(ApplicationSettings.UnitsSelection);
 
             PsychrometricsUserControl = new PsychrometricsTabPage(ApplicationSettings);
-            PsychrometricsUserControl.Dock = DockStyle.Top;
+            PsychrometricsUserControl.Dock = DockStyle.Fill;
             TabPage psychrometricsTabPage = new TabPage("Psychrometrics");
             psychrometricsTabPage.Controls.Add(PsychrometricsUserControl);
             tabControl1.TabPages.Add(psychrometricsTabPage);
 
             MerkelUserControl = new MerkelTabPage(ApplicationSettings);
-            MerkelUserControl.Dock = DockStyle.Top;
+            MerkelUserControl.Dock = DockStyle.Fill;
             TabPage merkelTabPage = new TabPage("Merkel");
             merkelTabPage.Controls.Add(MerkelUserControl);
             tabControl1.TabPages.Add(merkelTabPage);
 
             DemandCurveUserControl = new DemandCurveTabPage(ApplicationSettings);
+            DemandCurveUserControl.Dock = DockStyle.Fill;
             TabPage demandCurveTabPage = new TabPage("Demand Curve");
             demandCurveTabPage.Controls.Add(DemandCurveUserControl);
             tabControl1.TabPages.Add(demandCurveTabPage);
 
             MechanicalDraftPerformanceCurveUserControl = new MechanicalDraftPerformanceCurveTabPage(ApplicationSettings);
+            MechanicalDraftPerformanceCurveUserControl.Dock = DockStyle.Fill;
             TabPage mechanicalDraftPerformanceCurveTabPage = new TabPage("Mechanical Draft Performance Curve");
             mechanicalDraftPerformanceCurveTabPage.Controls.Add(MechanicalDraftPerformanceCurveUserControl);
             tabControl1.TabPages.Add(mechanicalDraftPerformanceCurveTabPage);
@@ -318,12 +320,6 @@ namespace CTIToolkit
 
                 }
             }
-        }
-
-
-        private void PrintSetupMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void ExitMenuItem_Click(object sender, EventArgs e)

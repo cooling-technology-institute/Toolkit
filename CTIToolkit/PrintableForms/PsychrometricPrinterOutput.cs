@@ -17,7 +17,6 @@ namespace CTIToolkit.PrintableForms
             InputPropertiesDataGridView.DataSource = new DataView(nameValueUnitsDataTable.DataTable);
             DataGridView.DataSource = new DataView(psychrometricsViewModel.GetDataTable());
             this.Height = bottomOfPage + 10;
-            Beta.Location = new System.Drawing.Point(0, bottomOfPage - Beta.Height);
         }
     }
 }
