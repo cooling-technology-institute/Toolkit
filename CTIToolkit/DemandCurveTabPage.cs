@@ -710,18 +710,30 @@ namespace CTIToolkit
 
         private void DemandCurveTabPage_Resize(object sender, EventArgs e)
         {
-            if(sender is Control)
+            if (sender is Control)
             {
-                Control control = (Control) sender;
+                Control control = (Control)sender;
 
                 int width = Chart.Size.Width - Chart.Margin.Left - Chart.Margin.Right;
                 int height = Chart.Size.Height;
-                int controlHeight = control.Size.Height - Chart.Location.Y - Chart.Margin.Top - Chart.Margin.Bottom;
+                int controlHeight = control.Size.Height - (Chart.Location.Y + height) - Chart.Margin.Top - Chart.Margin.Bottom;
                 int controlWidth = control.Size.Width - Chart.Location.X - Chart.Margin.Left - Chart.Margin.Right;
 
-                if ((controlWidth > width) || (controlHeight > height))
+                if(controlWidth < Chart.MinimumSize.Width)
                 {
-//                    Chart.Size = new Size(controlWidth, controlHeight);
+                    controlWidth = Chart.MinimumSize.Width;
+                }
+                if (controlHeight < Chart.MinimumSize.Height)
+                {
+                    controlHeight = Chart.MinimumSize.Height;
+                }
+
+                if ((controlWidth > 0) && (controlHeight > 0))
+                {
+                    if ((controlWidth != width) || (controlHeight != height))
+                    {
+                        Chart.Size = new Size(controlWidth, controlHeight);
+                    }
                 }
             }
 
@@ -750,6 +762,15 @@ namespace CTIToolkit
             //{
             //    m_wndGraph.GetAxis().GetBottom().SetIncrement(.2);
             //}
+        }
+
+        private void Chart_PostPaint(object sender, ChartPaintEventArgs e)
+        {
+            if (sender is Chart)
+            {
+                Chart chart = (Chart)sender;
+
+            }
         }
     }
 }

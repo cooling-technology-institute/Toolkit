@@ -24,30 +24,68 @@ namespace CTIToolkit
 
             ApplicationSettings.Read();
             UpdateUnits(ApplicationSettings.UnitsSelection);
-
+            int height = this.Size.Height;
+            int width = this.Size.Width;
             PsychrometricsUserControl = new PsychrometricsTabPage(ApplicationSettings);
-            PsychrometricsUserControl.Dock = DockStyle.Fill;
+            //PsychrometricsUserControl.Dock = DockStyle.Top;
+            //PsychrometricsUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TabPage psychrometricsTabPage = new TabPage("Psychrometrics");
             psychrometricsTabPage.Controls.Add(PsychrometricsUserControl);
             tabControl1.TabPages.Add(psychrometricsTabPage);
-
+            if (height < psychrometricsTabPage.Height)
+            {
+                height = psychrometricsTabPage.Height;
+            }
+            if (width < psychrometricsTabPage.Width)
+            {
+                width = psychrometricsTabPage.Width;
+            }
             MerkelUserControl = new MerkelTabPage(ApplicationSettings);
-            MerkelUserControl.Dock = DockStyle.Fill;
+            //MerkelUserControl.Dock = DockStyle.Top;
+            //MerkelUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TabPage merkelTabPage = new TabPage("Merkel");
             merkelTabPage.Controls.Add(MerkelUserControl);
             tabControl1.TabPages.Add(merkelTabPage);
+            if (height < merkelTabPage.Height)
+            {
+                height = merkelTabPage.Height;
+            }
+            if (width < merkelTabPage.Width)
+            {
+                width = merkelTabPage.Width;
+            }
 
             DemandCurveUserControl = new DemandCurveTabPage(ApplicationSettings);
-            DemandCurveUserControl.Dock = DockStyle.Fill;
+            DemandCurveUserControl.Dock = DockStyle.Top | DockStyle.Right;
+            //DemandCurveUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TabPage demandCurveTabPage = new TabPage("Demand Curve");
             demandCurveTabPage.Controls.Add(DemandCurveUserControl);
             tabControl1.TabPages.Add(demandCurveTabPage);
+            if (height < demandCurveTabPage.Height)
+            {
+                height = demandCurveTabPage.Height;
+            }
+            if (width < demandCurveTabPage.Width)
+            {
+                width = demandCurveTabPage.Width;
+            }
 
             MechanicalDraftPerformanceCurveUserControl = new MechanicalDraftPerformanceCurveTabPage(ApplicationSettings);
-            MechanicalDraftPerformanceCurveUserControl.Dock = DockStyle.Fill;
+            //MechanicalDraftPerformanceCurveUserControl.Dock = DockStyle.Top;
+            //MechanicalDraftPerformanceCurveUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TabPage mechanicalDraftPerformanceCurveTabPage = new TabPage("Mechanical Draft Performance Curve");
             mechanicalDraftPerformanceCurveTabPage.Controls.Add(MechanicalDraftPerformanceCurveUserControl);
             tabControl1.TabPages.Add(mechanicalDraftPerformanceCurveTabPage);
+            if (height < mechanicalDraftPerformanceCurveTabPage.Height)
+            {
+                height = mechanicalDraftPerformanceCurveTabPage.Height;
+            }
+            if (width < mechanicalDraftPerformanceCurveTabPage.Width)
+            {
+                width = mechanicalDraftPerformanceCurveTabPage.Width;
+            }
+            this.Height = height;
+            this.Width = width;
         }
 
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)

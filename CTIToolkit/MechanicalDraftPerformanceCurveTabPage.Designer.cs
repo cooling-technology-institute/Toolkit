@@ -110,7 +110,6 @@
             // 
             // CalculateButton
             // 
-            this.CalculateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CalculateButton.Enabled = false;
             this.CalculateButton.Location = new System.Drawing.Point(716, 17);
             this.CalculateButton.Name = "CalculateButton";
@@ -122,7 +121,6 @@
             // 
             // ViewGraph
             // 
-            this.ViewGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ViewGraph.Enabled = false;
             this.ViewGraph.Location = new System.Drawing.Point(703, 46);
             this.ViewGraph.Name = "ViewGraph";
@@ -538,7 +536,6 @@
             // 
             // DesignDataButton
             // 
-            this.DesignDataButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.DesignDataButton.Location = new System.Drawing.Point(703, 75);
             this.DesignDataButton.Name = "DesignDataButton";
             this.DesignDataButton.Size = new System.Drawing.Size(87, 25);

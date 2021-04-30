@@ -98,12 +98,12 @@
             this.groupBoxPressureElevation = new System.Windows.Forms.GroupBox();
             this.BarometricPressureRadio = new System.Windows.Forms.RadioButton();
             this.ElevationRadio = new System.Windows.Forms.RadioButton();
-            this.Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.DataFilename = new System.Windows.Forms.TextBox();
             this.OutputGridView = new System.Windows.Forms.DataGridView();
             this.CalculatedValuesGroupBox = new System.Windows.Forms.GroupBox();
+            this.Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.InputPropertiesGroupBox.SuspendLayout();
             this.DesignPointGroupBox.SuspendLayout();
             this.TowerOrFillCharacteristicsGroupBox.SuspendLayout();
@@ -111,10 +111,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.MinimumValue)).BeginInit();
             this.ThermalDesignConditionsGroupBox.SuspendLayout();
             this.groupBoxPressureElevation.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OutputGridView)).BeginInit();
             this.CalculatedValuesGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Chart)).BeginInit();
             this.SuspendLayout();
             // 
             // toolTip1
@@ -468,74 +468,6 @@
             this.ElevationRadio.UseVisualStyleBackColor = true;
             this.ElevationRadio.CheckedChanged += new System.EventHandler(this.ElevationRadio_CheckedChanged);
             // 
-            // Chart
-            // 
-            this.Chart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.AxisX.IsLogarithmic = true;
-            chartArea1.AxisX.MajorGrid.Enabled = false;
-            chartArea1.AxisX.MajorGrid.Interval = 0D;
-            chartArea1.AxisX.MajorTickMark.Enabled = false;
-            chartArea1.AxisX.MajorTickMark.Interval = 0D;
-            chartArea1.AxisX.Maximum = 5D;
-            chartArea1.AxisX.Minimum = 0.1D;
-            chartArea1.AxisX.MinorGrid.Enabled = true;
-            chartArea1.AxisX.MinorGrid.Interval = 0.25D;
-            chartArea1.AxisX.MinorTickMark.Enabled = true;
-            chartArea1.AxisX.MinorTickMark.Interval = 0.25D;
-            chartArea1.AxisY.IsLogarithmic = true;
-            chartArea1.AxisY.Maximum = 5D;
-            chartArea1.AxisY.Minimum = 0.1D;
-            chartArea1.Name = "ChartArea1";
-            this.Chart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.Chart.Legends.Add(legend1);
-            this.Chart.Location = new System.Drawing.Point(3, 277);
-            this.Chart.Name = "Chart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.MarkerBorderColor = System.Drawing.Color.White;
-            series1.Name = "Series1";
-            series1.Points.Add(dataPoint1);
-            series1.Points.Add(dataPoint2);
-            series1.Points.Add(dataPoint3);
-            series1.Points.Add(dataPoint4);
-            series1.Points.Add(dataPoint5);
-            series1.Points.Add(dataPoint6);
-            series1.Points.Add(dataPoint7);
-            series1.Points.Add(dataPoint8);
-            series1.Points.Add(dataPoint9);
-            series1.Points.Add(dataPoint10);
-            series1.Points.Add(dataPoint11);
-            series1.Points.Add(dataPoint12);
-            series1.Points.Add(dataPoint13);
-            series1.Points.Add(dataPoint14);
-            series1.Points.Add(dataPoint15);
-            series1.Points.Add(dataPoint16);
-            series1.Points.Add(dataPoint17);
-            series1.Points.Add(dataPoint18);
-            series1.Points.Add(dataPoint19);
-            series1.Points.Add(dataPoint20);
-            series1.Points.Add(dataPoint21);
-            series1.Points.Add(dataPoint22);
-            series1.Points.Add(dataPoint23);
-            series1.Points.Add(dataPoint24);
-            series1.Points.Add(dataPoint25);
-            series1.Points.Add(dataPoint26);
-            series1.Points.Add(dataPoint27);
-            series1.Points.Add(dataPoint28);
-            series1.Points.Add(dataPoint29);
-            series1.Points.Add(dataPoint30);
-            series1.Points.Add(dataPoint31);
-            series1.Points.Add(dataPoint32);
-            this.Chart.Series.Add(series1);
-            this.Chart.Size = new System.Drawing.Size(754, 405);
-            this.Chart.SuppressExceptions = true;
-            this.Chart.TabIndex = 12;
-            this.Chart.Text = "DemandCurveChart";
-            this.Chart.Resize += new System.EventHandler(this.DemandCurveChart_Resize);
-            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -572,16 +504,85 @@
             this.CalculatedValuesGroupBox.TabStop = false;
             this.CalculatedValuesGroupBox.Text = "Calculated Values:";
             // 
+            // Chart
+            // 
+            chartArea1.AlignmentOrientation = ((System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations)((System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Vertical | System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Horizontal)));
+            chartArea1.AxisX.IsLogarithmic = true;
+            chartArea1.AxisX.MajorGrid.Enabled = false;
+            chartArea1.AxisX.MajorGrid.Interval = 0D;
+            chartArea1.AxisX.MajorTickMark.Enabled = false;
+            chartArea1.AxisX.MajorTickMark.Interval = 0D;
+            chartArea1.AxisX.Maximum = 5D;
+            chartArea1.AxisX.Minimum = 0.1D;
+            chartArea1.AxisX.MinorGrid.Enabled = true;
+            chartArea1.AxisX.MinorGrid.Interval = 0.25D;
+            chartArea1.AxisX.MinorTickMark.Enabled = true;
+            chartArea1.AxisX.MinorTickMark.Interval = 0.25D;
+            chartArea1.AxisY.IsLogarithmic = true;
+            chartArea1.AxisY.Maximum = 5D;
+            chartArea1.AxisY.Minimum = 0.1D;
+            chartArea1.Name = "ChartArea1";
+            this.Chart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.Chart.Legends.Add(legend1);
+            this.Chart.Location = new System.Drawing.Point(6, 277);
+            this.Chart.MinimumSize = new System.Drawing.Size(751, 460);
+            this.Chart.Name = "Chart";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series1.Legend = "Legend1";
+            series1.MarkerBorderColor = System.Drawing.Color.White;
+            series1.Name = "Series1";
+            series1.Points.Add(dataPoint1);
+            series1.Points.Add(dataPoint2);
+            series1.Points.Add(dataPoint3);
+            series1.Points.Add(dataPoint4);
+            series1.Points.Add(dataPoint5);
+            series1.Points.Add(dataPoint6);
+            series1.Points.Add(dataPoint7);
+            series1.Points.Add(dataPoint8);
+            series1.Points.Add(dataPoint9);
+            series1.Points.Add(dataPoint10);
+            series1.Points.Add(dataPoint11);
+            series1.Points.Add(dataPoint12);
+            series1.Points.Add(dataPoint13);
+            series1.Points.Add(dataPoint14);
+            series1.Points.Add(dataPoint15);
+            series1.Points.Add(dataPoint16);
+            series1.Points.Add(dataPoint17);
+            series1.Points.Add(dataPoint18);
+            series1.Points.Add(dataPoint19);
+            series1.Points.Add(dataPoint20);
+            series1.Points.Add(dataPoint21);
+            series1.Points.Add(dataPoint22);
+            series1.Points.Add(dataPoint23);
+            series1.Points.Add(dataPoint24);
+            series1.Points.Add(dataPoint25);
+            series1.Points.Add(dataPoint26);
+            series1.Points.Add(dataPoint27);
+            series1.Points.Add(dataPoint28);
+            series1.Points.Add(dataPoint29);
+            series1.Points.Add(dataPoint30);
+            series1.Points.Add(dataPoint31);
+            series1.Points.Add(dataPoint32);
+            this.Chart.Series.Add(series1);
+            this.Chart.Size = new System.Drawing.Size(751, 460);
+            this.Chart.SuppressExceptions = true;
+            this.Chart.TabIndex = 12;
+            this.Chart.Text = "DemandCurveChart";
+            this.Chart.PostPaint += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ChartPaintEventArgs>(this.Chart_PostPaint);
+            this.Chart.Resize += new System.EventHandler(this.DemandCurveChart_Resize);
+            // 
             // DemandCurveTabPage
             // 
+            this.Controls.Add(this.Chart);
             this.Controls.Add(this.CalculatedValuesGroupBox);
             this.Controls.Add(this.DataFilename);
             this.Controls.Add(this.InputPropertiesGroupBox);
             this.Controls.Add(this.CalculateButton);
             this.Controls.Add(this.DataFileLabel);
-            this.Controls.Add(this.Chart);
             this.Name = "DemandCurveTabPage";
-            this.Size = new System.Drawing.Size(763, 685);
+            this.Size = new System.Drawing.Size(761, 740);
             this.Resize += new System.EventHandler(this.DemandCurveTabPage_Resize);
             this.InputPropertiesGroupBox.ResumeLayout(false);
             this.DesignPointGroupBox.ResumeLayout(false);
@@ -593,10 +594,10 @@
             this.ThermalDesignConditionsGroupBox.ResumeLayout(false);
             this.ThermalDesignConditionsGroupBox.PerformLayout();
             this.groupBoxPressureElevation.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Chart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OutputGridView)).EndInit();
             this.CalculatedValuesGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Chart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -630,7 +631,6 @@
         private System.Windows.Forms.NumericUpDown MinimumValue;
         private System.Windows.Forms.RadioButton KavLRadio;
         private System.Windows.Forms.RadioButton ApproachRadio;
-        private System.Windows.Forms.DataVisualization.Charting.Chart Chart;
         private System.Windows.Forms.GroupBox groupBoxPressureElevation;
         private System.Windows.Forms.RadioButton BarometricPressureRadio;
         private System.Windows.Forms.RadioButton ElevationRadio;
@@ -643,5 +643,6 @@
         private System.Windows.Forms.DataGridView OutputGridView;
         private System.Windows.Forms.Label UserApproachUnits;
         private System.Windows.Forms.GroupBox CalculatedValuesGroupBox;
+        private System.Windows.Forms.DataVisualization.Charting.Chart Chart;
     }
 }
