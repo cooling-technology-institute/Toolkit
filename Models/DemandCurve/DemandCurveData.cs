@@ -13,17 +13,21 @@ namespace Models
         public double CurveMaximum { set; get; }
         public double WetBulbTemperature { set; get; }
         public double Range { set; get; }
-        public double Approach { set; get; }
 
         public bool IsElevation { get; set; } // attitude
         public bool IsApproach { get; set; } // coef
         public bool IsWaterAirRatio { get; set; } // lg
 
         public double KaV_L { set; get; }
-        public double TargetApproach { get; set; }
+        public double TargetApproach { set; get; }
         public double UserApproach { get; set; }
 
         public DemandCurveData()
+        {
+            Initialize();
+        }
+
+        public void Initialize()
         {
             CurveC1 = 0.0;
             CurveC2 = 0.0;

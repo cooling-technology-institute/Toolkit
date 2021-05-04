@@ -81,16 +81,16 @@ namespace CTIToolkit
                 //        DemandCurveChart.Series.Add(series);
                 //    }
                 //}
-                ////                    if (Display_COEF)
+                ////                    if (Display_Charactertics)
                 if (true)
                 {
                     //Series series = new Series();
                     //series.ChartArea = "ChartArea1";
                     //series.ChartType = SeriesChartType.Line;
                     //series.Color = Color.Yellow;
-                    //series.Name = "COEF";
-                    //series.XValueMember = "L/G-COEF";
-                    //series.YValueMembers = "kaVL-COEF";
+                    //series.Name = "Charactertics";
+                    //series.XValueMember = "L/G-Charactertics";
+                    //series.YValueMembers = "kaVL-Charactertics";
                     //DemandCurveChart.Series.Add(series);
                 }
 

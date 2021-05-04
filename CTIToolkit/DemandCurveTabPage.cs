@@ -15,7 +15,7 @@ namespace CTIToolkit
     {
         const int INDEX_TARGETAPPROACH = 18;
         const int INDEX_USERAPPROACH = 19;
-        const int INDEX_COEF = 20;
+        const int INDEX_Charactertics = 20;
         const int INDEX_LG = 21;
         const int INDEX_KAVL = 22;
 
@@ -23,6 +23,8 @@ namespace CTIToolkit
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_SI { get; set; }
         private bool HasChanged { get; set; }
+        private bool AllOff { get; set; }
+        private bool IsNonApproachSeries { get; set; }
 
         public DemandCurveTabPage(ApplicationSettings applicationSettings)
         {
@@ -32,6 +34,8 @@ namespace CTIToolkit
             DefaultExt = "dc";
             Title = "Demand Curve";
             DefaultFileName = "DemandCurve";
+            AllOff = false;
+            IsNonApproachSeries = false;
 
             IsInternationalSystemOfUnits_SI = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
             IsDemo = applicationSettings.IsDemo;
@@ -100,16 +104,16 @@ namespace CTIToolkit
                 BarometricPressureRadio.Checked = true;
             }
 
-            if (DemandCurveViewModel.IsApproach)
-            {
-                ApproachRadio.Checked = true;
-                KavLRadio.Checked = false;
-            }
-            else
-            {
-                ApproachRadio.Checked = false;
-                KavLRadio.Checked = true;
-            }
+            //if (DemandCurveViewModel.IsApproach)
+            //{
+            //    ApproachRadio.Checked = true;
+            //    KavLRadio.Checked = false;
+            //}
+            //else
+            //{
+            //    ApproachRadio.Checked = false;
+            //    KavLRadio.Checked = true;
+            //}
         }
 
         private void SetDisplayedValues()
@@ -180,6 +184,10 @@ namespace CTIToolkit
             try
             {
                 Chart.Series.Clear();
+                IsNonApproachSeries = false;
+                AllOff = false;
+                //update button text
+                //AllOffOnButton.Text = "All On";
 
                 for (int i = 1; i <= INDEX_KAVL; i++)
                 {
@@ -189,7 +197,7 @@ namespace CTIToolkit
                     //series.YValueMembers = string.Format("Y{0}", i);
                 }
 
-                if (DemandCurveViewModel.CalculateDemandCurve())
+                if (DemandCurveViewModel.Calculate())
                 {
                     // AxisX, AxisY, AxisX2 and AxisY2
                     //Primary X-Axis  Bottom horizontal axis.
@@ -201,24 +209,26 @@ namespace CTIToolkit
                         Chart.ChartAreas[0].AxisX.Title = "L/G";
                         Chart.ChartAreas[0].AxisX.IsLogarithmic = true;
                         //DemandCurveChart.ChartAreas[0].AxisX.IsLabelAutoFit = false;
-                        ////DemandCurveChart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
+                        Chart.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
                         //DemandCurveChart.ChartAreas[0].AxisX.MajorGrid.Interval = 0.25D;
                         ////DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.Interval = 1.0;
                         ////DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.IntervalOffset = 1.0;
                         ////DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.Interval = 0.75D;
                         //DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.LineColor = Color.Gray;
-                        //DemandCurveChart.ChartAreas[0].AxisX.MinorTickMark.Enabled = true;
+                        Chart.ChartAreas[0].AxisX.MinorGrid.Enabled = false;
+                        //Chart.ChartAreas[0].AxisX.MinorTickMark.Enabled = false;
                         //DemandCurveChart.ChartAreas[0].AxisX.MajorTickMark.Enabled = true;
                         //DemandCurveChart.ChartAreas[0].AxisX.MinorTickMark.Interval = 0.75D;
                         //DemandCurveChart.ChartAreas[0].AxisX.MinorTickMark.LineColor = Color.LightGray;
 
                         Chart.ChartAreas[0].AxisY.Title = "KaV/L";
                         Chart.ChartAreas[0].AxisY.IsLogarithmic = true;
-                        //DemandCurveChart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
+                        Chart.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+                        Chart.ChartAreas[0].AxisY.MinorGrid.Enabled = false;
                         //DemandCurveChart.ChartAreas[0].AxisY.MajorGrid.Interval = 0.25;
                         //DemandCurveChart.ChartAreas[0].AxisY.MajorGrid.Interval = 0.75D;
                         //DemandCurveChart.ChartAreas[0].AxisY.MajorTickMark.Interval = 0.5D;
-                        //DemandCurveChart.ChartAreas[0].AxisY.MinorTickMark.Enabled = true;
+                        Chart.ChartAreas[0].AxisY.MinorTickMark.Enabled = false;
                         //DemandCurveChart.ChartAreas[0].AxisY.MinorTickMark.Interval = 0.75D;
                         //DemandCurveChart.ChartAreas[0].AxisY.MajorTickMark.LineColor = Color.Gray;
                         //DemandCurveChart.ChartAreas[0].AxisY.MinorTickMark.LineColor = Color.LightGray;
@@ -249,25 +259,56 @@ namespace CTIToolkit
                                     ChartArea = "ChartArea1",
                                     ChartType = SeriesChartType.Line,
                                     Name = string.Format("{0}", DemandCurveViewModel.DemandCurveCalculationLibrary.InitialApproachXValues[i]),
-                                    XValueMember = string.Format("L/G-{0}", DemandCurveViewModel.DemandCurveCalculationLibrary.InitialApproachXValues[i]),
-                                    YValueMembers = string.Format("kaVL-{0}", DemandCurveViewModel.DemandCurveCalculationLibrary.InitialApproachXValues[i]),
+                                    XValueMember = string.Format("L/G-Approach-{0}", DemandCurveViewModel.DemandCurveCalculationLibrary.InitialApproachXValues[i]),
+                                    YValueMembers = string.Format("kaVL-Approach-{0}", DemandCurveViewModel.DemandCurveCalculationLibrary.InitialApproachXValues[i]),
                                 };
                                 Chart.Series.Add(series);
                             }
                         }
-                        //                    if (Display_COEF)
-                        if (true)
+
+                        if (DemandCurveViewModel.IsUserApproach)
                         {
-                            //Series series = new Series();
-                            //series.ChartArea = "ChartArea1";
-                            //series.ChartType = SeriesChartType.Line;
-                            //series.Color = Color.Yellow;
-                            //series.Name = "COEF";
-                            //series.XValueMember = "L/G-COEF";
-                            //series.YValueMembers = "kaVL-COEF";
-                            //DemandCurveChart.Series.Add(series);
+                            Series series = new Series();
+                            series.ChartArea = "ChartArea1";
+                            series.ChartType = SeriesChartType.Line;
+                            series.Name = "User";
+                            series.XValueMember = "User-X";
+                            series.YValueMembers = "User-Y";
+                            Chart.Series.Add(series);
                         }
 
+                        if (DemandCurveViewModel.IsCoef)
+                        {
+                            Series series = new Series();
+                            series.ChartArea = "ChartArea1";
+                            series.ChartType = SeriesChartType.Line;
+                            series.Name = "Chars";
+                            series.XValueMember = "Charactertics-X";
+                            series.YValueMembers = "Charactertics-Y";
+                            Chart.Series.Add(series);
+                        }
+
+                        if (DemandCurveViewModel.IsLiquidToGasRatio)
+                        {
+                            Series series = new Series();
+                            series.ChartArea = "ChartArea1";
+                            series.ChartType = SeriesChartType.Line;
+                            series.Name = "L/G";
+                            series.XValueMember = "L/G-X";
+                            series.YValueMembers = "L/G-Y";
+                            Chart.Series.Add(series);
+                        }
+
+                        if (DemandCurveViewModel.IsKaV_L)
+                        {
+                            Series series = new Series();
+                            series.ChartArea = "ChartArea1";
+                            series.ChartType = SeriesChartType.Line;
+                            series.Name = "KaV/L";
+                            series.XValueMember = "Line-X";
+                            series.YValueMembers = "Line-Y";
+                            Chart.Series.Add(series);
+                        }
 
                         Chart.DataSource = DemandCurveViewModel.GetDataTable();
 
@@ -625,21 +666,21 @@ namespace CTIToolkit
             }
         }
 
-        private void ApproachRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            if (ApproachRadio.Checked)
-            {
-                DemandCurveViewModel.IsApproach = true;
-            }
-        }
+        //private void ApproachRadio_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (ApproachRadio.Checked)
+        //    {
+        //        DemandCurveViewModel.IsApproach = true;
+        //    }
+        //}
 
-        private void KavLRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            if (KavLRadio.Checked)
-            {
-                DemandCurveViewModel.IsApproach = false;
-            }
-        }
+        //private void KavLRadio_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (KavLRadio.Checked)
+        //    {
+        //        DemandCurveViewModel.IsApproach = false;
+        //    }
+        //}
 
         private void BarometricPressureRadio_CheckedChanged(object sender, EventArgs e)
         {
@@ -715,8 +756,8 @@ namespace CTIToolkit
                 Control control = (Control)sender;
 
                 int width = Chart.Size.Width - Chart.Margin.Left - Chart.Margin.Right;
-                int height = Chart.Size.Height;
-                int controlHeight = control.Size.Height - (Chart.Location.Y + height) - Chart.Margin.Top - Chart.Margin.Bottom;
+                int height = Chart.Size.Height - Chart.Margin.Top - Chart.Margin.Bottom;
+                int controlHeight = control.Size.Height - Chart.Location.Y - Chart.Margin.Top - Chart.Margin.Bottom;
                 int controlWidth = control.Size.Width - Chart.Location.X - Chart.Margin.Left - Chart.Margin.Right;
 
                 if(controlWidth < Chart.MinimumSize.Width)
@@ -732,7 +773,7 @@ namespace CTIToolkit
                 {
                     if ((controlWidth != width) || (controlHeight != height))
                     {
-                        Chart.Size = new Size(controlWidth, controlHeight);
+                        Chart.Size = new Size(controlWidth, controlHeight - 120);
                     }
                 }
             }
@@ -772,5 +813,45 @@ namespace CTIToolkit
 
             }
         }
+
+        private void UserTargetButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //private void AllOffOnButton_Click(object sender, EventArgs e)
+        //{
+        //    if (Chart.Series != null && Chart.Series.Count > 0)
+        //    {
+        //        if (AllOff)
+        //        {
+        //            AllOffOnButton.Text = "All On";
+        //            foreach (Series series in Chart.Series)
+        //            {
+        //                if (series.XValueMember.StartsWith("L/G-Approach"))
+        //                {
+        //                    series.Enabled = false;
+        //                }
+        //                else
+        //                {
+        //                    Chart.ChartAreas[0].AxisX.IsLogarithmic = false;
+        //                    Chart.ChartAreas[0].AxisY.IsLogarithmic = false;
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            AllOffOnButton.Text = "All Off";
+        //            foreach (Series series in Chart.Series)
+        //            {
+        //                if (series.XValueMember.StartsWith("L/G-Approach"))
+        //                {
+        //                    series.Enabled = true;
+        //                }
+        //            }
+        //        }
+        //        AllOff = !AllOff;
+        //    }
+        //}
     }
 }

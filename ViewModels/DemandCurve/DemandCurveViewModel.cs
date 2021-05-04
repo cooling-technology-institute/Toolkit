@@ -21,6 +21,7 @@ namespace ViewModels
         //Units Units { get; set; }
         public bool IsDemo { get; set; }
         public bool IsInternationalSystemOfUnits_SI { get; set; }
+
         public bool IsElevation 
         { 
             get 
@@ -32,6 +33,55 @@ namespace ViewModels
                 DemandCurveInputData.IsElevation = value; 
             } 
         }
+
+        public bool IsCoef
+        {
+            get
+            {
+                return DemandCurveCalculationData.IsCoef;
+            }
+            set
+            {
+                DemandCurveCalculationData.IsCoef = value;
+            }
+        }
+
+        public bool IsLiquidToGasRatio
+        {
+            get
+            {
+                return DemandCurveCalculationData.IsLiquidToGasRatio;
+            }
+            set
+            {
+                DemandCurveCalculationData.IsLiquidToGasRatio = value;
+            }
+        }
+
+        public bool IsKaV_L
+        {
+            get
+            {
+                return DemandCurveCalculationData.IsKaV_L;
+            }
+            set
+            {
+                DemandCurveCalculationData.IsKaV_L = value;
+            }
+        }
+
+        public bool IsUserApproach
+        {
+            get
+            {
+                return DemandCurveCalculationData.IsUserApproach;
+            }
+            set
+            {
+                DemandCurveCalculationData.IsUserApproach = value;
+            }
+        }
+
         public bool IsApproach
         {
             get
@@ -53,8 +103,9 @@ namespace ViewModels
             BuildFilename();
 
             DemandCurveInputData = new DemandCurveInputData(isDemo, isInternationalSystemOfUnits_SI);
-            DemandCurveCalculationLibrary = new DemandCurveCalculationLibrary();
+            DemandCurveCalculationLibrary = new DemandCurveCalculationLibrary(isInternationalSystemOfUnits_SI);
             NameValueUnitsDataTable = new NameValueUnitsDataTable();
+            DemandCurveCalculationData = new DemandCurveCalculationData(isInternationalSystemOfUnits_SI);
             DemandCurveFileData = new DemandCurveFileData(isInternationalSystemOfUnits_SI);
             DemandCurveInputData.SetDefaults(DemandCurveFileData);
         }
@@ -208,6 +259,7 @@ namespace ViewModels
         public void ConvertValues()
         {
             DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_SI, IsElevation, IsApproach);
+            DemandCurveCalculationData.ConvertValues(IsInternationalSystemOfUnits_SI);
         }
 
         public bool LoadData()
@@ -230,18 +282,18 @@ namespace ViewModels
             return returnValue;
         }
 
-        public bool CalculateDemandCurve()
+        public bool Calculate()
         {
             try
             {
-                DemandCurveCalculationData = new DemandCurveCalculationData(IsInternationalSystemOfUnits_SI);
+                DemandCurveCalculationData.Initialize();
 
                 if (!FillAndValidate(DemandCurveCalculationData.DemandCurveData))
                 {
                     return false;
                 }
 
-                if (!DemandCurveCalculationLibrary.DemandCurveCalculation(DemandCurveCalculationData))
+                if (!DemandCurveCalculationLibrary.Calculate(DemandCurveCalculationData))
                 {
                     ErrorMessage = DemandCurveCalculationLibrary.ErrorMessage;
                     return false;
@@ -250,19 +302,12 @@ namespace ViewModels
                 // output data in DemandCurveOutputData
                 NameValueUnitsDataTable.DataTable.Clear();
 
-                if(IsApproach)
-                {
-                    NameValueUnitsDataTable.AddRow("Approach", (DemandCurveCalculationData.DemandCurveData.TargetApproach > 0.001) ?
-                        DemandCurveCalculationData.DemandCurveData.TargetApproach.ToString("F5") : string.Empty, 
-                        (DemandCurveCalculationData.IsInternationalSystemOfUnits_SI) ? ConstantUnits.RangeK : ConstantUnits.TemperatureFahrenheit);
-                }
-                else
-                {
-                    NameValueUnitsDataTable.AddRow("KaV/L", 
-                        (DemandCurveCalculationData.DemandCurveData.KaV_L > 0.001) ? DemandCurveCalculationData.DemandCurveData.KaV_L.ToString("F5") : string.Empty, 
-                        string.Empty);
-                }
-
+                NameValueUnitsDataTable.AddRow("Approach", (DemandCurveCalculationData.DemandCurveData.TargetApproach > 0.001) ?
+                    DemandCurveCalculationData.DemandCurveData.TargetApproach.ToString("F3") : string.Empty, 
+                    (DemandCurveCalculationData.IsInternationalSystemOfUnits_SI) ? ConstantUnits.RangeK : ConstantUnits.TemperatureFahrenheit);
+                NameValueUnitsDataTable.AddRow("KaV/L", 
+                    (DemandCurveCalculationData.DemandCurveData.KaV_L > 0.001) ? DemandCurveCalculationData.DemandCurveData.KaV_L.ToString("F5") : string.Empty, 
+                    string.Empty);
 
                 return true;
             }
@@ -321,14 +366,14 @@ namespace ViewModels
             }
         }
 
-        public bool ConvertValues(bool isIS)
+        public void ConvertValues(bool isIS)
         {
             if (IsInternationalSystemOfUnits_SI != isIS)
             {
                 IsInternationalSystemOfUnits_SI = isIS;
-                return DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_SI, IsElevation, IsApproach);
+                DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_SI, IsElevation, IsApproach);
+                DemandCurveCalculationData.ConvertValues(IsInternationalSystemOfUnits_SI);
             }
-            return false;
         }
 
         #region DataValues

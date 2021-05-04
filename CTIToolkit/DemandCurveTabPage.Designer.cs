@@ -79,10 +79,8 @@
             this.DesignPointGroupBox = new System.Windows.Forms.GroupBox();
             this.UserApproachUnits = new System.Windows.Forms.Label();
             this.UserApproachValue = new System.Windows.Forms.TextBox();
-            this.KavLRadio = new System.Windows.Forms.RadioButton();
             this.UserApproachLabel = new System.Windows.Forms.Label();
             this.LiquidToGasRatioValue = new System.Windows.Forms.TextBox();
-            this.ApproachRadio = new System.Windows.Forms.RadioButton();
             this.LiquidToGasRatioLabel = new System.Windows.Forms.Label();
             this.TowerOrFillCharacteristicsGroupBox = new System.Windows.Forms.GroupBox();
             this.MaximumValue = new System.Windows.Forms.NumericUpDown();
@@ -234,10 +232,8 @@
             // 
             this.DesignPointGroupBox.Controls.Add(this.UserApproachUnits);
             this.DesignPointGroupBox.Controls.Add(this.UserApproachValue);
-            this.DesignPointGroupBox.Controls.Add(this.KavLRadio);
             this.DesignPointGroupBox.Controls.Add(this.UserApproachLabel);
             this.DesignPointGroupBox.Controls.Add(this.LiquidToGasRatioValue);
-            this.DesignPointGroupBox.Controls.Add(this.ApproachRadio);
             this.DesignPointGroupBox.Controls.Add(this.LiquidToGasRatioLabel);
             this.DesignPointGroupBox.Location = new System.Drawing.Point(539, 18);
             this.DesignPointGroupBox.Name = "DesignPointGroupBox";
@@ -264,16 +260,6 @@
             this.UserApproachValue.Validating += new System.ComponentModel.CancelEventHandler(this.UserApproachValue_Validating);
             this.UserApproachValue.Validated += new System.EventHandler(this.UserApproachValue_Validated);
             // 
-            // KavLRadio
-            // 
-            this.KavLRadio.Location = new System.Drawing.Point(15, 104);
-            this.KavLRadio.Name = "KavLRadio";
-            this.KavLRadio.Size = new System.Drawing.Size(73, 17);
-            this.KavLRadio.TabIndex = 1;
-            this.KavLRadio.Text = "Kav/L";
-            this.KavLRadio.UseVisualStyleBackColor = true;
-            this.KavLRadio.CheckedChanged += new System.EventHandler(this.KavLRadio_CheckedChanged);
-            // 
             // UserApproachLabel
             // 
             this.UserApproachLabel.AutoSize = true;
@@ -292,18 +278,6 @@
             this.LiquidToGasRatioValue.Text = "1";
             this.LiquidToGasRatioValue.Validating += new System.ComponentModel.CancelEventHandler(this.LiquidToGasRatioValue_Validating);
             this.LiquidToGasRatioValue.Validated += new System.EventHandler(this.LiquidToGasRatioValue_Validated);
-            // 
-            // ApproachRadio
-            // 
-            this.ApproachRadio.Checked = true;
-            this.ApproachRadio.Location = new System.Drawing.Point(15, 81);
-            this.ApproachRadio.Name = "ApproachRadio";
-            this.ApproachRadio.Size = new System.Drawing.Size(86, 17);
-            this.ApproachRadio.TabIndex = 0;
-            this.ApproachRadio.TabStop = true;
-            this.ApproachRadio.Text = "Approach";
-            this.ApproachRadio.UseVisualStyleBackColor = true;
-            this.ApproachRadio.CheckedChanged += new System.EventHandler(this.ApproachRadio_CheckedChanged);
             // 
             // LiquidToGasRatioLabel
             // 
@@ -484,6 +458,8 @@
             // 
             this.OutputGridView.AllowUserToAddRows = false;
             this.OutputGridView.AllowUserToDeleteRows = false;
+            this.OutputGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.OutputGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.OutputGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.OutputGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -491,15 +467,16 @@
             this.OutputGridView.Location = new System.Drawing.Point(6, 19);
             this.OutputGridView.Name = "OutputGridView";
             this.OutputGridView.ReadOnly = true;
-            this.OutputGridView.Size = new System.Drawing.Size(735, 52);
+            this.OutputGridView.Size = new System.Drawing.Size(735, 72);
             this.OutputGridView.TabIndex = 17;
+            this.OutputGridView.TabStop = false;
             // 
             // CalculatedValuesGroupBox
             // 
             this.CalculatedValuesGroupBox.Controls.Add(this.OutputGridView);
             this.CalculatedValuesGroupBox.Location = new System.Drawing.Point(6, 190);
             this.CalculatedValuesGroupBox.Name = "CalculatedValuesGroupBox";
-            this.CalculatedValuesGroupBox.Size = new System.Drawing.Size(751, 81);
+            this.CalculatedValuesGroupBox.Size = new System.Drawing.Size(751, 97);
             this.CalculatedValuesGroupBox.TabIndex = 31;
             this.CalculatedValuesGroupBox.TabStop = false;
             this.CalculatedValuesGroupBox.Text = "Calculated Values:";
@@ -512,24 +489,20 @@
             chartArea1.AxisX.MajorGrid.Interval = 0D;
             chartArea1.AxisX.MajorTickMark.Enabled = false;
             chartArea1.AxisX.MajorTickMark.Interval = 0D;
-            chartArea1.AxisX.Maximum = 5D;
-            chartArea1.AxisX.Minimum = 0.1D;
             chartArea1.AxisX.MinorGrid.Enabled = true;
             chartArea1.AxisX.MinorGrid.Interval = 0.25D;
             chartArea1.AxisX.MinorTickMark.Enabled = true;
             chartArea1.AxisX.MinorTickMark.Interval = 0.25D;
             chartArea1.AxisY.IsLogarithmic = true;
-            chartArea1.AxisY.Maximum = 5D;
-            chartArea1.AxisY.Minimum = 0.1D;
             chartArea1.Name = "ChartArea1";
             this.Chart.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.Chart.Legends.Add(legend1);
-            this.Chart.Location = new System.Drawing.Point(6, 277);
+            this.Chart.Location = new System.Drawing.Point(6, 293);
             this.Chart.MinimumSize = new System.Drawing.Size(751, 460);
             this.Chart.Name = "Chart";
             series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
             series1.MarkerBorderColor = System.Drawing.Color.White;
             series1.Name = "Series1";
@@ -575,6 +548,7 @@
             // 
             // DemandCurveTabPage
             // 
+            this.AutoSize = true;
             this.Controls.Add(this.Chart);
             this.Controls.Add(this.CalculatedValuesGroupBox);
             this.Controls.Add(this.DataFilename);
@@ -582,7 +556,7 @@
             this.Controls.Add(this.CalculateButton);
             this.Controls.Add(this.DataFileLabel);
             this.Name = "DemandCurveTabPage";
-            this.Size = new System.Drawing.Size(761, 740);
+            this.Size = new System.Drawing.Size(767, 777);
             this.Resize += new System.EventHandler(this.DemandCurveTabPage_Resize);
             this.InputPropertiesGroupBox.ResumeLayout(false);
             this.DesignPointGroupBox.ResumeLayout(false);
@@ -629,8 +603,6 @@
         private System.Windows.Forms.Label MinimumLabel;
         private System.Windows.Forms.NumericUpDown MaximumValue;
         private System.Windows.Forms.NumericUpDown MinimumValue;
-        private System.Windows.Forms.RadioButton KavLRadio;
-        private System.Windows.Forms.RadioButton ApproachRadio;
         private System.Windows.Forms.GroupBox groupBoxPressureElevation;
         private System.Windows.Forms.RadioButton BarometricPressureRadio;
         private System.Windows.Forms.RadioButton ElevationRadio;

@@ -13,7 +13,8 @@ namespace ViewModels
         public bool IsInternationalSystemOfUnits_SI { get; set; }
         public bool IsElevation { get; set; }
         public bool IsApproach { get; set; }
-        
+        public bool IsCoef { get; set; }
+
         public WetBulbTemperatureDataValue WetBulbTemperatureDataValue { get; set; }
         public RangeDataValue RangeDataValue { get; set; }
         public ElevationDataValue ElevationDataValue { get; set; }
@@ -33,6 +34,7 @@ namespace ViewModels
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
             IsElevation = true;
             IsApproach = true;
+            IsCoef = false;
 
             WetBulbTemperatureDataValue = new WetBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
             RangeDataValue = new RangeDataValue(IsDemo, IsInternationalSystemOfUnits_SI);

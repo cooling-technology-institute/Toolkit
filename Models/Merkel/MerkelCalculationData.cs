@@ -18,10 +18,14 @@ namespace Models
         public double Range { set; get; }
         public double KaV_L { set; get; }
 
-        public MerkelCalculationData(bool isInternationalSystemOfUnits_IS_)
+        public MerkelCalculationData(bool isInternationalSystemOfUnits_IS)
         {
-            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS_;
+            Initialize(isInternationalSystemOfUnits_IS);
+        }
 
+        public void Initialize(bool isInternationalSystemOfUnits_IS)
+        {
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS;
             IsElevation = true;
             Elevation = 0.0;
             BarometricPressure = 0.0;
