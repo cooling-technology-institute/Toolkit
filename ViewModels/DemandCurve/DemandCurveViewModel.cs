@@ -4,9 +4,11 @@ using CalculationLibrary;
 using Models;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Text;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace ViewModels
 {
@@ -21,6 +23,25 @@ namespace ViewModels
         //Units Units { get; set; }
         public bool IsDemo { get; set; }
         public bool IsInternationalSystemOfUnits_SI { get; set; }
+
+        public List<Approach> Approaches
+        {
+            get
+            {
+                if(DemandCurveCalculationData == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return DemandCurveCalculationData.Approaches;
+                }
+            }
+            private set
+            {
+                
+            }
+        }
 
         public bool IsElevation 
         { 
@@ -280,6 +301,37 @@ namespace ViewModels
             }
 
             return returnValue;
+        }
+
+        public void FillSeries(Series series)
+        {
+            if(Approaches != null && Approaches.Count > 0)
+            {
+                foreach (Approach approach in Approaches)
+                {
+                    if (approach.Name == series.Name)
+                    {
+                        foreach (Point point in approach.Points)
+                        {
+                            series.Points.AddXY(point.X, point.Y);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        public double CalculateExactApproach(double lg, double kval)
+        {
+            try
+            {
+                return DemandCurveCalculationLibrary.CalculateExactApproach(DemandCurveCalculationData, lg, kval);
+            }
+            catch (Exception exception)
+            {
+                ErrorMessage = string.Format("Error in Demand Curve calculation. Please check your input values. Exception Message: {0}", exception.Message);
+                return 0.0;
+            }
         }
 
         public bool Calculate()

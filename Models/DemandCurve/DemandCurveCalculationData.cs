@@ -1,5 +1,6 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 
+using System.Collections.Generic;
 using System.Data;
 
 namespace Models
@@ -11,6 +12,7 @@ namespace Models
         public bool IsElevation { get; set; }
         public bool ShowUserApproach { get; set; }
         public DataTable DataTable { get; set; }
+        public List<Approach> Approaches { get; set; }
         public bool IsCoef { get; set; }
         public bool IsLiquidToGasRatio { get; set; }
         public bool IsKaV_L { get; set; }
@@ -20,6 +22,7 @@ namespace Models
         {
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
             DemandCurveData = new DemandCurveData();
+            Approaches = new List<Approach>();
             DataTable = new DataTable();
             Initialize();
         }
@@ -31,6 +34,7 @@ namespace Models
             IsKaV_L = false;
             IsUserApproach = false;
             DemandCurveData.Initialize();
+            Approaches.Clear();
             DataTable.Rows.Clear();
             DataTable.Columns.Clear();
             DataTable.Clear();

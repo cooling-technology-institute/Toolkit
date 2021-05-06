@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.LegendCellColumn legendCellColumn1 = new System.Windows.Forms.DataVisualization.Charting.LegendCellColumn();
+            System.Windows.Forms.DataVisualization.Charting.LegendCellColumn legendCellColumn2 = new System.Windows.Forms.DataVisualization.Charting.LegendCellColumn();
+            System.Windows.Forms.DataVisualization.Charting.LegendCellColumn legendCellColumn3 = new System.Windows.Forms.DataVisualization.Charting.LegendCellColumn();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.1D, 1.165443D);
             System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0.15D, 1.188416D);
@@ -496,6 +499,14 @@
             chartArea1.AxisY.IsLogarithmic = true;
             chartArea1.Name = "ChartArea1";
             this.Chart.ChartAreas.Add(chartArea1);
+            legendCellColumn1.Name = "Check";
+            legendCellColumn1.Text = "☑";
+            legendCellColumn2.ColumnType = System.Windows.Forms.DataVisualization.Charting.LegendCellColumnType.SeriesSymbol;
+            legendCellColumn2.Name = "Color";
+            legendCellColumn3.Name = "Name";
+            legend1.CellColumns.Add(legendCellColumn1);
+            legend1.CellColumns.Add(legendCellColumn2);
+            legend1.CellColumns.Add(legendCellColumn3);
             legend1.Name = "Legend1";
             this.Chart.Legends.Add(legend1);
             this.Chart.Location = new System.Drawing.Point(6, 293);
@@ -544,6 +555,8 @@
             this.Chart.TabIndex = 12;
             this.Chart.Text = "DemandCurveChart";
             this.Chart.PostPaint += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ChartPaintEventArgs>(this.Chart_PostPaint);
+            this.Chart.Click += new System.EventHandler(this.Chart_Click);
+            this.Chart.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Chart_MouseClick);
             this.Chart.Resize += new System.EventHandler(this.DemandCurveChart_Resize);
             // 
             // DemandCurveTabPage
@@ -557,6 +570,7 @@
             this.Controls.Add(this.DataFileLabel);
             this.Name = "DemandCurveTabPage";
             this.Size = new System.Drawing.Size(767, 777);
+            this.Load += new System.EventHandler(this.DemandCurveTabPage_Load);
             this.Resize += new System.EventHandler(this.DemandCurveTabPage_Resize);
             this.InputPropertiesGroupBox.ResumeLayout(false);
             this.DesignPointGroupBox.ResumeLayout(false);
