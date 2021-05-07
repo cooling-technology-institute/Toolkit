@@ -146,7 +146,7 @@
             // 
             // RangeLabel
             // 
-            this.RangeLabel.Location = new System.Drawing.Point(6, 51);
+            this.RangeLabel.Location = new System.Drawing.Point(4, 51);
             this.RangeLabel.Name = "RangeLabel";
             this.RangeLabel.Size = new System.Drawing.Size(116, 13);
             this.RangeLabel.TabIndex = 1;
@@ -155,9 +155,9 @@
             // 
             // RangeValue
             // 
-            this.RangeValue.Location = new System.Drawing.Point(131, 51);
+            this.RangeValue.Location = new System.Drawing.Point(123, 48);
             this.RangeValue.Name = "RangeValue";
-            this.RangeValue.Size = new System.Drawing.Size(47, 20);
+            this.RangeValue.Size = new System.Drawing.Size(45, 20);
             this.RangeValue.TabIndex = 4;
             this.RangeValue.Text = "10";
             this.RangeValue.Validating += new System.ComponentModel.CancelEventHandler(this.RangeValue_Validating);
@@ -165,9 +165,9 @@
             // 
             // WetBulbTemperatureValue
             // 
-            this.WetBulbTemperatureValue.Location = new System.Drawing.Point(131, 25);
+            this.WetBulbTemperatureValue.Location = new System.Drawing.Point(123, 22);
             this.WetBulbTemperatureValue.Name = "WetBulbTemperatureValue";
-            this.WetBulbTemperatureValue.Size = new System.Drawing.Size(47, 20);
+            this.WetBulbTemperatureValue.Size = new System.Drawing.Size(45, 20);
             this.WetBulbTemperatureValue.TabIndex = 5;
             this.WetBulbTemperatureValue.Text = "80";
             this.WetBulbTemperatureValue.Validating += new System.ComponentModel.CancelEventHandler(this.WetBulbTemperature_Value_Validating);
@@ -175,7 +175,7 @@
             // 
             // WetBulbTemperatureLabel
             // 
-            this.WetBulbTemperatureLabel.Location = new System.Drawing.Point(6, 25);
+            this.WetBulbTemperatureLabel.Location = new System.Drawing.Point(4, 25);
             this.WetBulbTemperatureLabel.Name = "WetBulbTemperatureLabel";
             this.WetBulbTemperatureLabel.Size = new System.Drawing.Size(119, 13);
             this.WetBulbTemperatureLabel.TabIndex = 11;
@@ -184,9 +184,9 @@
             // 
             // ElevationValue
             // 
-            this.ElevationValue.Location = new System.Drawing.Point(131, 77);
+            this.ElevationValue.Location = new System.Drawing.Point(123, 74);
             this.ElevationValue.Name = "ElevationValue";
-            this.ElevationValue.Size = new System.Drawing.Size(47, 20);
+            this.ElevationValue.Size = new System.Drawing.Size(45, 20);
             this.ElevationValue.TabIndex = 15;
             this.ElevationValue.Text = "0";
             this.ElevationValue.Validating += new System.ComponentModel.CancelEventHandler(this.ElevationValue_Validating);
@@ -195,7 +195,7 @@
             // ElevationPressureUnits
             // 
             this.ElevationPressureUnits.AutoSize = true;
-            this.ElevationPressureUnits.Location = new System.Drawing.Point(202, 80);
+            this.ElevationPressureUnits.Location = new System.Drawing.Point(184, 77);
             this.ElevationPressureUnits.Name = "ElevationPressureUnits";
             this.ElevationPressureUnits.Size = new System.Drawing.Size(13, 13);
             this.ElevationPressureUnits.TabIndex = 16;
@@ -203,7 +203,7 @@
             // 
             // ElevationPressureLabel
             // 
-            this.ElevationPressureLabel.Location = new System.Drawing.Point(6, 77);
+            this.ElevationPressureLabel.Location = new System.Drawing.Point(4, 77);
             this.ElevationPressureLabel.Name = "ElevationPressureLabel";
             this.ElevationPressureLabel.Size = new System.Drawing.Size(116, 13);
             this.ElevationPressureLabel.TabIndex = 17;
@@ -213,7 +213,7 @@
             // WebBulbTemperatureUnits
             // 
             this.WebBulbTemperatureUnits.AutoSize = true;
-            this.WebBulbTemperatureUnits.Location = new System.Drawing.Point(202, 28);
+            this.WebBulbTemperatureUnits.Location = new System.Drawing.Point(184, 25);
             this.WebBulbTemperatureUnits.Name = "WebBulbTemperatureUnits";
             this.WebBulbTemperatureUnits.Size = new System.Drawing.Size(17, 13);
             this.WebBulbTemperatureUnits.TabIndex = 18;
@@ -226,7 +226,7 @@
             this.InputPropertiesGroupBox.Controls.Add(this.ThermalDesignConditionsGroupBox);
             this.InputPropertiesGroupBox.Location = new System.Drawing.Point(3, 36);
             this.InputPropertiesGroupBox.Name = "InputPropertiesGroupBox";
-            this.InputPropertiesGroupBox.Size = new System.Drawing.Size(754, 154);
+            this.InputPropertiesGroupBox.Size = new System.Drawing.Size(754, 125);
             this.InputPropertiesGroupBox.TabIndex = 11;
             this.InputPropertiesGroupBox.TabStop = false;
             this.InputPropertiesGroupBox.Text = "Input Properties";
@@ -238,9 +238,9 @@
             this.DesignPointGroupBox.Controls.Add(this.UserApproachLabel);
             this.DesignPointGroupBox.Controls.Add(this.LiquidToGasRatioValue);
             this.DesignPointGroupBox.Controls.Add(this.LiquidToGasRatioLabel);
-            this.DesignPointGroupBox.Location = new System.Drawing.Point(539, 18);
+            this.DesignPointGroupBox.Location = new System.Drawing.Point(543, 17);
             this.DesignPointGroupBox.Name = "DesignPointGroupBox";
-            this.DesignPointGroupBox.Size = new System.Drawing.Size(205, 127);
+            this.DesignPointGroupBox.Size = new System.Drawing.Size(205, 106);
             this.DesignPointGroupBox.TabIndex = 22;
             this.DesignPointGroupBox.TabStop = false;
             this.DesignPointGroupBox.Text = "Design Point";
@@ -248,7 +248,7 @@
             // UserApproachUnits
             // 
             this.UserApproachUnits.AutoSize = true;
-            this.UserApproachUnits.Location = new System.Drawing.Point(183, 51);
+            this.UserApproachUnits.Location = new System.Drawing.Point(182, 51);
             this.UserApproachUnits.Name = "UserApproachUnits";
             this.UserApproachUnits.Size = new System.Drawing.Size(17, 13);
             this.UserApproachUnits.TabIndex = 23;
@@ -258,7 +258,7 @@
             // 
             this.UserApproachValue.Location = new System.Drawing.Point(122, 48);
             this.UserApproachValue.Name = "UserApproachValue";
-            this.UserApproachValue.Size = new System.Drawing.Size(39, 20);
+            this.UserApproachValue.Size = new System.Drawing.Size(45, 20);
             this.UserApproachValue.TabIndex = 11;
             this.UserApproachValue.Validating += new System.ComponentModel.CancelEventHandler(this.UserApproachValue_Validating);
             this.UserApproachValue.Validated += new System.EventHandler(this.UserApproachValue_Validated);
@@ -276,7 +276,7 @@
             // 
             this.LiquidToGasRatioValue.Location = new System.Drawing.Point(122, 22);
             this.LiquidToGasRatioValue.Name = "LiquidToGasRatioValue";
-            this.LiquidToGasRatioValue.Size = new System.Drawing.Size(39, 20);
+            this.LiquidToGasRatioValue.Size = new System.Drawing.Size(45, 20);
             this.LiquidToGasRatioValue.TabIndex = 2;
             this.LiquidToGasRatioValue.Text = "1";
             this.LiquidToGasRatioValue.Validating += new System.ComponentModel.CancelEventHandler(this.LiquidToGasRatioValue_Validating);
@@ -301,9 +301,9 @@
             this.TowerOrFillCharacteristicsGroupBox.Controls.Add(this.SlopeLabel);
             this.TowerOrFillCharacteristicsGroupBox.Controls.Add(this.C_C1_Value);
             this.TowerOrFillCharacteristicsGroupBox.Controls.Add(this.CLabel);
-            this.TowerOrFillCharacteristicsGroupBox.Location = new System.Drawing.Point(378, 18);
+            this.TowerOrFillCharacteristicsGroupBox.Location = new System.Drawing.Point(343, 17);
             this.TowerOrFillCharacteristicsGroupBox.Name = "TowerOrFillCharacteristicsGroupBox";
-            this.TowerOrFillCharacteristicsGroupBox.Size = new System.Drawing.Size(155, 128);
+            this.TowerOrFillCharacteristicsGroupBox.Size = new System.Drawing.Size(194, 104);
             this.TowerOrFillCharacteristicsGroupBox.TabIndex = 21;
             this.TowerOrFillCharacteristicsGroupBox.TabStop = false;
             this.TowerOrFillCharacteristicsGroupBox.Text = "Tower or Fill Characteristics";
@@ -311,9 +311,9 @@
             // MaximumValue
             // 
             this.MaximumValue.DecimalPlaces = 1;
-            this.MaximumValue.Location = new System.Drawing.Point(73, 95);
+            this.MaximumValue.Location = new System.Drawing.Point(67, 78);
             this.MaximumValue.Name = "MaximumValue";
-            this.MaximumValue.Size = new System.Drawing.Size(53, 20);
+            this.MaximumValue.Size = new System.Drawing.Size(52, 20);
             this.MaximumValue.TabIndex = 9;
             this.MaximumValue.Validating += new System.ComponentModel.CancelEventHandler(this.MaximumValue_Validating);
             this.MaximumValue.Validated += new System.EventHandler(this.MaximumValue_Validated);
@@ -321,9 +321,9 @@
             // MinimumValue
             // 
             this.MinimumValue.DecimalPlaces = 1;
-            this.MinimumValue.Location = new System.Drawing.Point(73, 70);
+            this.MinimumValue.Location = new System.Drawing.Point(67, 52);
             this.MinimumValue.Name = "MinimumValue";
-            this.MinimumValue.Size = new System.Drawing.Size(53, 20);
+            this.MinimumValue.Size = new System.Drawing.Size(52, 20);
             this.MinimumValue.TabIndex = 8;
             this.MinimumValue.Validating += new System.ComponentModel.CancelEventHandler(this.MinimumValue_Validating);
             this.MinimumValue.Validated += new System.EventHandler(this.MinimumValue_Validated);
@@ -331,7 +331,7 @@
             // MaximumLabel
             // 
             this.MaximumLabel.AutoSize = true;
-            this.MaximumLabel.Location = new System.Drawing.Point(15, 98);
+            this.MaximumLabel.Location = new System.Drawing.Point(7, 80);
             this.MaximumLabel.Name = "MaximumLabel";
             this.MaximumLabel.Size = new System.Drawing.Size(54, 13);
             this.MaximumLabel.TabIndex = 6;
@@ -340,7 +340,7 @@
             // MinimumLabel
             // 
             this.MinimumLabel.AutoSize = true;
-            this.MinimumLabel.Location = new System.Drawing.Point(15, 73);
+            this.MinimumLabel.Location = new System.Drawing.Point(6, 55);
             this.MinimumLabel.Name = "MinimumLabel";
             this.MinimumLabel.Size = new System.Drawing.Size(51, 13);
             this.MinimumLabel.TabIndex = 4;
@@ -348,9 +348,9 @@
             // 
             // Slope_C2_Value
             // 
-            this.Slope_C2_Value.Location = new System.Drawing.Point(73, 45);
+            this.Slope_C2_Value.Location = new System.Drawing.Point(131, 22);
             this.Slope_C2_Value.Name = "Slope_C2_Value";
-            this.Slope_C2_Value.Size = new System.Drawing.Size(47, 20);
+            this.Slope_C2_Value.Size = new System.Drawing.Size(45, 20);
             this.Slope_C2_Value.TabIndex = 3;
             this.Slope_C2_Value.Text = "0";
             this.Slope_C2_Value.Validating += new System.ComponentModel.CancelEventHandler(this.Slope_C2_Value_Validating);
@@ -359,7 +359,7 @@
             // SlopeLabel
             // 
             this.SlopeLabel.AutoSize = true;
-            this.SlopeLabel.Location = new System.Drawing.Point(15, 48);
+            this.SlopeLabel.Location = new System.Drawing.Point(92, 25);
             this.SlopeLabel.Name = "SlopeLabel";
             this.SlopeLabel.Size = new System.Drawing.Size(37, 13);
             this.SlopeLabel.TabIndex = 2;
@@ -367,9 +367,9 @@
             // 
             // C_C1_Value
             // 
-            this.C_C1_Value.Location = new System.Drawing.Point(73, 20);
+            this.C_C1_Value.Location = new System.Drawing.Point(26, 22);
             this.C_C1_Value.Name = "C_C1_Value";
-            this.C_C1_Value.Size = new System.Drawing.Size(47, 20);
+            this.C_C1_Value.Size = new System.Drawing.Size(45, 20);
             this.C_C1_Value.TabIndex = 1;
             this.C_C1_Value.Text = "0";
             this.C_C1_Value.Validating += new System.ComponentModel.CancelEventHandler(this.C_C1_Value_Validating);
@@ -378,7 +378,7 @@
             // CLabel
             // 
             this.CLabel.AutoSize = true;
-            this.CLabel.Location = new System.Drawing.Point(15, 23);
+            this.CLabel.Location = new System.Drawing.Point(7, 25);
             this.CLabel.Name = "CLabel";
             this.CLabel.Size = new System.Drawing.Size(17, 13);
             this.CLabel.TabIndex = 0;
@@ -396,9 +396,9 @@
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.ElevationPressureLabel);
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.ElevationPressureUnits);
             this.ThermalDesignConditionsGroupBox.Controls.Add(this.ElevationValue);
-            this.ThermalDesignConditionsGroupBox.Location = new System.Drawing.Point(14, 20);
+            this.ThermalDesignConditionsGroupBox.Location = new System.Drawing.Point(6, 17);
             this.ThermalDesignConditionsGroupBox.Name = "ThermalDesignConditionsGroupBox";
-            this.ThermalDesignConditionsGroupBox.Size = new System.Drawing.Size(358, 128);
+            this.ThermalDesignConditionsGroupBox.Size = new System.Drawing.Size(333, 104);
             this.ThermalDesignConditionsGroupBox.TabIndex = 20;
             this.ThermalDesignConditionsGroupBox.TabStop = false;
             this.ThermalDesignConditionsGroupBox.Text = "Thermal Design Conditions";
@@ -406,7 +406,7 @@
             // RangeUnits
             // 
             this.RangeUnits.AutoSize = true;
-            this.RangeUnits.Location = new System.Drawing.Point(201, 54);
+            this.RangeUnits.Location = new System.Drawing.Point(184, 51);
             this.RangeUnits.Name = "RangeUnits";
             this.RangeUnits.Size = new System.Drawing.Size(17, 13);
             this.RangeUnits.TabIndex = 22;
@@ -417,7 +417,7 @@
             this.groupBoxPressureElevation.BackColor = System.Drawing.Color.Transparent;
             this.groupBoxPressureElevation.Controls.Add(this.BarometricPressureRadio);
             this.groupBoxPressureElevation.Controls.Add(this.ElevationRadio);
-            this.groupBoxPressureElevation.Location = new System.Drawing.Point(225, 13);
+            this.groupBoxPressureElevation.Location = new System.Drawing.Point(208, 10);
             this.groupBoxPressureElevation.Name = "groupBoxPressureElevation";
             this.groupBoxPressureElevation.Size = new System.Drawing.Size(123, 84);
             this.groupBoxPressureElevation.TabIndex = 21;
@@ -477,7 +477,7 @@
             // CalculatedValuesGroupBox
             // 
             this.CalculatedValuesGroupBox.Controls.Add(this.OutputGridView);
-            this.CalculatedValuesGroupBox.Location = new System.Drawing.Point(6, 190);
+            this.CalculatedValuesGroupBox.Location = new System.Drawing.Point(6, 163);
             this.CalculatedValuesGroupBox.Name = "CalculatedValuesGroupBox";
             this.CalculatedValuesGroupBox.Size = new System.Drawing.Size(751, 97);
             this.CalculatedValuesGroupBox.TabIndex = 31;
@@ -509,7 +509,7 @@
             legend1.CellColumns.Add(legendCellColumn3);
             legend1.Name = "Legend1";
             this.Chart.Legends.Add(legend1);
-            this.Chart.Location = new System.Drawing.Point(6, 293);
+            this.Chart.Location = new System.Drawing.Point(6, 266);
             this.Chart.MinimumSize = new System.Drawing.Size(751, 460);
             this.Chart.Name = "Chart";
             series1.ChartArea = "ChartArea1";
@@ -550,14 +550,13 @@
             series1.Points.Add(dataPoint31);
             series1.Points.Add(dataPoint32);
             this.Chart.Series.Add(series1);
-            this.Chart.Size = new System.Drawing.Size(751, 460);
+            this.Chart.Size = new System.Drawing.Size(751, 487);
             this.Chart.SuppressExceptions = true;
             this.Chart.TabIndex = 12;
             this.Chart.Text = "DemandCurveChart";
             this.Chart.PostPaint += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ChartPaintEventArgs>(this.Chart_PostPaint);
-            this.Chart.Click += new System.EventHandler(this.Chart_Click);
             this.Chart.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Chart_MouseClick);
-            this.Chart.Resize += new System.EventHandler(this.DemandCurveChart_Resize);
+            this.Chart.Resize += new System.EventHandler(this.Chart_Resize);
             // 
             // DemandCurveTabPage
             // 

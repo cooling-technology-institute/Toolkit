@@ -13,8 +13,7 @@ namespace CalculationLibrary
         private const double liquidToGasRatio_MIN = 0.1;
         private const double liquidToGasRatio_MAX = 5.0;
 
-        public readonly int[] InitialApproachXValues = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26 };
-        //        public readonly int[] InitialApproachXValues = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100 };
+        public readonly int[] InitialApproachXValues = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100 };
         private double CalculatedLiquidToGasRatio { get; set; }
         private double CalculatedLiquidToGasRatio_MIN { get; set; }
         private MerkelCalculationData MerkelCalculationData { get; set; }

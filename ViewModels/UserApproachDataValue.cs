@@ -8,11 +8,11 @@ namespace ViewModels
     {
         public const double UserApproachDefault = 10.0;
         public const double UserApproachMinimum = 0.1;
-        public const double UserApproachMaximum = 160.0;
+        public const double UserApproachMaximum = 100.0;
 
         public const double UserApproachDefault_InternationalSystemOfUnits_IS_ = 10.0;
-        public const double UserApproachMinimum_InternationalSystemOfUnits_IS_ = 0.2;
-        public const double UserApproachMaximum_InternationalSystemOfUnits_IS_ = 88.9;
+        public const double UserApproachMinimum_InternationalSystemOfUnits_IS_ = 0.1;
+        public const double UserApproachMaximum_InternationalSystemOfUnits_IS_ = 100.0;
 
         public const string UserApproachToolTipFormat = "Value should be between {0} and {1}.";
 

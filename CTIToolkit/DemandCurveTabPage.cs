@@ -35,6 +35,7 @@ namespace CTIToolkit
         private const string UncheckedString = "☐";
         private const string AllOnString = "AllOn";
         private const string AllOffString = "AllOff";
+        private const string GridString = "Grid";
 
         private DemandCurveViewModel DemandCurveViewModel { get; set; }
         private bool IsDemo { get; set; }
@@ -221,7 +222,7 @@ namespace CTIToolkit
                     {
                         foreach (Approach approach in DemandCurveViewModel.Approaches)
                         {
-                            if (approach.InRange)
+                            if (approach.InRange && approach.Points.Count > 0)
                             {
                                 Series series = new Series()
                                 {
@@ -634,34 +635,6 @@ namespace CTIToolkit
             }
         }
 
-        private void DemandCurveChart_Resize(object sender, EventArgs e)
-        {
-            //if (cy < 550)
-            //{
-            //    m_wndGraph.GetAxis().GetLeft().SetIncrement(.75);
-            //}
-            //else if (cx < 850)
-            //{
-            //    m_wndGraph.GetAxis().GetLeft().SetIncrement(.5);
-            //}
-            //else
-            //{
-            //    m_wndGraph.GetAxis().GetLeft().SetIncrement(.25);
-            //}
-
-            //if (cx < 650)
-            //{
-            //    m_wndGraph.GetAxis().GetBottom().SetIncrement(.5);
-            //}
-            //else if (cx < 850)
-            //{
-            //    m_wndGraph.GetAxis().GetBottom().SetIncrement(.25);
-            //}
-            //else
-            //{
-            //    m_wndGraph.GetAxis().GetBottom().SetIncrement(.2);
-            //}
-        }
 
         private void DemandCurveTabPage_Resize(object sender, EventArgs e)
         {
@@ -761,17 +734,23 @@ namespace CTIToolkit
                         }
                         break;
                     case TurnOffOn.TurnOff:
-                        series.SetCustomProperty("CHECK", UncheckedString);
-                        series.Points.Clear();
+                        if (series.GetCustomProperty("CHECK").Equals(CheckedString))
+                        {
+                            series.SetCustomProperty("CHECK", UncheckedString);
+                            series.Points.Clear();
+                        }
                         break;
                     case TurnOffOn.TurnOn:
-                        series.SetCustomProperty("CHECK", CheckedString);
-                        if (!Chart.ChartAreas[0].AxisX.IsLogarithmic)
+                        if (series.GetCustomProperty("CHECK").Equals(UncheckedString))
                         {
-                            Chart.ChartAreas[0].AxisX.IsLogarithmic = true;
-                            Chart.ChartAreas[0].AxisY.IsLogarithmic = true;
+                            series.SetCustomProperty("CHECK", CheckedString);
+                            if (!Chart.ChartAreas[0].AxisX.IsLogarithmic)
+                            {
+                                Chart.ChartAreas[0].AxisX.IsLogarithmic = true;
+                                Chart.ChartAreas[0].AxisY.IsLogarithmic = true;
+                            }
+                            DemandCurveViewModel.FillSeries(series);
                         }
-                        DemandCurveViewModel.FillSeries(series);
                         break;
                 }
             }
@@ -820,13 +799,32 @@ namespace CTIToolkit
                                         TurnSeriesOffOn(series, TurnOffOn.TurnOn);
                                     }
                                 }
-                                if (legendItem.Name == AllOffString)
+                                else if (legendItem.Name == AllOffString)
                                 {
                                     Chart.ChartAreas[0].AxisX.IsLogarithmic = false;
                                     Chart.ChartAreas[0].AxisY.IsLogarithmic = false;
                                     foreach (Series series in Chart.Series)
                                     {
                                         TurnSeriesOffOn(series, TurnOffOn.TurnOff);
+                                    }
+                                }
+                                else if (legendItem.Name == GridString)
+                                {
+                                    if (legendItem.Cells[0].Text == CheckedString)
+                                    {
+                                        legendItem.Cells[0].Text = UncheckedString;
+                                        Chart.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+                                        Chart.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+                                        Chart.ChartAreas[0].AxisY.MinorGrid.Enabled = false;
+                                        Chart.ChartAreas[0].AxisX.MinorGrid.Enabled = false;
+                                    }
+                                    else
+                                    {
+                                        legendItem.Cells[0].Text = CheckedString;
+                                        Chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
+                                        Chart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
+                                        Chart.ChartAreas[0].AxisY.MinorGrid.Enabled = false;
+                                        Chart.ChartAreas[0].AxisX.MinorGrid.Enabled = false;
                                     }
                                 }
                             }
@@ -890,49 +888,49 @@ namespace CTIToolkit
             allOffLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, "All Off"));
             Chart.Legends[0].CustomItems.Add(allOffLegendItem);
 
+            LegendItem gridOffOnLegendItem = new LegendItem()
+            {
+                Name = GridString,
+            };
+            gridOffOnLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, CheckedString));
+            gridOffOnLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, string.Empty));
+            gridOffOnLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, GridString));
+            Chart.Legends[0].CustomItems.Add(gridOffOnLegendItem);
+
             Chart.ChartAreas[0].AxisX.Title = "L/G";
             Chart.ChartAreas[0].AxisX.Maximum = 6;
             Chart.ChartAreas[0].AxisX.RoundAxisValues();
             Chart.ChartAreas[0].AxisX.LabelStyle.Format = "0.00";
-
-            //Chart.ChartAreas[0].AxisX.CustomLabels.Add(new CustomLabel(Math.Log(0.4), Math.Log(0.6), "0.5", 0, LabelMarkStyle.LineSideMark, GridTickTypes.Gridline));
-
-            Chart.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
-            //Chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Yellow;
-            //Chart.ChartAreas[0].AxisX.MajorGrid.Interval = 0.75;
-            Chart.ChartAreas[0].AxisX.MinorGrid.Enabled = false;
-            //Chart.ChartAreas[0].AxisX.MinorGrid.LineColor = Color.LightSlateGray;
-            //Chart.ChartAreas[0].AxisX.MinorGrid.Interval = 0.75;
+            Chart.ChartAreas[0].AxisX.LabelStyle.Angle = 90;
+            Chart.ChartAreas[0].AxisX.Interval = 0.2;
+            Chart.ChartAreas[0].AxisX.IntervalOffset = 0.1;
+            Chart.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Number;
+            Chart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
+            Chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightGray;
+            Chart.ChartAreas[0].AxisX.MajorGrid.Interval = 0.2;
+            Chart.ChartAreas[0].AxisX.MajorGrid.IntervalOffset = 0.1;
             Chart.ChartAreas[0].AxisX.MajorTickMark.Enabled = true;
-            Chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 0.5;
+            Chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 0.2;
+            Chart.ChartAreas[0].AxisX.MajorTickMark.IntervalOffset = 0.1;
+            Chart.ChartAreas[0].AxisX.MinorGrid.Enabled = false;
             Chart.ChartAreas[0].AxisX.MinorTickMark.Enabled = false;
-            //Chart.ChartAreas[0].AxisX.MinorTickMark.Interval = 0.25;
-            //Chart.ChartAreas[0].AxisX.MinorTickMark.LineColor = Color.LightGray;
-            //Chart.ChartAreas[0].AxisX.Interval = Math.Log(0.5);
-            //Chart.ChartAreas[0].AxisX.IntervalOffset = Math.Log(0.01);
-            //Chart.ChartAreas[0].AxisX.CustomLabels.Add(new CustomLabel(Math.Log(0.4), Math.Log(0.6), "0.5", 0, LabelMarkStyle.LineSideMark));
-            //Chart.ChartAreas[0].AxisX.CustomLabels.Add(new CustomLabel(Math.Log(0.9), Math.Log(1.1), "1.0", 0, LabelMarkStyle.LineSideMark));
 
             Chart.ChartAreas[0].AxisY.Title = "KaV/L";
             Chart.ChartAreas[0].AxisY.Maximum = 6;
             Chart.ChartAreas[0].AxisY.RoundAxisValues();
             Chart.ChartAreas[0].AxisY.LabelStyle.Format = "0.00";
-
-            Chart.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
-            //Chart.ChartAreas[0].AxisY.MajorGrid.Interval = 0.75;
-            //Chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Yellow;
+            Chart.ChartAreas[0].AxisY.Interval = 0.2;
+            Chart.ChartAreas[0].AxisY.IntervalOffset = 0.1;
+            Chart.ChartAreas[0].AxisY.IntervalType = DateTimeIntervalType.Number;
+            Chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
+            Chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightGray;
+            Chart.ChartAreas[0].AxisY.MajorGrid.Interval = 0.2;
+            Chart.ChartAreas[0].AxisY.MajorGrid.IntervalOffset = 0.1;
+            Chart.ChartAreas[0].AxisY.MajorTickMark.Enabled = true;
+            Chart.ChartAreas[0].AxisY.MajorTickMark.Interval = 0.2;
+            Chart.ChartAreas[0].AxisY.MajorTickMark.IntervalOffset = 0.1;
             Chart.ChartAreas[0].AxisY.MinorGrid.Enabled = false;
-            //Chart.ChartAreas[0].AxisY.MinorGrid.LineColor = Color.LightSlateGray;
-            //Chart.ChartAreas[0].AxisY.MinorGrid.Interval = 0.75;
-            Chart.ChartAreas[0].AxisY.MajorTickMark.Enabled = false;
-            //Chart.ChartAreas[0].AxisY.MajorTickMark.Interval = 0.75;
             Chart.ChartAreas[0].AxisY.MinorTickMark.Enabled = false;
-            // Chart.ChartAreas[0].AxisY.MinorTickMark.Interval = 0.25;
-            //Chart.ChartAreas[0].AxisY.MinorTickMark.LineColor = Color.LightGray;
-            //Chart.ChartAreas[0].AxisY.Interval = 0.75;
-            //Chart.ChartAreas[0].AxisY.IntervalOffset = 0.25;
-            //Chart.ChartAreas[0].AxisY.CustomLabels.Add(new CustomLabel(0.75, 0.75, "0.75", Bottom, LabelMarkStyle.LineSideMark));
-            Chart.ChartAreas[0].AxisY.Interval = Math.Log(0.75);
 
             Chart.Legends[0].Title = "Approach";
 
@@ -947,39 +945,63 @@ namespace CTIToolkit
             Chart.ChartAreas[0].CursorY.Interval = 0.01;
         }
 
-        //private void AllOffOnButton_Click(object sender, EventArgs e)
-        //{
-        //    if (Chart.Series != null && Chart.Series.Count > 0)
-        //    {
-        //        if (AllOff)
-        //        {
-        //            AllOffOnButton.Text = "All On";
-        //            foreach (Series series in Chart.Series)
-        //            {
-        //                if (series.XValueMember.StartsWith("L/G-Approach"))
-        //                {
-        //                    series.Enabled = false;
-        //                }
-        //                else
-        //                {
-        //                    Chart.ChartAreas[0].AxisX.IsLogarithmic = false;
-        //                    Chart.ChartAreas[0].AxisY.IsLogarithmic = false;
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            AllOffOnButton.Text = "All Off";
-        //            foreach (Series series in Chart.Series)
-        //            {
-        //                if (series.XValueMember.StartsWith("L/G-Approach"))
-        //                {
-        //                    series.Enabled = true;
-        //                }
-        //            }
-        //        }
-        //        AllOff = !AllOff;
-        //    }
-        //}
+        private void Chart_Resize(object sender, EventArgs e)
+        {
+            if (Chart.Size.Width > 1500)
+            {
+                Chart.ChartAreas[0].AxisX.Interval = 0.05;
+                Chart.ChartAreas[0].AxisX.IntervalOffset = 0.1;
+                Chart.ChartAreas[0].AxisX.MajorGrid.Interval = 0.05;
+                Chart.ChartAreas[0].AxisX.MajorGrid.IntervalOffset = 0.1;
+                Chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 0.05;
+                Chart.ChartAreas[0].AxisX.MajorTickMark.IntervalOffset = 0.1;
+            }
+            else if (Chart.Size.Width > 1000)
+            {
+                Chart.ChartAreas[0].AxisX.Interval = 0.1;
+                Chart.ChartAreas[0].AxisX.IntervalOffset = 0.1;
+                Chart.ChartAreas[0].AxisX.MajorGrid.Interval = 0.1;
+                Chart.ChartAreas[0].AxisX.MajorGrid.IntervalOffset = 0.1;
+                Chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 0.1;
+                Chart.ChartAreas[0].AxisX.MajorTickMark.IntervalOffset = 0.1;
+            }
+            else //if (Chart.ChartAreas[0].Position.Width > 100)
+            {
+                Chart.ChartAreas[0].AxisX.Interval = 0.2;
+                Chart.ChartAreas[0].AxisX.IntervalOffset = 0.1;
+                Chart.ChartAreas[0].AxisX.MajorGrid.Interval = 0.2;
+                Chart.ChartAreas[0].AxisX.MajorGrid.IntervalOffset = 0.1;
+                Chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 0.2;
+                Chart.ChartAreas[0].AxisX.MajorTickMark.IntervalOffset = 0.1;
+            }
+
+            if (Chart.Size.Height > 200)
+            {
+                Chart.ChartAreas[0].AxisY.Interval = 0.05;
+                Chart.ChartAreas[0].AxisY.IntervalOffset = 0.1;
+                Chart.ChartAreas[0].AxisY.MajorGrid.Interval = 0.05;
+                Chart.ChartAreas[0].AxisY.MajorGrid.IntervalOffset = 0.1;
+                Chart.ChartAreas[0].AxisY.MajorTickMark.Interval = 0.05;
+                Chart.ChartAreas[0].AxisY.MajorTickMark.IntervalOffset = 0.1;
+            }
+            else if (Chart.Size.Height > 100)
+            {
+                Chart.ChartAreas[0].AxisY.Interval = 0.1;
+                Chart.ChartAreas[0].AxisY.IntervalOffset = 0.1;
+                Chart.ChartAreas[0].AxisY.MajorGrid.Interval = 0.1;
+                Chart.ChartAreas[0].AxisY.MajorGrid.IntervalOffset = 0.1;
+                Chart.ChartAreas[0].AxisY.MajorTickMark.Interval = 0.1;
+                Chart.ChartAreas[0].AxisY.MajorTickMark.IntervalOffset = 0.1;
+            }
+            else //if (Chart.ChartAreas[0].Position.Height > 100)
+            {
+                Chart.ChartAreas[0].AxisY.Interval = 0.2;
+                Chart.ChartAreas[0].AxisY.IntervalOffset = 0.1;
+                Chart.ChartAreas[0].AxisY.MajorGrid.Interval = 0.2;
+                Chart.ChartAreas[0].AxisY.MajorGrid.IntervalOffset = 0.1;
+                Chart.ChartAreas[0].AxisY.MajorTickMark.Interval = 0.2;
+                Chart.ChartAreas[0].AxisY.MajorTickMark.IntervalOffset = 0.1;
+            }
+        }
     }
 }
