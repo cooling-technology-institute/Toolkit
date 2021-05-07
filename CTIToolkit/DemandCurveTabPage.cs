@@ -214,33 +214,7 @@ namespace CTIToolkit
                     //Secondary X-Axis    Top horizontal axis.
                     //Primary Y-Axis  Left vertical axis.
                     //Secondary Y-Axis    Right vertical axis.
-                    Chart.Series.Clear();
-                    Chart.ChartAreas[0].AxisX.IsLogarithmic = true;
-                    Chart.ChartAreas[0].AxisY.IsLogarithmic = true;
-
-                    if (DemandCurveViewModel.Approaches.Count > 0)
-                    {
-                        foreach (Approach approach in DemandCurveViewModel.Approaches)
-                        {
-                            if (approach.InRange && approach.Points.Count > 0)
-                            {
-                                Series series = new Series()
-                                {
-                                    ChartArea = "ChartArea1",
-                                    ChartType = SeriesChartType.Line,
-                                    Name = approach.Name
-                                };
-                                DemandCurveViewModel.FillSeries(series);
-                                series.SetCustomProperty("CHECK", CheckedString);
-                                Chart.Series.Add(series);
-                            }
-                        }
-
-                        if (DemandCurveViewModel.GetOutputDataTable() != null)
-                        {
-                            OutputGridView.DataSource = new DataView(DemandCurveViewModel.GetOutputDataTable());
-                        }
-                    }
+                    DrawSeries(Chart, false);
                 }
                 else
                 {
@@ -360,35 +334,73 @@ namespace CTIToolkit
 
         public override void PrintPage(object sender, PrintPageEventArgs e)
         {
-            //if(PrintControl.UserControl == null)
-            //{
-
-            //}
             NameValueUnitsDataTable nameValueUnitsDataTable = new NameValueUnitsDataTable();
 
-            if (DemandCurveViewModel.GetDataTable() != null)
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.WetBulbTemperatureDataValueInputMessage, WetBulbTemperatureValue.Text, WebBulbTemperatureUnits.Text);
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.RangeDataValueInputMessage, RangeValue.Text, RangeUnits.Text);
+
+            if (ElevationRadio.Checked)
             {
-                nameValueUnitsDataTable.AddRow(DemandCurveViewModel.WetBulbTemperatureDataValueInputMessage, WetBulbTemperatureValue.Text, WebBulbTemperatureUnits.Text);
-                nameValueUnitsDataTable.AddRow(DemandCurveViewModel.RangeDataValueInputMessage, RangeValue.Text, RangeUnits.Text);
-
-                if (ElevationRadio.Checked)
-                {
-                    nameValueUnitsDataTable.AddRow(DemandCurveViewModel.ElevationDataValueInputMessage, DemandCurveViewModel.ElevationDataValueInputValue, ElevationPressureUnits.Text);
-                }
-                else
-                    nameValueUnitsDataTable.AddRow(DemandCurveViewModel.BarometricPressureDataValueInputMessage, DemandCurveViewModel.BarometricPressureDataValueInputValue, ElevationPressureUnits.Text);
-                {
-                }
-
-                DemandCurvePrinterOutput printerOutput = new DemandCurvePrinterOutput(e.PageBounds.Height - 80, this.PrintControl.Label, nameValueUnitsDataTable, DemandCurveViewModel);
-                printerOutput.CreateControl();
-                var bm = new Bitmap(printerOutput.Width, printerOutput.Height);
-                printerOutput.DrawToBitmap(bm, new Rectangle(0, 0, bm.Width, bm.Height));
-                e.Graphics.DrawImage(bm, 40, 40);
+                nameValueUnitsDataTable.AddRow(DemandCurveViewModel.ElevationDataValueInputMessage, DemandCurveViewModel.ElevationDataValueInputValue, ElevationPressureUnits.Text);
             }
             else
             {
-                MessageBox.Show("You must run the calculation before printing.");
+                nameValueUnitsDataTable.AddRow(DemandCurveViewModel.BarometricPressureDataValueInputMessage, DemandCurveViewModel.BarometricPressureDataValueInputValue, ElevationPressureUnits.Text);
+            }
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.C1DataValueInputMessage, C_C1_Value.Text, string.Empty);
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.SlopeDataValueInputMessage, Slope_C2_Value.Text, string.Empty);
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.MaximumDataValueInputMessage, MaximumValue.Text, string.Empty);
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.MinimumDataValueInputMessage, MinimumValue.Text, string.Empty);
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.LiquidToGasRatioDataValueInputMessage, LiquidToGasRatioValue.Text, string.Empty);
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.UserApproachDataValueInputMessage, UserApproachValue.Text, UserApproachUnits.Text);
+
+            DemandCurvePrinterOutput printerOutput = new DemandCurvePrinterOutput(e.PageBounds.Height - 80, this.PrintControl.Label, nameValueUnitsDataTable, DemandCurveViewModel);
+            Chart chart = printerOutput.Controls["Chart"] as Chart;
+            InitializeChart(chart, true);
+            DrawSeries(chart, true);
+
+            printerOutput.CreateControl();
+            var bm = new Bitmap(printerOutput.Width, printerOutput.Height);
+            printerOutput.DrawToBitmap(bm, new Rectangle(0, 0, bm.Width, bm.Height));
+            e.Graphics.DrawImage(bm, 40, 40);
+        }
+
+        private void DrawSeries(Chart chart, bool isPrintPage)
+        {
+            if (DemandCurveViewModel.Approaches.Count > 0)
+            {
+                chart.Series.Clear();
+                chart.ChartAreas[0].AxisX.IsLogarithmic = true;
+                chart.ChartAreas[0].AxisY.IsLogarithmic = true;
+
+                foreach (Approach approach in DemandCurveViewModel.Approaches)
+                {
+                    if (approach.InRange && approach.Points.Count > 0)
+                    {
+                        Series series = new Series()
+                        {
+                            ChartArea = "ChartArea1",
+                            ChartType = SeriesChartType.Line,
+                            Name = approach.Name
+                        };
+                        DemandCurveViewModel.FillSeries(series);
+                        if(!isPrintPage)
+                        {
+                            series.SetCustomProperty("CHECK", CheckedString);
+                        }
+                        chart.Series.Add(series);
+                    }
+                }
+
+                if (DemandCurveViewModel.GetOutputDataTable() != null)
+                {
+                    OutputGridView.DataSource = new DataView(DemandCurveViewModel.GetOutputDataTable());
+                }
+            }
+            else
+            {
+                chart.ChartAreas[0].AxisX.IsLogarithmic = false;
+                chart.ChartAreas[0].AxisY.IsLogarithmic = false;
             }
         }
 
@@ -581,22 +593,6 @@ namespace CTIToolkit
             }
         }
 
-        //private void ApproachRadio_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    if (ApproachRadio.Checked)
-        //    {
-        //        DemandCurveViewModel.IsApproach = true;
-        //    }
-        //}
-
-        //private void KavLRadio_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    if (KavLRadio.Checked)
-        //    {
-        //        DemandCurveViewModel.IsApproach = false;
-        //    }
-        //}
-
         private void BarometricPressureRadio_CheckedChanged(object sender, EventArgs e)
         {
             if (BarometricPressureRadio.Checked)
@@ -635,7 +631,6 @@ namespace CTIToolkit
             }
         }
 
-
         private void DemandCurveTabPage_Resize(object sender, EventArgs e)
         {
             if (sender is Control)
@@ -664,32 +659,6 @@ namespace CTIToolkit
                     }
                 }
             }
-
-            //if (cy < 550)
-            //{
-            //    m_wndGraph.GetAxis().GetLeft().SetIncrement(.75);
-            //}
-            //else if (cx < 850)
-            //{
-            //    m_wndGraph.GetAxis().GetLeft().SetIncrement(.5);
-            //}
-            //else
-            //{
-            //    m_wndGraph.GetAxis().GetLeft().SetIncrement(.25);
-            //}
-
-            //if (cx < 650)
-            //{
-            //    m_wndGraph.GetAxis().GetBottom().SetIncrement(.5);
-            //}
-            //else if (cx < 850)
-            //{
-            //    m_wndGraph.GetAxis().GetBottom().SetIncrement(.25);
-            //}
-            //else
-            //{
-            //    m_wndGraph.GetAxis().GetBottom().SetIncrement(.2);
-            //}
         }
 
         private void Chart_PostPaint(object sender, ChartPaintEventArgs e)
@@ -843,106 +812,118 @@ namespace CTIToolkit
             }
         }
 
+        private void InitializeChart(Chart chart, bool isPrintPage)
+        {
+            chart.SuppressExceptions = true;
+            chart.ChartAreas[0].AxisX.IsLogarithmic = false;
+            chart.ChartAreas[0].AxisY.IsLogarithmic = false;
+
+            chart.Series.Clear();
+
+            if (!isPrintPage)
+            {
+                chart.Legends[0].CellColumns.Clear();
+                chart.Legends[0].CellColumns.Add(new LegendCellColumn()
+                {
+                    Name = "Check",
+                    ColumnType = LegendCellColumnType.Text,
+                    Text = "#CUSTOMPROPERTY(CHECK)",
+                });
+                chart.Legends[0].CellColumns.Add(new LegendCellColumn()
+                {
+                    Name = "Symbol",
+                    ColumnType = LegendCellColumnType.SeriesSymbol
+                });
+                chart.Legends[0].CellColumns.Add(new LegendCellColumn()
+                {
+                    Name = "Name",
+                    ColumnType = LegendCellColumnType.Text,
+                    Text = "#LEGENDTEXT"
+                });
+
+                LegendItem allOnLegendItem = new LegendItem()
+                {
+                    Name = AllOnString,
+                };
+                allOnLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, CheckedString));
+                allOnLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, string.Empty));
+                allOnLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, "All On"));
+                chart.Legends[0].CustomItems.Add(allOnLegendItem);
+
+                LegendItem allOffLegendItem = new LegendItem()
+                {
+                    Name = AllOffString,
+                };
+                allOffLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, UncheckedString));
+                allOffLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, string.Empty));
+                allOffLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, "All Off"));
+                chart.Legends[0].CustomItems.Add(allOffLegendItem);
+
+                LegendItem gridOffOnLegendItem = new LegendItem()
+                {
+                    Name = GridString,
+                };
+                gridOffOnLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, CheckedString));
+                gridOffOnLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, string.Empty));
+                gridOffOnLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, GridString));
+                chart.Legends[0].CustomItems.Add(gridOffOnLegendItem);
+            }
+
+            chart.ChartAreas[0].AxisX.Title = "L/G";
+            chart.ChartAreas[0].AxisX.Maximum = 6;
+            chart.ChartAreas[0].AxisX.RoundAxisValues();
+            chart.ChartAreas[0].AxisX.LabelStyle.Format = "0.00";
+            chart.ChartAreas[0].AxisX.LabelStyle.Angle = 90;
+            chart.ChartAreas[0].AxisX.Interval = 0.2;
+            chart.ChartAreas[0].AxisX.IntervalOffset = 0.1;
+            chart.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Number;
+            chart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
+            chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightGray;
+            chart.ChartAreas[0].AxisX.MajorGrid.Interval = 0.2;
+            chart.ChartAreas[0].AxisX.MajorGrid.IntervalOffset = 0.1;
+            chart.ChartAreas[0].AxisX.MajorTickMark.Enabled = true;
+            chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 0.2;
+            chart.ChartAreas[0].AxisX.MajorTickMark.IntervalOffset = 0.1;
+            chart.ChartAreas[0].AxisX.MinorGrid.Enabled = false;
+            chart.ChartAreas[0].AxisX.MinorTickMark.Enabled = false;
+
+            chart.ChartAreas[0].AxisY.Title = "KaV/L";
+            chart.ChartAreas[0].AxisY.Maximum = 6;
+            chart.ChartAreas[0].AxisY.RoundAxisValues();
+            chart.ChartAreas[0].AxisY.LabelStyle.Format = "0.00";
+            chart.ChartAreas[0].AxisY.Interval = 0.2;
+            chart.ChartAreas[0].AxisY.IntervalOffset = 0.1;
+            chart.ChartAreas[0].AxisY.IntervalType = DateTimeIntervalType.Number;
+            chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
+            chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightGray;
+            chart.ChartAreas[0].AxisY.MajorGrid.Interval = 0.2;
+            chart.ChartAreas[0].AxisY.MajorGrid.IntervalOffset = 0.1;
+            chart.ChartAreas[0].AxisY.MajorTickMark.Enabled = true;
+            chart.ChartAreas[0].AxisY.MajorTickMark.Interval = 0.2;
+            chart.ChartAreas[0].AxisY.MajorTickMark.IntervalOffset = 0.1;
+            chart.ChartAreas[0].AxisY.MinorGrid.Enabled = false;
+            chart.ChartAreas[0].AxisY.MinorTickMark.Enabled = false;
+
+            chart.Legends[0].Title = "Approach";
+
+            if(!isPrintPage)
+            {
+                chart.ChartAreas[0].CursorX.AutoScroll = true;
+                chart.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
+                chart.ChartAreas[0].CursorX.IsUserEnabled = true;
+                chart.ChartAreas[0].CursorX.Interval = 0.01;
+
+                chart.ChartAreas[0].CursorY.AutoScroll = true;
+                chart.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
+                chart.ChartAreas[0].CursorY.IsUserEnabled = true;
+                chart.ChartAreas[0].CursorY.Interval = 0.01;
+
+            }
+        }
+
         private void DemandCurveTabPage_Load(object sender, EventArgs e)
         {
-            Chart.SuppressExceptions = true;
-            Chart.ChartAreas[0].AxisX.IsLogarithmic = false;
-            Chart.ChartAreas[0].AxisY.IsLogarithmic = false;
-
-            Chart.Series.Clear();
-
-            Chart.Legends[0].CellColumns.Clear();
-            Chart.Legends[0].CellColumns.Add(new LegendCellColumn()
-            {
-                Name = "Check",
-                ColumnType = LegendCellColumnType.Text,
-                Text = "#CUSTOMPROPERTY(CHECK)",
-            });
-            Chart.Legends[0].CellColumns.Add(new LegendCellColumn()
-            {
-                Name = "Symbol",
-                ColumnType = LegendCellColumnType.SeriesSymbol
-            });
-            Chart.Legends[0].CellColumns.Add(new LegendCellColumn()
-            {
-                Name = "Name",
-                ColumnType = LegendCellColumnType.Text,
-                Text = "#LEGENDTEXT"
-            });
-
-            LegendItem allOnLegendItem = new LegendItem()
-            {
-                Name = AllOnString,
-            };
-            allOnLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, CheckedString));
-            allOnLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, string.Empty));
-            allOnLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, "All On"));
-            Chart.Legends[0].CustomItems.Add(allOnLegendItem);
-
-            LegendItem allOffLegendItem = new LegendItem()
-            {
-                Name = AllOffString,
-            };
-            allOffLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, UncheckedString));
-            allOffLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, string.Empty));
-            allOffLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, "All Off"));
-            Chart.Legends[0].CustomItems.Add(allOffLegendItem);
-
-            LegendItem gridOffOnLegendItem = new LegendItem()
-            {
-                Name = GridString,
-            };
-            gridOffOnLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, CheckedString));
-            gridOffOnLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, string.Empty));
-            gridOffOnLegendItem.Cells.Add(new LegendCell(LegendCellType.Text, GridString));
-            Chart.Legends[0].CustomItems.Add(gridOffOnLegendItem);
-
-            Chart.ChartAreas[0].AxisX.Title = "L/G";
-            Chart.ChartAreas[0].AxisX.Maximum = 6;
-            Chart.ChartAreas[0].AxisX.RoundAxisValues();
-            Chart.ChartAreas[0].AxisX.LabelStyle.Format = "0.00";
-            Chart.ChartAreas[0].AxisX.LabelStyle.Angle = 90;
-            Chart.ChartAreas[0].AxisX.Interval = 0.2;
-            Chart.ChartAreas[0].AxisX.IntervalOffset = 0.1;
-            Chart.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Number;
-            Chart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
-            Chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightGray;
-            Chart.ChartAreas[0].AxisX.MajorGrid.Interval = 0.2;
-            Chart.ChartAreas[0].AxisX.MajorGrid.IntervalOffset = 0.1;
-            Chart.ChartAreas[0].AxisX.MajorTickMark.Enabled = true;
-            Chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 0.2;
-            Chart.ChartAreas[0].AxisX.MajorTickMark.IntervalOffset = 0.1;
-            Chart.ChartAreas[0].AxisX.MinorGrid.Enabled = false;
-            Chart.ChartAreas[0].AxisX.MinorTickMark.Enabled = false;
-
-            Chart.ChartAreas[0].AxisY.Title = "KaV/L";
-            Chart.ChartAreas[0].AxisY.Maximum = 6;
-            Chart.ChartAreas[0].AxisY.RoundAxisValues();
-            Chart.ChartAreas[0].AxisY.LabelStyle.Format = "0.00";
-            Chart.ChartAreas[0].AxisY.Interval = 0.2;
-            Chart.ChartAreas[0].AxisY.IntervalOffset = 0.1;
-            Chart.ChartAreas[0].AxisY.IntervalType = DateTimeIntervalType.Number;
-            Chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
-            Chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightGray;
-            Chart.ChartAreas[0].AxisY.MajorGrid.Interval = 0.2;
-            Chart.ChartAreas[0].AxisY.MajorGrid.IntervalOffset = 0.1;
-            Chart.ChartAreas[0].AxisY.MajorTickMark.Enabled = true;
-            Chart.ChartAreas[0].AxisY.MajorTickMark.Interval = 0.2;
-            Chart.ChartAreas[0].AxisY.MajorTickMark.IntervalOffset = 0.1;
-            Chart.ChartAreas[0].AxisY.MinorGrid.Enabled = false;
-            Chart.ChartAreas[0].AxisY.MinorTickMark.Enabled = false;
-
-            Chart.Legends[0].Title = "Approach";
-
-            Chart.ChartAreas[0].CursorX.AutoScroll = true;
-            Chart.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
-            Chart.ChartAreas[0].CursorX.IsUserEnabled = true;
-            Chart.ChartAreas[0].CursorX.Interval = 0.01;
-
-            Chart.ChartAreas[0].CursorY.AutoScroll = true;
-            Chart.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
-            Chart.ChartAreas[0].CursorY.IsUserEnabled = true;
-            Chart.ChartAreas[0].CursorY.Interval = 0.01;
+            InitializeChart(Chart, false);
         }
 
         private void Chart_Resize(object sender, EventArgs e)

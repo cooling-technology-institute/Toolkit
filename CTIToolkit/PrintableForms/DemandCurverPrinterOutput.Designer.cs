@@ -67,13 +67,13 @@ namespace CTIToolkit
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label3 = new System.Windows.Forms.Label();
-            this.DemandCurveChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.OptionalLabelTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.ThermalDesignConditionsDataGridView = new System.Windows.Forms.DataGridView();
             this.CTILogo = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.DemandCurveChart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ThermalDesignConditionsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CTILogo)).BeginInit();
             this.SuspendLayout();
@@ -87,9 +87,9 @@ namespace CTIToolkit
             this.label3.TabIndex = 24;
             this.label3.Text = "Produced using CTI Toolkit 4.0";
             // 
-            // DemandCurveChart
+            // Chart
             // 
-            this.DemandCurveChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Chart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.AxisX.IsLogarithmic = true;
@@ -107,11 +107,11 @@ namespace CTIToolkit
             chartArea1.AxisY.Maximum = 5D;
             chartArea1.AxisY.Minimum = 0.1D;
             chartArea1.Name = "ChartArea1";
-            this.DemandCurveChart.ChartAreas.Add(chartArea1);
+            this.Chart.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
-            this.DemandCurveChart.Legends.Add(legend1);
-            this.DemandCurveChart.Location = new System.Drawing.Point(13, 386);
-            this.DemandCurveChart.Name = "DemandCurveChart";
+            this.Chart.Legends.Add(legend1);
+            this.Chart.Location = new System.Drawing.Point(0, 392);
+            this.Chart.Name = "Chart";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
@@ -149,10 +149,10 @@ namespace CTIToolkit
             series1.Points.Add(dataPoint30);
             series1.Points.Add(dataPoint31);
             series1.Points.Add(dataPoint32);
-            this.DemandCurveChart.Series.Add(series1);
-            this.DemandCurveChart.Size = new System.Drawing.Size(900, 442);
-            this.DemandCurveChart.TabIndex = 23;
-            this.DemandCurveChart.Text = "DemandCurveChart";
+            this.Chart.Series.Add(series1);
+            this.Chart.Size = new System.Drawing.Size(733, 488);
+            this.Chart.TabIndex = 23;
+            this.Chart.Text = "DemandCurveChart";
             // 
             // OptionalLabelTextBox
             // 
@@ -174,9 +174,9 @@ namespace CTIToolkit
             this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 137);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(170, 17);
+            this.label1.Size = new System.Drawing.Size(105, 17);
             this.label1.TabIndex = 21;
-            this.label1.Text = "Thermal Design Conditions:";
+            this.label1.Text = "Input Properties:";
             // 
             // textBox1
             // 
@@ -222,7 +222,7 @@ namespace CTIToolkit
             this.ThermalDesignConditionsDataGridView.Name = "ThermalDesignConditionsDataGridView";
             this.ThermalDesignConditionsDataGridView.RowHeadersVisible = false;
             this.ThermalDesignConditionsDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.ThermalDesignConditionsDataGridView.Size = new System.Drawing.Size(646, 213);
+            this.ThermalDesignConditionsDataGridView.Size = new System.Drawing.Size(646, 223);
             this.ThermalDesignConditionsDataGridView.TabIndex = 19;
             // 
             // CTILogo
@@ -242,15 +242,15 @@ namespace CTIToolkit
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.DemandCurveChart);
+            this.Controls.Add(this.Chart);
             this.Controls.Add(this.OptionalLabelTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.ThermalDesignConditionsDataGridView);
             this.Controls.Add(this.CTILogo);
             this.Name = "DemandCurvePrinterOutput";
-            this.Size = new System.Drawing.Size(950, 880);
-            ((System.ComponentModel.ISupportInitialize)(this.DemandCurveChart)).EndInit();
+            this.Size = new System.Drawing.Size(736, 880);
+            ((System.ComponentModel.ISupportInitialize)(this.Chart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ThermalDesignConditionsDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CTILogo)).EndInit();
             this.ResumeLayout(false);
@@ -261,7 +261,7 @@ namespace CTIToolkit
         #endregion
 
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataVisualization.Charting.Chart DemandCurveChart;
+        private System.Windows.Forms.DataVisualization.Charting.Chart Chart;
         private System.Windows.Forms.TextBox OptionalLabelTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
