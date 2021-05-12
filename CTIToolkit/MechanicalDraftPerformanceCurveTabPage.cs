@@ -447,103 +447,114 @@ namespace CTIToolkit
             if(PrintControl.UserControl == null)
             {
                 NameValueUnitsDataTable nameValueUnitsDataTable = new NameValueUnitsDataTable();
-                UserControl printerOutput;
+                UserControl printerOutput = null;
                 
                 if(PrintControl.Bitmap != null)
                 {
                     PrintControl.Bitmap.Dispose();
                 }
 
-                if (PrintControl.IsDesignData)
+                if (MechanicalDraftPerformanceCurveViewModel.IsDesignDataValid)
                 {
-                    int pageSize = e.PageSettings.Bounds.Height;
-                    TowerDesignDataForm.FillNameValueUnitsDataTable(nameValueUnitsDataTable);
-                    MechanicalDraftPerformanceCurveDataPrinterOutput output = new MechanicalDraftPerformanceCurveDataPrinterOutput(pageSize, this.PrintControl.Label, nameValueUnitsDataTable, MechanicalDraftPerformanceCurveViewModel);
-                    PrintControl.X.Clear();
-                    PrintControl.PageIndex = 0;
-                    printerOutput = output;
-                    if((MechanicalDraftPerformanceCurveViewModel.CalculationData != null) 
-                        && (MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates != null) 
-                        && (MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates.Count > 0))
+                    if (PrintControl.IsDesignData)
                     {
-                        int bottom = 475;
-                        int index = 1;
-                        int pageHeight = pageSize;
-                        int newBottom = 0;
-                        PrintControl.X.Add(0);
-                        PrintControl.X.Add(pageHeight);
-
-                        //                    foreach (WaterFlowRate waterFlowRate in MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates)
-                        foreach (WaterFlowRate waterFlowRate in MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates)
+                        int pageSize = e.PageSettings.Bounds.Height;
+                        TowerDesignDataForm.FillNameValueUnitsDataTable(nameValueUnitsDataTable);
+                        MechanicalDraftPerformanceCurveDataPrinterOutput output = new MechanicalDraftPerformanceCurveDataPrinterOutput(pageSize, this.PrintControl.Label, nameValueUnitsDataTable, MechanicalDraftPerformanceCurveViewModel);
+                        PrintControl.X.Clear();
+                        PrintControl.PageIndex = 0;
+                        printerOutput = output;
+                        if ((MechanicalDraftPerformanceCurveViewModel.CalculationData != null)
+                            && (MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates != null)
+                            && (MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates.Count > 0))
                         {
-                            newBottom = output.AddWaterFlowRate(pageHeight, bottom,
-                                string.Format("Water Flow Rate: {0} {1}", waterFlowRate.FlowRate, (IsInternationalSystemOfUnits_SI) ? ConstantUnits.LitersPerSecond : ConstantUnits.GallonsPerMinute),
-                                BuildFlowRateDataTable(waterFlowRate, MechanicalDraftPerformanceCurveViewModel.CalculationData.Ranges));
+                            int bottom = 475;
+                            int index = 1;
+                            int pageHeight = pageSize;
+                            int newBottom = 0;
+                            PrintControl.X.Add(0);
+                            PrintControl.X.Add(pageHeight);
 
-                            if(newBottom > pageHeight)
+                            foreach (WaterFlowRate waterFlowRate in MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates)
                             {
-                                if(index > 1)
+                                newBottom = output.AddWaterFlowRate(pageHeight, bottom,
+                                    string.Format("Water Flow Rate: {0} {1}", waterFlowRate.FlowRate, (IsInternationalSystemOfUnits_SI) ? ConstantUnits.LitersPerSecond : ConstantUnits.GallonsPerMinute),
+                                    BuildFlowRateDataTable(waterFlowRate, MechanicalDraftPerformanceCurveViewModel.CalculationData.Ranges));
+
+                                if (newBottom > pageHeight)
                                 {
-                                    //output.AddBeta(pageHeight);
-                                    PrintControl.X.Add(pageHeight);
+                                    if (index > 1)
+                                    {
+                                        PrintControl.X.Add(pageHeight);
+                                    }
+                                    index++;
+                                    pageHeight = pageSize * index;
                                 }
-                                index++;
-                                pageHeight = pageSize * index;
+                                bottom = newBottom;
                             }
-                            bottom = newBottom;
+                            PrintControl.X.Add(newBottom);
                         }
-                        //output.AddBeta(pageHeight);
-                        PrintControl.X.Add(newBottom);
-                        //PrintControl.X.Add(bottom);
                     }
-                }
-                else
-                {
-                    printerOutput = new MechanicalDraftPerformanceCurvePrinterOutput(e.PageBounds.Height - 120, this.PrintControl.Label, MechanicalDraftPerformanceCurveViewModel);
-     //               int bottom = 500;
-                }
-                
-                PrintControl.UserControl = printerOutput;
-                printerOutput.CreateControl();
-                PrintControl.Bitmap = new Bitmap(printerOutput.Width, printerOutput.Height);
-                printerOutput.DrawToBitmap(PrintControl.Bitmap, new Rectangle(0, 0, PrintControl.Bitmap.Width, PrintControl.Bitmap.Height));
-            }
-            
-            if (PrintControl.PageIndex < PrintControl.X.Count)
-            {
-                int pageTop = PrintControl.X[PrintControl.PageIndex];
-                int pageBottom;
-                if (PrintControl.PageIndex + 1 < PrintControl.X.Count)
-                {
-                    pageBottom = PrintControl.X[PrintControl.PageIndex + 1];
-
-                    if(pageBottom < PrintControl.Bitmap.Height)
+                    else
                     {
-                        e.HasMorePages = true;
+                        printerOutput = new MechanicalDraftPerformanceCurvePrinterOutput(e.PageBounds.Height - 120, this.PrintControl.Label, TestPointTabControl.SelectedIndex, MechanicalDraftPerformanceCurveViewModel);
+                        //               int bottom = 500;
                     }
                 }
                 else
                 {
-                    pageBottom = PrintControl.Bitmap.Height;
+                    MessageBox.Show("The design data is not valid", "Invalid Data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Cancel = true;
                 }
-                DrawImage(e, PrintControl.Bitmap, new Rectangle(0, pageTop, PrintControl.Bitmap.Width, pageBottom));
-                PrintControl.PageIndex++;
-            }
-            else
-            {
-                e.Graphics.DrawImage(PrintControl.Bitmap, 40, 40);
+
+                if (printerOutput != null)
+                {
+                    PrintControl.UserControl = printerOutput;
+                    printerOutput.CreateControl();
+                    PrintControl.Bitmap = new Bitmap(printerOutput.Width, printerOutput.Height);
+                    printerOutput.DrawToBitmap(PrintControl.Bitmap, new Rectangle(0, 0, PrintControl.Bitmap.Width, PrintControl.Bitmap.Height));
+                }
             }
 
-            e.Graphics.DrawString("CTI Toolkit 4.0 Beta Version", 
-                                  new Font("Times New Roman", 16),
-                                  new SolidBrush(Color.Red), 
-                                  40, e.PageSettings.Bounds.Height - 60);
-            Font font = new Font("Times New Roman", 8);
-            SizeF size = e.Graphics.MeasureString(MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue, font);
-            e.Graphics.DrawString(MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue,
-                                  font,
-                                  new SolidBrush(Color.Black),
-                                  e.PageSettings.Bounds.Width - size.Width - 40, e.PageSettings.Bounds.Height - 60);
+            if(!e.Cancel)
+            {
+                if (PrintControl.PageIndex < PrintControl.X.Count)
+                {
+                    int pageTop = PrintControl.X[PrintControl.PageIndex];
+                    int pageBottom;
+                    if (PrintControl.PageIndex + 1 < PrintControl.X.Count)
+                    {
+                        pageBottom = PrintControl.X[PrintControl.PageIndex + 1];
+
+                        if (pageBottom < PrintControl.Bitmap.Height)
+                        {
+                            e.HasMorePages = true;
+                        }
+                    }
+                    else
+                    {
+                        pageBottom = PrintControl.Bitmap.Height;
+                    }
+                    DrawImage(e, PrintControl.Bitmap, new Rectangle(0, pageTop, PrintControl.Bitmap.Width, pageBottom));
+                    PrintControl.PageIndex++;
+                }
+                else
+                {
+                    e.Graphics.DrawImage(PrintControl.Bitmap, 40, 40);
+                }
+
+                e.Graphics.DrawString("CTI Toolkit 4.0 Beta Version",
+                                      new Font("Times New Roman", 16),
+                                      new SolidBrush(Color.Red),
+                                      40, e.PageSettings.Bounds.Height - 60);
+                Font font = new Font("Times New Roman", 8);
+                SizeF size = e.Graphics.MeasureString(MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue, font);
+                e.Graphics.DrawString(MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue,
+                                      font,
+                                      new SolidBrush(Color.Black),
+                                      e.PageSettings.Bounds.Width - size.Width - 40, e.PageSettings.Bounds.Height - 60);
+
+            }
         }
 
         public void DrawImage(PrintPageEventArgs e, Image image, Rectangle rectangle)

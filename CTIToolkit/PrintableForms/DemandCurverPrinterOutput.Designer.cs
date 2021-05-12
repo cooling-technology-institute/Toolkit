@@ -152,6 +152,7 @@ namespace CTIToolkit
             this.Chart.Series.Add(series1);
             this.Chart.Size = new System.Drawing.Size(733, 488);
             this.Chart.TabIndex = 23;
+            this.Chart.TabStop = false;
             this.Chart.Text = "DemandCurveChart";
             // 
             // OptionalLabelTextBox
@@ -224,6 +225,7 @@ namespace CTIToolkit
             this.ThermalDesignConditionsDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.ThermalDesignConditionsDataGridView.Size = new System.Drawing.Size(646, 223);
             this.ThermalDesignConditionsDataGridView.TabIndex = 19;
+            this.ThermalDesignConditionsDataGridView.TabStop = false;
             // 
             // CTILogo
             // 

@@ -128,6 +128,7 @@ namespace CTIToolkit.PrintableForms
             this.InputPropertiesDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.InputPropertiesDataGridView.Size = new System.Drawing.Size(646, 111);
             this.InputPropertiesDataGridView.TabIndex = 14;
+            this.InputPropertiesDataGridView.TabStop = false;
             // 
             // CalculationProperty
             // 
@@ -187,6 +188,7 @@ namespace CTIToolkit.PrintableForms
             this.DataGridView.ShowRowErrors = false;
             this.DataGridView.Size = new System.Drawing.Size(649, 354);
             this.DataGridView.TabIndex = 12;
+            this.DataGridView.TabStop = false;
             // 
             // CTILogo
             // 

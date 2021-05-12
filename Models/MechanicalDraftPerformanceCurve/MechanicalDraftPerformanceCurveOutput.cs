@@ -12,10 +12,14 @@ namespace Models
         public double SpecificVolume { set; get; }
         public double WetBulbTemperature { set; get; }
         public double LiquidToGasRatio { set; get; }
-        
+        public PsychrometricsData TestPsychrometricsData { set; get; }
+        public PsychrometricsData DesignPsychrometricsData { set; get; }
+
         public MechanicalDraftPerformanceCurveOutput()
         {
             Clear();
+            TestPsychrometricsData = new PsychrometricsData();
+            DesignPsychrometricsData = new PsychrometricsData();
         }
 
         public void Clear()
