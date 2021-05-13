@@ -77,34 +77,16 @@ namespace CTIToolkit
         private void SwitchUnits()
         {
             DemandCurveViewModel.ConvertValues(IsInternationalSystemOfUnits_SI);
-
-            if (IsInternationalSystemOfUnits_SI)
+            WebBulbTemperatureUnits.Text = DemandCurveViewModel.WetBulbTemperatureDataValue.Units;
+            RangeUnits.Text = DemandCurveViewModel.RangeDataValue.Units;
+            UserApproachUnits.Text = DemandCurveViewModel.UserApproachDataValue.Units;
+            if (ElevationRadio.Checked)
             {
-                WebBulbTemperatureUnits.Text = ConstantUnits.TemperatureCelsius;
-                RangeUnits.Text = ConstantUnits.RangeK;
-                UserApproachUnits.Text = ConstantUnits.RangeK;
-                if (ElevationRadio.Checked)
-                {
-                    ElevationPressureUnits.Text = ConstantUnits.Meter;
-                }
-                else
-                {
-                    ElevationPressureUnits.Text = ConstantUnits.BarometricPressureKiloPascal;
-                }
+                ElevationPressureUnits.Text = DemandCurveViewModel.ElevationDataValue.Units;
             }
             else
             {
-                WebBulbTemperatureUnits.Text = ConstantUnits.TemperatureFahrenheit;
-                RangeUnits.Text = ConstantUnits.TemperatureFahrenheit;
-                UserApproachUnits.Text = ConstantUnits.TemperatureFahrenheit;
-                if (ElevationRadio.Checked)
-                {
-                    ElevationPressureUnits.Text = ConstantUnits.Foot;
-                }
-                else
-                {
-                    ElevationPressureUnits.Text = ConstantUnits.BarometricPressureInchOfMercury;
-                }
+                ElevationPressureUnits.Text = DemandCurveViewModel.BarometricPressureDataValue.Units;
             }
         }
 
@@ -140,60 +122,60 @@ namespace CTIToolkit
             SetRadioButtons();
             SwitchUnits();
 
-            WetBulbTemperatureLabel.Text = DemandCurveViewModel.WetBulbTemperatureDataValueInputMessage + ":";
+            WetBulbTemperatureLabel.Text = DemandCurveViewModel.WetBulbTemperatureDataValue.InputMessage + ":";
             WetBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
-            WetBulbTemperatureValue.Text = DemandCurveViewModel.WetBulbTemperatureDataValueInputValue;
-            toolTip1.SetToolTip(WetBulbTemperatureValue, DemandCurveViewModel.WetBulbTemperatureDataValueTooltip);
+            WetBulbTemperatureValue.Text = DemandCurveViewModel.WetBulbTemperatureDataValue.InputValue;
+            toolTip1.SetToolTip(WetBulbTemperatureValue, DemandCurveViewModel.WetBulbTemperatureDataValue.ToolTip);
 
-            RangeLabel.Text = DemandCurveViewModel.RangeDataValueInputMessage + ":";
+            RangeLabel.Text = DemandCurveViewModel.RangeDataValue.InputMessage + ":";
             RangeLabel.TextAlign = ContentAlignment.MiddleRight;
-            RangeValue.Text = DemandCurveViewModel.RangeDataValueInputValue;
-            toolTip1.SetToolTip(RangeValue, DemandCurveViewModel.RangeDataValueTooltip);
+            RangeValue.Text = DemandCurveViewModel.RangeDataValue.InputValue;
+            toolTip1.SetToolTip(RangeValue, DemandCurveViewModel.RangeDataValue.ToolTip);
 
             if (ElevationRadio.Checked)
             {
-                ElevationPressureLabel.Text = DemandCurveViewModel.ElevationDataValueInputMessage + ":";
+                ElevationPressureLabel.Text = DemandCurveViewModel.ElevationDataValue.InputMessage + ":";
                 ElevationPressureLabel.TextAlign = ContentAlignment.MiddleRight;
-                ElevationValue.Text = DemandCurveViewModel.ElevationDataValueInputValue;
-                toolTip1.SetToolTip(ElevationValue, DemandCurveViewModel.ElevationDataValueTooltip);
+                ElevationValue.Text = DemandCurveViewModel.ElevationDataValue.InputValue;
+                toolTip1.SetToolTip(ElevationValue, DemandCurveViewModel.ElevationDataValue.ToolTip);
             }
             else
             {
-                ElevationPressureLabel.Text = DemandCurveViewModel.BarometricPressureDataValueInputMessage + ":";
+                ElevationPressureLabel.Text = DemandCurveViewModel.BarometricPressureDataValue.InputMessage + ":";
                 ElevationPressureLabel.TextAlign = ContentAlignment.MiddleRight;
-                ElevationValue.Text = DemandCurveViewModel.BarometricPressureDataValueInputValue;
-                toolTip1.SetToolTip(ElevationValue, DemandCurveViewModel.BarometricPressureDataValueTooltip);
+                ElevationValue.Text = DemandCurveViewModel.BarometricPressureDataValue.InputValue;
+                toolTip1.SetToolTip(ElevationValue, DemandCurveViewModel.BarometricPressureDataValue.ToolTip);
             }
 
-            CLabel.Text = DemandCurveViewModel.C1DataValueInputMessage + ":";
+            CLabel.Text = DemandCurveViewModel.C1DataValue.InputMessage + ":";
             CLabel.TextAlign = ContentAlignment.MiddleRight;
-            C_C1_Value.Text = DemandCurveViewModel.C1DataValueInputValue;
-            toolTip1.SetToolTip(C_C1_Value, DemandCurveViewModel.C1DataValueTooltip);
+            C_C1_Value.Text = DemandCurveViewModel.C1DataValue.InputValue;
+            toolTip1.SetToolTip(C_C1_Value, DemandCurveViewModel.C1DataValue.ToolTip);
 
-            SlopeLabel.Text = DemandCurveViewModel.SlopeDataValueInputMessage + ":";
+            SlopeLabel.Text = DemandCurveViewModel.SlopeDataValue.InputMessage + ":";
             SlopeLabel.TextAlign = ContentAlignment.MiddleRight;
-            Slope_C2_Value.Text = DemandCurveViewModel.SlopeDataValueInputValue;
-            toolTip1.SetToolTip(Slope_C2_Value, DemandCurveViewModel.SlopeDataValueTooltip);
+            Slope_C2_Value.Text = DemandCurveViewModel.SlopeDataValue.InputValue;
+            toolTip1.SetToolTip(Slope_C2_Value, DemandCurveViewModel.SlopeDataValue.ToolTip);
 
-            MinimumLabel.Text = DemandCurveViewModel.MinimumDataValueInputMessage + ":";
+            MinimumLabel.Text = DemandCurveViewModel.MinimumDataValue.InputMessage + ":";
             MinimumLabel.TextAlign = ContentAlignment.MiddleRight;
-            MinimumValue.Text = DemandCurveViewModel.MinimumDataValueInputValue;
-            toolTip1.SetToolTip(MinimumValue, DemandCurveViewModel.MinimumDataValueTooltip);
+            MinimumValue.Text = DemandCurveViewModel.MinimumDataValue.InputValue;
+            toolTip1.SetToolTip(MinimumValue, DemandCurveViewModel.MinimumDataValue.ToolTip);
 
-            MaximumLabel.Text = DemandCurveViewModel.MaximumDataValueInputMessage + ":";
+            MaximumLabel.Text = DemandCurveViewModel.MaximumDataValue.InputMessage + ":";
             MaximumLabel.TextAlign = ContentAlignment.MiddleRight;
-            MaximumValue.Text = DemandCurveViewModel.MaximumDataValueInputValue;
-            toolTip1.SetToolTip(MaximumValue, DemandCurveViewModel.MaximumDataValueTooltip);
+            MaximumValue.Text = DemandCurveViewModel.MaximumDataValue.InputValue;
+            toolTip1.SetToolTip(MaximumValue, DemandCurveViewModel.MaximumDataValue.ToolTip);
 
-            LiquidToGasRatioLabel.Text = DemandCurveViewModel.LiquidToGasRatioDataValueInputMessage + ":";
+            LiquidToGasRatioLabel.Text = DemandCurveViewModel.LiquidToGasRatioDataValue.InputMessage + ":";
             LiquidToGasRatioLabel.TextAlign = ContentAlignment.MiddleRight;
-            LiquidToGasRatioValue.Text = DemandCurveViewModel.LiquidToGasRatioDataValueInputValue;
-            toolTip1.SetToolTip(LiquidToGasRatioValue, DemandCurveViewModel.LiquidToGasRatioDataValueTooltip);
+            LiquidToGasRatioValue.Text = DemandCurveViewModel.LiquidToGasRatioDataValue.InputValue;
+            toolTip1.SetToolTip(LiquidToGasRatioValue, DemandCurveViewModel.LiquidToGasRatioDataValue.ToolTip);
 
-            UserApproachLabel.Text = DemandCurveViewModel.UserApproachDataValueInputMessage + ":";
+            UserApproachLabel.Text = DemandCurveViewModel.UserApproachDataValue.InputMessage + ":";
             UserApproachLabel.TextAlign = ContentAlignment.MiddleRight;
-            UserApproachValue.Text = DemandCurveViewModel.UserApproachDataValueInputValue;
-            toolTip1.SetToolTip(UserApproachValue, DemandCurveViewModel.UserApproachDataValueTooltip);
+            UserApproachValue.Text = DemandCurveViewModel.UserApproachDataValue.InputValue;
+            toolTip1.SetToolTip(UserApproachValue, DemandCurveViewModel.UserApproachDataValue.ToolTip);
         }
 
         public override void Calculate()
@@ -340,23 +322,23 @@ namespace CTIToolkit
         {
             NameValueUnitsDataTable nameValueUnitsDataTable = new NameValueUnitsDataTable();
 
-            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.WetBulbTemperatureDataValueInputMessage, WetBulbTemperatureValue.Text, WebBulbTemperatureUnits.Text);
-            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.RangeDataValueInputMessage, RangeValue.Text, RangeUnits.Text);
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.WetBulbTemperatureDataValue.InputMessage, WetBulbTemperatureValue.Text, WebBulbTemperatureUnits.Text);
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.RangeDataValue.InputMessage, RangeValue.Text, RangeUnits.Text);
 
             if (ElevationRadio.Checked)
             {
-                nameValueUnitsDataTable.AddRow(DemandCurveViewModel.ElevationDataValueInputMessage, DemandCurveViewModel.ElevationDataValueInputValue, ElevationPressureUnits.Text);
+                nameValueUnitsDataTable.AddRow(DemandCurveViewModel.ElevationDataValue.InputMessage, DemandCurveViewModel.ElevationDataValue.InputValue, ElevationPressureUnits.Text);
             }
             else
             {
-                nameValueUnitsDataTable.AddRow(DemandCurveViewModel.BarometricPressureDataValueInputMessage, DemandCurveViewModel.BarometricPressureDataValueInputValue, ElevationPressureUnits.Text);
+                nameValueUnitsDataTable.AddRow(DemandCurveViewModel.BarometricPressureDataValue.InputMessage, DemandCurveViewModel.BarometricPressureDataValue.InputValue, ElevationPressureUnits.Text);
             }
-            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.C1DataValueInputMessage, C_C1_Value.Text, string.Empty);
-            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.SlopeDataValueInputMessage, Slope_C2_Value.Text, string.Empty);
-            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.MaximumDataValueInputMessage, MaximumValue.Text, string.Empty);
-            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.MinimumDataValueInputMessage, MinimumValue.Text, string.Empty);
-            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.LiquidToGasRatioDataValueInputMessage, LiquidToGasRatioValue.Text, string.Empty);
-            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.UserApproachDataValueInputMessage, UserApproachValue.Text, UserApproachUnits.Text);
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.C1DataValue.InputMessage, C_C1_Value.Text, string.Empty);
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.SlopeDataValue.InputMessage, Slope_C2_Value.Text, string.Empty);
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.MaximumDataValue.InputMessage, MaximumValue.Text, string.Empty);
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.MinimumDataValue.InputMessage, MinimumValue.Text, string.Empty);
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.LiquidToGasRatioDataValue.InputMessage, LiquidToGasRatioValue.Text, string.Empty);
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.UserApproachDataValue.InputMessage, UserApproachValue.Text, UserApproachUnits.Text);
 
             DemandCurvePrinterOutput printerOutput = new DemandCurvePrinterOutput(e.PageBounds.Height - 80, this.PrintControl.Label, nameValueUnitsDataTable, DemandCurveViewModel);
             Chart chart = printerOutput.Controls["Chart"] as Chart;
@@ -422,9 +404,9 @@ namespace CTIToolkit
 
         private void ValidatedValues()
         {
-            if (!DemandCurveViewModel.LiquidToGasRatioDataValueIsValid)
+            if (!DemandCurveViewModel.LiquidToGasRatioDataValue.IsValid)
             {
-                errorProvider1.SetError(LiquidToGasRatioValue, DemandCurveViewModel.LiquidToGasRatioDataValueErrorMessage);
+                errorProvider1.SetError(LiquidToGasRatioValue, DemandCurveViewModel.LiquidToGasRatioDataValue.ErrorMessage);
             }
         }
 
@@ -435,14 +417,14 @@ namespace CTIToolkit
 
         private void LiquidToGasRatioValue_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!DemandCurveViewModel.LiquidToGasRatioDataValueUpdateValue(LiquidToGasRatioValue.Text))
+            if (!DemandCurveViewModel.LiquidToGasRatioDataValue.UpdateValue(LiquidToGasRatioValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 LiquidToGasRatioValue.Select(0, LiquidToGasRatioValue.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(LiquidToGasRatioValue, DemandCurveViewModel.LiquidToGasRatioDataValueErrorMessage);
+                this.errorProvider1.SetError(LiquidToGasRatioValue, DemandCurveViewModel.LiquidToGasRatioDataValue.ErrorMessage);
             }
         }
 
@@ -453,14 +435,14 @@ namespace CTIToolkit
 
         private void WetBulbTemperature_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!DemandCurveViewModel.WetBulbTemperatureDataValueUpdateValue(WetBulbTemperatureValue.Text))
+            if (!DemandCurveViewModel.WetBulbTemperatureDataValue.UpdateValue(WetBulbTemperatureValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 WetBulbTemperatureValue.Select(0, WetBulbTemperatureValue.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(WetBulbTemperatureValue, DemandCurveViewModel.WetBulbTemperatureDataValueErrorMessage);
+                this.errorProvider1.SetError(WetBulbTemperatureValue, DemandCurveViewModel.WetBulbTemperatureDataValue.ErrorMessage);
             }
         }
 
@@ -471,14 +453,14 @@ namespace CTIToolkit
 
         private void RangeValue_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!DemandCurveViewModel.RangeDataValueUpdateValue(RangeValue.Text))
+            if (!DemandCurveViewModel.RangeDataValue.UpdateValue(RangeValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 RangeValue.Select(0, RangeValue.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(RangeValue, DemandCurveViewModel.RangeDataValueErrorMessage);
+                this.errorProvider1.SetError(RangeValue, DemandCurveViewModel.RangeDataValue.ErrorMessage);
             }
         }
 
@@ -491,26 +473,26 @@ namespace CTIToolkit
         {
             if (ElevationRadio.Checked)
             {
-                if (!DemandCurveViewModel.ElevationDataValueUpdateValue(ElevationValue.Text))
+                if (!DemandCurveViewModel.ElevationDataValue.UpdateValue(ElevationValue.Text))
                 {
                     // Cancel the event and select the text to be corrected by the user.
                     e.Cancel = true;
                     ElevationValue.Select(0, ElevationValue.Text.Length);
 
                     // Set the ErrorProvider error with the text to display. 
-                    this.errorProvider1.SetError(ElevationValue, DemandCurveViewModel.ElevationDataValueErrorMessage);
+                    this.errorProvider1.SetError(ElevationValue, DemandCurveViewModel.ElevationDataValue.ErrorMessage);
                 }
             }
             else
             {
-                if (!DemandCurveViewModel.BarometricPressureDataValueUpdateValue(ElevationValue.Text))
+                if (!DemandCurveViewModel.BarometricPressureDataValue.UpdateValue(ElevationValue.Text))
                 {
                     // Cancel the event and select the text to be corrected by the user.
                     e.Cancel = true;
                     ElevationValue.Select(0, ElevationValue.Text.Length);
 
                     // Set the ErrorProvider error with the text to display. 
-                    this.errorProvider1.SetError(ElevationValue, DemandCurveViewModel.BarometricPressureDataValueErrorMessage);
+                    this.errorProvider1.SetError(ElevationValue, DemandCurveViewModel.BarometricPressureDataValue.ErrorMessage);
                 }
             }
         }
@@ -522,14 +504,14 @@ namespace CTIToolkit
 
         private void C_C1_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!DemandCurveViewModel.C1DataValueUpdateValue(C_C1_Value.Text))
+            if (!DemandCurveViewModel.C1DataValue.UpdateValue(C_C1_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 C_C1_Value.Select(0, C_C1_Value.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(C_C1_Value, DemandCurveViewModel.C1DataValueErrorMessage);
+                this.errorProvider1.SetError(C_C1_Value, DemandCurveViewModel.C1DataValue.ErrorMessage);
             }
         }
 
@@ -540,14 +522,14 @@ namespace CTIToolkit
 
         private void Slope_C2_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!DemandCurveViewModel.SlopeDataValueUpdateValue(Slope_C2_Value.Text))
+            if (!DemandCurveViewModel.SlopeDataValue.UpdateValue(Slope_C2_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Slope_C2_Value.Select(0, Slope_C2_Value.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Slope_C2_Value, DemandCurveViewModel.SlopeDataValueErrorMessage);
+                this.errorProvider1.SetError(Slope_C2_Value, DemandCurveViewModel.SlopeDataValue.ErrorMessage);
             }
         }
 
@@ -558,14 +540,14 @@ namespace CTIToolkit
 
         private void MaximumValue_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!DemandCurveViewModel.MaximumDataValueUpdateValue(MaximumValue.Text))
+            if (!DemandCurveViewModel.MaximumDataValue.UpdateValue(MaximumValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 MaximumValue.Select(0, MaximumValue.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(MaximumValue, DemandCurveViewModel.MaximumDataValueErrorMessage);
+                this.errorProvider1.SetError(MaximumValue, DemandCurveViewModel.MaximumDataValue.ErrorMessage);
             }
         }
 
@@ -576,14 +558,14 @@ namespace CTIToolkit
 
         private void MinimumValue_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!DemandCurveViewModel.MinimumDataValueUpdateValue(MinimumValue.Text))
+            if (!DemandCurveViewModel.MinimumDataValue.UpdateValue(MinimumValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 MinimumValue.Select(0, MinimumValue.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(MinimumValue, DemandCurveViewModel.MinimumDataValueErrorMessage);
+                this.errorProvider1.SetError(MinimumValue, DemandCurveViewModel.MinimumDataValue.ErrorMessage);
             }
         }
 
@@ -594,14 +576,14 @@ namespace CTIToolkit
 
         private void UserApproachValue_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!DemandCurveViewModel.UserApproachDataValueUpdateValue(UserApproachValue.Text))
+            if (!DemandCurveViewModel.UserApproachDataValue.UpdateValue(UserApproachValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 UserApproachValue.Select(0, UserApproachValue.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(UserApproachValue, DemandCurveViewModel.UserApproachDataValueErrorMessage);
+                this.errorProvider1.SetError(UserApproachValue, DemandCurveViewModel.UserApproachDataValue.ErrorMessage);
             }
         }
 
@@ -610,9 +592,9 @@ namespace CTIToolkit
             if (BarometricPressureRadio.Checked)
             {
                 DemandCurveViewModel.IsElevation = false;
-                ElevationValue.Text = DemandCurveViewModel.BarometricPressureDataValueInputValue;
-                ElevationPressureLabel.Text = DemandCurveViewModel.BarometricPressureDataValueInputMessage;
-                toolTip1.SetToolTip(ElevationValue, DemandCurveViewModel.BarometricPressureDataValueTooltip);
+                ElevationValue.Text = DemandCurveViewModel.BarometricPressureDataValue.InputValue;
+                ElevationPressureLabel.Text = DemandCurveViewModel.BarometricPressureDataValue.InputMessage;
+                toolTip1.SetToolTip(ElevationValue, DemandCurveViewModel.BarometricPressureDataValue.ToolTip);
                 if (IsInternationalSystemOfUnits_SI)
                 {
                     ElevationPressureUnits.Text = ConstantUnits.BarometricPressureKiloPascal;
@@ -629,9 +611,9 @@ namespace CTIToolkit
             if (ElevationRadio.Checked)
             {
                 DemandCurveViewModel.IsElevation = true;
-                ElevationValue.Text = DemandCurveViewModel.ElevationDataValueInputValue;
-                ElevationPressureLabel.Text = DemandCurveViewModel.ElevationDataValueInputMessage;
-                toolTip1.SetToolTip(ElevationValue, DemandCurveViewModel.ElevationDataValueTooltip);
+                ElevationValue.Text = DemandCurveViewModel.ElevationDataValue.InputValue;
+                ElevationPressureLabel.Text = DemandCurveViewModel.ElevationDataValue.InputMessage;
+                toolTip1.SetToolTip(ElevationValue, DemandCurveViewModel.ElevationDataValue.ToolTip);
                 if (IsInternationalSystemOfUnits_SI)
                 {
                     ElevationPressureUnits.Text = ConstantUnits.Meter;

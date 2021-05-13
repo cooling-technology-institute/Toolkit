@@ -1,0 +1,21 @@
+<HTML>
+<HEAD>
+ <!-- $MVD$:fontset("Courier New","Courier New") -->
+ <LINK rel="StyleSheet" href="..\ctitoolkit.css">
+ <TITLE>Mechanical Draft Perf Curve Tab Usage</TITLE>
+ <META NAME="generator" CONTENT="RoboHELP by eHelp Corporation www.ehelp.com">
+ <SCRIPT LANGUAGE="JavaScript" TITLE="BSSC Special Effects" SRC="..\ehlpdhtm.js">
+ </SCRIPT>
+</HEAD>
+<BODY>
+ <H1>Mechanical Draft Perf Curve Tab Usage</H1>
+ <P style="margin-top:0;margin-bottom:0">&nbsp;</P>
+ <P style="text-align:center;"><IMG src="..\image\perf_curve_tab_small.gif" border=0 height=534 width=542 alt="image\perf_curve_tab_small.gif"></P>
+ <P class="Block-Text" style="margin-top:0;margin-bottom:0">&nbsp;</P>
+ <P>The performance curve method allows the evaluation of test data using a set of manufacturer’s performance curves. For this tab application, the curves must conform to the ATC-105 specifications, i.e., minimum of 3 flows (for example, 90%, 100% and 110% of design), 3 ranges (for example, 80%, 100% and 120% of design) and at least three, but no more than six, wet bulb temperatures (it is preferred that one of the points be the design wet bulb temperature). The calculation proceeds by intersecting the performance curves first at the test entering wet bulb temperature, then the test cooling range, and finally the test leaving water temperature. All interpolated points are determined using smooth fitting cubic spline curves through the original data points and the two successive cross plots to arrive at the ‘Predicted Flow Rate’ at test conditions. </P>
+ <P style="margin-top:0;margin-bottom:0">&nbsp;</P>
+ <P>The Adjusted Test Flow rate is the test water flow rate adjusted for the difference between the actual fan motor output power and the design fan output power as well as the test vs. the design air densities.  The test flow must be adjusted for air densities since ATC-105 specifies that performance curves shall be based on constant fan pitch angle.  This means that as the air density increases (i.e. at lower wet bulb temperatures) a constant pitch fan (and constant speed fan) WILL increase fan power proportionally to the density change. The adjusted test flow rate compensates for this density effect on the motor output power.</P>
+ <P style="margin-top:0;margin-bottom:0">&nbsp;</P>
+ <P>The overall Tower Capability is the Adjusted Test Flow Rate divided by the Predicted Flow Rate.</P>
+</BODY>
+</HTML>

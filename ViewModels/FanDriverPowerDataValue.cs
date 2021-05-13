@@ -76,6 +76,14 @@ namespace ViewModels
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(FanDriverPowerToolTipFormat, Minimum, Maximum);
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
+            if (IsInternationalSystemOfUnits_SI)
+            {
+                Units = ConstantUnits.Kilowatt;
+            }
+            else
+            {
+                Units = ConstantUnits.BrakeHorsepower;
+            }
         }
 
         public override void ConvertValue(bool isInternationalSystemOfUnits_SI)

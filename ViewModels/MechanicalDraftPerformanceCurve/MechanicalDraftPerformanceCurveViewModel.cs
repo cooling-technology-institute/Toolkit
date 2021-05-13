@@ -465,5 +465,65 @@ namespace ViewModels
             return returnValue;
         }
 
+        #region DataAccess
+
+        public DataValue WaterFlowRateDataValue
+        {
+            get
+            {
+                return DesignData.WaterFlowRateDataValue;
+            }
+        }
+
+        public DataValue HotWaterTemperatureDataValue
+        {
+            get
+            {
+                return DesignData.HotWaterTemperatureDataValue;
+            }
+        }
+
+        public DataValue ColdWaterTemperatureDataValue
+        {
+            get
+            {
+                return DesignData.ColdWaterTemperatureDataValue;
+            }
+        }
+
+        public DataValue WetBulbTemperatureDataValue
+        {
+            get
+            {
+                return DesignData.WetBulbTemperatureDataValue;
+            }
+        }
+
+        public DataValue DryBulbTemperatureDataValue
+        {
+            get
+            {
+                return DesignData.DryBulbTemperatureDataValue;
+            }
+        }
+
+        public DataValue FanDriverPowerDataValue
+        {
+            get
+            {
+                return DesignData.FanDriverPowerDataValue;
+            }
+        }
+
+        public DataValue BarometricPressureDataValue
+        {
+            get
+            {
+                return DesignData.BarometricPressureDataValue;
+            }
+        }
+
+        #endregion DataAccess
+
     }
 }

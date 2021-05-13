@@ -28,7 +28,7 @@ namespace ViewModels
         {
             IsDemo = isDemo;
             InputMessage = "Barometric Pressure";
-            Format = "F3";
+            Format = "F4";
             SetDefaultMinMax(isInternationalSystemOfUnits_SI);
             Current = Default;
             SetInputAndTooltip(isInternationalSystemOfUnits_SI);
@@ -73,6 +73,14 @@ namespace ViewModels
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(BarometricPressureToolTipFormat, Minimum, Maximum);
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
+            if (IsInternationalSystemOfUnits_SI)
+            {
+                Units = ConstantUnits.BarometricPressureKiloPascal;
+            }
+            else
+            {
+                Units = ConstantUnits.BarometricPressureInchOfMercury;
+            }
         }
 
         public override void ConvertValue(bool isInternationalSystemOfUnits_SI)
@@ -84,12 +92,12 @@ namespace ViewModels
                 if (isInternationalSystemOfUnits_SI)
                 {
                     // convert to InternationalSystemOfUnits_IS
-                    Current = UnitConverter.CalculatePsiToInchesOfMercury(Current);
+                    Current = UnitConverter.CalculateInchesOfMercuryToKilopascal(Current);
                 }
                 else
                 {
                     // convert to United States Customary Units (IP)
-                    Current = UnitConverter.CalculateInchesOfMercuryToPsi(Current);
+                    Current = UnitConverter.CalculateKilopascalToInchesOfMercury(Current);
                 }
             }
 

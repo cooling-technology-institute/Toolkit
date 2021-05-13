@@ -1,9 +1,5 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 
-using System;
-using System.Data;
-using System.Text;
-
 namespace ViewModels
 {
     public abstract class DataValue
@@ -21,6 +17,7 @@ namespace ViewModels
         public bool IsDemo { get; set; }
         public bool IsZeroValid { get; set; }
         public string ErrorMessage { get; set; }
+        public string Units { get; set; }
 
         public DataValue()
         {
@@ -37,6 +34,7 @@ namespace ViewModels
             Format = string.Empty;
             ToolTip = string.Empty;
             ErrorMessage = string.Empty;
+            Units = string.Empty;
         }
 
         public abstract void ConvertValue(bool isInternationalSystemOfUnits_SI);

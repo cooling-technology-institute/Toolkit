@@ -37,14 +37,14 @@ namespace CTIToolkit
             Calculate();
         }
 
-        private void SetupBarometericPressure(bool value)
+        private void SetupBarometricPressure(bool value)
         {
-            BarometericPressureLabel.Enabled = value;
-            BarometericPressureLabel.Visible = value;
-            BarometericPressure_Value.Enabled = value;
-            BarometericPressure_Value.Visible = value;
-            BarometericPressureUnits.Enabled = value;
-            BarometericPressureUnits.Visible = value;
+            BarometricPressureLabel.Enabled = value;
+            BarometricPressureLabel.Visible = value;
+            BarometricPressure_Value.Enabled = value;
+            BarometricPressure_Value.Visible = value;
+            BarometricPressureUnits.Enabled = value;
+            BarometricPressureUnits.Visible = value;
         }
 
         private void SetupElevation(bool value)
@@ -127,12 +127,12 @@ namespace CTIToolkit
 
                 if (BarometricPressureRadio.Checked)
                 {
-                    SetupBarometericPressure(true);
+                    SetupBarometricPressure(true);
                     SetupElevation(false);
                 }
                 else
                 {
-                    SetupBarometericPressure(false);
+                    SetupBarometricPressure(false);
                     SetupElevation(true);
                 }
 
@@ -155,35 +155,35 @@ namespace CTIToolkit
                     SetupEnthalpy(true);
                 }
 
-                WetBulbTemperatureLabel.Text = PsychrometricsViewModel.WetBulbTemperatureDataValueInputMessage + ":";
+                WetBulbTemperatureLabel.Text = PsychrometricsViewModel.WetBulbTemperatureDataValue.InputMessage + ":";
                 WetBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
-                WetBulbTemperature_Value.Text = PsychrometricsViewModel.WetBulbTemperatureDataValueInputValue;
-                toolTip1.SetToolTip(WetBulbTemperature_Value, PsychrometricsViewModel.WetBulbTemperatureDataValueToolTip);
+                WetBulbTemperature_Value.Text = PsychrometricsViewModel.WetBulbTemperatureDataValue.InputValue;
+                toolTip1.SetToolTip(WetBulbTemperature_Value, PsychrometricsViewModel.WetBulbTemperatureDataValue.ToolTip);
 
-                DryBulbTemperatureLabel.Text = PsychrometricsViewModel.DryBulbTemperatureDataValueInputMessage + ":";
+                DryBulbTemperatureLabel.Text = PsychrometricsViewModel.DryBulbTemperatureDataValue.InputMessage + ":";
                 DryBulbTemperatureLabel.TextAlign = ContentAlignment.MiddleRight;
-                DryBulbTemperature_Value.Text = PsychrometricsViewModel.DryBulbTemperatureDataValueInputValue;
-                toolTip1.SetToolTip(DryBulbTemperature_Value, PsychrometricsViewModel.DryBulbTemperatureDataValueToolTip);
+                DryBulbTemperature_Value.Text = PsychrometricsViewModel.DryBulbTemperatureDataValue.InputValue;
+                toolTip1.SetToolTip(DryBulbTemperature_Value, PsychrometricsViewModel.DryBulbTemperatureDataValue.ToolTip);
 
-                RelativeHumidityLabel.Text = PsychrometricsViewModel.RelativeHumidityDataValueInputMessage + ":";
+                RelativeHumidityLabel.Text = PsychrometricsViewModel.RelativeHumidityDataValue.InputMessage + ":";
                 RelativeHumidityLabel.TextAlign = ContentAlignment.MiddleRight;
-                RelativeHumidity_Value.Text = PsychrometricsViewModel.RelativeHumidityDataValueInputValue;
-                toolTip1.SetToolTip(RelativeHumidity_Value, PsychrometricsViewModel.RelativeHumidityDataValueToolTip);
+                RelativeHumidity_Value.Text = PsychrometricsViewModel.RelativeHumidityDataValue.InputValue;
+                toolTip1.SetToolTip(RelativeHumidity_Value, PsychrometricsViewModel.RelativeHumidityDataValue.ToolTip);
 
-                EnthalpyLabel.Text = PsychrometricsViewModel.EnthalpyDataValueInputMessage + ":";
+                EnthalpyLabel.Text = PsychrometricsViewModel.EnthalpyDataValue.InputMessage + ":";
                 EnthalpyLabel.TextAlign = ContentAlignment.MiddleRight;
-                EnthalpyValue.Text = PsychrometricsViewModel.EnthalpyDataValueInputValue;
-                toolTip1.SetToolTip(EnthalpyValue, PsychrometricsViewModel.EnthalpyDataValueToolTip);
+                EnthalpyValue.Text = PsychrometricsViewModel.EnthalpyDataValue.InputValue;
+                toolTip1.SetToolTip(EnthalpyValue, PsychrometricsViewModel.EnthalpyDataValue.ToolTip);
 
-                ElevationLabel.Text = PsychrometricsViewModel.ElevationDataValueInputMessage + ":";
+                ElevationLabel.Text = PsychrometricsViewModel.ElevationDataValue.InputMessage + ":";
                 ElevationLabel.TextAlign = ContentAlignment.MiddleRight;
-                Elevation_Value.Text = PsychrometricsViewModel.ElevationDataValueInputValue;
-                toolTip1.SetToolTip(Elevation_Value, PsychrometricsViewModel.ElevationDataValueToolTip);
+                Elevation_Value.Text = PsychrometricsViewModel.ElevationDataValue.InputValue;
+                toolTip1.SetToolTip(Elevation_Value, PsychrometricsViewModel.ElevationDataValue.ToolTip);
 
-                BarometericPressureLabel.Text = PsychrometricsViewModel.BarometricPressureDataValueInputMessage + ":";
-                BarometericPressureLabel.TextAlign = ContentAlignment.MiddleRight;
-                BarometericPressure_Value.Text = PsychrometricsViewModel.BarometricPressureDataValueInputValue;
-                toolTip1.SetToolTip(BarometericPressure_Value, PsychrometricsViewModel.BarometricPressureDataValueToolTip);
+                BarometricPressureLabel.Text = PsychrometricsViewModel.BarometricPressureDataValue.InputMessage + ":";
+                BarometricPressureLabel.TextAlign = ContentAlignment.MiddleRight;
+                BarometricPressure_Value.Text = PsychrometricsViewModel.BarometricPressureDataValue.InputValue;
+                toolTip1.SetToolTip(BarometricPressure_Value, PsychrometricsViewModel.BarometricPressureDataValue.ToolTip);
 
                 DataFilename.Text = PsychrometricsViewModel.DataFilenameInputValue;
             }
@@ -205,25 +205,12 @@ namespace CTIToolkit
 
         private void SwitchUnitsSelection()
         {
-            RelativeHumidityUnits.Text = ConstantUnits.Percentage;
-
-            if (IsInternationalSystemOfUnits_SI)
-            {
-                WetBulbTemperatureUnits.Text = ConstantUnits.TemperatureCelsius;
-                DryBulbTemperatureUnits.Text = ConstantUnits.TemperatureCelsius;
-                EnthalpyUnits.Text = ConstantUnits.BtuPerPound;
-                ElevationUnits.Text = ConstantUnits.Meter;
-                BarometericPressureUnits.Text = ConstantUnits.BarometricPressureInchOfMercury;
-            }
-            else
-            {
-                WetBulbTemperatureUnits.Text = ConstantUnits.TemperatureFahrenheit;
-                DryBulbTemperatureUnits.Text = ConstantUnits.TemperatureFahrenheit;
-                EnthalpyUnits.Text = ConstantUnits.BtuPerPound;
-                ElevationUnits.Text = ConstantUnits.Foot;
-                DryBulbTemperatureUnits.Text = ConstantUnits.TemperatureFahrenheit;
-                BarometericPressureUnits.Text = ConstantUnits.BarometricPressureInchOfMercury;
-            }
+            RelativeHumidityUnits.Text = PsychrometricsViewModel.RelativeHumidityDataValue.Units;
+            WetBulbTemperatureUnits.Text = PsychrometricsViewModel.WetBulbTemperatureDataValue.Units;
+            DryBulbTemperatureUnits.Text = PsychrometricsViewModel.DryBulbTemperatureDataValue.Units;
+            EnthalpyUnits.Text = PsychrometricsViewModel.EnthalpyDataValue.Units;
+            ElevationUnits.Text = PsychrometricsViewModel.ElevationDataValue.Units;
+            BarometricPressureUnits.Text = PsychrometricsViewModel.BarometricPressureDataValue.Units;
         }
 
         public override void Calculate()
@@ -377,28 +364,28 @@ namespace CTIToolkit
                 if (Psychrometrics_DryBulbTemperature_RelativeHumidity.Checked)
                 {
                     calculationProperty = Psychrometrics_DryBulbTemperature_RelativeHumidity.Text;
-                    nameValueUnitsDataTable.AddRow(PsychrometricsViewModel.DryBulbTemperatureDataValueInputMessage, DryBulbTemperature_Value.Text, DryBulbTemperatureUnits.Text);
-                    nameValueUnitsDataTable.AddRow(PsychrometricsViewModel.RelativeHumidityDataValueInputMessage, RelativeHumidity_Value.Text, RelativeHumidityUnits.Text);
+                    nameValueUnitsDataTable.AddRow(PsychrometricsViewModel.DryBulbTemperatureDataValue.InputMessage, DryBulbTemperature_Value.Text, DryBulbTemperatureUnits.Text);
+                    nameValueUnitsDataTable.AddRow(PsychrometricsViewModel.RelativeHumidityDataValue.InputMessage, RelativeHumidity_Value.Text, RelativeHumidityUnits.Text);
                 }
                 else if (Psychrometrics_WetBulbTemperature_DryBulbTemperature.Checked)
                 {
                     calculationProperty = Psychrometrics_WetBulbTemperature_DryBulbTemperature.Text;
-                    nameValueUnitsDataTable.AddRow(PsychrometricsViewModel.DryBulbTemperatureDataValueInputMessage, DryBulbTemperature_Value.Text, DryBulbTemperatureUnits.Text);
-                    nameValueUnitsDataTable.AddRow(PsychrometricsViewModel.WetBulbTemperatureDataValueInputMessage, WetBulbTemperature_Value.Text, WetBulbTemperatureUnits.Text);
+                    nameValueUnitsDataTable.AddRow(PsychrometricsViewModel.DryBulbTemperatureDataValue.InputMessage, DryBulbTemperature_Value.Text, DryBulbTemperatureUnits.Text);
+                    nameValueUnitsDataTable.AddRow(PsychrometricsViewModel.WetBulbTemperatureDataValue.InputMessage, WetBulbTemperature_Value.Text, WetBulbTemperatureUnits.Text);
                 }
                 else //Psychrometrics_Enthalpy
                 {
                     calculationProperty = Psychrometrics_Enthalpy.Text;
-                    nameValueUnitsDataTable.AddRow(PsychrometricsViewModel.ElevationDataValueInputMessage, EnthalpyValue.Text, EnthalpyUnits.Text);
+                    nameValueUnitsDataTable.AddRow(PsychrometricsViewModel.ElevationDataValue.InputMessage, EnthalpyValue.Text, EnthalpyUnits.Text);
                 }
 
                 if (BarometricPressureRadio.Checked)
                 {
-                    nameValueUnitsDataTable.AddRow(PsychrometricsViewModel.BarometricPressureDataValueInputMessage, BarometericPressure_Value.Text, BarometericPressureUnits.Text);
+                    nameValueUnitsDataTable.AddRow(PsychrometricsViewModel.BarometricPressureDataValue.InputMessage, BarometricPressure_Value.Text, BarometricPressureUnits.Text);
                 }
                 else
                 {
-                    nameValueUnitsDataTable.AddRow(PsychrometricsViewModel.ElevationDataValueInputMessage, Elevation_Value.Text, ElevationUnits.Text);
+                    nameValueUnitsDataTable.AddRow(PsychrometricsViewModel.ElevationDataValue.InputMessage, Elevation_Value.Text, ElevationUnits.Text);
                 }
 
                 PsychrometricPrinterOutput printerOutput = new PsychrometricPrinterOutput(e.PageBounds.Height - 80, calculationProperty, this.PrintControl.Label, nameValueUnitsDataTable, PsychrometricsViewModel);
@@ -430,7 +417,7 @@ namespace CTIToolkit
             {
                 ClearDataSource();
                 PsychrometricsViewModel.UpdateIsElevationValue(true);
-                SetupBarometericPressure(false);
+                SetupBarometricPressure(false);
                 SetupElevation(true);
                 Calculate();
             }
@@ -442,7 +429,7 @@ namespace CTIToolkit
             {
                 ClearDataSource();
                 PsychrometricsViewModel.UpdateIsElevationValue(false);
-                SetupBarometericPressure(true);
+                SetupBarometricPressure(true);
                 SetupElevation(false);
                 Calculate();
             }
@@ -507,16 +494,16 @@ namespace CTIToolkit
 
         private void Elevation_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            bool recalculate = (PsychrometricsViewModel.ElevationDataValueInputValue != Elevation_Value.Text);
+            bool recalculate = (PsychrometricsViewModel.ElevationDataValue.InputValue != Elevation_Value.Text);
 
-            if (!PsychrometricsViewModel.ElevationDataValueUpdateValue(Elevation_Value.Text))
+            if (!PsychrometricsViewModel.ElevationDataValue.UpdateValue(Elevation_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Elevation_Value.Select(0, Elevation_Value.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Elevation_Value, PsychrometricsViewModel.ElevationDataValueErrorMessage);
+                this.errorProvider1.SetError(Elevation_Value, PsychrometricsViewModel.ElevationDataValue.ErrorMessage);
             }
             else if (recalculate)
             {
@@ -524,23 +511,23 @@ namespace CTIToolkit
             }
         }
 
-        private void BarometericPressure_Value_Validated(object sender, EventArgs e)
+        private void BarometricPressure_Value_Validated(object sender, EventArgs e)
         {
-            errorProvider1.SetError(BarometericPressure_Value, "");
+            errorProvider1.SetError(BarometricPressure_Value, "");
         }
 
-        private void BarometericPressure_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void BarometricPressure_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            bool recalculate = (PsychrometricsViewModel.BarometricPressureDataValueInputValue != BarometericPressure_Value.Text);
+            bool recalculate = (PsychrometricsViewModel.BarometricPressureDataValue.InputValue != BarometricPressure_Value.Text);
 
-            if (!PsychrometricsViewModel.BarometricPressureDataValueUpdateValue(BarometericPressure_Value.Text))
+            if (!PsychrometricsViewModel.BarometricPressureDataValue.UpdateValue(BarometricPressure_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
-                BarometericPressure_Value.Select(0, BarometericPressure_Value.Text.Length);
+                BarometricPressure_Value.Select(0, BarometricPressure_Value.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(BarometericPressure_Value, PsychrometricsViewModel.BarometricPressureDataValueErrorMessage);
+                this.errorProvider1.SetError(BarometricPressure_Value, PsychrometricsViewModel.BarometricPressureDataValue.ErrorMessage);
             }
             else if (recalculate)
             {
@@ -556,16 +543,16 @@ namespace CTIToolkit
 
         private void DryBulbTemperature_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            bool recalculate = (PsychrometricsViewModel.DryBulbTemperatureDataValueInputValue != DryBulbTemperature_Value.Text);
+            bool recalculate = (PsychrometricsViewModel.DryBulbTemperatureDataValue.InputValue != DryBulbTemperature_Value.Text);
 
-            if (!PsychrometricsViewModel.DryBulbTemperatureDataValueUpdateValue(DryBulbTemperature_Value.Text))
+            if (!PsychrometricsViewModel.DryBulbTemperatureDataValue.UpdateValue(DryBulbTemperature_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 DryBulbTemperature_Value.Select(0, DryBulbTemperature_Value.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(DryBulbTemperature_Value, PsychrometricsViewModel.DryBulbTemperatureDataValueErrorMessage);
+                this.errorProvider1.SetError(DryBulbTemperature_Value, PsychrometricsViewModel.DryBulbTemperatureDataValue.ErrorMessage);
             }
             else if (recalculate)
             {
@@ -580,16 +567,16 @@ namespace CTIToolkit
 
         private void WetBulbTemperature_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            bool recalculate = (PsychrometricsViewModel.WetBulbTemperatureDataValueInputValue != WetBulbTemperature_Value.Text);
+            bool recalculate = (PsychrometricsViewModel.WetBulbTemperatureDataValue.InputValue != WetBulbTemperature_Value.Text);
 
-            if (!PsychrometricsViewModel.WetBulbTemperatureDataValueUpdateValue(WetBulbTemperature_Value.Text))
+            if (!PsychrometricsViewModel.WetBulbTemperatureDataValue.UpdateValue(WetBulbTemperature_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 WetBulbTemperature_Value.Select(0, WetBulbTemperature_Value.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(WetBulbTemperature_Value, PsychrometricsViewModel.WetBulbTemperatureDataValueErrorMessage);
+                this.errorProvider1.SetError(WetBulbTemperature_Value, PsychrometricsViewModel.WetBulbTemperatureDataValue.ErrorMessage);
             }
             else if (recalculate)
             {
@@ -604,16 +591,16 @@ namespace CTIToolkit
 
         private void RelativeHumidity_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            bool recalculate = (PsychrometricsViewModel.RelativeHumidityDataValueInputValue != RelativeHumidity_Value.Text);
+            bool recalculate = (PsychrometricsViewModel.RelativeHumidityDataValue.InputValue != RelativeHumidity_Value.Text);
 
-            if (!PsychrometricsViewModel.RelativeHumidityDataValueUpdateValue(RelativeHumidity_Value.Text))
+            if (!PsychrometricsViewModel.RelativeHumidityDataValue.UpdateValue(RelativeHumidity_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 RelativeHumidity_Value.Select(0, RelativeHumidity_Value.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(RelativeHumidity_Value, PsychrometricsViewModel.RelativeHumidityDataValueErrorMessage);
+                this.errorProvider1.SetError(RelativeHumidity_Value, PsychrometricsViewModel.RelativeHumidityDataValue.ErrorMessage);
             }
             else if (recalculate)
             {
@@ -628,16 +615,16 @@ namespace CTIToolkit
 
         private void EnthalpyValue_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            bool recalculate = (PsychrometricsViewModel.EnthalpyDataValueInputValue != EnthalpyValue.Text);
+            bool recalculate = (PsychrometricsViewModel.EnthalpyDataValue.InputValue != EnthalpyValue.Text);
 
-            if (!PsychrometricsViewModel.EnthalpyDataValueUpdateValue(EnthalpyValue.Text))
+            if (!PsychrometricsViewModel.EnthalpyDataValue.UpdateValue(EnthalpyValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 EnthalpyValue.Select(0, EnthalpyValue.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(EnthalpyValue, PsychrometricsViewModel.EnthalpyDataValueErrorMessage);
+                this.errorProvider1.SetError(EnthalpyValue, PsychrometricsViewModel.EnthalpyDataValue.ErrorMessage);
             }
             else if(recalculate)
             {

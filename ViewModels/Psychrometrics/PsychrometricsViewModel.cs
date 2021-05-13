@@ -22,245 +22,6 @@ namespace ViewModels
         public string DataFileName { get; set; }
         public string ErrorMessage { get; set; }
 
-        public string EnthalpyDataValueInputMessage
-        {
-            get
-            {
-                return PsychrometricsInputData.EnthalpyDataValue.InputMessage;
-            }
-        }
-
-        public string EnthalpyDataValueInputValue
-        {
-            get
-            {
-                return PsychrometricsInputData.EnthalpyDataValue.InputValue;
-            }
-        }
-
-        public bool EnthalpyDataValueUpdateValue(string value)
-        {
-            return PsychrometricsInputData.EnthalpyDataValue.UpdateValue(value);
-        }
-
-        public string EnthalpyDataValueErrorMessage
-        {
-            get
-            {
-                return PsychrometricsInputData.EnthalpyDataValue.ErrorMessage;
-            }
-        }
-
-        public string EnthalpyDataValueToolTip
-        {
-            get
-            {
-                return PsychrometricsInputData.EnthalpyDataValue.ToolTip;
-            }
-        }
-
-        public string ElevationDataValueInputMessage
-        {
-            get
-            {
-                return PsychrometricsInputData.ElevationDataValue.InputMessage;
-            }
-        }
-
-        public string ElevationDataValueInputValue
-        {
-            get
-            {
-                return PsychrometricsInputData.ElevationDataValue.InputValue;
-            }
-        }
-
-        public bool ElevationDataValueUpdateValue(string value)
-        {
-            return PsychrometricsInputData.ElevationDataValue.UpdateValue(value);
-        }
-
-        public string ElevationDataValueErrorMessage
-        {
-            get
-            {
-                return PsychrometricsInputData.ElevationDataValue.ErrorMessage;
-            }
-        }
-
-        public string ElevationDataValueToolTip
-        {
-            get
-            {
-                return PsychrometricsInputData.ElevationDataValue.ToolTip;
-            }
-        }
-
-        public string BarometricPressureDataValueInputMessage
-        {
-            get
-            {
-                return PsychrometricsInputData.BarometricPressureDataValue.InputMessage;
-            }
-        }
-
-        public string BarometricPressureDataValueInputValue
-        {
-            get
-            {
-                return PsychrometricsInputData.BarometricPressureDataValue.InputValue;
-            }
-        }
-
-        public bool BarometricPressureDataValueUpdateValue(string value)
-        {
-            return PsychrometricsInputData.BarometricPressureDataValue.UpdateValue(value);
-        }
-
-        public string BarometricPressureDataValueErrorMessage
-        {
-            get
-            {
-                return PsychrometricsInputData.BarometricPressureDataValue.ErrorMessage;
-            }
-        }
-
-        public string BarometricPressureDataValueToolTip
-        {
-            get
-            {
-                return PsychrometricsInputData.BarometricPressureDataValue.ToolTip;
-            }
-        }
-
-        public string RelativeHumidityDataValueInputMessage
-        {
-            get
-            {
-                return PsychrometricsInputData.RelativeHumidityDataValue.InputMessage;
-            }
-        }
-
-        public string RelativeHumidityDataValueInputValue
-        {
-            get
-            {
-                return PsychrometricsInputData.RelativeHumidityDataValue.InputValue;
-            }
-        }
-
-        public bool RelativeHumidityDataValueUpdateValue(string value)
-        {
-            return PsychrometricsInputData.RelativeHumidityDataValue.UpdateValue(value);
-        }
-
-        public string RelativeHumidityDataValueErrorMessage
-        {
-            get
-            {
-                return PsychrometricsInputData.RelativeHumidityDataValue.ErrorMessage;
-            }
-        }
-
-        public string RelativeHumidityDataValueToolTip
-        {
-            get
-            {
-                return PsychrometricsInputData.RelativeHumidityDataValue.ToolTip;
-            }
-        }
-        public string WetBulbTemperatureDataValueInputMessage
-        {
-            get
-            {
-                return PsychrometricsInputData.WetBulbTemperatureDataValue.InputMessage;
-            }
-        }
-
-        public string WetBulbTemperatureDataValueInputValue
-        {
-            get
-            {
-                return PsychrometricsInputData.WetBulbTemperatureDataValue.InputValue;
-            }
-        }
-
-        public bool WetBulbTemperatureDataValueUpdateValue(string value)
-        {
-            return PsychrometricsInputData.WetBulbTemperatureDataValue.UpdateValue(value);
-        }
-
-        public string WetBulbTemperatureDataValueErrorMessage
-        {
-            get
-            {
-                return PsychrometricsInputData.WetBulbTemperatureDataValue.ErrorMessage;
-            }
-        }
-        
-        public string WetBulbTemperatureDataValueToolTip
-        {
-            get
-            {
-                return PsychrometricsInputData.WetBulbTemperatureDataValue.ToolTip;
-            }
-        }
-
-        public string DryBulbTemperatureDataValueInputMessage
-        {
-            get
-            {
-                return PsychrometricsInputData.DryBulbTemperatureDataValue.InputMessage;
-            }
-        }
-
-        public string DryBulbTemperatureDataValueInputValue
-        {
-            get
-            {
-                return PsychrometricsInputData.DryBulbTemperatureDataValue.InputValue;
-            }
-        }
-
-        public bool DryBulbTemperatureDataValueUpdateValue(string value)
-        {
-            return PsychrometricsInputData.DryBulbTemperatureDataValue.UpdateValue(value);
-        }
-
-        public string DryBulbTemperatureDataValueErrorMessage
-        {
-            get
-            {
-                return PsychrometricsInputData.DryBulbTemperatureDataValue.ErrorMessage;
-            }
-        }
-
-        public string DryBulbTemperatureDataValueToolTip
-        {
-            get
-            {
-                return PsychrometricsInputData.DryBulbTemperatureDataValue.ToolTip;
-            }
-        }
-
-        public void UpdateIsElevationValue(bool value)
-        {
-            PsychrometricsInputData.IsElevation = value;
-        }
-
-        public bool IsElevation()
-        {
-            return PsychrometricsInputData.IsElevation;
-        }
-
-        public string DataFilenameInputValue
-        {
-            get
-            {
-                return Path.GetFileName(DataFileName);
-            }
-        }
-
         public PsychrometricsViewModel(bool isDemo, bool isInternationalSystemOfUnits_SI)
         {
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
@@ -500,5 +261,82 @@ namespace ViewModels
 
             return returnValue;
         }
+
+        #region DataAccess
+
+        public DataValue EnthalpyDataValue
+        {
+            get
+            {
+                return PsychrometricsInputData.EnthalpyDataValue;
+            }
+        }
+
+        public DataValue ElevationDataValue
+        {
+            get
+            {
+                return PsychrometricsInputData.ElevationDataValue;
+            }
+        }
+
+        public DataValue BarometricPressureDataValue
+        {
+            get
+            {
+                return PsychrometricsInputData.BarometricPressureDataValue;
+            }
+        }
+
+        public DataValue RelativeHumidityDataValue
+        {
+            get
+            {
+                return PsychrometricsInputData.RelativeHumidityDataValue;
+            }
+        }
+
+        public DataValue WetBulbTemperatureDataValue
+        {
+            get
+            {
+                return PsychrometricsInputData.WetBulbTemperatureDataValue;
+            }
+        }
+
+        public DataValue DryBulbTemperatureDataValue
+        {
+            get
+            {
+                return PsychrometricsInputData.DryBulbTemperatureDataValue;
+            }
+        }
+
+        public DataValue BarometericPressureDataValue
+        {
+            get
+            {
+                return PsychrometricsInputData.BarometricPressureDataValue;
+            }
+        }
+
+        public void UpdateIsElevationValue(bool value)
+        {
+            PsychrometricsInputData.IsElevation = value;
+        }
+
+        public bool IsElevation()
+        {
+            return PsychrometricsInputData.IsElevation;
+        }
+
+        public string DataFilenameInputValue
+        {
+            get
+            {
+                return Path.GetFileName(DataFileName);
+            }
+        }
+        #endregion DataAccess
     }
 }

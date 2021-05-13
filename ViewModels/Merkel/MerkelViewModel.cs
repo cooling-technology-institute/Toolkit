@@ -22,245 +22,6 @@ namespace ViewModels
         public string DataFileName { get; set; }
         public string ErrorMessage { get; set; }
 
-        public string HotWaterTemperatureDataValueInputMessage
-        {
-            get
-            {
-                return MerkelInputData.HotWaterTemperatureDataValue.InputMessage;
-            }
-        }
-
-        public string HotWaterTemperatureDataValueInputValue
-        {
-            get
-            {
-                return MerkelInputData.HotWaterTemperatureDataValue.InputValue;
-            }
-        }
-
-        public bool HotWaterTemperatureDataValueUpdateValue(string value)
-        {
-            return MerkelInputData.HotWaterTemperatureDataValue.UpdateValue(value);
-        }
-
-        public string HotWaterTemperatureDataValueErrorMessage
-        {
-            get
-            {
-                return MerkelInputData.HotWaterTemperatureDataValue.ErrorMessage;
-            }
-        }
-
-        public string HotWaterTemperatureDataValueTooltip
-        {
-            get
-            {
-                return MerkelInputData.HotWaterTemperatureDataValue.ToolTip;
-            }
-        }
-
-        public string ColdWaterTemperatureDataValueInputMessage
-        {
-            get
-            {
-                return MerkelInputData.ColdWaterTemperatureDataValue.InputMessage;
-            }
-        }
-
-        public string ColdWaterTemperatureDataValueInputValue
-        {
-            get
-            {
-                return MerkelInputData.ColdWaterTemperatureDataValue.InputValue;
-            }
-        }
-
-        public string ColdWaterTemperatureDataValueTooltip
-        {
-            get
-            {
-                return MerkelInputData.ColdWaterTemperatureDataValue.ToolTip;
-            }
-        }
-
-        public bool ColdWaterTemperatureDataValueUpdateValue(string value)
-        {
-            return MerkelInputData.ColdWaterTemperatureDataValue.UpdateValue(value);
-        }
-
-        public string ColdWaterTemperatureDataValueErrorMessage
-        {
-            get
-            {
-                return MerkelInputData.ColdWaterTemperatureDataValue.ErrorMessage;
-            }
-        }
-
-        public string WetBulbTemperatureDataValueInputMessage
-        {
-            get
-            {
-                return MerkelInputData.WetBulbTemperatureDataValue.InputMessage;
-            }
-        }
-
-        public string WetBulbTemperatureDataValueInputValue
-        {
-            get
-            {
-                return MerkelInputData.WetBulbTemperatureDataValue.InputValue;
-            }
-        }
-
-        public string WetBulbTemperatureDataValueTooltip
-        {
-            get
-            {
-                return MerkelInputData.WetBulbTemperatureDataValue.ToolTip;
-            }
-        }
-
-        public bool WetBulbTemperatureDataValueUpdateValue(string value)
-        {
-            return MerkelInputData.WetBulbTemperatureDataValue.UpdateValue(value);
-        }
-
-        public string WetBulbTemperatureDataValueErrorMessage
-        {
-            get
-            {
-                return MerkelInputData.WetBulbTemperatureDataValue.ErrorMessage;
-            }
-        }
-
-        public string LiquidtoGasRatioDataValueInputMessage
-        {
-            get
-            {
-                return MerkelInputData.LiquidToGasRatioDataValue .InputMessage;
-            }
-        }
-
-        public string LiquidtoGasRatioDataValueInputValue
-        {
-            get
-            {
-                return MerkelInputData.LiquidToGasRatioDataValue .InputValue;
-            }
-        }
-
-        public string LiquidtoGasRatioDataValueTooltip
-        {
-            get
-            {
-                return MerkelInputData.LiquidToGasRatioDataValue .ToolTip;
-            }
-        }
-
-        public bool LiquidtoGasRatioDataValueUpdateValue(string value)
-        {
-            return MerkelInputData.LiquidToGasRatioDataValue.UpdateValue(value);
-        }
-
-        public string LiquidtoGasRatioDataValueErrorMessage
-        {
-            get
-            {
-                return MerkelInputData.LiquidToGasRatioDataValue.ErrorMessage;
-            }
-        }
-
-        public string ElevationDataValueInputMessage
-        {
-            get
-            {
-                return MerkelInputData.ElevationDataValue.InputMessage;
-            }
-        }
-
-        public string ElevationDataValueInputValue
-        {
-            get
-            {
-                return MerkelInputData.ElevationDataValue.InputValue;
-            }
-        }
-
-        public string ElevationDataValueTooltip
-        {
-            get
-            {
-                return MerkelInputData.ElevationDataValue.ToolTip;
-            }
-        }
-
-        public bool ElevationDataValueUpdateValue(string value)
-        {
-            return MerkelInputData.ElevationDataValue.UpdateValue(value);
-        }
-
-        public string ElevationDataValueErrorMessage
-        {
-            get
-            {
-                return MerkelInputData.ElevationDataValue.ErrorMessage;
-            }
-        }
-
-        public string BarometricPressureDataValueInputMessage
-        {
-            get
-            {
-                return MerkelInputData.BarometricPressureDataValue.InputMessage;
-            }
-        }
-
-        public string BarometricPressureDataValueInputValue
-        {
-            get
-            {
-                return MerkelInputData.BarometricPressureDataValue.InputValue;
-            }
-        }
-
-        public string BarometricPressureDataValueTooltip
-        {
-            get
-            {
-                return MerkelInputData.BarometricPressureDataValue.ToolTip;
-            }
-        }
-
-        public bool BarometricPressureDataValueUpdateValue(string value)
-        {
-            return MerkelInputData.BarometricPressureDataValue.UpdateValue(value);
-        }
-
-        public string BarometricPressureDataValueErrorMessage
-        {
-            get
-            {
-                return MerkelInputData.BarometricPressureDataValue.ErrorMessage;
-            }
-        }
-
-        public void UpdateIsElevationValue(bool value)
-        {
-            MerkelInputData.IsElevation = value;
-        }
-
-        public bool IsElevation()
-        {
-            return MerkelInputData.IsElevation;
-        }
-
-        public string DataFilenameInputValue
-        {
-            get
-            {
-                return Path.GetFileName(DataFileName);
-            }
-        }
 
         public MerkelViewModel(bool isDemo, bool isInternationalSystemOfUnits_SI)
         {
@@ -489,5 +250,101 @@ namespace ViewModels
 
             return returnValue;
         }
+
+        #region DataAccess
+
+        public DataValue HotWaterTemperatureDataValue
+        {
+            get
+            {
+                return MerkelInputData.HotWaterTemperatureDataValue;
+            }
+        }
+
+        public DataValue ColdWaterTemperatureDataValue
+        {
+            get
+            {
+                return MerkelInputData.ColdWaterTemperatureDataValue;
+            }
+        }
+
+        public DataValue WetBulbTemperatureDataValue
+        {
+            get
+            {
+                return MerkelInputData.WetBulbTemperatureDataValue;
+            }
+        }
+
+        public DataValue LiquidToGasRatioDataValue
+        {
+            get
+            {
+                return MerkelInputData.LiquidToGasRatioDataValue;
+            }
+        }
+
+        public DataValue ElevationDataValue
+        {
+            get
+            {
+                return MerkelInputData.ElevationDataValue;
+            }
+        }
+
+        public DataValue BarometricPressureDataValue
+        {
+            get
+            {
+                return MerkelInputData.BarometricPressureDataValue;
+            }
+        }
+
+        public bool IsElevation
+        {
+            get
+            {
+                return MerkelInputData.IsElevation;
+            }
+            set
+            {
+                MerkelInputData.IsElevation = value;
+            }
+        }
+
+        public string DataFilenameInputValue
+        {
+            get
+            {
+                return Path.GetFileName(DataFileName);
+            }
+        }
+
+        public void ConvertElevationToBarometricPressure()
+        {
+            if(IsInternationalSystemOfUnits_SI)
+            {
+                MerkelInputData.BarometricPressureDataValue.UpdateCurrentValue(UnitConverter.ConvertElevationInMetersToKilopascal(MerkelInputData.ElevationDataValue.Current));
+            }
+            else
+            {
+                MerkelInputData.BarometricPressureDataValue.UpdateCurrentValue(UnitConverter.CalculatePsiToInchesOfMercury(UnitConverter.ConvertElevationInFeetToBarometricPressure(MerkelInputData.ElevationDataValue.Current)));
+            }
+        }
+
+        public void ConvertBarometricPressureToElevation()
+        {
+            if (IsInternationalSystemOfUnits_SI)
+            {
+                MerkelInputData.ElevationDataValue.UpdateCurrentValue(UnitConverter.ConvertKilopascalToElevationInMeters(MerkelInputData.BarometricPressureDataValue.Current));
+            }
+            else
+            {
+                MerkelInputData.ElevationDataValue.UpdateCurrentValue(UnitConverter.ConvertBarometricPressureToElevationInFeet(UnitConverter.CalculateInchesOfMercuryToPsi(MerkelInputData.BarometricPressureDataValue.Current)));
+            }
+        }
+
+        #endregion DataAccess
     }
 }

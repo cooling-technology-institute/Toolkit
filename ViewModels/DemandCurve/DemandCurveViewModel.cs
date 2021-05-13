@@ -412,382 +412,83 @@ namespace ViewModels
 
         #region DataValues
 
-        public string WetBulbTemperatureDataValueInputMessage
+        public DataValue WetBulbTemperatureDataValue
         {
             get
             {
-                return DemandCurveInputData.WetBulbTemperatureDataValue.InputMessage;
+                return DemandCurveInputData.WetBulbTemperatureDataValue;
             }
         }
 
-        public string WetBulbTemperatureDataValueInputValue
+        public DataValue RangeDataValue
         {
             get
             {
-                return DemandCurveInputData.WetBulbTemperatureDataValue.InputValue;
+                return DemandCurveInputData.RangeDataValue;
             }
         }
 
-        public bool WetBulbTemperatureDataValueUpdateValue(string value)
-        {
-            return DemandCurveInputData.WetBulbTemperatureDataValue.UpdateValue(value);
-        }
-
-        public string WetBulbTemperatureDataValueErrorMessage
+        public DataValue ElevationDataValue
         {
             get
             {
-                return DemandCurveInputData.WetBulbTemperatureDataValue.ErrorMessage;
+                return DemandCurveInputData.ElevationDataValue;
             }
         }
 
-        public string WetBulbTemperatureDataValueTooltip
+        public DataValue LiquidToGasRatioDataValue
         {
             get
             {
-                return DemandCurveInputData.WetBulbTemperatureDataValue.ToolTip;
+                return DemandCurveInputData.LiquidToGasRatioDataValue;
             }
         }
 
-        public string RangeDataValueInputMessage
+        public DataValue BarometricPressureDataValue
         {
             get
             {
-                return DemandCurveInputData.RangeDataValue.InputMessage;
+                return DemandCurveInputData.BarometricPressureDataValue;
             }
         }
 
-        public string RangeDataValueInputValue
+        public DataValue C1DataValue
         {
             get
             {
-                return DemandCurveInputData.RangeDataValue.InputValue;
+                return DemandCurveInputData.C1DataValue;
             }
         }
 
-        public bool RangeDataValueUpdateValue(string value)
-        {
-            return DemandCurveInputData.RangeDataValue.UpdateValue(value);
-        }
-
-        public string RangeDataValueErrorMessage
+        public DataValue SlopeDataValue
         {
             get
             {
-                return DemandCurveInputData.RangeDataValue.ErrorMessage;
+                return DemandCurveInputData.SlopeDataValue;
             }
         }
 
-        public string RangeDataValueTooltip
+        public DataValue MinimumDataValue
         {
             get
             {
-                return DemandCurveInputData.RangeDataValue.ToolTip;
+                return DemandCurveInputData.MinimumDataValue;
             }
         }
 
-        public string ElevationDataValueInputMessage
+        public DataValue MaximumDataValue
         {
             get
             {
-                return DemandCurveInputData.ElevationDataValue.InputMessage;
+                return DemandCurveInputData.MaximumDataValue;
             }
         }
 
-        public string ElevationDataValueInputValue
+        public DataValue UserApproachDataValue
         {
             get
             {
-                return DemandCurveInputData.ElevationDataValue.InputValue;
-            }
-        }
-
-        public bool ElevationDataValueUpdateValue(string value)
-        {
-            return DemandCurveInputData.ElevationDataValue.UpdateValue(value);
-        }
-
-        public string ElevationDataValueErrorMessage
-        {
-            get
-            {
-                return DemandCurveInputData.ElevationDataValue.ErrorMessage;
-            }
-        }
-
-        public string ElevationDataValueTooltip
-        {
-            get
-            {
-                return DemandCurveInputData.ElevationDataValue.ToolTip;
-            }
-        }
-
-        public bool LiquidToGasRatioDataValueIsValid
-        {
-            get
-            {
-                return DemandCurveInputData.LiquidToGasRatioDataValue.IsValid;
-            }
-        }
-
-        public string LiquidToGasRatioDataValueInputMessage
-        {
-            get
-            {
-                return DemandCurveInputData.LiquidToGasRatioDataValue.InputMessage;
-            }
-        }
-
-        public string LiquidToGasRatioDataValueInputValue
-        {
-            get
-            {
-                return DemandCurveInputData.LiquidToGasRatioDataValue.InputValue;
-            }
-        }
-
-        public bool LiquidToGasRatioDataValueUpdateValue(string value)
-        {
-            return DemandCurveInputData.LiquidToGasRatioDataValue.UpdateValue(value);
-        }
-
-        public string LiquidToGasRatioDataValueErrorMessage
-        {
-            get 
-            { 
-                return DemandCurveInputData.LiquidToGasRatioDataValue.ErrorMessage; 
-            }
-        }
-
-        public string LiquidToGasRatioDataValueTooltip
-        {
-            get
-            {
-                return DemandCurveInputData.LiquidToGasRatioDataValue.ToolTip;
-            }
-        }
-
-        public string BarometricPressureDataValueInputMessage
-        {
-            get
-            {
-                return DemandCurveInputData.BarometricPressureDataValue.InputMessage;
-            }
-        }
-
-        public string BarometricPressureDataValueInputValue
-        {
-            get
-            {
-                return DemandCurveInputData.BarometricPressureDataValue.InputValue;
-            }
-        }
-
-        public bool BarometricPressureDataValueUpdateValue(string value)
-        {
-            return DemandCurveInputData.BarometricPressureDataValue.UpdateValue(value);
-        }
-
-        public string BarometricPressureDataValueErrorMessage
-        {
-            get
-            {
-                return DemandCurveInputData.BarometricPressureDataValue.ErrorMessage;
-            }
-        }
-
-        public string BarometricPressureDataValueTooltip
-        {
-            get
-            {
-                return DemandCurveInputData.BarometricPressureDataValue.ToolTip;
-            }
-        }
-
-        public string C1DataValueInputMessage
-        {
-            get
-            {
-                return DemandCurveInputData.C1DataValue.InputMessage;
-            }
-        }
-
-        public string C1DataValueInputValue
-        {
-            get
-            {
-                return DemandCurveInputData.C1DataValue.InputValue;
-            }
-        }
-
-        public bool C1DataValueUpdateValue(string value)
-        {
-            return DemandCurveInputData.C1DataValue.UpdateValue(value);
-        }
-
-        public string C1DataValueErrorMessage
-        {
-            get
-            {
-                return DemandCurveInputData.C1DataValue.ErrorMessage;
-            }
-        }
-
-        public string C1DataValueTooltip
-        {
-            get
-            {
-                return DemandCurveInputData.C1DataValue.ToolTip;
-            }
-        }
-
-        public string SlopeDataValueInputMessage
-        {
-            get
-            {
-                return DemandCurveInputData.SlopeDataValue.InputMessage;
-            }
-        }
-
-        public string SlopeDataValueInputValue
-        {
-            get
-            {
-                return DemandCurveInputData.SlopeDataValue.InputValue;
-            }
-        }
-
-        public bool SlopeDataValueUpdateValue(string value)
-        {
-            return DemandCurveInputData.SlopeDataValue.UpdateValue(value);
-        }
-
-        public string SlopeDataValueErrorMessage
-        {
-            get
-            {
-                return DemandCurveInputData.SlopeDataValue.ErrorMessage;
-            }
-        }
-
-        public string SlopeDataValueTooltip
-        {
-            get
-            {
-                return DemandCurveInputData.SlopeDataValue.ToolTip;
-            }
-        }
-
-        public string MinimumDataValueInputMessage
-        {
-            get
-            {
-                return DemandCurveInputData.MinimumDataValue.InputMessage;
-            }
-        }
-
-        public string MinimumDataValueInputValue
-        {
-            get
-            {
-                return DemandCurveInputData.MinimumDataValue.InputValue;
-            }
-        }
-
-        public bool MinimumDataValueUpdateValue(string value)
-        {
-            return DemandCurveInputData.MinimumDataValue.UpdateValue(value);
-        }
-
-        public string MinimumDataValueErrorMessage
-        {
-            get
-            {
-                return DemandCurveInputData.MinimumDataValue.ErrorMessage;
-            }
-        }
-
-        public string MinimumDataValueTooltip
-        {
-            get
-            {
-                return DemandCurveInputData.MinimumDataValue.ToolTip;
-            }
-        }
-
-        public string MaximumDataValueInputMessage
-        {
-            get
-            {
-                return DemandCurveInputData.MaximumDataValue.InputMessage;
-            }
-        }
-
-        public string MaximumDataValueInputValue
-        {
-            get
-            {
-                return DemandCurveInputData.MaximumDataValue.InputValue;
-            }
-        }
-
-        public bool MaximumDataValueUpdateValue(string value)
-        {
-            return DemandCurveInputData.MaximumDataValue.UpdateValue(value);
-        }
-
-        public string MaximumDataValueErrorMessage
-        {
-            get
-            {
-                return DemandCurveInputData.MaximumDataValue.ErrorMessage;
-            }
-        }
-
-        public string MaximumDataValueTooltip
-        {
-            get
-            {
-                return DemandCurveInputData.MaximumDataValue.ToolTip;
-            }
-        }
-
-        public string UserApproachDataValueInputMessage
-        {
-            get
-            {
-                return DemandCurveInputData.UserApproachDataValue.InputMessage;
-            }
-        }
-
-        public string UserApproachDataValueInputValue
-        {
-            get
-            {
-                return DemandCurveInputData.UserApproachDataValue.InputValue;
-            }
-        }
-
-        public bool UserApproachDataValueUpdateValue(string value)
-        {
-            return DemandCurveInputData.UserApproachDataValue.UpdateValue(value);
-        }
-
-        public string UserApproachDataValueErrorMessage
-        {
-            get
-            {
-                return DemandCurveInputData.UserApproachDataValue.ErrorMessage;
-            }
-        }
-
-
-        public string UserApproachDataValueTooltip
-        {
-            get
-            {
-                return DemandCurveInputData.UserApproachDataValue.ToolTip;
+                return DemandCurveInputData.UserApproachDataValue;
             }
         }
 

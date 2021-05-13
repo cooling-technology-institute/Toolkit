@@ -79,6 +79,16 @@ namespace CalculationLibrary
             return (pressure / SeaLevelBasePressure) * BarometricPressure;
         }
 
+        public static double CalculateInchesOfMercuryToKilopascal(double inchesOfMercury)
+        {
+            return (inchesOfMercury * 3.386);
+        }
+
+        public static double CalculateKilopascalToInchesOfMercury(double kilopascal)
+        {
+            return (kilopascal / 3.386);
+        }
+
         public static double ConvertCelsiusToFahrenheit(double celsiusTemperature)
         {
             return celsiusTemperature * CelsiusToFahrenheitConversionFactor + CelsiusToFahrenheitAdjustment;

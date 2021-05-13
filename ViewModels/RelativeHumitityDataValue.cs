@@ -35,6 +35,7 @@ namespace ViewModels
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(RelativeHumidityToolTipFormat, Minimum, Maximum);
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
+            Units = ConstantUnits.Percentage;
         }
 
         public override void ConvertValue(bool isInternationalSystemOfUnits_SI)

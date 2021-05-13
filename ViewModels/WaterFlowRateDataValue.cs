@@ -73,6 +73,14 @@ namespace ViewModels
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(WaterFlowRateToolTipFormat, Minimum, Maximum);
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
+            if (IsInternationalSystemOfUnits_SI)
+            {
+                Units = ConstantUnits.LitersPerSecond;
+            }
+            else
+            {
+                Units = ConstantUnits.GallonsPerMinute;
+            }
         }
 
         public override void ConvertValue(bool isInternationalSystemOfUnits_SI)

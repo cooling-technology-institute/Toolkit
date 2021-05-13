@@ -28,7 +28,7 @@ namespace ViewModels
         {
             IsDemo = isDemo;
             InputMessage = "Wet Bulb Temperature";
-            Format = "F2";
+            Format = "F3";
             SetDefaultMinMax(isInternationalSystemOfUnits_SI);
             Current = Default;
             SetInputAndTooltip(isInternationalSystemOfUnits_SI);
@@ -73,6 +73,14 @@ namespace ViewModels
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(WetBulbTemperatureToolTipFormat, Minimum, Maximum);
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
+            if(IsInternationalSystemOfUnits_SI)
+            {
+                Units = ConstantUnits.TemperatureCelsius;
+            }
+            else
+            {
+                Units = ConstantUnits.TemperatureFahrenheit;
+            }
         }
 
         public override void ConvertValue(bool isInternationalSystemOfUnits_SI)

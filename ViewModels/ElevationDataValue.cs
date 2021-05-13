@@ -46,6 +46,14 @@ namespace ViewModels
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(ElevationToolTipFormat, Minimum, Maximum);
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
+            if (IsInternationalSystemOfUnits_SI)
+            {
+                Units = ConstantUnits.Meter;
+            }
+            else
+            {
+                Units = ConstantUnits.Foot;
+            }
         }
 
         public override void ConvertValue(bool isInternationalSystemOfUnits_SI)

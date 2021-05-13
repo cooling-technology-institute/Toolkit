@@ -65,26 +65,13 @@ namespace CTIToolkit
 
         private void SetDisplayedUnits()
         {
-            if (IsInternationalSystemOfUnits_SI)
-            {
-                UnitsWaterFlowRate.Text = ConstantUnits.LitersPerSecond;
-                UnitsHotWaterTemperature.Text = ConstantUnits.TemperatureCelsius;
-                UnitsColdWaterTemperature.Text = ConstantUnits.TemperatureCelsius;
-                UnitsWetBulbTemperature.Text = ConstantUnits.TemperatureCelsius;
-                UnitsDryBulbTemperature.Text = ConstantUnits.TemperatureCelsius;
-                UnitsFanDriverPower.Text = ConstantUnits.Kilowatt;
-                UnitsBarometricPressure.Text = ConstantUnits.BarometricPressureKiloPascal;
-            }
-            else
-            {
-                UnitsWaterFlowRate.Text = ConstantUnits.GallonsPerMinute;
-                UnitsHotWaterTemperature.Text = ConstantUnits.TemperatureFahrenheit;
-                UnitsColdWaterTemperature.Text = ConstantUnits.TemperatureFahrenheit;
-                UnitsWetBulbTemperature.Text = ConstantUnits.TemperatureFahrenheit;
-                UnitsDryBulbTemperature.Text = ConstantUnits.TemperatureFahrenheit;
-                UnitsFanDriverPower.Text = ConstantUnits.BrakeHorsepower;
-                UnitsBarometricPressure.Text = ConstantUnits.BarometricPressureInchOfMercury;
-            }
+            UnitsWaterFlowRate.Text = MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValue.Units;
+            UnitsWaterFlowRate.Text = MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValue.Units;
+            UnitsColdWaterTemperature.Text = MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValue.Units;
+            UnitsWetBulbTemperature.Text = MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValue.Units;
+            UnitsDryBulbTemperature.Text = MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValue.Units;
+            UnitsFanDriverPower.Text = MechanicalDraftPerformanceCurveViewModel.FanDriverPowerDataValue.Units;
+            UnitsBarometricPressure.Text = MechanicalDraftPerformanceCurveViewModel.BarometricPressureDataValue.Units;
         }
 
         public override bool OpenDataFile(string fileName)

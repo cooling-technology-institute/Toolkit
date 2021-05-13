@@ -1,0 +1,56 @@
+:Base ctitoolkit.hlp
+:Title CTI Toolkit
+1 CTI Toolkit
+2 Welcome=Welcome
+2 Using CTI Toolkit
+3 Introduction=Introduction
+3 Psychrometrics Tab
+4 Psychrometrics=Psychrometrics
+4 Psychrometrics Tab Usage=Psychrometrics_Tab_Usage
+3 Merkel Tab
+4 Merkel=Merkel
+4 Merkel Tab Usage=Merkel_Tab_Usage
+3 Demand Curve Tab
+4 Demand Curve=Demand_Curve
+4 Demand Curve Tab Usage=Demand_Curve_Tab_Usage
+3 Performance Curve Tab
+4 Mechanical Draft Performance Curve=Mechanical_Draft_Performance_Curve
+4 Mechanical Draft Perf Curve Tab Usage=Mechanical_Draft_Perf_Curve_Tab_Usage
+4 Opening Screen for Mechanical Draft Perf Curve Tab=Opening_Screen_for_Mechanical_Draft_Perf_Curve_Tab
+4 Performance Curve Tab: Entering Data for the First Time=Mechanical_Draft_Perf_Curve_Entering_Data_for_the_First_Time
+4 Performance Curve Tab: Using Existing Project Files=Performance_Curve_Using_Existing_Project_Files
+4 Performance Curve Tab: Viewing the Graphs=Performance_Curve_Viewing_the_Graphs
+4 Performance Curve Tab: Printing the Report=Performance_Curve_Printing_the_Report
+2 Examples
+3 Off-Design Performance
+4 Demand Curve Worksheet Example 1=Demand_Curve_Worksheet_Example_1
+4 Off-Design Performance 1=Demand_Curve_Example_1_Step_1
+4 Off-Design Performance 2=Off_Design_Performance_Example_Step_2
+4 Off-Design Performance 3=Off_Design_Performance_Example_Step_3
+4 Off-Design Performance 4=Off_Design_Performance_Example_Step_4
+4 Off-Design Performance 5=Off_Design_Performance_Example_Step_5
+4 Off-Design Performance 6=Off_Design_Performance_Example_Step_6
+4 Off-Design Performance 7=Off_Design_Performance_Example_Step_7
+4 Off-Design Performance 8=Off_Design_Performance_Example_Step_8
+4 Off-Design Performance 9=Off_Design_Performance_Example_Step_9
+3 Performance Test Calculations
+4 Demand Curve Worksheet Example 2=Demand_Curve_Worksheet_Example_2
+4 Performance Test Calculations 1=Performance_Test_Calculations_Example_Page_1
+4 Performance Test Calculations 2=Performance_Test_Calculations_Example_Page_2
+4 Performance Test Calculations 3=Performance_Test_Calculations_Example_Page_3
+4 Performance Test Calculations 4=Performance_Test_Calculations_Example_Page_4
+4 Performance Test Calculations 5=Performance_Test_Calculations_Example_Page_5
+4 Performance Test Calculations 6=Performance_Test_Calculations_Example_Page_6
+4 Performance Test Calculations 7=Performance_Test_Calculations_Example_Page_7
+3 Predicting Tower Performance
+4 Predicting Tower Performance 1=Predicting_Tower_Performance
+4 Predicting Tower Performance 2=Predicting_Tower_Performance_Page_2
+4 Predicting Tower Performance 3=Predicting_Tower_Performance_Page_3
+4 Predicting Tower Performance 4=Predicting_Tower_Performance_Page_4
+4 Predicting Tower Performance 5=Predicting_Tower_Performance_Page_5
+4 Predicting Tower Performance 6=Predicting_Tower_Performance_Page_6
+4 Predicting Tower Performance 7=Predicting_Tower_Performance_Page_7
+2 Appendix
+3 Water Chemistry and Biological Terms=Water_Chemistry_and_Biological_Terms
+3 Definitions=Definitions
+3 Abbreviations and Letter Symbols=Abbreviations_and_Letter_Symbols

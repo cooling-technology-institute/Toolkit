@@ -63,26 +63,13 @@ namespace CTIToolkit
 
         private void SetDisplayedUnits()
         {
-            if (IsInternationalSystemOfUnits_SI)
-            {
-                WaterFlowRateUnits.Text = ConstantUnits.LitersPerSecond;
-                HotWaterTemperatureUnits.Text = ConstantUnits.TemperatureCelsius;
-                ColdWaterTemperatureUnits.Text = ConstantUnits.TemperatureCelsius;
-                WetBulbTemperatureUnits.Text = ConstantUnits.TemperatureCelsius;
-                DryBulbTemperatureUnits.Text = ConstantUnits.TemperatureCelsius;
-                FanDriverPowerUnits.Text = ConstantUnits.Kilowatt;
-                BarometricPressureUnits.Text = ConstantUnits.BarometricPressureKiloPascal;
-            }
-            else
-            {
-                WaterFlowRateUnits.Text = ConstantUnits.GallonsPerMinute;
-                HotWaterTemperatureUnits.Text = ConstantUnits.TemperatureFahrenheit;
-                ColdWaterTemperatureUnits.Text = ConstantUnits.TemperatureFahrenheit;
-                WetBulbTemperatureUnits.Text = ConstantUnits.TemperatureFahrenheit;
-                DryBulbTemperatureUnits.Text = ConstantUnits.TemperatureFahrenheit;
-                FanDriverPowerUnits.Text = ConstantUnits.BrakeHorsepower;
-                BarometricPressureUnits.Text = ConstantUnits.BarometricPressureInchOfMercury;
-            }
+            WaterFlowRateUnits.Text = TowerDesignData.WaterFlowRateDataValue.Units;
+            HotWaterTemperatureUnits.Text = TowerDesignData.HotWaterTemperatureDataValue.Units;
+            ColdWaterTemperatureUnits.Text = TowerDesignData.ColdWaterTemperatureDataValue.Units;
+            WetBulbTemperatureUnits.Text = TowerDesignData.WetBulbTemperatureDataValue.Units;
+            DryBulbTemperatureUnits.Text = TowerDesignData.DryBulbTemperatureDataValue.Units;
+            FanDriverPowerUnits.Text = TowerDesignData.FanDriverPowerDataValue.Units;
+            BarometricPressureUnits.Text = TowerDesignData.BarometricPressureDataValue.Units;
         }
 
         protected void CloseFormCallback(object sender, FormClosingEventArgs e)

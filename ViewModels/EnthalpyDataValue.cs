@@ -48,6 +48,14 @@ namespace ViewModels
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(EnthalpyToolTipFormat, Minimum, Maximum);
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
+            if (IsInternationalSystemOfUnits_SI)
+            {
+                Units = ConstantUnits.KilojoulesPerKilogram;
+            }
+            else
+            {
+                Units = ConstantUnits.BtuPerPound;
+            }
         }
 
         public override void ConvertValue(bool isInternationalSystemOfUnits_SI)

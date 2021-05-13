@@ -49,6 +49,14 @@ namespace ViewModels
             InputValue = Current.ToString(Format);
             ToolTip = string.Format(UserApproachToolTipFormat, Minimum, Maximum);
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
+            if (IsInternationalSystemOfUnits_SI)
+            {
+                Units = ConstantUnits.RangeK;
+            }
+            else
+            {
+                Units = ConstantUnits.TemperatureFahrenheit;
+            }
         }
 
         public override void ConvertValue(bool isInternationalSystemOfUnits_SI)

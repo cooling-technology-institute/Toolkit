@@ -38,9 +38,9 @@
             this.EnthalpyUnits = new System.Windows.Forms.Label();
             this.EnthalpyLabel = new System.Windows.Forms.Label();
             this.EnthalpyValue = new System.Windows.Forms.TextBox();
-            this.BarometericPressureUnits = new System.Windows.Forms.Label();
-            this.BarometericPressureLabel = new System.Windows.Forms.Label();
-            this.BarometericPressure_Value = new System.Windows.Forms.TextBox();
+            this.BarometricPressureUnits = new System.Windows.Forms.Label();
+            this.BarometricPressureLabel = new System.Windows.Forms.Label();
+            this.BarometricPressure_Value = new System.Windows.Forms.TextBox();
             this.RelativeHumidityUnits = new System.Windows.Forms.Label();
             this.RelativeHumidityLabel = new System.Windows.Forms.Label();
             this.RelativeHumidity_Value = new System.Windows.Forms.TextBox();
@@ -133,9 +133,9 @@
             this.InputPropertiesGroupBox.Controls.Add(this.EnthalpyUnits);
             this.InputPropertiesGroupBox.Controls.Add(this.EnthalpyLabel);
             this.InputPropertiesGroupBox.Controls.Add(this.EnthalpyValue);
-            this.InputPropertiesGroupBox.Controls.Add(this.BarometericPressureUnits);
-            this.InputPropertiesGroupBox.Controls.Add(this.BarometericPressureLabel);
-            this.InputPropertiesGroupBox.Controls.Add(this.BarometericPressure_Value);
+            this.InputPropertiesGroupBox.Controls.Add(this.BarometricPressureUnits);
+            this.InputPropertiesGroupBox.Controls.Add(this.BarometricPressureLabel);
+            this.InputPropertiesGroupBox.Controls.Add(this.BarometricPressure_Value);
             this.InputPropertiesGroupBox.Controls.Add(this.RelativeHumidityUnits);
             this.InputPropertiesGroupBox.Controls.Add(this.RelativeHumidityLabel);
             this.InputPropertiesGroupBox.Controls.Add(this.RelativeHumidity_Value);
@@ -186,35 +186,35 @@
             // 
             // BarometericPressureUnits
             // 
-            this.BarometericPressureUnits.AutoSize = true;
-            this.BarometericPressureUnits.Location = new System.Drawing.Point(245, 91);
-            this.BarometericPressureUnits.Name = "BarometericPressureUnits";
-            this.BarometericPressureUnits.Size = new System.Drawing.Size(13, 13);
-            this.BarometericPressureUnits.TabIndex = 17;
-            this.BarometericPressureUnits.Text = "ft";
+            this.BarometricPressureUnits.AutoSize = true;
+            this.BarometricPressureUnits.Location = new System.Drawing.Point(245, 91);
+            this.BarometricPressureUnits.Name = "BarometericPressureUnits";
+            this.BarometricPressureUnits.Size = new System.Drawing.Size(13, 13);
+            this.BarometricPressureUnits.TabIndex = 17;
+            this.BarometricPressureUnits.Text = "ft";
             // 
             // BarometericPressureLabel
             // 
-            this.BarometericPressureLabel.Enabled = false;
-            this.BarometericPressureLabel.Location = new System.Drawing.Point(22, 91);
-            this.BarometericPressureLabel.Name = "BarometericPressureLabel";
-            this.BarometericPressureLabel.Size = new System.Drawing.Size(110, 13);
-            this.BarometericPressureLabel.TabIndex = 16;
-            this.BarometericPressureLabel.Text = "Barometeric Pressure:";
-            this.BarometericPressureLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BarometericPressureLabel.Visible = false;
+            this.BarometricPressureLabel.Enabled = false;
+            this.BarometricPressureLabel.Location = new System.Drawing.Point(22, 91);
+            this.BarometricPressureLabel.Name = "BarometericPressureLabel";
+            this.BarometricPressureLabel.Size = new System.Drawing.Size(110, 13);
+            this.BarometricPressureLabel.TabIndex = 16;
+            this.BarometricPressureLabel.Text = "Barometeric Pressure:";
+            this.BarometricPressureLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BarometricPressureLabel.Visible = false;
             // 
             // BarometericPressure_Value
             // 
-            this.BarometericPressure_Value.Enabled = false;
-            this.BarometericPressure_Value.Location = new System.Drawing.Point(152, 88);
-            this.BarometericPressure_Value.Name = "BarometericPressure_Value";
-            this.BarometericPressure_Value.Size = new System.Drawing.Size(70, 20);
-            this.BarometericPressure_Value.TabIndex = 15;
-            this.BarometericPressure_Value.Text = "0";
-            this.BarometericPressure_Value.Visible = false;
-            this.BarometericPressure_Value.Validating += new System.ComponentModel.CancelEventHandler(this.BarometericPressure_Value_Validating);
-            this.BarometericPressure_Value.Validated += new System.EventHandler(this.BarometericPressure_Value_Validated);
+            this.BarometricPressure_Value.Enabled = false;
+            this.BarometricPressure_Value.Location = new System.Drawing.Point(152, 88);
+            this.BarometricPressure_Value.Name = "BarometericPressure_Value";
+            this.BarometricPressure_Value.Size = new System.Drawing.Size(70, 20);
+            this.BarometricPressure_Value.TabIndex = 15;
+            this.BarometricPressure_Value.Text = "0";
+            this.BarometricPressure_Value.Visible = false;
+            this.BarometricPressure_Value.Validating += new System.ComponentModel.CancelEventHandler(this.BarometricPressure_Value_Validating);
+            this.BarometricPressure_Value.Validated += new System.EventHandler(this.BarometricPressure_Value_Validated);
             // 
             // RelativeHumidityUnits
             // 
@@ -464,9 +464,9 @@
         private System.Windows.Forms.TextBox RelativeHumidity_Value;
         private System.Windows.Forms.Label RelativeHumidityLabel;
         private System.Windows.Forms.Label RelativeHumidityUnits;
-        private System.Windows.Forms.TextBox BarometericPressure_Value;
-        private System.Windows.Forms.Label BarometericPressureLabel;
-        private System.Windows.Forms.Label BarometericPressureUnits;
+        private System.Windows.Forms.TextBox BarometricPressure_Value;
+        private System.Windows.Forms.Label BarometricPressureLabel;
+        private System.Windows.Forms.Label BarometricPressureUnits;
         private System.Windows.Forms.TextBox EnthalpyValue;
         private System.Windows.Forms.Label EnthalpyLabel;
         private System.Windows.Forms.Label EnthalpyUnits;
