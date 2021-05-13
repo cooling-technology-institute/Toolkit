@@ -454,7 +454,10 @@ namespace CTIToolkit
                     PrintControl.Bitmap.Dispose();
                 }
 
-                if (MechanicalDraftPerformanceCurveViewModel.IsDesignDataValid)
+                if ((MechanicalDraftPerformanceCurveViewModel.IsDesignDataValid)
+                && (MechanicalDraftPerformanceCurveViewModel.CalculationData != null)
+                && (MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates != null)
+                && (MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates.Count > 0))
                 {
                     if (PrintControl.IsDesignData)
                     {
@@ -464,41 +467,35 @@ namespace CTIToolkit
                         PrintControl.X.Clear();
                         PrintControl.PageIndex = 0;
                         printerOutput = output;
-                        if ((MechanicalDraftPerformanceCurveViewModel.CalculationData != null)
-                            && (MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates != null)
-                            && (MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates.Count > 0))
+                        int bottom = 475;
+                        int index = 1;
+                        int pageHeight = pageSize;
+                        int newBottom = 0;
+                        PrintControl.X.Add(0);
+                        PrintControl.X.Add(pageHeight);
+
+                        foreach (WaterFlowRate waterFlowRate in MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates)
                         {
-                            int bottom = 475;
-                            int index = 1;
-                            int pageHeight = pageSize;
-                            int newBottom = 0;
-                            PrintControl.X.Add(0);
-                            PrintControl.X.Add(pageHeight);
+                            newBottom = output.AddWaterFlowRate(pageHeight, bottom,
+                                string.Format("Water Flow Rate: {0} {1}", waterFlowRate.FlowRate, (IsInternationalSystemOfUnits_SI) ? ConstantUnits.LitersPerSecond : ConstantUnits.GallonsPerMinute),
+                                BuildFlowRateDataTable(waterFlowRate, MechanicalDraftPerformanceCurveViewModel.CalculationData.Ranges));
 
-                            foreach (WaterFlowRate waterFlowRate in MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates)
+                            if (newBottom > pageHeight)
                             {
-                                newBottom = output.AddWaterFlowRate(pageHeight, bottom,
-                                    string.Format("Water Flow Rate: {0} {1}", waterFlowRate.FlowRate, (IsInternationalSystemOfUnits_SI) ? ConstantUnits.LitersPerSecond : ConstantUnits.GallonsPerMinute),
-                                    BuildFlowRateDataTable(waterFlowRate, MechanicalDraftPerformanceCurveViewModel.CalculationData.Ranges));
-
-                                if (newBottom > pageHeight)
+                                if (index > 1)
                                 {
-                                    if (index > 1)
-                                    {
-                                        PrintControl.X.Add(pageHeight);
-                                    }
-                                    index++;
-                                    pageHeight = pageSize * index;
+                                    PrintControl.X.Add(pageHeight);
                                 }
-                                bottom = newBottom;
+                                index++;
+                                pageHeight = pageSize * index;
                             }
-                            PrintControl.X.Add(newBottom);
+                            bottom = newBottom;
                         }
+                        PrintControl.X.Add(newBottom);
                     }
                     else
                     {
                         printerOutput = new MechanicalDraftPerformanceCurvePrinterOutput(e.PageBounds.Height - 120, this.PrintControl.Label, TestPointTabControl.SelectedIndex, MechanicalDraftPerformanceCurveViewModel);
-                        //               int bottom = 500;
                     }
                 }
                 else

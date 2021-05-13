@@ -102,14 +102,14 @@ namespace CTIToolkit
 
         private void WaterFlowRate_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!TowerTestPoint.WaterFlowRateDataValue.UpdateValue(WaterFlowRate.Text, out string errorMessage))
+            if (!TowerTestPoint.WaterFlowRateDataValue.UpdateValue(WaterFlowRate.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 WaterFlowRate.Select(0, WaterFlowRate.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(WaterFlowRate, errorMessage);
+                this.errorProvider1.SetError(WaterFlowRate, TowerTestPoint.WaterFlowRateDataValue.ErrorMessage);
             }
         }
 
@@ -121,14 +121,14 @@ namespace CTIToolkit
 
         private void HotWaterTemperature_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!TowerTestPoint.HotWaterTemperatureDataValue.UpdateValue(HotWaterTemperature.Text, out string errorMessage))
+            if (!TowerTestPoint.HotWaterTemperatureDataValue.UpdateValue(HotWaterTemperature.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 HotWaterTemperature.Select(0, HotWaterTemperature.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(HotWaterTemperature, errorMessage);
+                this.errorProvider1.SetError(HotWaterTemperature, TowerTestPoint.HotWaterTemperatureDataValue.ErrorMessage);
             }
             else if(TowerTestPoint.HotWaterTemperatureDataValue.Current <= TowerTestPoint.ColdWaterTemperatureDataValue.Current) 
             {
@@ -149,14 +149,14 @@ namespace CTIToolkit
 
         private void ColdWaterTemperature_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!TowerTestPoint.ColdWaterTemperatureDataValue.UpdateValue(ColdWaterTemperature.Text, out string errorMessage ))
+            if (!TowerTestPoint.ColdWaterTemperatureDataValue.UpdateValue(ColdWaterTemperature.Text ))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 ColdWaterTemperature.Select(0, ColdWaterTemperature.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(ColdWaterTemperature, errorMessage);
+                this.errorProvider1.SetError(ColdWaterTemperature, TowerTestPoint.ColdWaterTemperatureDataValue.ErrorMessage);
             }
             else if (TowerTestPoint.ColdWaterTemperatureDataValue.Current >= TowerTestPoint.HotWaterTemperatureDataValue.Current)
             {
@@ -177,14 +177,14 @@ namespace CTIToolkit
 
         private void WetBulbTemperature_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!TowerTestPoint.WetBulbTemperatureDataValue.UpdateValue(WetBulbTemperature.Text, out string errorMessage))
+            if (!TowerTestPoint.WetBulbTemperatureDataValue.UpdateValue(WetBulbTemperature.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 WetBulbTemperature.Select(0, WetBulbTemperature.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(WetBulbTemperature, errorMessage);
+                this.errorProvider1.SetError(WetBulbTemperature, TowerTestPoint.WetBulbTemperatureDataValue.ErrorMessage);
             }
         }
 
@@ -196,14 +196,14 @@ namespace CTIToolkit
 
         private void DryBulbTemperature_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!TowerTestPoint.DryBulbTemperatureDataValue.UpdateValue(DryBulbTemperature.Text, out string errorMessage ))
+            if (!TowerTestPoint.DryBulbTemperatureDataValue.UpdateValue(DryBulbTemperature.Text ))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 DryBulbTemperature.Select(0, DryBulbTemperature.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(DryBulbTemperature, errorMessage);
+                this.errorProvider1.SetError(DryBulbTemperature, TowerTestPoint.DryBulbTemperatureDataValue.ErrorMessage);
             }
         }
 
@@ -215,14 +215,14 @@ namespace CTIToolkit
 
         private void FanDriverPower_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!TowerTestPoint.FanDriverPowerDataValue.UpdateValue(FanDriverPower.Text, out string errorMessage ))
+            if (!TowerTestPoint.FanDriverPowerDataValue.UpdateValue(FanDriverPower.Text ))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 FanDriverPower.Select(0, FanDriverPower.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(FanDriverPower, errorMessage);
+                this.errorProvider1.SetError(FanDriverPower, TowerTestPoint.FanDriverPowerDataValue.ErrorMessage);
             }
         }
 
@@ -234,14 +234,14 @@ namespace CTIToolkit
 
         private void BarometricPressure_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!TowerTestPoint.BarometricPressureDataValue.UpdateValue(BarometricPressure.Text, out string errorMessage))
+            if (!TowerTestPoint.BarometricPressureDataValue.UpdateValue(BarometricPressure.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 BarometricPressure.Select(0, BarometricPressure.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(BarometricPressure, errorMessage);
+                this.errorProvider1.SetError(BarometricPressure, TowerTestPoint.BarometricPressureDataValue.ErrorMessage);
             }
         }
 
@@ -253,14 +253,14 @@ namespace CTIToolkit
 
         private void LiquidToGasRatio_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!TowerTestPoint.LiquidToGasRatioDataValue.UpdateValue(LiquidToGasRatio.Text, out string errorMessage))
+            if (!TowerTestPoint.LiquidToGasRatioDataValue.UpdateValue(LiquidToGasRatio.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 LiquidToGasRatio.Select(0, LiquidToGasRatio.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(LiquidToGasRatio, errorMessage);
+                this.errorProvider1.SetError(LiquidToGasRatio, TowerTestPoint.LiquidToGasRatioDataValue.ErrorMessage);
             }
         }
     }

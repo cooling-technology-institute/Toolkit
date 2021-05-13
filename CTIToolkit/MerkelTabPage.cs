@@ -317,14 +317,14 @@ namespace CTIToolkit
         {
             bool recalculate = (MerkelViewModel.LiquidtoGasRatioDataValueInputValue != Merkel_LiquidtoGasRatio_Value.Text);
 
-            if (!MerkelViewModel.LiquidtoGasRatioDataValueUpdateValue(Merkel_LiquidtoGasRatio_Value.Text, out string errorMessage))
+            if (!MerkelViewModel.LiquidtoGasRatioDataValueUpdateValue(Merkel_LiquidtoGasRatio_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Merkel_LiquidtoGasRatio_Value.Select(0, Merkel_LiquidtoGasRatio_Value.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Merkel_LiquidtoGasRatio_Value, errorMessage);
+                this.errorProvider1.SetError(Merkel_LiquidtoGasRatio_Value, MerkelViewModel.LiquidtoGasRatioDataValueErrorMessage);
                 //MessageBox.Show(errorMessage);
             }
             else if (recalculate)
@@ -343,14 +343,14 @@ namespace CTIToolkit
         {
             bool recalculate = (MerkelViewModel.ColdWaterTemperatureDataValueInputValue != Merkel_ColdWaterTemperature_Value.Text);
 
-            if (!MerkelViewModel.ColdWaterTemperatureDataValueUpdateValue(Merkel_ColdWaterTemperature_Value.Text, out string errorMessage))
+            if (!MerkelViewModel.ColdWaterTemperatureDataValueUpdateValue(Merkel_ColdWaterTemperature_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Merkel_ColdWaterTemperature_Value.Select(0, Merkel_ColdWaterTemperature_Value.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Merkel_ColdWaterTemperature_Value, errorMessage);
+                this.errorProvider1.SetError(Merkel_ColdWaterTemperature_Value, MerkelViewModel.ColdWaterTemperatureDataValueErrorMessage);
                 //MessageBox.Show(errorMessage);
             }
             else if (recalculate)
@@ -369,14 +369,14 @@ namespace CTIToolkit
         {
             bool recalculate = (MerkelViewModel.HotWaterTemperatureDataValueInputValue != Merkel_HotWaterTemperature_Value.Text);
 
-            if (!MerkelViewModel.HotWaterTemperatureDataValueUpdateValue(Merkel_HotWaterTemperature_Value.Text, out string errorMessage))
+            if (!MerkelViewModel.HotWaterTemperatureDataValueUpdateValue(Merkel_HotWaterTemperature_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Merkel_HotWaterTemperature_Value.Select(0, Merkel_HotWaterTemperature_Value.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Merkel_HotWaterTemperature_Value, errorMessage);
+                this.errorProvider1.SetError(Merkel_HotWaterTemperature_Value, MerkelViewModel.HotWaterTemperatureDataValueErrorMessage);
                 //MessageBox.Show(errorMessage);
             }
             else if (recalculate)
@@ -395,14 +395,14 @@ namespace CTIToolkit
         {
             bool recalculate = (MerkelViewModel.WetBulbTemperatureDataValueInputValue != Merkel_WetBulbTemperature_Value.Text);
 
-            if (!MerkelViewModel.WetBulbTemperatureDataValueUpdateValue(Merkel_WetBulbTemperature_Value.Text, out string errorMessage))
+            if (!MerkelViewModel.WetBulbTemperatureDataValueUpdateValue(Merkel_WetBulbTemperature_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Merkel_WetBulbTemperature_Value.Select(0, Merkel_WetBulbTemperature_Value.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Merkel_WetBulbTemperature_Value, errorMessage);
+                this.errorProvider1.SetError(Merkel_WetBulbTemperature_Value, MerkelViewModel.WetBulbTemperatureDataValueErrorMessage);
             }
             else if (recalculate)
             {
@@ -418,33 +418,32 @@ namespace CTIToolkit
 
         private void Merkel_Elevation_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
             bool recalculate = false;
 
             if (ElevationRadio.Checked)
             {
                 recalculate = (MerkelViewModel.ElevationDataValueInputValue != Merkel_Elevation_Value.Text);
-                if (!MerkelViewModel.ElevationDataValueUpdateValue(Merkel_Elevation_Value.Text, out errorMessage))
+                if (!MerkelViewModel.ElevationDataValueUpdateValue(Merkel_Elevation_Value.Text))
                 {
                     // Cancel the event and select the text to be corrected by the user.
                     e.Cancel = true;
                     Merkel_Elevation_Value.Select(0, Merkel_Elevation_Value.Text.Length);
 
                     // Set the ErrorProvider error with the text to display. 
-                    this.errorProvider1.SetError(Merkel_Elevation_Value, errorMessage);
+                    this.errorProvider1.SetError(Merkel_Elevation_Value, MerkelViewModel.ElevationDataValueErrorMessage);
                 }
             }
             else
             {
                 recalculate = (MerkelViewModel.BarometricPressureDataValueInputValue != Merkel_Elevation_Value.Text);
-                if (!MerkelViewModel.BarometricPressureDataValueUpdateValue(Merkel_Elevation_Value.Text, out errorMessage))
+                if (!MerkelViewModel.BarometricPressureDataValueUpdateValue(Merkel_Elevation_Value.Text))
                 {
                     // Cancel the event and select the text to be corrected by the user.
                     e.Cancel = true;
                     Merkel_Elevation_Value.Select(0, Merkel_Elevation_Value.Text.Length);
 
                     // Set the ErrorProvider error with the text to display. 
-                    this.errorProvider1.SetError(Merkel_Elevation_Value, errorMessage);
+                    this.errorProvider1.SetError(Merkel_Elevation_Value, MerkelViewModel.BarometricPressureDataValueErrorMessage);
                 }
             }
             if(recalculate)

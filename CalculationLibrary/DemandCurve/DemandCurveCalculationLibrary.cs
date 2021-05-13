@@ -309,6 +309,12 @@ namespace CalculationLibrary
 
             double givenKaV_L = MerkelCalculationData.KaV_L;
 
+            if (givenKaV_L == 0)
+            {
+                MerkelCalculationData.Approach = 0;
+                return 0;
+            }
+
             //---------------------------------------------------------------------
             // Find approach within .001
             //---------------------------------------------------------------------

@@ -42,7 +42,7 @@ namespace ViewModels
 
             LiquidToGasRatioDataValue = new LiquidToGasRatioDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
             LiquidToGasRatioDataValue.IsZeroValid = true;
-            LiquidToGasRatioDataValue.UpdateCurrentValue(0.0, out string errorMessage);
+            LiquidToGasRatioDataValue.UpdateCurrentValue(0.0);
         }
 
         public bool ConvertValues(bool isIS)
@@ -68,7 +68,6 @@ namespace ViewModels
 
         public bool LoadData(bool isInternationalSystemOfUnits_SI, TowerTestData testData)
         {
-            string errorMessage = string.Empty;
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
             ErrorMessage = string.Empty;
@@ -83,64 +82,47 @@ namespace ViewModels
 
                     ConvertValues(isInternationalSystemOfUnits_SI);
 
-                    if (!WaterFlowRateDataValue.UpdateCurrentValue(testData.TowerSpecifications.WaterFlowRate, out errorMessage))
+                    if (!WaterFlowRateDataValue.UpdateCurrentValue(testData.TowerSpecifications.WaterFlowRate))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine(label + errorMessage);
-                        errorMessage = string.Empty;
+                        stringBuilder.AppendLine(label + WaterFlowRateDataValue.ErrorMessage);
                     }
 
-                    if (!HotWaterTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.HotWaterTemperature, out errorMessage))
+                    if (!HotWaterTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.HotWaterTemperature))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine(label + errorMessage);
-                        errorMessage = string.Empty;
+                        stringBuilder.AppendLine(label + HotWaterTemperatureDataValue.ErrorMessage);
                     }
 
-                    if (!ColdWaterTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.ColdWaterTemperature, out errorMessage))
+                    if (!ColdWaterTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.ColdWaterTemperature))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine(label + errorMessage);
-                        errorMessage = string.Empty;
+                        stringBuilder.AppendLine(label + ColdWaterTemperatureDataValue.ErrorMessage);
                     }
 
-                    if (!WetBulbTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.WetBulbTemperature, out errorMessage))
+                    if (!WetBulbTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.WetBulbTemperature))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine(label + errorMessage);
-                        errorMessage = string.Empty;
+                        stringBuilder.AppendLine(label + WetBulbTemperatureDataValue.ErrorMessage);
                     }
 
-                    if (!DryBulbTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.DryBulbTemperature, out errorMessage))
+                    if (!DryBulbTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.DryBulbTemperature))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine(label + errorMessage);
-                        errorMessage = string.Empty;
+                        stringBuilder.AppendLine(label + DryBulbTemperatureDataValue.ErrorMessage);
                     }
 
-                    if (!FanDriverPowerDataValue.UpdateCurrentValue(testData.TowerSpecifications.FanDriverPower, out errorMessage))
+                    if (!FanDriverPowerDataValue.UpdateCurrentValue(testData.TowerSpecifications.FanDriverPower))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine(label + errorMessage);
-                        errorMessage = string.Empty;
+                        stringBuilder.AppendLine(label + FanDriverPowerDataValue.ErrorMessage);
                     }
 
-                    if (!BarometricPressureDataValue.UpdateCurrentValue(testData.TowerSpecifications.BarometricPressure, out errorMessage))
+                    if (!BarometricPressureDataValue.UpdateCurrentValue(testData.TowerSpecifications.BarometricPressure))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine(label + errorMessage);
-                        errorMessage = string.Empty;
+                        stringBuilder.AppendLine(label + BarometricPressureDataValue.ErrorMessage);
                     }
-
-                    // the l/g is an output for a test point so should not be saved to file
-                    //if (!LiquidToGasRatioDataValue.UpdateCurrentValue(testData.TowerSpecifications.LiquidToGasRatio, out errorMessage))
-                    //{
-                    //    returnValue = false;
-                    //    stringBuilder.AppendLine(label + errorMessage);
-                    //    errorMessage = string.Empty;
-                    //}
-
-                    errorMessage = stringBuilder.ToString();
 
                     ConvertValues(isSI);
                 }

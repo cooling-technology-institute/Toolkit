@@ -161,10 +161,25 @@ namespace ViewModels
             }
             catch (Exception e)
             {
-                stringBuilder.AppendFormat("Failure to read file: {0}. Exception: {1}\n", Path.GetFileName(DataFileName), e.ToString());
+                ErrorMessage = string.Format("Failure to read file: {0}. Exception: {1}\n", Path.GetFileName(DataFileName), e.ToString());
                 returnValue = false;
             }
 
+            return returnValue;
+        }
+
+        public bool LoadDataFile()
+        {
+            bool returnValue = true;
+
+            ErrorMessage = string.Empty;
+
+            if (DemandCurveFileData == null)
+            {
+                DemandCurveFileData = new DemandCurveFileData(IsInternationalSystemOfUnits_SI);
+                DemandCurveInputData.SetDefaults(DemandCurveFileData);
+            }
+            
             if (DemandCurveFileData != null)
             {
                 if (DemandCurveFileData.IsInternationalSystemOfUnits_SI != IsInternationalSystemOfUnits_SI)
@@ -174,20 +189,8 @@ namespace ViewModels
 
                 if (!LoadData())
                 {
-                    stringBuilder.AppendLine(ErrorMessage);
                     returnValue = false;
-                    ErrorMessage = string.Empty;
                 }
-
-            }
-            else
-            {
-                stringBuilder.AppendLine("Unable to load file. File contains invalid data");
-            }
-
-            if (!returnValue)
-            {
-                ErrorMessage = stringBuilder.ToString();
             }
 
             return returnValue;
@@ -200,29 +203,8 @@ namespace ViewModels
             ErrorMessage = string.Empty;
 
             DataFileName = fileName;
-            DemandCurveFileData = new DemandCurveFileData(IsInternationalSystemOfUnits_SI);
-
-            if (DemandCurveFileData != null)
-            {
-                DemandCurveInputData.SetDefaults(DemandCurveFileData);
-
-                if (!LoadData())
-                {
-                    stringBuilder.AppendLine(ErrorMessage);
-                    returnValue = false;
-                    ErrorMessage = string.Empty;
-                }
-            }
-            else
-            {
-                stringBuilder.AppendLine("Unable to create new file.");
-                returnValue = false;
-            }
-
-            if (!returnValue)
-            {
-                ErrorMessage = stringBuilder.ToString();
-            }
+            DemandCurveFileData = null;
+            LoadDataFile();
 
             return returnValue;
         }
@@ -446,9 +428,17 @@ namespace ViewModels
             }
         }
 
-        public bool WetBulbTemperatureDataValueUpdateValue(string value, out string errorMessage)
+        public bool WetBulbTemperatureDataValueUpdateValue(string value)
         {
-            return DemandCurveInputData.WetBulbTemperatureDataValue.UpdateValue(value, out errorMessage);
+            return DemandCurveInputData.WetBulbTemperatureDataValue.UpdateValue(value);
+        }
+
+        public string WetBulbTemperatureDataValueErrorMessage
+        {
+            get
+            {
+                return DemandCurveInputData.WetBulbTemperatureDataValue.ErrorMessage;
+            }
         }
 
         public string WetBulbTemperatureDataValueTooltip
@@ -475,9 +465,17 @@ namespace ViewModels
             }
         }
 
-        public bool RangeDataValueUpdateValue(string value, out string errorMessage)
+        public bool RangeDataValueUpdateValue(string value)
         {
-            return DemandCurveInputData.RangeDataValue.UpdateValue(value, out errorMessage);
+            return DemandCurveInputData.RangeDataValue.UpdateValue(value);
+        }
+
+        public string RangeDataValueErrorMessage
+        {
+            get
+            {
+                return DemandCurveInputData.RangeDataValue.ErrorMessage;
+            }
         }
 
         public string RangeDataValueTooltip
@@ -504,9 +502,17 @@ namespace ViewModels
             }
         }
 
-        public bool ElevationDataValueUpdateValue(string value, out string errorMessage)
+        public bool ElevationDataValueUpdateValue(string value)
         {
-            return DemandCurveInputData.ElevationDataValue.UpdateValue(value, out errorMessage);
+            return DemandCurveInputData.ElevationDataValue.UpdateValue(value);
+        }
+
+        public string ElevationDataValueErrorMessage
+        {
+            get
+            {
+                return DemandCurveInputData.ElevationDataValue.ErrorMessage;
+            }
         }
 
         public string ElevationDataValueTooltip
@@ -514,6 +520,14 @@ namespace ViewModels
             get
             {
                 return DemandCurveInputData.ElevationDataValue.ToolTip;
+            }
+        }
+
+        public bool LiquidToGasRatioDataValueIsValid
+        {
+            get
+            {
+                return DemandCurveInputData.LiquidToGasRatioDataValue.IsValid;
             }
         }
 
@@ -533,9 +547,17 @@ namespace ViewModels
             }
         }
 
-        public bool LiquidToGasRatioDataValueUpdateValue(string value, out string errorMessage)
+        public bool LiquidToGasRatioDataValueUpdateValue(string value)
         {
-            return DemandCurveInputData.LiquidToGasRatioDataValue.UpdateValue(value, out errorMessage);
+            return DemandCurveInputData.LiquidToGasRatioDataValue.UpdateValue(value);
+        }
+
+        public string LiquidToGasRatioDataValueErrorMessage
+        {
+            get 
+            { 
+                return DemandCurveInputData.LiquidToGasRatioDataValue.ErrorMessage; 
+            }
         }
 
         public string LiquidToGasRatioDataValueTooltip
@@ -562,9 +584,17 @@ namespace ViewModels
             }
         }
 
-        public bool BarometricPressureDataValueUpdateValue(string value, out string errorMessage)
+        public bool BarometricPressureDataValueUpdateValue(string value)
         {
-            return DemandCurveInputData.BarometricPressureDataValue.UpdateValue(value, out errorMessage);
+            return DemandCurveInputData.BarometricPressureDataValue.UpdateValue(value);
+        }
+
+        public string BarometricPressureDataValueErrorMessage
+        {
+            get
+            {
+                return DemandCurveInputData.BarometricPressureDataValue.ErrorMessage;
+            }
         }
 
         public string BarometricPressureDataValueTooltip
@@ -591,9 +621,17 @@ namespace ViewModels
             }
         }
 
-        public bool C1DataValueUpdateValue(string value, out string errorMessage)
+        public bool C1DataValueUpdateValue(string value)
         {
-            return DemandCurveInputData.C1DataValue.UpdateValue(value, out errorMessage);
+            return DemandCurveInputData.C1DataValue.UpdateValue(value);
+        }
+
+        public string C1DataValueErrorMessage
+        {
+            get
+            {
+                return DemandCurveInputData.C1DataValue.ErrorMessage;
+            }
         }
 
         public string C1DataValueTooltip
@@ -620,9 +658,17 @@ namespace ViewModels
             }
         }
 
-        public bool SlopeDataValueUpdateValue(string value, out string errorMessage)
+        public bool SlopeDataValueUpdateValue(string value)
         {
-            return DemandCurveInputData.SlopeDataValue.UpdateValue(value, out errorMessage);
+            return DemandCurveInputData.SlopeDataValue.UpdateValue(value);
+        }
+
+        public string SlopeDataValueErrorMessage
+        {
+            get
+            {
+                return DemandCurveInputData.SlopeDataValue.ErrorMessage;
+            }
         }
 
         public string SlopeDataValueTooltip
@@ -649,9 +695,17 @@ namespace ViewModels
             }
         }
 
-        public bool MinimumDataValueUpdateValue(string value, out string errorMessage)
+        public bool MinimumDataValueUpdateValue(string value)
         {
-            return DemandCurveInputData.MinimumDataValue.UpdateValue(value, out errorMessage);
+            return DemandCurveInputData.MinimumDataValue.UpdateValue(value);
+        }
+
+        public string MinimumDataValueErrorMessage
+        {
+            get
+            {
+                return DemandCurveInputData.MinimumDataValue.ErrorMessage;
+            }
         }
 
         public string MinimumDataValueTooltip
@@ -678,9 +732,17 @@ namespace ViewModels
             }
         }
 
-        public bool MaximumDataValueUpdateValue(string value, out string errorMessage)
+        public bool MaximumDataValueUpdateValue(string value)
         {
-            return DemandCurveInputData.MaximumDataValue.UpdateValue(value, out errorMessage);
+            return DemandCurveInputData.MaximumDataValue.UpdateValue(value);
+        }
+
+        public string MaximumDataValueErrorMessage
+        {
+            get
+            {
+                return DemandCurveInputData.MaximumDataValue.ErrorMessage;
+            }
         }
 
         public string MaximumDataValueTooltip
@@ -707,10 +769,19 @@ namespace ViewModels
             }
         }
 
-        public bool UserApproachDataValueUpdateValue(string value, out string errorMessage)
+        public bool UserApproachDataValueUpdateValue(string value)
         {
-            return DemandCurveInputData.UserApproachDataValue.UpdateValue(value, out errorMessage);
+            return DemandCurveInputData.UserApproachDataValue.UpdateValue(value);
         }
+
+        public string UserApproachDataValueErrorMessage
+        {
+            get
+            {
+                return DemandCurveInputData.UserApproachDataValue.ErrorMessage;
+            }
+        }
+
 
         public string UserApproachDataValueTooltip
         {

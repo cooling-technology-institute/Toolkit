@@ -38,9 +38,17 @@ namespace ViewModels
             }
         }
 
-        public bool HotWaterTemperatureDataValueUpdateValue(string value, out string errorMessage)
+        public bool HotWaterTemperatureDataValueUpdateValue(string value)
         {
-            return MerkelInputData.HotWaterTemperatureDataValue.UpdateValue(value, out errorMessage);
+            return MerkelInputData.HotWaterTemperatureDataValue.UpdateValue(value);
+        }
+
+        public string HotWaterTemperatureDataValueErrorMessage
+        {
+            get
+            {
+                return MerkelInputData.HotWaterTemperatureDataValue.ErrorMessage;
+            }
         }
 
         public string HotWaterTemperatureDataValueTooltip
@@ -75,9 +83,17 @@ namespace ViewModels
             }
         }
 
-        public bool ColdWaterTemperatureDataValueUpdateValue(string value, out string errorMessage)
+        public bool ColdWaterTemperatureDataValueUpdateValue(string value)
         {
-            return MerkelInputData.ColdWaterTemperatureDataValue.UpdateValue(value, out errorMessage);
+            return MerkelInputData.ColdWaterTemperatureDataValue.UpdateValue(value);
+        }
+
+        public string ColdWaterTemperatureDataValueErrorMessage
+        {
+            get
+            {
+                return MerkelInputData.ColdWaterTemperatureDataValue.ErrorMessage;
+            }
         }
 
         public string WetBulbTemperatureDataValueInputMessage
@@ -104,9 +120,17 @@ namespace ViewModels
             }
         }
 
-        public bool WetBulbTemperatureDataValueUpdateValue(string value, out string errorMessage)
+        public bool WetBulbTemperatureDataValueUpdateValue(string value)
         {
-            return MerkelInputData.WetBulbTemperatureDataValue.UpdateValue(value, out errorMessage);
+            return MerkelInputData.WetBulbTemperatureDataValue.UpdateValue(value);
+        }
+
+        public string WetBulbTemperatureDataValueErrorMessage
+        {
+            get
+            {
+                return MerkelInputData.WetBulbTemperatureDataValue.ErrorMessage;
+            }
         }
 
         public string LiquidtoGasRatioDataValueInputMessage
@@ -133,9 +157,17 @@ namespace ViewModels
             }
         }
 
-        public bool LiquidtoGasRatioDataValueUpdateValue(string value, out string errorMessage)
+        public bool LiquidtoGasRatioDataValueUpdateValue(string value)
         {
-            return MerkelInputData.LiquidToGasRatioDataValue .UpdateValue(value, out errorMessage);
+            return MerkelInputData.LiquidToGasRatioDataValue.UpdateValue(value);
+        }
+
+        public string LiquidtoGasRatioDataValueErrorMessage
+        {
+            get
+            {
+                return MerkelInputData.LiquidToGasRatioDataValue.ErrorMessage;
+            }
         }
 
         public string ElevationDataValueInputMessage
@@ -162,9 +194,17 @@ namespace ViewModels
             }
         }
 
-        public bool ElevationDataValueUpdateValue(string value, out string errorMessage)
+        public bool ElevationDataValueUpdateValue(string value)
         {
-            return MerkelInputData.ElevationDataValue.UpdateValue(value, out errorMessage);
+            return MerkelInputData.ElevationDataValue.UpdateValue(value);
+        }
+
+        public string ElevationDataValueErrorMessage
+        {
+            get
+            {
+                return MerkelInputData.ElevationDataValue.ErrorMessage;
+            }
         }
 
         public string BarometricPressureDataValueInputMessage
@@ -191,9 +231,17 @@ namespace ViewModels
             }
         }
 
-        public bool BarometricPressureDataValueUpdateValue(string value, out string errorMessage)
+        public bool BarometricPressureDataValueUpdateValue(string value)
         {
-            return MerkelInputData.BarometricPressureDataValue.UpdateValue(value, out errorMessage);
+            return MerkelInputData.BarometricPressureDataValue.UpdateValue(value);
+        }
+
+        public string BarometricPressureDataValueErrorMessage
+        {
+            get
+            {
+                return MerkelInputData.BarometricPressureDataValue.ErrorMessage;
+            }
         }
 
         public void UpdateIsElevationValue(bool value)

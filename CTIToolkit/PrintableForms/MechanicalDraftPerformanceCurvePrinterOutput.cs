@@ -57,29 +57,35 @@ namespace CTIToolkit
             TowerTypeTextBox.Text = string.Format("Tower Type: {0}", viewModel.DesignData.TowerTypeValue.ToString());
 
             DesignTestDataGridView.DataSource = BuildDesignTestDataTable(index, viewModel);
+            DesignTestDataGridView.Size = new Size(DesignTestDataGridView.Size.Width, (DesignTestDataGridView.Rows.Count + 1) * 22);
 
-            ColdVsRangeTitle.Location = new System.Drawing.Point(ColdVsRangeTitle.Location.X, DesignTestDataGridView.Location.Y + DesignTestDataGridView.Height + 2);
+            ColdVsRangeTitle.Location = new System.Drawing.Point(ColdVsRangeTitle.Location.X, DesignTestDataGridView.Location.Y + DesignTestDataGridView.Height + 20);
             ColdVsRange.Location = new System.Drawing.Point(ColdVsRange.Location.X, ColdVsRangeTitle.Location.Y + ColdVsRangeTitle.Height + 2);
-            ColdVsRange.Text = string.Format("At {0} {1} Test Wet Bulb Temperature", viewModel.TestPoints[index].WetBulbTemperatureDataValue.InputValue, UnitsWetBulbTemperature);
             ColdVsRangeDataGridView.Location = new System.Drawing.Point(ColdVsRangeDataGridView.Location.X, ColdVsRange.Location.Y + ColdVsRange.Height + 2);
+            ColdVsRange.Text = string.Format("At {0} {1} Test Wet Bulb Temperature", viewModel.TestPoints[index].WetBulbTemperatureDataValue.InputValue, UnitsWetBulbTemperature);
             ColdVsRangeDataGridView.DataSource = BuildColdVsRangeDataTable(viewModel);
+            ColdVsRangeDataGridView.Size = new Size(ColdVsRangeDataGridView.Size.Width, (ColdVsRangeDataGridView.Rows.Count + 1) * 22);
 
-            ColdVsWaterFlowTitle.Location = new System.Drawing.Point(ColdVsWaterFlowTitle.Location.X, ColdVsRangeDataGridView.Location.Y + ColdVsRangeDataGridView.Height + 2);
+            ColdVsWaterFlowTitle.Location = new System.Drawing.Point(ColdVsWaterFlowTitle.Location.X, ColdVsRangeDataGridView.Location.Y + ColdVsRangeDataGridView.Height + 20);
             ColdVsWaterFlow.Location = new System.Drawing.Point(ColdVsWaterFlow.Location.X, ColdVsWaterFlowTitle.Location.Y + ColdVsWaterFlowTitle.Height + 2);
+            ColdVsWaterFlowDataGridView.Location = new System.Drawing.Point(ColdVsWaterFlowDataGridView.Location.X, ColdVsWaterFlow.Location.Y + ColdVsWaterFlow.Height + 2);
             ColdVsWaterFlow.Text = string.Format("At {0} {1} Test Wet Bulb Temperature and {2} {1} Test Range", 0, UnitsColdWaterTemperature, 0);
-            ColdVsWaterFLowDataGridView.Location = new System.Drawing.Point(ColdVsWaterFLowDataGridView.Location.X, ColdVsWaterFlow.Location.Y + ColdVsWaterFlow.Height + 2);
-            ColdVsWaterFLowDataGridView.DataSource = BuildColdVsWaterFLowDataTable(viewModel);
-            
-            ExitAirTitle.Location = new System.Drawing.Point(ExitAirTitle.Location.X, ColdVsWaterFLowDataGridView.Location.Y + ColdVsWaterFLowDataGridView.Height + 2);
+            ColdVsWaterFlowDataGridView.DataSource = BuildColdVsWaterFLowDataTable(viewModel);
+            ColdVsWaterFlowDataGridView.Size = new Size(ColdVsWaterFlowDataGridView.Size.Width, (ColdVsWaterFlowDataGridView.Rows.Count + 1) * 22);
+
+            ExitAirTitle.Location = new System.Drawing.Point(ExitAirTitle.Location.X, ColdVsWaterFlowDataGridView.Location.Y + ColdVsWaterFlowDataGridView.Height + 20);
             ExitAirDataGridView.Location = new System.Drawing.Point(ExitAirDataGridView.Location.X, ExitAirTitle.Location.Y + ExitAirTitle.Height + 2);
             ExitAirDataGridView.DataSource = BuildExitAirDataTable(viewModel);
+            ExitAirDataGridView.Size = new Size(ExitAirDataGridView.Size.Width, (ExitAirDataGridView.Rows.Count + 1) * 22);
 
-            TestResultTitle.Location = new System.Drawing.Point(TestResultTitle.Location.X, ExitAirDataGridView.Location.Y + ExitAirDataGridView.Height + 2);
+            TestResultTitle.Location = new System.Drawing.Point(TestResultTitle.Location.X, ExitAirDataGridView.Location.Y + ExitAirDataGridView.Height + 20);
             TestResultDataGridView.Location = new System.Drawing.Point(TestResultDataGridView.Location.X, TestResultTitle.Location.Y + TestResultTitle.Height + 2);
             TestResultDataGridView.DataSource = viewModel.OutputDataViewModel.NameValueUnitsDataTable.DataTable;
+            TestResultDataGridView.Size = new Size(TestResultDataGridView.Size.Width, (TestResultDataGridView.Rows.Count + 1) * 22);
 
-            WarningLabel.Location = new System.Drawing.Point(WarningLabel.Location.X, TestResultDataGridView.Location.Y + TestResultDataGridView.Height + 2);
-            this.Height = bottomOfPage + 10;
+            WarningLabel.Location = new System.Drawing.Point(WarningLabel.Location.X, TestResultDataGridView.Location.Y + TestResultDataGridView.Height + 20);
+
+            this.Height = WarningLabel.Location.Y + 30;
         }
 
         private DataTable BuildDesignTestDataTable(int index, MechanicalDraftPerformanceCurveViewModel viewModel)
@@ -104,6 +110,11 @@ namespace CTIToolkit
             column.ColumnName = "Test";
             dataTable.Columns.Add(column);
 
+            column = new DataColumn();
+            column.DataType = Type.GetType("System.String");
+            column.ColumnName = "Units";
+            dataTable.Columns.Add(column);
+
             AddRowDesignTest(dataTable, viewModel.DesignData.WaterFlowRateDataValue, viewModel.TestPoints[index].WaterFlowRateDataValue, UnitsWaterFlowRate);
             AddRowDesignTest(dataTable, viewModel.DesignData.HotWaterTemperatureDataValue, viewModel.TestPoints[index].HotWaterTemperatureDataValue, UnitsHotWaterTemperature);
             AddRowDesignTest(dataTable, viewModel.DesignData.ColdWaterTemperatureDataValue, viewModel.TestPoints[index].ColdWaterTemperatureDataValue, UnitsColdWaterTemperature);
@@ -119,8 +130,9 @@ namespace CTIToolkit
         {
             DataRow row = dataTable.NewRow();
             row["Parameters"] = design.InputMessage;
-            row["Design"] = string.Format("{0} {1}", design.InputValue, units);
+            row["Design"] = design.InputValue;
             row["Test"] = test.InputValue;
+            row["Units"] = units;
             dataTable.Rows.Add(row);
         }
 

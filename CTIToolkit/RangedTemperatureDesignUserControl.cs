@@ -330,14 +330,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.WetBulbTemperatureDataValue1.UpdateValue(WetBulbTemperature1.Text, out string errorMessage))
+            if (!TowerDesignCurveData.WetBulbTemperatureDataValue1.UpdateValue(WetBulbTemperature1.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 WetBulbTemperature1.Select(0, WetBulbTemperature1.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(WetBulbTemperature1, errorMessage);
+                this.errorProvider1.SetError(WetBulbTemperature1, TowerDesignCurveData.WetBulbTemperatureDataValue1.ErrorMessage);
             }
         }
 
@@ -353,14 +353,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.WetBulbTemperatureDataValue2.UpdateValue(WetBulbTemperature2.Text, out string errorMessage))
+            if (!TowerDesignCurveData.WetBulbTemperatureDataValue2.UpdateValue(WetBulbTemperature2.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 WetBulbTemperature2.Select(0, WetBulbTemperature2.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(WetBulbTemperature2, errorMessage);
+                this.errorProvider1.SetError(WetBulbTemperature2, TowerDesignCurveData.WetBulbTemperatureDataValue2.ErrorMessage);
             }
         }
 
@@ -377,14 +377,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.WetBulbTemperatureDataValue3.UpdateValue(WetBulbTemperature3.Text, out string errorMessage))
+            if (!TowerDesignCurveData.WetBulbTemperatureDataValue3.UpdateValue(WetBulbTemperature3.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 WetBulbTemperature3.Select(0, WetBulbTemperature3.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(WetBulbTemperature3, errorMessage);
+                this.errorProvider1.SetError(WetBulbTemperature3, TowerDesignCurveData.WetBulbTemperatureDataValue3.ErrorMessage);
             }
         }
 
@@ -401,14 +401,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.WetBulbTemperatureDataValue4.UpdateValue(WetBulbTemperature4.Text, out string errorMessage))
+            if (!TowerDesignCurveData.WetBulbTemperatureDataValue4.UpdateValue(WetBulbTemperature4.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 WetBulbTemperature4.Select(0, WetBulbTemperature4.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(WetBulbTemperature4, errorMessage);
+                this.errorProvider1.SetError(WetBulbTemperature4, TowerDesignCurveData.WetBulbTemperatureDataValue4.ErrorMessage);
             }
         }
 
@@ -425,14 +425,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.WetBulbTemperatureDataValue5.UpdateValue(WetBulbTemperature5.Text, out string errorMessage))
+            if (!TowerDesignCurveData.WetBulbTemperatureDataValue5.UpdateValue(WetBulbTemperature5.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 WetBulbTemperature5.Select(0, WetBulbTemperature5.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(WetBulbTemperature5, errorMessage);
+                this.errorProvider1.SetError(WetBulbTemperature5, TowerDesignCurveData.WetBulbTemperatureDataValue5.ErrorMessage);
             }
         }
 
@@ -449,14 +449,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.WetBulbTemperatureDataValue6.UpdateValue(WetBulbTemperature6.Text, out string errorMessage))
+            if (!TowerDesignCurveData.WetBulbTemperatureDataValue6.UpdateValue(WetBulbTemperature6.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 WetBulbTemperature6.Select(0, WetBulbTemperature6.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(WetBulbTemperature6, errorMessage);
+                this.errorProvider1.SetError(WetBulbTemperature6, TowerDesignCurveData.WetBulbTemperatureDataValue6.ErrorMessage);
             }
         }
 
@@ -472,14 +472,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue1.UpdateValue(Range1ColdWaterTemperature1.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue1.UpdateValue(Range1ColdWaterTemperature1.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range1ColdWaterTemperature1.Select(0, Range1ColdWaterTemperature1.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range1ColdWaterTemperature1, errorMessage);
+                this.errorProvider1.SetError(Range1ColdWaterTemperature1, TowerDesignCurveData.Range1ColdWaterTemperatureDataValue1.ErrorMessage);
             }
         }
 
@@ -495,14 +495,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue2.UpdateValue(Range1ColdWaterTemperature2.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue2.UpdateValue(Range1ColdWaterTemperature2.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range1ColdWaterTemperature2.Select(0, Range1ColdWaterTemperature2.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range1ColdWaterTemperature2, errorMessage);
+                this.errorProvider1.SetError(Range1ColdWaterTemperature2, TowerDesignCurveData.Range1ColdWaterTemperatureDataValue2.ErrorMessage);
             }
         }
 
@@ -518,14 +518,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue3.UpdateValue(Range1ColdWaterTemperature3.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue3.UpdateValue(Range1ColdWaterTemperature3.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range1ColdWaterTemperature3.Select(0, Range1ColdWaterTemperature3.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range1ColdWaterTemperature3, errorMessage);
+                this.errorProvider1.SetError(Range1ColdWaterTemperature3, TowerDesignCurveData.Range1ColdWaterTemperatureDataValue3.ErrorMessage);
             }
         }
 
@@ -541,14 +541,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue4.UpdateValue(Range1ColdWaterTemperature4.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue4.UpdateValue(Range1ColdWaterTemperature4.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range1ColdWaterTemperature4.Select(0, Range1ColdWaterTemperature4.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range1ColdWaterTemperature4, errorMessage);
+                this.errorProvider1.SetError(Range1ColdWaterTemperature4, TowerDesignCurveData.Range1ColdWaterTemperatureDataValue4.ErrorMessage);
             }
         }
 
@@ -564,14 +564,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue5.UpdateValue(Range1ColdWaterTemperature5.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue5.UpdateValue(Range1ColdWaterTemperature5.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range1ColdWaterTemperature5.Select(0, Range1ColdWaterTemperature5.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range1ColdWaterTemperature5, errorMessage);
+                this.errorProvider1.SetError(Range1ColdWaterTemperature5, TowerDesignCurveData.Range1ColdWaterTemperatureDataValue5.ErrorMessage);
             }
         }
 
@@ -587,14 +587,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue6.UpdateValue(Range1ColdWaterTemperature6.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue6.UpdateValue(Range1ColdWaterTemperature6.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range1ColdWaterTemperature6.Select(0, Range1ColdWaterTemperature6.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range1ColdWaterTemperature6, errorMessage);
+                this.errorProvider1.SetError(Range1ColdWaterTemperature6, TowerDesignCurveData.Range1ColdWaterTemperatureDataValue6.ErrorMessage);
             }
         }
 
@@ -610,14 +610,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue1.UpdateValue(Range2ColdWaterTemperature1.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue6.UpdateValue(Range2ColdWaterTemperature1.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range2ColdWaterTemperature1.Select(0, Range2ColdWaterTemperature1.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range2ColdWaterTemperature1, errorMessage);
+                this.errorProvider1.SetError(Range2ColdWaterTemperature1, TowerDesignCurveData.Range1ColdWaterTemperatureDataValue6.ErrorMessage);
             }
         }
 
@@ -633,14 +633,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue2.UpdateValue(Range2ColdWaterTemperature2.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue2.UpdateValue(Range2ColdWaterTemperature2.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range2ColdWaterTemperature2.Select(0, Range2ColdWaterTemperature2.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range2ColdWaterTemperature2, errorMessage);
+                this.errorProvider1.SetError(Range2ColdWaterTemperature2, TowerDesignCurveData.Range2ColdWaterTemperatureDataValue2.ErrorMessage);
             }
         }
 
@@ -656,14 +656,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue3.UpdateValue(Range2ColdWaterTemperature3.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue3.UpdateValue(Range2ColdWaterTemperature3.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range2ColdWaterTemperature3.Select(0, Range2ColdWaterTemperature3.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range2ColdWaterTemperature3, errorMessage);
+                this.errorProvider1.SetError(Range2ColdWaterTemperature3, TowerDesignCurveData.Range2ColdWaterTemperatureDataValue3.ErrorMessage);
             }
         }
 
@@ -679,14 +679,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue4.UpdateValue(Range2ColdWaterTemperature4.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue4.UpdateValue(Range2ColdWaterTemperature4.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range2ColdWaterTemperature4.Select(0, Range2ColdWaterTemperature4.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range2ColdWaterTemperature4, errorMessage);
+                this.errorProvider1.SetError(Range2ColdWaterTemperature4, TowerDesignCurveData.Range2ColdWaterTemperatureDataValue4.ErrorMessage);
             }
         }
 
@@ -702,14 +702,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue5.UpdateValue(Range2ColdWaterTemperature5.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue5.UpdateValue(Range2ColdWaterTemperature5.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range2ColdWaterTemperature5.Select(0, Range2ColdWaterTemperature5.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range2ColdWaterTemperature5, errorMessage);
+                this.errorProvider1.SetError(Range2ColdWaterTemperature5, TowerDesignCurveData.Range2ColdWaterTemperatureDataValue5.ErrorMessage);
             }
         }
 
@@ -725,14 +725,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue6.UpdateValue(Range2ColdWaterTemperature6.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue6.UpdateValue(Range2ColdWaterTemperature6.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range2ColdWaterTemperature6.Select(0, Range2ColdWaterTemperature6.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range2ColdWaterTemperature6, errorMessage);
+                this.errorProvider1.SetError(Range2ColdWaterTemperature6, TowerDesignCurveData.Range2ColdWaterTemperatureDataValue6.ErrorMessage);
             }
         }
 
@@ -748,14 +748,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue1.UpdateValue(Range3ColdWaterTemperature1.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue1.UpdateValue(Range3ColdWaterTemperature1.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range3ColdWaterTemperature1.Select(0, Range3ColdWaterTemperature1.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range3ColdWaterTemperature1, errorMessage);
+                this.errorProvider1.SetError(Range3ColdWaterTemperature1, TowerDesignCurveData.Range3ColdWaterTemperatureDataValue1.ErrorMessage);
             }
         }
 
@@ -766,21 +766,19 @@ namespace CTIToolkit
 
         private void Range3ColdWaterTemperature2_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            
-
             if (Range3ColdWaterTemperature2.Text != TowerDesignCurveData.Range3ColdWaterTemperatureDataValue2.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue2.UpdateValue(Range3ColdWaterTemperature2.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue2.UpdateValue(Range3ColdWaterTemperature2.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range3ColdWaterTemperature2.Select(0, Range3ColdWaterTemperature2.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range3ColdWaterTemperature2, errorMessage);
+                this.errorProvider1.SetError(Range3ColdWaterTemperature2, TowerDesignCurveData.Range3ColdWaterTemperatureDataValue2.ErrorMessage);
             }
         }
 
@@ -796,14 +794,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue3.UpdateValue(Range3ColdWaterTemperature3.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue3.UpdateValue(Range3ColdWaterTemperature3.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range3ColdWaterTemperature3.Select(0, Range3ColdWaterTemperature3.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range3ColdWaterTemperature3, errorMessage);
+                this.errorProvider1.SetError(Range3ColdWaterTemperature3, TowerDesignCurveData.Range3ColdWaterTemperatureDataValue3.ErrorMessage);
             }
         }
 
@@ -819,14 +817,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue4.UpdateValue(Range3ColdWaterTemperature4.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue4.UpdateValue(Range3ColdWaterTemperature4.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range3ColdWaterTemperature4.Select(0, Range3ColdWaterTemperature4.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range3ColdWaterTemperature4, errorMessage);
+                this.errorProvider1.SetError(Range3ColdWaterTemperature4, TowerDesignCurveData.Range3ColdWaterTemperatureDataValue4.ErrorMessage);
             }
         }
 
@@ -842,14 +840,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue5.UpdateValue(Range3ColdWaterTemperature5.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue5.UpdateValue(Range3ColdWaterTemperature5.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range3ColdWaterTemperature5.Select(0, Range3ColdWaterTemperature5.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range3ColdWaterTemperature5, errorMessage);
+                this.errorProvider1.SetError(Range3ColdWaterTemperature5, TowerDesignCurveData.Range3ColdWaterTemperatureDataValue5.ErrorMessage);
             }
         }
 
@@ -865,14 +863,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue6.UpdateValue(Range3ColdWaterTemperature6.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue6.UpdateValue(Range3ColdWaterTemperature6.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range3ColdWaterTemperature6.Select(0, Range3ColdWaterTemperature6.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range3ColdWaterTemperature6, errorMessage);
+                this.errorProvider1.SetError(Range3ColdWaterTemperature6, TowerDesignCurveData.Range3ColdWaterTemperatureDataValue6.ErrorMessage);
             }
         }
 
@@ -888,14 +886,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue1.UpdateValue(Range4ColdWaterTemperature1.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue1.UpdateValue(Range4ColdWaterTemperature1.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range4ColdWaterTemperature1.Select(0, Range4ColdWaterTemperature1.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range4ColdWaterTemperature1, errorMessage);
+                this.errorProvider1.SetError(Range4ColdWaterTemperature1, TowerDesignCurveData.Range4ColdWaterTemperatureDataValue1.ErrorMessage);
             }
         }
 
@@ -911,14 +909,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue2.UpdateValue(Range4ColdWaterTemperature2.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue2.UpdateValue(Range4ColdWaterTemperature2.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range4ColdWaterTemperature2.Select(0, Range4ColdWaterTemperature2.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range4ColdWaterTemperature2, errorMessage);
+                this.errorProvider1.SetError(Range4ColdWaterTemperature2, TowerDesignCurveData.Range4ColdWaterTemperatureDataValue2.ErrorMessage);
             }
         }
 
@@ -934,14 +932,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue3.UpdateValue(Range4ColdWaterTemperature3.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue3.UpdateValue(Range4ColdWaterTemperature3.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range4ColdWaterTemperature3.Select(0, Range4ColdWaterTemperature3.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range4ColdWaterTemperature3, errorMessage);
+                this.errorProvider1.SetError(Range4ColdWaterTemperature3, TowerDesignCurveData.Range4ColdWaterTemperatureDataValue3.ErrorMessage);
             }
         }
 
@@ -957,14 +955,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue4.UpdateValue(Range4ColdWaterTemperature4.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue4.UpdateValue(Range4ColdWaterTemperature4.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range4ColdWaterTemperature4.Select(0, Range4ColdWaterTemperature4.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range4ColdWaterTemperature4, errorMessage);
+                this.errorProvider1.SetError(Range4ColdWaterTemperature4, TowerDesignCurveData.Range4ColdWaterTemperatureDataValue4.ErrorMessage);
             }
         }
 
@@ -980,14 +978,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue5.UpdateValue(Range4ColdWaterTemperature5.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue5.UpdateValue(Range4ColdWaterTemperature5.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range4ColdWaterTemperature5.Select(0, Range4ColdWaterTemperature5.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range4ColdWaterTemperature5, errorMessage);
+                this.errorProvider1.SetError(Range4ColdWaterTemperature5, TowerDesignCurveData.Range4ColdWaterTemperatureDataValue5.ErrorMessage);
             }
         }
 
@@ -1003,14 +1001,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue6.UpdateValue(Range4ColdWaterTemperature6.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue6.UpdateValue(Range4ColdWaterTemperature6.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range4ColdWaterTemperature6.Select(0, Range4ColdWaterTemperature6.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range4ColdWaterTemperature6, errorMessage);
+                this.errorProvider1.SetError(Range4ColdWaterTemperature6, TowerDesignCurveData.Range4ColdWaterTemperatureDataValue6.ErrorMessage);
             }
         }
 
@@ -1026,14 +1024,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue1.UpdateValue(Range5ColdWaterTemperature1.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue1.UpdateValue(Range5ColdWaterTemperature1.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range5ColdWaterTemperature1.Select(0, Range5ColdWaterTemperature1.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range5ColdWaterTemperature1, errorMessage);
+                this.errorProvider1.SetError(Range5ColdWaterTemperature1, TowerDesignCurveData.Range5ColdWaterTemperatureDataValue1.ErrorMessage);
             }
         }
 
@@ -1049,14 +1047,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue2.UpdateValue(Range5ColdWaterTemperature2.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue2.UpdateValue(Range5ColdWaterTemperature2.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range5ColdWaterTemperature2.Select(0, Range5ColdWaterTemperature2.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range5ColdWaterTemperature2, errorMessage);
+                this.errorProvider1.SetError(Range5ColdWaterTemperature2, TowerDesignCurveData.Range5ColdWaterTemperatureDataValue2.ErrorMessage);
             }
         }
 
@@ -1072,14 +1070,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue3.UpdateValue(Range5ColdWaterTemperature3.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue3.UpdateValue(Range5ColdWaterTemperature3.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range5ColdWaterTemperature3.Select(0, Range5ColdWaterTemperature3.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range5ColdWaterTemperature3, errorMessage);
+                this.errorProvider1.SetError(Range5ColdWaterTemperature3, TowerDesignCurveData.Range5ColdWaterTemperatureDataValue3.ErrorMessage);
             }
         }
 
@@ -1095,14 +1093,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue4.UpdateValue(Range5ColdWaterTemperature4.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue4.UpdateValue(Range5ColdWaterTemperature4.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range5ColdWaterTemperature4.Select(0, Range5ColdWaterTemperature4.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range5ColdWaterTemperature4, errorMessage);
+                this.errorProvider1.SetError(Range5ColdWaterTemperature4, TowerDesignCurveData.Range5ColdWaterTemperatureDataValue4.ErrorMessage);
             }
         }
 
@@ -1118,14 +1116,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue5.UpdateValue(Range5ColdWaterTemperature5.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue5.UpdateValue(Range5ColdWaterTemperature5.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range5ColdWaterTemperature5.Select(0, Range5ColdWaterTemperature5.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range5ColdWaterTemperature5, errorMessage);
+                this.errorProvider1.SetError(Range5ColdWaterTemperature5, TowerDesignCurveData.Range5ColdWaterTemperatureDataValue5.ErrorMessage);
             }
         }
 
@@ -1141,14 +1139,14 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue6.UpdateValue(Range5ColdWaterTemperature6.Text, out string errorMessage))
+            if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue6.UpdateValue(Range5ColdWaterTemperature6.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range5ColdWaterTemperature6.Select(0, Range5ColdWaterTemperature6.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range5ColdWaterTemperature6, errorMessage);
+                this.errorProvider1.SetError(Range5ColdWaterTemperature6, TowerDesignCurveData.Range5ColdWaterTemperatureDataValue6.ErrorMessage);
             }
         }
 

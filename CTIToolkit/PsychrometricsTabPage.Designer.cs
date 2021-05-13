@@ -76,7 +76,7 @@
             this.PsychrometricPropertiesGroupBox.Controls.Add(this.Psychrometrics_Enthalpy);
             this.PsychrometricPropertiesGroupBox.Controls.Add(this.Psychrometrics_DryBulbTemperature_RelativeHumidity);
             this.PsychrometricPropertiesGroupBox.Controls.Add(this.Psychrometrics_WetBulbTemperature_DryBulbTemperature);
-            this.PsychrometricPropertiesGroupBox.Location = new System.Drawing.Point(10, 198);
+            this.PsychrometricPropertiesGroupBox.Location = new System.Drawing.Point(3, 172);
             this.PsychrometricPropertiesGroupBox.Name = "PsychrometricPropertiesGroupBox";
             this.PsychrometricPropertiesGroupBox.Size = new System.Drawing.Size(755, 145);
             this.PsychrometricPropertiesGroupBox.TabIndex = 12;
@@ -120,7 +120,7 @@
             // 
             // PsychrometricsCalculate
             // 
-            this.PsychrometricsCalculate.Location = new System.Drawing.Point(677, 12);
+            this.PsychrometricsCalculate.Location = new System.Drawing.Point(682, 3);
             this.PsychrometricsCalculate.Name = "PsychrometricsCalculate";
             this.PsychrometricsCalculate.Size = new System.Drawing.Size(75, 23);
             this.PsychrometricsCalculate.TabIndex = 0;
@@ -149,7 +149,7 @@
             this.InputPropertiesGroupBox.Controls.Add(this.WetBulbTemperature_Value);
             this.InputPropertiesGroupBox.Controls.Add(this.DryBulbTemperatureLabel);
             this.InputPropertiesGroupBox.Controls.Add(this.WetBulbTemperatureLabel);
-            this.InputPropertiesGroupBox.Location = new System.Drawing.Point(10, 52);
+            this.InputPropertiesGroupBox.Location = new System.Drawing.Point(3, 36);
             this.InputPropertiesGroupBox.Name = "InputPropertiesGroupBox";
             this.InputPropertiesGroupBox.Size = new System.Drawing.Size(755, 130);
             this.InputPropertiesGroupBox.TabIndex = 11;
@@ -159,7 +159,7 @@
             // EnthalpyUnits
             // 
             this.EnthalpyUnits.AutoSize = true;
-            this.EnthalpyUnits.Location = new System.Drawing.Point(273, 65);
+            this.EnthalpyUnits.Location = new System.Drawing.Point(245, 65);
             this.EnthalpyUnits.Name = "EnthalpyUnits";
             this.EnthalpyUnits.Size = new System.Drawing.Size(0, 13);
             this.EnthalpyUnits.TabIndex = 20;
@@ -178,7 +178,7 @@
             this.EnthalpyValue.Enabled = false;
             this.EnthalpyValue.Location = new System.Drawing.Point(152, 62);
             this.EnthalpyValue.Name = "EnthalpyValue";
-            this.EnthalpyValue.Size = new System.Drawing.Size(100, 20);
+            this.EnthalpyValue.Size = new System.Drawing.Size(70, 20);
             this.EnthalpyValue.TabIndex = 18;
             this.EnthalpyValue.Visible = false;
             this.EnthalpyValue.Validating += new System.ComponentModel.CancelEventHandler(this.EnthalpyValue_Validating);
@@ -187,7 +187,7 @@
             // BarometericPressureUnits
             // 
             this.BarometericPressureUnits.AutoSize = true;
-            this.BarometericPressureUnits.Location = new System.Drawing.Point(273, 91);
+            this.BarometericPressureUnits.Location = new System.Drawing.Point(245, 91);
             this.BarometericPressureUnits.Name = "BarometericPressureUnits";
             this.BarometericPressureUnits.Size = new System.Drawing.Size(13, 13);
             this.BarometericPressureUnits.TabIndex = 17;
@@ -209,7 +209,7 @@
             this.BarometericPressure_Value.Enabled = false;
             this.BarometericPressure_Value.Location = new System.Drawing.Point(152, 88);
             this.BarometericPressure_Value.Name = "BarometericPressure_Value";
-            this.BarometericPressure_Value.Size = new System.Drawing.Size(100, 20);
+            this.BarometericPressure_Value.Size = new System.Drawing.Size(70, 20);
             this.BarometericPressure_Value.TabIndex = 15;
             this.BarometericPressure_Value.Text = "0";
             this.BarometericPressure_Value.Visible = false;
@@ -220,7 +220,7 @@
             // 
             this.RelativeHumidityUnits.AutoSize = true;
             this.RelativeHumidityUnits.Enabled = false;
-            this.RelativeHumidityUnits.Location = new System.Drawing.Point(273, 39);
+            this.RelativeHumidityUnits.Location = new System.Drawing.Point(245, 39);
             this.RelativeHumidityUnits.Name = "RelativeHumidityUnits";
             this.RelativeHumidityUnits.Size = new System.Drawing.Size(15, 13);
             this.RelativeHumidityUnits.TabIndex = 14;
@@ -244,7 +244,7 @@
             this.RelativeHumidity_Value.Enabled = false;
             this.RelativeHumidity_Value.Location = new System.Drawing.Point(152, 36);
             this.RelativeHumidity_Value.Name = "RelativeHumidity_Value";
-            this.RelativeHumidity_Value.Size = new System.Drawing.Size(100, 20);
+            this.RelativeHumidity_Value.Size = new System.Drawing.Size(70, 20);
             this.RelativeHumidity_Value.TabIndex = 12;
             this.RelativeHumidity_Value.Visible = false;
             this.RelativeHumidity_Value.Validating += new System.ComponentModel.CancelEventHandler(this.RelativeHumidity_Value_Validating);
@@ -264,7 +264,7 @@
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.BarometricPressureRadio);
             this.groupBox2.Controls.Add(this.ElevationRadio);
-            this.groupBox2.Location = new System.Drawing.Point(341, 29);
+            this.groupBox2.Location = new System.Drawing.Point(297, 29);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(164, 79);
             this.groupBox2.TabIndex = 10;
@@ -295,7 +295,7 @@
             // ElevationUnits
             // 
             this.ElevationUnits.AutoSize = true;
-            this.ElevationUnits.Location = new System.Drawing.Point(273, 91);
+            this.ElevationUnits.Location = new System.Drawing.Point(245, 91);
             this.ElevationUnits.Name = "ElevationUnits";
             this.ElevationUnits.Size = new System.Drawing.Size(13, 13);
             this.ElevationUnits.TabIndex = 8;
@@ -304,7 +304,7 @@
             // DryBulbTemperatureUnits
             // 
             this.DryBulbTemperatureUnits.AutoSize = true;
-            this.DryBulbTemperatureUnits.Location = new System.Drawing.Point(273, 65);
+            this.DryBulbTemperatureUnits.Location = new System.Drawing.Point(245, 65);
             this.DryBulbTemperatureUnits.Name = "DryBulbTemperatureUnits";
             this.DryBulbTemperatureUnits.Size = new System.Drawing.Size(17, 13);
             this.DryBulbTemperatureUnits.TabIndex = 7;
@@ -313,7 +313,7 @@
             // WetBulbTemperatureUnits
             // 
             this.WetBulbTemperatureUnits.AutoSize = true;
-            this.WetBulbTemperatureUnits.Location = new System.Drawing.Point(273, 39);
+            this.WetBulbTemperatureUnits.Location = new System.Drawing.Point(245, 39);
             this.WetBulbTemperatureUnits.Name = "WetBulbTemperatureUnits";
             this.WetBulbTemperatureUnits.Size = new System.Drawing.Size(17, 13);
             this.WetBulbTemperatureUnits.TabIndex = 6;
@@ -323,7 +323,7 @@
             // 
             this.Elevation_Value.Location = new System.Drawing.Point(152, 88);
             this.Elevation_Value.Name = "Elevation_Value";
-            this.Elevation_Value.Size = new System.Drawing.Size(100, 20);
+            this.Elevation_Value.Size = new System.Drawing.Size(70, 20);
             this.Elevation_Value.TabIndex = 5;
             this.Elevation_Value.Text = "0";
             this.Elevation_Value.Validating += new System.ComponentModel.CancelEventHandler(this.Elevation_Value_Validating);
@@ -333,7 +333,7 @@
             // 
             this.DryBulbTemperature_Value.Location = new System.Drawing.Point(152, 62);
             this.DryBulbTemperature_Value.Name = "DryBulbTemperature_Value";
-            this.DryBulbTemperature_Value.Size = new System.Drawing.Size(100, 20);
+            this.DryBulbTemperature_Value.Size = new System.Drawing.Size(70, 20);
             this.DryBulbTemperature_Value.TabIndex = 4;
             this.DryBulbTemperature_Value.Text = "90";
             this.DryBulbTemperature_Value.Validating += new System.ComponentModel.CancelEventHandler(this.DryBulbTemperature_Value_Validating);
@@ -343,7 +343,7 @@
             // 
             this.WetBulbTemperature_Value.Location = new System.Drawing.Point(152, 36);
             this.WetBulbTemperature_Value.Name = "WetBulbTemperature_Value";
-            this.WetBulbTemperature_Value.Size = new System.Drawing.Size(100, 20);
+            this.WetBulbTemperature_Value.Size = new System.Drawing.Size(70, 20);
             this.WetBulbTemperature_Value.TabIndex = 3;
             this.WetBulbTemperature_Value.Text = "80";
             this.WetBulbTemperature_Value.Validating += new System.ComponentModel.CancelEventHandler(this.WetBulbTemperature_Value_Validating);
@@ -374,7 +374,7 @@
             // 
             // DataFilename
             // 
-            this.DataFilename.Location = new System.Drawing.Point(68, 15);
+            this.DataFilename.Location = new System.Drawing.Point(72, 5);
             this.DataFilename.Name = "DataFilename";
             this.DataFilename.ReadOnly = true;
             this.DataFilename.Size = new System.Drawing.Size(541, 20);
@@ -383,7 +383,7 @@
             // DataFileLabel
             // 
             this.DataFileLabel.AutoSize = true;
-            this.DataFileLabel.Location = new System.Drawing.Point(7, 17);
+            this.DataFileLabel.Location = new System.Drawing.Point(7, 8);
             this.DataFileLabel.Name = "DataFileLabel";
             this.DataFileLabel.Size = new System.Drawing.Size(55, 13);
             this.DataFileLabel.TabIndex = 25;
@@ -393,7 +393,7 @@
             // 
             this.CalculatedValuesGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CalculatedValuesGroupBox.Controls.Add(this.CalculatedValuesGridView);
-            this.CalculatedValuesGroupBox.Location = new System.Drawing.Point(10, 359);
+            this.CalculatedValuesGroupBox.Location = new System.Drawing.Point(3, 323);
             this.CalculatedValuesGroupBox.Name = "CalculatedValuesGroupBox";
             this.CalculatedValuesGroupBox.Size = new System.Drawing.Size(755, 298);
             this.CalculatedValuesGroupBox.TabIndex = 31;

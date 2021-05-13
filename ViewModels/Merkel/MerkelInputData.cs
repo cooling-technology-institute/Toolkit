@@ -64,7 +64,7 @@ namespace ViewModels
             //    {
             //        value = UnitConverter.ConvertBarometricPressureToElevationInFeet(UnitConverter.CalculateInchesOfMercuryToPsi(BarometricPressureDataValue.Current));
             //    }
-            //    ElevationDataValue.UpdateCurrentValue(value, out string errorMessage);
+            //    ElevationDataValue.UpdateCurrentValue(value);
             //}
             //else
             //{
@@ -76,7 +76,7 @@ namespace ViewModels
             //    {
             //        value = UnitConverter.CalculatePsiToInchesOfMercury(UnitConverter.ConvertElevationInFeetToBarometricPressure(ElevationDataValue.Current));
             //    }
-            //    BarometricPressureDataValue.UpdateCurrentValue(value, out string errorMessage);
+            //    BarometricPressureDataValue.UpdateCurrentValue(value);
             //}
         }
 
@@ -105,40 +105,34 @@ namespace ViewModels
                 IsElevation = merkelDataFile.IsElevation;
                 IsInternationalSystemOfUnits_SI = merkelDataFile.IsInternationalSystemOfUnits_SI;
 
-                if (!ElevationDataValue.UpdateCurrentValue(merkelDataFile.Elevation, out string errorMessage))
+                if (!ElevationDataValue.UpdateCurrentValue(merkelDataFile.Elevation))
                 {
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(ElevationDataValue.ErrorMessage);
                     returnValue = false;
                 }
-                if (!BarometricPressureDataValue.UpdateCurrentValue(merkelDataFile.BarometricPressure, out errorMessage))
+                if (!BarometricPressureDataValue.UpdateCurrentValue(merkelDataFile.BarometricPressure))
                 {
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(BarometricPressureDataValue.ErrorMessage);
                     returnValue = false;
                 }
-                if (!WetBulbTemperatureDataValue.UpdateCurrentValue(merkelDataFile.WetBulbTemperature, out errorMessage))
+                if (!WetBulbTemperatureDataValue.UpdateCurrentValue(merkelDataFile.WetBulbTemperature))
                 {
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(WetBulbTemperatureDataValue.ErrorMessage);
                     returnValue = false;
                 }
-                if (!HotWaterTemperatureDataValue.UpdateCurrentValue(merkelDataFile.HotWaterTemperature, out errorMessage))
+                if (!HotWaterTemperatureDataValue.UpdateCurrentValue(merkelDataFile.HotWaterTemperature))
                 {
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(HotWaterTemperatureDataValue.ErrorMessage);
                     returnValue = false;
                 }
-                if (!ColdWaterTemperatureDataValue.UpdateCurrentValue(merkelDataFile.ColdWaterTemperature, out errorMessage))
+                if (!ColdWaterTemperatureDataValue.UpdateCurrentValue(merkelDataFile.ColdWaterTemperature))
                 {
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(ColdWaterTemperatureDataValue.ErrorMessage);
                     returnValue = false;
                 }
-                if (!LiquidToGasRatioDataValue.UpdateCurrentValue(merkelDataFile.LiquidToGasRatio, out errorMessage))
+                if (!LiquidToGasRatioDataValue.UpdateCurrentValue(merkelDataFile.LiquidToGasRatio))
                 {
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(LiquidToGasRatioDataValue.ErrorMessage);
                     returnValue = false;
                 }
 

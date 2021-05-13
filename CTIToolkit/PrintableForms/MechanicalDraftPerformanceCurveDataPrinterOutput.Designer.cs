@@ -50,12 +50,12 @@ namespace CTIToolkit
             // 
             this.OptionalLabelTextBox.BackColor = System.Drawing.Color.White;
             this.OptionalLabelTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.OptionalLabelTextBox.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OptionalLabelTextBox.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OptionalLabelTextBox.ForeColor = System.Drawing.Color.Black;
-            this.OptionalLabelTextBox.Location = new System.Drawing.Point(143, 34);
+            this.OptionalLabelTextBox.Location = new System.Drawing.Point(143, 28);
             this.OptionalLabelTextBox.Name = "OptionalLabelTextBox";
             this.OptionalLabelTextBox.ReadOnly = true;
-            this.OptionalLabelTextBox.Size = new System.Drawing.Size(620, 28);
+            this.OptionalLabelTextBox.Size = new System.Drawing.Size(620, 22);
             this.OptionalLabelTextBox.TabIndex = 21;
             this.OptionalLabelTextBox.Text = "Label";
             this.OptionalLabelTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -63,10 +63,10 @@ namespace CTIToolkit
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 174);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(180, 19);
+            this.label1.Size = new System.Drawing.Size(157, 15);
             this.label1.TabIndex = 20;
             this.label1.Text = "Cooling Tower Design Data:";
             // 
@@ -74,12 +74,12 @@ namespace CTIToolkit
             // 
             this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.ForeColor = System.Drawing.Color.Black;
             this.textBox1.Location = new System.Drawing.Point(143, 0);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(620, 28);
+            this.textBox1.Size = new System.Drawing.Size(620, 22);
             this.textBox1.TabIndex = 19;
             this.textBox1.Text = "CTI Tower Design Data";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -121,10 +121,10 @@ namespace CTIToolkit
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(3, 435);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(170, 19);
+            this.label2.Size = new System.Drawing.Size(147, 15);
             this.label2.TabIndex = 24;
             this.label2.Text = "Tower Design Curve Data:";
             // 
@@ -132,7 +132,7 @@ namespace CTIToolkit
             // 
             this.OwnerTextBox.BackColor = System.Drawing.Color.White;
             this.OwnerTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.OwnerTextBox.Location = new System.Drawing.Point(218, 68);
+            this.OwnerTextBox.Location = new System.Drawing.Point(219, 56);
             this.OwnerTextBox.Name = "OwnerTextBox";
             this.OwnerTextBox.ReadOnly = true;
             this.OwnerTextBox.Size = new System.Drawing.Size(462, 13);
@@ -144,7 +144,7 @@ namespace CTIToolkit
             // 
             this.ProjectTextBox.BackColor = System.Drawing.Color.White;
             this.ProjectTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ProjectTextBox.Location = new System.Drawing.Point(218, 87);
+            this.ProjectTextBox.Location = new System.Drawing.Point(219, 75);
             this.ProjectTextBox.Name = "ProjectTextBox";
             this.ProjectTextBox.ReadOnly = true;
             this.ProjectTextBox.Size = new System.Drawing.Size(462, 13);
@@ -156,7 +156,7 @@ namespace CTIToolkit
             // 
             this.LocationTextBox.BackColor = System.Drawing.Color.White;
             this.LocationTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.LocationTextBox.Location = new System.Drawing.Point(218, 106);
+            this.LocationTextBox.Location = new System.Drawing.Point(219, 94);
             this.LocationTextBox.Name = "LocationTextBox";
             this.LocationTextBox.ReadOnly = true;
             this.LocationTextBox.Size = new System.Drawing.Size(462, 13);
@@ -168,7 +168,7 @@ namespace CTIToolkit
             // 
             this.TowerManufacturerTextBox.BackColor = System.Drawing.Color.White;
             this.TowerManufacturerTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TowerManufacturerTextBox.Location = new System.Drawing.Point(218, 125);
+            this.TowerManufacturerTextBox.Location = new System.Drawing.Point(219, 113);
             this.TowerManufacturerTextBox.Name = "TowerManufacturerTextBox";
             this.TowerManufacturerTextBox.ReadOnly = true;
             this.TowerManufacturerTextBox.Size = new System.Drawing.Size(462, 13);
@@ -180,7 +180,7 @@ namespace CTIToolkit
             // 
             this.TowerTypeTextBox.BackColor = System.Drawing.Color.White;
             this.TowerTypeTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TowerTypeTextBox.Location = new System.Drawing.Point(218, 144);
+            this.TowerTypeTextBox.Location = new System.Drawing.Point(219, 132);
             this.TowerTypeTextBox.Name = "TowerTypeTextBox";
             this.TowerTypeTextBox.ReadOnly = true;
             this.TowerTypeTextBox.Size = new System.Drawing.Size(462, 13);

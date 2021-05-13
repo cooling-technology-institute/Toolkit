@@ -79,7 +79,7 @@
             this.InputPropertiesGroupBox.Controls.Add(this.Merkel_HotWaterTemperature_Value);
             this.InputPropertiesGroupBox.Controls.Add(this.TemperatureColdWaterLabel);
             this.InputPropertiesGroupBox.Controls.Add(this.TemperatureHotWaterLabel);
-            this.InputPropertiesGroupBox.Location = new System.Drawing.Point(9, 49);
+            this.InputPropertiesGroupBox.Location = new System.Drawing.Point(3, 36);
             this.InputPropertiesGroupBox.Name = "InputPropertiesGroupBox";
             this.InputPropertiesGroupBox.Size = new System.Drawing.Size(743, 186);
             this.InputPropertiesGroupBox.TabIndex = 11;
@@ -100,7 +100,7 @@
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.BarometricPressureRadio);
             this.groupBox2.Controls.Add(this.ElevationRadio);
-            this.groupBox2.Location = new System.Drawing.Point(296, 29);
+            this.groupBox2.Location = new System.Drawing.Point(287, 34);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(164, 79);
             this.groupBox2.TabIndex = 22;
@@ -131,7 +131,7 @@
             // MerkelWebBulbTemperatureUnits
             // 
             this.MerkelWebBulbTemperatureUnits.AutoSize = true;
-            this.MerkelWebBulbTemperatureUnits.Location = new System.Drawing.Point(258, 93);
+            this.MerkelWebBulbTemperatureUnits.Location = new System.Drawing.Point(244, 93);
             this.MerkelWebBulbTemperatureUnits.Name = "MerkelWebBulbTemperatureUnits";
             this.MerkelWebBulbTemperatureUnits.Size = new System.Drawing.Size(17, 13);
             this.MerkelWebBulbTemperatureUnits.TabIndex = 18;
@@ -140,7 +140,7 @@
             // MerkelElevationPressureUnits
             // 
             this.MerkelElevationPressureUnits.AutoSize = true;
-            this.MerkelElevationPressureUnits.Location = new System.Drawing.Point(258, 120);
+            this.MerkelElevationPressureUnits.Location = new System.Drawing.Point(244, 120);
             this.MerkelElevationPressureUnits.Name = "MerkelElevationPressureUnits";
             this.MerkelElevationPressureUnits.Size = new System.Drawing.Size(13, 13);
             this.MerkelElevationPressureUnits.TabIndex = 16;
@@ -150,7 +150,7 @@
             // 
             this.Merkel_Elevation_Value.Location = new System.Drawing.Point(152, 114);
             this.Merkel_Elevation_Value.Name = "Merkel_Elevation_Value";
-            this.Merkel_Elevation_Value.Size = new System.Drawing.Size(100, 20);
+            this.Merkel_Elevation_Value.Size = new System.Drawing.Size(70, 20);
             this.Merkel_Elevation_Value.TabIndex = 15;
             this.Merkel_Elevation_Value.Text = "0";
             this.Merkel_Elevation_Value.Validating += new System.ComponentModel.CancelEventHandler(this.Merkel_Elevation_Value_Validating);
@@ -169,7 +169,7 @@
             // 
             this.Merkel_LiquidtoGasRatio_Value.Location = new System.Drawing.Point(152, 140);
             this.Merkel_LiquidtoGasRatio_Value.Name = "Merkel_LiquidtoGasRatio_Value";
-            this.Merkel_LiquidtoGasRatio_Value.Size = new System.Drawing.Size(100, 20);
+            this.Merkel_LiquidtoGasRatio_Value.Size = new System.Drawing.Size(70, 20);
             this.Merkel_LiquidtoGasRatio_Value.TabIndex = 12;
             this.Merkel_LiquidtoGasRatio_Value.Text = "0";
             this.Merkel_LiquidtoGasRatio_Value.Validating += new System.ComponentModel.CancelEventHandler(this.Merkel_LiquidtoGasRatio_Value_Validating);
@@ -187,7 +187,7 @@
             // MerkelTemperatureColdWaterUnits
             // 
             this.MerkelTemperatureColdWaterUnits.AutoSize = true;
-            this.MerkelTemperatureColdWaterUnits.Location = new System.Drawing.Point(258, 66);
+            this.MerkelTemperatureColdWaterUnits.Location = new System.Drawing.Point(244, 66);
             this.MerkelTemperatureColdWaterUnits.Name = "MerkelTemperatureColdWaterUnits";
             this.MerkelTemperatureColdWaterUnits.Size = new System.Drawing.Size(17, 13);
             this.MerkelTemperatureColdWaterUnits.TabIndex = 7;
@@ -196,7 +196,7 @@
             // MerkelTemperatureHotWaterUnits
             // 
             this.MerkelTemperatureHotWaterUnits.AutoSize = true;
-            this.MerkelTemperatureHotWaterUnits.Location = new System.Drawing.Point(258, 39);
+            this.MerkelTemperatureHotWaterUnits.Location = new System.Drawing.Point(244, 39);
             this.MerkelTemperatureHotWaterUnits.Name = "MerkelTemperatureHotWaterUnits";
             this.MerkelTemperatureHotWaterUnits.Size = new System.Drawing.Size(17, 13);
             this.MerkelTemperatureHotWaterUnits.TabIndex = 6;
@@ -206,7 +206,7 @@
             // 
             this.Merkel_WetBulbTemperature_Value.Location = new System.Drawing.Point(152, 88);
             this.Merkel_WetBulbTemperature_Value.Name = "Merkel_WetBulbTemperature_Value";
-            this.Merkel_WetBulbTemperature_Value.Size = new System.Drawing.Size(100, 20);
+            this.Merkel_WetBulbTemperature_Value.Size = new System.Drawing.Size(70, 20);
             this.Merkel_WetBulbTemperature_Value.TabIndex = 5;
             this.Merkel_WetBulbTemperature_Value.Text = "0";
             this.Merkel_WetBulbTemperature_Value.Validating += new System.ComponentModel.CancelEventHandler(this.Merkel_WetBulbTemperature_Value_Validating);
@@ -216,16 +216,18 @@
             // 
             this.Merkel_ColdWaterTemperature_Value.Location = new System.Drawing.Point(152, 62);
             this.Merkel_ColdWaterTemperature_Value.Name = "Merkel_ColdWaterTemperature_Value";
-            this.Merkel_ColdWaterTemperature_Value.Size = new System.Drawing.Size(100, 20);
+            this.Merkel_ColdWaterTemperature_Value.Size = new System.Drawing.Size(70, 20);
             this.Merkel_ColdWaterTemperature_Value.TabIndex = 4;
             this.Merkel_ColdWaterTemperature_Value.Text = "90";
             this.Merkel_ColdWaterTemperature_Value.Validating += new System.ComponentModel.CancelEventHandler(this.Merkel_ColdWaterTemperature_Value_Validating);
             // 
             // Merkel_HotWaterTemperature_Value
             // 
+            this.helpProvider1.SetHelpKeyword(this.Merkel_HotWaterTemperature_Value, "MerkelHotWater");
             this.Merkel_HotWaterTemperature_Value.Location = new System.Drawing.Point(152, 36);
             this.Merkel_HotWaterTemperature_Value.Name = "Merkel_HotWaterTemperature_Value";
-            this.Merkel_HotWaterTemperature_Value.Size = new System.Drawing.Size(100, 20);
+            this.helpProvider1.SetShowHelp(this.Merkel_HotWaterTemperature_Value, true);
+            this.Merkel_HotWaterTemperature_Value.Size = new System.Drawing.Size(70, 20);
             this.Merkel_HotWaterTemperature_Value.TabIndex = 3;
             this.Merkel_HotWaterTemperature_Value.Text = "80";
             this.Merkel_HotWaterTemperature_Value.Validating += new System.ComponentModel.CancelEventHandler(this.Merkel_HotWaterTemperature_Value_Validating);
@@ -252,7 +254,7 @@
             // 
             // MerkelCalculate
             // 
-            this.MerkelCalculate.Location = new System.Drawing.Point(677, 11);
+            this.MerkelCalculate.Location = new System.Drawing.Point(682, 3);
             this.MerkelCalculate.Name = "MerkelCalculate";
             this.MerkelCalculate.Size = new System.Drawing.Size(75, 23);
             this.MerkelCalculate.TabIndex = 15;
@@ -266,7 +268,7 @@
             // 
             // DataFilename
             // 
-            this.DataFilename.Location = new System.Drawing.Point(68, 13);
+            this.DataFilename.Location = new System.Drawing.Point(72, 5);
             this.DataFilename.Name = "DataFilename";
             this.DataFilename.ReadOnly = true;
             this.DataFilename.Size = new System.Drawing.Size(541, 20);
@@ -275,7 +277,7 @@
             // DataFileLabel
             // 
             this.DataFileLabel.AutoSize = true;
-            this.DataFileLabel.Location = new System.Drawing.Point(7, 15);
+            this.DataFileLabel.Location = new System.Drawing.Point(7, 8);
             this.DataFileLabel.Name = "DataFileLabel";
             this.DataFileLabel.Size = new System.Drawing.Size(55, 13);
             this.DataFileLabel.TabIndex = 27;
@@ -299,7 +301,7 @@
             // CalculatedValuesGroupBox
             // 
             this.CalculatedValuesGroupBox.Controls.Add(this.CalculatedValuesGridView);
-            this.CalculatedValuesGroupBox.Location = new System.Drawing.Point(9, 241);
+            this.CalculatedValuesGroupBox.Location = new System.Drawing.Point(10, 228);
             this.CalculatedValuesGroupBox.Name = "CalculatedValuesGroupBox";
             this.CalculatedValuesGroupBox.Size = new System.Drawing.Size(743, 125);
             this.CalculatedValuesGroupBox.TabIndex = 32;

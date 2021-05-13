@@ -456,7 +456,7 @@ namespace CTIToolkit
                 SetupRelativeHumidity(false);
                 SetupWetBulbTemperature(true);
                 SetupEnthalpy(false);
-                PsychrometricsViewModel.UpdateCalculationType(Models.PsychrometricsCalculationType.WetBulbTemperature_DryBulbTemperature, out string errorMessage);
+                PsychrometricsViewModel.UpdateCalculationType(Models.PsychrometricsCalculationType.WetBulbTemperature_DryBulbTemperature);
                 Calculate();
             }
         }
@@ -469,7 +469,7 @@ namespace CTIToolkit
                 SetupRelativeHumidity(true);
                 SetupWetBulbTemperature(false);
                 SetupEnthalpy(false);
-                PsychrometricsViewModel.UpdateCalculationType(Models.PsychrometricsCalculationType.DryBulbTemperature_RelativeHumidity, out string errorMessage);
+                PsychrometricsViewModel.UpdateCalculationType(Models.PsychrometricsCalculationType.DryBulbTemperature_RelativeHumidity);
                 Calculate();
             }
         }
@@ -482,7 +482,7 @@ namespace CTIToolkit
                 SetupRelativeHumidity(false);
                 SetupWetBulbTemperature(false);
                 SetupEnthalpy(true);
-                PsychrometricsViewModel.UpdateCalculationType(Models.PsychrometricsCalculationType.Enthalpy, out string errorMessage);
+                PsychrometricsViewModel.UpdateCalculationType(Models.PsychrometricsCalculationType.Enthalpy);
                 Calculate();
             }
         }
@@ -509,14 +509,14 @@ namespace CTIToolkit
         {
             bool recalculate = (PsychrometricsViewModel.ElevationDataValueInputValue != Elevation_Value.Text);
 
-            if (!PsychrometricsViewModel.ElevationDataValueUpdateValue(Elevation_Value.Text, out string errorMessage))
+            if (!PsychrometricsViewModel.ElevationDataValueUpdateValue(Elevation_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Elevation_Value.Select(0, Elevation_Value.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Elevation_Value, errorMessage);
+                this.errorProvider1.SetError(Elevation_Value, PsychrometricsViewModel.ElevationDataValueErrorMessage);
             }
             else if (recalculate)
             {
@@ -533,14 +533,14 @@ namespace CTIToolkit
         {
             bool recalculate = (PsychrometricsViewModel.BarometricPressureDataValueInputValue != BarometericPressure_Value.Text);
 
-            if (!PsychrometricsViewModel.BarometricPressureDataValueUpdateValue(BarometericPressure_Value.Text, out string errorMessage))
+            if (!PsychrometricsViewModel.BarometricPressureDataValueUpdateValue(BarometericPressure_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 BarometericPressure_Value.Select(0, BarometericPressure_Value.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(BarometericPressure_Value, errorMessage);
+                this.errorProvider1.SetError(BarometericPressure_Value, PsychrometricsViewModel.BarometricPressureDataValueErrorMessage);
             }
             else if (recalculate)
             {
@@ -558,14 +558,14 @@ namespace CTIToolkit
         {
             bool recalculate = (PsychrometricsViewModel.DryBulbTemperatureDataValueInputValue != DryBulbTemperature_Value.Text);
 
-            if (!PsychrometricsViewModel.DryBulbTemperatureDataValueUpdateValue(DryBulbTemperature_Value.Text, out string errorMessage))
+            if (!PsychrometricsViewModel.DryBulbTemperatureDataValueUpdateValue(DryBulbTemperature_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 DryBulbTemperature_Value.Select(0, DryBulbTemperature_Value.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(DryBulbTemperature_Value, errorMessage);
+                this.errorProvider1.SetError(DryBulbTemperature_Value, PsychrometricsViewModel.DryBulbTemperatureDataValueErrorMessage);
             }
             else if (recalculate)
             {
@@ -582,14 +582,14 @@ namespace CTIToolkit
         {
             bool recalculate = (PsychrometricsViewModel.WetBulbTemperatureDataValueInputValue != WetBulbTemperature_Value.Text);
 
-            if (!PsychrometricsViewModel.WetBulbTemperatureDataValueUpdateValue(WetBulbTemperature_Value.Text, out string errorMessage))
+            if (!PsychrometricsViewModel.WetBulbTemperatureDataValueUpdateValue(WetBulbTemperature_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 WetBulbTemperature_Value.Select(0, WetBulbTemperature_Value.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(WetBulbTemperature_Value, errorMessage);
+                this.errorProvider1.SetError(WetBulbTemperature_Value, PsychrometricsViewModel.WetBulbTemperatureDataValueErrorMessage);
             }
             else if (recalculate)
             {
@@ -606,14 +606,14 @@ namespace CTIToolkit
         {
             bool recalculate = (PsychrometricsViewModel.RelativeHumidityDataValueInputValue != RelativeHumidity_Value.Text);
 
-            if (!PsychrometricsViewModel.RelativeHumidityDataValueUpdateValue(RelativeHumidity_Value.Text, out string errorMessage))
+            if (!PsychrometricsViewModel.RelativeHumidityDataValueUpdateValue(RelativeHumidity_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 RelativeHumidity_Value.Select(0, RelativeHumidity_Value.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(RelativeHumidity_Value, errorMessage);
+                this.errorProvider1.SetError(RelativeHumidity_Value, PsychrometricsViewModel.RelativeHumidityDataValueErrorMessage);
             }
             else if (recalculate)
             {
@@ -630,14 +630,14 @@ namespace CTIToolkit
         {
             bool recalculate = (PsychrometricsViewModel.EnthalpyDataValueInputValue != EnthalpyValue.Text);
 
-            if (!PsychrometricsViewModel.EnthalpyDataValueUpdateValue(EnthalpyValue.Text, out string errorMessage))
+            if (!PsychrometricsViewModel.EnthalpyDataValueUpdateValue(EnthalpyValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 EnthalpyValue.Select(0, EnthalpyValue.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(EnthalpyValue, errorMessage);
+                this.errorProvider1.SetError(EnthalpyValue, PsychrometricsViewModel.EnthalpyDataValueErrorMessage);
             }
             else if(recalculate)
             {

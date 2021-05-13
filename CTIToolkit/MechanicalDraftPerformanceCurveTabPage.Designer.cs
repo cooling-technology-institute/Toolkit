@@ -102,16 +102,16 @@
             // DataFileLabel
             // 
             this.DataFileLabel.AutoSize = true;
-            this.DataFileLabel.Location = new System.Drawing.Point(0, 23);
+            this.DataFileLabel.Location = new System.Drawing.Point(7, 8);
             this.DataFileLabel.Name = "DataFileLabel";
-            this.DataFileLabel.Size = new System.Drawing.Size(118, 13);
+            this.DataFileLabel.Size = new System.Drawing.Size(52, 13);
             this.DataFileLabel.TabIndex = 0;
-            this.DataFileLabel.Text = "Performance Data  File:";
+            this.DataFileLabel.Text = "Data File:";
             // 
             // CalculateButton
             // 
             this.CalculateButton.Enabled = false;
-            this.CalculateButton.Location = new System.Drawing.Point(716, 17);
+            this.CalculateButton.Location = new System.Drawing.Point(682, 3);
             this.CalculateButton.Name = "CalculateButton";
             this.CalculateButton.Size = new System.Drawing.Size(74, 23);
             this.CalculateButton.TabIndex = 3;
@@ -122,7 +122,7 @@
             // ViewGraph
             // 
             this.ViewGraph.Enabled = false;
-            this.ViewGraph.Location = new System.Drawing.Point(703, 46);
+            this.ViewGraph.Location = new System.Drawing.Point(682, 46);
             this.ViewGraph.Name = "ViewGraph";
             this.ViewGraph.Size = new System.Drawing.Size(87, 23);
             this.ViewGraph.TabIndex = 4;
@@ -187,9 +187,9 @@
             this.TestResultsGroupBox.Controls.Add(this.UnitsDryBulbTemperature);
             this.TestResultsGroupBox.Controls.Add(this.UnitsBarometricPressure);
             this.TestResultsGroupBox.Controls.Add(this.UnitsFanDriverPower);
-            this.TestResultsGroupBox.Location = new System.Drawing.Point(3, 209);
+            this.TestResultsGroupBox.Location = new System.Drawing.Point(3, 193);
             this.TestResultsGroupBox.Name = "TestResultsGroupBox";
-            this.TestResultsGroupBox.Size = new System.Drawing.Size(804, 311);
+            this.TestResultsGroupBox.Size = new System.Drawing.Size(778, 311);
             this.TestResultsGroupBox.TabIndex = 14;
             this.TestResultsGroupBox.TabStop = false;
             this.TestResultsGroupBox.Text = "Test Results";
@@ -197,7 +197,7 @@
             // AddTestPointButton
             // 
             this.AddTestPointButton.Enabled = false;
-            this.AddTestPointButton.Location = new System.Drawing.Point(682, 277);
+            this.AddTestPointButton.Location = new System.Drawing.Point(591, 276);
             this.AddTestPointButton.Name = "AddTestPointButton";
             this.AddTestPointButton.Size = new System.Drawing.Size(110, 23);
             this.AddTestPointButton.TabIndex = 34;
@@ -208,7 +208,7 @@
             // AddTestPointName
             // 
             this.AddTestPointName.Enabled = false;
-            this.AddTestPointName.Location = new System.Drawing.Point(396, 277);
+            this.AddTestPointName.Location = new System.Drawing.Point(305, 276);
             this.AddTestPointName.Name = "AddTestPointName";
             this.AddTestPointName.Size = new System.Drawing.Size(279, 20);
             this.AddTestPointName.TabIndex = 33;
@@ -220,7 +220,7 @@
             this.TestPointTabControl.Location = new System.Drawing.Point(300, 14);
             this.TestPointTabControl.Name = "TestPointTabControl";
             this.TestPointTabControl.SelectedIndex = 0;
-            this.TestPointTabControl.Size = new System.Drawing.Size(498, 256);
+            this.TestPointTabControl.Size = new System.Drawing.Size(466, 256);
             this.TestPointTabControl.TabIndex = 32;
             this.TestPointTabControl.SelectedIndexChanged += new System.EventHandler(this.TestPointTabControl_SelectedIndexChanged);
             this.TestPointTabControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TestPointTabControl_MouseUp);
@@ -238,7 +238,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(490, 230);
+            this.tabPage1.Size = new System.Drawing.Size(458, 230);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -305,7 +305,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(490, 230);
+            this.tabPage2.Size = new System.Drawing.Size(458, 230);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -536,7 +536,7 @@
             // 
             // DesignDataButton
             // 
-            this.DesignDataButton.Location = new System.Drawing.Point(703, 75);
+            this.DesignDataButton.Location = new System.Drawing.Point(682, 75);
             this.DesignDataButton.Name = "DesignDataButton";
             this.DesignDataButton.Size = new System.Drawing.Size(87, 25);
             this.DesignDataButton.TabIndex = 10;
@@ -562,7 +562,7 @@
             this.OwnerNameField.Location = new System.Drawing.Point(134, 17);
             this.OwnerNameField.Name = "OwnerNameField";
             this.OwnerNameField.ReadOnly = true;
-            this.OwnerNameField.Size = new System.Drawing.Size(541, 20);
+            this.OwnerNameField.Size = new System.Drawing.Size(494, 20);
             this.OwnerNameField.TabIndex = 19;
             // 
             // ProjectNameField
@@ -570,7 +570,7 @@
             this.ProjectNameField.Location = new System.Drawing.Point(134, 43);
             this.ProjectNameField.Name = "ProjectNameField";
             this.ProjectNameField.ReadOnly = true;
-            this.ProjectNameField.Size = new System.Drawing.Size(541, 20);
+            this.ProjectNameField.Size = new System.Drawing.Size(494, 20);
             this.ProjectNameField.TabIndex = 20;
             // 
             // LocationField
@@ -578,7 +578,7 @@
             this.LocationField.Location = new System.Drawing.Point(134, 69);
             this.LocationField.Name = "LocationField";
             this.LocationField.ReadOnly = true;
-            this.LocationField.Size = new System.Drawing.Size(541, 20);
+            this.LocationField.Size = new System.Drawing.Size(494, 20);
             this.LocationField.TabIndex = 21;
             // 
             // TowerManufacturerField
@@ -586,7 +586,7 @@
             this.TowerManufacturerField.Location = new System.Drawing.Point(134, 95);
             this.TowerManufacturerField.Name = "TowerManufacturerField";
             this.TowerManufacturerField.ReadOnly = true;
-            this.TowerManufacturerField.Size = new System.Drawing.Size(541, 20);
+            this.TowerManufacturerField.Size = new System.Drawing.Size(494, 20);
             this.TowerManufacturerField.TabIndex = 22;
             // 
             // TowerTypeField
@@ -599,7 +599,7 @@
             // 
             // DataFilename
             // 
-            this.DataFilename.Location = new System.Drawing.Point(137, 20);
+            this.DataFilename.Location = new System.Drawing.Point(72, 5);
             this.DataFilename.Name = "DataFilename";
             this.DataFilename.ReadOnly = true;
             this.DataFilename.Size = new System.Drawing.Size(541, 20);
@@ -617,9 +617,9 @@
             this.TowerDataGroupBox.Controls.Add(this.TowerTypeLabel);
             this.TowerDataGroupBox.Controls.Add(this.ProjectNameField);
             this.TowerDataGroupBox.Controls.Add(this.OwnerNameField);
-            this.TowerDataGroupBox.Location = new System.Drawing.Point(3, 52);
+            this.TowerDataGroupBox.Location = new System.Drawing.Point(3, 36);
             this.TowerDataGroupBox.Name = "TowerDataGroupBox";
-            this.TowerDataGroupBox.Size = new System.Drawing.Size(685, 151);
+            this.TowerDataGroupBox.Size = new System.Drawing.Size(648, 151);
             this.TowerDataGroupBox.TabIndex = 25;
             this.TowerDataGroupBox.TabStop = false;
             this.TowerDataGroupBox.Text = "Tower Data";
@@ -629,18 +629,19 @@
             this.DataGridView.AllowUserToAddRows = false;
             this.DataGridView.AllowUserToDeleteRows = false;
             this.DataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridView.Location = new System.Drawing.Point(6, 19);
             this.DataGridView.Name = "DataGridView";
-            this.DataGridView.Size = new System.Drawing.Size(786, 111);
+            this.DataGridView.Size = new System.Drawing.Size(760, 111);
             this.DataGridView.TabIndex = 26;
             // 
             // CalculatedValuesGroupBox
             // 
             this.CalculatedValuesGroupBox.Controls.Add(this.DataGridView);
-            this.CalculatedValuesGroupBox.Location = new System.Drawing.Point(3, 526);
+            this.CalculatedValuesGroupBox.Location = new System.Drawing.Point(3, 510);
             this.CalculatedValuesGroupBox.Name = "CalculatedValuesGroupBox";
-            this.CalculatedValuesGroupBox.Size = new System.Drawing.Size(804, 156);
+            this.CalculatedValuesGroupBox.Size = new System.Drawing.Size(778, 143);
             this.CalculatedValuesGroupBox.TabIndex = 31;
             this.CalculatedValuesGroupBox.TabStop = false;
             this.CalculatedValuesGroupBox.Text = "Calculated Values:";
@@ -659,7 +660,7 @@
             this.Controls.Add(this.DataFileLabel);
             this.Controls.Add(this.UnitsLiquidToGasRatio);
             this.Name = "MechanicalDraftPerformanceCurveTabPage";
-            this.Size = new System.Drawing.Size(812, 695);
+            this.Size = new System.Drawing.Size(790, 666);
             this.TestResultsGroupBox.ResumeLayout(false);
             this.TestResultsGroupBox.PerformLayout();
             this.TestPointTabControl.ResumeLayout(false);

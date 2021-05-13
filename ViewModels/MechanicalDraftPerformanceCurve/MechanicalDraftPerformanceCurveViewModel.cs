@@ -221,11 +221,11 @@ namespace ViewModels
                     TestPoints.Add(towerTestPoint);
                 }
 
-                IsDesignDataValid = DesignData.IsValid(out string errorMessage);
+                IsDesignDataValid = DesignData.IsValid();
 
                 if(!IsDesignDataValid)
                 {
-                    stringBuilder.AppendLine(errorMessage);
+                    stringBuilder.AppendLine(DesignData.ErrorMessage);
                 }
             }
 
@@ -308,7 +308,7 @@ namespace ViewModels
 
             try
             {
-                if (DesignData.IsValid(out string errorMessage))
+                if (DesignData.IsValid())
                 {
                     CalculationData = new MechanicalDraftPerformanceCurveCalculationData();
 
@@ -328,8 +328,7 @@ namespace ViewModels
                 }
                 else
                 {
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(DesignData.ErrorMessage);
                     returnValue = false;
                 }
             }
@@ -355,7 +354,7 @@ namespace ViewModels
             {
                 MechanicalDraftPerformanceCurveCalculationLibrary calculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
 
-                if (DesignData.IsValid(out string errorMessage))
+                if (DesignData.IsValid())
                 {
                     CalculationData = new MechanicalDraftPerformanceCurveCalculationData();
 
@@ -373,8 +372,7 @@ namespace ViewModels
                 }
                 else
                 {
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(DesignData.ErrorMessage);
                     returnValue = false;
                 }
             }

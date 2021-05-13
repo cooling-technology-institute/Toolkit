@@ -156,51 +156,49 @@ namespace ViewModels
 
         public bool LoadData(RangedTemperaturesDesignData rangedTemperaturesDesignData)
         {
-            string errorMessage = string.Empty;
+            WaterFlowRateDataValue.UpdateCurrentValue(rangedTemperaturesDesignData.WaterFlowRate);
 
-            WaterFlowRateDataValue.UpdateCurrentValue(rangedTemperaturesDesignData.WaterFlowRate, out errorMessage);
+            WetBulbTemperatureDataValue1.UpdateCurrentValue(rangedTemperaturesDesignData.WetBulbTemperatures.Temperature1);
+            WetBulbTemperatureDataValue2.UpdateCurrentValue(rangedTemperaturesDesignData.WetBulbTemperatures.Temperature2);
+            WetBulbTemperatureDataValue3.UpdateCurrentValue(rangedTemperaturesDesignData.WetBulbTemperatures.Temperature3);
+            WetBulbTemperatureDataValue4.UpdateCurrentValue(rangedTemperaturesDesignData.WetBulbTemperatures.Temperature4);
+            WetBulbTemperatureDataValue5.UpdateCurrentValue(rangedTemperaturesDesignData.WetBulbTemperatures.Temperature5);
+            WetBulbTemperatureDataValue6.UpdateCurrentValue(rangedTemperaturesDesignData.WetBulbTemperatures.Temperature6);
 
-            WetBulbTemperatureDataValue1.UpdateCurrentValue(rangedTemperaturesDesignData.WetBulbTemperatures.Temperature1, out errorMessage);
-            WetBulbTemperatureDataValue2.UpdateCurrentValue(rangedTemperaturesDesignData.WetBulbTemperatures.Temperature2, out errorMessage);
-            WetBulbTemperatureDataValue3.UpdateCurrentValue(rangedTemperaturesDesignData.WetBulbTemperatures.Temperature3, out errorMessage);
-            WetBulbTemperatureDataValue4.UpdateCurrentValue(rangedTemperaturesDesignData.WetBulbTemperatures.Temperature4, out errorMessage);
-            WetBulbTemperatureDataValue5.UpdateCurrentValue(rangedTemperaturesDesignData.WetBulbTemperatures.Temperature5, out errorMessage);
-            WetBulbTemperatureDataValue6.UpdateCurrentValue(rangedTemperaturesDesignData.WetBulbTemperatures.Temperature6, out errorMessage);
+            Range1ColdWaterTemperatureDataValue1.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature1);
+            Range1ColdWaterTemperatureDataValue2.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature2);
+            Range1ColdWaterTemperatureDataValue3.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature3);
+            Range1ColdWaterTemperatureDataValue4.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature4);
+            Range1ColdWaterTemperatureDataValue5.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature5);
+            Range1ColdWaterTemperatureDataValue6.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature6);
 
-            Range1ColdWaterTemperatureDataValue1.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature1, out errorMessage);
-            Range1ColdWaterTemperatureDataValue2.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature2, out errorMessage);
-            Range1ColdWaterTemperatureDataValue3.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature3, out errorMessage);
-            Range1ColdWaterTemperatureDataValue4.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature4, out errorMessage);
-            Range1ColdWaterTemperatureDataValue5.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature5, out errorMessage);
-            Range1ColdWaterTemperatureDataValue6.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature6, out errorMessage);
+            Range2ColdWaterTemperatureDataValue1.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature1);
+            Range2ColdWaterTemperatureDataValue2.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature2);
+            Range2ColdWaterTemperatureDataValue3.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature3);
+            Range2ColdWaterTemperatureDataValue4.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature4);
+            Range2ColdWaterTemperatureDataValue5.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature5);
+            Range2ColdWaterTemperatureDataValue6.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature6);
 
-            Range2ColdWaterTemperatureDataValue1.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature1, out errorMessage);
-            Range2ColdWaterTemperatureDataValue2.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature2, out errorMessage);
-            Range2ColdWaterTemperatureDataValue3.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature3, out errorMessage);
-            Range2ColdWaterTemperatureDataValue4.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature4, out errorMessage);
-            Range2ColdWaterTemperatureDataValue5.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature5, out errorMessage);
-            Range2ColdWaterTemperatureDataValue6.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature6, out errorMessage);
+            Range3ColdWaterTemperatureDataValue1.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature1);
+            Range3ColdWaterTemperatureDataValue2.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature2);
+            Range3ColdWaterTemperatureDataValue3.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature3);
+            Range3ColdWaterTemperatureDataValue4.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature4);
+            Range3ColdWaterTemperatureDataValue5.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature5);
+            Range3ColdWaterTemperatureDataValue6.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature6);
 
-            Range3ColdWaterTemperatureDataValue1.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature1, out errorMessage);
-            Range3ColdWaterTemperatureDataValue2.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature2, out errorMessage);
-            Range3ColdWaterTemperatureDataValue3.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature3, out errorMessage);
-            Range3ColdWaterTemperatureDataValue4.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature4, out errorMessage);
-            Range3ColdWaterTemperatureDataValue5.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature5, out errorMessage);
-            Range3ColdWaterTemperatureDataValue6.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature6, out errorMessage);
+            Range4ColdWaterTemperatureDataValue1.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature1);
+            Range4ColdWaterTemperatureDataValue2.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature2);
+            Range4ColdWaterTemperatureDataValue3.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature3);
+            Range4ColdWaterTemperatureDataValue4.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature4);
+            Range4ColdWaterTemperatureDataValue5.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature5);
+            Range4ColdWaterTemperatureDataValue6.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature6);
 
-            Range4ColdWaterTemperatureDataValue1.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature1, out errorMessage);
-            Range4ColdWaterTemperatureDataValue2.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature2, out errorMessage);
-            Range4ColdWaterTemperatureDataValue3.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature3, out errorMessage);
-            Range4ColdWaterTemperatureDataValue4.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature4, out errorMessage);
-            Range4ColdWaterTemperatureDataValue5.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature5, out errorMessage);
-            Range4ColdWaterTemperatureDataValue6.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature6, out errorMessage);
-
-            Range5ColdWaterTemperatureDataValue1.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature1, out errorMessage);
-            Range5ColdWaterTemperatureDataValue2.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature2, out errorMessage);
-            Range5ColdWaterTemperatureDataValue3.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature3, out errorMessage);
-            Range5ColdWaterTemperatureDataValue4.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature4, out errorMessage);
-            Range5ColdWaterTemperatureDataValue5.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature5, out errorMessage);
-            Range5ColdWaterTemperatureDataValue6.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature6, out errorMessage);
+            Range5ColdWaterTemperatureDataValue1.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature1);
+            Range5ColdWaterTemperatureDataValue2.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature2);
+            Range5ColdWaterTemperatureDataValue3.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature3);
+            Range5ColdWaterTemperatureDataValue4.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature4);
+            Range5ColdWaterTemperatureDataValue5.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature5);
+            Range5ColdWaterTemperatureDataValue6.UpdateCurrentValue(rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature6);
 
             return true;
         }

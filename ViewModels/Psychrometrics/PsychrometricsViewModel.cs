@@ -38,9 +38,17 @@ namespace ViewModels
             }
         }
 
-        public bool EnthalpyDataValueUpdateValue(string value, out string errorMessage)
+        public bool EnthalpyDataValueUpdateValue(string value)
         {
-            return PsychrometricsInputData.EnthalpyDataValue.UpdateValue(value, out errorMessage);
+            return PsychrometricsInputData.EnthalpyDataValue.UpdateValue(value);
+        }
+
+        public string EnthalpyDataValueErrorMessage
+        {
+            get
+            {
+                return PsychrometricsInputData.EnthalpyDataValue.ErrorMessage;
+            }
         }
 
         public string EnthalpyDataValueToolTip
@@ -67,9 +75,17 @@ namespace ViewModels
             }
         }
 
-        public bool ElevationDataValueUpdateValue(string value, out string errorMessage)
+        public bool ElevationDataValueUpdateValue(string value)
         {
-            return PsychrometricsInputData.ElevationDataValue.UpdateValue(value, out errorMessage);
+            return PsychrometricsInputData.ElevationDataValue.UpdateValue(value);
+        }
+
+        public string ElevationDataValueErrorMessage
+        {
+            get
+            {
+                return PsychrometricsInputData.ElevationDataValue.ErrorMessage;
+            }
         }
 
         public string ElevationDataValueToolTip
@@ -96,9 +112,17 @@ namespace ViewModels
             }
         }
 
-        public bool BarometricPressureDataValueUpdateValue(string value, out string errorMessage)
+        public bool BarometricPressureDataValueUpdateValue(string value)
         {
-            return PsychrometricsInputData.BarometricPressureDataValue.UpdateValue(value, out errorMessage);
+            return PsychrometricsInputData.BarometricPressureDataValue.UpdateValue(value);
+        }
+
+        public string BarometricPressureDataValueErrorMessage
+        {
+            get
+            {
+                return PsychrometricsInputData.BarometricPressureDataValue.ErrorMessage;
+            }
         }
 
         public string BarometricPressureDataValueToolTip
@@ -125,9 +149,17 @@ namespace ViewModels
             }
         }
 
-        public bool RelativeHumidityDataValueUpdateValue(string value, out string errorMessage)
+        public bool RelativeHumidityDataValueUpdateValue(string value)
         {
-            return PsychrometricsInputData.RelativeHumidityDataValue.UpdateValue(value, out errorMessage);
+            return PsychrometricsInputData.RelativeHumidityDataValue.UpdateValue(value);
+        }
+
+        public string RelativeHumidityDataValueErrorMessage
+        {
+            get
+            {
+                return PsychrometricsInputData.RelativeHumidityDataValue.ErrorMessage;
+            }
         }
 
         public string RelativeHumidityDataValueToolTip
@@ -153,11 +185,19 @@ namespace ViewModels
             }
         }
 
-        public bool WetBulbTemperatureDataValueUpdateValue(string value, out string errorMessage)
+        public bool WetBulbTemperatureDataValueUpdateValue(string value)
         {
-            return PsychrometricsInputData.WetBulbTemperatureDataValue.UpdateValue(value, out errorMessage);
+            return PsychrometricsInputData.WetBulbTemperatureDataValue.UpdateValue(value);
         }
 
+        public string WetBulbTemperatureDataValueErrorMessage
+        {
+            get
+            {
+                return PsychrometricsInputData.WetBulbTemperatureDataValue.ErrorMessage;
+            }
+        }
+        
         public string WetBulbTemperatureDataValueToolTip
         {
             get
@@ -182,9 +222,17 @@ namespace ViewModels
             }
         }
 
-        public bool DryBulbTemperatureDataValueUpdateValue(string value, out string errorMessage)
+        public bool DryBulbTemperatureDataValueUpdateValue(string value)
         {
-            return PsychrometricsInputData.DryBulbTemperatureDataValue.UpdateValue(value, out errorMessage);
+            return PsychrometricsInputData.DryBulbTemperatureDataValue.UpdateValue(value);
+        }
+
+        public string DryBulbTemperatureDataValueErrorMessage
+        {
+            get
+            {
+                return PsychrometricsInputData.DryBulbTemperatureDataValue.ErrorMessage;
+            }
         }
 
         public string DryBulbTemperatureDataValueToolTip
@@ -268,9 +316,9 @@ namespace ViewModels
             return PsychrometricsOutputData.NameValueUnitsDataTable.DataTable;
         }
 
-        public bool UpdateCalculationType(PsychrometricsCalculationType psychrometricsCalculationType, out string errorMessage)
+        public bool UpdateCalculationType(PsychrometricsCalculationType psychrometricsCalculationType)
         {
-            errorMessage = string.Empty;
+            ErrorMessage = string.Empty;
 
             switch (psychrometricsCalculationType)
             {
@@ -281,7 +329,7 @@ namespace ViewModels
                     break;
 
                 default:
-                    errorMessage = "Invalid psychrometrics calculation type.";
+                    ErrorMessage = "Invalid psychrometrics calculation type.";
                     return false;
             }
 

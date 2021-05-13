@@ -20,6 +20,7 @@ namespace ViewModels
         public bool IsInternationalSystemOfUnits_SI { get; set; }
         public bool IsDemo { get; set; }
         public bool IsZeroValid { get; set; }
+        public string ErrorMessage { get; set; }
 
         public DataValue()
         {
@@ -35,26 +36,27 @@ namespace ViewModels
             InputValue = string.Empty;
             Format = string.Empty;
             ToolTip = string.Empty;
+            ErrorMessage = string.Empty;
         }
 
         public abstract void ConvertValue(bool isInternationalSystemOfUnits_SI);
 
-        public bool UpdateValue(string input, out string errorMessage)
+        public bool UpdateValue(string input)
         {
             InputValue = input;
-            return IsValidValue(out errorMessage);
+            return IsValidValue();
         }
 
-        public bool UpdateCurrentValue(double input, out string errorMessage)
+        public bool UpdateCurrentValue(double input)
         {
             InputValue = input.ToString(Format);
-            return IsValidValue(out errorMessage);
+            return IsValidValue();
         }
 
-        private bool IsValidValue(out string message)
+        private bool IsValidValue()
         {
-            message = string.Empty;
-            double value = Current;
+            ErrorMessage = string.Empty;
+            double value;
 
             if (!string.IsNullOrEmpty(InputValue))
             {
@@ -67,8 +69,7 @@ namespace ViewModels
                     }
                     else if ((value < Minimum) || (value > Maximum))
                     {
-                        value = Current;
-                        message = string.Format("The {0} input must be between {1} and {2}", InputMessage, Minimum, Maximum);
+                        ErrorMessage = string.Format("The {0} input must be between {1} and {2}", InputMessage, Minimum, Maximum);
                         IsValid = false;
                     }
                     else
@@ -79,13 +80,13 @@ namespace ViewModels
                 }
                 else
                 {
-                    message = string.Format("The {0} input is not a valid number", InputMessage);
+                    ErrorMessage = string.Format("The {0} input is not a valid number", InputMessage);
                     IsValid = false;
                 }
             }
             else
             {
-                message = string.Format("The {0} input is not a valid number", InputMessage);
+                ErrorMessage = string.Format("The {0} input is not a valid number", InputMessage);
                 IsValid = false;
             }
             

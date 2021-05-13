@@ -78,7 +78,7 @@ namespace ViewModels
                 //    {
                 //        value = UnitConverter.ConvertBarometricPressureToElevationInFeet(BarometricPressureDataValue.Current);
                 //    }
-                //    ElevationDataValue.UpdateCurrentValue(value, out errorMessage);
+                //    ElevationDataValue.UpdateCurrentValue(value);
                 //}
                 //else
                 //{
@@ -90,7 +90,7 @@ namespace ViewModels
                 //    {
                 //        value = UnitConverter.CalculatePsiToInchesOfMercury(UnitConverter.ConvertElevationInFeetToBarometricPressure(ElevationDataValue.Current));
                 //    }
-                //    BarometricPressureDataValue.UpdateCurrentValue(value, out errorMessage);
+                //    BarometricPressureDataValue.UpdateCurrentValue(value);
                 //}
 
                 isChanged = true;
@@ -111,7 +111,7 @@ namespace ViewModels
                 //    {
                 //        value = UnitConverter.ConvertBarometricPressureToElevationInFeet(BarometricPressureDataValue.Current);
                 //    }
-                //    ElevationDataValue.UpdateCurrentValue(value, out errorMessage);
+                //    ElevationDataValue.UpdateCurrentValue(value);
                 //}
                 //else
                 //{
@@ -123,7 +123,7 @@ namespace ViewModels
                 //    {
                 //        value = UnitConverter.CalculatePsiToInchesOfMercury(UnitConverter.ConvertElevationInFeetToBarometricPressure(ElevationDataValue.Current));
                 //    }
-                //    BarometricPressureDataValue.UpdateCurrentValue(value, out errorMessage);
+                //    BarometricPressureDataValue.UpdateCurrentValue(value);
                 //}
 
                 isChanged = true;
@@ -136,7 +136,6 @@ namespace ViewModels
         {
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
-            string label = "Demand Curve Data: ";
 
             try
             {
@@ -144,67 +143,58 @@ namespace ViewModels
 
                 IsElevation = data.IsElevation;
 
-                if (!WetBulbTemperatureDataValue.UpdateCurrentValue(data.WetBulbTemperature, out string errorMessage))
+                if (!WetBulbTemperatureDataValue.UpdateCurrentValue(data.WetBulbTemperature))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(WetBulbTemperatureDataValue.ErrorMessage);
                 }
 
-                if (!RangeDataValue.UpdateCurrentValue(data.Range, out errorMessage))
+                if (!RangeDataValue.UpdateCurrentValue(data.Range))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(RangeDataValue.ErrorMessage);
                 }
 
-                if (!ElevationDataValue.UpdateCurrentValue(data.Elevation, out errorMessage))
+                if (!ElevationDataValue.UpdateCurrentValue(data.Elevation))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(ElevationDataValue.ErrorMessage);
                 }
 
-                if (!BarometricPressureDataValue.UpdateCurrentValue(data.BarometricPressure, out errorMessage))
+                if (!BarometricPressureDataValue.UpdateCurrentValue(data.BarometricPressure))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(BarometricPressureDataValue.ErrorMessage);
                 }
 
-                if (!C1DataValue.UpdateCurrentValue(data.CurveC1, out errorMessage))
+                if (!C1DataValue.UpdateCurrentValue(data.CurveC1))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(C1DataValue.ErrorMessage);
                 }
 
-                if (!SlopeDataValue.UpdateCurrentValue(data.CurveC2, out errorMessage))
+                if (!SlopeDataValue.UpdateCurrentValue(data.CurveC2))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(SlopeDataValue.ErrorMessage);
                 }
 
-                if (!MinimumDataValue.UpdateCurrentValue(data.CurveMinimum, out errorMessage))
+                if (!MinimumDataValue.UpdateCurrentValue(data.CurveMinimum))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(MinimumDataValue.ErrorMessage);
                 }
 
-                if (!MaximumDataValue.UpdateCurrentValue(data.CurveMaximum, out errorMessage))
+                if (!MaximumDataValue.UpdateCurrentValue(data.CurveMaximum))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(MaximumDataValue.ErrorMessage);
                 }
 
-                if (!LiquidToGasRatioDataValue.UpdateCurrentValue(data.LiquidToGasRatio, out errorMessage))
+                if (!LiquidToGasRatioDataValue.UpdateCurrentValue(data.LiquidToGasRatio))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(LiquidToGasRatioDataValue.ErrorMessage);
                 }
             }
             catch (Exception e)

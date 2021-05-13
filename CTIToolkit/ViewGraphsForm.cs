@@ -50,10 +50,6 @@ namespace CTIToolkit
             chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 1.0;
             chart.ChartAreas[0].AxisX.MajorTickMark.IntervalOffset = 1.0;
             chart.ChartAreas[0].AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
-            //chart.ChartAreas[0].AxisX.LabelAutoFitMaxFontSize = 8;
-            //chart.ChartAreas[0].AxisX.LabelAutoFitMinFontSize = 7;
-            //chart.ChartAreas[0].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.None;
-            //chart.ChartAreas[0].AxisX.MinorGrid.Enabled = true;
             chart.ChartAreas[0].AxisX.MinorTickMark.Interval = 0.1;
             chart.ChartAreas[0].AxisX.Minimum = calculationData.FindMinimumWetBulbTempurature(waterFlowRate);
             chart.ChartAreas[0].AxisX.Maximum = calculationData.FindMaximumWetBulbTempurature(waterFlowRate);
@@ -67,10 +63,6 @@ namespace CTIToolkit
             chart.ChartAreas[0].AxisY.MajorTickMark.Interval = 1.0;
             chart.ChartAreas[0].AxisY.MajorTickMark.IntervalOffset = 1.0;
             chart.ChartAreas[0].AxisY.IntervalAutoMode = IntervalAutoMode.VariableCount;
-            //chart.ChartAreas[0].AxisY.LabelAutoFitMaxFontSize = 8;
-            //chart.ChartAreas[0].AxisY.LabelAutoFitMinFontSize = 7;
-            //chart.ChartAreas[0].AxisY.LabelAutoFitStyle = LabelAutoFitStyles.None;
-            //chart.ChartAreas[0].AxisY.MinorGrid.Enabled = true;
             chart.ChartAreas[0].AxisY.MinorTickMark.Interval = 0.1;
             chart.ChartAreas[0].AxisY.Minimum = calculationData.FindMinimumColdWaterTempurature(waterFlowRate);
             chart.ChartAreas[0].AxisY.Maximum = calculationData.FindMaximumColdWaterTempurature(waterFlowRate);

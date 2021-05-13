@@ -85,40 +85,34 @@ namespace ViewModels
                 IsElevation = psychrometricsDataFile.IsElevation;
                 IsInternationalSystemOfUnits_SI = psychrometricsDataFile.IsInternationalSystemOfUnits_SI;
 
-                if (!EnthalpyDataValue.UpdateCurrentValue(psychrometricsDataFile.Enthalpy, out string errorMessage))
+                if (!EnthalpyDataValue.UpdateCurrentValue(psychrometricsDataFile.Enthalpy))
                 {
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(EnthalpyDataValue.ErrorMessage);
                     returnValue = false;
                 }
-                if (!ElevationDataValue.UpdateCurrentValue(psychrometricsDataFile.Elevation, out errorMessage))
+                if (!ElevationDataValue.UpdateCurrentValue(psychrometricsDataFile.Elevation))
                 {
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(ElevationDataValue.ErrorMessage);
                     returnValue = false;
                 }
-                if (!BarometricPressureDataValue.UpdateCurrentValue(psychrometricsDataFile.BarometricPressure, out errorMessage))
+                if (!BarometricPressureDataValue.UpdateCurrentValue(psychrometricsDataFile.BarometricPressure))
                 {
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(BarometricPressureDataValue.ErrorMessage);
                     returnValue = false;
                 }
-                if (!RelativeHumidityDataValue.UpdateCurrentValue(psychrometricsDataFile.RelativeHumidity, out errorMessage))
+                if (!RelativeHumidityDataValue.UpdateCurrentValue(psychrometricsDataFile.RelativeHumidity))
                 {
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(RelativeHumidityDataValue.ErrorMessage);
                     returnValue = false;
                 }
-                if (!WetBulbTemperatureDataValue.UpdateCurrentValue(psychrometricsDataFile.WetBulbTemperature, out errorMessage))
+                if (!WetBulbTemperatureDataValue.UpdateCurrentValue(psychrometricsDataFile.WetBulbTemperature))
                 {
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(WetBulbTemperatureDataValue.ErrorMessage);
                     returnValue = false;
                 }
-                if (!DryBulbTemperatureDataValue.UpdateCurrentValue(psychrometricsDataFile.DryBulbTemperature, out errorMessage))
+                if (!DryBulbTemperatureDataValue.UpdateCurrentValue(psychrometricsDataFile.DryBulbTemperature))
                 {
-                    stringBuilder.AppendLine(errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(DryBulbTemperatureDataValue.ErrorMessage);
                     returnValue = false;
                 }
 

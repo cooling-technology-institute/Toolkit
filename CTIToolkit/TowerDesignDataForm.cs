@@ -297,21 +297,19 @@ namespace CTIToolkit
 
         private void WaterFlowRate_Validating(object sender, CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (WaterFlowRate.Text != TowerDesignData.WaterFlowRateDataValue.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignData.WaterFlowRateDataValue.UpdateValue(WaterFlowRate.Text, out errorMessage))
+            if (!TowerDesignData.WaterFlowRateDataValue.UpdateValue(WaterFlowRate.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 WaterFlowRate.Select(0, WaterFlowRate.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(WaterFlowRate, errorMessage);
+                this.errorProvider1.SetError(WaterFlowRate, TowerDesignData.WaterFlowRateDataValue.ErrorMessage);
             }
         }
 
@@ -322,21 +320,19 @@ namespace CTIToolkit
 
         private void HotWaterTemperature_Validating(object sender, CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (HotWaterTemperature.Text != TowerDesignData.HotWaterTemperatureDataValue.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignData.HotWaterTemperatureDataValue.UpdateValue(HotWaterTemperature.Text, out errorMessage))
+            if (!TowerDesignData.HotWaterTemperatureDataValue.UpdateValue(HotWaterTemperature.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 HotWaterTemperature.Select(0, HotWaterTemperature.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(HotWaterTemperature, errorMessage);
+                this.errorProvider1.SetError(HotWaterTemperature, TowerDesignData.HotWaterTemperatureDataValue.ErrorMessage);
             }
             else if (TowerDesignData.HotWaterTemperatureDataValue.Current <= TowerDesignData.ColdWaterTemperatureDataValue.Current)
             {
@@ -357,21 +353,19 @@ namespace CTIToolkit
 
         private void ColdWaterTemperature_Validating(object sender, CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (ColdWaterTemperature.Text != TowerDesignData.ColdWaterTemperatureDataValue.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignData.ColdWaterTemperatureDataValue.UpdateValue(ColdWaterTemperature.Text, out errorMessage))
+            if (!TowerDesignData.ColdWaterTemperatureDataValue.UpdateValue(ColdWaterTemperature.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 ColdWaterTemperature.Select(0, ColdWaterTemperature.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(ColdWaterTemperature, errorMessage);
+                this.errorProvider1.SetError(ColdWaterTemperature, TowerDesignData.ColdWaterTemperatureDataValue.ErrorMessage);
             }
             else if (TowerDesignData.ColdWaterTemperatureDataValue.Current >= TowerDesignData.HotWaterTemperatureDataValue.Current)
             {
@@ -391,21 +385,19 @@ namespace CTIToolkit
 
         private void WetBulbTemperature_Validating(object sender, CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (WetBulbTemperature.Text != TowerDesignData.WetBulbTemperatureDataValue.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignData.WetBulbTemperatureDataValue.UpdateValue(WetBulbTemperature.Text, out errorMessage))
+            if (!TowerDesignData.WetBulbTemperatureDataValue.UpdateValue(WetBulbTemperature.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 WetBulbTemperature.Select(0, WetBulbTemperature.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(WetBulbTemperature, errorMessage);
+                this.errorProvider1.SetError(WetBulbTemperature, TowerDesignData.WetBulbTemperatureDataValue.ErrorMessage);
             }
             else if (TowerDesignData.WetBulbTemperatureDataValue.Current >= TowerDesignData.DryBulbTemperatureDataValue.Current)
             {
@@ -436,21 +428,19 @@ namespace CTIToolkit
 
         private void FanDriverPower_Validating(object sender, CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (FanDriverPower.Text != TowerDesignData.FanDriverPowerDataValue.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignData.FanDriverPowerDataValue.UpdateValue(FanDriverPower.Text, out errorMessage))
+            if (!TowerDesignData.FanDriverPowerDataValue.UpdateValue(FanDriverPower.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 FanDriverPower.Select(0, FanDriverPower.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(FanDriverPower, errorMessage);
+                this.errorProvider1.SetError(FanDriverPower, TowerDesignData.FanDriverPowerDataValue.ErrorMessage);
             }
         }
 
@@ -461,21 +451,19 @@ namespace CTIToolkit
 
         private void BarometricPressure_Validating(object sender, CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (BarometricPressure.Text != TowerDesignData.BarometricPressureDataValue.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignData.BarometricPressureDataValue.UpdateValue(BarometricPressure.Text, out errorMessage))
+            if (!TowerDesignData.BarometricPressureDataValue.UpdateValue(BarometricPressure.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 BarometricPressure.Select(0, BarometricPressure.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(BarometricPressure, errorMessage);
+                this.errorProvider1.SetError(BarometricPressure, TowerDesignData.BarometricPressureDataValue.ErrorMessage);
             }
         }
 
@@ -486,21 +474,19 @@ namespace CTIToolkit
 
         private void LiquidToGasRatio_Validating(object sender, CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (LiquidToGasRatio.Text != TowerDesignData.LiquidToGasRatioDataValue.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignData.LiquidToGasRatioDataValue.UpdateValue(LiquidToGasRatio.Text, out errorMessage))
+            if (!TowerDesignData.LiquidToGasRatioDataValue.UpdateValue(LiquidToGasRatio.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 LiquidToGasRatio.Select(0, LiquidToGasRatio.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(LiquidToGasRatio, errorMessage);
+                this.errorProvider1.SetError(LiquidToGasRatio, TowerDesignData.LiquidToGasRatioDataValue.ErrorMessage);
             }
         }
 
@@ -516,21 +502,19 @@ namespace CTIToolkit
 
         private void Range1_Validating(object sender, CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range1.Text != TowerDesignData.Range1Value.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignData.Range1Value.UpdateValue(Range1.Text, out errorMessage))
+            if (!TowerDesignData.Range1Value.UpdateValue(Range1.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range1.Select(0, Range1.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range1, errorMessage);
+                this.errorProvider1.SetError(Range1, TowerDesignData.Range1Value.ErrorMessage);
             }
             else if (!TowerDesignData.CheckRangeOrder())
             {
@@ -558,21 +542,19 @@ namespace CTIToolkit
 
         private void Range2_Validating(object sender, CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range2.Text != TowerDesignData.Range2Value.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignData.Range2Value.UpdateValue(Range2.Text, out errorMessage))
+            if (!TowerDesignData.Range2Value.UpdateValue(Range2.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range2.Select(0, Range2.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range2, errorMessage);
+                this.errorProvider1.SetError(Range2, TowerDesignData.Range2Value.ErrorMessage);
             }
             else if (!TowerDesignData.CheckRangeOrder())
             {
@@ -600,21 +582,19 @@ namespace CTIToolkit
 
         private void Range3_Validating(object sender, CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range3.Text != TowerDesignData.Range3Value.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignData.Range3Value.UpdateValue(Range3.Text, out errorMessage))
+            if (!TowerDesignData.Range3Value.UpdateValue(Range3.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range3.Select(0, Range3.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range3, errorMessage);
+                this.errorProvider1.SetError(Range3, TowerDesignData.Range3Value.ErrorMessage);
             }
             else if (!TowerDesignData.CheckRangeOrder())
             {
@@ -638,21 +618,19 @@ namespace CTIToolkit
 
         private void Range4_Validating(object sender, CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range4.Text != TowerDesignData.Range4Value.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignData.Range4Value.UpdateValue(Range4.Text, out errorMessage))
+            if (!TowerDesignData.Range4Value.UpdateValue(Range4.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range4.Select(0, Range4.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range4, errorMessage);
+                this.errorProvider1.SetError(Range4, TowerDesignData.Range4Value.ErrorMessage);
             }
             else if (!TowerDesignData.CheckRangeOrder())
             {
@@ -676,21 +654,19 @@ namespace CTIToolkit
 
         private void Range5_Validating(object sender, CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
             if (Range5.Text != TowerDesignData.Range5Value.InputValue)
             {
                 IsChanged = true;
             }
 
-            if (!TowerDesignData.Range5Value.UpdateValue(Range5.Text, out errorMessage))
+            if (!TowerDesignData.Range5Value.UpdateValue(Range5.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range5.Select(0, Range5.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range5, errorMessage);
+                this.errorProvider1.SetError(Range5, TowerDesignData.Range5Value.ErrorMessage);
             }
             else if (!TowerDesignData.CheckRangeOrder())
             {
@@ -710,16 +686,14 @@ namespace CTIToolkit
 
         private void AddNewWaterFlowRate_Validating(object sender, CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
-            if (!TowerDesignData.AddWaterFlowRateDataValue.UpdateValue(AddNewWaterFlowRate.Text, out errorMessage))
+            if (!TowerDesignData.AddWaterFlowRateDataValue.UpdateValue(AddNewWaterFlowRate.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 AddNewWaterFlowRate.Select(0, AddNewWaterFlowRate.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(AddNewWaterFlowRate, errorMessage);
+                this.errorProvider1.SetError(AddNewWaterFlowRate, TowerDesignData.AddWaterFlowRateDataValue.ErrorMessage);
             }
         }
 
@@ -728,14 +702,13 @@ namespace CTIToolkit
         private void AddWaterFlowRate()
         {
             IsChanged = true;
-            string errorMessage = string.Empty;
             ErrorMessage = string.Empty;
 
             TowerDesignCurveData towerDesignCurveData = new TowerDesignCurveData(IsDemo, IsInternationalSystemOfUnits_SI);
             RangedTemperaturesDesignData rangedTemperaturesDesignData = new RangedTemperaturesDesignData();
             WaterFlowRateDataValue waterFlowRateDataValue = new WaterFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
             
-            if (waterFlowRateDataValue.UpdateValue(AddNewWaterFlowRate.Text, out errorMessage))
+            if (waterFlowRateDataValue.UpdateValue(AddNewWaterFlowRate.Text))
             {
                 rangedTemperaturesDesignData.WaterFlowRate = waterFlowRateDataValue.Current;
 
@@ -754,7 +727,7 @@ namespace CTIToolkit
             }
             else
             {
-                ErrorMessage = errorMessage;
+                ErrorMessage = waterFlowRateDataValue.ErrorMessage;
             }
         }
 
@@ -896,8 +869,6 @@ namespace CTIToolkit
 
         private void WaterFlowRateUpdate_Click(object sender, EventArgs e)
         {
-            string errorMessage;
-
             CustomMenuItem customMenuItem = sender as CustomMenuItem;
             RangedTemperatureDesignUserControl rangedTemperatureDesignUserControl = TowerDesignDataTabControl.TabPages[customMenuItem.TabIndex].Controls[0] as RangedTemperatureDesignUserControl;
 
@@ -907,7 +878,7 @@ namespace CTIToolkit
 
                 if (updateWaterFlowRateForm.ShowDialog(this) == DialogResult.OK)
                 {
-                    rangedTemperatureDesignUserControl.TowerDesignCurveData.WaterFlowRateDataValue.UpdateCurrentValue(updateWaterFlowRateForm.WaterFlowRateDataValue.Current, out errorMessage);
+                    rangedTemperatureDesignUserControl.TowerDesignCurveData.WaterFlowRateDataValue.UpdateCurrentValue(updateWaterFlowRateForm.WaterFlowRateDataValue.Current);
                     TowerDesignDataTabControl.TabPages[customMenuItem.TabIndex].Text = updateWaterFlowRateForm.WaterFlowRateDataValue.InputValue;
                     IsChanged = true;
                 }

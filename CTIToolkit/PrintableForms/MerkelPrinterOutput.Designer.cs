@@ -49,10 +49,10 @@ namespace CTIToolkit.PrintableForms
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(3, 358);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 19);
+            this.label2.Size = new System.Drawing.Size(48, 15);
             this.label2.TabIndex = 30;
             this.label2.Text = "Output:";
             // 
@@ -106,12 +106,12 @@ namespace CTIToolkit.PrintableForms
             // 
             this.OptionalLabelTextBox.BackColor = System.Drawing.Color.White;
             this.OptionalLabelTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.OptionalLabelTextBox.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OptionalLabelTextBox.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OptionalLabelTextBox.ForeColor = System.Drawing.Color.Black;
-            this.OptionalLabelTextBox.Location = new System.Drawing.Point(143, 34);
+            this.OptionalLabelTextBox.Location = new System.Drawing.Point(143, 28);
             this.OptionalLabelTextBox.Name = "OptionalLabelTextBox";
             this.OptionalLabelTextBox.ReadOnly = true;
-            this.OptionalLabelTextBox.Size = new System.Drawing.Size(620, 28);
+            this.OptionalLabelTextBox.Size = new System.Drawing.Size(620, 22);
             this.OptionalLabelTextBox.TabIndex = 28;
             this.OptionalLabelTextBox.Text = "Label";
             this.OptionalLabelTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -119,10 +119,10 @@ namespace CTIToolkit.PrintableForms
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 145);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 19);
+            this.label1.Size = new System.Drawing.Size(96, 15);
             this.label1.TabIndex = 27;
             this.label1.Text = "Input Properties:";
             // 
@@ -130,12 +130,12 @@ namespace CTIToolkit.PrintableForms
             // 
             this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.ForeColor = System.Drawing.Color.Black;
             this.textBox1.Location = new System.Drawing.Point(143, 0);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(620, 28);
+            this.textBox1.Size = new System.Drawing.Size(620, 22);
             this.textBox1.TabIndex = 26;
             this.textBox1.Text = "CTI Merkel Report";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -198,7 +198,7 @@ namespace CTIToolkit.PrintableForms
             this.Controls.Add(this.InputPropertiesDataGridView);
             this.Controls.Add(this.CTILogo);
             this.Name = "MerkelPrinterOutput";
-            this.Size = new System.Drawing.Size(876, 592);
+            this.Size = new System.Drawing.Size(786, 592);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InputPropertiesDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CTILogo)).EndInit();

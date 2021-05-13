@@ -22,7 +22,6 @@ namespace ViewModels
             IsDemo = isDemo;
             InputMessage = "Range";
             Format = "F2";
-            IsZeroValid = true;
             SetDefaultMinMax(isInternationalSystemOfUnits_SI);
             Current = Default;
             SetInputAndTooltip(isInternationalSystemOfUnits_SI);

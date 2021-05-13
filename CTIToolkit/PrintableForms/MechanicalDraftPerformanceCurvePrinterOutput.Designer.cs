@@ -54,7 +54,7 @@ namespace CTIToolkit
             this.ColdVsRange = new System.Windows.Forms.Label();
             this.ColdVsWaterFlowTitle = new System.Windows.Forms.Label();
             this.ColdVsWaterFlow = new System.Windows.Forms.Label();
-            this.ColdVsWaterFLowDataGridView = new System.Windows.Forms.DataGridView();
+            this.ColdVsWaterFlowDataGridView = new System.Windows.Forms.DataGridView();
             this.ExitAirTitle = new System.Windows.Forms.Label();
             this.ExitAirDataGridView = new System.Windows.Forms.DataGridView();
             this.TestResultTitle = new System.Windows.Forms.Label();
@@ -63,7 +63,7 @@ namespace CTIToolkit
             ((System.ComponentModel.ISupportInitialize)(this.DesignTestDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CTILogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ColdVsRangeDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ColdVsWaterFLowDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ColdVsWaterFlowDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ExitAirDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TestResultDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -72,12 +72,12 @@ namespace CTIToolkit
             // 
             this.OptionalLabelTextBox.BackColor = System.Drawing.Color.White;
             this.OptionalLabelTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.OptionalLabelTextBox.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OptionalLabelTextBox.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OptionalLabelTextBox.ForeColor = System.Drawing.Color.Black;
-            this.OptionalLabelTextBox.Location = new System.Drawing.Point(143, 34);
+            this.OptionalLabelTextBox.Location = new System.Drawing.Point(143, 28);
             this.OptionalLabelTextBox.Name = "OptionalLabelTextBox";
             this.OptionalLabelTextBox.ReadOnly = true;
-            this.OptionalLabelTextBox.Size = new System.Drawing.Size(620, 28);
+            this.OptionalLabelTextBox.Size = new System.Drawing.Size(611, 22);
             this.OptionalLabelTextBox.TabIndex = 28;
             this.OptionalLabelTextBox.Text = "Label";
             this.OptionalLabelTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -85,10 +85,10 @@ namespace CTIToolkit
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 166);
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 151);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(235, 19);
+            this.label1.Size = new System.Drawing.Size(206, 15);
             this.label1.TabIndex = 27;
             this.label1.Text = "Cooling Tower Design and Test Data:";
             // 
@@ -96,12 +96,12 @@ namespace CTIToolkit
             // 
             this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.ForeColor = System.Drawing.Color.Black;
             this.textBox1.Location = new System.Drawing.Point(143, 0);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(620, 28);
+            this.textBox1.Size = new System.Drawing.Size(611, 22);
             this.textBox1.TabIndex = 26;
             this.textBox1.Text = "CTI Mechanical Draft Performance Curve Test Report";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -132,11 +132,11 @@ namespace CTIToolkit
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DesignTestDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.DesignTestDataGridView.Enabled = false;
-            this.DesignTestDataGridView.Location = new System.Drawing.Point(7, 188);
+            this.DesignTestDataGridView.Location = new System.Drawing.Point(7, 173);
             this.DesignTestDataGridView.Name = "DesignTestDataGridView";
             this.DesignTestDataGridView.RowHeadersVisible = false;
             this.DesignTestDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.DesignTestDataGridView.Size = new System.Drawing.Size(646, 233);
+            this.DesignTestDataGridView.Size = new System.Drawing.Size(711, 236);
             this.DesignTestDataGridView.TabIndex = 25;
             this.DesignTestDataGridView.TabStop = false;
             // 
@@ -155,7 +155,7 @@ namespace CTIToolkit
             // 
             this.TowerTypeTextBox.BackColor = System.Drawing.Color.White;
             this.TowerTypeTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TowerTypeTextBox.Location = new System.Drawing.Point(222, 144);
+            this.TowerTypeTextBox.Location = new System.Drawing.Point(217, 131);
             this.TowerTypeTextBox.Name = "TowerTypeTextBox";
             this.TowerTypeTextBox.ReadOnly = true;
             this.TowerTypeTextBox.Size = new System.Drawing.Size(462, 13);
@@ -167,7 +167,7 @@ namespace CTIToolkit
             // 
             this.TowerManufacturerTextBox.BackColor = System.Drawing.Color.White;
             this.TowerManufacturerTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TowerManufacturerTextBox.Location = new System.Drawing.Point(222, 125);
+            this.TowerManufacturerTextBox.Location = new System.Drawing.Point(217, 112);
             this.TowerManufacturerTextBox.Name = "TowerManufacturerTextBox";
             this.TowerManufacturerTextBox.ReadOnly = true;
             this.TowerManufacturerTextBox.Size = new System.Drawing.Size(462, 13);
@@ -179,7 +179,7 @@ namespace CTIToolkit
             // 
             this.LocationTextBox.BackColor = System.Drawing.Color.White;
             this.LocationTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.LocationTextBox.Location = new System.Drawing.Point(222, 106);
+            this.LocationTextBox.Location = new System.Drawing.Point(217, 93);
             this.LocationTextBox.Name = "LocationTextBox";
             this.LocationTextBox.ReadOnly = true;
             this.LocationTextBox.Size = new System.Drawing.Size(462, 13);
@@ -191,7 +191,7 @@ namespace CTIToolkit
             // 
             this.ProjectTextBox.BackColor = System.Drawing.Color.White;
             this.ProjectTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ProjectTextBox.Location = new System.Drawing.Point(222, 87);
+            this.ProjectTextBox.Location = new System.Drawing.Point(217, 74);
             this.ProjectTextBox.Name = "ProjectTextBox";
             this.ProjectTextBox.ReadOnly = true;
             this.ProjectTextBox.Size = new System.Drawing.Size(462, 13);
@@ -203,7 +203,7 @@ namespace CTIToolkit
             // 
             this.OwnerTextBox.BackColor = System.Drawing.Color.White;
             this.OwnerTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.OwnerTextBox.Location = new System.Drawing.Point(222, 68);
+            this.OwnerTextBox.Location = new System.Drawing.Point(217, 55);
             this.OwnerTextBox.Name = "OwnerTextBox";
             this.OwnerTextBox.ReadOnly = true;
             this.OwnerTextBox.Size = new System.Drawing.Size(462, 13);
@@ -241,58 +241,58 @@ namespace CTIToolkit
             this.ColdVsRangeDataGridView.Name = "ColdVsRangeDataGridView";
             this.ColdVsRangeDataGridView.RowHeadersVisible = false;
             this.ColdVsRangeDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.ColdVsRangeDataGridView.Size = new System.Drawing.Size(646, 161);
+            this.ColdVsRangeDataGridView.Size = new System.Drawing.Size(711, 161);
             this.ColdVsRangeDataGridView.TabIndex = 44;
             this.ColdVsRangeDataGridView.TabStop = false;
             // 
             // ColdVsRangeTitle
             // 
             this.ColdVsRangeTitle.AutoSize = true;
-            this.ColdVsRangeTitle.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ColdVsRangeTitle.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ColdVsRangeTitle.Location = new System.Drawing.Point(3, 441);
             this.ColdVsRangeTitle.Name = "ColdVsRangeTitle";
-            this.ColdVsRangeTitle.Size = new System.Drawing.Size(232, 19);
+            this.ColdVsRangeTitle.Size = new System.Drawing.Size(201, 15);
             this.ColdVsRangeTitle.TabIndex = 45;
             this.ColdVsRangeTitle.Text = "Cold Water Temperatures vs. Range:";
             // 
             // ColdVsRange
             // 
             this.ColdVsRange.AutoSize = true;
-            this.ColdVsRange.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ColdVsRange.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ColdVsRange.Location = new System.Drawing.Point(3, 465);
             this.ColdVsRange.Name = "ColdVsRange";
-            this.ColdVsRange.Size = new System.Drawing.Size(175, 19);
+            this.ColdVsRange.Size = new System.Drawing.Size(146, 15);
             this.ColdVsRange.TabIndex = 46;
             this.ColdVsRange.Text = "At 24.53 °C Test Wet Bulb";
             // 
             // ColdVsWaterFlowTitle
             // 
             this.ColdVsWaterFlowTitle.AutoSize = true;
-            this.ColdVsWaterFlowTitle.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ColdVsWaterFlowTitle.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ColdVsWaterFlowTitle.Location = new System.Drawing.Point(3, 699);
             this.ColdVsWaterFlowTitle.Name = "ColdVsWaterFlowTitle";
-            this.ColdVsWaterFlowTitle.Size = new System.Drawing.Size(257, 19);
+            this.ColdVsWaterFlowTitle.Size = new System.Drawing.Size(219, 15);
             this.ColdVsWaterFlowTitle.TabIndex = 47;
             this.ColdVsWaterFlowTitle.Text = "Cold Water Temperature vs. Water Flow";
             // 
             // ColdVsWaterFlow
             // 
             this.ColdVsWaterFlow.AutoSize = true;
-            this.ColdVsWaterFlow.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ColdVsWaterFlow.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ColdVsWaterFlow.Location = new System.Drawing.Point(3, 724);
             this.ColdVsWaterFlow.Name = "ColdVsWaterFlow";
-            this.ColdVsWaterFlow.Size = new System.Drawing.Size(333, 19);
+            this.ColdVsWaterFlow.Size = new System.Drawing.Size(278, 15);
             this.ColdVsWaterFlow.TabIndex = 48;
             this.ColdVsWaterFlow.Text = "At 24.53 °C Test Wet Bulb and 17.46 °C Test Range";
             // 
-            // ColdVsWaterFLowDataGridView
+            // ColdVsWaterFlowDataGridView
             // 
-            this.ColdVsWaterFLowDataGridView.AllowUserToAddRows = false;
-            this.ColdVsWaterFLowDataGridView.AllowUserToDeleteRows = false;
-            this.ColdVsWaterFLowDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.ColdVsWaterFLowDataGridView.BackgroundColor = System.Drawing.Color.White;
-            this.ColdVsWaterFLowDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ColdVsWaterFLowDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.ColdVsWaterFlowDataGridView.AllowUserToAddRows = false;
+            this.ColdVsWaterFlowDataGridView.AllowUserToDeleteRows = false;
+            this.ColdVsWaterFlowDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.ColdVsWaterFlowDataGridView.BackgroundColor = System.Drawing.Color.White;
+            this.ColdVsWaterFlowDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ColdVsWaterFlowDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -300,8 +300,8 @@ namespace CTIToolkit
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColdVsWaterFLowDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.ColdVsWaterFLowDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ColdVsWaterFlowDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.ColdVsWaterFlowDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -309,23 +309,23 @@ namespace CTIToolkit
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColdVsWaterFLowDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
-            this.ColdVsWaterFLowDataGridView.Enabled = false;
-            this.ColdVsWaterFLowDataGridView.Location = new System.Drawing.Point(7, 759);
-            this.ColdVsWaterFLowDataGridView.Name = "ColdVsWaterFLowDataGridView";
-            this.ColdVsWaterFLowDataGridView.RowHeadersVisible = false;
-            this.ColdVsWaterFLowDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.ColdVsWaterFLowDataGridView.Size = new System.Drawing.Size(646, 148);
-            this.ColdVsWaterFLowDataGridView.TabIndex = 49;
-            this.ColdVsWaterFLowDataGridView.TabStop = false;
+            this.ColdVsWaterFlowDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
+            this.ColdVsWaterFlowDataGridView.Enabled = false;
+            this.ColdVsWaterFlowDataGridView.Location = new System.Drawing.Point(7, 759);
+            this.ColdVsWaterFlowDataGridView.Name = "ColdVsWaterFlowDataGridView";
+            this.ColdVsWaterFlowDataGridView.RowHeadersVisible = false;
+            this.ColdVsWaterFlowDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.ColdVsWaterFlowDataGridView.Size = new System.Drawing.Size(711, 148);
+            this.ColdVsWaterFlowDataGridView.TabIndex = 49;
+            this.ColdVsWaterFlowDataGridView.TabStop = false;
             // 
             // ExitAirTitle
             // 
             this.ExitAirTitle.AutoSize = true;
-            this.ExitAirTitle.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExitAirTitle.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ExitAirTitle.Location = new System.Drawing.Point(3, 923);
             this.ExitAirTitle.Name = "ExitAirTitle";
-            this.ExitAirTitle.Size = new System.Drawing.Size(123, 19);
+            this.ExitAirTitle.Size = new System.Drawing.Size(105, 15);
             this.ExitAirTitle.TabIndex = 50;
             this.ExitAirTitle.Text = "Exit Air Properties:";
             // 
@@ -359,17 +359,17 @@ namespace CTIToolkit
             this.ExitAirDataGridView.Name = "ExitAirDataGridView";
             this.ExitAirDataGridView.RowHeadersVisible = false;
             this.ExitAirDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.ExitAirDataGridView.Size = new System.Drawing.Size(646, 75);
+            this.ExitAirDataGridView.Size = new System.Drawing.Size(711, 75);
             this.ExitAirDataGridView.TabIndex = 51;
             this.ExitAirDataGridView.TabStop = false;
             // 
             // TestResultTitle
             // 
             this.TestResultTitle.AutoSize = true;
-            this.TestResultTitle.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TestResultTitle.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TestResultTitle.Location = new System.Drawing.Point(3, 1062);
             this.TestResultTitle.Name = "TestResultTitle";
-            this.TestResultTitle.Size = new System.Drawing.Size(84, 19);
+            this.TestResultTitle.Size = new System.Drawing.Size(76, 15);
             this.TestResultTitle.TabIndex = 52;
             this.TestResultTitle.Text = "Test Results:";
             // 
@@ -403,7 +403,7 @@ namespace CTIToolkit
             this.TestResultDataGridView.Name = "TestResultDataGridView";
             this.TestResultDataGridView.RowHeadersVisible = false;
             this.TestResultDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.TestResultDataGridView.Size = new System.Drawing.Size(646, 75);
+            this.TestResultDataGridView.Size = new System.Drawing.Size(711, 75);
             this.TestResultDataGridView.TabIndex = 53;
             this.TestResultDataGridView.TabStop = false;
             // 
@@ -427,7 +427,7 @@ namespace CTIToolkit
             this.Controls.Add(this.TestResultTitle);
             this.Controls.Add(this.ExitAirDataGridView);
             this.Controls.Add(this.ExitAirTitle);
-            this.Controls.Add(this.ColdVsWaterFLowDataGridView);
+            this.Controls.Add(this.ColdVsWaterFlowDataGridView);
             this.Controls.Add(this.ColdVsWaterFlow);
             this.Controls.Add(this.ColdVsWaterFlowTitle);
             this.Controls.Add(this.ColdVsRange);
@@ -444,11 +444,11 @@ namespace CTIToolkit
             this.Controls.Add(this.DesignTestDataGridView);
             this.Controls.Add(this.CTILogo);
             this.Name = "MechanicalDraftPerformanceCurvePrinterOutput";
-            this.Size = new System.Drawing.Size(794, 1199);
+            this.Size = new System.Drawing.Size(757, 1199);
             ((System.ComponentModel.ISupportInitialize)(this.DesignTestDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CTILogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ColdVsRangeDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ColdVsWaterFLowDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ColdVsWaterFlowDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ExitAirDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TestResultDataGridView)).EndInit();
             this.ResumeLayout(false);
@@ -472,7 +472,7 @@ namespace CTIToolkit
         private System.Windows.Forms.Label ColdVsRange;
         private System.Windows.Forms.Label ColdVsWaterFlowTitle;
         private System.Windows.Forms.Label ColdVsWaterFlow;
-        private System.Windows.Forms.DataGridView ColdVsWaterFLowDataGridView;
+        private System.Windows.Forms.DataGridView ColdVsWaterFlowDataGridView;
         private System.Windows.Forms.Label ExitAirTitle;
         private System.Windows.Forms.DataGridView ExitAirDataGridView;
         private System.Windows.Forms.Label TestResultTitle;

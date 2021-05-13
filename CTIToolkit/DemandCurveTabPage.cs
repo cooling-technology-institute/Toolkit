@@ -1,6 +1,5 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 
-using CTIToolkit.Properties;
 using Models;
 using System;
 using System.Data;
@@ -235,6 +234,12 @@ namespace CTIToolkit
 
             if (DemandCurveViewModel.OpenDataFile(fileName))
             {
+                if(!DemandCurveViewModel.LoadDataFile())
+                {
+                    returnValue = false;
+                    stringBuilder.AppendLine(DemandCurveViewModel.ErrorMessage);
+                }
+
                 if (DemandCurveViewModel.IsInternationalSystemOfUnits_SI != IsInternationalSystemOfUnits_SI)
                 {
                     ToolkitMain main = this.Parent.Parent.Parent as ToolkitMain;
@@ -246,7 +251,10 @@ namespace CTIToolkit
 
                 SetDisplayedValues();
 
-                Calculate();
+                if(returnValue)
+                {
+                    Calculate();
+                }
             }
             else
             {
@@ -257,7 +265,7 @@ namespace CTIToolkit
             {
                 ErrorMessage = stringBuilder.ToString();
             }
-            
+
             return returnValue;
         }
 
@@ -269,10 +277,6 @@ namespace CTIToolkit
             if (DemandCurveViewModel.OpenNewDataFile(fileName))
             {
                 SetDisplayedValues();
-                //{
-                //    stringBuilder.AppendLine(ErrorMessage);
-                //    returnValue = false;
-                //}
             }
             else
             {
@@ -416,6 +420,14 @@ namespace CTIToolkit
             // update page
         }
 
+        private void ValidatedValues()
+        {
+            if (!DemandCurveViewModel.LiquidToGasRatioDataValueIsValid)
+            {
+                errorProvider1.SetError(LiquidToGasRatioValue, DemandCurveViewModel.LiquidToGasRatioDataValueErrorMessage);
+            }
+        }
+
         private void LiquidToGasRatioValue_Validated(object sender, EventArgs e)
         {
             errorProvider1.SetError(LiquidToGasRatioValue, "");
@@ -423,14 +435,14 @@ namespace CTIToolkit
 
         private void LiquidToGasRatioValue_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!DemandCurveViewModel.LiquidToGasRatioDataValueUpdateValue(LiquidToGasRatioValue.Text, out string errorMessage))
+            if (!DemandCurveViewModel.LiquidToGasRatioDataValueUpdateValue(LiquidToGasRatioValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 LiquidToGasRatioValue.Select(0, LiquidToGasRatioValue.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(LiquidToGasRatioValue, errorMessage);
+                this.errorProvider1.SetError(LiquidToGasRatioValue, DemandCurveViewModel.LiquidToGasRatioDataValueErrorMessage);
             }
         }
 
@@ -441,14 +453,14 @@ namespace CTIToolkit
 
         private void WetBulbTemperature_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!DemandCurveViewModel.WetBulbTemperatureDataValueUpdateValue(WetBulbTemperatureValue.Text, out string errorMessage))
+            if (!DemandCurveViewModel.WetBulbTemperatureDataValueUpdateValue(WetBulbTemperatureValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 WetBulbTemperatureValue.Select(0, WetBulbTemperatureValue.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(WetBulbTemperatureValue, errorMessage);
+                this.errorProvider1.SetError(WetBulbTemperatureValue, DemandCurveViewModel.WetBulbTemperatureDataValueErrorMessage);
             }
         }
 
@@ -459,14 +471,14 @@ namespace CTIToolkit
 
         private void RangeValue_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!DemandCurveViewModel.RangeDataValueUpdateValue(RangeValue.Text, out string errorMessage))
+            if (!DemandCurveViewModel.RangeDataValueUpdateValue(RangeValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 RangeValue.Select(0, RangeValue.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(RangeValue, errorMessage);
+                this.errorProvider1.SetError(RangeValue, DemandCurveViewModel.RangeDataValueErrorMessage);
             }
         }
 
@@ -479,26 +491,26 @@ namespace CTIToolkit
         {
             if (ElevationRadio.Checked)
             {
-                if (!DemandCurveViewModel.ElevationDataValueUpdateValue(ElevationValue.Text, out string errorMessage))
+                if (!DemandCurveViewModel.ElevationDataValueUpdateValue(ElevationValue.Text))
                 {
                     // Cancel the event and select the text to be corrected by the user.
                     e.Cancel = true;
                     ElevationValue.Select(0, ElevationValue.Text.Length);
 
                     // Set the ErrorProvider error with the text to display. 
-                    this.errorProvider1.SetError(ElevationValue, errorMessage);
+                    this.errorProvider1.SetError(ElevationValue, DemandCurveViewModel.ElevationDataValueErrorMessage);
                 }
             }
             else
             {
-                if (!DemandCurveViewModel.BarometricPressureDataValueUpdateValue(ElevationValue.Text, out string errorMessage))
+                if (!DemandCurveViewModel.BarometricPressureDataValueUpdateValue(ElevationValue.Text))
                 {
                     // Cancel the event and select the text to be corrected by the user.
                     e.Cancel = true;
                     ElevationValue.Select(0, ElevationValue.Text.Length);
 
                     // Set the ErrorProvider error with the text to display. 
-                    this.errorProvider1.SetError(ElevationValue, errorMessage);
+                    this.errorProvider1.SetError(ElevationValue, DemandCurveViewModel.BarometricPressureDataValueErrorMessage);
                 }
             }
         }
@@ -510,14 +522,14 @@ namespace CTIToolkit
 
         private void C_C1_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!DemandCurveViewModel.C1DataValueUpdateValue(C_C1_Value.Text, out string errorMessage))
+            if (!DemandCurveViewModel.C1DataValueUpdateValue(C_C1_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 C_C1_Value.Select(0, C_C1_Value.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(C_C1_Value, errorMessage);
+                this.errorProvider1.SetError(C_C1_Value, DemandCurveViewModel.C1DataValueErrorMessage);
             }
         }
 
@@ -528,14 +540,14 @@ namespace CTIToolkit
 
         private void Slope_C2_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!DemandCurveViewModel.SlopeDataValueUpdateValue(Slope_C2_Value.Text, out string errorMessage))
+            if (!DemandCurveViewModel.SlopeDataValueUpdateValue(Slope_C2_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Slope_C2_Value.Select(0, Slope_C2_Value.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Slope_C2_Value, errorMessage);
+                this.errorProvider1.SetError(Slope_C2_Value, DemandCurveViewModel.SlopeDataValueErrorMessage);
             }
         }
 
@@ -546,14 +558,14 @@ namespace CTIToolkit
 
         private void MaximumValue_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!DemandCurveViewModel.MaximumDataValueUpdateValue(MaximumValue.Text, out string errorMessage))
+            if (!DemandCurveViewModel.MaximumDataValueUpdateValue(MaximumValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 MaximumValue.Select(0, MaximumValue.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(MaximumValue, errorMessage);
+                this.errorProvider1.SetError(MaximumValue, DemandCurveViewModel.MaximumDataValueErrorMessage);
             }
         }
 
@@ -564,14 +576,14 @@ namespace CTIToolkit
 
         private void MinimumValue_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!DemandCurveViewModel.MinimumDataValueUpdateValue(MinimumValue.Text, out string errorMessage))
+            if (!DemandCurveViewModel.MinimumDataValueUpdateValue(MinimumValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 MinimumValue.Select(0, MinimumValue.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(MinimumValue, errorMessage);
+                this.errorProvider1.SetError(MinimumValue, DemandCurveViewModel.MinimumDataValueErrorMessage);
             }
         }
 
@@ -582,14 +594,14 @@ namespace CTIToolkit
 
         private void UserApproachValue_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!DemandCurveViewModel.UserApproachDataValueUpdateValue(UserApproachValue.Text, out string errorMessage))
+            if (!DemandCurveViewModel.UserApproachDataValueUpdateValue(UserApproachValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 UserApproachValue.Select(0, UserApproachValue.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(UserApproachValue, errorMessage);
+                this.errorProvider1.SetError(UserApproachValue, DemandCurveViewModel.UserApproachDataValueErrorMessage);
             }
         }
 

@@ -19,8 +19,7 @@ namespace CTIToolkit
         {
             InitializeComponent();
             WaterFlowRateDataValue = new WaterFlowRateDataValue(isDemo, isInternationalSystemOfUnits_IS_);
-            string errorMessage;
-            WaterFlowRateDataValue.UpdateCurrentValue(value, out errorMessage);
+            WaterFlowRateDataValue.UpdateCurrentValue(value);
             WaterFlowRate.Text = WaterFlowRateDataValue.InputValue;
         }
 
@@ -31,16 +30,14 @@ namespace CTIToolkit
 
         private void WaterFlowRate_Validating(object sender, CancelEventArgs e)
         {
-            string errorMessage = string.Empty;
-
-            if (!WaterFlowRateDataValue.UpdateValue(WaterFlowRate.Text, out errorMessage))
+            if (!WaterFlowRateDataValue.UpdateValue(WaterFlowRate.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 WaterFlowRate.Select(0, WaterFlowRate.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(WaterFlowRate, errorMessage);
+                this.errorProvider1.SetError(WaterFlowRate, WaterFlowRateDataValue.ErrorMessage);
             }
         }
 

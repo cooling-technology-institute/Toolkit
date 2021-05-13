@@ -64,14 +64,19 @@ namespace ViewModels
             TowerTypeValue = TOWER_TYPE.Forced;
 
             Range1Value = new RangeDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range1Value.IsZeroValid = true;
             Range1Value.InitializeValue(0.0);
             Range2Value = new RangeDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range2Value.IsZeroValid = true;
             Range2Value.InitializeValue(0.0);
             Range3Value = new RangeDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range3Value.IsZeroValid = true;
             Range3Value.InitializeValue(0.0);
             Range4Value = new RangeDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range4Value.IsZeroValid = true;
             Range4Value.InitializeValue(0.0);
             Range5Value = new RangeDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
+            Range5Value.IsZeroValid = true;
             Range5Value.InitializeValue(0.0);
 
             WaterFlowRateDataValue = new WaterFlowRateDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
@@ -120,7 +125,6 @@ namespace ViewModels
 
         public bool LoadData(DesignData data)
         {
-            string errorMessage = string.Empty;
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
             string label = "Design Data: ";
@@ -132,95 +136,82 @@ namespace ViewModels
                 TowerManufacturerValue = data.TowerManufacturer;
                 TowerTypeValue = data.TowerType;
 
-                if (!WaterFlowRateDataValue.UpdateCurrentValue(data.TowerSpecifications.WaterFlowRate, out errorMessage))
+                if (!WaterFlowRateDataValue.UpdateCurrentValue(data.TowerSpecifications.WaterFlowRate))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(label + WaterFlowRateDataValue.ErrorMessage);
                 }
 
-                if (!HotWaterTemperatureDataValue.UpdateCurrentValue(data.TowerSpecifications.HotWaterTemperature, out errorMessage))
+                if (!HotWaterTemperatureDataValue.UpdateCurrentValue(data.TowerSpecifications.HotWaterTemperature))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(label + HotWaterTemperatureDataValue.ErrorMessage);
                 }
 
-                if (!ColdWaterTemperatureDataValue.UpdateCurrentValue(data.TowerSpecifications.ColdWaterTemperature, out errorMessage))
+                if (!ColdWaterTemperatureDataValue.UpdateCurrentValue(data.TowerSpecifications.ColdWaterTemperature))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(label + ColdWaterTemperatureDataValue.ErrorMessage);
                 }
 
-                if (!WetBulbTemperatureDataValue.UpdateCurrentValue(data.TowerSpecifications.WetBulbTemperature, out errorMessage))
+                if (!WetBulbTemperatureDataValue.UpdateCurrentValue(data.TowerSpecifications.WetBulbTemperature))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(label + WetBulbTemperatureDataValue.ErrorMessage);
                 }
 
-                if (!DryBulbTemperatureDataValue.UpdateCurrentValue(data.TowerSpecifications.DryBulbTemperature, out errorMessage))
+                if (!DryBulbTemperatureDataValue.UpdateCurrentValue(data.TowerSpecifications.DryBulbTemperature))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(label + DryBulbTemperatureDataValue.ErrorMessage);
                 }
 
-                if (!FanDriverPowerDataValue.UpdateCurrentValue(data.TowerSpecifications.FanDriverPower, out errorMessage))
+                if (!FanDriverPowerDataValue.UpdateCurrentValue(data.TowerSpecifications.FanDriverPower))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(label + FanDriverPowerDataValue.ErrorMessage);
                 }
 
-                if (!BarometricPressureDataValue.UpdateCurrentValue(data.TowerSpecifications.BarometricPressure, out errorMessage))
+                if (!BarometricPressureDataValue.UpdateCurrentValue(data.TowerSpecifications.BarometricPressure))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(label + BarometricPressureDataValue.ErrorMessage);
                 }
 
-                if (!LiquidToGasRatioDataValue.UpdateCurrentValue(data.TowerSpecifications.LiquidToGasRatio, out errorMessage))
+                if (!LiquidToGasRatioDataValue.UpdateCurrentValue(data.TowerSpecifications.LiquidToGasRatio))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(label + LiquidToGasRatioDataValue.ErrorMessage);
                 }
 
-                if (!Range1Value.UpdateCurrentValue(data.Range1, out errorMessage))
+                if (!Range1Value.UpdateCurrentValue(data.Range1))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(label + Range1Value.ErrorMessage);
                 }
 
-                if (!Range2Value.UpdateCurrentValue(data.Range2, out errorMessage))
+                if (!Range2Value.UpdateCurrentValue(data.Range2))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(label + Range2Value.ErrorMessage);
                 }
 
-                if (!Range3Value.UpdateCurrentValue(data.Range3, out errorMessage))
+                if (!Range3Value.UpdateCurrentValue(data.Range3))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(label + Range3Value.ErrorMessage);
                 }
 
-                if (!Range4Value.UpdateCurrentValue(data.Range4, out errorMessage))
+                if (!Range4Value.UpdateCurrentValue(data.Range4))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(label + Range4Value.ErrorMessage);
                 }
 
-                if (!Range5Value.UpdateCurrentValue(data.Range5, out errorMessage))
+                if (!Range5Value.UpdateCurrentValue(data.Range5))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + errorMessage);
-                    errorMessage = string.Empty;
+                    stringBuilder.AppendLine(label + Range5Value.ErrorMessage);
                 }
 
                 TowerDesignCurveData.Clear();
@@ -231,7 +222,6 @@ namespace ViewModels
                     {
                         returnValue = false;
                         stringBuilder.AppendLine(label + towerDesignCurveData.ErrorMessage);
-                        errorMessage = string.Empty;
                     }
                     TowerDesignCurveData.Add(towerDesignCurveData);
                 }
@@ -792,9 +782,8 @@ namespace ViewModels
             return returnValue;
         }
 
-        public bool ValidateRanges(int count, out string errorMessage)
+        public bool ValidateRanges(int count)
         {
-            errorMessage = string.Empty;
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
             
@@ -814,15 +803,15 @@ namespace ViewModels
 
             if (!returnValue)
             {
-                errorMessage = stringBuilder.ToString();
+                ErrorMessage = stringBuilder.ToString();
             }
 
             return returnValue;
         }
 
-        public bool ValidateRangedTemperatures(int count, out string errorMessage)
+        public bool ValidateRangedTemperatures(int count)
         {
-            errorMessage = string.Empty;
+            ErrorMessage = string.Empty;
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
 
@@ -840,22 +829,22 @@ namespace ViewModels
 
             if(!returnValue)
             {
-                errorMessage = stringBuilder.ToString();
+                ErrorMessage = stringBuilder.ToString();
             }
 
             return returnValue;
         }
 
-        public bool IsValid(out string errorMessage)
+        public bool IsValid()
         {
             bool isValid = false;
             try
             {
-                if (ValidateRanges(MINIMUM_RANGE_COUNT, out errorMessage))
+                if (ValidateRanges(MINIMUM_RANGE_COUNT))
                 {
-                    if (ValidateWaterFlowRates(MINIMUM_WATER_FLOW_RATES_COUNT, out errorMessage))
+                    if (ValidateWaterFlowRates(MINIMUM_WATER_FLOW_RATES_COUNT))
                     {
-                        if (ValidateRangedTemperatures(MINIMUM_WET_BULB_TEMPERTURE_COUNT, out errorMessage))
+                        if (ValidateRangedTemperatures(MINIMUM_WET_BULB_TEMPERTURE_COUNT))
                         {
                             isValid = true;
                         }
@@ -864,14 +853,14 @@ namespace ViewModels
             }
             catch(Exception e)
             {
-                errorMessage = string.Format("There has been some problem validating the design data. Exception: {0}", e.Message);
+                ErrorMessage = string.Format("There has been some problem validating the design data. Exception: {0}", e.Message);
             }
             return isValid;
         }
 
-        public bool ValidateWaterFlowRates(int count, out string errorMessage)
+        public bool ValidateWaterFlowRates(int count)
         {
-            errorMessage = string.Empty;
+            ErrorMessage = string.Empty;
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
 
@@ -891,7 +880,7 @@ namespace ViewModels
 
             if (!returnValue)
             {
-                errorMessage = stringBuilder.ToString();
+                ErrorMessage = stringBuilder.ToString();
             }
 
             return returnValue;
