@@ -14,6 +14,7 @@ namespace Models
         public double LiquidToGasRatio { set; get; }
         public PsychrometricsData TestPsychrometricsData { set; get; }
         public PsychrometricsData DesignPsychrometricsData { set; get; }
+        public string ErrorMessage { get; set; }
 
         public MechanicalDraftPerformanceCurveOutput()
         {
@@ -24,6 +25,7 @@ namespace Models
 
         public void Clear()
         {
+            ErrorMessage = string.Empty;
             AdjustedFlow = 0.0;
             PredictedFlow = 0.0;
             TowerCapability = 0.0;

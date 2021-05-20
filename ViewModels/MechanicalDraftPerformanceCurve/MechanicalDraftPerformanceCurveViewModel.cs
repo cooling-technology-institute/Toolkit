@@ -317,7 +317,7 @@ namespace ViewModels
                         MechanicalDraftPerformanceCurveCalculationLibrary calculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
 
                         calculationLibrary.MechanicalDraftPerformanceCurveCalculation(CalculationData, OutputDataViewModel.MechanicalDraftPerformanceCurveOutput, true);
-
+                        //calculationLibrary.DetermineAdjustedTestFlow(CalculationData, OutputDataViewModel.MechanicalDraftPerformanceCurveOutput);
                         OutputDataViewModel.FillTable();
                     }
                     else

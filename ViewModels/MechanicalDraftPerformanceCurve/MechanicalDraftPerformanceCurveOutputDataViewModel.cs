@@ -10,6 +10,7 @@ namespace ViewModels
         public MechanicalDraftPerformanceCurveOutput MechanicalDraftPerformanceCurveOutput { get; set; }
         public NameValueUnitsDataTable NameValueUnitsDataTable { get; set; }
         public Units Units { get; set; }
+        public string ErrorMessage { get; set; }
 
         public MechanicalDraftPerformanceCurveOutputDataViewModel(bool isInternationalSystemOfUnits_SI)
         {

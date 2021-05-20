@@ -10,44 +10,10 @@ namespace CTIToolkit
 {
     public partial class MechanicalDraftPerformanceCurvePrinterOutput : UserControl
     {
-        string UnitsWaterFlowRate { get; set; }
-        string UnitsHotWaterTemperature { get; set; }
-        string UnitsColdWaterTemperature { get; set; }
-        string UnitsWetBulbTemperature { get; set; }
-        string UnitsDryBulbTemperature { get; set; }
-        string UnitsFanDriverPower { get; set; }
-        string UnitsBarometricPressure { get; set; }
-
-        private void SetUnits(bool IsInternationalSystemOfUnits_SI)
-        { 
-            if (IsInternationalSystemOfUnits_SI)
-            {
-                UnitsWaterFlowRate = ConstantUnits.LitersPerSecond;
-                UnitsHotWaterTemperature = ConstantUnits.TemperatureCelsius;
-                UnitsColdWaterTemperature = ConstantUnits.TemperatureCelsius;
-                UnitsWetBulbTemperature = ConstantUnits.TemperatureCelsius;
-                UnitsDryBulbTemperature = ConstantUnits.TemperatureCelsius;
-                UnitsFanDriverPower = ConstantUnits.Kilowatt;
-                UnitsBarometricPressure = ConstantUnits.BarometricPressureKiloPascal;
-            }
-            else
-            {
-                UnitsWaterFlowRate = ConstantUnits.GallonsPerMinute;
-                UnitsHotWaterTemperature = ConstantUnits.TemperatureFahrenheit;
-                UnitsColdWaterTemperature = ConstantUnits.TemperatureFahrenheit;
-                UnitsWetBulbTemperature = ConstantUnits.TemperatureFahrenheit;
-                UnitsDryBulbTemperature = ConstantUnits.TemperatureFahrenheit;
-                UnitsFanDriverPower = ConstantUnits.BrakeHorsepower;
-                UnitsBarometricPressure = ConstantUnits.BarometricPressureInchOfMercury;
-            }
-        }
-
         public MechanicalDraftPerformanceCurvePrinterOutput(int bottomOfPage, string optionalLabel, int index, MechanicalDraftPerformanceCurveViewModel viewModel)
         {
             InitializeComponent();
 
-            SetUnits(viewModel.IsInternationalSystemOfUnits_SI);
-            
             OptionalLabelTextBox.Text = optionalLabel;
 
             OwnerTextBox.Text = string.Format("Owner: {0}", viewModel.DesignData.OwnerNameValue);
@@ -62,18 +28,42 @@ namespace CTIToolkit
             ColdVsRangeTitle.Location = new System.Drawing.Point(ColdVsRangeTitle.Location.X, DesignTestDataGridView.Location.Y + DesignTestDataGridView.Height + 20);
             ColdVsRange.Location = new System.Drawing.Point(ColdVsRange.Location.X, ColdVsRangeTitle.Location.Y + ColdVsRangeTitle.Height + 2);
             ColdVsRangeDataGridView.Location = new System.Drawing.Point(ColdVsRangeDataGridView.Location.X, ColdVsRange.Location.Y + ColdVsRange.Height + 2);
-            ColdVsRange.Text = string.Format("At {0} {1} Test Wet Bulb Temperature", viewModel.TestPoints[index].WetBulbTemperatureDataValue.InputValue, UnitsWetBulbTemperature);
+            ColdVsRange.Text = string.Format("At {0} {1} Test Wet Bulb Temperature", viewModel.TestPoints[index].WetBulbTemperatureDataValue.InputValue, viewModel.WetBulbTemperatureDataValue.Units);
             ColdVsRangeDataGridView.DataSource = BuildColdVsRangeDataTable(viewModel);
             ColdVsRangeDataGridView.Size = new Size(ColdVsRangeDataGridView.Size.Width, (ColdVsRangeDataGridView.Rows.Count + 1) * 22);
 
             ColdVsWaterFlowTitle.Location = new System.Drawing.Point(ColdVsWaterFlowTitle.Location.X, ColdVsRangeDataGridView.Location.Y + ColdVsRangeDataGridView.Height + 20);
             ColdVsWaterFlow.Location = new System.Drawing.Point(ColdVsWaterFlow.Location.X, ColdVsWaterFlowTitle.Location.Y + ColdVsWaterFlowTitle.Height + 2);
             ColdVsWaterFlowDataGridView.Location = new System.Drawing.Point(ColdVsWaterFlowDataGridView.Location.X, ColdVsWaterFlow.Location.Y + ColdVsWaterFlow.Height + 2);
-            ColdVsWaterFlow.Text = string.Format("At {0} {1} Test Wet Bulb Temperature and {2} {1} Test Range", 0, UnitsColdWaterTemperature, 0);
+            ColdVsWaterFlow.Text = string.Format("At {0} {1} Test Wet Bulb Temperature and {2} {1} Test Range", 
+                    viewModel.TestPoints[index].WetBulbTemperatureDataValue.InputValue, 
+                    viewModel.TestPoints[index].WetBulbTemperatureDataValue.Units,
+                    (viewModel.TestPoints[index].HotWaterTemperatureDataValue.Current - viewModel.TestPoints[index].ColdWaterTemperatureDataValue.Current).ToString("F2"),
+                    viewModel.TestPoints[index].WetBulbTemperatureDataValue.Units);
             ColdVsWaterFlowDataGridView.DataSource = BuildColdVsWaterFLowDataTable(viewModel);
             ColdVsWaterFlowDataGridView.Size = new Size(ColdVsWaterFlowDataGridView.Size.Width, (ColdVsWaterFlowDataGridView.Rows.Count + 1) * 22);
 
-            ExitAirTitle.Location = new System.Drawing.Point(ExitAirTitle.Location.X, ColdVsWaterFlowDataGridView.Location.Y + ColdVsWaterFlowDataGridView.Height + 20);
+            int y = ColdVsWaterFlowDataGridView.Location.Y + ColdVsWaterFlowDataGridView.Height + 2;
+            if (!string.IsNullOrWhiteSpace(viewModel.OutputDataViewModel.ErrorMessage))
+            {
+                PredictedFlowCaution.Text = viewModel.OutputDataViewModel.ErrorMessage;
+                PredictedFlowCaution.Location = new System.Drawing.Point(PredictedFlowCaution.Location.X, y);
+                y += PredictedFlowCaution.Location.Y + PredictedFlowCaution.Height + 20;
+                PredictedFlowCaution.Visible = true;
+            }
+            else
+            {
+                PredictedFlowCaution.Visible = false;
+            }
+            if (viewModel.DesignData.TowerTypeValue == TOWER_TYPE.Induced)
+            {
+                ExitAirTitle.Text = "Exit Air Properties";
+            }
+            else
+            {
+                ExitAirTitle.Text = "Inlet Air Properties";
+            }
+            ExitAirTitle.Location = new System.Drawing.Point(ExitAirTitle.Location.X, y);
             ExitAirDataGridView.Location = new System.Drawing.Point(ExitAirDataGridView.Location.X, ExitAirTitle.Location.Y + ExitAirTitle.Height + 2);
             ExitAirDataGridView.DataSource = BuildExitAirDataTable(viewModel);
             ExitAirDataGridView.Size = new Size(ExitAirDataGridView.Size.Width, (ExitAirDataGridView.Rows.Count + 1) * 22);
@@ -115,24 +105,24 @@ namespace CTIToolkit
             column.ColumnName = "Units";
             dataTable.Columns.Add(column);
 
-            AddRowDesignTest(dataTable, viewModel.DesignData.WaterFlowRateDataValue, viewModel.TestPoints[index].WaterFlowRateDataValue, UnitsWaterFlowRate);
-            AddRowDesignTest(dataTable, viewModel.DesignData.HotWaterTemperatureDataValue, viewModel.TestPoints[index].HotWaterTemperatureDataValue, UnitsHotWaterTemperature);
-            AddRowDesignTest(dataTable, viewModel.DesignData.ColdWaterTemperatureDataValue, viewModel.TestPoints[index].ColdWaterTemperatureDataValue, UnitsColdWaterTemperature);
-            AddRowDesignTest(dataTable, viewModel.DesignData.WetBulbTemperatureDataValue, viewModel.TestPoints[index].WetBulbTemperatureDataValue, UnitsWetBulbTemperature);
-            AddRowDesignTest(dataTable, viewModel.DesignData.DryBulbTemperatureDataValue, viewModel.TestPoints[index].DryBulbTemperatureDataValue, UnitsDryBulbTemperature);
-            AddRowDesignTest(dataTable, viewModel.DesignData.FanDriverPowerDataValue, viewModel.TestPoints[index].FanDriverPowerDataValue, UnitsFanDriverPower);
-            AddRowDesignTest(dataTable, viewModel.DesignData.BarometricPressureDataValue, viewModel.TestPoints[index].BarometricPressureDataValue, UnitsBarometricPressure);
-            AddRowDesignTest(dataTable, viewModel.DesignData.LiquidToGasRatioDataValue, viewModel.TestPoints[index].LiquidToGasRatioDataValue, string.Empty);
+            AddRowDesignTest(dataTable, viewModel.DesignData.WaterFlowRateDataValue, viewModel.TestPoints[index].WaterFlowRateDataValue);
+            AddRowDesignTest(dataTable, viewModel.DesignData.HotWaterTemperatureDataValue, viewModel.TestPoints[index].HotWaterTemperatureDataValue);
+            AddRowDesignTest(dataTable, viewModel.DesignData.ColdWaterTemperatureDataValue, viewModel.TestPoints[index].ColdWaterTemperatureDataValue);
+            AddRowDesignTest(dataTable, viewModel.DesignData.WetBulbTemperatureDataValue, viewModel.TestPoints[index].WetBulbTemperatureDataValue);
+            AddRowDesignTest(dataTable, viewModel.DesignData.DryBulbTemperatureDataValue, viewModel.TestPoints[index].DryBulbTemperatureDataValue);
+            AddRowDesignTest(dataTable, viewModel.DesignData.FanDriverPowerDataValue, viewModel.TestPoints[index].FanDriverPowerDataValue);
+            AddRowDesignTest(dataTable, viewModel.DesignData.BarometricPressureDataValue, viewModel.TestPoints[index].BarometricPressureDataValue);
+            AddRowDesignTest(dataTable, viewModel.DesignData.LiquidToGasRatioDataValue, viewModel.TestPoints[index].LiquidToGasRatioDataValue);
             return dataTable;
         }
 
-        private void AddRowDesignTest(DataTable dataTable, DataValue design, DataValue test, string units)
+        private void AddRowDesignTest(DataTable dataTable, DataValue design, DataValue test)
         {
             DataRow row = dataTable.NewRow();
             row["Parameters"] = design.InputMessage;
             row["Design"] = design.InputValue;
             row["Test"] = test.InputValue;
-            row["Units"] = units;
+            row["Units"] = design.Units;
             dataTable.Rows.Add(row);
         }
 

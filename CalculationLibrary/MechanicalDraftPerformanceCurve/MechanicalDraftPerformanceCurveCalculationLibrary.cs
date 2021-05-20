@@ -20,7 +20,7 @@ namespace CalculationLibrary
             double TestColdWaterTemperature = data.TowerTestData.ColdWaterTemperature;
             StringBuilder stringBuilder = new StringBuilder();
 
-            DetermineAdjustedTestFlow(data, output);
+            //DetermineAdjustedTestFlow(data, output);
 
             InterpolateWetBulbTemperature(data);
             
@@ -41,16 +41,7 @@ namespace CalculationLibrary
 
             if ((predicatedFlow < minimumFlow) || (predicatedFlow > maximumFlow))
             {
-                //PRINT #2, STRING$(80, 42)
-                //PRINT #2, USING "CAUTION: Predicted Flow ####.## is EXTRAPOLATED beyond the"; PredFlow
-                //PRINT #2, USING "Supplied Curve Flows of #####.## to #####.##"; MinFlow; MaxFlow
-                //PRINT #2, STRING$(80, 42)
-                //CString strWarning;
-                //strWarning.Format("CAUTION: Predicted Flow %.02f is EXTRAPOLATED beyond the\r\nSupplied Curve Flows of %.02f to %.02f", PredFlow, MinFlow, MaxFlow);
-                //if (bCalcWET_BULB_TEMPERATUREDeviation)
-                //{
-                //    MessageBox(strWarning, "Extrapolation Warning", MB_ICONWARNING);
-                //}
+                output.ErrorMessage = string.Format("CAUTION: Predicted Flow {0} is EXTRAPOLATED beyond the Supplied Curve Flows of {1} to {2}", predicatedFlow.ToString("F2"), minimumFlow.ToString("F2"), maximumFlow.ToString("F2"));
             }
             //'End check for Extrapolation
 
