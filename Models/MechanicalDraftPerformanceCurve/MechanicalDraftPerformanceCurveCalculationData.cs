@@ -68,6 +68,8 @@ namespace Models
         public TOWER_TYPE TowerType { get; set; }
         public List<double> Y { get; set; }
         public List<double> WetBulbTemperatureRange { get; set; }
+        public MechanicalDraftPerformanceCurveOutput TestOutput { get; set; }
+        public MechanicalDraftPerformanceCurveOutput DesignOutput { get; set; }
         public CrossPlot1 CrossPlot1 { get; set; }
 
         public MechanicalDraftPerformanceCurveCalculationData()
@@ -78,6 +80,8 @@ namespace Models
             WaterFlowRates = new List<WaterFlowRate>();
             WetBulbTemperatureRange = new List<double>();
             Y = new List<double>();
+            TestOutput = new MechanicalDraftPerformanceCurveOutput();
+            DesignOutput = new MechanicalDraftPerformanceCurveOutput();
             CrossPlot1 = new CrossPlot1();
         }
 

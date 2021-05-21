@@ -1,4 +1,5 @@
 ﻿using System;
+using CalculationLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
 
@@ -7,7 +8,7 @@ namespace CalculationLibraryUnitTest
     [TestClass]
     public class CalculateTestLiquidToGasRatioUnitTest
     {
-        CalculationLibrary.CalculationLibrary CalculationLibrary { get; set; }
+        MechanicalDraftPerformanceCurveCalculationLibrary CalculationLibrary { get; set; }
 
         [TestMethod]
         public void CalculateTestLiquidToGasRatioTest()
@@ -39,7 +40,7 @@ namespace CalculationLibraryUnitTest
 
             try
             {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
                 ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data, testPsychrometricsData, designPsychrometricsData);
             }
             catch
@@ -81,7 +82,7 @@ namespace CalculationLibraryUnitTest
 
             try
             {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
                 ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data, testPsychrometricsData, designPsychrometricsData);
             }
             catch
@@ -123,7 +124,7 @@ namespace CalculationLibraryUnitTest
 
             try
             {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
                 ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data, testPsychrometricsData, designPsychrometricsData);
             }
             catch
@@ -165,7 +166,7 @@ namespace CalculationLibraryUnitTest
 
             try
             {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
                 ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data, testPsychrometricsData, designPsychrometricsData);
             }
             catch
@@ -209,7 +210,7 @@ namespace CalculationLibraryUnitTest
 
             try
             {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
                 ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data, testPsychrometricsData, designPsychrometricsData);
             }
             catch

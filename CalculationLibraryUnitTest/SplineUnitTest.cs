@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using CalculationLibrary;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,7 @@ namespace CalculationLibraryUnitTest
     [TestClass]
     public class SplineUnitTest
     {
-        CalculationLibrary.CalculationLibrary CalculationLibrary { get; set; }
+        MechanicalDraftPerformanceCurveCalculationLibrary CalculationLibrary { get; set; }
 
         [TestMethod]
         public void SplineTest()
@@ -26,7 +27,7 @@ namespace CalculationLibraryUnitTest
 
             try
             {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
                 CalculationLibrary.Spline(x, y, yp1, ypn, y2, errorMessage);
             }
             catch
@@ -58,7 +59,7 @@ namespace CalculationLibraryUnitTest
 
             try
             {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
                 CalculationLibrary.Spline(x, y, yp1, ypn, y2, errorMessage);
             }
             catch
@@ -86,7 +87,7 @@ namespace CalculationLibraryUnitTest
 
             try
             {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
                 CalculationLibrary.Spline(x, y, yp1, ypn, y2, errorMessage);
             }
             catch
@@ -114,7 +115,7 @@ namespace CalculationLibraryUnitTest
 
             try
             {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
                 CalculationLibrary.Spline(x, y, yp1, ypn, y2, errorMessage);
             }
             catch

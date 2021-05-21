@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using CalculationLibrary;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,7 @@ namespace CalculationLibraryUnitTest
     [TestClass]
     public class SplintUnitTest
     {
-        CalculationLibrary.CalculationLibrary CalculationLibrary { get; set; }
+        MechanicalDraftPerformanceCurveCalculationLibrary CalculationLibrary { get; set; }
 
         [TestMethod]
         public void SplintTest()
@@ -25,7 +26,7 @@ namespace CalculationLibraryUnitTest
 
             try
             {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
                 CalculationLibrary.Splint(xa, ya, y2, xreal, ref yfit, errorMessage);
             }
             catch
@@ -53,7 +54,7 @@ namespace CalculationLibraryUnitTest
 
             try
             {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
                 CalculationLibrary.Splint(xa, ya, y2, xreal, ref yfit, errorMessage);
             }
             catch
@@ -81,7 +82,7 @@ namespace CalculationLibraryUnitTest
 
             try
             {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
                 CalculationLibrary.Splint(xa, ya, y2, xreal, ref yfit, errorMessage);
             }
             catch
@@ -109,7 +110,7 @@ namespace CalculationLibraryUnitTest
 
             try
             {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
                 CalculationLibrary.Splint(xa, ya, y2, xreal, ref yfit, errorMessage);
             }
             catch
@@ -137,7 +138,7 @@ namespace CalculationLibraryUnitTest
 
             try
             {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
                 CalculationLibrary.Splint(xa, ya, y2, xreal, ref yfit, errorMessage);
             }
             catch
@@ -165,7 +166,7 @@ namespace CalculationLibraryUnitTest
 
             try
             {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
                 CalculationLibrary.Splint(xa, ya, y2, xreal, ref yfit, errorMessage);
             }
             catch
@@ -193,7 +194,7 @@ namespace CalculationLibraryUnitTest
 
             try
             {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
                 CalculationLibrary.Splint(xa, ya, y2, xreal, ref yfit, errorMessage);
             }
             catch
@@ -221,7 +222,7 @@ namespace CalculationLibraryUnitTest
 
             try
             {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
                 CalculationLibrary.Splint(xa, ya, y2, xreal, ref yfit, errorMessage);
             }
             catch
@@ -249,7 +250,7 @@ namespace CalculationLibraryUnitTest
 
             try
             {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
                 CalculationLibrary.Splint(xa, ya, y2, xreal, ref yfit, errorMessage);
             }
             catch

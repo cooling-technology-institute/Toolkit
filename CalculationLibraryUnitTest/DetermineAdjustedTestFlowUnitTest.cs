@@ -8,7 +8,7 @@ namespace CalculationLibraryUnitTest
     [TestClass]
     public class DetermineAdjustedTestFlowUnitTest
     {
-        CalculationLibrary.CalculationLibrary CalculationLibrary { get; set; }
+		MechanicalDraftPerformanceCurveCalculationLibrary CalculationLibrary { get; set; }
 
         [TestMethod]
         public void SI_CalculateAdjustedFlowTest()
@@ -49,12 +49,10 @@ namespace CalculationLibraryUnitTest
 				TowerTestData = test,
 			};
 
-			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
-
 			try
 			{
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                CalculationLibrary.DetermineAdjustedTestFlow(data, output);
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+                CalculationLibrary.DetermineAdjustedTestFlow(data);
             }
             catch
             {
@@ -62,12 +60,12 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(3549.8089648534847, output.AdjustedFlow, "AdjustedFlow value does not match"); // 
-			Assert.AreEqual(39.941644668579102, output.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
-			Assert.AreEqual(1.0791204854438692, output.Density, "Density value does not match");
-			Assert.AreEqual(1.2839296953830412, output.LiquidToGasRatio, "LiquidToGasRatio value does not match");
-			Assert.AreEqual(0.96780162756832133, output.SpecificVolume, "SpecificVolume value does not match");
-			Assert.AreEqual(152.00262906811440, output.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
+            Assert.AreEqual(3549.8089648534847, data.TestOutput.AdjustedFlow, "AdjustedFlow value does not match"); // 
+			Assert.AreEqual(39.941644668579102, data.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
+			Assert.AreEqual(1.0791204854438692, data.TestOutput.Density, "Density value does not match");
+			Assert.AreEqual(1.2839296953830412, data.TestOutput.LiquidToGasRatio, "LiquidToGasRatio value does not match");
+			Assert.AreEqual(0.96780162756832133, data.TestOutput.SpecificVolume, "SpecificVolume value does not match");
+			Assert.AreEqual(152.00262906811440, data.TestOutput.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
 		}
 
 
@@ -110,12 +108,10 @@ namespace CalculationLibraryUnitTest
 				TowerTestData = test
 			};
 
-			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
-
 			try
 			{
-				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
+				CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+				CalculationLibrary.DetermineAdjustedTestFlow(data);
 			}
 			catch
 			{
@@ -123,12 +119,12 @@ namespace CalculationLibraryUnitTest
 			}
 
 			Assert.IsFalse(methodThrew, "Method threw");
-			Assert.AreEqual(0.0, output.AdjustedFlow, "AdjustedFlow value does not match"); // 
-			Assert.AreEqual(24.521169662475586, output.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
-			Assert.AreEqual(1.0791204854438692, output.Density, "Density value does not match");
-			Assert.AreEqual(0.0, output.LiquidToGasRatio, "LiquidToGasRatio value does not match");
-			Assert.AreEqual(0.96780162756832133, output.SpecificVolume, "SpecificVolume value does not match");
-			Assert.AreEqual(152.00262906811440, output.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
+			Assert.AreEqual(0.0, data.TestOutput.AdjustedFlow, "AdjustedFlow value does not match"); // 
+			Assert.AreEqual(24.521169662475586, data.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
+			Assert.AreEqual(1.0791204854438692, data.TestOutput.Density, "Density value does not match");
+			Assert.AreEqual(0.0, data.TestOutput.LiquidToGasRatio, "LiquidToGasRatio value does not match");
+			Assert.AreEqual(0.96780162756832133, data.TestOutput.SpecificVolume, "SpecificVolume value does not match");
+			Assert.AreEqual(152.00262906811440, data.TestOutput.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
 		}
 
 		[TestMethod]
@@ -170,12 +166,10 @@ namespace CalculationLibraryUnitTest
 				TowerTestData = test
 			};
 
-			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
-
 			try
 			{
-				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
+				CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+				CalculationLibrary.DetermineAdjustedTestFlow(data);
 			}
 			catch
 			{
@@ -183,12 +177,12 @@ namespace CalculationLibraryUnitTest
 			}
 
 			Assert.IsFalse(methodThrew, "Method threw");
-			Assert.AreEqual(3549.8089648534847, output.AdjustedFlow, "AdjustedFlow value does not match"); // 
-			Assert.AreEqual(24.521169662475586, output.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
-			Assert.AreEqual(1.0791204854438692, output.Density, "Density value does not match");
-			Assert.AreEqual(0.0, output.LiquidToGasRatio, "LiquidToGasRatio value does not match");
-			Assert.AreEqual(0.96780162756832133, output.SpecificVolume, "SpecificVolume value does not match");
-			Assert.AreEqual(152.00262906811440, output.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
+			Assert.AreEqual(3549.8089648534847, data.TestOutput.AdjustedFlow, "AdjustedFlow value does not match"); // 
+			Assert.AreEqual(24.521169662475586, data.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
+			Assert.AreEqual(1.0791204854438692, data.TestOutput.Density, "Density value does not match");
+			Assert.AreEqual(0.0, data.TestOutput.LiquidToGasRatio, "LiquidToGasRatio value does not match");
+			Assert.AreEqual(0.96780162756832133, data.TestOutput.SpecificVolume, "SpecificVolume value does not match");
+			Assert.AreEqual(152.00262906811440, data.TestOutput.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
 		}
 
 		[TestMethod]
@@ -230,12 +224,10 @@ namespace CalculationLibraryUnitTest
 				TowerTestData = test
 			};
 
-			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
-
 			try
 			{
-				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
+				CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+				CalculationLibrary.DetermineAdjustedTestFlow(data);
 			}
 			catch
 			{
@@ -243,12 +235,12 @@ namespace CalculationLibraryUnitTest
 			}
 
 			Assert.IsFalse(methodThrew, "Method threw");
-			Assert.AreEqual(0.0, output.AdjustedFlow, "AdjustedFlow value does not match"); // 
-			Assert.AreEqual(24.521169662475586, output.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
-			Assert.AreEqual(1.0791204854438692, output.Density, "Density value does not match");
-			Assert.AreEqual(0.0, output.LiquidToGasRatio, "LiquidToGasRatio value does not match");
-			Assert.AreEqual(0.96780162756832133, output.SpecificVolume, "SpecificVolume value does not match");
-			Assert.AreEqual(152.00262906811440, output.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
+			Assert.AreEqual(0.0, data.TestOutput.AdjustedFlow, "AdjustedFlow value does not match"); // 
+			Assert.AreEqual(24.521169662475586, data.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
+			Assert.AreEqual(1.0791204854438692, data.TestOutput.Density, "Density value does not match");
+			Assert.AreEqual(0.0, data.TestOutput.LiquidToGasRatio, "LiquidToGasRatio value does not match");
+			Assert.AreEqual(0.96780162756832133, data.TestOutput.SpecificVolume, "SpecificVolume value does not match");
+			Assert.AreEqual(152.00262906811440, data.TestOutput.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
 		}
 
 		[TestMethod]
@@ -290,12 +282,10 @@ namespace CalculationLibraryUnitTest
 				TowerTestData = test
 			};
 
-			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
-
 			try
 			{
-				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
+				CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+				CalculationLibrary.DetermineAdjustedTestFlow(data);
 			}
 			catch
 			{
@@ -303,12 +293,12 @@ namespace CalculationLibraryUnitTest
 			}
 
 			Assert.IsFalse(methodThrew, "Method threw");
-			Assert.AreEqual(0.0, output.AdjustedFlow, "AdjustedFlow value does not match"); // 
-			Assert.AreEqual(24.521169662475586, output.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
-			Assert.AreEqual(1.0791204854438692, output.Density, "Density value does not match");
-			Assert.AreEqual(0.0, output.LiquidToGasRatio, "LiquidToGasRatio value does not match");
-			Assert.AreEqual(0.96780162756832133, output.SpecificVolume, "SpecificVolume value does not match");
-			Assert.AreEqual(152.00262906811440, output.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
+			Assert.AreEqual(0.0, data.TestOutput.AdjustedFlow, "AdjustedFlow value does not match"); // 
+			Assert.AreEqual(24.521169662475586, data.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
+			Assert.AreEqual(1.0791204854438692, data.TestOutput.Density, "Density value does not match");
+			Assert.AreEqual(0.0, data.TestOutput.LiquidToGasRatio, "LiquidToGasRatio value does not match");
+			Assert.AreEqual(0.96780162756832133, data.TestOutput.SpecificVolume, "SpecificVolume value does not match");
+			Assert.AreEqual(152.00262906811440, data.TestOutput.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
 		}
 
 		[TestMethod]
@@ -350,12 +340,10 @@ namespace CalculationLibraryUnitTest
 				TowerTestData = test
 			};
 
-			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
-
 			try
 			{
-				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
+				CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+				CalculationLibrary.DetermineAdjustedTestFlow(data);
 			}
 			catch
 			{
@@ -363,12 +351,12 @@ namespace CalculationLibraryUnitTest
 			}
 
 			Assert.IsFalse(methodThrew, "Method threw");
-			Assert.AreEqual(3549.8089648534847, output.AdjustedFlow, "AdjustedFlow value does not match"); // 
-			Assert.AreEqual(24.521169662475586, output.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
-			Assert.AreEqual(1.0791204854438692, output.Density, "Density value does not match");
-			Assert.AreEqual(0.0, output.LiquidToGasRatio, "LiquidToGasRatio value does not match");
-			Assert.AreEqual(0.96780162756832133, output.SpecificVolume, "SpecificVolume value does not match");
-			Assert.AreEqual(152.00262906811440, output.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
+			Assert.AreEqual(3549.8089648534847, data.TestOutput.AdjustedFlow, "AdjustedFlow value does not match"); // 
+			Assert.AreEqual(24.521169662475586, data.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
+			Assert.AreEqual(1.0791204854438692, data.TestOutput.Density, "Density value does not match");
+			Assert.AreEqual(0.0, data.TestOutput.LiquidToGasRatio, "LiquidToGasRatio value does not match");
+			Assert.AreEqual(0.96780162756832133, data.TestOutput.SpecificVolume, "SpecificVolume value does not match");
+			Assert.AreEqual(152.00262906811440, data.TestOutput.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
 		}
 
 		[TestMethod]
@@ -410,12 +398,10 @@ namespace CalculationLibraryUnitTest
 				TowerTestData = test
 			};
 
-			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
-
 			try
 			{
-				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
+				CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+				CalculationLibrary.DetermineAdjustedTestFlow(data);
 			}
 			catch
 			{
@@ -423,12 +409,12 @@ namespace CalculationLibraryUnitTest
 			}
 
 			Assert.IsFalse(methodThrew, "Method threw");
-			Assert.AreEqual(3546.2191136184192, output.AdjustedFlow, "AdjustedFlow value does not match");
-			Assert.AreEqual(75.821218466275639, output.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match"); // HLWBT
-			Assert.AreEqual(1.1390247623025043, output.Density, "Density value does not match"); // DenOutT
-			Assert.AreEqual(0.0, output.LiquidToGasRatio, "LiquidToGasRatio value does not match"); // LinGt
-			Assert.AreEqual(0.89522952152485946, output.SpecificVolume, "SpecificVolume value does not match"); // SVOutT
-			Assert.AreEqual(24.53, output.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew // LWBTnew
+			Assert.AreEqual(3546.2191136184192, data.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
+			Assert.AreEqual(75.821218466275639, data.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match"); // HLWBT
+			Assert.AreEqual(1.1390247623025043, data.TestOutput.Density, "Density value does not match"); // DenOutT
+			Assert.AreEqual(0.0, data.TestOutput.LiquidToGasRatio, "LiquidToGasRatio value does not match"); // LinGt
+			Assert.AreEqual(0.89522952152485946, data.TestOutput.SpecificVolume, "SpecificVolume value does not match"); // SVOutT
+			Assert.AreEqual(24.53, data.TestOutput.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew // LWBTnew
 		}
 
 		[TestMethod]
@@ -476,12 +462,10 @@ namespace CalculationLibraryUnitTest
 				TowerTestData = test
 			};
 
-			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
-
 			try
 			{
-				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
+				CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+				CalculationLibrary.DetermineAdjustedTestFlow(data);
 			}
 			catch
 			{
@@ -489,12 +473,12 @@ namespace CalculationLibraryUnitTest
 			}
 
 			Assert.IsFalse(methodThrew, "Method threw");
-			Assert.AreEqual(51028.716619350191, output.AdjustedFlow, "AdjustedFlow value does not match");
-			Assert.AreEqual(102.01949119567871, output.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
-			Assert.AreEqual(0.067379633634750025, output.Density, "Density value does not match");
-			Assert.AreEqual(1.1643467203016293, output.LiquidToGasRatio, "LiquidToGasRatio value does not match");
-			Assert.AreEqual(15.499719809090942, output.SpecificVolume, "SpecificVolume value does not match");
-			Assert.AreEqual(73.037664309523052, output.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
+			Assert.AreEqual(51028.716619350191, data.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
+			Assert.AreEqual(102.01949119567871, data.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
+			Assert.AreEqual(0.067379633634750025, data.TestOutput.Density, "Density value does not match");
+			Assert.AreEqual(1.1643467203016293, data.TestOutput.LiquidToGasRatio, "LiquidToGasRatio value does not match");
+			Assert.AreEqual(15.499719809090942, data.TestOutput.SpecificVolume, "SpecificVolume value does not match");
+			Assert.AreEqual(73.037664309523052, data.TestOutput.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
 		}
 
 		[TestMethod]
@@ -536,12 +520,10 @@ namespace CalculationLibraryUnitTest
 				TowerTestData = test
 			};
 
-			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
-
 			try
 			{
-				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
+				CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+				CalculationLibrary.DetermineAdjustedTestFlow(data);
 			}
 			catch
 			{
@@ -549,12 +531,12 @@ namespace CalculationLibraryUnitTest
 			}
 
 			Assert.IsFalse(methodThrew, "Method threw");
-			Assert.AreEqual(0.0, output.AdjustedFlow, "AdjustedFlow value does not match");
-			Assert.AreEqual(76.161623001098633, output.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
-			Assert.AreEqual(0.067379633634750025, output.Density, "Density value does not match");
-			Assert.AreEqual(0.0, output.LiquidToGasRatio, "LiquidToGasRatio value does not match");
-			Assert.AreEqual(15.499719809090942, output.SpecificVolume, "SpecificVolume value does not match");
-			Assert.AreEqual(73.037664309523052, output.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
+			Assert.AreEqual(0.0, data.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
+			Assert.AreEqual(76.161623001098633, data.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
+			Assert.AreEqual(0.067379633634750025, data.TestOutput.Density, "Density value does not match");
+			Assert.AreEqual(0.0, data.TestOutput.LiquidToGasRatio, "LiquidToGasRatio value does not match");
+			Assert.AreEqual(15.499719809090942, data.TestOutput.SpecificVolume, "SpecificVolume value does not match");
+			Assert.AreEqual(73.037664309523052, data.TestOutput.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
 		}
 
 		[TestMethod]
@@ -596,12 +578,10 @@ namespace CalculationLibraryUnitTest
 				TowerTestData = test
 			};
 
-			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
-
 			try
 			{
-				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
+				CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+				CalculationLibrary.DetermineAdjustedTestFlow(data);
 			}
 			catch
 			{
@@ -609,12 +589,12 @@ namespace CalculationLibraryUnitTest
 			}
 
 			Assert.IsFalse(methodThrew, "Method threw");
-			Assert.AreEqual(0.0, output.AdjustedFlow, "AdjustedFlow value does not match");
-			Assert.AreEqual(76.161623001098633, output.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
-			Assert.AreEqual(0.067379633634750025, output.Density, "Density value does not match");
-			Assert.AreEqual(0.0, output.LiquidToGasRatio, "LiquidToGasRatio value does not match");
-			Assert.AreEqual(15.499719809090942, output.SpecificVolume, "SpecificVolume value does not match");
-			Assert.AreEqual(73.037664309523052, output.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
+			Assert.AreEqual(0.0, data.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
+			Assert.AreEqual(76.161623001098633, data.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
+			Assert.AreEqual(0.067379633634750025, data.TestOutput.Density, "Density value does not match");
+			Assert.AreEqual(0.0, data.TestOutput.LiquidToGasRatio, "LiquidToGasRatio value does not match");
+			Assert.AreEqual(15.499719809090942, data.TestOutput.SpecificVolume, "SpecificVolume value does not match");
+			Assert.AreEqual(73.037664309523052, data.TestOutput.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
 		}
 
 		[TestMethod]
@@ -662,12 +642,10 @@ namespace CalculationLibraryUnitTest
 				TowerTestData = test
 			};
 
-			MechanicalDraftPerformanceCurveOutput output = new MechanicalDraftPerformanceCurveOutput();
-
 			try
 			{
-				CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-				CalculationLibrary.DetermineAdjustedTestFlow(data, output);
+				CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+				CalculationLibrary.DetermineAdjustedTestFlow(data);
 			}
 			catch
 			{
@@ -675,12 +653,12 @@ namespace CalculationLibraryUnitTest
 			}
 
 			Assert.IsFalse(methodThrew, "Method threw");
-			Assert.AreEqual(50977.565031811129, output.AdjustedFlow, "AdjustedFlow value does not match");
-			Assert.AreEqual(40.295820974981808, output.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
-			Assert.AreEqual(0.071118288489722126, output.Density, "Density value does not match");
-			Assert.AreEqual(0.0, output.LiquidToGasRatio, "LiquidToGasRatio value does not match");
-			Assert.AreEqual(14.338171292573175, output.SpecificVolume, "SpecificVolume value does not match");
-			Assert.AreEqual(76.18, output.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
+			Assert.AreEqual(50977.565031811129, data.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
+			Assert.AreEqual(40.295820974981808, data.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
+			Assert.AreEqual(0.071118288489722126, data.TestOutput.Density, "Density value does not match");
+			Assert.AreEqual(0.0, data.TestOutput.LiquidToGasRatio, "LiquidToGasRatio value does not match");
+			Assert.AreEqual(14.338171292573175, data.TestOutput.SpecificVolume, "SpecificVolume value does not match");
+			Assert.AreEqual(76.18, data.TestOutput.WetBulbTemperature, "WetBulbTemperature value does not match");  //LWBTnew
 		}
 	}
 }

@@ -16,12 +16,13 @@ namespace ViewModels
         public TowerDesignData DesignData { get; set; }
         public List<TowerTestPoint> TestPoints { get; set; }
         public bool IsDesignDataValid { get; set; }
-        public MechanicalDraftPerformanceCurveOutputDataViewModel OutputDataViewModel { get; set; }
 
         public string DataFileName { get; set; }
         
         public MechanicalDraftPerformanceCurveFileData MechanicalDraftPerformanceCurveFileData;
         public MechanicalDraftPerformanceCurveCalculationData CalculationData { get; set; }
+        public NameValueUnitsDataTable NameValueUnitsDataTable { get; set; }
+        public Units Units { get; set; }
 
         public bool IsDemo { get; set; }
         public bool IsInternationalSystemOfUnits_SI { get; set; }
@@ -37,7 +38,7 @@ namespace ViewModels
             DesignData = new TowerDesignData(IsDemo, IsInternationalSystemOfUnits_SI);
             TestPoints = new List<TowerTestPoint>();
 
-            OutputDataViewModel = new MechanicalDraftPerformanceCurveOutputDataViewModel(IsInternationalSystemOfUnits_SI);
+            NameValueUnitsDataTable = new NameValueUnitsDataTable();
 
             MechanicalDraftPerformanceCurveFileData = new MechanicalDraftPerformanceCurveFileData(IsInternationalSystemOfUnits_SI);
         }
@@ -300,6 +301,23 @@ namespace ViewModels
             return returnValue;
         }
 
+        public void FillTable()
+        {
+            if (IsInternationalSystemOfUnits_SI)
+            {
+                Units = new UnitsIS();
+            }
+            else
+            {
+                Units = new UnitsIP();
+            }
+            NameValueUnitsDataTable.DataTable.Clear();
+            NameValueUnitsDataTable.AddRow("Adjusted Flow", CalculationData.TestOutput.AdjustedFlow.ToString("F1"), Units.FlowRate);
+            NameValueUnitsDataTable.AddRow("Predicted Flow", CalculationData.TestOutput.PredictedFlow.ToString("F1"), Units.FlowRate);
+            NameValueUnitsDataTable.AddRow("Tower Capability", CalculationData.TestOutput.TowerCapability.ToString("F2"), ConstantUnits.Percentage);
+            NameValueUnitsDataTable.AddRow("Cold Water Temperature Deviation", CalculationData.TestOutput.ColdWaterTemperatureDeviation.ToString("F1"), Units.Temperature);
+        }
+
         public bool CalculatePerformanceCurve(int testIndex)
         {
             ErrorMessage = string.Empty;
@@ -316,9 +334,9 @@ namespace ViewModels
                     {
                         MechanicalDraftPerformanceCurveCalculationLibrary calculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
 
-                        calculationLibrary.MechanicalDraftPerformanceCurveCalculation(CalculationData, OutputDataViewModel.MechanicalDraftPerformanceCurveOutput, true);
+                        calculationLibrary.MechanicalDraftPerformanceCurveCalculation(CalculationData, true);
                         //calculationLibrary.DetermineAdjustedTestFlow(CalculationData, OutputDataViewModel.MechanicalDraftPerformanceCurveOutput);
-                        OutputDataViewModel.FillTable();
+                        FillTable();
                     }
                     else
                     {
@@ -390,7 +408,7 @@ namespace ViewModels
 
         public DataTable GetDataTable()
         {
-            return OutputDataViewModel.NameValueUnitsDataTable.DataTable;
+            return NameValueUnitsDataTable.DataTable;
         }
 
         // Check design or test data, optionally prompting the user with bounds if errors are found.

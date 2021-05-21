@@ -44,9 +44,9 @@ namespace CTIToolkit
             ColdVsWaterFlowDataGridView.Size = new Size(ColdVsWaterFlowDataGridView.Size.Width, (ColdVsWaterFlowDataGridView.Rows.Count + 1) * 22);
 
             int y = ColdVsWaterFlowDataGridView.Location.Y + ColdVsWaterFlowDataGridView.Height + 2;
-            if (!string.IsNullOrWhiteSpace(viewModel.OutputDataViewModel.ErrorMessage))
+            if (!string.IsNullOrWhiteSpace(viewModel.CalculationData.TestOutput.ErrorMessage))
             {
-                PredictedFlowCaution.Text = viewModel.OutputDataViewModel.ErrorMessage;
+                PredictedFlowCaution.Text = viewModel.CalculationData.TestOutput.ErrorMessage;
                 PredictedFlowCaution.Location = new System.Drawing.Point(PredictedFlowCaution.Location.X, y);
                 y += PredictedFlowCaution.Location.Y + PredictedFlowCaution.Height + 20;
                 PredictedFlowCaution.Visible = true;
@@ -54,6 +54,7 @@ namespace CTIToolkit
             else
             {
                 PredictedFlowCaution.Visible = false;
+                y += 20;
             }
             if (viewModel.DesignData.TowerTypeValue == TOWER_TYPE.Induced)
             {
@@ -70,7 +71,7 @@ namespace CTIToolkit
 
             TestResultTitle.Location = new System.Drawing.Point(TestResultTitle.Location.X, ExitAirDataGridView.Location.Y + ExitAirDataGridView.Height + 20);
             TestResultDataGridView.Location = new System.Drawing.Point(TestResultDataGridView.Location.X, TestResultTitle.Location.Y + TestResultTitle.Height + 2);
-            TestResultDataGridView.DataSource = viewModel.OutputDataViewModel.NameValueUnitsDataTable.DataTable;
+            TestResultDataGridView.DataSource = viewModel.NameValueUnitsDataTable.DataTable;
             TestResultDataGridView.Size = new Size(TestResultDataGridView.Size.Width, (TestResultDataGridView.Rows.Count + 1) * 22);
 
             WarningLabel.Location = new System.Drawing.Point(WarningLabel.Location.X, TestResultDataGridView.Location.Y + TestResultDataGridView.Height + 20);
@@ -228,20 +229,20 @@ namespace CTIToolkit
             column.ColumnName = "Enthalpy";
             dataTable.Columns.Add(column);
 
-            AddRowExitAir(dataTable, "Design", viewModel.OutputDataViewModel.MechanicalDraftPerformanceCurveOutput.DesignPsychrometricsData);
-            AddRowExitAir(dataTable, "Testn", viewModel.OutputDataViewModel.MechanicalDraftPerformanceCurveOutput.TestPsychrometricsData);
+            AddRowExitAir(dataTable, "Design", viewModel.CalculationData.DesignOutput);
+            AddRowExitAir(dataTable, "Testn", viewModel.CalculationData.TestOutput);
 
             return dataTable;
         }
 
-        private void AddRowExitAir(DataTable dataTable, string rowId, PsychrometricsData psychrometricsData)
+        private void AddRowExitAir(DataTable dataTable, string rowId, MechanicalDraftPerformanceCurveOutput data)
         {
             DataRow row = dataTable.NewRow();
             row[0] = rowId;
-            row[1] = psychrometricsData.WetBulbTemperature.ToString("F2");
-            row[2] = psychrometricsData.Density.ToString("F5");
-            row[3] = psychrometricsData.SpecificVolume.ToString("F4");
-            row[4] = psychrometricsData.Enthalpy.ToString("F4");
+            row[1] = data.WetBulbTemperature.ToString("F2");
+            row[2] = data.Density.ToString("F5");
+            row[3] = data.SpecificVolume.ToString("F4");
+            row[4] = data.ColdWaterTemperatureDeviation.ToString("F4");
             dataTable.Rows.Add(row);
         }
     }
