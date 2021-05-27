@@ -2,13 +2,7 @@
 <rhpml majorversion="4" minorversion="0">
 	<folders>
 		<folder>
-			<name>html</name>
-		</folder>
-		<folder>
-			<name>image</name>
-		</folder>
-		<folder>
-			<name>!Language!</name>
+			<name>en_US</name>
 		</folder>
 	</folders>
 </rhpml>
