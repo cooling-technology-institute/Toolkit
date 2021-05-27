@@ -1,0 +1,44 @@
+﻿[Target:WebHelp Pro]
+ResultFileName=!SSL!\WebHelp_Pro\ctitoolkit.htm
+SSLayoutType=32
+ServerProjectName=ctitoolkit
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1
+[Target:WebHelp]
+ResultFileName=!SSL!\WebHelp\ctitoolkit.htm
+SSLayoutType=2
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1
+[Target:Microsoft HTML Help]
+ResultFileName=!SSL!\Microsoft_HTML_Help\ctitoolkit.chm
+SSLayoutType=1
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1
+[Target:FlashHelp]
+ResultFileName=!SSL!\FlashHelp\ctitoolkit.htm
+SSLayoutType=2
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1
+[Target:Printed Documentation]
+ResultFileName=!SSL!\Printed_Documentation\ctitoolkit.doc
+SSLayoutType=7
+[Target:XML Output]
+ResultFileName=!SSL!\XML_Output\ctitoolkit.xml
+SSLayoutType=8129
+[Target:FlashHelp Pro]
+ResultFileName=!SSL!\FlashHelp_Pro\ctitoolkit.htm
+SSLayoutType=2
+ServerProjectName=ctitoolkit
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1
+[Target:Adobe AIR]
+ResultFileName=!SSL!\Adobe_AIR\ctitoolkit.air
+SSLayoutType=512
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1

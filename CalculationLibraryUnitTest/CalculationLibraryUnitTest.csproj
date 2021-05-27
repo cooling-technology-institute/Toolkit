@@ -70,6 +70,7 @@
     <Compile Include="CalculatePerformanceDataUnitTest.cs" />
     <Compile Include="SplineUnitTest.cs" />
     <Compile Include="SplintUnitTest.cs" />
+    <Compile Include="MechanicalDraftPerformanceCurveCalculationUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

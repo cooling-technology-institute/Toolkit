@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rhpml majorversion="4" minorversion="0">
+	<folders>
+		<folder>
+			<name>html</name>
+		</folder>
+		<folder>
+			<name>image</name>
+		</folder>
+	</folders>
+</rhpml>

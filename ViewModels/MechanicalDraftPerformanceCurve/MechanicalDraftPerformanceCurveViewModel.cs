@@ -333,6 +333,7 @@ namespace ViewModels
                     if (FillCalculationData(testIndex, CalculationData))
                     {
                         MechanicalDraftPerformanceCurveCalculationLibrary calculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+                        File.WriteAllText("data.json", JsonConvert.SerializeObject(CalculationData, Formatting.Indented));
 
                         calculationLibrary.MechanicalDraftPerformanceCurveCalculation(CalculationData, true);
                         //calculationLibrary.DetermineAdjustedTestFlow(CalculationData, OutputDataViewModel.MechanicalDraftPerformanceCurveOutput);

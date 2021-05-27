@@ -20,7 +20,7 @@ namespace CalculationLibraryUnitTest
             List<double> x = new List<double>() { 5.0, 10.0, 15.0, 20.0, 25.0, 30.0 };
             List<double> y = new List<double>() { 18.0, 20.379999999999999, 23.050000000000001, 25.800000000000001, 28.930000000000000, 32.600000000000001};
 
-        double yp1 = 1E+31;
+            double yp1 = 1E+31;
             double ypn = 1E+31;
             List<double> y2 = new List<double>();
             StringBuilder errorMessage = new StringBuilder();

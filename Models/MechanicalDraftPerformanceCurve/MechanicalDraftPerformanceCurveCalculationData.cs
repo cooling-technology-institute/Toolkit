@@ -87,120 +87,161 @@ namespace Models
 
         public double FindMinimumWetBulbTempurature(WaterFlowRate waterFlowRate)
         {
-            double value = waterFlowRate.WetBulbTemperatures[0].Temperature;
-            foreach(WetBulbTemperature wetBulbTemperature in waterFlowRate.WetBulbTemperatures)
+            if (waterFlowRate != null
+                && waterFlowRate.WetBulbTemperatures != null && waterFlowRate.WetBulbTemperatures.Count > 0)
             {
-                if(wetBulbTemperature.Temperature < value)
+                double value = waterFlowRate.WetBulbTemperatures[0].Temperature;
+                foreach(WetBulbTemperature wetBulbTemperature in waterFlowRate.WetBulbTemperatures)
                 {
-                    value = wetBulbTemperature.Temperature;
+                    if(wetBulbTemperature.Temperature < value)
+                    {
+                        value = wetBulbTemperature.Temperature;
+                    }
                 }
+                return Math.Round(value, MidpointRounding.ToEven);
             }
-            return Math.Round(value, MidpointRounding.ToEven);
+            return 0;
         }
 
         public double FindMaximumWetBulbTempurature(WaterFlowRate waterFlowRate)
         {
-            double value = waterFlowRate.WetBulbTemperatures[0].Temperature;
-            foreach (WetBulbTemperature wetBulbTemperature in waterFlowRate.WetBulbTemperatures)
+            if (waterFlowRate != null
+                && waterFlowRate.WetBulbTemperatures != null && waterFlowRate.WetBulbTemperatures.Count > 0)
             {
-                if (wetBulbTemperature.Temperature > value)
+                double value = waterFlowRate.WetBulbTemperatures[0].Temperature;
+                foreach (WetBulbTemperature wetBulbTemperature in waterFlowRate.WetBulbTemperatures)
                 {
-                    value = wetBulbTemperature.Temperature;
+                    if (wetBulbTemperature.Temperature > value)
+                    {
+                        value = wetBulbTemperature.Temperature;
+                    }
                 }
+                return Math.Round(value, MidpointRounding.AwayFromZero);
             }
-            return Math.Round(value, MidpointRounding.AwayFromZero);
+            return 0;
         }
 
         public double FindMinimumColdWaterTempurature(WaterFlowRate waterFlowRate)
         {
-            double value = waterFlowRate.WetBulbTemperatures[0].ColdWaterTemperatures[0];
-            foreach (WetBulbTemperature wetBulbTemperature in waterFlowRate.WetBulbTemperatures)
+            if (waterFlowRate != null
+                && waterFlowRate.WetBulbTemperatures != null && waterFlowRate.WetBulbTemperatures.Count > 0
+                && waterFlowRate.WetBulbTemperatures[0].ColdWaterTemperatures != null && waterFlowRate.WetBulbTemperatures[0].ColdWaterTemperatures.Count > 0)
             {
-                foreach (double coldWaterTemperature in wetBulbTemperature.ColdWaterTemperatures)
+                double value = waterFlowRate.WetBulbTemperatures[0].ColdWaterTemperatures[0];
+                foreach (WetBulbTemperature wetBulbTemperature in waterFlowRate.WetBulbTemperatures)
                 {
-                    if (coldWaterTemperature < value)
+                    foreach (double coldWaterTemperature in wetBulbTemperature.ColdWaterTemperatures)
                     {
-                        value = coldWaterTemperature;
+                        if (coldWaterTemperature < value)
+                        {
+                            value = coldWaterTemperature;
+                        }
                     }
                 }
+                return Math.Round(value, MidpointRounding.ToEven);
             }
-            return Math.Round(value, MidpointRounding.ToEven);
+            return 0;
         }
 
         public double FindMaximumColdWaterTempurature(WaterFlowRate waterFlowRate)
         {
-            double value = waterFlowRate.WetBulbTemperatures[0].ColdWaterTemperatures[0];
-            foreach (WetBulbTemperature wetBulbTemperature in waterFlowRate.WetBulbTemperatures)
+            if (waterFlowRate != null 
+                && waterFlowRate.WetBulbTemperatures != null && waterFlowRate.WetBulbTemperatures.Count > 0
+                && waterFlowRate.WetBulbTemperatures[0].ColdWaterTemperatures != null && waterFlowRate.WetBulbTemperatures[0].ColdWaterTemperatures.Count > 0)
             {
-                foreach (double coldWaterTemperature in wetBulbTemperature.ColdWaterTemperatures)
+                double value = waterFlowRate.WetBulbTemperatures[0].ColdWaterTemperatures[0];
+                foreach (WetBulbTemperature wetBulbTemperature in waterFlowRate.WetBulbTemperatures)
                 {
-                    if (coldWaterTemperature > value)
+                    foreach (double coldWaterTemperature in wetBulbTemperature.ColdWaterTemperatures)
                     {
-                        value = coldWaterTemperature;
+                        if (coldWaterTemperature > value)
+                        {
+                            value = coldWaterTemperature;
+                        }
                     }
                 }
+                return Math.Round(value, MidpointRounding.AwayFromZero);
             }
-            return Math.Round(value, MidpointRounding.AwayFromZero);
+            return 0;
         }
 
         public double FindMinimumRange()
         {
-            double value = Ranges[0];
-            foreach (double range in Ranges)
+            if (Ranges != null && Ranges.Count > 0)
             {
-                if (range < value)
+                double value = Ranges[0];
+                foreach (double range in Ranges)
                 {
-                    value = range;
+                    if (range < value)
+                    {
+                        value = range;
+                    }
                 }
+                return Math.Round(value, MidpointRounding.ToEven);
             }
-            return Math.Round(value, MidpointRounding.ToEven);
+            return 0;
         }
 
         public double FindMaximumRange()
         {
-            double value = Ranges[0];
-            foreach (double range in Ranges)
+            if (Ranges != null && Ranges.Count > 0)
             {
-                if (range > value)
+                double value = Ranges[0];
+                foreach (double range in Ranges)
                 {
-                    value = range;
+                    if (range > value)
+                    {
+                        value = range;
+                    }
                 }
+                return Math.Round(value, MidpointRounding.AwayFromZero);
             }
-            return Math.Round(value, MidpointRounding.AwayFromZero);
+            return 0;
         }
 
         public double FindMinimumWaterFlowRate()
         {
-            double value = WaterFlowRates[0].FlowRate;
-            foreach (WaterFlowRate waterFlowRate in WaterFlowRates)
+            if(WaterFlowRates != null && WaterFlowRates.Count > 0)
             {
-                if (waterFlowRate.FlowRate < value)
+                double value = WaterFlowRates[0].FlowRate;
+                foreach (WaterFlowRate waterFlowRate in WaterFlowRates)
                 {
-                    value = waterFlowRate.FlowRate;
+                    if (waterFlowRate.FlowRate < value)
+                    {
+                        value = waterFlowRate.FlowRate;
+                    }
                 }
-            }
-            return Math.Round(value, MidpointRounding.ToEven);
+                return Math.Round(value, MidpointRounding.ToEven);
+           }
+           return 0;
         }
 
         public double FindMaximumWaterFlowRate()
         {
-            double value = WaterFlowRates[0].FlowRate;
-            foreach (WaterFlowRate waterFlowRate in WaterFlowRates)
+            if (WaterFlowRates != null && WaterFlowRates.Count > 0)
             {
-                if (waterFlowRate.FlowRate > value)
+                double value = WaterFlowRates[0].FlowRate;
+                foreach (WaterFlowRate waterFlowRate in WaterFlowRates)
                 {
-                    value = waterFlowRate.FlowRate;
+                    if (waterFlowRate.FlowRate > value)
+                    {
+                        value = waterFlowRate.FlowRate;
+                    }
                 }
+                return Math.Round(value, MidpointRounding.AwayFromZero);
             }
-            return Math.Round(value, MidpointRounding.AwayFromZero);
+            return 0;
         }
 
         public List<double> GetWaterFlowRates()
         {
             List<double> values = new List<double>();
-            foreach (WaterFlowRate waterFlowRate in WaterFlowRates)
+            if (WaterFlowRates != null && WaterFlowRates.Count > 0)
             {
-                values.Add(waterFlowRate.FlowRate);
+                foreach (WaterFlowRate waterFlowRate in WaterFlowRates)
+                {
+                    values.Add(waterFlowRate.FlowRate);
+                }
             }
             return values;
         }

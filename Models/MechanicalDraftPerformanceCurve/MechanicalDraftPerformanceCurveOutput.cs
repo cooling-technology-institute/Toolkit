@@ -31,9 +31,6 @@ namespace Models
             TowerCapability = 0.0;
             ColdWaterTemperatureDeviation = 0.0;
             LiquidToGasRatio = 0.0;
-            //Density = 0.0;
-            //SpecificVolume = 0.0;
-            //WetBulbTemperature = 0.0;
             base.Clear();
         }
     }

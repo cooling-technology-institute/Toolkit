@@ -242,7 +242,7 @@ namespace CTIToolkit
             row[1] = data.WetBulbTemperature.ToString("F2");
             row[2] = data.Density.ToString("F5");
             row[3] = data.SpecificVolume.ToString("F4");
-            row[4] = data.ColdWaterTemperatureDeviation.ToString("F4");
+            row[4] = data.Enthalpy.ToString("F4");
             dataTable.Rows.Add(row);
         }
     }

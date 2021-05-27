@@ -41,7 +41,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
-                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data, testPsychrometricsData, designPsychrometricsData);
+                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data.TowerDesignData, data.TowerTestData, designPsychrometricsData, testPsychrometricsData);
             }
             catch
             {
@@ -50,6 +50,48 @@ namespace CalculationLibraryUnitTest
 
             Assert.IsFalse(methodThrew, "Method threw");
             Assert.AreEqual(1.2992315398021315, ratio, "TestLiquidToGasRatio value does not match");
+        }
+
+        [TestMethod]
+        public void CalculateTestLiquidToGasRatioDesignTest()
+        {
+            bool methodThrew = false;
+            double ratio = 0.0;
+            MechanicalDraftPerformanceCurveCalculationData data = new MechanicalDraftPerformanceCurveCalculationData()
+            {
+                IsInternationalSystemOfUnits_SI = false,
+                TowerType = TOWER_TYPE.Induced,
+                TowerDesignData = {
+                    WaterFlowRate = 3583.0,
+                    FanDriverPower = 107.0,
+                    LiquidToGasRatio = 1.3
+                },
+                TowerTestData = {
+                    WaterFlowRate = 3623.0,
+                    FanDriverPower = 113.0
+                }
+            };
+            PsychrometricsData designPsychrometricsData = new PsychrometricsData();
+            PsychrometricsData testPsychrometricsData = new PsychrometricsData();
+
+            designPsychrometricsData.Density = 1.0863388914262087;
+            designPsychrometricsData.SpecificVolume = 0.97083769524317687;
+
+            testPsychrometricsData.Density = 1.0962026451105518;
+            testPsychrometricsData.SpecificVolume = 0.95696108697698912;
+
+            try
+            {
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data.TowerDesignData, data.TowerDesignData, designPsychrometricsData, testPsychrometricsData);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.AreEqual(1.2852851981790823, ratio, "TestLiquidToGasRatio value does not match");
         }
 
         [TestMethod]
@@ -83,7 +125,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
-                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data, testPsychrometricsData, designPsychrometricsData);
+                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data.TowerDesignData, data.TowerTestData, designPsychrometricsData, testPsychrometricsData);
             }
             catch
             {
@@ -125,7 +167,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
-                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data, testPsychrometricsData, designPsychrometricsData);
+                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data.TowerDesignData, data.TowerTestData, designPsychrometricsData, testPsychrometricsData);
             }
             catch
             {
@@ -167,7 +209,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
-                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data, testPsychrometricsData, designPsychrometricsData);
+                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data.TowerDesignData, data.TowerTestData, designPsychrometricsData, testPsychrometricsData);
             }
             catch
             {
@@ -211,7 +253,7 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
-                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data, testPsychrometricsData, designPsychrometricsData);
+                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data.TowerDesignData, data.TowerTestData, designPsychrometricsData, testPsychrometricsData);
             }
             catch
             {
