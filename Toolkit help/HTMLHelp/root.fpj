@@ -11,4 +11,11 @@
 			<name>!Language!</name>
 		</folder>
 	</folders>
+	<topics>
+		<topic>
+			<name>Menubar.htm</name>
+			<comments></comments>
+			<frameset>0</frameset>
+		</topic>
+	</topics>
 </rhpml>

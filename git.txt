@@ -1,7 +1,8 @@
 azure
 https://coolingtechnologyinstitute.visualstudio.com/CTI%20Toolkit/_git/CTI%20Toolkit
 
-github rgeoffrion / ragmop3558
+github rgeoffrion / ragmop3558 - hpe email address
+github reneegeoffrion / ragmop3558
 https://github.com/cooling-technology-institute/Toolkit.git
 https://github.com/cooling-technology-institute/CTIBluebook2017.git
 
