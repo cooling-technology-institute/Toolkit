@@ -147,14 +147,19 @@ namespace CTIToolkit
                 dataTable.Columns.Add(column);
             }
 
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Units";
+            dataTable.Columns.Add(column);
+
             for (int i = 0; i < viewModel.CalculationData.Ranges.Count; i++)
             {
-                AddRowColdVsRange(dataTable, i, viewModel.CalculationData.Ranges[i], viewModel.CalculationData.WaterFlowRates);
+                AddRowColdVsRange(dataTable, i, viewModel.CalculationData.Ranges[i], viewModel.CalculationData.WaterFlowRates, viewModel.DesignData.ColdWaterTemperatureDataValue.Units);
             }
             return dataTable;
         }
 
-        private void AddRowColdVsRange(DataTable dataTable, int i, double range, List<WaterFlowRate> waterFlowRates)
+        private void AddRowColdVsRange(DataTable dataTable, int i, double range, List<WaterFlowRate> waterFlowRates, string units)
         {
             DataRow row = dataTable.NewRow();
             row["range"] = range.ToString("F2");
@@ -162,6 +167,7 @@ namespace CTIToolkit
             {
                 row[waterFlowRate.FlowRate.ToString("F2")] = waterFlowRate.Yfit[i].ToString("F2");
             }
+            row["Units"] = units;
             dataTable.Rows.Add(row);
         }
 
@@ -172,29 +178,46 @@ namespace CTIToolkit
             // Declare DataColumn and DataRow variables.
             DataColumn column;
 
+            //column = new DataColumn();
+            //column.DataType = Type.GetType("System.String");
+            //column.ColumnName = "Range";
+            //dataTable.Columns.Add(column);
+
+            //column = new DataColumn();
+            //column.DataType = Type.GetType("System.String");
+            //column.ColumnName = "Units";
+            //dataTable.Columns.Add(column);
+
+            //column = new DataColumn();
+            //column.DataType = Type.GetType("System.String");
+            //column.ColumnName = "Cold Water Temperature";
+            //dataTable.Columns.Add(column);
+
+            //column = new DataColumn();
+            //column.DataType = Type.GetType("System.String");
+            //column.ColumnName = "CWT Units";
+            //dataTable.Columns.Add(column);
+
             foreach (WaterFlowRate waterFlowRate in viewModel.CalculationData.WaterFlowRates)
             {
                 column = new DataColumn();
                 column.DataType = Type.GetType("System.String");
-                column.ColumnName = waterFlowRate.FlowRate.ToString("F2");
+                column.ColumnName = string.Format("{0} {1}", waterFlowRate.FlowRate.ToString("F2"), viewModel.DesignData.WaterFlowRateDataValue.Units); 
                 dataTable.Columns.Add(column);
             }
 
+            DataRow row = dataTable.NewRow();
             for (int i = 0; i < viewModel.CalculationData.Ranges.Count; i++)
             {
-                AddRowColdVsWaterFLow(dataTable, i, viewModel.CalculationData.Ranges[i], viewModel.CalculationData.WaterFlowRates);
+                AddRowColdVsWaterFLow(row, i, viewModel.CalculationData.Ranges[i], viewModel.CalculationData.InterpolateRanges[i], viewModel.DesignData.ColdWaterTemperatureDataValue.Units);
             }
+            dataTable.Rows.Add(row);
             return dataTable;
         }
 
-        private void AddRowColdVsWaterFLow(DataTable dataTable, int i, double range, List<WaterFlowRate> waterFlowRates)
+        private void AddRowColdVsWaterFLow(DataRow row, int i, double range, double interpolateRange, string units)
         {
-            DataRow row = dataTable.NewRow();
-            foreach (WaterFlowRate waterFlowRate in waterFlowRates)
-            {
-                row[waterFlowRate.FlowRate.ToString("F2")] = waterFlowRate.Yfit[i].ToString("F2");
-            }
-            dataTable.Rows.Add(row);
+            row[i] = string.Format("{0} {1}", interpolateRange.ToString("F2"), units);
         }
 
         private DataTable BuildExitAirDataTable(MechanicalDraftPerformanceCurveViewModel viewModel)
@@ -230,7 +253,7 @@ namespace CTIToolkit
             dataTable.Columns.Add(column);
 
             AddRowExitAir(dataTable, "Design", viewModel.CalculationData.DesignOutput);
-            AddRowExitAir(dataTable, "Testn", viewModel.CalculationData.TestOutput);
+            AddRowExitAir(dataTable, "Test", viewModel.CalculationData.TestOutput);
 
             return dataTable;
         }

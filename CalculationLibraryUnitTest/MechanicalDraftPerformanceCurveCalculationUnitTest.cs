@@ -44,7 +44,7 @@ namespace CalculationLibraryUnitTest
                 17.0, 18.8, 21.0
 
             },
-            WetBulbTemperatureRange = new List<double>(),
+            InterpolateRanges = new List<double>(),
             WaterFlowRates = new List<WaterFlowRate>()
             {
                 new WaterFlowRate()
@@ -318,9 +318,9 @@ namespace CalculationLibraryUnitTest
 			}
 
 			Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(28.670592947284472, data.WetBulbTemperatureRange[0], "WetBulbTemperatureRange[0] value does not match"); // 
-            Assert.AreEqual(29.462722073160837, data.WetBulbTemperatureRange[1], "WetBulbTemperatureRange[1] value does not match");
-            Assert.AreEqual(30.286990688774534, data.WetBulbTemperatureRange[2], "WetBulbTemperatureRange[3] value does not match");
+            Assert.AreEqual(28.670592947284472, data.InterpolateRanges[0], "WetBulbTemperatureRange[0] value does not match"); // 
+            Assert.AreEqual(29.462722073160837, data.InterpolateRanges[1], "WetBulbTemperatureRange[1] value does not match");
+            Assert.AreEqual(30.286990688774534, data.InterpolateRanges[2], "WetBulbTemperatureRange[3] value does not match");
         }
 
         [TestMethod]

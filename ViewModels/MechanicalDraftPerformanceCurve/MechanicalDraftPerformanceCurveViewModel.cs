@@ -318,7 +318,7 @@ namespace ViewModels
             NameValueUnitsDataTable.AddRow("Cold Water Temperature Deviation", CalculationData.TestOutput.ColdWaterTemperatureDeviation.ToString("F1"), Units.Temperature);
         }
 
-        public bool CalculatePerformanceCurve(int testIndex)
+        public bool Calculate(int testIndex)
         {
             ErrorMessage = string.Empty;
             StringBuilder stringBuilder = new StringBuilder();
@@ -333,11 +333,12 @@ namespace ViewModels
                     if (FillCalculationData(testIndex, CalculationData))
                     {
                         MechanicalDraftPerformanceCurveCalculationLibrary calculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
-                        File.WriteAllText("data.json", JsonConvert.SerializeObject(CalculationData, Formatting.Indented));
+                        //File.WriteAllText("data.json", JsonConvert.SerializeObject(CalculationData, Formatting.Indented));
 
                         calculationLibrary.MechanicalDraftPerformanceCurveCalculation(CalculationData, true);
                         //calculationLibrary.DetermineAdjustedTestFlow(CalculationData, OutputDataViewModel.MechanicalDraftPerformanceCurveOutput);
                         FillTable();
+                        TestPoints[testIndex].LiquidToGasRatioDataValue.UpdateCurrentValue(CalculationData.TestOutput.LiquidToGasRatio);
                     }
                     else
                     {
@@ -407,9 +408,12 @@ namespace ViewModels
             return returnValue;
         }
 
-        public DataTable GetDataTable()
+        public DataTable DataTable
         {
-            return NameValueUnitsDataTable.DataTable;
+            get
+            {
+                return NameValueUnitsDataTable.DataTable;
+            }
         }
 
         // Check design or test data, optionally prompting the user with bounds if errors are found.

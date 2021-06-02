@@ -44,7 +44,7 @@ namespace CTIToolkit
             this.OKButton.Location = new System.Drawing.Point(286, 33);
             this.OKButton.Name = "OKButton";
             this.OKButton.Size = new System.Drawing.Size(75, 24);
-            this.OKButton.TabIndex = 0;
+            this.OKButton.TabIndex = 2;
             this.OKButton.Text = "OK";
             this.OKButton.UseVisualStyleBackColor = true;
             this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
@@ -62,7 +62,7 @@ namespace CTIToolkit
             this.label1.Location = new System.Drawing.Point(13, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(150, 13);
-            this.label1.TabIndex = 2;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Enter optional document label:";
             // 
             // PreformanceDataRadioButton
@@ -72,7 +72,7 @@ namespace CTIToolkit
             this.PreformanceDataRadioButton.Location = new System.Drawing.Point(24, 23);
             this.PreformanceDataRadioButton.Name = "PreformanceDataRadioButton";
             this.PreformanceDataRadioButton.Size = new System.Drawing.Size(111, 17);
-            this.PreformanceDataRadioButton.TabIndex = 3;
+            this.PreformanceDataRadioButton.TabIndex = 0;
             this.PreformanceDataRadioButton.TabStop = true;
             this.PreformanceDataRadioButton.Text = "Performance Data";
             this.PreformanceDataRadioButton.UseVisualStyleBackColor = true;
@@ -83,7 +83,7 @@ namespace CTIToolkit
             this.DesignRadioButton.Location = new System.Drawing.Point(177, 23);
             this.DesignRadioButton.Name = "DesignRadioButton";
             this.DesignRadioButton.Size = new System.Drawing.Size(84, 17);
-            this.DesignRadioButton.TabIndex = 4;
+            this.DesignRadioButton.TabIndex = 1;
             this.DesignRadioButton.Text = "Design Data";
             this.DesignRadioButton.UseVisualStyleBackColor = true;
             // 
@@ -94,7 +94,7 @@ namespace CTIToolkit
             this.DataGroupBox.Location = new System.Drawing.Point(12, 71);
             this.DataGroupBox.Name = "DataGroupBox";
             this.DataGroupBox.Size = new System.Drawing.Size(281, 48);
-            this.DataGroupBox.TabIndex = 5;
+            this.DataGroupBox.TabIndex = 0;
             this.DataGroupBox.TabStop = false;
             this.DataGroupBox.Text = "Data Type Selection";
             // 

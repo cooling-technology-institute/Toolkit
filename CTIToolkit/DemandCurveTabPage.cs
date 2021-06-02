@@ -21,12 +21,6 @@ namespace CTIToolkit
             Toggle
         };
 
-        const int INDEX_TARGETAPPROACH = 18;
-        const int INDEX_USERAPPROACH = 19;
-        const int INDEX_Charactertics = 20;
-        const int INDEX_LG = 21;
-        const int INDEX_KAVL = 22;
-
         //private const string CheckedString = "✔";
         //private const string UncheckedString = "✘";
 
@@ -340,15 +334,51 @@ namespace CTIToolkit
             nameValueUnitsDataTable.AddRow(DemandCurveViewModel.LiquidToGasRatioDataValue.InputMessage, LiquidToGasRatioValue.Text, string.Empty);
             nameValueUnitsDataTable.AddRow(DemandCurveViewModel.UserApproachDataValue.InputMessage, UserApproachValue.Text, UserApproachUnits.Text);
 
-            DemandCurvePrinterOutput printerOutput = new DemandCurvePrinterOutput(e.PageBounds.Height - 80, this.PrintControl.Label, nameValueUnitsDataTable, DemandCurveViewModel);
-            Chart chart = printerOutput.Controls["Chart"] as Chart;
-            InitializeChart(chart, true);
-            DrawSeries(chart, true);
+            e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias; // so footer is anti-aliased
+            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;  // so when we scale up, we smooth out the jaggies somewhat
+            e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
 
-            printerOutput.CreateControl();
-            var bm = new Bitmap(printerOutput.Width, printerOutput.Height);
-            printerOutput.DrawToBitmap(bm, new Rectangle(0, 0, bm.Width, bm.Height));
-            e.Graphics.DrawImage(bm, 40, 40);
+            DrawLogo(e, 0, 0);
+            DrawText(e, 18, FontStyle.Bold, "CTI Demand Curve Report", 143, 0, true);
+            if (!string.IsNullOrWhiteSpace(this.PrintControl.Label))
+            {
+                DrawText(e, 18, FontStyle.Bold, this.PrintControl.Label, 143, 34, true);
+            }
+            float y = 145;
+            y += DrawText(e, 12, FontStyle.Regular, "Input Properties:", 3, y, false);
+            y += DrawDataTable(e, nameValueUnitsDataTable.DataTable, 7, y);
+            y += DrawText(e, 12, FontStyle.Regular, "Output:", 3, y, false);
+            y += DrawDataTable(e, DemandCurveViewModel.DataTable, 7, y);
+            y += 30;
+
+            int width = 0;
+            if (Chart.Size.Width > e.PageSettings.Bounds.Width - MARGIN)
+            {
+                width = Chart.Size.Width;
+                Chart.Size = new Size(e.PageSettings.Bounds.Width - (int) MARGIN, Chart.Size.Height);
+            }
+            PrintControl.Bitmap = new Bitmap(Chart.Width, Chart.Height);
+            Chart.DrawToBitmap(PrintControl.Bitmap, new Rectangle(0, 0, PrintControl.Bitmap.Width, PrintControl.Bitmap.Height));
+            e.Graphics.DrawImage(PrintControl.Bitmap, new PointF(3, y));
+            if (width != 0)
+            {
+                Chart.Size = new Size(width, Chart.Size.Height);
+            }
+
+            e.Graphics.DrawString("CTI Toolkit 4.0 Beta Version",
+                                new Font("Times New Roman", 16),
+                                new SolidBrush(Color.Red),
+                                MARGIN, e.PageSettings.Bounds.Height - MARGIN);
+
+            using (Font font = new Font("Times New Roman", 8))
+            {
+                SizeF size = e.Graphics.MeasureString(DemandCurveViewModel.DataFilenameInputValue, font);
+                e.Graphics.DrawString(DemandCurveViewModel.DataFilenameInputValue,
+                                      font,
+                                      new SolidBrush(Color.Black),
+                                      e.PageSettings.Bounds.Width - size.Width - MARGIN, e.PageSettings.Bounds.Height - MARGIN);
+            }
         }
 
         private void DrawSeries(Chart chart, bool isPrintPage)
@@ -378,9 +408,9 @@ namespace CTIToolkit
                     }
                 }
 
-                if (DemandCurveViewModel.GetOutputDataTable() != null)
+                if (DemandCurveViewModel.DataTable != null)
                 {
-                    OutputGridView.DataSource = new DataView(DemandCurveViewModel.GetOutputDataTable());
+                    OutputGridView.DataSource = new DataView(DemandCurveViewModel.DataTable);
                 }
             }
             else
@@ -736,16 +766,24 @@ namespace CTIToolkit
                             lg = Math.Pow(10, Chart.ChartAreas[0].AxisX.PixelPositionToValue(e.X));
                             kval = Math.Pow(10, Chart.ChartAreas[0].AxisY.PixelPositionToValue(e.Y));
                         }
+                        else if (result.Object is Grid)
+                        {
+                            lg = Math.Pow(10, Chart.ChartAreas[0].AxisX.PixelPositionToValue(e.X));
+                            kval = Math.Pow(10, Chart.ChartAreas[0].AxisY.PixelPositionToValue(e.Y));
+                        }
                         else if (result.Object is DataPoint)
                         {
-                            DataPoint dataPoint = result.Object as DataPoint;
-                            lg = dataPoint.XValue;
-                            kval = dataPoint.YValues[0];
+                            lg = Math.Pow(10, Chart.ChartAreas[0].AxisX.PixelPositionToValue(e.X));
+                            kval = Math.Pow(10, Chart.ChartAreas[0].AxisY.PixelPositionToValue(e.Y));
+
+                            //DataPoint dataPoint = result.Object as DataPoint;
+                            //lg = dataPoint.XValue;
+                            //kval = dataPoint.YValues[0];
                         }
                         if(lg != 0.0 && kval != 0.0)
                         {
                             approach = DemandCurveViewModel.CalculateExactApproach(lg, kval);
-                            MessageBox.Show(string.Format("Approach={0}\n\nL/G={1}\n\nKaV/L={2}\n\n", approach.ToString("F3"), lg.ToString("F3"), kval.ToString("F5")));
+                            MessageBox.Show(string.Format("L/G = {0}\n\nKaV/L = {1}\n\n\nApproach = {2} {3}\n\n", lg.ToString("F3"), kval.ToString("F5"), approach.ToString("F3"), DemandCurveViewModel.RangeDataValue.Units), "Mouse Click at");
                         }
                     }
                     else if (e.Button == MouseButtons.Left)
@@ -950,7 +988,7 @@ namespace CTIToolkit
                 Chart.ChartAreas[0].AxisX.MajorTickMark.IntervalOffset = 0.1;
             }
 
-            if (Chart.Size.Height > 200)
+            if (Chart.Size.Height > 600)
             {
                 Chart.ChartAreas[0].AxisY.Interval = 0.05;
                 Chart.ChartAreas[0].AxisY.IntervalOffset = 0.1;
@@ -959,7 +997,7 @@ namespace CTIToolkit
                 Chart.ChartAreas[0].AxisY.MajorTickMark.Interval = 0.05;
                 Chart.ChartAreas[0].AxisY.MajorTickMark.IntervalOffset = 0.1;
             }
-            else if (Chart.Size.Height > 100)
+            else if (Chart.Size.Height > 450)
             {
                 Chart.ChartAreas[0].AxisY.Interval = 0.1;
                 Chart.ChartAreas[0].AxisY.IntervalOffset = 0.1;

@@ -388,22 +388,35 @@ namespace CTIToolkit
                     nameValueUnitsDataTable.AddRow(PsychrometricsViewModel.ElevationDataValue.InputMessage, Elevation_Value.Text, ElevationUnits.Text);
                 }
 
-                PsychrometricPrinterOutput printerOutput = new PsychrometricPrinterOutput(e.PageBounds.Height - 80, calculationProperty, this.PrintControl.Label, nameValueUnitsDataTable, PsychrometricsViewModel);
-                printerOutput.CreateControl();
-                var bm = new Bitmap(printerOutput.Width, printerOutput.Height);
-                printerOutput.DrawToBitmap(bm, new Rectangle(0, 0, bm.Width, bm.Height));
-                e.Graphics.DrawImage(bm, 40, 40);
+                e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias; // so footer is anti-aliased
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;  // so when we scale up, we smooth out the jaggies somewhat
+                e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+
+                DrawLogo(e, 0, 0);
+                DrawText(e, 18, FontStyle.Bold, "CTI Psychrometric Air Properties Report", 143, 0, true);
+                DrawText(e, 18, FontStyle.Bold, calculationProperty, 143, 34, true);
+                if (!string.IsNullOrWhiteSpace(this.PrintControl.Label))
+                {
+                    DrawText(e, 18, FontStyle.Bold, this.PrintControl.Label, 143, 68, true);
+                }
+                float y = 145;
+                y += DrawText(e, 12, FontStyle.Regular, "Input Properties:", 3, y, false);
+                y += DrawDataTable(e, nameValueUnitsDataTable.DataTable, 7, y);
+                y += DrawText(e, 12, FontStyle.Regular, "Output:", 3, y, false);
+                DrawDataTable(e, PsychrometricsViewModel.GetDataTable(), 7, y);
 
                 e.Graphics.DrawString("CTI Toolkit 4.0 Beta Version",
                                       new Font("Times New Roman", 16),
                                       new SolidBrush(Color.Red),
-                                      40, e.PageSettings.Bounds.Height - 60);
+                                      MARGIN, e.PageSettings.Bounds.Height - MARGIN);
+
                 Font font = new Font("Times New Roman", 8);
                 SizeF size = e.Graphics.MeasureString(PsychrometricsViewModel.DataFilenameInputValue, font);
                 e.Graphics.DrawString(PsychrometricsViewModel.DataFilenameInputValue,
                                       font,
                                       new SolidBrush(Color.Black),
-                                      e.PageSettings.Bounds.Width - size.Width - 40, e.PageSettings.Bounds.Height - 60);
+                                      e.PageSettings.Bounds.Width - size.Width - MARGIN, e.PageSettings.Bounds.Height - MARGIN);
             }
             else
             {

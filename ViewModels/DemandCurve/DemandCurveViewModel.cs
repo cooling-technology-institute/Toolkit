@@ -307,7 +307,14 @@ namespace ViewModels
         {
             try
             {
-                return DemandCurveCalculationLibrary.CalculateExactApproach(DemandCurveCalculationData, lg, kval);
+                double approach =  DemandCurveCalculationLibrary.CalculateExactApproach(DemandCurveCalculationData, lg, kval);
+
+                if (DemandCurveCalculationData.IsInternationalSystemOfUnits_SI)
+                {
+                    approach *= 5.0 / 9.0;
+                }
+
+                return approach;
             }
             catch (Exception exception)
             {
@@ -388,15 +395,18 @@ namespace ViewModels
             }
         }
 
-        public DataTable GetOutputDataTable()
+        public DataTable DataTable
         {
-            if (DemandCurveCalculationData == null)
+            get
             {
-                return null;
-            }
-            else
-            {
-                return NameValueUnitsDataTable.DataTable;
+                if (DemandCurveCalculationData == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return NameValueUnitsDataTable.DataTable;
+                }
             }
         }
 

@@ -360,191 +360,461 @@ namespace CTIToolkit
             //    //        returnValue = false;
             //    //    }
             //}
-
-            if (MechanicalDraftPerformanceCurveViewModel.CalculatePerformanceCurve(TestPointTabControl.SelectedIndex))
+            if (TestPointTabControl.SelectedIndex >= 0)
             {
-                if (MechanicalDraftPerformanceCurveViewModel.GetDataTable() != null)
+                if (MechanicalDraftPerformanceCurveViewModel.Calculate(TestPointTabControl.SelectedIndex))
                 {
-                    DataGridView.DataSource = null;
-                }
+                    if (MechanicalDraftPerformanceCurveViewModel.DataTable != null)
+                    {
+                        DataGridView.DataSource = null;
+                    }
 
-                if (MechanicalDraftPerformanceCurveViewModel.GetDataTable() != null)
+                    if (MechanicalDraftPerformanceCurveViewModel.DataTable != null)
+                    {
+                        // Set a DataGrid control's DataSource to the DataView.
+                        DataGridView.DataSource = new DataView(MechanicalDraftPerformanceCurveViewModel.DataTable);
+                        if (TestPointTabControl.TabPages[TestPointTabControl.SelectedIndex].Controls[0] is TestPointUserControl)
+                        {
+                            TestPointUserControl testPointUserControl = TestPointTabControl.TabPages[TestPointTabControl.SelectedIndex].Controls[0] as TestPointUserControl;
+                            testPointUserControl.LoadData(MechanicalDraftPerformanceCurveViewModel.TestPoints[TestPointTabControl.SelectedIndex]);
+                        }
+                    }
+                }
+                else
                 {
-                    // Set a DataGrid control's DataSource to the DataView.
-                    DataGridView.DataSource = new DataView(MechanicalDraftPerformanceCurveViewModel.GetDataTable());
+                    MessageBox.Show(MechanicalDraftPerformanceCurveViewModel.ErrorMessage, "Mechanical Draft Performance Curve Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
+        }
+        public override void PrintPage(object sender, PrintPageEventArgs e)
+        {
+            string reportLabel = string.Empty;
+
+            if (!e.Cancel)
             {
-                MessageBox.Show(MechanicalDraftPerformanceCurveViewModel.ErrorMessage, "Mechanical Draft Performance Curve Calculation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                if (PrintControl.PageIndex == 0)
+                {
+                    PrintControl.PageIndex = 0;
+
+                    if (PrintControl.Bitmap != null)
+                    {
+                        PrintControl.Bitmap.Dispose();
+                    }
+
+                    PrintControl.DataTables.Clear();
+
+                    if ((MechanicalDraftPerformanceCurveViewModel.IsDesignDataValid)
+                    && (MechanicalDraftPerformanceCurveViewModel.CalculationData != null)
+                    && (MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates != null)
+                    && (MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates.Count > 0))
+                    {
+                        if (PrintControl.IsDesignData)
+                        {
+                            reportLabel = "CTI Tower Design Data";
+                            NameValueUnitsDataTable nameValueUnitsDataTable = new NameValueUnitsDataTable();
+                            TowerDesignDataForm.FillNameValueUnitsDataTable(nameValueUnitsDataTable);
+                            PrintControl.DataTables.Add(nameValueUnitsDataTable.DataTable);
+                            foreach (WaterFlowRate waterFlowRate in MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates)
+                            {
+                                PrintControl.DataTables.Add(BuildFlowRateDataTable(waterFlowRate, MechanicalDraftPerformanceCurveViewModel.CalculationData.Ranges));
+                            }
+                        }
+                        else
+                        {
+                            reportLabel = "CTI Mechanical Draft Performance Curve Test Report";
+                            PrintControl.DataTables.Add(BuildDesignTestDataTable(TestPointTabControl.SelectedIndex));
+                            PrintControl.DataTables.Add(BuildColdVsRangeDataTable(TestPointTabControl.SelectedIndex));
+                            PrintControl.DataTables.Add(BuildColdVsWaterFLowDataTable(TestPointTabControl.SelectedIndex));
+                            PrintControl.DataTables.Add(BuildExitAirDataTable());
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("The design data is not valid", "Invalid Data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        e.Cancel = true;
+                    }
+                }
+
+                float y = 34;
+
+                if (PrintControl.PageIndex == 0)
+                {
+                    e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                    e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias; // so footer is anti-aliased
+                    e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;  // so when we scale up, we smooth out the jaggies somewhat
+                    e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+
+                    DrawLogo(e, 0, 0);
+                    DrawText(e, 18, FontStyle.Bold, reportLabel, 143, 0, true);
+                    if (!string.IsNullOrWhiteSpace(this.PrintControl.Label))
+                    {
+                        y += DrawText(e, 18, FontStyle.Bold, this.PrintControl.Label, 143, y, true);
+                    }
+                    y += DrawText(e, 12, FontStyle.Regular, string.Format("Owner: {0}", MechanicalDraftPerformanceCurveViewModel.DesignData.OwnerNameValue), 143, y, true);
+                    y += DrawText(e, 12, FontStyle.Regular, string.Format("Project: {0}", MechanicalDraftPerformanceCurveViewModel.DesignData.ProjectNameValue), 143, y, true);
+                    y += DrawText(e, 12, FontStyle.Regular, string.Format("Location: {0}", MechanicalDraftPerformanceCurveViewModel.DesignData.LocationValue), 143, y, true);
+                    y += DrawText(e, 12, FontStyle.Regular, string.Format("Manufacturer: {0}", MechanicalDraftPerformanceCurveViewModel.DesignData.TowerManufacturerValue), 143, y, true);
+                    y += DrawText(e, 12, FontStyle.Regular, string.Format("Tower Type: {0}", MechanicalDraftPerformanceCurveViewModel.DesignData.TowerTypeValue.ToString()), 143, y, true);
+                }
+                else
+                {
+                    y = MARGIN;
+                }
+
+                if (PrintControl.IsDesignData)
+                {
+                    y += DrawTowerDesignData(e, y);
+                }
+                else
+                {
+                    y += DrawPerformanceData(e, y);
+                }
+
+                e.Graphics.DrawString("CTI Toolkit 4.0 Beta Version",
+                                    new Font("Times New Roman", 16),
+                                    new SolidBrush(Color.Red),
+                                    MARGIN, e.PageSettings.Bounds.Height - MARGIN);
+                Font font = new Font("Times New Roman", 8);
+                SizeF size = e.Graphics.MeasureString(MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue, font);
+                e.Graphics.DrawString(MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue,
+                                      font,
+                                      new SolidBrush(Color.Black),
+                                      e.PageSettings.Bounds.Width - size.Width - MARGIN, e.PageSettings.Bounds.Height - MARGIN);
+
+                if(!e.HasMorePages)
+                {
+                    PrintControl.PageIndex = 0;
+                }
             }
+        }
+
+        private float DrawTowerDesignData(PrintPageEventArgs e, float y)
+        {
+            if (PrintControl.PageIndex == 0)
+            {
+                y += DrawText(e, 12, FontStyle.Bold, "Cooling Tower Design Data:", 3, y, false);
+                if (PrintControl.DataTables.Count > 0)
+                {
+                    y += DrawDataTable(e, PrintControl.DataTables[0], 7, y);
+                    PrintControl.DataTableIndex = 1;
+                }
+            }
+
+            y += DrawTowerDesignCurveData(e, y);
+
+            return y;
+        }
+
+        private float DrawTowerDesignCurveData(PrintPageEventArgs e, float y)
+        {
+            if (PrintControl.PageIndex == 0)
+            {
+                y += DrawText(e, 12, FontStyle.Bold, "Tower Design Curve Data:", 3, y, false);
+            }
+
+            if (PrintControl.DataTables.Count > 0)
+            {
+                for (int i = PrintControl.DataTableIndex; i < PrintControl.DataTables.Count; i++)
+                {
+                    float height = GetDataTableHeight(e, PrintControl.DataTables[i]);
+                    if (y + height < e.PageSettings.Bounds.Height - 80)
+                    {
+                        y += DrawDataTable(e, PrintControl.DataTables[i], 7, y);
+                    }
+                    else
+                    {
+                        PrintControl.DataTableIndex = i;
+                        PrintControl.PageIndex++;
+                        e.HasMorePages = true;
+                        break;
+                    }
+                }
+            }
+            return y;
+        }
+
+        private float DrawPerformanceData(PrintPageEventArgs e, float y)
+        {
+            if (PrintControl.DataTables.Count > 0)
+            {
+                for (int i = PrintControl.DataTableIndex; i < PrintControl.DataTables.Count; i++)
+                {
+                    float height = GetDataTableHeight(e, PrintControl.DataTables[i]);
+                    if (y + height < e.PageSettings.Bounds.Height - 80)
+                    {
+                        y += DrawDataTable(e, PrintControl.DataTables[i], 7, y);
+                    }
+                    else
+                    {
+                        PrintControl.DataTableIndex = i;
+                        PrintControl.PageIndex++;
+                        e.HasMorePages = true;
+                        break;
+                    }
+                }
+            }
+            return y;
         }
 
         private DataTable BuildFlowRateDataTable(WaterFlowRate waterFlowRate, List<double> ranges)
         {
-            DataTable DataTable = new DataTable();
+            DataTable dataTable = new DataTable();
             DataColumn column;
+
+            dataTable.TableName = string.Format("Water Flow Rate: {0} {1}", waterFlowRate.FlowRate, MechanicalDraftPerformanceCurveViewModel.DesignData.WaterFlowRateDataValue.Units);
 
             // Create Name column
             column = new DataColumn();
             column.DataType = System.Type.GetType("System.String");
             column.ColumnName = "Wet Bulb Temperature";
-            DataTable.Columns.Add(column);
+            dataTable.Columns.Add(column);
 
-            foreach(double range in ranges)
+            foreach (double range in ranges)
             {
                 // Create Value column.
                 column = new DataColumn();
                 column.DataType = Type.GetType("System.String");
                 column.ColumnName = string.Format("Range: {0}", range.ToString("F2"));
-                DataTable.Columns.Add(column);
+                dataTable.Columns.Add(column);
             }
 
             // Create Units column.
             column = new DataColumn();
             column.DataType = Type.GetType("System.String");
             column.ColumnName = "Units";
-            DataTable.Columns.Add(column);
+            dataTable.Columns.Add(column);
 
-            foreach(WetBulbTemperature wetBulbTemperature in waterFlowRate.WetBulbTemperatures)
+            foreach (WetBulbTemperature wetBulbTemperature in waterFlowRate.WetBulbTemperatures)
             {
-                DataRow row = DataTable.NewRow();
+                DataRow row = dataTable.NewRow();
                 row[0] = wetBulbTemperature.Temperature.ToString("F2");
                 int columnIndex = 1;
-                foreach(double temperature in wetBulbTemperature.ColdWaterTemperatures)
+                foreach (double temperature in wetBulbTemperature.ColdWaterTemperatures)
                 {
                     row[columnIndex++] = temperature.ToString("F2");
                 }
-                if(IsInternationalSystemOfUnits_SI)
-                {
-                    row[columnIndex] = ConstantUnits.TemperatureCelsius;
-                }
-                else
-                {
-                    row[columnIndex] = ConstantUnits.TemperatureFahrenheit;
-                }
-                DataTable.Rows.Add(row);
+                row[columnIndex] = MechanicalDraftPerformanceCurveViewModel.DesignData.WetBulbTemperatureDataValue.Units;
+                dataTable.Rows.Add(row);
             }
 
-            return DataTable;
+            return dataTable;
         }
 
-        public override void PrintPage(object sender, PrintPageEventArgs e)
+        public DataTable FillDesignDataTable()
         {
-            if(PrintControl.UserControl == null)
-            {
-                NameValueUnitsDataTable nameValueUnitsDataTable = new NameValueUnitsDataTable();
-                UserControl printerOutput = null;
-                
-                if(PrintControl.Bitmap != null)
-                {
-                    PrintControl.Bitmap.Dispose();
-                }
+            NameValueUnitsDataTable nameValueUnitsDataTable = new NameValueUnitsDataTable();
 
-                if ((MechanicalDraftPerformanceCurveViewModel.IsDesignDataValid)
-                && (MechanicalDraftPerformanceCurveViewModel.CalculationData != null)
-                && (MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates != null)
-                && (MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates.Count > 0))
-                {
-                    if (PrintControl.IsDesignData)
-                    {
-                        int pageSize = e.PageSettings.Bounds.Height;
-                        TowerDesignDataForm.FillNameValueUnitsDataTable(nameValueUnitsDataTable);
-                        MechanicalDraftPerformanceCurveDataPrinterOutput output = new MechanicalDraftPerformanceCurveDataPrinterOutput(pageSize, this.PrintControl.Label, nameValueUnitsDataTable, MechanicalDraftPerformanceCurveViewModel);
-                        PrintControl.X.Clear();
-                        PrintControl.PageIndex = 0;
-                        printerOutput = output;
-                        int bottom = 475;
-                        int index = 1;
-                        int pageHeight = pageSize;
-                        int newBottom = 0;
-                        PrintControl.X.Add(0);
-                        PrintControl.X.Add(pageHeight);
+            nameValueUnitsDataTable.AddRow(MechanicalDraftPerformanceCurveViewModel.DesignData.WaterFlowRateDataValue.InputMessage, MechanicalDraftPerformanceCurveViewModel.DesignData.WaterFlowRateDataValue.InputValue, MechanicalDraftPerformanceCurveViewModel.DesignData.WaterFlowRateDataValue.Units);
+            nameValueUnitsDataTable.AddRow(MechanicalDraftPerformanceCurveViewModel.DesignData.HotWaterTemperatureDataValue.InputMessage, MechanicalDraftPerformanceCurveViewModel.DesignData.HotWaterTemperatureDataValue.InputValue, MechanicalDraftPerformanceCurveViewModel.DesignData.HotWaterTemperatureDataValue.Units);
+            nameValueUnitsDataTable.AddRow(MechanicalDraftPerformanceCurveViewModel.DesignData.ColdWaterTemperatureDataValue.InputMessage, MechanicalDraftPerformanceCurveViewModel.DesignData.ColdWaterTemperatureDataValue.InputValue, MechanicalDraftPerformanceCurveViewModel.DesignData.ColdWaterTemperatureDataValue.Units);
+            nameValueUnitsDataTable.AddRow(MechanicalDraftPerformanceCurveViewModel.DesignData.WetBulbTemperatureDataValue.InputMessage, MechanicalDraftPerformanceCurveViewModel.DesignData.WetBulbTemperatureDataValue.InputValue, MechanicalDraftPerformanceCurveViewModel.DesignData.WetBulbTemperatureDataValue.Units);
+            nameValueUnitsDataTable.AddRow(MechanicalDraftPerformanceCurveViewModel.DesignData.DryBulbTemperatureDataValue.InputMessage, MechanicalDraftPerformanceCurveViewModel.DesignData.DryBulbTemperatureDataValue.InputValue, MechanicalDraftPerformanceCurveViewModel.DesignData.DryBulbTemperatureDataValue.Units);
+            nameValueUnitsDataTable.AddRow(MechanicalDraftPerformanceCurveViewModel.DesignData.BarometricPressureDataValue.InputMessage, MechanicalDraftPerformanceCurveViewModel.DesignData.BarometricPressureDataValue.InputValue, MechanicalDraftPerformanceCurveViewModel.DesignData.BarometricPressureDataValue.Units);
+            nameValueUnitsDataTable.AddRow(MechanicalDraftPerformanceCurveViewModel.DesignData.LiquidToGasRatioDataValue.InputMessage, MechanicalDraftPerformanceCurveViewModel.DesignData.LiquidToGasRatioDataValue.InputValue, string.Empty);
 
-                        foreach (WaterFlowRate waterFlowRate in MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates)
-                        {
-                            newBottom = output.AddWaterFlowRate(pageHeight, bottom,
-                                string.Format("Water Flow Rate: {0} {1}", waterFlowRate.FlowRate, (IsInternationalSystemOfUnits_SI) ? ConstantUnits.LitersPerSecond : ConstantUnits.GallonsPerMinute),
-                                BuildFlowRateDataTable(waterFlowRate, MechanicalDraftPerformanceCurveViewModel.CalculationData.Ranges));
-
-                            if (newBottom > pageHeight)
-                            {
-                                if (index > 1)
-                                {
-                                    PrintControl.X.Add(pageHeight);
-                                }
-                                index++;
-                                pageHeight = pageSize * index;
-                            }
-                            bottom = newBottom;
-                        }
-                        PrintControl.X.Add(newBottom);
-                    }
-                    else
-                    {
-                        printerOutput = new MechanicalDraftPerformanceCurvePrinterOutput(e.PageBounds.Height - 120, this.PrintControl.Label, TestPointTabControl.SelectedIndex, MechanicalDraftPerformanceCurveViewModel);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("The design data is not valid", "Invalid Data", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    e.Cancel = true;
-                }
-
-                if (printerOutput != null)
-                {
-                    PrintControl.UserControl = printerOutput;
-                    printerOutput.CreateControl();
-                    PrintControl.Bitmap = new Bitmap(printerOutput.Width, printerOutput.Height);
-                    printerOutput.DrawToBitmap(PrintControl.Bitmap, new Rectangle(0, 0, PrintControl.Bitmap.Width, PrintControl.Bitmap.Height));
-                }
-            }
-
-            if(!e.Cancel)
-            {
-                if (PrintControl.PageIndex < PrintControl.X.Count)
-                {
-                    int pageTop = PrintControl.X[PrintControl.PageIndex];
-                    int pageBottom;
-                    if (PrintControl.PageIndex + 1 < PrintControl.X.Count)
-                    {
-                        pageBottom = PrintControl.X[PrintControl.PageIndex + 1];
-
-                        if (pageBottom < PrintControl.Bitmap.Height)
-                        {
-                            e.HasMorePages = true;
-                        }
-                    }
-                    else
-                    {
-                        pageBottom = PrintControl.Bitmap.Height;
-                    }
-                    DrawImage(e, PrintControl.Bitmap, new Rectangle(0, pageTop, PrintControl.Bitmap.Width, pageBottom));
-                    PrintControl.PageIndex++;
-                }
-                else
-                {
-                    e.Graphics.DrawImage(PrintControl.Bitmap, 40, 40);
-                }
-
-                e.Graphics.DrawString("CTI Toolkit 4.0 Beta Version",
-                                      new Font("Times New Roman", 16),
-                                      new SolidBrush(Color.Red),
-                                      40, e.PageSettings.Bounds.Height - 60);
-                Font font = new Font("Times New Roman", 8);
-                SizeF size = e.Graphics.MeasureString(MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue, font);
-                e.Graphics.DrawString(MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue,
-                                      font,
-                                      new SolidBrush(Color.Black),
-                                      e.PageSettings.Bounds.Width - size.Width - 40, e.PageSettings.Bounds.Height - 60);
-
-            }
+            return nameValueUnitsDataTable.DataTable;
         }
 
-        public void DrawImage(PrintPageEventArgs e, Image image, Rectangle rectangle)
+        private DataTable BuildDesignTestDataTable(int index)
         {
-            // Draw image to screen.
-            e.Graphics.DrawImage(image, 40, 40, rectangle, GraphicsUnit.Pixel);
+            DataTable dataTable = new DataTable();
+            
+            dataTable.TableName = "Cooling Tower Design and Test Data:";
+
+            // Declare DataColumn and DataRow variables.
+            DataColumn column;
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Parameters";
+            dataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = Type.GetType("System.String");
+            column.ColumnName = "Design";
+            dataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = Type.GetType("System.String");
+            column.ColumnName = "Test";
+            dataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = Type.GetType("System.String");
+            column.ColumnName = "Units";
+            dataTable.Columns.Add(column);
+
+            AddRowDesignTest(dataTable, MechanicalDraftPerformanceCurveViewModel.DesignData.WaterFlowRateDataValue, MechanicalDraftPerformanceCurveViewModel.TestPoints[index].WaterFlowRateDataValue);
+            AddRowDesignTest(dataTable, MechanicalDraftPerformanceCurveViewModel.DesignData.HotWaterTemperatureDataValue, MechanicalDraftPerformanceCurveViewModel.TestPoints[index].HotWaterTemperatureDataValue);
+            AddRowDesignTest(dataTable, MechanicalDraftPerformanceCurveViewModel.DesignData.ColdWaterTemperatureDataValue, MechanicalDraftPerformanceCurveViewModel.TestPoints[index].ColdWaterTemperatureDataValue);
+            AddRowDesignTest(dataTable, MechanicalDraftPerformanceCurveViewModel.DesignData.WetBulbTemperatureDataValue, MechanicalDraftPerformanceCurveViewModel.TestPoints[index].WetBulbTemperatureDataValue);
+            AddRowDesignTest(dataTable, MechanicalDraftPerformanceCurveViewModel.DesignData.DryBulbTemperatureDataValue, MechanicalDraftPerformanceCurveViewModel.TestPoints[index].DryBulbTemperatureDataValue);
+            AddRowDesignTest(dataTable, MechanicalDraftPerformanceCurveViewModel.DesignData.FanDriverPowerDataValue, MechanicalDraftPerformanceCurveViewModel.TestPoints[index].FanDriverPowerDataValue);
+            AddRowDesignTest(dataTable, MechanicalDraftPerformanceCurveViewModel.DesignData.BarometricPressureDataValue, MechanicalDraftPerformanceCurveViewModel.TestPoints[index].BarometricPressureDataValue);
+            AddRowDesignTest(dataTable, MechanicalDraftPerformanceCurveViewModel.DesignData.LiquidToGasRatioDataValue, MechanicalDraftPerformanceCurveViewModel.TestPoints[index].LiquidToGasRatioDataValue);
+            return dataTable;
+        }
+
+        private void AddRowDesignTest(DataTable dataTable, DataValue design, DataValue test)
+        {
+            DataRow row = dataTable.NewRow();
+            row["Parameters"] = design.InputMessage;
+            row["Design"] = design.InputValue;
+            row["Test"] = test.InputValue;
+            row["Units"] = design.Units;
+            dataTable.Rows.Add(row);
+        }
+
+        private DataTable BuildColdVsRangeDataTable(int index)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.TableName = string.Format("Cold Water Temperatures vs. Range\nAt {0} {1} Test Wet Bulb Temperature", MechanicalDraftPerformanceCurveViewModel.TestPoints[index].WetBulbTemperatureDataValue.InputValue, MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValue.Units);
+
+            // Declare DataColumn and DataRow variables.
+            DataColumn column;
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Range";
+            dataTable.Columns.Add(column);
+
+            foreach (WaterFlowRate waterFlowRate in MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates)
+            {
+                column = new DataColumn();
+                column.DataType = Type.GetType("System.String");
+                column.ColumnName = waterFlowRate.FlowRate.ToString("F2");
+                dataTable.Columns.Add(column);
+            }
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Units";
+            dataTable.Columns.Add(column);
+
+            for (int i = 0; i < MechanicalDraftPerformanceCurveViewModel.CalculationData.Ranges.Count; i++)
+            {
+                AddRowColdVsRange(dataTable, i, MechanicalDraftPerformanceCurveViewModel.CalculationData.Ranges[i], MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates, MechanicalDraftPerformanceCurveViewModel.DesignData.ColdWaterTemperatureDataValue.Units);
+            }
+            return dataTable;
+        }
+
+        private void AddRowColdVsRange(DataTable dataTable, int i, double range, List<WaterFlowRate> waterFlowRates, string units)
+        {
+            DataRow row = dataTable.NewRow();
+            row["range"] = range.ToString("F2");
+            foreach (WaterFlowRate waterFlowRate in waterFlowRates)
+            {
+                row[waterFlowRate.FlowRate.ToString("F2")] = waterFlowRate.Yfit[i].ToString("F2");
+            }
+            row["Units"] = units;
+            dataTable.Rows.Add(row);
+        }
+
+        private DataTable BuildColdVsWaterFLowDataTable(int index)
+        {
+            DataTable dataTable = new DataTable();
+
+            dataTable.TableName = string.Format("Cold Water Temperatures vs. Water Flow\nAt {0} {1} Test Wet Bulb Temperature and {2} {3} Test Range",
+                    MechanicalDraftPerformanceCurveViewModel.TestPoints[index].WetBulbTemperatureDataValue.InputValue,
+                    MechanicalDraftPerformanceCurveViewModel.TestPoints[index].WetBulbTemperatureDataValue.Units,
+                    (MechanicalDraftPerformanceCurveViewModel.TestPoints[index].HotWaterTemperatureDataValue.Current - MechanicalDraftPerformanceCurveViewModel.TestPoints[index].ColdWaterTemperatureDataValue.Current).ToString("F2"),
+                    MechanicalDraftPerformanceCurveViewModel.TestPoints[index].WetBulbTemperatureDataValue.Units);
+
+            // Declare DataColumn and DataRow variables.
+            DataColumn column;
+            foreach (WaterFlowRate waterFlowRate in MechanicalDraftPerformanceCurveViewModel.CalculationData.WaterFlowRates)
+            {
+                column = new DataColumn();
+                column.DataType = Type.GetType("System.String");
+                column.ColumnName = string.Format("{0} {1}", waterFlowRate.FlowRate.ToString("F2"), MechanicalDraftPerformanceCurveViewModel.DesignData.WaterFlowRateDataValue.Units);
+                dataTable.Columns.Add(column);
+            }
+
+            DataRow row = dataTable.NewRow();
+            for (int i = 0; i < MechanicalDraftPerformanceCurveViewModel.CalculationData.Ranges.Count; i++)
+            {
+                AddRowColdVsWaterFLow(row, i, MechanicalDraftPerformanceCurveViewModel.CalculationData.Ranges[i], MechanicalDraftPerformanceCurveViewModel.CalculationData.InterpolateRanges[i], MechanicalDraftPerformanceCurveViewModel.DesignData.ColdWaterTemperatureDataValue.Units);
+            }
+            dataTable.Rows.Add(row);
+            return dataTable;
+        }
+
+        private void AddRowColdVsWaterFLow(DataRow row, int i, double range, double interpolateRange, string units)
+        {
+            row[i] = string.Format("{0} {1}", interpolateRange.ToString("F2"), units);
+        }
+
+        private DataTable BuildExitAirDataTable()
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.TableName = "Exit Air Properties";
+
+            // Declare DataColumn and DataRow variables.
+
+            DataColumn column;
+            column = new DataColumn();
+            column.DataType = Type.GetType("System.String");
+            column.ColumnName = "Number";
+            dataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = Type.GetType("System.String");
+            column.ColumnName = "Design Value";
+            dataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = Type.GetType("System.String");
+            column.ColumnName = "Test Value";
+            dataTable.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = Type.GetType("System.String");
+            column.ColumnName = "Units";
+            dataTable.Columns.Add(column);
+
+            Units Units;
+            if (IsInternationalSystemOfUnits_SI)
+            {
+                Units = new UnitsIS();
+            }
+            else
+            {
+                Units = new UnitsIP();
+            }
+
+            AddRowExitAir(dataTable, "WetBulbTemperature", 
+                                      MechanicalDraftPerformanceCurveViewModel.CalculationData.DesignOutput.WetBulbTemperature, 
+                                      MechanicalDraftPerformanceCurveViewModel.CalculationData.TestOutput.WetBulbTemperature,
+                                      Units.Temperature,
+                                      "F2");
+            AddRowExitAir(dataTable, "Density",
+                                      MechanicalDraftPerformanceCurveViewModel.CalculationData.DesignOutput.Density,
+                                      MechanicalDraftPerformanceCurveViewModel.CalculationData.TestOutput.Density,
+                                      Units.Density,
+                                      "F5");
+            AddRowExitAir(dataTable, "SpecificVolume",
+                                      MechanicalDraftPerformanceCurveViewModel.CalculationData.DesignOutput.SpecificVolume,
+                                      MechanicalDraftPerformanceCurveViewModel.CalculationData.TestOutput.SpecificVolume,
+                                      Units.SpecificVolume,
+                                      "F4");
+            AddRowExitAir(dataTable, "Enthalpy", 
+                                      MechanicalDraftPerformanceCurveViewModel.CalculationData.DesignOutput.Enthalpy, 
+                                      MechanicalDraftPerformanceCurveViewModel.CalculationData.TestOutput.Enthalpy,
+                                      Units.Enthalpy,
+                                      "F4");
+
+            return dataTable;
+        }
+
+        private void AddRowExitAir(DataTable dataTable, string name,  double value1, double value2, string units, string format)
+        {
+            DataRow row = dataTable.NewRow();
+            row[0] = name;
+            row[1] = value1.ToString(format);
+            row[2] = value2.ToString(format);
+            row[3] = units;
+            dataTable.Rows.Add(row);
         }
 
         private void Calculate_Click(object sender, EventArgs e)
@@ -705,6 +975,15 @@ namespace CTIToolkit
         {
             // Clear output data
             DataGridView.DataSource = null;
+            if(TestPointTabControl.SelectedIndex >= 0)
+            {
+                if (TestPointTabControl.TabPages[TestPointTabControl.SelectedIndex].Controls[0] is TestPointUserControl)
+                {
+                    MechanicalDraftPerformanceCurveViewModel.TestPoints[TestPointTabControl.SelectedIndex].LiquidToGasRatioDataValue.UpdateCurrentValue(0);
+                    TestPointUserControl testPointUserControl = TestPointTabControl.TabPages[TestPointTabControl.SelectedIndex].Controls[0] as TestPointUserControl;
+                    testPointUserControl.LoadData(MechanicalDraftPerformanceCurveViewModel.TestPoints[TestPointTabControl.SelectedIndex]);
+                }
+            }
         }
 
         private void TestPointTabControl_SelectedIndexChanged(object sender, EventArgs e)

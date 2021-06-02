@@ -34,7 +34,7 @@ namespace CalculationLibrary
             y2.Clear();
             double yfit = 0.0;
 
-            CalculatePerformanceData(data.WetBulbTemperatureRange, y, data.TowerTestData.ColdWaterTemperature, ref yfit, y2, stringBuilder);
+            CalculatePerformanceData(data.InterpolateRanges, y, data.TowerTestData.ColdWaterTemperature, ref yfit, y2, stringBuilder);
             double predicatedFlow = yfit;
 
             if ((predicatedFlow < minimumFlow) || (predicatedFlow > maximumFlow))
@@ -93,7 +93,7 @@ namespace CalculationLibrary
             StringBuilder stringBuilder = new StringBuilder();
 
             //'Interpolate for Range
-            data.WetBulbTemperatureRange.Clear();
+            data.InterpolateRanges.Clear();
             for (int flowRateIndex = 0; flowRateIndex < data.WaterFlowRates.Count; flowRateIndex++)
             {
                 y.Clear();
@@ -106,7 +106,7 @@ namespace CalculationLibrary
                 }
                 y2.Clear();
                 CalculatePerformanceData(x, y, testRange, ref yfit, y2, stringBuilder);
-                data.WetBulbTemperatureRange.Add(yfit);
+                data.InterpolateRanges.Add(yfit);
             }
         }
 
