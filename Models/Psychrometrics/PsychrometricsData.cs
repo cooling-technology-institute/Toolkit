@@ -1,8 +1,10 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 
+using System;
+
 namespace Models
 {
-    public class PsychrometricsData
+    public class PsychrometricsData : ICloneable
     {
         public bool IsInternationalSystemOfUnits_SI { get; set; }
 
@@ -60,6 +62,11 @@ namespace Models
             FsDryBulb = 0.0;
             WsWetBulb = 0.0;
             WsDryBulb = 0.0;
+        }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
         }
     }
 }

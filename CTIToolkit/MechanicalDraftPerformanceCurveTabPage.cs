@@ -341,25 +341,6 @@ namespace CTIToolkit
 
         public override void Calculate()
         {
-            //int testIndex = TestPointTabControl.SelectedIndex;
-
-            //MechanicalDraftPerformanceCurveViewModel.TestPoints.Clear();
-
-            // save the test points to view model
-            //foreach (TabPage tabPage in TestPointTabControl.TabPages)
-            //{
-            //    try
-            //    {
-            //        TestPointUserControl testPointUserControl = tabPage.Controls[0] as TestPointUserControl;
-            //        MechanicalDraftPerformanceCurveViewModel.TestPoints.Add(testPointUserControl.TowerTestPoint);
-            //    }
-            //    catch
-            //    { }
-            //    //    if (!testPointUserControl.LoadData(towerTestPoint, out errorMessage))
-            //    //    {
-            //    //        returnValue = false;
-            //    //    }
-            //}
             if (TestPointTabControl.SelectedIndex >= 0)
             {
                 if (MechanicalDraftPerformanceCurveViewModel.Calculate(TestPointTabControl.SelectedIndex))
@@ -392,7 +373,6 @@ namespace CTIToolkit
 
             if (!e.Cancel)
             {
-
                 if (PrintControl.PageIndex == 0)
                 {
                     PrintControl.PageIndex = 0;
@@ -427,6 +407,12 @@ namespace CTIToolkit
                             PrintControl.DataTables.Add(BuildColdVsRangeDataTable(TestPointTabControl.SelectedIndex));
                             PrintControl.DataTables.Add(BuildColdVsWaterFLowDataTable(TestPointTabControl.SelectedIndex));
                             PrintControl.DataTables.Add(BuildExitAirDataTable());
+                            MechanicalDraftPerformanceCurveViewModel.DataTable.TableName = "Test Results";
+                            if (MechanicalDraftPerformanceCurveViewModel.CalculationData.TestOutput.Extrapolated)
+                            {
+                                MechanicalDraftPerformanceCurveViewModel.DataTable.TableName += "\n* Indicates predicted flow is extrapolated.";
+                            }
+                            PrintControl.DataTables.Add(MechanicalDraftPerformanceCurveViewModel.DataTable);
                         }
                     }
                     else
@@ -438,51 +424,63 @@ namespace CTIToolkit
 
                 float y = 34;
 
-                if (PrintControl.PageIndex == 0)
+                if (!e.Cancel)
                 {
-                    e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-                    e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias; // so footer is anti-aliased
-                    e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;  // so when we scale up, we smooth out the jaggies somewhat
-                    e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
-
-                    DrawLogo(e, 0, 0);
-                    DrawText(e, 18, FontStyle.Bold, reportLabel, 143, 0, true);
-                    if (!string.IsNullOrWhiteSpace(this.PrintControl.Label))
+                    if (PrintControl.PageIndex == 0)
                     {
-                        y += DrawText(e, 18, FontStyle.Bold, this.PrintControl.Label, 143, y, true);
+                        e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                        e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias; // so footer is anti-aliased
+                        e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;  // so when we scale up, we smooth out the jaggies somewhat
+                        e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+
+                        DrawLogo(e, 0, 0);
+                        DrawText(e, 18, FontStyle.Bold, reportLabel, 143, 0, true);
+                        if (!string.IsNullOrWhiteSpace(this.PrintControl.Label))
+                        {
+                            y += DrawText(e, 18, FontStyle.Bold, this.PrintControl.Label, 143, y, true);
+                        }
+                        y += DrawText(e, 12, FontStyle.Regular, string.Format("Owner: {0}", MechanicalDraftPerformanceCurveViewModel.DesignData.OwnerNameValue), 143, y, true);
+                        y += DrawText(e, 12, FontStyle.Regular, string.Format("Project: {0}", MechanicalDraftPerformanceCurveViewModel.DesignData.ProjectNameValue), 143, y, true);
+                        y += DrawText(e, 12, FontStyle.Regular, string.Format("Location: {0}", MechanicalDraftPerformanceCurveViewModel.DesignData.LocationValue), 143, y, true);
+                        y += DrawText(e, 12, FontStyle.Regular, string.Format("Manufacturer: {0}", MechanicalDraftPerformanceCurveViewModel.DesignData.TowerManufacturerValue), 143, y, true);
+                        y += DrawText(e, 12, FontStyle.Regular, string.Format("Tower Type: {0}", MechanicalDraftPerformanceCurveViewModel.DesignData.TowerTypeValue.ToString()), 143, y, true);
                     }
-                    y += DrawText(e, 12, FontStyle.Regular, string.Format("Owner: {0}", MechanicalDraftPerformanceCurveViewModel.DesignData.OwnerNameValue), 143, y, true);
-                    y += DrawText(e, 12, FontStyle.Regular, string.Format("Project: {0}", MechanicalDraftPerformanceCurveViewModel.DesignData.ProjectNameValue), 143, y, true);
-                    y += DrawText(e, 12, FontStyle.Regular, string.Format("Location: {0}", MechanicalDraftPerformanceCurveViewModel.DesignData.LocationValue), 143, y, true);
-                    y += DrawText(e, 12, FontStyle.Regular, string.Format("Manufacturer: {0}", MechanicalDraftPerformanceCurveViewModel.DesignData.TowerManufacturerValue), 143, y, true);
-                    y += DrawText(e, 12, FontStyle.Regular, string.Format("Tower Type: {0}", MechanicalDraftPerformanceCurveViewModel.DesignData.TowerTypeValue.ToString()), 143, y, true);
-                }
-                else
-                {
-                    y = MARGIN;
+                    else
+                    {
+                        y = MARGIN;
+                    }
+
+                    if (PrintControl.IsDesignData)
+                    {
+                        y += DrawTowerDesignData(e, y);
+                    }
+                    else
+                    {
+                        y += DrawPerformanceData(e, y);
+                        if (!e.HasMorePages)
+                        {
+                            y += DrawText(e, 8, FontStyle.Regular, "This test result is only certified by CTI if the test data was collected by a CTI Licensed Testing Agency. See www.cti.org for an agency list.", 0, y, false);
+                        }
+                    }
+
+                    e.Graphics.DrawString("CTI Toolkit 4.0 Beta Version",
+                                        new Font("Times New Roman", 16),
+                                        new SolidBrush(Color.Red),
+                                        MARGIN, e.PageSettings.Bounds.Height - MARGIN);
+                    Font font = new Font("Times New Roman", 8);
+                    string name = MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue;
+                    if (!PrintControl.IsDesignData)
+                    {
+                        name += "\\" + TestPointTabControl.TabPages[TestPointTabControl.SelectedIndex].Name;
+                    }
+                    SizeF size = e.Graphics.MeasureString(name, font);
+                    e.Graphics.DrawString(name,
+                                          font,
+                                          new SolidBrush(Color.Black),
+                                          e.PageSettings.Bounds.Width - size.Width - MARGIN, e.PageSettings.Bounds.Height - MARGIN);
                 }
 
-                if (PrintControl.IsDesignData)
-                {
-                    y += DrawTowerDesignData(e, y);
-                }
-                else
-                {
-                    y += DrawPerformanceData(e, y);
-                }
-
-                e.Graphics.DrawString("CTI Toolkit 4.0 Beta Version",
-                                    new Font("Times New Roman", 16),
-                                    new SolidBrush(Color.Red),
-                                    MARGIN, e.PageSettings.Bounds.Height - MARGIN);
-                Font font = new Font("Times New Roman", 8);
-                SizeF size = e.Graphics.MeasureString(MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue, font);
-                e.Graphics.DrawString(MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue,
-                                      font,
-                                      new SolidBrush(Color.Black),
-                                      e.PageSettings.Bounds.Width - size.Width - MARGIN, e.PageSettings.Bounds.Height - MARGIN);
-
-                if(!e.HasMorePages)
+                if (!e.HasMorePages || e.Cancel)
                 {
                     PrintControl.PageIndex = 0;
                 }
@@ -501,26 +499,31 @@ namespace CTIToolkit
                 }
             }
 
-            y += DrawTowerDesignCurveData(e, y);
-
-            return y;
+            return DrawTowerDesignCurveData(e, y); 
         }
 
         private float DrawTowerDesignCurveData(PrintPageEventArgs e, float y)
         {
+            float totalHeight = 0;
+            float height = 0;
+
             if (PrintControl.PageIndex == 0)
             {
-                y += DrawText(e, 12, FontStyle.Bold, "Tower Design Curve Data:", 3, y, false);
+                height = DrawText(e, 12, FontStyle.Bold, "Tower Design Curve Data:", 3, y, false);
+                y += height;
+                totalHeight += height;
             }
 
             if (PrintControl.DataTables.Count > 0)
             {
                 for (int i = PrintControl.DataTableIndex; i < PrintControl.DataTables.Count; i++)
                 {
-                    float height = GetDataTableHeight(e, PrintControl.DataTables[i]);
+                    height = GetDataTableHeight(e, PrintControl.DataTables[i]);
                     if (y + height < e.PageSettings.Bounds.Height - 80)
                     {
-                        y += DrawDataTable(e, PrintControl.DataTables[i], 7, y);
+                        height = DrawDataTable(e, PrintControl.DataTables[i], 7, y);
+                        y += height;
+                        totalHeight += height;
                     }
                     else
                     {
@@ -531,11 +534,13 @@ namespace CTIToolkit
                     }
                 }
             }
-            return y;
+            return totalHeight;
         }
 
         private float DrawPerformanceData(PrintPageEventArgs e, float y)
         {
+            float totalHeight = 0;
+
             if (PrintControl.DataTables.Count > 0)
             {
                 for (int i = PrintControl.DataTableIndex; i < PrintControl.DataTables.Count; i++)
@@ -543,7 +548,9 @@ namespace CTIToolkit
                     float height = GetDataTableHeight(e, PrintControl.DataTables[i]);
                     if (y + height < e.PageSettings.Bounds.Height - 80)
                     {
-                        y += DrawDataTable(e, PrintControl.DataTables[i], 7, y);
+                        height = DrawDataTable(e, PrintControl.DataTables[i], 7, y);
+                        totalHeight += height;
+                        y += height;
                     }
                     else
                     {
@@ -554,7 +561,7 @@ namespace CTIToolkit
                     }
                 }
             }
-            return y;
+            return totalHeight;
         }
 
         private DataTable BuildFlowRateDataTable(WaterFlowRate waterFlowRate, List<double> ranges)
@@ -616,15 +623,10 @@ namespace CTIToolkit
             return nameValueUnitsDataTable.DataTable;
         }
 
-        private DataTable BuildDesignTestDataTable(int index)
+        private void DesignTestColumns(DataTable dataTable)
         {
-            DataTable dataTable = new DataTable();
-            
-            dataTable.TableName = "Cooling Tower Design and Test Data:";
-
             // Declare DataColumn and DataRow variables.
             DataColumn column;
-
             column = new DataColumn();
             column.DataType = System.Type.GetType("System.String");
             column.ColumnName = "Parameters";
@@ -644,6 +646,13 @@ namespace CTIToolkit
             column.DataType = Type.GetType("System.String");
             column.ColumnName = "Units";
             dataTable.Columns.Add(column);
+        }
+
+        private DataTable BuildDesignTestDataTable(int index)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.TableName = "Cooling Tower Design and Test Data:";
+            DesignTestColumns(dataTable);
 
             AddRowDesignTest(dataTable, MechanicalDraftPerformanceCurveViewModel.DesignData.WaterFlowRateDataValue, MechanicalDraftPerformanceCurveViewModel.TestPoints[index].WaterFlowRateDataValue);
             AddRowDesignTest(dataTable, MechanicalDraftPerformanceCurveViewModel.DesignData.HotWaterTemperatureDataValue, MechanicalDraftPerformanceCurveViewModel.TestPoints[index].HotWaterTemperatureDataValue);
@@ -748,30 +757,18 @@ namespace CTIToolkit
         private DataTable BuildExitAirDataTable()
         {
             DataTable dataTable = new DataTable();
-            dataTable.TableName = "Exit Air Properties";
+            
+            if (TowerDesignDataForm.TowerDesignData.TowerTypeValue == TOWER_TYPE.Induced)
+            {
+                dataTable.TableName = "Exit Air Properties";
+            }
+            else
+            {
+                dataTable.TableName = "Inlet Air Properties";
+            }
 
             // Declare DataColumn and DataRow variables.
-
-            DataColumn column;
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.String");
-            column.ColumnName = "Number";
-            dataTable.Columns.Add(column);
-
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.String");
-            column.ColumnName = "Design Value";
-            dataTable.Columns.Add(column);
-
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.String");
-            column.ColumnName = "Test Value";
-            dataTable.Columns.Add(column);
-
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.String");
-            column.ColumnName = "Units";
-            dataTable.Columns.Add(column);
+            DesignTestColumns(dataTable);
 
             Units Units;
             if (IsInternationalSystemOfUnits_SI)
@@ -975,13 +972,20 @@ namespace CTIToolkit
         {
             // Clear output data
             DataGridView.DataSource = null;
-            if(TestPointTabControl.SelectedIndex >= 0)
+
+            if(TestPointTabControl.SelectedIndex >= 0 
+            && TestPointTabControl.TabPages.Count > TestPointTabControl.SelectedIndex 
+            && MechanicalDraftPerformanceCurveViewModel.TestPoints.Count > TestPointTabControl.SelectedIndex)
             {
                 if (TestPointTabControl.TabPages[TestPointTabControl.SelectedIndex].Controls[0] is TestPointUserControl)
                 {
                     MechanicalDraftPerformanceCurveViewModel.TestPoints[TestPointTabControl.SelectedIndex].LiquidToGasRatioDataValue.UpdateCurrentValue(0);
-                    TestPointUserControl testPointUserControl = TestPointTabControl.TabPages[TestPointTabControl.SelectedIndex].Controls[0] as TestPointUserControl;
-                    testPointUserControl.LoadData(MechanicalDraftPerformanceCurveViewModel.TestPoints[TestPointTabControl.SelectedIndex]);
+                    if(TestPointTabControl.TabPages[TestPointTabControl.SelectedIndex].Controls.Count > 1 
+                    && TestPointTabControl.TabPages[TestPointTabControl.SelectedIndex].Controls[0] is TestPointUserControl)
+                    {
+                        TestPointUserControl testPointUserControl = TestPointTabControl.TabPages[TestPointTabControl.SelectedIndex].Controls[0] as TestPointUserControl;
+                        testPointUserControl.LoadData(MechanicalDraftPerformanceCurveViewModel.TestPoints[TestPointTabControl.SelectedIndex]);
+                    }
                 }
             }
         }

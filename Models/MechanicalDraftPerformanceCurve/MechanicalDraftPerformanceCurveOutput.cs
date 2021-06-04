@@ -13,6 +13,7 @@ namespace Models
         //public double WetBulbTemperature { set; get; }
         public double LiquidToGasRatio { set; get; }
         public string ErrorMessage { get; set; }
+        public bool Extrapolated { get; set; }
 
         public void Initialize(TowerSpecifications data)
         {
@@ -31,6 +32,7 @@ namespace Models
             TowerCapability = 0.0;
             ColdWaterTemperatureDeviation = 0.0;
             LiquidToGasRatio = 0.0;
+            Extrapolated = false;
             base.Clear();
         }
     }

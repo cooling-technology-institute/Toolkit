@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Models
 {
-    public class TowerSpecifications
+    public class TowerSpecifications : ICloneable
     {
         public bool IsInternationalSystemOfUnits_SI { get; set; }
 
@@ -44,6 +44,11 @@ namespace Models
             FanDriverPower = towerSpecifications.FanDriverPower;
             BarometricPressure = towerSpecifications.BarometricPressure;
             LiquidToGasRatio = towerSpecifications.LiquidToGasRatio;
+        }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
         }
     }
 }

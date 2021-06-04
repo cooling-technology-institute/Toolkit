@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Models
 {
-    public class CrossPlot1
+    public class CrossPlot1 : ICloneable
     {
         public List<Point> Points { get; set; }
         public double ColdWaterTemperatureMinimum { get; set; }
@@ -17,9 +17,16 @@ namespace Models
             ColdWaterTemperatureMinimum = 0.0;
             ColdWaterTemperatureMaximum = 0.0;
         }
+
+        public object Clone()
+        {
+            var data = (CrossPlot1)MemberwiseClone();
+            data.Points = Points.GetClone();
+            return data;
+        }
     }
 
-    public class RangePoints
+    public class RangePoints : ICloneable
     {
         public List<Point> Points { get; set; }
 
@@ -27,9 +34,16 @@ namespace Models
         {
             Points = new List<Point>();
         }
+        public object Clone()
+        {
+            var data = (RangePoints)MemberwiseClone();
+            data.Points = Points.GetClone();
+            return data;
+        }
+
     }
 
-    public class WetBulbTemperature
+    public class WetBulbTemperature : ICloneable
     {
         public double Temperature { get; set; }
         public List<double> ColdWaterTemperatures { get; set; }
@@ -39,9 +53,15 @@ namespace Models
             Temperature = 0.0;
             ColdWaterTemperatures = new List<double>();
         }
+        public object Clone()
+        {
+            var data = (WetBulbTemperature)MemberwiseClone();
+            data.ColdWaterTemperatures = ColdWaterTemperatures.GetClone();
+            return data;
+        }
     }
 
-    public class WaterFlowRate
+    public class WaterFlowRate : ICloneable
     {
         public double FlowRate { get; set; }
         public List<WetBulbTemperature> WetBulbTemperatures { get; set; }
@@ -55,9 +75,18 @@ namespace Models
             RangePoints = new List<RangePoints>();
             Yfit = new List<double>();
         }
+
+        public object Clone()
+        {
+            var data = (WaterFlowRate)MemberwiseClone();
+            data.WetBulbTemperatures = WetBulbTemperatures.GetClone();
+            data.RangePoints = RangePoints.GetClone();
+            data.Yfit = Yfit.GetClone();
+            return data;
+        }
     }
 
-    public class MechanicalDraftPerformanceCurveCalculationData
+    public class MechanicalDraftPerformanceCurveCalculationData : ICloneable
     {
         public bool IsInternationalSystemOfUnits_SI { get; set; }
 
@@ -245,5 +274,48 @@ namespace Models
             }
             return values;
         }
+
+        public object Clone()
+        {
+            var data = (MechanicalDraftPerformanceCurveCalculationData)MemberwiseClone();
+            data.TowerTestData = (TowerSpecifications)TowerTestData.Clone();
+            data.TowerDesignData = (TowerSpecifications)TowerDesignData.Clone();
+            data.TestOutput = (MechanicalDraftPerformanceCurveOutput)TestOutput.Clone();
+            data.DesignOutput = (MechanicalDraftPerformanceCurveOutput)DesignOutput.Clone();
+            data.Ranges = Ranges.GetClone();
+            data.WaterFlowRates = WaterFlowRates.Clone();
+            data.Y = Y.GetClone();
+            data.InterpolateRanges = InterpolateRanges.GetClone();
+            data.CrossPlot1 = (CrossPlot1)CrossPlot1.Clone();
+            return data;
+        }
+    }
+
+    public static class Extensions
+    {
+        public static List<T> Clone<T>(this List<T> source) where T : ICloneable
+        {
+            List<T> newlist = new List<T>();
+            foreach(T item in source)
+            {
+                newlist.Add((T) item.Clone());
+            }
+            return newlist;
+        }
+
+        public static List<T> GetClone<T>(this List<T> source)
+        {
+            List<T> newlist = new List<T>();
+            foreach (T item in source)
+            {
+                newlist.Add(item);
+            }
+            return newlist;
+        }
+
+        //public static IList<T> Clone<T>(this IList<T> listToClone) where T : ICloneable
+        //{
+        //    return listToClone.Select(item => (T)item.Clone()).ToList();
+        //}
     }
 }

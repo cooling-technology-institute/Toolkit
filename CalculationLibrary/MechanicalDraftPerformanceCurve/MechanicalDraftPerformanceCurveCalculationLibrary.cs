@@ -40,6 +40,7 @@ namespace CalculationLibrary
             if ((predicatedFlow < minimumFlow) || (predicatedFlow > maximumFlow))
             {
                 data.TestOutput.ErrorMessage = string.Format("CAUTION: Predicted Flow {0} is EXTRAPOLATED beyond the Supplied Curve Flows of {1} to {2}", predicatedFlow.ToString("F2"), minimumFlow.ToString("F2"), maximumFlow.ToString("F2"));
+                data.TestOutput.Extrapolated = true;
             }
             //'End check for Extrapolation
 
@@ -113,37 +114,31 @@ namespace CalculationLibrary
         public void CalculateColdWaterTemperatureDeviation(MechanicalDraftPerformanceCurveCalculationData data)
         {
             int iterationCount = 0;
-
-            // save the current Calculated values
-            double capability = data.TestOutput.TowerCapability;
-            double adjustedFlow = data.TestOutput.AdjustedFlow;
-            double predictedFlow = data.TestOutput.PredictedFlow;
-
-            // save Test Values
-            TowerSpecifications testHold = new TowerSpecifications(data.TowerTestData);
+            MechanicalDraftPerformanceCurveCalculationData dataForDevation = (MechanicalDraftPerformanceCurveCalculationData) data.Clone();
 
             // Set test values to design values
-            data.TowerTestData.BarometricPressure = data.TowerDesignData.BarometricPressure;
-            data.TowerTestData.ColdWaterTemperature = data.TowerDesignData.ColdWaterTemperature;
-            data.TowerTestData.DryBulbTemperature = data.TowerDesignData.DryBulbTemperature;
-            data.TowerTestData.FanDriverPower = data.TowerDesignData.FanDriverPower;
-            data.TowerTestData.HotWaterTemperature = data.TowerDesignData.HotWaterTemperature;
-            data.TowerTestData.LiquidToGasRatio = data.TowerDesignData.LiquidToGasRatio;
-            data.TowerTestData.WaterFlowRate = data.TowerDesignData.WaterFlowRate;
-            data.TowerTestData.WetBulbTemperature = data.TowerDesignData.WetBulbTemperature;
+            dataForDevation.TowerTestData.BarometricPressure = dataForDevation.TowerDesignData.BarometricPressure;
+            dataForDevation.TowerTestData.ColdWaterTemperature = dataForDevation.TowerDesignData.ColdWaterTemperature;
+            dataForDevation.TowerTestData.DryBulbTemperature = dataForDevation.TowerDesignData.DryBulbTemperature;
+            dataForDevation.TowerTestData.FanDriverPower = dataForDevation.TowerDesignData.FanDriverPower;
+            dataForDevation.TowerTestData.HotWaterTemperature = dataForDevation.TowerDesignData.HotWaterTemperature;
+            dataForDevation.TowerTestData.LiquidToGasRatio = dataForDevation.TowerDesignData.LiquidToGasRatio;
+            dataForDevation.TowerTestData.WaterFlowRate = dataForDevation.TowerDesignData.WaterFlowRate;
+            dataForDevation.TowerTestData.WetBulbTemperature = dataForDevation.TowerDesignData.WetBulbTemperature;
 
             double estimatedSlope = -10.0;   // original estimate of slope (Cap vs. CWT)
-            MechanicalDraftPerformanceCurveCalculation(data, false);
-            double deltaCapability = capability - data.TestOutput.TowerCapability;
+            double capability = dataForDevation.TestOutput.TowerCapability;
+            MechanicalDraftPerformanceCurveCalculation(dataForDevation, false);
+            double deltaCapability = capability - dataForDevation.TestOutput.TowerCapability;
             while (Math.Abs(deltaCapability) > 0.01)
             {
                 double deltaColdWaterTemperature = deltaCapability / estimatedSlope;
-                double priorCapability = data.TestOutput.TowerCapability;
-                data.TowerTestData.ColdWaterTemperature += deltaColdWaterTemperature;
-                data.TowerTestData.HotWaterTemperature += deltaColdWaterTemperature;
-                MechanicalDraftPerformanceCurveCalculation(data, false);
-                estimatedSlope = (data.TestOutput.TowerCapability - priorCapability) / deltaColdWaterTemperature;
-                deltaCapability = capability - data.TestOutput.TowerCapability;
+                double priorCapability = dataForDevation.TestOutput.TowerCapability;
+                dataForDevation.TowerTestData.ColdWaterTemperature += deltaColdWaterTemperature;
+                dataForDevation.TowerTestData.HotWaterTemperature += deltaColdWaterTemperature;
+                MechanicalDraftPerformanceCurveCalculation(dataForDevation, false);
+                estimatedSlope = (dataForDevation.TestOutput.TowerCapability - priorCapability) / deltaColdWaterTemperature;
+                deltaCapability = capability - dataForDevation.TestOutput.TowerCapability;
                 if (++iterationCount >= MAX_COLD_WATER_TEMPERATURE_DEVIATION_ITERATIONS)
                 {
                     break;
@@ -156,23 +151,8 @@ namespace CalculationLibrary
             }
             else
             {
-                data.TestOutput.ColdWaterTemperatureDeviation = data.TowerTestData.ColdWaterTemperature - data.TowerDesignData.ColdWaterTemperature;
+                data.TestOutput.ColdWaterTemperatureDeviation = dataForDevation.TowerTestData.ColdWaterTemperature - dataForDevation.TowerDesignData.ColdWaterTemperature;
             }
-
-            // Restore the Calculated values
-            data.TestOutput.TowerCapability = capability;
-            data.TestOutput.AdjustedFlow = adjustedFlow;
-            data.TestOutput.PredictedFlow = predictedFlow;
-
-            // Restore Real Test Values
-            data.TowerTestData.BarometricPressure = testHold.BarometricPressure;
-            data.TowerTestData.ColdWaterTemperature = testHold.ColdWaterTemperature;
-            data.TowerTestData.DryBulbTemperature = testHold.DryBulbTemperature;
-            data.TowerTestData.FanDriverPower = testHold.FanDriverPower;
-            data.TowerTestData.HotWaterTemperature = testHold.HotWaterTemperature;
-            data.TowerTestData.LiquidToGasRatio = testHold.LiquidToGasRatio;
-            data.TowerTestData.WaterFlowRate = testHold.WaterFlowRate;
-            data.TowerTestData.WetBulbTemperature = testHold.WetBulbTemperature;
         }
 
         public void CalculateCrossPlot1(MechanicalDraftPerformanceCurveCalculationData data)
