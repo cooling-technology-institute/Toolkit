@@ -1,8 +1,10 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 
+using System;
+
 namespace Models
 {
-    public class Point
+    public class Point : ICloneable
     {
         public double X { get; set; }
         public double Y { get; set; }
@@ -23,6 +25,10 @@ namespace Models
         {
             X = 0.0;
             Y = 0.0;
+        }
+        public object Clone()
+        {
+            return (Point)MemberwiseClone();
         }
     }
 }

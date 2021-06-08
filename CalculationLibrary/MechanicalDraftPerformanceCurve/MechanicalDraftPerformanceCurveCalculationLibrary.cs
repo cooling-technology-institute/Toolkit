@@ -1,11 +1,9 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 
+using Models;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.IO;
 using System.Text;
-using Models;
 
 namespace CalculationLibrary
 {
@@ -22,7 +20,7 @@ namespace CalculationLibrary
             DetermineAdjustedTestFlow(data, data.TowerDesignData, data.TowerDesignData, data.DesignOutput);
 
             InterpolateWetBulbTemperature(data);
-            
+
             InterpolateRange(data);
 
             //'Final interpolation for Flow (Y) vs COLD_WATER_TEMPERATURE (X)
@@ -114,7 +112,7 @@ namespace CalculationLibrary
         public void CalculateColdWaterTemperatureDeviation(MechanicalDraftPerformanceCurveCalculationData data)
         {
             int iterationCount = 0;
-            MechanicalDraftPerformanceCurveCalculationData dataForDevation = (MechanicalDraftPerformanceCurveCalculationData) data.Clone();
+            MechanicalDraftPerformanceCurveCalculationData dataForDevation = (MechanicalDraftPerformanceCurveCalculationData)data.Clone();
 
             // Set test values to design values
             dataForDevation.TowerTestData.BarometricPressure = dataForDevation.TowerDesignData.BarometricPressure;
@@ -155,54 +153,31 @@ namespace CalculationLibrary
             }
         }
 
-        public void CalculateCrossPlot1(MechanicalDraftPerformanceCurveCalculationData data)
+        public void GenerateGraphPoints(MechanicalDraftPerformanceCurveCalculationData data)
         {
             StringBuilder stringBuilder = new StringBuilder();
             List<double> x = new List<double>();
             List<double> y = new List<double>();
+            List<double> yFit = new List<double>();
             List<double> y2 = new List<double>();
-            double yfit;
-            double testX;
-
-            double rangeMinimum = data.FindMinimumRange();
-            double rangeMaximum = data.FindMaximumRange();
-            double rangeIncrement = (rangeMaximum - rangeMinimum) / 50.0;
-            y.Clear();
-            x.Clear();
-            yfit = 0.0;
+            double increment;
+            double yfit = 0;
             
-            InterpolateWetBulbTemperature(data);
+            data.CrossPlot1.Clear();
+            data.CrossPlot2.Clear();
 
-            for (double rangeValue = rangeMinimum; rangeValue <= rangeMaximum; rangeValue += rangeIncrement)
-            {
-                testX = rangeValue;
-                yfit = 0.0;
-                y2.Clear();
-                //CalculatePerformanceData(data.Ranges, data.WaterFlowRates[flowRateIndex].Yfit, testX, ref yfit, y2, stringBuilder);
-                data.CrossPlot1.Points.Add(new Point() { X = testX, Y = yfit });
+            data.CrossPlot1.ColdWaterTemperatureMinimum = 200;
+            data.CrossPlot1.ColdWaterTemperatureMaximum = 0;
+            data.CrossPlot1.TestRange = data.CrossPlot2.TestRange = data.TowerTestData.HotWaterTemperature - data.TowerTestData.ColdWaterTemperature;
 
-                //CalcPerfDat.a(iCnt, xAxis, yAxis, TestX, YFIT, Y2);
-                //m_wndGraph.GetSeries(IFlow).AddXY(TestX, YFIT, NULL, DATACOLOR);
-                if (yfit < data.CrossPlot1.ColdWaterTemperatureMinimum)
-                {
-                    data.CrossPlot1.ColdWaterTemperatureMinimum = yfit;
-                }
-                else if (yfit > data.CrossPlot1.ColdWaterTemperatureMaximum)
-                {
-                    data.CrossPlot1.ColdWaterTemperatureMaximum = yfit;
-                }
-            }
-
+            // range points
             foreach (WaterFlowRate waterFlowRate in data.WaterFlowRates)
             {
                 waterFlowRate.RangePoints.Clear();
-
                 for (int rangeIndex = 0; rangeIndex < data.Ranges.Count; rangeIndex++)
                 {
-                    //
                     // Iterate through with 50 increments
-                    //
-                    double increment = (waterFlowRate.WetBulbTemperatures[waterFlowRate.WetBulbTemperatures.Count - 1].Temperature - waterFlowRate.WetBulbTemperatures[0].Temperature) / 50.0;
+                    increment = (waterFlowRate.WetBulbTemperatures[waterFlowRate.WetBulbTemperatures.Count - 1].Temperature - waterFlowRate.WetBulbTemperatures[0].Temperature) / 50.0;
 
                     y.Clear();
                     x.Clear();
@@ -216,14 +191,163 @@ namespace CalculationLibrary
                     RangePoints rangePoints = new RangePoints();
                     for (double wetBulbTemperature = waterFlowRate.WetBulbTemperatures[0].Temperature; wetBulbTemperature <= waterFlowRate.WetBulbTemperatures[waterFlowRate.WetBulbTemperatures.Count - 1].Temperature; wetBulbTemperature += increment)
                     {
-                        testX = wetBulbTemperature;
+                        yfit = 0;
                         y2.Clear();
-                        CalculatePerformanceData(x, y, testX, ref yfit, y2, stringBuilder);
-                        rangePoints.Points.Add(new Point() { X = testX, Y = yfit });
+                        CalculatePerformanceData(x, y, wetBulbTemperature, ref yfit, y2, stringBuilder);
+                        rangePoints.Points.Add(new Point(wetBulbTemperature, yfit));
                     }
                     waterFlowRate.RangePoints.Add(rangePoints);
                 }
+
+                if (waterFlowRate.FlowRate < data.CrossPlot2.WaterFlowRateMinimum)
+                {
+                    data.CrossPlot2.WaterFlowRateMinimum = waterFlowRate.FlowRate;
+                }
+                if (waterFlowRate.FlowRate > data.CrossPlot2.WaterFlowRateMaximum)
+                {
+                    data.CrossPlot2.WaterFlowRateMaximum = waterFlowRate.FlowRate;
+                }
             }
+
+            // cross plot 1 points
+            SeriesPoints seriesPoints;
+            data.CrossPlot1.RangeMinimum = data.FindMinimumRange();
+            data.CrossPlot1.RangeMaximum = data.FindMaximumRange();
+            data.CrossPlot1.AdjustedTestRange = data.CrossPlot1.TestRange - 1.0;
+            if (data.CrossPlot1.AdjustedTestRange < data.CrossPlot1.RangeMinimum)
+            {
+                data.CrossPlot1.RangeMinimum = data.CrossPlot1.AdjustedTestRange;
+            }
+            else if (data.CrossPlot1.AdjustedTestRange > data.CrossPlot1.RangeMaximum)
+            {
+                data.CrossPlot1.RangeMaximum = data.CrossPlot1.AdjustedTestRange;
+            }
+
+            foreach (WaterFlowRate waterFlowRate in data.WaterFlowRates)
+            {
+                x.Clear();
+                y.Clear();
+
+                for (int rangeIndex = 0; rangeIndex < data.Ranges.Count; rangeIndex++)
+                {
+                    x.Add(data.Ranges[rangeIndex]);
+                    y.Add(waterFlowRate.Yfit[rangeIndex]);
+                }
+
+                y2.Clear();
+                CalculatePerformanceData(x, y, data.CrossPlot1.AdjustedTestRange, ref yfit, y2, stringBuilder);
+
+                if (yfit < data.CrossPlot1.ColdWaterTemperatureMinimum)
+                {
+                    data.CrossPlot1.ColdWaterTemperatureMinimum = yfit;
+                }
+                else if (yfit > data.CrossPlot1.ColdWaterTemperatureMaximum)
+                {
+                    data.CrossPlot1.ColdWaterTemperatureMaximum = yfit;
+                }
+
+                data.CrossPlot2.ColdWaterTemperatureMinimum = data.CrossPlot1.ColdWaterTemperatureMinimum;
+                data.CrossPlot2.ColdWaterTemperatureMaximum = data.CrossPlot1.ColdWaterTemperatureMaximum;
+
+                seriesPoints = new SeriesPoints();
+                seriesPoints.Name = string.Format("Flow Rate ({0})", waterFlowRate.FlowRate.ToString("F2"));
+                increment = (data.CrossPlot1.RangeMaximum - data.CrossPlot1.RangeMinimum) / 50.0;
+                for (double rangeValue = data.CrossPlot1.RangeMinimum; rangeValue <= data.CrossPlot1.RangeMaximum; rangeValue += increment)
+                {
+                    yfit = 0;
+                    y2.Clear();
+                    CalculatePerformanceData(x, y, rangeValue, ref yfit, y2, stringBuilder);
+                    seriesPoints.Points.Add(new Point() { X = rangeValue, Y = yfit });
+                    if (yfit < data.CrossPlot1.ColdWaterTemperatureMinimum)
+                    {
+                        data.CrossPlot1.ColdWaterTemperatureMinimum = yfit;
+                    }
+                    else if (yfit > data.CrossPlot1.ColdWaterTemperatureMaximum)
+                    {
+                        data.CrossPlot1.ColdWaterTemperatureMaximum = yfit;
+                    }
+                }
+                data.CrossPlot1.SeriesPoints.Add(seriesPoints);
+            }
+            seriesPoints = new SeriesPoints();
+            seriesPoints.Name = string.Format("Test Range ({0})", data.CrossPlot1.TestRange);
+            seriesPoints.Points.Add(new Point() { X = data.CrossPlot1.TestRange, Y = data.CrossPlot1.ColdWaterTemperatureMinimum });
+            seriesPoints.Points.Add(new Point() { X = data.CrossPlot1.TestRange, Y = data.CrossPlot1.ColdWaterTemperatureMaximum });
+            data.CrossPlot1.SeriesPoints.Add(seriesPoints);
+
+            // cross plot 2 points
+            data.CrossPlot2.WaterFlowRateMinimum = data.FindMinimumWaterFlowRate();
+            data.CrossPlot2.WaterFlowRateMaximum = data.FindMaximumWaterFlowRate();
+
+            if ((data.TestOutput.PredictedFlow < data.CrossPlot2.WaterFlowRateMinimum) || (data.TestOutput.PredictedFlow > data.CrossPlot2.WaterFlowRateMinimum))
+            {
+                string warning = string.Format("CAUTION: Predicted Flow {0} is EXTRAPOLATED beyond the\r\nSupplied Curve Flows of {1} to {2}", data.TestOutput.PredictedFlow.ToString("F2"), data.CrossPlot2.WaterFlowRateMinimum.ToString("F2"), data.CrossPlot2.WaterFlowRateMinimum.ToString("F2"));
+                //MessageBox.Show(strWarning, "Extrapolation Warning", MB_ICONWARNING);
+            }
+
+            // Add series for Test CWT
+            // DDP 2-9-01	
+            if (data.CrossPlot2.WaterFlowRateMinimum > data.TestOutput.PredictedFlow)
+            {
+                data.CrossPlot2.WaterFlowRateMinimum = data.TestOutput.PredictedFlow - (data.TestOutput.PredictedFlow * .05);
+            }
+            else if (data.CrossPlot2.WaterFlowRateMaximum < data.TestOutput.PredictedFlow)
+            {
+                data.CrossPlot2.WaterFlowRateMaximum = data.TestOutput.PredictedFlow + (data.TestOutput.PredictedFlow * .05);
+            }
+            seriesPoints = new SeriesPoints();
+            seriesPoints.Name = string.Format("Test CWT ({0})", data.TowerTestData.ColdWaterTemperature.ToString("F2"));
+            seriesPoints.Points.Add(new Point(data.CrossPlot2.WaterFlowRateMinimum, data.TowerTestData.ColdWaterTemperature));
+            seriesPoints.Points.Add(new Point(data.TestOutput.PredictedFlow, data.TowerTestData.ColdWaterTemperature));
+            data.CrossPlot2.SeriesPoints.Add(seriesPoints);
+
+            // Add series for Predicte Flow
+            // DDP 2-9-01
+            if (data.CrossPlot2.ColdWaterTemperatureMinimum > data.TowerTestData.ColdWaterTemperature)
+            {
+                data.CrossPlot2.ColdWaterTemperatureMinimum = data.TowerTestData.ColdWaterTemperature - (data.TowerTestData.ColdWaterTemperature * .05);
+            }
+            else if (data.CrossPlot2.ColdWaterTemperatureMaximum < data.TowerTestData.ColdWaterTemperature)
+            {
+                data.CrossPlot2.ColdWaterTemperatureMaximum = data.TowerTestData.ColdWaterTemperature + (data.TowerTestData.ColdWaterTemperature * .05);
+            }
+            seriesPoints = new SeriesPoints();
+            seriesPoints.Name = string.Format("Predicte Flow ({0})", data.TestOutput.PredictedFlow.ToString("F2"));
+            seriesPoints.Points.Add(new Point(data.TestOutput.PredictedFlow, data.TowerTestData.ColdWaterTemperature));
+            seriesPoints.Points.Add(new Point(data.TestOutput.PredictedFlow, data.CrossPlot2.ColdWaterTemperatureMinimum));
+            data.CrossPlot2.SeriesPoints.Add(seriesPoints);
+
+            seriesPoints = new SeriesPoints();
+            seriesPoints.Name = "Crossplot2";
+            x.Clear();
+            y.Clear();
+            yFit.Clear();
+            foreach (WaterFlowRate waterFlowRate in data.WaterFlowRates)
+            {
+                x.Add(waterFlowRate.FlowRate);
+                y.Clear();
+                for (int rangeIndex = 0; rangeIndex < data.Ranges.Count; rangeIndex++)
+                {
+                    y.Add(waterFlowRate.Yfit[rangeIndex]);
+                }
+
+                yfit = 0;
+                y2.Clear();
+                CalculatePerformanceData(data.Ranges, y, data.CrossPlot2.TestRange, ref yfit, y2, stringBuilder);
+                yFit.Add(yfit);
+            }
+
+            increment = (data.CrossPlot2.ColdWaterTemperatureMaximum - data.CrossPlot2.ColdWaterTemperatureMinimum) / 50.0;
+            if (increment > 0.0)
+            {
+                for (double coldWaterTemperatureValue = data.CrossPlot2.ColdWaterTemperatureMinimum; coldWaterTemperatureValue <= data.CrossPlot2.ColdWaterTemperatureMaximum; coldWaterTemperatureValue += increment)
+                {
+                    y2.Clear();
+                    CalculatePerformanceData(yFit, x, coldWaterTemperatureValue, ref yfit, y2, stringBuilder);
+                    seriesPoints.Points.Add(new Point(yfit, coldWaterTemperatureValue));
+                }
+            }
+            data.CrossPlot2.SeriesPoints.Add(seriesPoints);
         }
 
         public void CalculatePerformanceData(List<double> x, List<double> ymeas, double xreal, ref double yfit, List<double> y2, StringBuilder errorMessage)
@@ -404,27 +528,27 @@ namespace CalculationLibrary
             {
                 y += ((Math.Pow(a, 3.0) - a) * y2a[kLow] + (Math.Pow(b, 3.0) - b) * y2a[kHigh]) * (Math.Pow(h, 2.0)) / 6.0;
             }
-            else
-            {
-                if (increasingX)
-                {
-                    errorMessage.AppendLine("X value is out of range of the increasing XA values.");
-                    return;
-                }
-                else
-                {
-                    errorMessage.AppendLine("X value is out of range of the decreasing XA values.");
-                    return;
-                }
-            }
+            //else
+            //{
+            //    if (increasingX)
+            //    {
+            //        errorMessage.AppendLine("X value is out of range of the increasing XA values.");
+            //        return;
+            //    }
+            //    else
+            //    {
+            //        errorMessage.AppendLine("X value is out of range of the decreasing XA values.");
+            //        return;
+            //    }
+            //}
         }
 
-        public double CalculateTestLiquidToGasRatio(TowerSpecifications towerDesignData, TowerSpecifications towerTestData, 
+        public double CalculateTestLiquidToGasRatio(TowerSpecifications towerDesignData, TowerSpecifications towerTestData,
                                                     PsychrometricsData designPsychrometricsData, PsychrometricsData testPsychrometricsData)
         {
             double liquidToGasRatio = 0;
             double oneThird = (1.0 / 3.0);
-  
+
             if ((towerDesignData.WaterFlowRate != 0)
             && (towerTestData.FanDriverPower != 0)
             && (designPsychrometricsData.Density != 0) // P
@@ -516,7 +640,7 @@ namespace CalculationLibrary
                     EnthalpySearch(true, testSearchPsychrometricsData);
 
                     output.WetBulbTemperature = testSearchPsychrometricsData.WetBulbTemperature;
- 
+
                     //'Check to see if Enthalpy  of Leaving Wet Bulb Test (testPsychrometricsData.Enthalpy) converged to calculated value (HCalcT)
                     if (Math.Abs(testSearchPsychrometricsData.RootEnthalpy - testSearchPsychrometricsData.Enthalpy) > 0.0002)
                     {

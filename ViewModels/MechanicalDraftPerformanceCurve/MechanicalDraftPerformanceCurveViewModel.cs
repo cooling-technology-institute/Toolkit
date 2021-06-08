@@ -333,12 +333,10 @@ namespace ViewModels
                     if (FillCalculationData(testIndex, CalculationData))
                     {
                         MechanicalDraftPerformanceCurveCalculationLibrary calculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
-                        //File.WriteAllText("data.json", JsonConvert.SerializeObject(CalculationData, Formatting.Indented));
-
                         calculationLibrary.MechanicalDraftPerformanceCurveCalculation(CalculationData, true);
-                        //calculationLibrary.DetermineAdjustedTestFlow(CalculationData, OutputDataViewModel.MechanicalDraftPerformanceCurveOutput);
                         FillTable();
                         TestPoints[testIndex].LiquidToGasRatioDataValue.UpdateCurrentValue(CalculationData.TestOutput.LiquidToGasRatio);
+                        calculationLibrary.GenerateGraphPoints(CalculationData);
                     }
                     else
                     {
@@ -364,49 +362,49 @@ namespace ViewModels
             return returnValue;
         }
 
-        public bool CalculateViewGraphs(int testIndex)
-        {
-            ErrorMessage = string.Empty;
-            StringBuilder stringBuilder = new StringBuilder();
-            bool returnValue = true;
+        //public bool CalculateViewGraphs(int testIndex)
+        //{
+        //    ErrorMessage = string.Empty;
+        //    StringBuilder stringBuilder = new StringBuilder();
+        //    bool returnValue = true;
 
-            try
-            {
-                MechanicalDraftPerformanceCurveCalculationLibrary calculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+        //    try
+        //    {
+        //        MechanicalDraftPerformanceCurveCalculationLibrary calculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
 
-                if (DesignData.IsValid())
-                {
-                    CalculationData = new MechanicalDraftPerformanceCurveCalculationData();
+        //        if (DesignData.IsValid())
+        //        {
+        //            //CalculationData = new MechanicalDraftPerformanceCurveCalculationData();
 
-                    if (FillCalculationData(testIndex, CalculationData))
-                    {
-                        //calculationLibrary.MechanicalDraftPerformanceCurveCalculation(CalculationData);
-                        calculationLibrary.CalculateCrossPlot1(CalculationData);
-                        //calculationLibrary.CalculateCrossPlot2(CalculationData);
-                    }
-                    else
-                    {
-                        returnValue = false;
-                        stringBuilder.AppendLine(ErrorMessage);
-                    }
-                }
-                else
-                {
-                    stringBuilder.AppendLine(DesignData.ErrorMessage);
-                    returnValue = false;
-                }
-            }
-            catch (Exception exception)
-            {
-                stringBuilder.AppendFormat("Error in Performance Curve calculation. Please check your input values. Exception Message: {0}", exception.Message);
-            }
+        //            //if (FillCalculationData(testIndex, CalculationData))
+        //            //{
+        //                //calculationLibrary.MechanicalDraftPerformanceCurveCalculation(CalculationData);
+        //                calculationLibrary.GenerateGraphPoints(CalculationData);
+        //                //calculationLibrary.CalculateCrossPlot2(CalculationData);
+        //            //}
+        //            //else
+        //            //{
+        //            //    returnValue = false;
+        //            //    stringBuilder.AppendLine(ErrorMessage);
+        //            //}
+        //        }
+        //        else
+        //        {
+        //            stringBuilder.AppendLine(DesignData.ErrorMessage);
+        //            returnValue = false;
+        //        }
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        stringBuilder.AppendFormat("Error in Performance Curve calculation. Please check your input values. Exception Message: {0}", exception.Message);
+        //    }
 
-            if (!returnValue)
-            {
-                ErrorMessage = stringBuilder.ToString();
-            }
-            return returnValue;
-        }
+        //    if (!returnValue)
+        //    {
+        //        ErrorMessage = stringBuilder.ToString();
+        //    }
+        //    return returnValue;
+        //}
 
         public DataTable DataTable
         {

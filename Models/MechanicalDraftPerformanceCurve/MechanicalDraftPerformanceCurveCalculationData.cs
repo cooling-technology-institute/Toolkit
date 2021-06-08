@@ -5,23 +5,92 @@ using System.Collections.Generic;
 
 namespace Models
 {
-    public class CrossPlot1 : ICloneable
+    public class SeriesPoints : ICloneable
     {
         public List<Point> Points { get; set; }
+        public string Name { get; set; }
+
+        public SeriesPoints()
+        {
+            Points = new List<Point>();
+            Clear();
+        }
+        public void Clear()
+        {
+            Name = string.Empty;
+            Points.Clear();
+        }
+
+        public object Clone()
+        {
+            var data = (SeriesPoints)MemberwiseClone();
+            data.Points = Points.Clone();
+            return data;
+        }
+    }
+
+    public class CrossPlot1 : ICloneable
+    {
+        public List<SeriesPoints> SeriesPoints { get; set; }
         public double ColdWaterTemperatureMinimum { get; set; }
         public double ColdWaterTemperatureMaximum { get; set; }
+        public double RangeMinimum { get; set; }
+        public double RangeMaximum { get; set; }
+        public double TestRange { get; set; }
+        public double AdjustedTestRange { get; set; }
 
         public CrossPlot1()
         {
-            Points = new List<Point>();
+            SeriesPoints = new List<SeriesPoints>();
+            Clear();
+        }
+        public void Clear()
+        {
+            SeriesPoints.Clear();
             ColdWaterTemperatureMinimum = 0.0;
             ColdWaterTemperatureMaximum = 0.0;
+            RangeMinimum = 0.0;
+            RangeMaximum = 0.0;
+            TestRange = 0.0;
+            AdjustedTestRange = 0.0;
         }
 
         public object Clone()
         {
             var data = (CrossPlot1)MemberwiseClone();
-            data.Points = Points.GetClone();
+            data.SeriesPoints = SeriesPoints.Clone();
+            return data;
+        }
+    }
+
+    public class CrossPlot2 : ICloneable
+    {
+        public List<SeriesPoints> SeriesPoints { get; set; }
+        public double ColdWaterTemperatureMinimum { get; set; }
+        public double ColdWaterTemperatureMaximum { get; set; }
+        public double WaterFlowRateMinimum { get; set; }
+        public double WaterFlowRateMaximum { get; set; }
+        public double TestRange { get; set; }
+
+        public CrossPlot2()
+        {
+            SeriesPoints = new List<SeriesPoints>();
+            Clear();
+        }
+        public void Clear()
+        {
+            SeriesPoints.Clear();
+            ColdWaterTemperatureMinimum = 0.0;
+            ColdWaterTemperatureMaximum = 0.0;
+            WaterFlowRateMinimum = 0.0;
+            WaterFlowRateMaximum = 0.0;
+            TestRange = 0.0;
+        }
+
+        public object Clone()
+        {
+            var data = (CrossPlot2)MemberwiseClone();
+            data.SeriesPoints = SeriesPoints.Clone();
             return data;
         }
     }
@@ -100,6 +169,7 @@ namespace Models
         public MechanicalDraftPerformanceCurveOutput TestOutput { get; set; }
         public MechanicalDraftPerformanceCurveOutput DesignOutput { get; set; }
         public CrossPlot1 CrossPlot1 { get; set; }
+        public CrossPlot2 CrossPlot2 { get; set; }
 
         public MechanicalDraftPerformanceCurveCalculationData()
         {
@@ -112,6 +182,7 @@ namespace Models
             TestOutput = new MechanicalDraftPerformanceCurveOutput();
             DesignOutput = new MechanicalDraftPerformanceCurveOutput();
             CrossPlot1 = new CrossPlot1();
+            CrossPlot2 = new CrossPlot2();
         }
 
         public double FindMinimumWetBulbTempurature(WaterFlowRate waterFlowRate)

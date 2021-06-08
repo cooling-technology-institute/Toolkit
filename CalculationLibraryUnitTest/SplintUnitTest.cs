@@ -238,60 +238,60 @@ namespace CalculationLibraryUnitTest
             Assert.IsTrue(errorMessage.ToString().Contains("bisection values"), "errorMethod does not have correct information");
         }
 
-        [TestMethod]
-        public void SplintTest_OrderIncreasing()
-        {
-            bool methodThrew = false;
+        //[TestMethod]
+        //public void SplintTest_OrderIncreasing()
+        //{
+        //    bool methodThrew = false;
 
-            List<double> xa = new List<double>() { 5.0, 10.0, 15.0, 20.0, 25.0, 30.0 };
-            List<double> ya = new List<double>() { 18.0, 20.379999999999999, 23.050000000000001, 25.800000000000001, 28.930000000000000, 32.600000000000001 };
-            List<double> y2 = new List<double>() { 0.0, 0.018396172248804021, -0.0039846889952154310, 0.016742583732057319, 0.028214354066985834, 0.0 };
+        //    List<double> xa = new List<double>() { 5.0, 10.0, 15.0, 20.0, 25.0, 30.0 };
+        //    List<double> ya = new List<double>() { 18.0, 20.379999999999999, 23.050000000000001, 25.800000000000001, 28.930000000000000, 32.600000000000001 };
+        //    List<double> y2 = new List<double>() { 0.0, 0.018396172248804021, -0.0039846889952154310, 0.016742583732057319, 0.028214354066985834, 0.0 };
 
-            double yfit = 0.0;
-            double xreal = 31.0;
-            StringBuilder errorMessage = new StringBuilder();
+        //    double yfit = 0.0;
+        //    double xreal = 31.0;
+        //    StringBuilder errorMessage = new StringBuilder();
 
-            try
-            {
-                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
-                CalculationLibrary.Splint(xa, ya, y2, xreal, ref yfit, errorMessage);
-            }
-            catch
-            {
-                methodThrew = true;
-            }
+        //    try
+        //    {
+        //        CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+        //        CalculationLibrary.Splint(xa, ya, y2, xreal, ref yfit, errorMessage);
+        //    }
+        //    catch
+        //    {
+        //        methodThrew = true;
+        //    }
 
-            Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreNotEqual(errorMessage.Length, 0, "errorMethod is empty");
-            Assert.IsTrue(errorMessage.ToString().Contains("increasing"), "errorMethod does not have correct information");
-        }
+        //    Assert.IsFalse(methodThrew, "Method threw");
+        //    Assert.AreNotEqual(errorMessage.Length, 0, "errorMethod is empty");
+        //    Assert.IsTrue(errorMessage.ToString().Contains("increasing"), "errorMethod does not have correct information");
+        //}
 
-        [TestMethod]
-        public void SplintTest_OrderDecreasing()
-        {
-            bool methodThrew = false;
+        //[TestMethod]
+        //public void SplintTest_OrderDecreasing()
+        //{
+        //    bool methodThrew = false;
 
-            List<double> xa = new List<double>() { 30.0, 25.0, 20.0, 15.0, 10.0, 5.0 };
-            List<double> ya = new List<double>() { 18.0, 20.379999999999999, 23.050000000000001, 25.800000000000001, 28.930000000000000, 32.600000000000001 };
-            List<double> y2 = new List<double>() { 0.0, 0.018396172248804021, -0.0039846889952154310, 0.016742583732057319, 0.028214354066985834, 0.0 };
+        //    List<double> xa = new List<double>() { 30.0, 25.0, 20.0, 15.0, 10.0, 5.0 };
+        //    List<double> ya = new List<double>() { 18.0, 20.379999999999999, 23.050000000000001, 25.800000000000001, 28.930000000000000, 32.600000000000001 };
+        //    List<double> y2 = new List<double>() { 0.0, 0.018396172248804021, -0.0039846889952154310, 0.016742583732057319, 0.028214354066985834, 0.0 };
 
-            double yfit = 0.0;
-            double xreal = 31.0;
-            StringBuilder errorMessage = new StringBuilder();
+        //    double yfit = 0.0;
+        //    double xreal = 31.0;
+        //    StringBuilder errorMessage = new StringBuilder();
 
-            try
-            {
-                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
-                CalculationLibrary.Splint(xa, ya, y2, xreal, ref yfit, errorMessage);
-            }
-            catch
-            {
-                methodThrew = true;
-            }
+        //    try
+        //    {
+        //        CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+        //        CalculationLibrary.Splint(xa, ya, y2, xreal, ref yfit, errorMessage);
+        //    }
+        //    catch
+        //    {
+        //        methodThrew = true;
+        //    }
 
-            Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreNotEqual(errorMessage.Length, 0, "errorMethod is empty");
-            Assert.IsTrue(errorMessage.ToString().Contains("decreasing"), "errorMethod does not have correct information");
-        }
+        //    Assert.IsFalse(methodThrew, "Method threw");
+        //    Assert.AreNotEqual(errorMessage.Length, 0, "errorMethod is empty");
+        //    Assert.IsTrue(errorMessage.ToString().Contains("decreasing"), "errorMethod does not have correct information");
+        //}
     }
 }
