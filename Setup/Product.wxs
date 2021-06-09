@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <!--
+  <Bundle Id="Bundle1" UpgradeCode="">
+      <PayloadGroup Id="NetFx452RedistPayload">
+        <Payload Name="redist\NDP452-KB2901907-x86-x64-AllOS-ENU.exe"  SourceFile="X:\path\to\redists\in\repo\NDP452-KB2901907-x86-x64-AllOS-ENU.exe"/>
+    </PayloadGroup>
+    <BootstrapperApplicationRef Id="*" />
+  <Chain>
+      <PackageGroupRef Id="NetFx48Web"/>
+      <MsiPackage Id="MyApplication" SourceFile="$(var.MyApplicationSetup.TargetPath)"/>
+  </Chain>
+  </Bundle>
+  -->
+  <Product Id="*" Name="Setup" Language="1033" Version="4.0.0.0" Manufacturer="Cooling Technology Institute" UpgradeCode="312e018a-e097-4d9d-ac92-9082cd505c95">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="Setup" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+
+    <!--<Media Id='1' Cabinet='Sample.cab' EmbedCab='yes' DiskPrompt="CD-ROM #1" />
+    <Property Id='DiskPrompt' Value="Cooling Technology Institute's Toolkit 4.0 Installation [1]" />-->
+
+    <!--<Icon Id="CTIToolkit.ico" SourceFile="$(var.CTIToolkit.TargetPath)CTIToolkit.ico" />-->
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id='CTI' Name='Cooling Technology Institute'>
+          <Directory Id="INSTALLFOLDER" Name="CTI Toolkit 4.0" />
+				</Directory>
+      </Directory>
+    </Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<Component Id="ProductComponent">
+        <!-- TODO: Insert files, registry keys, and other resources here. -->
+        <File Source="$(var.CTIToolkit.TargetPath)" />
+        <!--<File Id='CTIToolkitEXE' Name='CTIToolkit.exe' DiskId='1' Source='CTIToolkit.exe' KeyPath='yes' />-->
+        <!--<Shortcut Id="startmenuCTIToolkit4" Directory="ProgramMenuDir" Name="CTI Toolkit 4.0" WorkingDirectory='INSTALLDIR' Icon="CTIToolkit.exe" IconIndex="0" Advertise="yes" />
+        <Shortcut Id="desktopCTIToolkit4" Directory="DesktopFolder" Name="CTI Toolkit 4.0" WorkingDirectory='INSTALLDIR' Icon="CTIToolkit.exe" IconIndex="0" Advertise="yes" />-->
+      </Component>
+      <!--<Component Id='Help' Guid='FCEAE45C-53A6-401D-9C99-C48CC89644AC'>
+        <File Id='Help' Name='ctitoolkit.chm' DiskId='1' Source='ctitoolkit.chm' KeyPath='yes' />
+      </Component>
+      <Component Id='Data' Guid='D9A852D2-4C81-4FD6-9669-FAA5D576D9BB'>
+        <File Id='AppendixC' Name='Appendix C.mdpc' DiskId='1' Source='Appendix C.mdpc' KeyPath='yes' />
+        <File Id='AppendixD' Name='Appendix D.mdpc' DiskId='1' Source='Appendix D.mdpc' KeyPath='yes' />
+      </Component>
+      <Component Id='Documentation' Guid='BA2041F7-E3BD-466D-A89D-A67638B18B09'>
+        <File Id='Definitions' Name='ToolKit Definitions.pdf' DiskId='1' Source='ToolKit Definitions.pdf' KeyPath='yes' />
+        <File Id='Manual' Name='Manual.pdf' DiskId='1' Source='Manual.pdf' KeyPath='yes'>
+          <Shortcut Id='startmenuManual' Directory='ProgramMenuDir' Name='Instruction Manual' Advertise='yes' />
+        </File>
+      </Component>-->
+    </ComponentGroup>
+	</Fragment>
+</Wix>

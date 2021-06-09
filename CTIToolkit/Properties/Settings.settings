@@ -5,5 +5,8 @@
     <Setting Name="UnitsSelection" Type="System.String" Scope="User">
       <Value Profile="(Default)">United_States_Customary_Units_IP</Value>
     </Setting>
+    <Setting Name="Demo" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

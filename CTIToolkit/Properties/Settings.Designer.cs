@@ -34,5 +34,17 @@ namespace CTIToolkit.Properties {
                 this["UnitsSelection"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Demo {
+            get {
+                return ((bool)(this["Demo"]));
+            }
+            set {
+                this["Demo"] = value;
+            }
+        }
     }
 }
