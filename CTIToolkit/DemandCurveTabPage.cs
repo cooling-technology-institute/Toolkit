@@ -96,17 +96,6 @@ namespace CTIToolkit
                 ElevationRadio.Checked = false;
                 BarometricPressureRadio.Checked = true;
             }
-
-            //if (DemandCurveViewModel.IsApproach)
-            //{
-            //    ApproachRadio.Checked = true;
-            //    KavLRadio.Checked = false;
-            //}
-            //else
-            //{
-            //    ApproachRadio.Checked = false;
-            //    KavLRadio.Checked = true;
-            //}
         }
 
         private void SetDisplayedValues()
@@ -184,11 +173,6 @@ namespace CTIToolkit
 
                 if (DemandCurveViewModel.Calculate())
                 {
-                    // AxisX, AxisY, AxisX2 and AxisY2
-                    //Primary X-Axis  Bottom horizontal axis.
-                    //Secondary X-Axis    Top horizontal axis.
-                    //Primary Y-Axis  Left vertical axis.
-                    //Secondary Y-Axis    Right vertical axis.
                     DrawSeries(Chart, false);
                 }
                 else
@@ -281,10 +265,6 @@ namespace CTIToolkit
             }
 
             SetDisplayedValues();
-            //{
-            //    stringBuilder.AppendLine(ErrorMessage);
-            //    returnValue = false;
-            //}
 
             if (!returnValue)
             {
@@ -383,6 +363,11 @@ namespace CTIToolkit
 
         private void DrawSeries(Chart chart, bool isPrintPage)
         {
+            // AxisX, AxisY, AxisX2 and AxisY2
+            //Primary X-Axis  Bottom horizontal axis.
+            //Secondary X-Axis    Top horizontal axis.
+            //Primary Y-Axis  Left vertical axis.
+            //Secondary Y-Axis    Right vertical axis.
             if (DemandCurveViewModel.Approaches.Count > 0)
             {
                 chart.Series.Clear();
@@ -447,6 +432,10 @@ namespace CTIToolkit
 
         private void LiquidToGasRatioValue_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (DemandCurveViewModel.LiquidToGasRatioDataValue.InputValue != LiquidToGasRatioValue.Text)
+            {
+                ClearPage();
+            }
             if (!DemandCurveViewModel.LiquidToGasRatioDataValue.UpdateValue(LiquidToGasRatioValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -465,6 +454,10 @@ namespace CTIToolkit
 
         private void WetBulbTemperature_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (DemandCurveViewModel.WetBulbTemperatureDataValue.InputValue != WetBulbTemperatureValue.Text)
+            {
+                ClearPage();
+            }
             if (!DemandCurveViewModel.WetBulbTemperatureDataValue.UpdateValue(WetBulbTemperatureValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -483,6 +476,10 @@ namespace CTIToolkit
 
         private void RangeValue_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (DemandCurveViewModel.RangeDataValue.InputValue != RangeValue.Text)
+            {
+                ClearPage();
+            }
             if (!DemandCurveViewModel.RangeDataValue.UpdateValue(RangeValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -503,6 +500,10 @@ namespace CTIToolkit
         {
             if (ElevationRadio.Checked)
             {
+                if (DemandCurveViewModel.ElevationDataValue.InputValue != ElevationValue.Text)
+                {
+                    ClearPage();
+                }
                 if (!DemandCurveViewModel.ElevationDataValue.UpdateValue(ElevationValue.Text))
                 {
                     // Cancel the event and select the text to be corrected by the user.
@@ -515,6 +516,10 @@ namespace CTIToolkit
             }
             else
             {
+                if (DemandCurveViewModel.BarometricPressureDataValue.InputValue != ElevationValue.Text)
+                {
+                    ClearPage();
+                }
                 if (!DemandCurveViewModel.BarometricPressureDataValue.UpdateValue(ElevationValue.Text))
                 {
                     // Cancel the event and select the text to be corrected by the user.
@@ -534,6 +539,10 @@ namespace CTIToolkit
 
         private void C_C1_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (DemandCurveViewModel.C1DataValue.InputValue != C_C1_Value.Text)
+            {
+                ClearPage();
+            }
             if (!DemandCurveViewModel.C1DataValue.UpdateValue(C_C1_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -552,6 +561,10 @@ namespace CTIToolkit
 
         private void Slope_C2_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (DemandCurveViewModel.SlopeDataValue.InputValue != Slope_C2_Value.Text)
+            {
+                ClearPage();
+            }
             if (!DemandCurveViewModel.SlopeDataValue.UpdateValue(Slope_C2_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -570,6 +583,10 @@ namespace CTIToolkit
 
         private void MaximumValue_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (DemandCurveViewModel.MaximumDataValue.InputValue != MaximumValue.Text)
+            {
+                ClearPage();
+            }
             if (!DemandCurveViewModel.MaximumDataValue.UpdateValue(MaximumValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -588,6 +605,10 @@ namespace CTIToolkit
 
         private void MinimumValue_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (DemandCurveViewModel.MinimumDataValue.InputValue != MinimumValue.Text)
+            {
+                ClearPage();
+            }
             if (!DemandCurveViewModel.MinimumDataValue.UpdateValue(MinimumValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -606,6 +627,10 @@ namespace CTIToolkit
 
         private void UserApproachValue_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (DemandCurveViewModel.UserApproachDataValue.InputValue != UserApproachValue.Text)
+            {
+                ClearPage();
+            }
             if (!DemandCurveViewModel.UserApproachDataValue.UpdateValue(UserApproachValue.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -634,6 +659,14 @@ namespace CTIToolkit
                     ElevationPressureUnits.Text = ConstantUnits.BarometricPressureInchOfMercury;
                 }
             }
+        }
+
+        private void ClearPage()
+        {
+            Chart.ChartAreas[0].AxisX.IsLogarithmic = false;
+            Chart.ChartAreas[0].AxisY.IsLogarithmic = false;
+            Chart.Series.Clear();
+            OutputGridView.DataSource = null;
         }
 
         private void ElevationRadio_CheckedChanged(object sender, EventArgs e)
@@ -703,6 +736,7 @@ namespace CTIToolkit
         {
 
         }
+
         private void TurnSeriesOffOn(Series series, TurnOffOn turnOffOn)
         {
             if ((series != null) && (series.GetCustomProperty("CHECK") != null))

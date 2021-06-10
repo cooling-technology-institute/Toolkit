@@ -14,7 +14,7 @@ namespace ViewModels
         {
             IsDemo = isDemo;
             InputMessage = "Slope";
-            Format = "F2";
+            Format = "F4";
             SetDefaultMinMax(isInternationalSystemOfUnits_SI);
             Current = Default;
             SetInputAndTooltip(isInternationalSystemOfUnits_SI);

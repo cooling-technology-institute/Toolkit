@@ -541,7 +541,7 @@
             series1.Points.Add(dataPoint31);
             series1.Points.Add(dataPoint32);
             this.Chart.Series.Add(series1);
-            this.Chart.Size = new System.Drawing.Size(751, 487);
+            this.Chart.Size = new System.Drawing.Size(751, 557);
             this.Chart.SuppressExceptions = true;
             this.Chart.TabIndex = 12;
             this.Chart.Text = "DemandCurveChart";
@@ -567,7 +567,7 @@
             this.Controls.Add(this.CalculateButton);
             this.Controls.Add(this.DataFileLabel);
             this.Name = "DemandCurveTabPage";
-            this.Size = new System.Drawing.Size(767, 777);
+            this.Size = new System.Drawing.Size(767, 829);
             this.Load += new System.EventHandler(this.DemandCurveTabPage_Load);
             this.Resize += new System.EventHandler(this.DemandCurveTabPage_Resize);
             this.InputPropertiesGroupBox.ResumeLayout(false);

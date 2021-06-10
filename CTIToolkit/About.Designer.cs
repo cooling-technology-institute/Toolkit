@@ -57,11 +57,12 @@
             // versionNumber
             // 
             this.versionNumber.AutoSize = true;
+            this.versionNumber.ForeColor = System.Drawing.Color.Red;
             this.versionNumber.Location = new System.Drawing.Point(73, 257);
             this.versionNumber.Name = "versionNumber";
-            this.versionNumber.Size = new System.Drawing.Size(40, 13);
+            this.versionNumber.Size = new System.Drawing.Size(47, 13);
             this.versionNumber.TabIndex = 1;
-            this.versionNumber.Text = "1.1.1.1";
+            this.versionNumber.Text = "4.0 Beta";
             // 
             // logo
             // 

@@ -608,21 +608,6 @@ namespace CTIToolkit
             return dataTable;
         }
 
-        public DataTable FillDesignDataTable()
-        {
-            NameValueUnitsDataTable nameValueUnitsDataTable = new NameValueUnitsDataTable();
-
-            nameValueUnitsDataTable.AddRow(MechanicalDraftPerformanceCurveViewModel.DesignData.WaterFlowRateDataValue.InputMessage, MechanicalDraftPerformanceCurveViewModel.DesignData.WaterFlowRateDataValue.InputValue, MechanicalDraftPerformanceCurveViewModel.DesignData.WaterFlowRateDataValue.Units);
-            nameValueUnitsDataTable.AddRow(MechanicalDraftPerformanceCurveViewModel.DesignData.HotWaterTemperatureDataValue.InputMessage, MechanicalDraftPerformanceCurveViewModel.DesignData.HotWaterTemperatureDataValue.InputValue, MechanicalDraftPerformanceCurveViewModel.DesignData.HotWaterTemperatureDataValue.Units);
-            nameValueUnitsDataTable.AddRow(MechanicalDraftPerformanceCurveViewModel.DesignData.ColdWaterTemperatureDataValue.InputMessage, MechanicalDraftPerformanceCurveViewModel.DesignData.ColdWaterTemperatureDataValue.InputValue, MechanicalDraftPerformanceCurveViewModel.DesignData.ColdWaterTemperatureDataValue.Units);
-            nameValueUnitsDataTable.AddRow(MechanicalDraftPerformanceCurveViewModel.DesignData.WetBulbTemperatureDataValue.InputMessage, MechanicalDraftPerformanceCurveViewModel.DesignData.WetBulbTemperatureDataValue.InputValue, MechanicalDraftPerformanceCurveViewModel.DesignData.WetBulbTemperatureDataValue.Units);
-            nameValueUnitsDataTable.AddRow(MechanicalDraftPerformanceCurveViewModel.DesignData.DryBulbTemperatureDataValue.InputMessage, MechanicalDraftPerformanceCurveViewModel.DesignData.DryBulbTemperatureDataValue.InputValue, MechanicalDraftPerformanceCurveViewModel.DesignData.DryBulbTemperatureDataValue.Units);
-            nameValueUnitsDataTable.AddRow(MechanicalDraftPerformanceCurveViewModel.DesignData.BarometricPressureDataValue.InputMessage, MechanicalDraftPerformanceCurveViewModel.DesignData.BarometricPressureDataValue.InputValue, MechanicalDraftPerformanceCurveViewModel.DesignData.BarometricPressureDataValue.Units);
-            nameValueUnitsDataTable.AddRow(MechanicalDraftPerformanceCurveViewModel.DesignData.LiquidToGasRatioDataValue.InputMessage, MechanicalDraftPerformanceCurveViewModel.DesignData.LiquidToGasRatioDataValue.InputValue, string.Empty);
-
-            return nameValueUnitsDataTable.DataTable;
-        }
-
         private void DesignTestColumns(DataTable dataTable)
         {
             // Declare DataColumn and DataRow variables.

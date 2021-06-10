@@ -10,7 +10,7 @@ namespace ViewModels
         {
             IsDemo = isDemo;
             InputMessage = "C";
-            Format = "F1";
+            Format = "F4";
             SetDefaultMinMax(isInternationalSystemOfUnits_SI);
             Current = Default;
             SetInputAndTooltip(isInternationalSystemOfUnits_SI);
