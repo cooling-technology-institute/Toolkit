@@ -1,0 +1,16 @@
+"C:\Program Files (x86)\WiX Toolset v3.11\bin\heat.exe" project "C:\CTI\CTI_Toolkit\CTIToolkit\CTIToolkit.csproj" pog Binaries -ag template fragment -out project2.wxs
+
+DLL = C:\Program Files (x86)\WiX Toolset v3.11\bin
+
+Could not load file or assembly 'Microsoft.VisualStudio.VCProjectEngine, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)
+
+C:\Program Files (x86)\WiX Toolset v3.11\bin
+
+In the Solution Explorer, right-click the project and then choose Properties.
+Click on the Signing tab.
+Now, toggle on the Sign the ClickOnce Manifests checkbox.
+Click on Select from Store.
+From the list, select the code signing certificate you want to use.
+Specify the timestamp server and start signing.
+
+https://wixtoolset.org/documentation/manual/v3/overview/insignia.html

@@ -13,13 +13,15 @@
   </Chain>
   </Bundle>
   -->
-  <Product Id="*" Name="Setup" Language="1033" Version="4.0.0.0" Manufacturer="Cooling Technology Institute" UpgradeCode="555501F8-744F-4400-B406-AD28A89EDF38">
+  <Product Id="*" Name="CTI Toolkit 4.0" Language="1033" Version="4.0.0.0" Manufacturer="Cooling Technology Institute" UpgradeCode="555501F8-744F-4400-B406-AD28A89EDF38">
 		
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
     
     <MediaTemplate EmbedCab="yes" />
+
+    <PropertyRef Id="WIX_DIR_COMMON_DOCUMENTS" />
 
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
@@ -28,45 +30,28 @@
         </Directory>
       </Directory>
       <Directory Id="ProgramMenuFolder">
-        <Directory Id="ApplicationProgramsFolder" Name='!(bind.property.ProductName)'>
-        </Directory>
+        <Directory Id="ApplicationProgramsFolder" Name="!(bind.property.ProductName)"/>
       </Directory>
-      <Directory Id="StartMenuFolder">
-        <Directory Id="ApplicationStartFolder" Name='!(bind.property.ProductName)'/>
-      </Directory>
-      <Directory Id="DocumentsFolder">
-        <Directory Id="UsersDocumentsFolder" Name='[PersonalFolder]'>
-          <Directory Id="CTIUsersDocumentsFolder" Name='[ProductName]'>
+      <Directory Id="WIX_DIR_COMMON_DOCUMENTS">
+        <Directory Id="UsersDocumentsFolder" Name='!(bind.property.Manufacturer)'>
+          <Directory Id="CTIUsersDocumentsFolder" Name='!(bind.property.ProductName)'>
           </Directory>
         </Directory>
       </Directory>
-      
     </Directory>
-
-    <!--<DirectoryRef Id="ApplicationProgramsFolder">
-      <Component Id="ApplicationShortcut" Guid="5A645C22-1C83-4B02-9BB5-876005D5EFB5">
-        <Shortcut Id="ApplicationStartMenuShortcut"
-                  Name="[ProductName]"
-                  Description="[ProductName]"
-                  Target="[#ctitoolkit.exe]"
-                  WorkingDirectory="APPLICATIONROOTDIRECTORY"/>
-        <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
-        <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
-      </Component>
-    </DirectoryRef>-->
 
     <Feature Id="ProductFeature" Title="Setup" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
       <ComponentGroupRef Id="DocumentComponents" />
-      <ComponentGroupRef Id="ShortCut" />
       <ComponentGroupRef Id="RegistryEntries" />
       <!--<ComponentRef Id="ApplicationShortcut" />-->
     </Feature>
 
-    <Icon Id="CTIToolkit.ico" SourceFile="$(var.ProjectDir)CTIToolkit.ico" />
-
-    <WixVariable Id="WixUIBannerBmp" Value="Resources\banner.bmp" />
-    <WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)license.rtf" />
+    <Icon Id="CTIToolkit.ico" SourceFile="$(var.CTIToolkit.ProjectDir)CTIToolkit.ico" />
+    <Property Id="ARPPRODUCTICON" Value="CTIToolkit.ico" />
+    
+    <WixVariable Id="WixUIBannerBmp" Value="$(var.CTIToolkit.ProjectDir)Resources\banner.bmp" />
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.SolutionDir)license.rtf" />
     
     <!--<UIRef Id="WixUI_Minimal" />-->
     <UIRef Id="CustomUI" />
@@ -97,24 +82,44 @@
   </Fragment>
 
 	<Fragment>
-		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			<Component Id="ProductComponent" Guid='13ED3467-2902-4B84-8032-338D95D1B9A6'>
+		<ComponentGroup Id="ProductComponents">
+			<Component Id="ProductComponent" Guid='13ED3467-2902-4B84-8032-338D95D1B9A6' Directory="INSTALLFOLDER">
         <File Id='File_$(var.CTIToolkit.TargetFileName)' Name='$(var.CTIToolkit.TargetFileName)' DiskId='1' Source='$(var.CTIToolkit.TargetPath)' KeyPath='yes' Checksum='yes' >
-          <!--<netfx:NativeImage Id='$(var.CTIToolkit.TargetFileName)' Platform='32bit' Priority='0' AppBaseDirectory='INSTALLFOLDER' />-->
+          <!--
+          <netfx:NativeImage Id="$(var.CTIToolkit.TargetFileName)" Platform="32bit" Priority="0" AppBaseDirectory="INSTALLFOLDER"/>
+          -->
         </File>
       </Component>
-      <Component Id="File_$(var.CalculationLibrary.TargetFileName)" Guid='{804C82F6-BD57-4A0B-B7A0-5A421B153213}'>
+      <Component Id="File_$(var.CalculationLibrary.TargetFileName)" Guid='{804C82F6-BD57-4A0B-B7A0-5A421B153213}' Directory="INSTALLFOLDER">
         <File Id='$(var.CalculationLibrary.TargetFileName)' Name='$(var.CalculationLibrary.TargetFileName)' DiskId='1' Source='$(var.CalculationLibrary.TargetPath)' KeyPath='yes' Checksum='yes'>
+          <!--
+          <netfx:NativeImage Id="$(var.CalculationLibrary.TargetFileName)" Platform="32bit" Priority="0" AppBaseDirectory="INSTALLFOLDER"/>
+          -->
         </File>
       </Component>
-      <Component Id="File_$(var.Models.TargetFileName)" Guid='{FEE4730E-3464-4CB8-A18E-3E4C506F70C8}'>
-        <File Id='$(var.Models.TargetFileName)' Name='$(var.Models.TargetFileName)' DiskId='1' Source='$(var.Models.TargetPath)' KeyPath='yes' Checksum='yes' />
+      <Component Id="File_$(var.Models.TargetFileName)" Guid='{FEE4730E-3464-4CB8-A18E-3E4C506F70C8}' Directory="INSTALLFOLDER">
+        <File Id='$(var.Models.TargetFileName)' Name='$(var.Models.TargetFileName)' DiskId='1' Source='$(var.Models.TargetPath)' KeyPath='yes' Checksum='yes' >
+          <!--
+          <netfx:NativeImage Id="$(var.CalculationLibrary.TargetFileName)" Platform="32bit" Priority="0" AppBaseDirectory="INSTALLFOLDER"/>
+          -->
+        </File>
       </Component>
-      <Component Id="File_$(var.ViewModels.TargetFileName)" Guid='{3851876C-E0A0-4FE1-95C0-4CD704AE0C07}'>
-        <File Id='$(var.ViewModels.TargetFileName)' Name='$(var.ViewModels.TargetFileName)' DiskId='1' Source='$(var.ViewModels.TargetPath)' KeyPath='yes' Checksum='yes' />
+      <Component Id="File_$(var.ViewModels.TargetFileName)" Guid='{3851876C-E0A0-4FE1-95C0-4CD704AE0C07}' Directory="INSTALLFOLDER">
+        <File Id='$(var.ViewModels.TargetFileName)' Name='$(var.ViewModels.TargetFileName)' DiskId='1' Source='$(var.ViewModels.TargetPath)' KeyPath='yes' Checksum='yes'>
+        <!--
+          <netfx:NativeImage Id="$(var.CalculationLibrary.TargetFileName)" Platform="32bit" Priority="0" AppBaseDirectory="INSTALLFOLDER"/>
+          -->
+        </File>
       </Component>
-      <Component Id='File_Help' Guid='FCEAE45C-53A6-401D-9C99-C48CC89644AC'>
+      <Component Id='File_Help' Guid='FCEAE45C-53A6-401D-9C99-C48CC89644AC' Directory="INSTALLFOLDER">
         <File Id='Help' Name='ctitoolkit.chm' DiskId='1' Source='$(var.SolutionDir)Toolkit help\HTMLHelp\!SSL!\Microsoft_HTML_Help\ctitoolkit.chm' KeyPath='yes' Checksum='yes' />
+      </Component>
+      <!-- Provide application and uninstall shortcuts in the start menu-->
+      <Component Id="ApplicationShortcuts" Guid="{87246E42-660E-48BD-BEBE-54ADA2D4FC29}" Directory="ApplicationProgramsFolder">
+        <Shortcut Id="ApplicationShortcut" Name="!(bind.property.ProductName)" Description="Starts !(bind.property.ProductName)" Target="[INSTALLFOLDER]$(var.CTIToolkit.TargetFileName)" WorkingDirectory="MAINFOLDER" Icon="CTIToolkit.ico"/>
+        <Shortcut Id="UninstallShortcut" Name="Uninstall !(bind.property.ProductName)" Description="Uninstalls !(bind.property.ProductName)" Target="[System64Folder]msiexec.exe" Arguments="/x [ProductCode]"/>
+        <RegistryValue Root="HKCU" Key="Software\!(bind.property.Manufacturer)\!(bind.property.ProductName)" Name="ApplicationShortcutsInstalled" Type="integer" Value="1" KeyPath="yes"/>
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
       </Component>
     </ComponentGroup>
   </Fragment>
@@ -137,25 +142,13 @@
   </Fragment>
 
   <Fragment>
-    <ComponentGroup Id="ShortCut" Directory="ApplicationProgramsFolder">
-      <Component Id="ApplicationShortCut" Guid='{72B42882-D1AE-455B-AAE2-EAAC1477403C}'>
-        <Shortcut Id="startmenuCTIToolkit4" Directory="StartMenuFolder" Name='!(bind.property.ProductName)' WorkingDirectory='INSTALLDIR' 
-                  Target='[#$(var.CTIToolkit.TargetFileName)]' Icon="CTIToolkit.ico" IconIndex="0" />
-        <RegistryValue Root='HKCU' Key='Software\!(bind.property.Manufacturer)\!(bind.property.ProductName)' Name='ApplicationShortCutInstalled' Type='integer' Value='1' KeyPath='yes' />
-        <RemoveFolder Id='ApplicationProgramsFolder' On='uninstall' />
-        <!--<Shortcut Id="desktopCTIToolkit4" Directory="DesktopFolder" Name='!(bind.property.ProductName)' WorkingDirectory='INSTALLDIR' Icon="CTIToolkit.ico" IconIndex="0" Advertise="yes" />-->
-      </Component>
-    </ComponentGroup>
-  </Fragment>
-
-  <Fragment>
     <ComponentGroup Id="RegistryEntries" Directory="INSTALLFOLDER">
       <Component Id="Registry_Name" Guid='{ACD2CCB6-B907-4BFC-B3DF-E77FD13301C4}'>
         <RegistryKey Root='HKLM' Key='Software\!(bind.property.Manufacturer)\!(bind.property.ProductName)'>
           <RegistryValue Type='string' Key='Name' Value='[USERNAME]' KeyPath='yes' />
         </RegistryKey>
       </Component>
-      <Component Id="Registry_Company" Guid='{ACD2CCB6-B907-4BFC-B3DF-E77FD13301C4}'>
+      <Component Id="Registry_Company" Guid='{896EF312-B1ED-4B73-8098-A697DC2F186A}'>
         <RegistryKey Root='HKLM' Key='Software\!(bind.property.Manufacturer)\!(bind.property.ProductName)'>
           <RegistryValue Type='string' Key='Company' Value='[COMPANYNAME]' KeyPath='yes' />
         </RegistryKey>
