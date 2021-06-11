@@ -75,6 +75,14 @@
     <Property Id="USERNAME" Secure="yes" />
     <Property Id="COMPANYNAME" Secure="yes" />
 
+    <Property Id="ARPHELPLINK" Value="http://www.cti.org/toolkit" />
+
+    <!--
+    <PropertyRef Id="NetFramework48"/>
+    <Condition Message="[ProductName] requires that the .NET Framework 4.8.3 or higher is installed.">
+      <![CDATA[Installed OR NetFramework48 >= #379893]]>
+    </Condition>
+    -->
   </Product>
 
   <Fragment>
