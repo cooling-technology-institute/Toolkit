@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.InputDirectory = new System.Windows.Forms.TextBox();
             this.Convert = new System.Windows.Forms.Button();
             this.SelectInput = new System.Windows.Forms.Button();
             this.SelectOutput = new System.Windows.Forms.Button();
@@ -38,6 +37,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.ConvertListBox = new System.Windows.Forms.ListBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.InputDirectoryComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,16 +49,6 @@
             this.label1.Size = new System.Drawing.Size(95, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Input File Directory";
-            // 
-            // InputDirectory
-            // 
-            this.InputDirectory.Location = new System.Drawing.Point(138, 23);
-            this.InputDirectory.Name = "InputDirectory";
-            this.InputDirectory.Size = new System.Drawing.Size(506, 20);
-            this.InputDirectory.TabIndex = 1;
-            this.InputDirectory.TextChanged += new System.EventHandler(this.InputDirectory_TextChanged);
-            this.InputDirectory.Validating += new System.ComponentModel.CancelEventHandler(this.InputDirectory_Validating);
-            this.InputDirectory.Validated += new System.EventHandler(this.InputDirectory_Validated);
             // 
             // Convert
             // 
@@ -121,18 +111,27 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // InputDirectoryComboBox
+            // 
+            this.InputDirectoryComboBox.FormattingEnabled = true;
+            this.InputDirectoryComboBox.Location = new System.Drawing.Point(138, 23);
+            this.InputDirectoryComboBox.Name = "InputDirectoryComboBox";
+            this.InputDirectoryComboBox.Size = new System.Drawing.Size(506, 21);
+            this.InputDirectoryComboBox.TabIndex = 9;
+            this.InputDirectoryComboBox.SelectedIndexChanged += new System.EventHandler(this.InputDirectoryComboBox_SelectedIndexChanged);
+            // 
             // IniFileConverterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(762, 461);
+            this.Controls.Add(this.InputDirectoryComboBox);
             this.Controls.Add(this.ConvertListBox);
             this.Controls.Add(this.SelectOutput);
             this.Controls.Add(this.OutputDirectory);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.SelectInput);
             this.Controls.Add(this.Convert);
-            this.Controls.Add(this.InputDirectory);
             this.Controls.Add(this.label1);
             this.Name = "IniFileConverterForm";
             this.Text = "Data File Format Converter";
@@ -145,7 +144,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox InputDirectory;
         private System.Windows.Forms.Button Convert;
         private System.Windows.Forms.Button SelectInput;
         private System.Windows.Forms.Button SelectOutput;
@@ -153,6 +151,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox ConvertListBox;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ComboBox InputDirectoryComboBox;
     }
 }
 

@@ -52,9 +52,6 @@
     "Range3": 40.61,
     "Range4": 0.0,
     "Range5": 0.0,
-    "RangeCount": 0,
-    "LastValidRange": 0,
-    "RangeLessThan": false,
     "RangedTemperaturesDesignData": [
       {
         "WaterFlowRate": 51112.8,
@@ -65,9 +62,6 @@
           "Temperature4": 70.0,
           "Temperature5": 80.0001,
           "Temperature6": 90.0,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         },
         "ColdWaterTemperaturesRange1": {
           "Temperature1": 62.3601,
@@ -76,9 +70,6 @@
           "Temperature4": 78.7201,
           "Temperature5": 85.66,
           "Temperature6": 93.6801,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         },
         "ColdWaterTemperaturesRange2": {
           "Temperature1": 64.9501,
@@ -87,9 +78,6 @@
           "Temperature4": 79.9801,
           "Temperature5": 86.5701,
           "Temperature6": 94.3,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         },
         "ColdWaterTemperaturesRange3": {
           "Temperature1": 67.0699,
@@ -98,9 +86,6 @@
           "Temperature4": 81.1099,
           "Temperature5": 87.42,
           "Temperature6": 94.9201,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         },
         "ColdWaterTemperaturesRange4": {
           "Temperature1": 0.0,
@@ -109,9 +94,6 @@
           "Temperature4": 0.0,
           "Temperature5": 0.0,
           "Temperature6": 0.0,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         },
         "ColdWaterTemperaturesRange5": {
           "Temperature1": 0.0,
@@ -120,9 +102,6 @@
           "Temperature4": 0.0,
           "Temperature5": 0.0,
           "Temperature6": 0.0,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         },
         "ColdWaterTemperaturesRange6": {
           "Temperature1": 0.0,
@@ -131,9 +110,6 @@
           "Temperature4": 0.0,
           "Temperature5": 0.0,
           "Temperature6": 0.0,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         }
       },
       {
@@ -145,9 +121,6 @@
           "Temperature4": 70.0,
           "Temperature5": 80.0001,
           "Temperature6": 90.0,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         },
         "ColdWaterTemperaturesRange1": {
           "Temperature1": 64.9099,
@@ -156,9 +129,6 @@
           "Temperature4": 80.2099,
           "Temperature5": 86.7799,
           "Temperature6": 94.4501,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         },
         "ColdWaterTemperaturesRange2": {
           "Temperature1": 67.7401,
@@ -167,9 +137,6 @@
           "Temperature4": 81.6701,
           "Temperature5": 87.8801,
           "Temperature6": 95.2101,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         },
         "ColdWaterTemperaturesRange3": {
           "Temperature1": 70.0601,
@@ -178,9 +145,6 @@
           "Temperature4": 82.98,
           "Temperature5": 88.8901,
           "Temperature6": 95.9801,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         },
         "ColdWaterTemperaturesRange4": {
           "Temperature1": 0.0,
@@ -189,9 +153,6 @@
           "Temperature4": 0.0,
           "Temperature5": 0.0,
           "Temperature6": 0.0,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         },
         "ColdWaterTemperaturesRange5": {
           "Temperature1": 0.0,
@@ -200,9 +161,6 @@
           "Temperature4": 0.0,
           "Temperature5": 0.0,
           "Temperature6": 0.0,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         },
         "ColdWaterTemperaturesRange6": {
           "Temperature1": 0.0,
@@ -211,9 +169,6 @@
           "Temperature4": 0.0,
           "Temperature5": 0.0,
           "Temperature6": 0.0,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         }
       },
       {
@@ -225,9 +180,6 @@
           "Temperature4": 70.0,
           "Temperature5": 80.0001,
           "Temperature6": 90.0,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         },
         "ColdWaterTemperaturesRange1": {
           "Temperature1": 67.75,
@@ -236,9 +188,6 @@
           "Temperature4": 82.08,
           "Temperature5": 88.3301,
           "Temperature6": 95.67,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         },
         "ColdWaterTemperaturesRange2": {
           "Temperature1": 70.81,
@@ -247,9 +196,6 @@
           "Temperature4": 83.7401,
           "Temperature5": 89.6101,
           "Temperature6": 96.6,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         },
         "ColdWaterTemperaturesRange3": {
           "Temperature1": 73.29,
@@ -258,9 +204,6 @@
           "Temperature4": 85.24,
           "Temperature5": 90.79,
           "Temperature6": 97.52,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         },
         "ColdWaterTemperaturesRange4": {
           "Temperature1": 0.0,
@@ -269,9 +212,6 @@
           "Temperature4": 0.0,
           "Temperature5": 0.0,
           "Temperature6": 0.0,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         },
         "ColdWaterTemperaturesRange5": {
           "Temperature1": 0.0,
@@ -280,9 +220,6 @@
           "Temperature4": 0.0,
           "Temperature5": 0.0,
           "Temperature6": 0.0,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         },
         "ColdWaterTemperaturesRange6": {
           "Temperature1": 0.0,
@@ -291,9 +228,6 @@
           "Temperature4": 0.0,
           "Temperature5": 0.0,
           "Temperature6": 0.0,
-          "TemperatureCount": 0,
-          "LastValidTemperature": 0,
-          "TemperatureLessThan": false
         }
       }
     ]

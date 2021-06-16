@@ -1,7 +1,6 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 
 using System.Collections.Generic;
-using System.Text;
 
 namespace Models
 {
@@ -22,9 +21,6 @@ namespace Models
         public double Range3 { set; get; }
         public double Range4 { set; get; }
         public double Range5 { set; get; }
-        public int RangeCount { set; get; }
-        public int LastValidRange { set; get; }
-        public bool RangeLessThan { set; get; }
 
         public List<RangedTemperaturesDesignData> RangedTemperaturesDesignData { set; get; }
         
@@ -37,10 +33,6 @@ namespace Models
             TowerType = TOWER_TYPE.Forced;
 
             TowerSpecifications = new TowerSpecifications();
- 
-            RangeCount = 0;
-            LastValidRange = 0;
-            RangeLessThan = false;
 
             RangedTemperaturesDesignData = new List<RangedTemperaturesDesignData>();
         }

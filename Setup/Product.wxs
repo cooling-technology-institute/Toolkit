@@ -22,6 +22,8 @@
     <MediaTemplate EmbedCab="yes" />
 
     <PropertyRef Id="WIX_DIR_COMMON_DOCUMENTS" />
+    <?define CTIToolkit = "CTI Toolkit" ?>
+    <?define Version = "4.0" ?>
 
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
@@ -32,7 +34,8 @@
       <Directory Id="ProgramMenuFolder">
         <Directory Id="ApplicationProgramsFolder" Name="!(bind.property.ProductName)"/>
       </Directory>
-      <Directory Id="WIX_DIR_COMMON_DOCUMENTS">
+      <!--<Directory Id="WIX_DIR_COMMON_DOCUMENTS">-->
+      <Directory Id="WIX_DIR_PERSONAL">
         <Directory Id="UsersDocumentsFolder" Name='!(bind.property.Manufacturer)'>
           <Directory Id="CTIUsersDocumentsFolder" Name='!(bind.property.ProductName)'>
           </Directory>
@@ -41,16 +44,17 @@
     </Directory>
 
     <Feature Id="ProductFeature" Title="Setup" Level="1">
-			<ComponentGroupRef Id="ProductComponents" />
-      <ComponentGroupRef Id="DocumentComponents" />
-      <ComponentGroupRef Id="RegistryEntries" />
+        <ComponentGroupRef Id="ProductComponents" />
+        <ComponentGroupRef Id="DocumentComponents" />
+        <ComponentGroupRef Id="RegistryEntries" />
       <!--<ComponentRef Id="ApplicationShortcut" />-->
     </Feature>
 
     <Icon Id="CTIToolkit.ico" SourceFile="$(var.CTIToolkit.ProjectDir)CTIToolkit.ico" />
     <Property Id="ARPPRODUCTICON" Value="CTIToolkit.ico" />
-    
-    <WixVariable Id="WixUIBannerBmp" Value="$(var.CTIToolkit.ProjectDir)Resources\banner.bmp" />
+
+    <WixVariable Id="WixUIBannerBmp" Value="$(var.CTIToolkit.ProjectDir)Resources\banner.bmp" /> <!--493 × 58-->
+    <WixVariable Id="WixUIDialogBmp" Value="$(var.CTIToolkit.ProjectDir)Resources\dialog.bmp" /> <!--493 × 312-->
     <WixVariable Id="WixUILicenseRtf" Value="$(var.SolutionDir)license.rtf" />
     
     <!--<UIRef Id="WixUI_Minimal" />-->
@@ -59,7 +63,7 @@
 
     <Property Id="USERNAME" Secure="yes" />
     <Property Id="COMPANYNAME" Secure="yes" />
-
+    <Property Id="SERIALNUMBER" Secure="yes" />
     <Property Id="ARPHELPLINK" Value="http://www.cti.org/toolkit" />
 
     <!--
@@ -104,12 +108,26 @@
           -->
         </File>
       </Component>
-      <Component Id="File_$(var.ViewModels.TargetFileName)" Guid='{3851876C-E0A0-4FE1-95C0-4CD704AE0C07}' Directory="INSTALLFOLDER">
-        <File Id='$(var.ViewModels.TargetFileName)' Name='$(var.ViewModels.TargetFileName)' DiskId='1' Source='$(var.ViewModels.TargetPath)' KeyPath='yes' Checksum='yes'>
+      <Component Id="File_$(var.ViewModels.TargetFileName)" Guid='{A9EEDA36-9480-489C-A4A6-2BED82117C13}' Directory="INSTALLFOLDER">
+        <File Id='$(var.ViewModels.TargetFileName)' Name='$(var.ViewModels.TargetFileName)' DiskId='1' Source='$(var.ViewModels.TargetPath)' KeyPath='yes' Checksum='yes' >
+          <!--
+          <netfx:NativeImage Id="$(var.CalculationLibrary.TargetFileName)" Platform="32bit" Priority="0" AppBaseDirectory="INSTALLFOLDER"/>
+          -->
+        </File>
+      </Component>
+      <Component Id="File_Newtonsoft" Guid='{C1937415-955A-4C66-9C9A-1FB7FEFB3BB4}' Directory="INSTALLFOLDER">
+        <File Id='Newtonsoft' Name='Newtonsoft.Json.dll' DiskId='1' Source='$(var.CTIToolkit.TargetDir)Newtonsoft.Json.dll' KeyPath='yes' Checksum='yes' >
+        </File>
+      </Component>
+      <Component Id="File_$(var.IniFileConverter.TargetFileName)" Guid='{D041B919-4383-4D50-9634-58E3B2EE63A5}' Directory="INSTALLFOLDER">
+        <File Id='IniFileConverter' Name='$(var.IniFileConverter.TargetFileName)' DiskId='1' Source='$(var.IniFileConverter.TargetPath)' KeyPath='yes' Checksum='yes'>
         <!--
           <netfx:NativeImage Id="$(var.CalculationLibrary.TargetFileName)" Platform="32bit" Priority="0" AppBaseDirectory="INSTALLFOLDER"/>
           -->
         </File>
+      </Component>
+      <Component Id="File_IniParser" Guid='{61C8377B-9B82-4E53-BB15-38C3DA4F4176}' Directory="INSTALLFOLDER">
+        <File Id='IniParser' Name='INIFileParser.dll' Source='$(var.IniFileConverter.TargetDir)INIFileParser.dll' DiskId='1' KeyPath='yes' Checksum='yes' />
       </Component>
       <Component Id='File_Help' Guid='FCEAE45C-53A6-401D-9C99-C48CC89644AC' Directory="INSTALLFOLDER">
         <File Id='Help' Name='ctitoolkit.chm' DiskId='1' Source='$(var.SolutionDir)Toolkit help\HTMLHelp\!SSL!\Microsoft_HTML_Help\ctitoolkit.chm' KeyPath='yes' Checksum='yes' />
@@ -117,6 +135,7 @@
       <!-- Provide application and uninstall shortcuts in the start menu-->
       <Component Id="ApplicationShortcuts" Guid="{87246E42-660E-48BD-BEBE-54ADA2D4FC29}" Directory="ApplicationProgramsFolder">
         <Shortcut Id="ApplicationShortcut" Name="!(bind.property.ProductName)" Description="Starts !(bind.property.ProductName)" Target="[INSTALLFOLDER]$(var.CTIToolkit.TargetFileName)" WorkingDirectory="MAINFOLDER" Icon="CTIToolkit.ico"/>
+        <Shortcut Id="ApplicationShortcut2" Name="CTI Toolkit Data File Converter" Description="Starts CTI Data File Converter" Target="[INSTALLFOLDER]$(var.IniFileConverter.TargetFileName)" WorkingDirectory="MAINFOLDER" Icon="CTIToolkit.ico"/>
         <Shortcut Id="UninstallShortcut" Name="Uninstall !(bind.property.ProductName)" Description="Uninstalls !(bind.property.ProductName)" Target="[System64Folder]msiexec.exe" Arguments="/x [ProductCode]"/>
         <RegistryValue Root="HKCU" Key="Software\!(bind.property.Manufacturer)\!(bind.property.ProductName)" Name="ApplicationShortcutsInstalled" Type="integer" Value="1" KeyPath="yes"/>
         <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
@@ -127,40 +146,30 @@
   <Fragment>
     <ComponentGroup Id="DocumentComponents" Directory="CTIUsersDocumentsFolder">
       <Component Id='DocumentationDefinitions' Guid='{A963C1C1-73B0-44F7-8FDC-CAE79616B051}'>
-        <File Id='Definitions' Name='ToolKitDefinitions.pdf' DiskId='1' Source='$(var.SolutionDir)Documents\ToolKit Definitions.pdf' KeyPath='yes' Checksum='yes'  />
+		    <CreateFolder />
+        <File Id='ToolKitDefinitions.pdf' Name='ToolKit Definitions.pdf' DiskId='1' Source='$(var.SolutionDir)Documents\ToolKit Definitions.pdf' KeyPath='yes' Checksum='yes'  />
       </Component>
       <Component Id='DocumentationTutorial' Guid='BA2041F7-E3BD-466D-A89D-A67638B18B09'>
-        <File Id='Tutorial' Name='ToolKitTutorial.pdf' DiskId='1' Source='$(var.SolutionDir)Documents\ToolKit Tutorial 4.0.pdf' KeyPath='yes' Checksum='yes'  />
+        <File Id='ToolKitTutorial.pdf' Name='ToolKit Tutorial.pdf' DiskId='1' Source='$(var.SolutionDir)Documents\ToolKit Tutorial 4.0.pdf' KeyPath='yes' Checksum='yes'  />
       </Component>
-      <Component Id='Data_AppendixC' Guid='D9A852D2-4C81-4FD6-9669-FAA5D576D9BB'>
-        <File Id='AppendixC' Name='Appendix C.mdpc' DiskId='1' Source='$(var.SolutionDir)Data\Appendix C.mdpc' />
+      <Component Id='Data_AppendixC' Guid='D9A852D2-4C81-4FD6-9669-FAA5D576D9BB' Permanent="yes">
+        <File Id='AppendixC.mdpc' Name='Appendix C.mdpc' DiskId='1' Source='$(var.SolutionDir)Data\Appendix C.mdpc' />
       </Component>
-      <Component Id='Data_AppendixD' Guid='{9AFB7450-656E-421D-80C1-096D2A2844BD}'>
-        <File Id='AppendixD' Name='Appendix D.mdpc' DiskId='1' Source='$(var.SolutionDir)Data\Appendix D.mdpc' />
+      <Component Id='Data_AppendixD' Guid='{9AFB7450-656E-421D-80C1-096D2A2844BD}' Permanent="yes">
+        <File Id='AppendixD.mdpc' Name='Appendix D.mdpc' DiskId='1' Source='$(var.SolutionDir)Data\Appendix D.mdpc' />
       </Component>
     </ComponentGroup>
   </Fragment>
 
   <Fragment>
-    <ComponentGroup Id="RegistryEntries" Directory="INSTALLFOLDER">
+    <ComponentGroup Id="RegistryEntries" Directory="TARGETDIR">
       <Component Id="Registry_Name" Guid='{ACD2CCB6-B907-4BFC-B3DF-E77FD13301C4}'>
-        <RegistryKey Root='HKLM' Key='Software\!(bind.property.Manufacturer)\!(bind.property.ProductName)'>
+        <RegistryKey Root='HKLM' Key='SOFTWARE\!(bind.property.Manufacturer)\$(var.CTIToolkit)\$(var.Version)'>
           <RegistryValue Type='string' Key='Name' Value='[USERNAME]' KeyPath='yes' />
-        </RegistryKey>
-      </Component>
-      <Component Id="Registry_Company" Guid='{896EF312-B1ED-4B73-8098-A697DC2F186A}'>
-        <RegistryKey Root='HKLM' Key='Software\!(bind.property.Manufacturer)\!(bind.property.ProductName)'>
-          <RegistryValue Type='string' Key='Company' Value='[COMPANYNAME]' KeyPath='yes' />
-        </RegistryKey>
-      </Component>
-      <Component Id="Registry_Version" Guid='{851EA206-6287-4627-9A6E-B2FFAB6FC07E}'>
-        <RegistryKey Root='HKLM' Key='Software\!(bind.property.Manufacturer)\!(bind.property.ProductName)'>
-          <RegistryValue Type='string' Key='Version' Value='[ProductVersion]' KeyPath='yes' />
-        </RegistryKey>
-     </Component>
-      <Component Id="Registry_InstallPath" Guid='{707F17A1-D8C1-4AC2-B947-3619DC5DC51E}'>
-        <RegistryKey Root='HKLM' Key='Software\!(bind.property.Manufacturer)\!(bind.property.ProductName)'>
-          <RegistryValue Type='string' Key='InstallPath' Value='[INSTALLFOLDER]' KeyPath='yes' />
+          <RegistryValue Type='string' Key='Company' Value='[COMPANYNAME]' KeyPath='no' />
+          <RegistryValue Type='string' Key='Version' Value='[ProductVersion]' KeyPath='no' />
+          <RegistryValue Type='string' Key='InstallPath' Value='[INSTALLFOLDER]' KeyPath='no' />
+          <RegistryValue Type='string' Key='SerialNumber' Value='[SERIALNUMBER]' KeyPath='no' />
         </RegistryKey>
       </Component>
     </ComponentGroup>

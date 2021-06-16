@@ -167,7 +167,7 @@ namespace CTIToolkit
 
                     using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                     {
-                        saveFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
+                        saveFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Cooling Technology Institute", "CTI Toolkit 4.0");
                         saveFileDialog.Filter = calculatePrintUserControl.Filter;
                         saveFileDialog.FilterIndex = 1;
                         saveFileDialog.DefaultExt = calculatePrintUserControl.DefaultExt;
@@ -198,7 +198,7 @@ namespace CTIToolkit
 
                     using (OpenFileDialog openFileDialog = new OpenFileDialog())
                     {
-                        openFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
+                        openFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Cooling Technology Institute", "CTI Toolkit 4.0");
                         openFileDialog.Filter = calculatePrintUserControl.Filter;
                         openFileDialog.FilterIndex = 1;
                         openFileDialog.AddExtension = true;
@@ -245,7 +245,7 @@ namespace CTIToolkit
 
                     using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                     {
-                        saveFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
+                        saveFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Cooling Technology Institute", "CTI Toolkit 4.0");
 
                         saveFileDialog.Filter = calculatePrintUserControl.Filter;
                         saveFileDialog.FilterIndex = 1;

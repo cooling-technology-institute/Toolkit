@@ -52,6 +52,9 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>CTIToolkit.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -332,6 +335,7 @@
     <None Include="Resources\beta2.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CTIToolkit.ico" />
     <Content Include="Resources\help.png" />
     <None Include="Resources\info.png" />
   </ItemGroup>

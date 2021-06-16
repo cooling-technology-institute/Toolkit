@@ -42,6 +42,7 @@
             this.setSerialNumberInput = new System.Windows.Forms.TextBox();
             this.setSerialNumberInputLabel = new System.Windows.Forms.Label();
             this.ctiLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -168,12 +169,23 @@
             this.ctiLinkLabel.Text = "http://www.cti.org";
             this.ctiLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ctiLinkLabel_LinkClicked);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(145, 257);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(67, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Beta Version";
+            // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(550, 334);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.ctiLinkLabel);
             this.Controls.Add(this.setSerialNumberInputLabel);
             this.Controls.Add(this.setSerialNumberInput);
@@ -211,5 +223,6 @@
         private System.Windows.Forms.TextBox setSerialNumberInput;
         private System.Windows.Forms.Label setSerialNumberInputLabel;
         private System.Windows.Forms.LinkLabel ctiLinkLabel;
+        private System.Windows.Forms.Label label2;
     }
 }

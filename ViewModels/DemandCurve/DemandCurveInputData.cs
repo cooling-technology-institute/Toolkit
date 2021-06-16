@@ -48,7 +48,7 @@ namespace ViewModels
             UserApproachDataValue = new UserApproachDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
         }
 
-        public bool ConvertValues(bool isIS, bool isElevation, bool isApproach)
+        public bool ConvertValues(bool isIS, bool isElevation)
         {
             bool isChanged = false;
 
@@ -66,69 +66,8 @@ namespace ViewModels
             if (IsElevation != isElevation)
             {
                 IsElevation = isElevation;
-
-                //double value = 0.0;
-                //if (IsElevation)
-                //{
-                //    if (IsInternationalSystemOfUnits_SI)
-                //    {
-                //        value = UnitConverter.ConvertKilopascalToElevationInMeters(BarometricPressureDataValue.Current);
-                //    }
-                //    else
-                //    {
-                //        value = UnitConverter.ConvertBarometricPressureToElevationInFeet(BarometricPressureDataValue.Current);
-                //    }
-                //    ElevationDataValue.UpdateCurrentValue(value);
-                //}
-                //else
-                //{
-                //    if (IsInternationalSystemOfUnits_SI)
-                //    {
-                //        value = UnitConverter.ConvertElevationInMetersToKilopascal(ElevationDataValue.Current);
-                //    }
-                //    else
-                //    {
-                //        value = UnitConverter.CalculatePsiToInchesOfMercury(UnitConverter.ConvertElevationInFeetToBarometricPressure(ElevationDataValue.Current));
-                //    }
-                //    BarometricPressureDataValue.UpdateCurrentValue(value);
-                //}
-
                 isChanged = true;
             }
-
-            if (IsApproach != isApproach)
-            {
-                IsApproach = isApproach;
-
-                //double value = 0.0;
-                //if (IsElevation)
-                //{
-                //    if (IsInternationalSystemOfUnits_SI)
-                //    {
-                //        value = UnitConverter.ConvertKilopascalToElevationInMeters(BarometricPressureDataValue.Current);
-                //    }
-                //    else
-                //    {
-                //        value = UnitConverter.ConvertBarometricPressureToElevationInFeet(BarometricPressureDataValue.Current);
-                //    }
-                //    ElevationDataValue.UpdateCurrentValue(value);
-                //}
-                //else
-                //{
-                //    if (IsInternationalSystemOfUnits_SI)
-                //    {
-                //        value = UnitConverter.ConvertElevationInMetersToKilopascal(ElevationDataValue.Current);
-                //    }
-                //    else
-                //    {
-                //        value = UnitConverter.CalculatePsiToInchesOfMercury(UnitConverter.ConvertElevationInFeetToBarometricPressure(ElevationDataValue.Current));
-                //    }
-                //    BarometricPressureDataValue.UpdateCurrentValue(value);
-                //}
-
-                isChanged = true;
-            }
-
             return isChanged;
         }
 
@@ -139,7 +78,7 @@ namespace ViewModels
 
             try
             {
-                ConvertValues(data.IsInternationalSystemOfUnits_SI, data.IsElevation, data.IsApproach);
+                ConvertValues(data.IsInternationalSystemOfUnits_SI, data.IsElevation);
 
                 IsElevation = data.IsElevation;
 

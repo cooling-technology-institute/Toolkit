@@ -1,9 +1,8 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
-
 using System;
 using System.Windows.Forms;
 
-namespace IniFileConverter
+namespace GenerateSerialNumber
 {
     static class Program
     {
@@ -15,7 +14,7 @@ namespace IniFileConverter
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new IniFileConverterForm());
+            Application.Run(new GenerateSerialNumberForm());
         }
     }
 }

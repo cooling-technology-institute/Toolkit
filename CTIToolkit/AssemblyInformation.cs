@@ -1,6 +1,7 @@
-﻿using Microsoft.Win32;
+﻿// Copyright Cooling Technology Institute 2019-2021
+
+using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace CTIToolkit
@@ -213,10 +214,12 @@ namespace CTIToolkit
             }
         }
 
+        // 012345678901234567890
+        // aa99-a999-a9aa
         public static bool TestSerialNumber(string serialNumber)
         {
-            bool isGood = true;
-
+            bool isGood = (serialNumber.Length == 10);
+            
             // check the serial number 
             for (int x = 0; x < serialNumber.Length && isGood; x++)
             {
@@ -225,19 +228,22 @@ namespace CTIToolkit
                     // alphabetic
                     case 0:
                     case 1:
-                    case 8:
-                    case 9:
+                    case 5:
                     case 10:
+                    case 12:
+                    case 13:
                         isGood &= (char.IsLetter(serialNumber[x]));
                         break;
                     case 2:
-                    case 4:
-                    case 5:
+                    case 3:
                     case 6:
+                    case 7:
+                    case 8:
+                    case 11:
                         isGood &= (char.IsDigit(serialNumber[x]));
                         break;
-                    case 3:
-                    case 7:
+                    case 4:
+                    case 9:
                         isGood &= (serialNumber[x] == '-');
                         break;
                     default:

@@ -1,9 +1,6 @@
 ﻿// Copyright Cooling Technology Institute 2019-2021
 
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Text;
 
 namespace Models
 {

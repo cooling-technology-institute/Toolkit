@@ -103,17 +103,6 @@ namespace ViewModels
             }
         }
 
-        public bool IsApproach
-        {
-            get
-            {
-                return DemandCurveInputData.IsApproach;
-            }
-            set
-            {
-                DemandCurveInputData.IsApproach = value;
-            }
-        }
         public string ErrorMessage { get; set; }
         public string DataFileName { get; set; }
 
@@ -261,7 +250,7 @@ namespace ViewModels
 
         public void ConvertValues()
         {
-            DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_SI, IsElevation, IsApproach);
+            DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_SI, IsElevation);
             DemandCurveCalculationData.ConvertValues(IsInternationalSystemOfUnits_SI);
         }
 
@@ -415,7 +404,7 @@ namespace ViewModels
             if (IsInternationalSystemOfUnits_SI != isIS)
             {
                 IsInternationalSystemOfUnits_SI = isIS;
-                DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_SI, IsElevation, IsApproach);
+                DemandCurveInputData.ConvertValues(IsInternationalSystemOfUnits_SI, IsElevation);
                 DemandCurveCalculationData.ConvertValues(IsInternationalSystemOfUnits_SI);
             }
         }

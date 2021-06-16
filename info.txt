@@ -14,3 +14,6 @@ From the list, select the code signing certificate you want to use.
 Specify the timestamp server and start signing.
 
 https://wixtoolset.org/documentation/manual/v3/overview/insignia.html
+
+
+shortcut is a non-advertised shortcut with a file target, but the target file does not exist

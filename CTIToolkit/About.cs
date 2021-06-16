@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright Cooling Technology Institute 2019-2021
+
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 

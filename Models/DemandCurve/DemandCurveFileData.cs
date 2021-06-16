@@ -17,7 +17,6 @@ namespace Models
         public double LiquidToGasRatio { set; get; } //L/G
 
         public bool IsElevation { get; set; } // attitude
-        public bool IsApproach { get; set; } // coef
 
         public DemandCurveFileData(bool isInternationalSystemOfUnits_IS_)
         {

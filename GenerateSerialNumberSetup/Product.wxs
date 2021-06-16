@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="Generate Serial Number For Toolkit" Language="1033" Version="1.0.0.0" Manufacturer="Cooling Technology Institute" UpgradeCode="23c609ec-61d0-43f6-887c-63f602c58311">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <?define GenerateName = "Generate Serial Number for CTI Toolkit" ?>
+    <?define Version = "4.0" ?>
+
+    <Feature Id="ProductFeature" Title="SetupGenerateSerialNumber" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="RegistryEntries" />
+    </Feature>
+  
+    <Icon Id="GenerateSerialNumber.ico" SourceFile="$(var.GenerateSerialNumber.ProjectDir)GenerateSerialNumber.ico" />
+    <Property Id="ARPPRODUCTICON" Value="GenerateSerialNumber.ico" />
+
+  </Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id='ManufacturerFolder' Name='!(bind.property.Manufacturer)'>
+          <Directory Id="INSTALLFOLDER" Name='$(var.GenerateName)' />
+        </Directory>
+      </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name='!(bind.property.Manufacturer)'/>
+      </Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents">
+      <Component Id="ProductComponent" Guid='{AD09CC88-E9F5-4F83-8BF3-3AD15C52522E}' Directory="INSTALLFOLDER">
+        <File Id='File_$(var.GenerateSerialNumber.TargetFileName)' Name='$(var.GenerateSerialNumber.TargetFileName)' DiskId='1' Source='$(var.GenerateSerialNumber.TargetPath)' KeyPath='yes' Checksum='yes' >
+          <!--
+          <netfx:NativeImage Id="$(var.GenerateSerialNumber.TargetFileName)" Platform="32bit" Priority="0" AppBaseDirectory="INSTALLFOLDER"/>
+          -->
+        </File>
+      </Component>
+      <!-- Provide application and uninstall shortcuts in the start menu-->
+      <Component Id="ApplicationShortcuts" Guid="{F531F601-5CA5-4760-BB1B-1982795181BE}" Directory="ApplicationProgramsFolder">
+        <Shortcut Id="ApplicationShortcut" Name="!(bind.property.ProductName)" Description="Starts $(var.GenerateName)" Target="[INSTALLFOLDER]$(var.GenerateSerialNumber.TargetFileName)" WorkingDirectory="MAINFOLDER" Icon="GenerateSerialNumber.ico"/>
+        <Shortcut Id="UninstallShortcut" Name="Uninstall !(bind.property.ProductName)" Description="Uninstalls $(var.GenerateName)" Target="[System64Folder]msiexec.exe" Arguments="/x [ProductCode]"/>
+        <RegistryValue Root="HKCU" Key="Software\!(bind.property.Manufacturer)\$(var.GenerateName)" Name="ApplicationShortcutsInstalled" Type="integer" Value="1" KeyPath="yes"/>
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+      </Component>
+    </ComponentGroup>
+	</Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="RegistryEntries" Directory="TARGETDIR">
+      <Component Id="Registry_Name" Guid='{0E647CD6-5158-46D1-ADE1-C272823759BB}'>
+        <RegistryKey Root='HKLM' Key='SOFTWARE\!(bind.property.Manufacturer)\$(var.GenerateName)\$(var.Version)'>
+          <RegistryValue Type='string' Key='InstallPath' Value='[INSTALLFOLDER]' KeyPath='no' />
+        </RegistryKey>
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+</Wix>
