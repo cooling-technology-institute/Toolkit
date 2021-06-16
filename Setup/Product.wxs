@@ -41,6 +41,13 @@
           </Directory>
         </Directory>
       </Directory>
+      <Directory Id="AppDataFolder">
+        <Directory Id="MyAppFolder" Name="!(bind.property.ProductName)">
+          <Component Id="SerialNumberFile">
+            <File Source="Files\test1.txt" />
+          </Component>
+        </Directory>
+      </Directory>
     </Directory>
 
     <Feature Id="ProductFeature" Title="Setup" Level="1">
@@ -51,6 +58,7 @@
     </Feature>
 
     <Icon Id="CTIToolkit.ico" SourceFile="$(var.CTIToolkit.ProjectDir)CTIToolkit.ico" />
+    <Icon Id="IniFileConverter.ico" SourceFile="$(var.IniFileConverter.ProjectDir)IniFileConverter.ico" />
     <Property Id="ARPPRODUCTICON" Value="CTIToolkit.ico" />
 
     <WixVariable Id="WixUIBannerBmp" Value="$(var.CTIToolkit.ProjectDir)Resources\banner.bmp" /> <!--493 × 58-->
@@ -93,6 +101,42 @@
           <netfx:NativeImage Id="$(var.CTIToolkit.TargetFileName)" Platform="32bit" Priority="0" AppBaseDirectory="INSTALLFOLDER"/>
           -->
         </File>
+<!--<Component Id="MyApp.exe" Directory="APPLICATIONFOLDER" Guid="*">
+    <File Id="MyApp.exe" Name="MyApp.exe" KeyPath="yes"/>
+
+    <Shortcut Id="startmenuShortcut" Directory="ProgramMenuFolder" Name="MyApp" Icon="$(var.product).ico" IconIndex="0" WorkingDirectory="APPLICATIONFOLDER" Advertise="yes" />
+
+    --><!-- Capabilities keys for Vista/7 "Set Program Access and Defaults" --><!--
+    <RegistryValue Root="HKLM" Key="SOFTWARE\MyApp\Capabilities" Name="ApplicationDescription" Value="!(loc.ApplicationDescription)" Type="string" />
+    <RegistryValue Root="HKLM" Key="SOFTWARE\MyApp\Capabilities" Name="ApplicationIcon" Value="[APPLICATIONFOLDER]MyApp.exe,0" Type="string" />
+    <RegistryValue Root="HKLM" Key="SOFTWARE\MyApp\Capabilities" Name="ApplicationName" Value="!(loc.ApplicationName)" Type="string" />
+    <RegistryValue Root="HKLM" Key="SOFTWARE\MyApp\Capabilities\DefaultIcon" Value="[APPLICATIONFOLDER]MyApp.exe,1" Type="string" />
+    <RegistryValue Root="HKLM" Key="SOFTWARE\MyApp\Capabilities\FileAssociations" Name=".xyz" Value="MyApp.Document" Type="string" />
+    <RegistryValue Root="HKLM" Key="SOFTWARE\MyApp\Capabilities\MIMEAssociations" Name="application/xyz" Value="MyApp.Document" Type="string" />
+    <RegistryValue Root="HKLM" Key="SOFTWARE\MyApp\Capabilities\shell\Open\command" Value="&quot;[APPLICATIONFOLDER]MyApp.exe&quot; &quot;%1&quot;" Type="string" />
+    <RegistryValue Root="HKLM" Key="SOFTWARE\RegisteredApplications" Name="MyApp" Value="SOFTWARE\MyApp\Capabilities" Type="string" />
+
+    --><!-- App Paths to support Start,Run -> "myapp" --><!--
+    <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\MyApp.exe" Value="[!MyApp.exe]" Type="string" />
+    <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\MyApp.exe" Name="Path" Value="[APPLICATIONFOLDER]" Type="string" />
+
+    --><!-- Extend to the "open with" list + Win7 jump menu pinning  --><!--
+    <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\MyApp.exe\SupportedTypes" Name=".xyz" Value="" Type="string" />
+    <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\MyApp.exe\shell\open" Name="FriendlyAppName" Value="!(loc.ApplicationName)" Type="string" />
+
+    --><!-- MyApp.Document ProgID --><!--
+    <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\MyApp.Document" Name="FriendlyTypeName" Value="!(loc.DescXYZ)" Type="string" />
+    <ProgId Id="MyApp.Document" Description="!(loc.DescXYZ)" Icon="filetype.ico" Advertise="yes">
+        <Extension Id="xyz">
+            <Verb Id="open" Command="!(loc.ExplorerMenuOpenXYZ)" Argument="&quot;%1&quot;" />
+            <MIME Advertise="yes" ContentType="application/xyz" Default="yes" />
+        </Extension>
+    </ProgId>
+
+    --><!-- Optional: add an 'Edit with XYZ' to 'right click' even when not associated --><!--
+    <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\SystemFileAssociations\.xyz\shell\edit.MyApp.exe" Value="!(loc.ExplorerMenuEditXYZ)" Type="string" />
+    <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\SystemFileAssociations\.xyz\shell\edit.MyApp.exe\command" Value="&quot;[APPLICATIONFOLDER]MyApp.exe&quot; &quot;%1&quot;" Type="string" />
+</Component>-->      
       </Component>
       <Component Id="File_$(var.CalculationLibrary.TargetFileName)" Guid='{804C82F6-BD57-4A0B-B7A0-5A421B153213}' Directory="INSTALLFOLDER">
         <File Id='$(var.CalculationLibrary.TargetFileName)' Name='$(var.CalculationLibrary.TargetFileName)' DiskId='1' Source='$(var.CalculationLibrary.TargetPath)' KeyPath='yes' Checksum='yes'>
@@ -135,7 +179,7 @@
       <!-- Provide application and uninstall shortcuts in the start menu-->
       <Component Id="ApplicationShortcuts" Guid="{87246E42-660E-48BD-BEBE-54ADA2D4FC29}" Directory="ApplicationProgramsFolder">
         <Shortcut Id="ApplicationShortcut" Name="!(bind.property.ProductName)" Description="Starts !(bind.property.ProductName)" Target="[INSTALLFOLDER]$(var.CTIToolkit.TargetFileName)" WorkingDirectory="MAINFOLDER" Icon="CTIToolkit.ico"/>
-        <Shortcut Id="ApplicationShortcut2" Name="CTI Toolkit Data File Converter" Description="Starts CTI Data File Converter" Target="[INSTALLFOLDER]$(var.IniFileConverter.TargetFileName)" WorkingDirectory="MAINFOLDER" Icon="CTIToolkit.ico"/>
+        <Shortcut Id="ApplicationShortcut2" Name="CTI Toolkit Data File Converter" Description="Starts CTI Data File Converter" Target="[INSTALLFOLDER]$(var.IniFileConverter.TargetFileName)" WorkingDirectory="MAINFOLDER" Icon="IniFileConverter.ico"/>
         <Shortcut Id="UninstallShortcut" Name="Uninstall !(bind.property.ProductName)" Description="Uninstalls !(bind.property.ProductName)" Target="[System64Folder]msiexec.exe" Arguments="/x [ProductCode]"/>
         <RegistryValue Root="HKCU" Key="Software\!(bind.property.Manufacturer)\!(bind.property.ProductName)" Name="ApplicationShortcutsInstalled" Type="integer" Value="1" KeyPath="yes"/>
         <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
@@ -170,6 +214,11 @@
           <RegistryValue Type='string' Key='Version' Value='[ProductVersion]' KeyPath='no' />
           <RegistryValue Type='string' Key='InstallPath' Value='[INSTALLFOLDER]' KeyPath='no' />
           <RegistryValue Type='string' Key='SerialNumber' Value='[SERIALNUMBER]' KeyPath='no' />
+<!--
+<Registry Id='DCIcon1' Root='HKCR' Key='.dc' Action='write' Type='string' Value='CTIToolkit.DemandCurveFile' />
+<Registry Id='DCIcon2' Root='HKCR' Key='CTIToolkit.dcfile' Action='write' Type='string' Value='CTI Toolkit Demand Curve file' />
+<Registry Id='DCIcon3' Root='HKCR' Key='CTIToolkit.dcfile\DefaultIcon' Action='write' Type='string' Value='[INSTALLDIR]$(var.CTIToolkit.TargetFileName),1' />
+-->
         </RegistryKey>
       </Component>
     </ComponentGroup>

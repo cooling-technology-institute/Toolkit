@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IniFileConverterForm));
             this.label1 = new System.Windows.Forms.Label();
             this.Convert = new System.Windows.Forms.Button();
             this.SelectInput = new System.Windows.Forms.Button();
@@ -133,6 +134,7 @@
             this.Controls.Add(this.SelectInput);
             this.Controls.Add(this.Convert);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "IniFileConverterForm";
             this.Text = "Data File Format Converter";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

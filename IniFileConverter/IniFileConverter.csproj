@@ -62,6 +62,7 @@
     <Compile Include="IniFileConverterForm.Designer.cs">
       <DependentUpon>IniFileConverterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PathLabel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="IniFileConverterForm.resx">

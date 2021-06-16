@@ -5,6 +5,7 @@ using IniParser.Model;
 using Models;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
@@ -14,28 +15,57 @@ namespace IniFileConverter
     {
         string InputFolder { get; set; }
         string OutputFolder { get; set; }
+        List<PathLabel> SearchPaths { get; set; }
 
         public IniFileConverterForm()
         {
             InitializeComponent();
+            
+            SearchPaths = new List<PathLabel>();
+            String sPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            String sUserName = Environment.UserName;
+            string[] sPathLines = sPath.Split(new string[] { sUserName }, StringSplitOptions.RemoveEmptyEntries);
 
             // search for old version installed
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Cooling Technology Institute", "CTI Toolkit 3.2");
+            //C:\Users\renee\AppData\Local\VirtualStore\Program Files (x86)\Cooling Technology Institute\CTI Toolkit 3.2
+            string path = Path.Combine(sPathLines[0], Environment.UserName, "AppData", "Local", "VirtualStore", "Program Files (x86)", "Cooling Technology Institute", "CTI Toolkit 3.2");
+            //string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Cooling Technology Institute", "CTI Toolkit 3.2");
             if(Directory.Exists(path))
             {
-                InputDirectoryComboBox.Items.Add(path);
+                PathLabel pathLabel = new PathLabel()
+                {
+                    path = path,
+                    label = "CTI Toolkit 3.2"
+                };
+                SearchPaths.Add(pathLabel);
+                InputDirectoryComboBox.Items.Add(pathLabel.label);
             }
-            path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Thuridion", "CTI Toolkit 3.1");
+            //C:\Users\renee\AppData\Local\VirtualStore\Program Files (x86)\Thuridion\CTI Toolkit 3.1
+            //path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Thuridion", "CTI Toolkit 3.1");
+            path = Path.Combine(sPathLines[0], Environment.UserName, "AppData", "Local", "VirtualStore", "Program Files (x86)", "Thuridion", "CTI Toolkit 3.1");
             if (Directory.Exists(path))
             {
-                InputDirectoryComboBox.Items.Add(path);
+                PathLabel pathLabel = new PathLabel()
+                {
+                    path = path,
+                    label = "CTI Toolkit 3.1"
+                };
+                SearchPaths.Add(pathLabel);
+                InputDirectoryComboBox.Items.Add(pathLabel.label);
             }
-            path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Thuridion", "CTI Toolkit 3.0");
+            path = Path.Combine(sPathLines[0], Environment.UserName, "AppData", "Local", "VirtualStore", "Program Files (x86)", "Thuridion", "CTI Toolkit 3.0");
+            //path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Thuridion", "CTI Toolkit 3.0");
             if (Directory.Exists(path))
             {
-                InputDirectoryComboBox.Items.Add(path);
+                PathLabel pathLabel = new PathLabel()
+                {
+                    path = path,
+                    label = "CTI Toolkit 3.0"
+                };
+                SearchPaths.Add(pathLabel);
+                InputDirectoryComboBox.Items.Add(pathLabel.label);
             }
-            if(InputDirectoryComboBox.Items.Count > 0)
+            if (InputDirectoryComboBox.Items.Count > 0)
             {
                 InputDirectoryComboBox.SelectedIndex = 0;
             }
@@ -46,6 +76,15 @@ namespace IniFileConverter
 
         private void Convert_Click(object sender, EventArgs e)
         {
+            ConvertListBox.Items.Clear();
+            foreach (PathLabel pathLabel in SearchPaths)
+            {
+                if (pathLabel.label == InputFolder)
+                {
+                    InputFolder = pathLabel.path;
+                    break;
+                }
+            }
             ProcessMechanicalDraftPerformanceCurveFiles();
             ProcessDemandCurveFiles();
         }
@@ -302,9 +341,14 @@ namespace IniFileConverter
                         }
 
                         string convertedFileName = Path.Combine(OutputFolder, Path.GetFileNameWithoutExtension(fileName) + ".mdpc");
+                        int index = 1;
+                        while(File.Exists(convertedFileName))
+                        {
+                            convertedFileName = Path.Combine(OutputFolder, Path.GetFileNameWithoutExtension(fileName) + string.Format("({0})", index++) + ".mdpc");
+                        }
                         File.WriteAllText(convertedFileName, JsonConvert.SerializeObject(mechanicalDraftPerformanceCurveFileData, Formatting.Indented));
 
-                        ConvertListBox.Items.Add(string.Format("Converted file: {0} saved as {1}", fileName, convertedFileName));
+                        ConvertListBox.Items.Add(string.Format("Converted file: {0} saved as {1}", Path.GetFileName(fileName), Path.GetFileName(convertedFileName)));
                     }
                 }
             }
@@ -348,9 +392,14 @@ namespace IniFileConverter
                     demandCurveFileData.CurveMinimum = double.Parse(CurveMin);
 
                     string convertedFileName = Path.Combine(OutputFolder, Path.GetFileNameWithoutExtension(fileName) + ".dc");
+                    int index = 1;
+                    while (File.Exists(convertedFileName))
+                    {
+                        convertedFileName = Path.Combine(OutputFolder, Path.GetFileNameWithoutExtension(fileName) + string.Format("({0})", index++) + ".dc");
+                    }
                     File.WriteAllText(convertedFileName, JsonConvert.SerializeObject(demandCurveFileData, Formatting.Indented));
 
-                    ConvertListBox.Items.Add(string.Format("Converted file: {0} saved as {1}", fileName, convertedFileName));
+                    ConvertListBox.Items.Add(string.Format("Converted file: {0} saved as {1}", Path.GetFileName(fileName), Path.GetFileName(convertedFileName)));
                 }
             }
             catch (Exception exception)
