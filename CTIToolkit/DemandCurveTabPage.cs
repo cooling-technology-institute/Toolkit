@@ -33,9 +33,7 @@ namespace CTIToolkit
         private DemandCurveViewModel DemandCurveViewModel { get; set; }
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_SI { get; set; }
-        private bool HasChanged { get; set; }
-        private bool AllOff { get; set; }
-        private bool IsNonApproachSeries { get; set; }
+        private bool IsChanged { get; set; }
 
         public DemandCurveTabPage(ApplicationSettings applicationSettings)
         {
@@ -45,16 +43,14 @@ namespace CTIToolkit
             DefaultExt = "dc";
             Title = "Demand Curve";
             DefaultFileName = "DemandCurve";
-            AllOff = false;
-            IsNonApproachSeries = false;
-
+            
             IsInternationalSystemOfUnits_SI = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
             IsDemo = applicationSettings.IsDemo;
 
             DemandCurveViewModel = new DemandCurveViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
             DemandCurveViewModel.DataFileName = BuildDefaultFileName();
 
-            HasChanged = false;
+            IsChanged = false;
 
             SetDisplayedValues();
         }
@@ -166,11 +162,6 @@ namespace CTIToolkit
             try
             {
                 Chart.Series.Clear();
-                IsNonApproachSeries = false;
-                AllOff = false;
-                //update button text
-                //AllOffOnButton.Text = "All On";
-
                 if (DemandCurveViewModel.Calculate())
                 {
                     DrawSeries(Chart, false);
@@ -248,7 +239,7 @@ namespace CTIToolkit
             {
                 ErrorMessage = stringBuilder.ToString();
             }
-            
+            IsChanged = false;
             return returnValue;
         }
 
@@ -262,6 +253,10 @@ namespace CTIToolkit
             {
                 stringBuilder.AppendLine(DemandCurveViewModel.ErrorMessage);
                 returnValue = false;
+            }
+            else
+            {
+                IsChanged = false;
             }
 
             SetDisplayedValues();
@@ -286,6 +281,10 @@ namespace CTIToolkit
             {
                 stringBuilder.AppendLine(DemandCurveViewModel.ErrorMessage);
                 returnValue = false;
+            }
+            else
+            {
+                IsChanged = false;
             }
 
             ErrorMessage = stringBuilder.ToString();
@@ -667,6 +666,7 @@ namespace CTIToolkit
             Chart.ChartAreas[0].AxisY.IsLogarithmic = false;
             Chart.Series.Clear();
             OutputGridView.DataSource = null;
+            IsChanged = true;
         }
 
         private void ElevationRadio_CheckedChanged(object sender, EventArgs e)

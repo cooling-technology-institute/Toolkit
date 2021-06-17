@@ -1,12 +1,11 @@
-﻿using System;
+﻿// Copyright Cooling Technology Institute 2019-2021
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CTIToolkit

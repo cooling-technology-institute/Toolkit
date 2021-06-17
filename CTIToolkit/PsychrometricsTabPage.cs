@@ -16,6 +16,7 @@ namespace CTIToolkit
         PsychrometricsViewModel PsychrometricsViewModel { get; set; }
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_SI { get; set; }
+        public bool IsChanged { get; set; }
 
         public PsychrometricsTabPage(ApplicationSettings applicationSettings)
         {
@@ -23,6 +24,7 @@ namespace CTIToolkit
 
             IsInternationalSystemOfUnits_SI = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
             IsDemo = applicationSettings.IsDemo;
+            IsChanged = false;
 
             Filter = "Psychrometrics files (*.psy)|*.psy|All files (*.*)|*.*";
             DefaultExt = "psy";
@@ -262,7 +264,7 @@ namespace CTIToolkit
                     returnValue = false;
                     ErrorMessage = string.Empty;
                 }
-
+                IsChanged = false;
                 Calculate();
             }
             else
@@ -297,6 +299,7 @@ namespace CTIToolkit
                     returnValue = false;
                 }
 
+                IsChanged = false;
                 Calculate();
             }
             else
@@ -329,6 +332,10 @@ namespace CTIToolkit
             {
                 ErrorMessage = stringBuilder.ToString();
             }
+            else
+            {
+                IsChanged = false;
+            }
 
             return returnValue;
         }
@@ -347,7 +354,14 @@ namespace CTIToolkit
                 returnValue = false;
             }
 
-            ErrorMessage = stringBuilder.ToString();
+            if (!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
+            else
+            {
+                IsChanged = false;
+            }
 
             return returnValue;
         }
@@ -428,6 +442,7 @@ namespace CTIToolkit
         {
             if (ElevationRadio.Checked)
             {
+                IsChanged = true;
                 ClearDataSource();
                 PsychrometricsViewModel.UpdateIsElevationValue(true);
                 SetupBarometricPressure(false);
@@ -440,6 +455,7 @@ namespace CTIToolkit
         {
             if (BarometricPressureRadio.Checked)
             {
+                IsChanged = true;
                 ClearDataSource();
                 PsychrometricsViewModel.UpdateIsElevationValue(false);
                 SetupBarometricPressure(true);
@@ -452,6 +468,7 @@ namespace CTIToolkit
         {
             if (Psychrometrics_WetBulbTemperature_DryBulbTemperature.Checked)
             {
+                IsChanged = true;
                 ClearDataSource();
                 SetupRelativeHumidity(false);
                 SetupWetBulbTemperature(true);
@@ -465,6 +482,7 @@ namespace CTIToolkit
         {
             if (Psychrometrics_DryBulbTemperature_RelativeHumidity.Checked)
             {
+                IsChanged = true;
                 ClearDataSource();
                 SetupRelativeHumidity(true);
                 SetupWetBulbTemperature(false);
@@ -478,6 +496,7 @@ namespace CTIToolkit
         {
             if (Psychrometrics_Enthalpy.Checked)
             {
+                IsChanged = true;
                 ClearDataSource();
                 SetupRelativeHumidity(false);
                 SetupWetBulbTemperature(false);
@@ -520,6 +539,7 @@ namespace CTIToolkit
             }
             else if (recalculate)
             {
+                IsChanged = true;
                 Calculate();
             }
         }
@@ -544,6 +564,7 @@ namespace CTIToolkit
             }
             else if (recalculate)
             {
+                IsChanged = true;
                 Calculate();
             }
         }
@@ -569,6 +590,7 @@ namespace CTIToolkit
             }
             else if (recalculate)
             {
+                IsChanged = true;
                 Calculate();
             }
         }
@@ -593,6 +615,7 @@ namespace CTIToolkit
             }
             else if (recalculate)
             {
+                IsChanged = true;
                 Calculate();
             }
         }
@@ -617,6 +640,7 @@ namespace CTIToolkit
             }
             else if (recalculate)
             {
+                IsChanged = true;
                 Calculate();
             }
         }
@@ -641,6 +665,7 @@ namespace CTIToolkit
             }
             else if(recalculate)
             {
+                IsChanged = true;
                 Calculate();
             }
         }

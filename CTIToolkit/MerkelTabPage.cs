@@ -14,6 +14,7 @@ namespace CTIToolkit
     public partial class MerkelTabPage: CalculatePrintUserControl
     {
         private MerkelViewModel MerkelViewModel { get; set; }
+        private bool IsChanged { get; set; }
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_SI { get; set; }
 
@@ -23,6 +24,7 @@ namespace CTIToolkit
 
             IsDemo = applicationSettings.IsDemo;
             IsInternationalSystemOfUnits_SI = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
+            IsChanged = false;
 
             Filter = "Merkel files (*.mrkl)|*.mrkl|All files (*.*)|*.*";
             DefaultExt = "mrkl";
@@ -244,6 +246,7 @@ namespace CTIToolkit
                     returnValue = false;
                 }
 
+                IsChanged = false;
                 SetDisplayedValues();
                 Calculate();
             }
@@ -272,6 +275,10 @@ namespace CTIToolkit
                 stringBuilder.AppendLine(MerkelViewModel.ErrorMessage);
                 returnValue = false;
             }
+            else
+            {
+                IsChanged = false;
+            }
 
             if (!returnValue)
             {
@@ -294,6 +301,10 @@ namespace CTIToolkit
                 stringBuilder.AppendLine(MerkelViewModel.ErrorMessage);
                 returnValue = false;
             }
+            else
+            {
+                IsChanged = false;
+            }
 
             ErrorMessage = stringBuilder.ToString();
 
@@ -308,6 +319,11 @@ namespace CTIToolkit
         private void Merkel_LiquidtoGasRatio_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             bool recalculate = (MerkelViewModel.LiquidToGasRatioDataValue.InputValue != LiquidtoGasRatio_Value.Text);
+
+            if (recalculate)
+            {
+                IsChanged = true;
+            }
 
             if (!MerkelViewModel.LiquidToGasRatioDataValue.UpdateValue(LiquidtoGasRatio_Value.Text))
             {
@@ -335,6 +351,11 @@ namespace CTIToolkit
         {
             bool recalculate = (MerkelViewModel.ColdWaterTemperatureDataValue.InputValue != ColdWaterTemperature_Value.Text);
 
+            if (recalculate)
+            {
+                IsChanged = true;
+            }
+
             if (!MerkelViewModel.ColdWaterTemperatureDataValue.UpdateValue(ColdWaterTemperature_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -360,6 +381,11 @@ namespace CTIToolkit
         private void Merkel_HotWaterTemperature_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             bool recalculate = (MerkelViewModel.HotWaterTemperatureDataValue.InputValue != HotWaterTemperature_Value.Text);
+
+            if (recalculate)
+            {
+                IsChanged = true;
+            }
 
             if (!MerkelViewModel.HotWaterTemperatureDataValue.UpdateValue(HotWaterTemperature_Value.Text))
             {
@@ -387,6 +413,11 @@ namespace CTIToolkit
         {
             bool recalculate = (MerkelViewModel.WetBulbTemperatureDataValue.InputValue != WetBulbTemperature_Value.Text);
 
+            if (recalculate)
+            {
+                IsChanged = true;
+            }
+
             if (!MerkelViewModel.WetBulbTemperatureDataValue.UpdateValue(WetBulbTemperature_Value.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -410,7 +441,7 @@ namespace CTIToolkit
 
         private void Merkel_Elevation_Value_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            bool recalculate = false;
+            bool recalculate;
 
             if (ElevationRadio.Checked)
             {
@@ -442,6 +473,7 @@ namespace CTIToolkit
             }
             if(recalculate)
             {
+                IsChanged = true;
                 Calculate();
             }
         }

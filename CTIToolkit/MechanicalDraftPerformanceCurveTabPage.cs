@@ -146,6 +146,7 @@ namespace CTIToolkit
 
             if (MechanicalDraftPerformanceCurveViewModel.OpenNewDataFile(fileName))
             {
+                IsChanged = false;
                 if (!TowerDesignDataForm.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData))
                 {
                     stringBuilder.AppendLine(TowerDesignDataForm.ErrorMessage);
@@ -240,6 +241,10 @@ namespace CTIToolkit
             {
                 ErrorMessage = stringBuilder.ToString();
             }
+            else
+            {
+                IsChanged = false;
+            }
 
             return returnValue;
         }
@@ -258,7 +263,14 @@ namespace CTIToolkit
                 returnValue = false;
             }
 
-            ErrorMessage = stringBuilder.ToString();
+            if (!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
+            else
+            {
+                IsChanged = false;
+            }
 
             return returnValue;
         }
