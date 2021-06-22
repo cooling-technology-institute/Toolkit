@@ -30,20 +30,20 @@
 				<item name="Demand Curve Tab Usage" link="html\Demand_Curve_Tab_Usage.htm">
 				</item>
 			</item>
-			<item name="Performance Curve Tab">
+			<item name="Mechanical Draft Performance Curve Tab">
 				<item name="Mechanical Draft Performance Curve" link="html\Mechanical_Draft_Performance_Curve.htm">
 				</item>
 				<item name="Mechanical Draft Perf Curve Tab Usage" link="html\Mechanical_Draft_Perf_Curve_Tab_Usage.htm">
 				</item>
-				<item name="Opening Screen for Mechanical Draft Perf Curve Tab" link="html\Opening_Screen_for_Mechanical_Draft_Perf_Curve_Tab.htm">
+				<item name="Opening Screen for Mechanical Draft Performance Curve Tab" link="html\Opening_Screen_for_Mechanical_Draft_Perf_Curve_Tab.htm">
 				</item>
-				<item name="Performance Curve Tab: Entering Data for the First Time" link="html\Mechanical_Draft_Perf_Curve_Entering_Data_for_the_First_Time.htm">
+				<item name="Mechanical Draft Performance Curve Tab: Entering Data for the First Time" link="html\Mechanical_Draft_Perf_Curve_Entering_Data_for_the_First_Time.htm">
 				</item>
-				<item name="Performance Curve Tab: Using Existing Project Files" link="html\Performance_Curve_Using_Existing_Project_Files.htm">
+				<item name="Mechanical Draft Performance Curve Tab: Using Existing Project Files" link="html\Performance_Curve_Using_Existing_Project_Files.htm">
 				</item>
-				<item name="Performance Curve Tab: Viewing the Graphs" link="html\Performance_Curve_Viewing_the_Graphs.htm">
+				<item name="Mechanical Draft Performance Curve Tab: Viewing the Graphs" link="html\Performance_Curve_Viewing_the_Graphs.htm">
 				</item>
-				<item name="Performance Curve Tab: Printing the Report" link="html\Performance_Curve_Printing_the_Report.htm">
+				<item name="Mechanical Draft Performance Curve Tab: Printing the Report" link="html\Performance_Curve_Printing_the_Report.htm">
 				</item>
 			</item>
 		</item>

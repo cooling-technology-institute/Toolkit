@@ -35,6 +35,7 @@ namespace CTIToolkit
 
         private void UpdateButton_Click(object sender, EventArgs e)
         {
+            TestName = TestNameTextBox.Text;
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

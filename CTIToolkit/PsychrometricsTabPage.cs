@@ -270,6 +270,11 @@ namespace CTIToolkit
             else
             {
                 stringBuilder.AppendLine("Unable to load file. File contains invalid data.");
+                if (!string.IsNullOrWhiteSpace(PsychrometricsViewModel.ErrorMessage))
+                {
+                    stringBuilder.AppendLine(PsychrometricsViewModel.ErrorMessage);
+                }
+                returnValue = false;
             }
 
             if (!returnValue)

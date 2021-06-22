@@ -38,9 +38,8 @@ namespace CalculationLibrary
             GenerateCharacterticsLine(data);
             GenerateLGLine(data);
             GenerateKaVLLine(data);
+            GenerateTargetApproach(data);
             GenerateUserApproach(data);
-
-            File.WriteAllText("demand.txt", stringBuilder.ToString());
 
             return true;
         }
@@ -127,8 +126,6 @@ namespace CalculationLibrary
 
         void CalculateApproaches(DemandCurveCalculationData data)
         {
-            stringBuilder = new StringBuilder();
-
             MerkelCalculationData.Initialize(data.IsInternationalSystemOfUnits_SI);
             MerkelConvertValues(data);
 
@@ -136,15 +133,10 @@ namespace CalculationLibrary
             {
                 for (double liquidToGasRatio = liquidToGasRatio_MIN; liquidToGasRatio < liquidToGasRatio_MAX; liquidToGasRatio += .05)
                 {
-                    stringBuilder.AppendFormat("\ndLG {0} \n\n", liquidToGasRatio.ToString("F6"));
-
                     foreach (Approach approach in data.Approaches)
                     {
-                        approach.OutOfRange = GenerateApproach(approach, data, liquidToGasRatio, false);
-                        stringBuilder.AppendFormat("\niIndex {0}  getapp(iIndex) {1} App[iIndex] {2} ", approach.Name, 1, approach.OutOfRange ? "0" : approach.Value.ToString("F0"));
+                        approach.OutOfRange = GenerateApproach(approach, data, liquidToGasRatio);
                     }
-                    stringBuilder.AppendLine("\niIndex 18  getapp(iIndex) 1 App[iIndex] 0 \n");
-                    stringBuilder.AppendLine("iIndex 19  getapp(iIndex) 1 App[iIndex] 0 ");
                 }
             }
         }
@@ -161,7 +153,26 @@ namespace CalculationLibrary
 
                 for (double liquidToGasRatio = liquidToGasRatio_MIN; liquidToGasRatio < liquidToGasRatio_MAX; liquidToGasRatio += .05)
                 {
-                    GenerateApproach(approach, data, liquidToGasRatio, true);
+                    GenerateApproach(approach, data, liquidToGasRatio);
+                }
+
+                data.Approaches.Add(approach);
+            }
+        }
+
+        void GenerateTargetApproach(DemandCurveCalculationData data)
+        {
+            if (data.DemandCurveData.TargetApproach != 0)
+            {
+                Approach approach = new Approach("Target");
+                approach.Value = data.DemandCurveData.TargetApproach;
+
+                MerkelCalculationData.Initialize(data.IsInternationalSystemOfUnits_SI);
+                MerkelConvertValues(data);
+
+                for (double liquidToGasRatio = liquidToGasRatio_MIN; liquidToGasRatio < liquidToGasRatio_MAX; liquidToGasRatio += .05)
+                {
+                    GenerateApproach(approach, data, liquidToGasRatio);
                 }
 
                 data.Approaches.Add(approach);
@@ -188,7 +199,6 @@ namespace CalculationLibrary
                         {
                             approach.Points.Add(new Point(lg, k));
                             data.IsCoef = true;
-                            stringBuilder.AppendFormat("\nkaVL-Charactertics {0} L/G-Charactertics {1} \n", lg.ToString("F6"), k.ToString("F6"));
                         }
                     }
                 }
@@ -227,7 +237,7 @@ namespace CalculationLibrary
             }
         }
 
-        private bool GenerateApproach(Approach approach, DemandCurveCalculationData data, double liquidToGasRatio, bool isUserApproach)
+        private bool GenerateApproach(Approach approach, DemandCurveCalculationData data, double liquidToGasRatio)
         {
             const double kavl_MIN = 0.01;
             const double kavl_MAX = 5.0;
@@ -242,23 +252,14 @@ namespace CalculationLibrary
                     MerkelCalculationData.Approach *= 1.8;
                 }
 
-                if (liquidToGasRatio > 1.3 && liquidToGasRatio < 1.4)
-                {
-                    stringBuilder.AppendLine();
-                }
-
                 if (CalculateMerkel(MerkelCalculationData))
                 {
-                    stringBuilder.AppendFormat("\n m_dblCurveWBT {0}, m_dblCurveRange {1}, App[iIndex] {2}, dLG {3}, m_dblAltitude {4} ", MerkelCalculationData.WetBulbTemperature.ToString("F6"), MerkelCalculationData.Range.ToString("F6"), MerkelCalculationData.Approach.ToString("F6"), MerkelCalculationData.LiquidToGasRatio.ToString("F6"), MerkelCalculationData.Elevation.ToString("F6"));
-                    stringBuilder.AppendFormat("\n kavl {0} minVal {1} maxVal {2} dLG {3} App[iIndex] {4}", MerkelCalculationData.KaV_L.ToString("F6"), kavl_MIN.ToString("F6"), kavl_MAX.ToString("F6"), liquidToGasRatio.ToString("F6"), approach.Value.ToString("F6"));
-
                     // ddp
                     if ((MerkelCalculationData.KaV_L < kavl_MIN) || (MerkelCalculationData.KaV_L >= kavl_MAX))
                     {
                         double dInterp;
                         for (dInterp = liquidToGasRatio; ((MerkelCalculationData.KaV_L < kavl_MIN) || (MerkelCalculationData.KaV_L >= kavl_MAX)) && (dInterp > .1); dInterp -= 0.0002)
                         {
-                            stringBuilder.AppendFormat("\n dInterp {0} kavl {1}", dInterp.ToString("F6"), MerkelCalculationData.KaV_L.ToString("F6"));
                             MerkelCalculationData.Approach = approach.Value;
                             if (data.IsInternationalSystemOfUnits_SI)
                             {
@@ -278,27 +279,17 @@ namespace CalculationLibrary
                         CalculatedLiquidToGasRatio = liquidToGasRatio;
                     }
 
-                    stringBuilder.AppendFormat("\n kavl {0} dLG {1} App[iIndex] {2}", MerkelCalculationData.KaV_L.ToString("F6"), liquidToGasRatio.ToString("F6"), approach.OutOfRange ? "0.000000" : approach.Value.ToString("F6"));
-
                     if ((CalculatedLiquidToGasRatio_MIN > MerkelCalculationData.KaV_L) && (MerkelCalculationData.KaV_L > .1))
                     {
                         CalculatedLiquidToGasRatio_MIN = MerkelCalculationData.KaV_L;
                     }
-                    stringBuilder.AppendFormat("\n sDLG {0} ", CalculatedLiquidToGasRatio.ToString("F6"));
-                    stringBuilder.AppendFormat("min4Lg {0} ", CalculatedLiquidToGasRatio_MIN.ToString("F6"));
 
                     if ((MerkelCalculationData.KaV_L <= 10.0) && (MerkelCalculationData.KaV_L >= .1))
                     {
-                        stringBuilder.AppendFormat("\n m_wndGraph {0} KaV_L {1}", CalculatedLiquidToGasRatio.ToString("F6"), MerkelCalculationData.KaV_L.ToString("F6"));
                         approach.Points.Add(new Point(CalculatedLiquidToGasRatio, MerkelCalculationData.KaV_L));
-                    }
-                    else
-                    {
-                        stringBuilder.AppendFormat("no m_wndGraph");
                     }
                 }
             }
-            stringBuilder.AppendLine();
             return approach.OutOfRange;
         }
 

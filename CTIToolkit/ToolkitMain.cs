@@ -31,6 +31,7 @@ namespace CTIToolkit
             //PsychrometricsUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TabPage psychrometricsTabPage = new TabPage("Psychrometrics");
             psychrometricsTabPage.Controls.Add(PsychrometricsUserControl);
+            //HelpNavigator.Topic
             tabControl1.TabPages.Add(psychrometricsTabPage);
             if (height < psychrometricsTabPage.Height)
             {
@@ -393,6 +394,11 @@ namespace CTIToolkit
         private void Calculate_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void HelpContentMenuItem_Click(object sender, EventArgs e)
+        {
+           Help.ShowHelp(this, "ctitoolkit.chm");
         }
     }
 }

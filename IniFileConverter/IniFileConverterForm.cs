@@ -35,11 +35,16 @@ namespace IniFileConverter
                 PathLabel pathLabel = new PathLabel()
                 {
                     path = path,
-                    label = "CTI Toolkit 3.2"
+                    label = "..\\Program Files (x86)\\Cooling Technology Institute\\CTI Toolkit 3.2"
                 };
                 SearchPaths.Add(pathLabel);
                 InputDirectoryComboBox.Items.Add(pathLabel.label);
             }
+            else // windows 7
+            {
+
+            }
+
             //C:\Users\renee\AppData\Local\VirtualStore\Program Files (x86)\Thuridion\CTI Toolkit 3.1
             //path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Thuridion", "CTI Toolkit 3.1");
             path = Path.Combine(sPathLines[0], Environment.UserName, "AppData", "Local", "VirtualStore", "Program Files (x86)", "Thuridion", "CTI Toolkit 3.1");
@@ -48,11 +53,16 @@ namespace IniFileConverter
                 PathLabel pathLabel = new PathLabel()
                 {
                     path = path,
-                    label = "CTI Toolkit 3.1"
+                    label = "..\\Program Files (x86)\\Thuridion\\CTI Toolkit 3.1"
                 };
                 SearchPaths.Add(pathLabel);
                 InputDirectoryComboBox.Items.Add(pathLabel.label);
             }
+            else // windows 7
+            {
+
+            }
+
             path = Path.Combine(sPathLines[0], Environment.UserName, "AppData", "Local", "VirtualStore", "Program Files (x86)", "Thuridion", "CTI Toolkit 3.0");
             //path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Thuridion", "CTI Toolkit 3.0");
             if (Directory.Exists(path))
@@ -60,11 +70,16 @@ namespace IniFileConverter
                 PathLabel pathLabel = new PathLabel()
                 {
                     path = path,
-                    label = "CTI Toolkit 3.0"
+                    label = "..\\Program Files (x86)\\Thuridion\\CTI Toolkit 3.0"
                 };
                 SearchPaths.Add(pathLabel);
                 InputDirectoryComboBox.Items.Add(pathLabel.label);
             }
+            else // windows 7
+            {
+
+            }
+
             if (InputDirectoryComboBox.Items.Count > 0)
             {
                 InputDirectoryComboBox.SelectedIndex = 0;

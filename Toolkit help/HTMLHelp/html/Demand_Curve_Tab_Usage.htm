@@ -98,39 +98,89 @@ if( typeof( kadovInitEffects ) != 'function' ) kadovInitEffects = new Function()
 
 <p style="margin-top: 0; margin-bottom: 0;">&nbsp;</p>
 
-<p>Entering the values of wet bulb temperature, range, altitude and clicking 
- on ‘Recalculate’ brings up the appropriate group of Demand Curves. These 
+<p>Entering the values of wet bulb temperature, range, elevation and clicking 
+ on ‘Calculate’ brings up the appropriate group of Demand Curves. These 
  curves represent the solution of the Merkel equation over a wide range 
  of liquid-to-gas ratio’s (L/G’s), and are so called since they represent 
  the demand imposed on the cooling tower by the environmental &amp; process 
  variables and each one represents a specific approach temperature (see 
  <a href="Definitions.htm">glossary</a>).</p>
 
+<p style="text-align: center;"
+	align=center><img src="..\image\demand_curve_tab_small_shg2.gif"
+						usemap=#MAP73709023
+						style="width: 542px;
+								height: 534px;
+								border-style: none;
+								float: none;"
+						width=542
+						height=534
+						border=0> </p>
+
 <p style="margin-top: 0; margin-bottom: 0;">&nbsp;</p>
 
-<p>Clicking on View/Demand Curves brings up the ‘Curve Selection’ dialog 
- box, which allows the selection of the approach curve(s) of interest. 
- Clicking on items in the ‘User Target’ section will display the items 
- listed. The ‘Target Approach’ click box is especially useful since it 
- will draw the intersecting approach curve to a known L/G &amp; KaV/L intersection. 
- The ‘User Approach’ click box allows the drawing of an approach curve 
- of any value.</p>
+
+<p>
+Entering a value of L/G and clicking on ‘Calculate’ will display a 
+ vertical line at the selected L/G value and intersect the characteristic 
+ curve. This intersection defines the approach temperature at the selected 
+ L/G ratio. The numerical value of the approach temperature and the KaV/L are displayed 
+ in the output box.</p>
+<p>
+Entering a value of of the User Approach ‘Target Approach’ and clicking on ‘Calculate’ 
+will draw the intersecting approach curve to a known L/G &amp; KaV/L intersection. 
+</p>
+
+<p style="text-align: center;"
+	align=center><img src="..\image\demand_curve_tab_small_shg4.gif"
+						usemap=#MAP73709023
+						style="width: 542px;
+								height: 534px;
+								border-style: none;
+								float: none;"
+						width=542
+						height=534
+						border=0> </p>
 
 <p style="margin-top: 0; margin-bottom: 0;">&nbsp;</p>
 
 <p>The section of the worksheet labeled &quot;Tower or Fill Characteristic&quot; 
  allows the entering of the fill or tower coefficients ‘C’ &amp; ‘Slope’ 
  as mentioned above. Entering a value of &quot;C&quot; and &quot;slope&quot; 
- and clicking ‘Recalculate’ will display the fill characteristic curve 
+ and clicking ‘Calculate’ will display the fill characteristic curve 
  from the selected minimum and maximum.</p>
+
+<p style="text-align: center;"
+	align=center><img src="..\image\demand_curve_tab_small_shg3.gif"
+						usemap=#MAP73709023
+						style="width: 542px;
+								height: 534px;
+								border-style: none;
+								float: none;"
+						width=542
+						height=534
+						border=0> </p>
 
 <p style="margin-top: 0; margin-bottom: 0;">&nbsp;</p>
 
-<p>Entering a value of L/G and clicking on ‘Recalculate’ will display a 
+<p>Entering a value of L/G and clicking on ‘Calculate’ will display a 
  vertical line at the selected L/G value and intersect the characteristic 
  curve. This intersection defines the approach temperature at the selected 
- L/G ratio. The numerical value of the approach temperature is displayed 
- when clicking on the KaV/L - Approach toggle.</p>
+ L/G ratio. The numerical value of the approach temperature and the KaV/L are displayed 
+ in the output box.</p>
+
+<p style="text-align: center;"
+	align=center><img src="..\image\demand_curve_tab_small_shg5.gif"
+						usemap=#MAP73709023
+						style="width: 542px;
+								height: 534px;
+								border-style: none;
+								float: none;"
+						width=542
+						height=534
+						border=0> </p>
+
+<p style="margin-top: 0; margin-bottom: 0;">&nbsp;</p>
 
 <p style="margin-top: 0; margin-bottom: 0;">&nbsp;</p>
 
@@ -145,7 +195,7 @@ if( typeof( kadovInitEffects ) != 'function' ) kadovInitEffects = new Function()
 		class=kadov-p-CTopic-Text-Bulleted><p class=Topic-Text-Bulleted>Holding 
  down the left mouse button and dragging down and to the right creates 
  an enlargement box, which when released will zoom to fill the plotting 
- area. Clicking on ‘Recalculate’ will return the plot to normal. </p></li>
+ area. Clicking on ‘Calculate’ will return the plot to normal. </p></li>
 	
 	<li style="font-size: 10pt;"
 		class=kadov-p-CTopic-Text-Bulleted><p class=Topic-Text-Bulleted>Positioning 
@@ -158,18 +208,17 @@ if( typeof( kadovInitEffects ) != 'function' ) kadovInitEffects = new Function()
  up or down.</p></li>
 	
 	<li style="font-size: 10pt;"
-		class=kadov-p-CTopic-Text-Bulleted><p class=Topic-Text-Bulleted>Double 
- clicking on or near a demand curve will delete it from the plot area.</p></li>
+		class=kadov-p-CTopic-Text-Bulleted><p class=Topic-Text-Bulleted>Click on the 
+		Approach checkbox on the right to hide or show a demand curve from the plot area.</p></li>
 </ul>
 
 <p style="margin-top: 0; margin-bottom: 0;">&nbsp;</p>
 
-<p><span style="font-weight: bold; x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ ">New 
- with version 3.0</span> is the ability to save data and retrieve previously 
- stored data files. To save data, first click on the down arrow and click 
- on, &quot;New Data File&quot;. This brings up a dialog box, which allows 
- you to enter a file name. Once entered, click on ‘OK’. Clicking on ‘Save’ 
- saves the current work sheet data.</p>
+<p>
+With all calculation tabs, the data can be saved to a data file (*.dc) and retrieved from the stored data files. 
+To save data, click on the menubar File, Save, to save to the file indicated
+at the top of the tab. Or on the menubar, File, Save As, to select the fila name of the data file.
+</p>
 
 </body>
 
