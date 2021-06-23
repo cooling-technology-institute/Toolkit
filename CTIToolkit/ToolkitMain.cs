@@ -5,6 +5,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace CTIToolkit
@@ -12,6 +13,8 @@ namespace CTIToolkit
     public partial class ToolkitMain : Form
     {
         public ApplicationSettings ApplicationSettings = new ApplicationSettings();
+
+        string HelpFilename { get; set; }
 
         PsychrometricsTabPage PsychrometricsUserControl { get; set; }
         MerkelTabPage MerkelUserControl { get; set; }
@@ -22,71 +25,37 @@ namespace CTIToolkit
         {
             InitializeComponent();
 
+            // get full path to your startup EXE
+            string exeFile = (new System.Uri(Assembly.GetEntryAssembly().CodeBase)).AbsolutePath;
+            // get directory of your EXE file
+            string exeDir = Path.GetDirectoryName(exeFile);
+            HelpFilename = Path.Combine(exeDir, "ctitoolkit.chm");
+            helpProvider1.HelpNamespace = HelpFilename;
+
             ApplicationSettings.Read();
             UpdateUnits(ApplicationSettings.UnitsSelection);
-            int height = this.Size.Height;
-            int width = this.Size.Width;
+
             PsychrometricsUserControl = new PsychrometricsTabPage(ApplicationSettings);
-            //PsychrometricsUserControl.Dock = DockStyle.Top;
-            //PsychrometricsUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TabPage psychrometricsTabPage = new TabPage("Psychrometrics");
             psychrometricsTabPage.Controls.Add(PsychrometricsUserControl);
-            //HelpNavigator.Topic
-            tabControl1.TabPages.Add(psychrometricsTabPage);
-            if (height < psychrometricsTabPage.Height)
-            {
-                height = psychrometricsTabPage.Height;
-            }
-            if (width < psychrometricsTabPage.Width)
-            {
-                width = psychrometricsTabPage.Width;
-            }
+            CalculationTabControl.TabPages.Add(psychrometricsTabPage);
+
             MerkelUserControl = new MerkelTabPage(ApplicationSettings);
-            //MerkelUserControl.Dock = DockStyle.Top;
-            //MerkelUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TabPage merkelTabPage = new TabPage("Merkel");
             merkelTabPage.Controls.Add(MerkelUserControl);
-            tabControl1.TabPages.Add(merkelTabPage);
-            if (height < merkelTabPage.Height)
-            {
-                height = merkelTabPage.Height;
-            }
-            if (width < merkelTabPage.Width)
-            {
-                width = merkelTabPage.Width;
-            }
+            CalculationTabControl.TabPages.Add(merkelTabPage);
 
             DemandCurveUserControl = new DemandCurveTabPage(ApplicationSettings);
             DemandCurveUserControl.Dock = DockStyle.Top | DockStyle.Right;
             //DemandCurveUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TabPage demandCurveTabPage = new TabPage("Demand Curve");
             demandCurveTabPage.Controls.Add(DemandCurveUserControl);
-            tabControl1.TabPages.Add(demandCurveTabPage);
-            if (height < demandCurveTabPage.Height)
-            {
-                height = demandCurveTabPage.Height;
-            }
-            if (width < demandCurveTabPage.Width)
-            {
-                width = demandCurveTabPage.Width;
-            }
+            CalculationTabControl.TabPages.Add(demandCurveTabPage);
 
             MechanicalDraftPerformanceCurveUserControl = new MechanicalDraftPerformanceCurveTabPage(ApplicationSettings);
-            //MechanicalDraftPerformanceCurveUserControl.Dock = DockStyle.Top;
-            //MechanicalDraftPerformanceCurveUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TabPage mechanicalDraftPerformanceCurveTabPage = new TabPage("Mechanical Draft Performance Curve");
             mechanicalDraftPerformanceCurveTabPage.Controls.Add(MechanicalDraftPerformanceCurveUserControl);
-            tabControl1.TabPages.Add(mechanicalDraftPerformanceCurveTabPage);
-            if (height < mechanicalDraftPerformanceCurveTabPage.Height)
-            {
-                height = mechanicalDraftPerformanceCurveTabPage.Height;
-            }
-            if (width < mechanicalDraftPerformanceCurveTabPage.Width)
-            {
-                width = mechanicalDraftPerformanceCurveTabPage.Width;
-            }
-            this.Height = height;
-            this.Width = width;
+            CalculationTabControl.TabPages.Add(mechanicalDraftPerformanceCurveTabPage);
         }
 
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -160,7 +129,7 @@ namespace CTIToolkit
 
         private void NewFile_Click(object sender, EventArgs e)
         {
-            foreach (Control control in tabControl1.TabPages[tabControl1.SelectedIndex].Controls)
+            foreach (Control control in CalculationTabControl.TabPages[CalculationTabControl.SelectedIndex].Controls)
             {
                 if (control is CalculatePrintUserControl)
                 {
@@ -191,7 +160,7 @@ namespace CTIToolkit
 
         private void OpenMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Control control in tabControl1.TabPages[tabControl1.SelectedIndex].Controls)
+            foreach (Control control in CalculationTabControl.TabPages[CalculationTabControl.SelectedIndex].Controls)
             {
                 if (control is CalculatePrintUserControl)
                 {
@@ -223,7 +192,7 @@ namespace CTIToolkit
 
         private void SaveMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Control control in tabControl1.TabPages[tabControl1.SelectedIndex].Controls)
+            foreach (Control control in CalculationTabControl.TabPages[CalculationTabControl.SelectedIndex].Controls)
             {
                 if (control is CalculatePrintUserControl)
                 {
@@ -238,7 +207,7 @@ namespace CTIToolkit
 
         private void SaveAsMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Control control in tabControl1.TabPages[tabControl1.SelectedIndex].Controls)
+            foreach (Control control in CalculationTabControl.TabPages[CalculationTabControl.SelectedIndex].Controls)
             {
                 if (control is CalculatePrintUserControl)
                 {
@@ -273,9 +242,9 @@ namespace CTIToolkit
             string label = string.Empty;
 
             // determine which is the current tab call it caculate click method
-            if (tabControl1.SelectedIndex != -1)
+            if (CalculationTabControl.SelectedIndex != -1)
             {
-                foreach (Control control in tabControl1.TabPages[tabControl1.SelectedIndex].Controls)
+                foreach (Control control in CalculationTabControl.TabPages[CalculationTabControl.SelectedIndex].Controls)
                 {
                     if (control is CalculatePrintUserControl)
                     {
@@ -283,13 +252,13 @@ namespace CTIToolkit
                         calculatePrintUserControl.PrintControl.Label = string.Empty;
                         calculatePrintUserControl.PrintControl.IsDesignData = false;
 
-                        PrintLabelForm printLabelForm = new PrintLabelForm((tabControl1.SelectedIndex == 3));
-                        printLabelForm.Height = (tabControl1.SelectedIndex == 3) ? 170 : 105;
+                        PrintLabelForm printLabelForm = new PrintLabelForm((CalculationTabControl.SelectedIndex == 3));
+                        printLabelForm.Height = (CalculationTabControl.SelectedIndex == 3) ? 170 : 105;
 
                         if (printLabelForm.ShowDialog() == DialogResult.OK)
                         {
                             calculatePrintUserControl.PrintControl.Label = printLabelForm.GetLabel();
-                            if (tabControl1.SelectedIndex == 3)
+                            if (CalculationTabControl.SelectedIndex == 3)
                             {
                                 calculatePrintUserControl.PrintControl.IsDesignData = printLabelForm.IsDesignData();
                             }    
@@ -305,7 +274,7 @@ namespace CTIToolkit
 
                         PrintDocument printDocument = new PrintDocument()
                         {
-                            DocumentName = tabControl1.TabPages[tabControl1.SelectedIndex].Text,
+                            DocumentName = CalculationTabControl.TabPages[CalculationTabControl.SelectedIndex].Text,
                         };
 
                         printDocument.PrintPage += new PrintPageEventHandler(calculatePrintUserControl.PrintPage);
@@ -325,21 +294,21 @@ namespace CTIToolkit
 
         private void PrintPreviewMenuItem_Click(object sender, EventArgs e)
         {
-            if(tabControl1.SelectedIndex != -1)
+            if(CalculationTabControl.SelectedIndex != -1)
             {
-                foreach (Control control in tabControl1.TabPages[tabControl1.SelectedIndex].Controls)
+                foreach (Control control in CalculationTabControl.TabPages[CalculationTabControl.SelectedIndex].Controls)
                 {
                     if (control is CalculatePrintUserControl)
                     {
                         CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
 
-                        PrintLabelForm printLabelForm = new PrintLabelForm((tabControl1.SelectedIndex == 3));
-                        printLabelForm.Height = (tabControl1.SelectedIndex == 3) ? 170 : 105;
+                        PrintLabelForm printLabelForm = new PrintLabelForm((CalculationTabControl.SelectedIndex == 3));
+                        printLabelForm.Height = (CalculationTabControl.SelectedIndex == 3) ? 170 : 105;
 
                         if (printLabelForm.ShowDialog() == DialogResult.OK)
                         {
                             calculatePrintUserControl.PrintControl.Label = printLabelForm.GetLabel();
-                            if (tabControl1.SelectedIndex == 3)
+                            if (CalculationTabControl.SelectedIndex == 3)
                             {
                                 calculatePrintUserControl.PrintControl.IsDesignData = printLabelForm.IsDesignData();
                             }
@@ -398,7 +367,29 @@ namespace CTIToolkit
 
         private void HelpContentMenuItem_Click(object sender, EventArgs e)
         {
-           Help.ShowHelp(this, "ctitoolkit.chm");
+            Help.ShowHelp(this, HelpFilename);
+        }
+
+        private void ToolkitMain_HelpRequested(object sender, HelpEventArgs hlpevent)
+        {
+            switch (CalculationTabControl.SelectedIndex)
+            {
+                case 0: // psychrometrics
+                    Help.ShowHelp(this, HelpFilename, HelpNavigator.Index, "Psychrometrics");
+                    break;
+                case 1: // Merkel
+                    Help.ShowHelp(this, HelpFilename, HelpNavigator.Index, "Merkel");
+                    break;
+                case 2: // DemandCurve
+                    Help.ShowHelp(this, HelpFilename, HelpNavigator.Index, "Demand Curve");
+                    break;
+                case 3: // MechanicalDraftPerformanceCurve
+                    Help.ShowHelp(this, HelpFilename, HelpNavigator.Index, "Mechanical Draft Performance Curve");
+                    break;
+                default:
+                    Help.ShowHelp(this, HelpFilename);
+                    break;
+            }
         }
     }
 }

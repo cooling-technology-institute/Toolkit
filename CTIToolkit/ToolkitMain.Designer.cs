@@ -50,7 +50,7 @@
             this.AboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.CalculationTabControl = new System.Windows.Forms.TabControl();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.NewButton = new System.Windows.Forms.ToolStripButton();
             this.OpenFileButton = new System.Windows.Forms.ToolStripButton();
@@ -206,7 +206,7 @@
             // 
             this.HelpContentMenuItem.Image = global::CTIToolkit.Properties.Resources.help;
             this.HelpContentMenuItem.Name = "HelpContentMenuItem";
-            this.HelpContentMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.HelpContentMenuItem.Size = new System.Drawing.Size(145, 22);
             this.HelpContentMenuItem.Text = "Help Content";
             this.HelpContentMenuItem.Click += new System.EventHandler(this.HelpContentMenuItem_Click);
             // 
@@ -214,7 +214,7 @@
             // 
             this.AboutMenuItem.Image = global::CTIToolkit.Properties.Resources.info;
             this.AboutMenuItem.Name = "AboutMenuItem";
-            this.AboutMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.AboutMenuItem.Size = new System.Drawing.Size(145, 22);
             this.AboutMenuItem.Text = "About";
             this.AboutMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
@@ -222,16 +222,16 @@
             // 
             this.helpProvider1.HelpNamespace = "ctitoolkit.chm";
             // 
-            // tabControl1
+            // CalculationTabControl
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.CalculationTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Location = new System.Drawing.Point(0, 50);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(824, 913);
-            this.tabControl1.TabIndex = 1;
+            this.CalculationTabControl.Location = new System.Drawing.Point(0, 50);
+            this.CalculationTabControl.Name = "CalculationTabControl";
+            this.CalculationTabControl.SelectedIndex = 0;
+            this.CalculationTabControl.Size = new System.Drawing.Size(824, 913);
+            this.CalculationTabControl.TabIndex = 1;
             // 
             // toolStrip1
             // 
@@ -355,13 +355,17 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(824, 850);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.CalculationTabControl);
             this.Controls.Add(this.menuStrip1);
             this.HelpButton = true;
+            this.helpProvider1.SetHelpKeyword(this, "Page Layout");
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Index);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ToolkitMain";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Text = "Cooling Technology Institute Toolkit";
+            this.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.ToolkitMain_HelpRequested);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -382,7 +386,7 @@
         private System.Windows.Forms.ToolStripMenuItem AboutMenuItem;
         private System.Windows.Forms.HelpProvider helpProvider1;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl CalculationTabControl;
         private System.Windows.Forms.ToolStripMenuItem InternationalSystemOfUnitsSIMenuItem;
         private System.Windows.Forms.ToolStripMenuItem NewMenuItem;
         private System.Windows.Forms.ToolStripMenuItem OpenMenuItem;

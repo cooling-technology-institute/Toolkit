@@ -9,7 +9,13 @@
 			<item name="Introduction" link="html\Introduction.htm">
 			</item>
 			<item name="Page Layout">
-				<item name="Layout" link="Layout.htm">
+				<item name="Page Layout Overview" link="Page_Layout_Overiew.htm">
+				</item>
+				<item name="Menubar" link="Menubar.htm">
+				</item>
+				<item name="Toolbar" link="Toolbar.htm">
+				</item>
+				<item name="Calculation Tabs" link="Calculation_Tabs.htm">
 				</item>
 			</item>
 			<item name="Psychrometrics Tab">
