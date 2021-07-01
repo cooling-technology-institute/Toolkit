@@ -90,17 +90,17 @@ namespace CTIToolkit
         {
             if (ApplicationSettings.TestSerialNumber(this.serialNumber.Text))
             {
-                this.demoWarning.Visible = true;
-                this.SerialNumberInput.Visible = true;
-                this.setSerialNumberButton.Visible = true;
-                this.setSerialNumberInputLabel.Visible = true;
-            }
-            else
-            {
                 this.demoWarning.Visible = false;
                 this.SerialNumberInput.Visible = false;
                 this.setSerialNumberButton.Visible = false;
                 this.setSerialNumberInputLabel.Visible = false;
+            }
+            else
+            {
+                this.demoWarning.Visible = true;
+                this.SerialNumberInput.Visible = true;
+                this.setSerialNumberButton.Visible = true;
+                this.setSerialNumberInputLabel.Visible = true;
             }
         }
 

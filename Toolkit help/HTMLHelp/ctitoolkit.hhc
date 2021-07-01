@@ -53,6 +53,10 @@
 				</item>
 			</item>
 		</item>
+		<item name="Data Files">
+			<item name="Converting Data File" link="html\Convert_Data_File.htm">
+			</item>
+		</item>
 		<item name="Examples">
 			<item name="Off-Design Performance">
 				<item name="Demand Curve Worksheet Example 1" link="html\Demand_Curve_Worksheet_Example_1.htm">

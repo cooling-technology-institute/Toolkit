@@ -128,6 +128,7 @@
     <Compile Include="RangedTemperatureDesignUserControlTabPage.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="UpdateTestPointTestNameForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -340,6 +341,7 @@
   <ItemGroup>
     <Content Include="CTIToolkit.ico" />
     <Content Include="Resources\help.png" />
+    <None Include="Resources\save.png" />
     <None Include="Resources\info.png" />
   </ItemGroup>
   <ItemGroup>

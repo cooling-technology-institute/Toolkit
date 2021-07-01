@@ -9,10 +9,10 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="SerialNumber" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Demo</Value>
     </Setting>
-    <Setting Name="ActivationDate" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="Setting" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Test</Value>
     </Setting>
   </Settings>
 </SettingsFile>

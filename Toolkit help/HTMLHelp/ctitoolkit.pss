@@ -14,15 +14,15 @@ SupportMas_MPJ=1
 [Target:Microsoft HTML Help]
 ResultFileName=!SSL!\Microsoft_HTML_Help\ctitoolkit.chm
 SSLayoutType=1
-CreateProjectTime=18:31, June 23, 2021
+CreateProjectTime=21:47, June 30, 2021
 CreateProjectUser=renee
 SupportMas_MPJ=1
 ActionID For Generation=1001
 Remove Folder with prompt=1
 ViewFileName=!SSL!\Microsoft_HTML_Help\ctitoolkit.chm
 ResultStatus=0
-BuildTimeHi=30894215
-BuildTimeLow=-441697751
+BuildTimeHi=30895651
+BuildTimeLow=-2024364087
 [Target:FlashHelp]
 ResultFileName=!SSL!\FlashHelp\ctitoolkit.htm
 SSLayoutType=2
@@ -69,7 +69,7 @@ Project CSS List=C:\CTI\CTI_Toolkit\Toolkit help\HTMLHelp\ctitoolkit.trcss
 Project Variable Set List=C:\CTI\CTI_Toolkit\Toolkit help\HTMLHelp\ctitoolkit.trvset
 External URL Settings=C:\CTI\CTI_Toolkit\Toolkit help\HTMLHelp\SearchOptions.xml
 Default Topic=C:\CTI\CTI_Toolkit\Toolkit help\HTMLHelp\html\Welcome.htm
-Build Tags0=8858;
+Build Tags0=11636;
 Build Tags=
 Build Expression=
 Language ID=1033

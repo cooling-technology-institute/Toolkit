@@ -14,8 +14,8 @@ namespace CTIToolkit
         private UnitsSelection _UnitsSelection = UnitsSelection.United_States_Customary_Units_IP;
         private bool _IsDemo = true;
         private string _SerialNumber = "Demo";
-        private string _ActivationDate;
-        private bool _IsActivated = false;
+        //private string _ActivationDate;
+        //private bool _IsActivated = false;
 
         public UnitsSelection UnitsSelection
         {
@@ -96,22 +96,22 @@ namespace CTIToolkit
                 _SerialNumber = serialNumber;
             }
 
-            string activationDate;
-            try
-            {
-                activationDate = Properties.Settings.Default.ActivationDate;
-                if (!string.IsNullOrWhiteSpace(activationDate))
-                {
-                    _IsActivated = true;
-                    _ActivationDate = activationDate;
-                }
-                else
-                {
-                    // message box need to activate
-                }
-            }
-            catch
-            { }
+            //string activationDate;
+            //try
+            //{
+            //    activationDate = Properties.Settings.Default.ActivationDate;
+            //    if (!string.IsNullOrWhiteSpace(activationDate))
+            //    {
+            //        _IsActivated = true;
+            //        _ActivationDate = activationDate;
+            //    }
+            //    else
+            //    {
+            //        // message box need to activate
+            //    }
+            //}
+            //catch
+            //{ }
         }
 
         // 012345678901234567890
