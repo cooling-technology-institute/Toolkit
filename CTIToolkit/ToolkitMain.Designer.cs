@@ -216,7 +216,7 @@
             this.AboutMenuItem.Name = "AboutMenuItem";
             this.AboutMenuItem.Size = new System.Drawing.Size(145, 22);
             this.AboutMenuItem.Text = "About";
-            this.AboutMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
+            this.AboutMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem1_Click);
             // 
             // helpProvider1
             // 
@@ -365,6 +365,7 @@
             this.Name = "ToolkitMain";
             this.helpProvider1.SetShowHelp(this, true);
             this.Text = "Cooling Technology Institute Toolkit";
+            this.Load += new System.EventHandler(this.ToolkitMain_Load);
             this.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.ToolkitMain_HelpRequested);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

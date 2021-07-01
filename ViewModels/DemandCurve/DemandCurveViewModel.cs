@@ -138,7 +138,6 @@ namespace ViewModels
 
         public bool OpenDataFile(string fileName)
         {
-            StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
 
             DataFileName = fileName;
@@ -187,7 +186,6 @@ namespace ViewModels
 
         public bool OpenNewDataFile(string fileName)
         {
-            StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
             ErrorMessage = string.Empty;
 

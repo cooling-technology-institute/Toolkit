@@ -15,6 +15,8 @@ namespace CTIToolkit
         public ApplicationSettings ApplicationSettings = new ApplicationSettings();
 
         string HelpFilename { get; set; }
+        string InputFilename { get; set; }
+        int TabControlIndex { get; set; }
 
         PsychrometricsTabPage PsychrometricsUserControl { get; set; }
         MerkelTabPage MerkelUserControl { get; set; }
@@ -56,11 +58,53 @@ namespace CTIToolkit
             TabPage mechanicalDraftPerformanceCurveTabPage = new TabPage("Mechanical Draft Performance Curve");
             mechanicalDraftPerformanceCurveTabPage.Controls.Add(MechanicalDraftPerformanceCurveUserControl);
             CalculationTabControl.TabPages.Add(mechanicalDraftPerformanceCurveTabPage);
+
+            string[] args = Environment.GetCommandLineArgs();
+            InputFilename = string.Empty;
+            if ((args != null) && (args.Length >= 2))
+            {
+                InputFilename = args[1];
+                if (!string.IsNullOrWhiteSpace(InputFilename))
+                {
+                    string extension = Path.GetExtension(InputFilename);
+                    if (!string.IsNullOrWhiteSpace(extension))
+                    {
+                        if(extension.ToLower() == "." + PsychrometricsUserControl.DefaultExt)
+                        {
+                            TabControlIndex = 0;
+                        }
+                        else if (extension.ToLower() == "." + MerkelUserControl.DefaultExt)
+                        {
+                            TabControlIndex = 1;
+                        }
+                        else if (extension.ToLower() == "." + DemandCurveUserControl.DefaultExt)
+                        {
+                            TabControlIndex = 2;
+                        }
+                        else if (extension.ToLower() == "." + MechanicalDraftPerformanceCurveUserControl.DefaultExt)
+                        {
+                            TabControlIndex = 3;
+                        }
+                        else
+                        {
+                            InputFilename = string.Empty;
+                        }
+                    }
+                    else
+                    {
+                        InputFilename = string.Empty;
+                    }
+                }
+                else
+                {
+                    InputFilename = string.Empty;
+                }
+            }
         }
 
-        private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void AboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            About about = new About();
+            About about = new About(ApplicationSettings);
             about.ShowDialog();
         }
 
@@ -389,6 +433,27 @@ namespace CTIToolkit
                 default:
                     Help.ShowHelp(this, HelpFilename);
                     break;
+            }
+        }
+
+        private void ToolkitMain_Load(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(InputFilename))
+            {
+                CalculationTabControl.SelectedIndex = TabControlIndex;
+                foreach (Control control in CalculationTabControl.TabPages[CalculationTabControl.SelectedIndex].Controls)
+                {
+                    if (control is CalculatePrintUserControl)
+                    {
+                        CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
+
+                        if (!calculatePrintUserControl.OpenDataFile(InputFilename))
+                        {
+                            MessageBox.Show(calculatePrintUserControl.ErrorMessage, "File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        break;
+                    }
+                }
             }
         }
     }

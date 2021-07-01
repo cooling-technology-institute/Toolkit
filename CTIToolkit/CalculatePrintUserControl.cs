@@ -33,7 +33,7 @@ namespace CTIToolkit
         
         public string BuildDefaultFileName()
         {
-            string dataFileName = string.Empty;
+            string dataFileName;
             string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
             int i = 1;
 
@@ -88,7 +88,7 @@ namespace CTIToolkit
             {
                 x1 += widths[i];
             }
-            float x2 = x1 + width;
+            //float x2 = x1 + width;
 
             using (Font font = new Font("Times New Roman", 12, (row == 0) ? FontStyle.Bold : FontStyle.Regular, GraphicsUnit.Point))
             {

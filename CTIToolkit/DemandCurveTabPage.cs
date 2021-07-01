@@ -718,15 +718,6 @@ namespace CTIToolkit
             }
         }
 
-        private void Chart_PostPaint(object sender, ChartPaintEventArgs e)
-        {
-            if (sender is Chart)
-            {
-                Chart chart = (Chart)sender;
-
-            }
-        }
-
         private void UserTargetButton_Click(object sender, EventArgs e)
         {
 

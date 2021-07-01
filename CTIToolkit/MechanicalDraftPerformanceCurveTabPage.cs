@@ -26,6 +26,7 @@ namespace CTIToolkit
         {
             InitializeComponent();
 
+            IsDemo = applicationSettings.IsDemo;
             IsInternationalSystemOfUnits_SI = (applicationSettings.UnitsSelection == UnitsSelection.International_System_Of_Units_SI);
             ErrorMessage = string.Empty;
 
@@ -517,7 +518,7 @@ namespace CTIToolkit
         private float DrawTowerDesignCurveData(PrintPageEventArgs e, float y)
         {
             float totalHeight = 0;
-            float height = 0;
+            float height;
 
             if (PrintControl.PageIndex == 0)
             {
@@ -625,7 +626,7 @@ namespace CTIToolkit
             // Declare DataColumn and DataRow variables.
             DataColumn column;
             column = new DataColumn();
-            column.DataType = System.Type.GetType("System.String");
+            column.DataType = Type.GetType("System.String");
             column.ColumnName = "Parameters";
             dataTable.Columns.Add(column);
 

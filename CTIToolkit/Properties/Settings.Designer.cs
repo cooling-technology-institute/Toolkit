@@ -46,5 +46,29 @@ namespace CTIToolkit.Properties {
                 this["Demo"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SerialNumber {
+            get {
+                return ((string)(this["SerialNumber"]));
+            }
+            set {
+                this["SerialNumber"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ActivationDate {
+            get {
+                return ((string)(this["ActivationDate"]));
+            }
+            set {
+                this["ActivationDate"] = value;
+            }
+        }
     }
 }

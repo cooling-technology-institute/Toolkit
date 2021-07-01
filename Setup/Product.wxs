@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
-     xmlns:netfs="http://schemas.microsoft.com/wix/NetFxExtension">
+     xmlns:netfs="http://schemas.microsoft.com/wix/NetFxExtension"
+    xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
+     >
+
+  <?define NetFx48MinRelease = 528040 ?>
+  <?define NetFx48WebLink = https://go.microsoft.com/fwlink/?LinkId=2085155 ?>
+  <?define NetFx48RedistLink = https://go.microsoft.com/fwlink/?linkid=2088631 ?>
+  <?define NetFx48EulaLink = https://referencesource.microsoft.com/license.html ?>
+  
   <!--
   <Bundle Id="Bundle1" UpgradeCode="">
       <PayloadGroup Id="NetFx452RedistPayload">
@@ -14,7 +22,6 @@
   </Bundle>
   -->
   <Product Id="*" Name="CTI Toolkit 4.0" Language="1033" Version="4.0.0.0" Manufacturer="Cooling Technology Institute" UpgradeCode="555501F8-744F-4400-B406-AD28A89EDF38">
-		
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
@@ -41,20 +48,13 @@
           </Directory>
         </Directory>
       </Directory>
-      <Directory Id="AppDataFolder">
-        <Directory Id="MyAppFolder" Name="!(bind.property.ProductName)">
-          <Component Id="SerialNumberFile">
-            <File Source="Files\test1.txt" />
-          </Component>
-        </Directory>
-      </Directory>
     </Directory>
 
     <Feature Id="ProductFeature" Title="Setup" Level="1">
         <ComponentGroupRef Id="ProductComponents" />
         <ComponentGroupRef Id="DocumentComponents" />
         <ComponentGroupRef Id="RegistryEntries" />
-      <!--<ComponentRef Id="ApplicationShortcut" />-->
+        <!--<ComponentRef Id="ApplicationShortcut" />-->
     </Feature>
 
     <Icon Id="CTIToolkit.ico" SourceFile="$(var.CTIToolkit.ProjectDir)CTIToolkit.ico" />
@@ -74,12 +74,16 @@
     <Property Id="SERIALNUMBER" Secure="yes" />
     <Property Id="ARPHELPLINK" Value="http://www.cti.org/toolkit" />
 
-    <!--
-    <PropertyRef Id="NetFramework48"/>
-    <Condition Message="[ProductName] requires that the .NET Framework 4.8.3 or higher is installed.">
-      <![CDATA[Installed OR NetFramework48 >= #379893]]>
+    <PropertyRef Id="WIXNETFX4RELEASEINSTALLED" />
+    <Property Id="WIX_IS_NETFRAMEWORK_48_OR_LATER_INSTALLED" Secure="yes" />
+    <SetProperty Id="WIX_IS_NETFRAMEWORK_48_OR_LATER_INSTALLED" Value="1" After="AppSearch">
+      WIXNETFX4RELEASEINSTALLED >= "#$(var.NetFx48MinRelease)"
+    </SetProperty>
+
+    <Condition Message="[ProductName] requires that the .NET Framework 4.8 or higher is installed. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR WIX_IS_NETFRAMEWORK_48_OR_LATER_INSTALLED]]>
     </Condition>
-    -->
+
   </Product>
 
   <Fragment>
@@ -101,42 +105,101 @@
           <netfx:NativeImage Id="$(var.CTIToolkit.TargetFileName)" Platform="32bit" Priority="0" AppBaseDirectory="INSTALLFOLDER"/>
           -->
         </File>
-<!--<Component Id="MyApp.exe" Directory="APPLICATIONFOLDER" Guid="*">
-    <File Id="MyApp.exe" Name="MyApp.exe" KeyPath="yes"/>
 
-    <Shortcut Id="startmenuShortcut" Directory="ProgramMenuFolder" Name="MyApp" Icon="$(var.product).ico" IconIndex="0" WorkingDirectory="APPLICATIONFOLDER" Advertise="yes" />
+        <!-- Capabilities keys for Vista/7 "Set Program Access and Defaults" -->
+        <RegistryValue Root="HKLM" Key="SOFTWARE\ctitoolkit\Capabilities" Name="ApplicationDescription" Value="CTI Toolkit" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\ctitoolkit\Capabilities" Name="ApplicationIcon" Value="[INSTALLFOLDER]ctitoolkit.exe,0" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\ctitoolkit\Capabilities" Name="ApplicationName" Value="[ProductName]" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\ctitoolkit\Capabilities\DefaultIcon" Value="[INSTALLFOLDER]ctitoolkit.exe,1" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\ctitoolkit\Capabilities\FileAssociations" Name=".mdpc" Value="ctitoolkit.MechanicalDraftPerformanceCurveDataFile" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\ctitoolkit\Capabilities\FileAssociations" Name=".dc" Value="ctitoolkit.DemandCurveDataFile" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\ctitoolkit\Capabilities\FileAssociations" Name=".mrkl" Value="ctitoolkit.MerkelDataFile" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\ctitoolkit\Capabilities\FileAssociations" Name=".psy" Value="ctitoolkit.PsychrometricsDataFile" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\ctitoolkit\Capabilities\MIMEAssociations" Name="application/mdpc" Value="ctitoolkit.MechanicalDraftPerformanceCurveDataFile" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\ctitoolkit\Capabilities\MIMEAssociations" Name="application/dc" Value="ctitoolkit.DemandCurveDataFile" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\ctitoolkit\Capabilities\MIMEAssociations" Name="application/mrkl" Value="ctitoolkit.MerkelDataFile" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\ctitoolkit\Capabilities\MIMEAssociations" Name="application/psy" Value="ctitoolkit.PsychrometricsDataFile" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\ctitoolkit\Capabilities\shell\Open\command" Value="&quot;[INSTALLFOLDER]ctitoolkit.exe&quot; &quot;%1&quot;" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\RegisteredApplications" Name="ctitoolkit" Value="SOFTWARE\ctitoolkit\Capabilities" Type="string" />
 
-    --><!-- Capabilities keys for Vista/7 "Set Program Access and Defaults" --><!--
-    <RegistryValue Root="HKLM" Key="SOFTWARE\MyApp\Capabilities" Name="ApplicationDescription" Value="!(loc.ApplicationDescription)" Type="string" />
-    <RegistryValue Root="HKLM" Key="SOFTWARE\MyApp\Capabilities" Name="ApplicationIcon" Value="[APPLICATIONFOLDER]MyApp.exe,0" Type="string" />
-    <RegistryValue Root="HKLM" Key="SOFTWARE\MyApp\Capabilities" Name="ApplicationName" Value="!(loc.ApplicationName)" Type="string" />
-    <RegistryValue Root="HKLM" Key="SOFTWARE\MyApp\Capabilities\DefaultIcon" Value="[APPLICATIONFOLDER]MyApp.exe,1" Type="string" />
-    <RegistryValue Root="HKLM" Key="SOFTWARE\MyApp\Capabilities\FileAssociations" Name=".xyz" Value="MyApp.Document" Type="string" />
-    <RegistryValue Root="HKLM" Key="SOFTWARE\MyApp\Capabilities\MIMEAssociations" Name="application/xyz" Value="MyApp.Document" Type="string" />
-    <RegistryValue Root="HKLM" Key="SOFTWARE\MyApp\Capabilities\shell\Open\command" Value="&quot;[APPLICATIONFOLDER]MyApp.exe&quot; &quot;%1&quot;" Type="string" />
-    <RegistryValue Root="HKLM" Key="SOFTWARE\RegisteredApplications" Name="MyApp" Value="SOFTWARE\MyApp\Capabilities" Type="string" />
+        <!-- App Paths to support Start,Run -> "ctitoolkit" -->
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\ctitoolkit.exe" Value="[!ctitoolkit.exe]" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\ctitoolkit.exe" Name="Path" Value="[INSTALLFOLDER]" Type="string" />
 
-    --><!-- App Paths to support Start,Run -> "myapp" --><!--
-    <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\MyApp.exe" Value="[!MyApp.exe]" Type="string" />
-    <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\MyApp.exe" Name="Path" Value="[APPLICATIONFOLDER]" Type="string" />
+        <!-- Extend to the "open with" list + Win7 jump menu pinning  -->
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\ctitoolkit.exe\SupportedTypes" Name=".mdpc" Value="" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\ctitoolkit.exe\SupportedTypes" Name=".dc" Value="" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\ctitoolkit.exe\SupportedTypes" Name=".mrkl" Value="" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\ctitoolkit.exe\SupportedTypes" Name=".psy" Value="" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\ctitoolkit.exe\shell\open" Name="FriendlyAppName" Value="[ProductName]" Type="string" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\ctitoolkit.exe\shell\open\command" Value="&quot;[INSTALLFOLDER]ctitoolkit.exe&quot; &quot;%1&quot;" Type="string" />
 
-    --><!-- Extend to the "open with" list + Win7 jump menu pinning  --><!--
-    <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\MyApp.exe\SupportedTypes" Name=".xyz" Value="" Type="string" />
-    <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Applications\MyApp.exe\shell\open" Name="FriendlyAppName" Value="!(loc.ApplicationName)" Type="string" />
+        <!-- ctitoolkit.MechanicalDraftPerformanceCurveDataFile ProgID -->
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\ctitoolkit.MechanicalDraftPerformanceCurveDataFile" Name="FriendlyTypeName" Value="Mechanical Draft Performance Curve Data File" Type="string" />
+        <ProgId Id="ctitoolkit.MechanicalDraftPerformanceCurveDataFile" Description="Mechanical Draft Performance Curve Data File" Icon="CTIToolkit.ico" Advertise="yes">
+          <Extension Id="mdpc">
+            <Verb Id="open" Command="Open With CTIToolkit" Argument="&quot;%1&quot;" />
+            <MIME Advertise="yes" ContentType="application/mdpc" Default="yes" />
+          </Extension>
+        </ProgId>
+        <!-- ctitoolkit.DemandCurveDataFile ProgID -->
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\ctitoolkit.DemandCurveDataFile" Name="FriendlyTypeName" Value="Demand Curve Data File" Type="string" />
+        <ProgId Id="ctitoolkit.DemandCurveDataFile" Description="Demand Curve Data File" Icon="CTIToolkit.ico" Advertise="yes">
+          <Extension Id="dc">
+            <Verb Id="open" Command="Open With CTIToolkit" Argument="&quot;%1&quot;" />
+            <MIME Advertise="yes" ContentType="application/dc" Default="yes" />
+          </Extension>
+        </ProgId>
+        <!-- ctitoolkit.MerkelDataFile ProgID -->
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\ctitoolkit.MerkelDataFile" Name="FriendlyTypeName" Value="Merkel Data File" Type="string" />
+        <ProgId Id="ctitoolkit.MerkelDataFile" Description="Merkel Data File" Icon="CTIToolkit.ico" Advertise="yes">
+          <Extension Id="mrkl">
+            <Verb Id="open" Command="Open With CTIToolkit" Argument="&quot;%1&quot;" />
+            <MIME Advertise="yes" ContentType="application/mrkl" Default="yes" />
+          </Extension>
+        </ProgId>
+        <!-- ctitoolkit.PsychrometricsDataFile ProgID -->
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\ctitoolkit.PsychrometricsDataFile" Name="FriendlyTypeName" Value="Psychrometrics Data File" Type="string" />
+        <ProgId Id="ctitoolkit.PsychrometricsDataFile" Description="Psychrometrics Data File" Icon="CTIToolkit.ico" Advertise="yes">
+          <Extension Id="psy">
+            <Verb Id="open" Command="Open With CTIToolkit" Argument="&quot;%1&quot;" />
+            <MIME Advertise="yes" ContentType="application/psy" Default="yes" />
+          </Extension>
+        </ProgId>
 
-    --><!-- MyApp.Document ProgID --><!--
-    <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\MyApp.Document" Name="FriendlyTypeName" Value="!(loc.DescXYZ)" Type="string" />
-    <ProgId Id="MyApp.Document" Description="!(loc.DescXYZ)" Icon="filetype.ico" Advertise="yes">
-        <Extension Id="xyz">
-            <Verb Id="open" Command="!(loc.ExplorerMenuOpenXYZ)" Argument="&quot;%1&quot;" />
-            <MIME Advertise="yes" ContentType="application/xyz" Default="yes" />
-        </Extension>
-    </ProgId>
+        <!-- Optional: add an 'Edit with CTI Toolkit' to 'right click' even when not associated -->
+        <!--
+    <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\SystemFileAssociations\.mdpc\shell\edit.ctitoolkit.exe" Value="Edit with CTI Toolkit" Type="string" />
+    <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\SystemFileAssociations\.mdpc\shell\edit.ctitoolkit.exe\command" Value="&quot;[INSTALLFOLDER]ctitoolkit.exe&quot; &quot;%1&quot;" Type="string" />
+    -->
+        <util:XmlFile
+          Id="UpdateSerialNumber"
+          Action="setValue"
+          File="[INSTALLFOLDER]App.config"
+          SelectionLanguage="XPath"
+          Permanent="yes"
+          ElementPath="/configuration/userSettings/CTIToolkit.Properties.Settings/setting"
+          Name="SerialNumber"
+          Value="[SERIALNUMBER]" />
+        <util:XmlFile
+          Id="UpdateEmail"
+          Action="setValue"
+          File="[INSTALLFOLDER]App.config"
+          SelectionLanguage="XPath"
+          Permanent="yes"
+          ElementPath="/configuration/userSettings/CTIToolkit.Properties.Settings/setting"
+          Name="Email"
+          Value="[EMAIL]" />
+        <util:XmlFile
+          Id="UpdateCompany"
+          Action="setValue"
+          File="[INSTALLFOLDER]App.config"
+          SelectionLanguage="XPath"
+          Permanent="yes"
+          ElementPath="/configuration/userSettings/CTIToolkit.Properties.Settings/setting"
+          Name="Company"
+          Value="[COMPANYNAME]" />
 
-    --><!-- Optional: add an 'Edit with XYZ' to 'right click' even when not associated --><!--
-    <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\SystemFileAssociations\.xyz\shell\edit.MyApp.exe" Value="!(loc.ExplorerMenuEditXYZ)" Type="string" />
-    <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\SystemFileAssociations\.xyz\shell\edit.MyApp.exe\command" Value="&quot;[APPLICATIONFOLDER]MyApp.exe&quot; &quot;%1&quot;" Type="string" />
-</Component>-->      
       </Component>
       <Component Id="File_$(var.CalculationLibrary.TargetFileName)" Guid='{804C82F6-BD57-4A0B-B7A0-5A421B153213}' Directory="INSTALLFOLDER">
         <File Id='$(var.CalculationLibrary.TargetFileName)' Name='$(var.CalculationLibrary.TargetFileName)' DiskId='1' Source='$(var.CalculationLibrary.TargetPath)' KeyPath='yes' Checksum='yes'>
@@ -214,13 +277,9 @@
           <RegistryValue Type='string' Key='Version' Value='[ProductVersion]' KeyPath='no' />
           <RegistryValue Type='string' Key='InstallPath' Value='[INSTALLFOLDER]' KeyPath='no' />
           <RegistryValue Type='string' Key='SerialNumber' Value='[SERIALNUMBER]' KeyPath='no' />
-<!--
-<Registry Id='DCIcon1' Root='HKCR' Key='.dc' Action='write' Type='string' Value='CTIToolkit.DemandCurveFile' />
-<Registry Id='DCIcon2' Root='HKCR' Key='CTIToolkit.dcfile' Action='write' Type='string' Value='CTI Toolkit Demand Curve file' />
-<Registry Id='DCIcon3' Root='HKCR' Key='CTIToolkit.dcfile\DefaultIcon' Action='write' Type='string' Value='[INSTALLDIR]$(var.CTIToolkit.TargetFileName),1' />
--->
         </RegistryKey>
       </Component>
     </ComponentGroup>
   </Fragment>
+
 </Wix>

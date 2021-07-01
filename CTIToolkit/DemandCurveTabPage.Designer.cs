@@ -545,7 +545,6 @@
             this.Chart.SuppressExceptions = true;
             this.Chart.TabIndex = 12;
             this.Chart.Text = "DemandCurveChart";
-            this.Chart.PostPaint += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ChartPaintEventArgs>(this.Chart_PostPaint);
             this.Chart.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Chart_MouseClick);
             this.Chart.Resize += new System.EventHandler(this.Chart_Resize);
             // 

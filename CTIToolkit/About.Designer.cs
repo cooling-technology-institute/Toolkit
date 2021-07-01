@@ -39,7 +39,7 @@
             this.websiteLabel = new System.Windows.Forms.Label();
             this.demoWarning = new System.Windows.Forms.RichTextBox();
             this.setSerialNumberButton = new System.Windows.Forms.Button();
-            this.setSerialNumberInput = new System.Windows.Forms.TextBox();
+            this.SerialNumberInput = new System.Windows.Forms.TextBox();
             this.setSerialNumberInputLabel = new System.Windows.Forms.Label();
             this.ctiLinkLabel = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
@@ -140,14 +140,14 @@
             this.setSerialNumberButton.TabIndex = 10;
             this.setSerialNumberButton.Text = "Set Serial Number";
             this.setSerialNumberButton.UseVisualStyleBackColor = true;
-            this.setSerialNumberButton.Click += new System.EventHandler(this.demoSetSerialNumber_Click);
+            this.setSerialNumberButton.Click += new System.EventHandler(this.SetSerialNumber_Click);
             // 
             // setSerialNumberInput
             // 
-            this.setSerialNumberInput.Location = new System.Drawing.Point(312, 103);
-            this.setSerialNumberInput.Name = "setSerialNumberInput";
-            this.setSerialNumberInput.Size = new System.Drawing.Size(200, 20);
-            this.setSerialNumberInput.TabIndex = 11;
+            this.SerialNumberInput.Location = new System.Drawing.Point(312, 103);
+            this.SerialNumberInput.Name = "setSerialNumberInput";
+            this.SerialNumberInput.Size = new System.Drawing.Size(200, 20);
+            this.SerialNumberInput.TabIndex = 11;
             // 
             // setSerialNumberInputLabel
             // 
@@ -167,7 +167,7 @@
             this.ctiLinkLabel.TabIndex = 13;
             this.ctiLinkLabel.TabStop = true;
             this.ctiLinkLabel.Text = "http://www.cti.org";
-            this.ctiLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ctiLinkLabel_LinkClicked);
+            this.ctiLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.CtiLinkLabel_LinkClicked);
             // 
             // label2
             // 
@@ -188,7 +188,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ctiLinkLabel);
             this.Controls.Add(this.setSerialNumberInputLabel);
-            this.Controls.Add(this.setSerialNumberInput);
+            this.Controls.Add(this.SerialNumberInput);
             this.Controls.Add(this.setSerialNumberButton);
             this.Controls.Add(this.demoWarning);
             this.Controls.Add(this.websiteLabel);
@@ -220,7 +220,7 @@
         private System.Windows.Forms.Label websiteLabel;
         private System.Windows.Forms.RichTextBox demoWarning;
         private System.Windows.Forms.Button setSerialNumberButton;
-        private System.Windows.Forms.TextBox setSerialNumberInput;
+        private System.Windows.Forms.TextBox SerialNumberInput;
         private System.Windows.Forms.Label setSerialNumberInputLabel;
         private System.Windows.Forms.LinkLabel ctiLinkLabel;
         private System.Windows.Forms.Label label2;
