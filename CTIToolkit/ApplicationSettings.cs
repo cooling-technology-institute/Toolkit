@@ -122,6 +122,7 @@ namespace CTIToolkit
 
         // 012345678901234567890
         // aa99-a999-a9aa
+        // BB00-B000-B0BB beta serial number
         public static bool TestSerialNumber(string serialNumber)
         {
             bool isGood = (serialNumber.Length == 14);
