@@ -37,11 +37,13 @@
 			  <Publish Event="SpawnDialog" Value="CancelDlg">1</Publish>
 		  </Control>
 		  <Control Id="Title" Type="Text" X="15" Y="6" Width="200" Height="15" Transparent="yes" NoPrefix="yes" Text="{\WixUI_Font_Title}User Registration" />
-		  <Control Id="Description" Type="Text" X="25" Y="23" Width="280" Height="15" Transparent="yes" NoPrefix="yes" Text="Please enter your name, email address, company name, and serial number." />
-		  <Control Id="BannerBitmap" Type="Bitmap" X="0" Y="0" Width="370" Height="44" TabSkip="no" Text="!(loc.InstallDirDlgBannerBitmap)" />
+		  <!--<Control Id="Description" Type="Text" X="25" Y="23" Width="280" Height="15" Transparent="yes" NoPrefix="yes" Text="Please enter your name, email address, company name, and serial number." />-->
+      <Control Id="Description" Type="Text" X="25" Y="23" Width="280" Height="15" Transparent="yes" NoPrefix="yes" Text="Please enter your serial number." />
+      <Control Id="BannerBitmap" Type="Bitmap" X="0" Y="0" Width="370" Height="44" TabSkip="no" Text="!(loc.InstallDirDlgBannerBitmap)" />
 		  <Control Id="BannerLine" Type="Line" X="0" Y="44" Width="370" Height="0" />
-		  <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="0" />
-		  <Control Id="UserPrompt" Type="Text" X="20" Y="60" Width="290" Height="13" NoPrefix="yes" Text="Your name:" />
+      <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="0" />
+		  <!--
+      <Control Id="UserPrompt" Type="Text" X="20" Y="60" Width="290" Height="13" NoPrefix="yes" Text="Your name:" />
 		  <Control Id="UserField" Type="Edit" X="20" Y="72" Width="290" Height="18" Property="USERNAME" />
 		  <Control Id="EmailPrompt" Type="Text" X="20" Y="93" Width="290" Height="13" NoPrefix="yes" Text="Your email address:" />
 		  <Control Id="EmailField" Type="Edit" X="20" Y="105" Width="290" Height="18" Property="EMAIL" />
@@ -49,7 +51,12 @@
 		  <Control Id="CompanyField" Type="Edit" X="20" Y="138" Width="290" Height="18" Property="COMPANYNAME" />
 		  <Control Id="SerialNumberPrompt" Type="Text" X="20" Y="159" Width="290" Height="13" NoPrefix="yes" Text="Your serial number:" />
 		  <Control Id="SerialNumberField" Type="Edit" X="20" Y="171" Width="290" Height="18" Property="SERIALNUMBER" />
-	  </Dialog>
+      -->
+		  <Control Id="SerialNumberPrompt" Type="Text" X="20" Y="60" Width="290" Height="13" NoPrefix="yes" Text="Your serial number:" />
+		  <Control Id="SerialNumberField" Type="Edit" X="20" Y="72" Width="290" Height="18" Property="SERIALNUMBER" />
+      <Control Id="SerialNumberNotice" Type="Text" X="20" Y="93" Width="290" Height="13" NoPrefix="yes" Text="If you do not have a serial number or do not enter one, the Toolkit will run" />
+      <Control Id="SerialNumberNotice2" Type="Text" X="20" Y="105" Width="290" Height="13" NoPrefix="yes" Text="in 'Demo' mode; which will limit the ranges of input values." />
+      </Dialog>
 
       <Publish Dialog="CustomizeDlg" Control="Back" Event="NewDialog" Value="MaintenanceTypeDlg" Order="1">Installed</Publish>
       <Publish Dialog="CustomizeDlg" Control="Back" Event="NewDialog" Value="UserCompanyDlg" Order="2">NOT Installed</Publish>

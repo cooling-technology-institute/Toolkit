@@ -90,6 +90,7 @@ namespace CTIToolkit
         {
             if (ApplicationSettings.TestSerialNumber(this.serialNumber.Text))
             {
+                ApplicationSettings.SerialNumber = this.serialNumber.Text;
                 this.demoWarning.Visible = false;
                 this.SerialNumberInput.Visible = false;
                 this.setSerialNumberButton.Visible = false;

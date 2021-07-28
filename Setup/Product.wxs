@@ -69,10 +69,10 @@
     <UIRef Id="CustomUI" />
     <!--<Text SourceFile="!(wix.WixUILicenseRtf=$(var.LicenseRtf))" />-->
 
-    <Property Id="USERNAME" Secure="yes" />
+    <!--<Property Id="USERNAME" Secure="yes" />
     <Property Id="COMPANYNAME" Secure="yes" />
+    <Property Id="EMAIL" Secure="yes" />-->
     <Property Id="SERIALNUMBER" Secure="yes" />
-    <Property Id="EMAIL" Secure="yes" />
     <Property Id="ARPHELPLINK" Value="http://www.cti.org/toolkit" />
 
     <PropertyRef Id="WIXNETFX4RELEASEINSTALLED" />
@@ -286,11 +286,11 @@
     <ComponentGroup Id="RegistryEntries" Directory="TARGETDIR">
       <Component Id="Registry_Name" Guid='{ACD2CCB6-B907-4BFC-B3DF-E77FD13301C4}'>
         <RegistryKey Root='HKLM' Key='SOFTWARE\!(bind.property.Manufacturer)\$(var.CTIToolkit)\$(var.Version)'>
-          <RegistryValue Type='string' Key='Name' Value='[USERNAME]' KeyPath='yes' />
-          <RegistryValue Type='string' Key='Company' Value='[COMPANYNAME]' KeyPath='no' />
-          <RegistryValue Type='string' Key='Version' Value='[ProductVersion]' KeyPath='no' />
-          <RegistryValue Type='string' Key='InstallPath' Value='[INSTALLFOLDER]' KeyPath='no' />
-          <RegistryValue Type='string' Key='SerialNumber' Value='[SERIALNUMBER]' KeyPath='no' />
+          <!--<RegistryValue Type='string' Key='Name' Value='[USERNAME]' KeyPath='yes' />
+          <RegistryValue Type='string' Key='Company' Value='[COMPANYNAME]' KeyPath='no' />-->
+          <!--<RegistryValue Type='string' Key='Version' Value='[ProductVersion]' KeyPath='no' />-->
+          <RegistryValue Type='string' Key='InstallPath' Value='[INSTALLFOLDER]' KeyPath='yes' />
+          <!--<RegistryValue Type='string' Key='SerialNumber' Value='[SERIALNUMBER]' KeyPath='no' />-->
         </RegistryKey>
       </Component>
     </ComponentGroup>

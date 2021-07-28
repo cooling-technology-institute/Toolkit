@@ -142,10 +142,10 @@
             this.setSerialNumberButton.UseVisualStyleBackColor = true;
             this.setSerialNumberButton.Click += new System.EventHandler(this.SetSerialNumber_Click);
             // 
-            // setSerialNumberInput
+            // SerialNumberInput
             // 
             this.SerialNumberInput.Location = new System.Drawing.Point(312, 103);
-            this.SerialNumberInput.Name = "setSerialNumberInput";
+            this.SerialNumberInput.Name = "SerialNumberInput";
             this.SerialNumberInput.Size = new System.Drawing.Size(200, 20);
             this.SerialNumberInput.TabIndex = 11;
             // 

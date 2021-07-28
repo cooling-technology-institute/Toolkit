@@ -165,6 +165,7 @@
             this.DocumentationMenuItem.Name = "DocumentationMenuItem";
             this.DocumentationMenuItem.Size = new System.Drawing.Size(102, 20);
             this.DocumentationMenuItem.Text = "Documentation";
+            this.DocumentationMenuItem.Click += new System.EventHandler(this.DocumentationMenuItem_Click);
             // 
             // SettingsMenuItem
             // 

@@ -38,15 +38,20 @@ namespace CTIToolkit
                 if(!string.IsNullOrWhiteSpace(value) && TestSerialNumber(value))
                 {
                     _SerialNumber = value;
-
-                    UpdateSettings();
+                    _IsDemo = false;
                 }
+                else
+                {
+                    _IsDemo = true;
+                }
+                UpdateSettings();
             }
         }
 
         public bool IsDemo
         {
             get { return _IsDemo; }
+            private set { _IsDemo = value; }
         }
 
         private void UpdateSettings()
@@ -86,14 +91,15 @@ namespace CTIToolkit
             catch
             { }
 
-            if (string.IsNullOrWhiteSpace(serialNumber))
+            if (string.IsNullOrWhiteSpace(serialNumber) || !TestSerialNumber(serialNumber))
             {
                 _SerialNumber = string.Empty;
-                _IsDemo = true;
+                IsDemo = true;
             }
             else
             {
                 _SerialNumber = serialNumber;
+                IsDemo = false;
             }
 
             //string activationDate;

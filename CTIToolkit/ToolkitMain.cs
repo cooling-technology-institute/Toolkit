@@ -2,6 +2,7 @@
 
 using CTIToolkit.Properties;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
@@ -35,6 +36,11 @@ namespace CTIToolkit
             helpProvider1.HelpNamespace = HelpFilename;
 
             ApplicationSettings.Read();
+            if(ApplicationSettings.IsDemo)
+            {
+                this.Text = "Cooling Technology Institute Toolkit Demo";
+                MessageBox.Show(this, "The Toolkit is running in Demo mode.", "Demo Mode", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             UpdateUnits(ApplicationSettings.UnitsSelection);
 
             PsychrometricsUserControl = new PsychrometricsTabPage(ApplicationSettings);
@@ -106,6 +112,14 @@ namespace CTIToolkit
         {
             About about = new About(ApplicationSettings);
             about.ShowDialog();
+            if (ApplicationSettings.IsDemo)
+            {
+                this.Text = "Cooling Technology Institute Toolkit Demo";
+            }
+            else
+            {
+                this.Text = "Cooling Technology Institute Toolkit";
+            }
         }
 
         private void UnitedStatesCustomaryUnitsIPToolStripMenuItem_Click(object sender, EventArgs e)
@@ -453,6 +467,32 @@ namespace CTIToolkit
                         }
                         break;
                     }
+                }
+            }
+        }
+
+        private void DocumentationMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Cooling Technology Institute", "CTI Toolkit 4.0");
+                openFileDialog.Filter = "PDF files (*.pdf)|*.pdf|All files (*.*)|*.*";
+                openFileDialog.FilterIndex = 1;
+                openFileDialog.AddExtension = true;
+                openFileDialog.CheckFileExists = true;
+                openFileDialog.CheckPathExists = true;
+                openFileDialog.DefaultExt = "pdf";
+                openFileDialog.Title = "Open PDF File";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    new Process
+                    {
+                        StartInfo = new ProcessStartInfo(openFileDialog.FileName)
+                        {
+                            UseShellExecute = true
+                        }
+                    }.Start();
                 }
             }
         }
