@@ -38,7 +38,7 @@ namespace ViewModels
 
             //data.BarometricPressure = truncit(data.BarometricPressure, 5);
             NameValueUnitsDataTable.AddRow("Barometric Pressure", data.BarometricPressure.ToString("F4"), Units.BarometricPressure);
-            NameValueUnitsDataTable.AddRow("Elevation above MSL", data.Elevation.ToString(), ConstantUnits.Foot);
+            NameValueUnitsDataTable.AddRow("Elevation above MSL", data.Elevation.ToString("F2"), ConstantUnits.Foot);
             NameValueUnitsDataTable.AddRow("Dry Bulb Temperature", data.DryBulbTemperature.ToString("F2"), Units.Temperature);
             NameValueUnitsDataTable.AddRow("Wet Bulb Temperature", data.WetBulbTemperature.ToString("F2"), Units.Temperature);
             NameValueUnitsDataTable.AddRow("Enthalpy", data.Enthalpy.ToString("F4"), Units.Enthalpy);

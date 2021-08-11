@@ -433,8 +433,8 @@
             this.Range3ColdWaterTemperature5.Name = "Range3ColdWaterTemperature5";
             this.Range3ColdWaterTemperature5.Size = new System.Drawing.Size(70, 20);
             this.Range3ColdWaterTemperature5.TabIndex = 4;
-            this.Range3ColdWaterTemperature5.Validating += new System.ComponentModel.CancelEventHandler(this.Range4ColdWaterTemperature5_Validating);
-            this.Range3ColdWaterTemperature5.Validated += new System.EventHandler(this.Range4ColdWaterTemperature5_Validated);
+            this.Range3ColdWaterTemperature5.Validating += new System.ComponentModel.CancelEventHandler(this.Range3ColdWaterTemperature5_Validating);
+            this.Range3ColdWaterTemperature5.Validated += new System.EventHandler(this.Range3ColdWaterTemperature5_Validated);
             // 
             // Range3ColdWaterTemperature6
             // 

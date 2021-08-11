@@ -262,7 +262,7 @@ namespace CalculationLibrary
             Thot = Tcold + merkelCalculationData.Range;
             if (Thot >= Tboil)
             {
-                ErrorMessage = "The calculated Hot water temperature value is greater than or equal to the boiling point.";
+                ErrorMessage = "The calculated Hot Water Temperature value is greater than or equal to the boiling point.";
                 return false;
             }
 
@@ -274,7 +274,7 @@ namespace CalculationLibrary
                 Ha = Hain + X[i] * (Haex - Hain);
                 if (Hw <= Ha)
                 {
-                    ErrorMessage = "The calculated Hw value is less than or equal to the Ha value.";
+                    ErrorMessage = "The L/G value entered produces an out of bounds value of KaV/L."; // "The calculated Hw value is less than or equal to the Ha value.";
                     return false;
                 }
                 KaV += .25 / (Hw - Ha);

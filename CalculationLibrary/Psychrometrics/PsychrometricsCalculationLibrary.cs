@@ -34,6 +34,10 @@ namespace CalculationLibrary
                 {
                     data.BarometricPressure = UnitConverter.ConvertElevationInMetersToKilopascal(data.Elevation);
                 }
+                else
+                {
+                    data.Elevation = UnitConverter.ConvertKilopascalToElevationInMeters(data.BarometricPressure);
+                }
 
                 CalculateProperties(data);
 
@@ -46,7 +50,11 @@ namespace CalculationLibrary
             {
                 if (isElevation)
                 {
-                    data.BarometricPressure = UnitConverter.ConvertElevationInFeetToBarometricPressure(data.Elevation);
+                    data.BarometricPressure = UnitConverter.CalculatePsiToInchesOfMercury(UnitConverter.ConvertElevationInFeetToPressurePSI(data.Elevation));
+                }
+                else
+                {
+                    data.Elevation = UnitConverter.ConvertBarometricPressureToElevationInFeet(data.BarometricPressure);
                 }
 
                 CalculateProperties(data);
@@ -56,7 +64,7 @@ namespace CalculationLibrary
                     data.Enthalpy = -999.0;
                 }
 
-                data.BarometricPressure = UnitConverter.CalculatePsiToInchesOfMercury(data.BarometricPressure);
+                data.BarometricPressure = UnitConverter.ConvertElevationInFeetToPressurePSI(data.Elevation);
             }
 
             return Psychrometrics_CheckCalculationValues(data, out errorMessage);
@@ -66,7 +74,7 @@ namespace CalculationLibrary
         {
             if (isElevation)
             {
-                data.BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertElevationInMetersToKilopascal(data.Elevation) : UnitConverter.ConvertElevationInFeetToBarometricPressure(data.Elevation);
+                data.BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertElevationInMetersToKilopascal(data.Elevation) : UnitConverter.ConvertElevationInFeetToPressurePSI(data.Elevation);
             }
 
             data.WetBulbTemperature = data.DryBulbTemperature;
@@ -91,7 +99,7 @@ namespace CalculationLibrary
 
             if (isElevation)
             {
-                data.BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertElevationInMetersToKilopascal(data.Elevation) : UnitConverter.ConvertElevationInFeetToBarometricPressure(data.Elevation);
+                data.BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertElevationInMetersToKilopascal(data.Elevation) : UnitConverter.ConvertElevationInFeetToPressurePSI(data.Elevation);
             }
 
             EnthalpySearch(true, data);

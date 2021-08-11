@@ -72,6 +72,7 @@
     <Compile Include="SplineUnitTest.cs" />
     <Compile Include="SplintUnitTest.cs" />
     <Compile Include="MechanicalDraftPerformanceCurveCalculationUnitTest.cs" />
+    <Compile Include="CalculatePsychrometricsUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CalculationLibrary\CalculationLibrary.csproj">

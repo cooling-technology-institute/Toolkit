@@ -329,7 +329,7 @@ namespace ViewModels
             }
             else
             {
-                MerkelInputData.BarometricPressureDataValue.UpdateCurrentValue(UnitConverter.CalculatePsiToInchesOfMercury(UnitConverter.ConvertElevationInFeetToBarometricPressure(MerkelInputData.ElevationDataValue.Current)));
+                MerkelInputData.BarometricPressureDataValue.UpdateCurrentValue(UnitConverter.CalculatePsiToInchesOfMercury(UnitConverter.ConvertElevationInFeetToPressurePSI(MerkelInputData.ElevationDataValue.Current)));
             }
         }
 

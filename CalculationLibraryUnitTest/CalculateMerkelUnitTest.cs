@@ -353,5 +353,71 @@ namespace CalculationLibraryUnitTest
             Assert.IsFalse(methodThrew, "Method threw");
             Assert.IsFalse(returnValue, "CalculateMerkel return value");
         }
+
+        [TestMethod]
+        public void IP_HwHaRangeTest()
+        {
+            bool methodThrew = false;
+            bool returnValue = false;
+
+            MerkelCalculationData data = new MerkelCalculationData(true)
+            {
+                IsElevation = true,
+                IsInternationalSystemOfUnits_SI = false,
+                Elevation = 0.0,
+                BarometricPressure = 14.0,
+                HotWaterTemperature = 110.0,
+                ColdWaterTemperature = 84.0,
+                WetBulbTemperature = 80.0,
+                LiquidToGasRatio = 1.754
+            };
+
+            try
+            {
+                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                returnValue = CalculationLibrary.CalculateMerkel(data, true);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.IsFalse(returnValue, "CalculateMerkel return value");
+            Assert.IsTrue(CalculationLibrary.ErrorMessage.Contains("The L/G value entered produces an out of bounds value of KaV/L."), "ErrorMessage value does not match");
+        }
+
+        [TestMethod]
+        public void IP_HotWaterTemperatureBoilingTest()
+        {
+            bool methodThrew = false;
+            bool returnValue = false;
+
+            MerkelCalculationData data = new MerkelCalculationData(true)
+            {
+                IsElevation = true,
+                IsInternationalSystemOfUnits_SI = true,
+                Elevation = 0.0,
+                BarometricPressure = 14.0,
+                HotWaterTemperature = 110.0,
+                ColdWaterTemperature = 84.0,
+                WetBulbTemperature = 80.0,
+                LiquidToGasRatio = 1.754
+            };
+
+            try
+            {
+                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                returnValue = CalculationLibrary.CalculateMerkel(data, true);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.IsFalse(returnValue, "CalculateMerkel return value");
+            Assert.IsTrue(CalculationLibrary.ErrorMessage.Contains("he calculated Hot Water Temperature value is greater than or equal to the boiling point."), "ErrorMessage value does not match");
+        }
     }
 }

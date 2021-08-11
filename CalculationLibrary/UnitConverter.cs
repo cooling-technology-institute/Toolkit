@@ -27,10 +27,10 @@ namespace CalculationLibrary
         const double OneAtmosphere = 101.325;
 
         // Conversion Methods
-        public static double ConvertElevationInFeetToBarometricPressure(double elevation)
+        public static double ConvertElevationInFeetToPressurePSI(double elevation)
         {
-            double barometricPressure = SeaLevelBasePressure * Math.Pow((1.0 - (ElevationConversionFactor * elevation)), ElevationPowerFactor);
-            return barometricPressure;
+            double pressure = SeaLevelBasePressure * Math.Pow((1.0 - (ElevationConversionFactor * elevation)), ElevationPowerFactor);
+            return pressure;
         }
 
         public static double ConvertBarometricPressureToPsi(double barometricPressure)

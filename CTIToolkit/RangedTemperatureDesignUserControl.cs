@@ -472,6 +472,8 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
+            TowerDesignCurveData.Range1ColdWaterTemperatureDataValue1.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue1.Current == 0.0);
+
             if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue1.UpdateValue(Range1ColdWaterTemperature1.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -494,6 +496,8 @@ namespace CTIToolkit
             {
                 IsChanged = true;
             }
+
+            TowerDesignCurveData.Range1ColdWaterTemperatureDataValue2.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue2.Current == 0.0);
 
             if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue2.UpdateValue(Range1ColdWaterTemperature2.Text))
             {
@@ -518,6 +522,8 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
+            TowerDesignCurveData.Range1ColdWaterTemperatureDataValue3.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue3.Current == 0.0);
+
             if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue3.UpdateValue(Range1ColdWaterTemperature3.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -540,6 +546,8 @@ namespace CTIToolkit
             {
                 IsChanged = true;
             }
+
+            TowerDesignCurveData.Range1ColdWaterTemperatureDataValue4.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue4.Current == 0.0);
 
             if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue4.UpdateValue(Range1ColdWaterTemperature4.Text))
             {
@@ -564,6 +572,8 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
+            TowerDesignCurveData.Range1ColdWaterTemperatureDataValue5.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue5.Current == 0.0);
+
             if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue5.UpdateValue(Range1ColdWaterTemperature5.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -586,6 +596,8 @@ namespace CTIToolkit
             {
                 IsChanged = true;
             }
+
+            TowerDesignCurveData.Range1ColdWaterTemperatureDataValue6.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue6.Current == 0.0);
 
             if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue6.UpdateValue(Range1ColdWaterTemperature6.Text))
             {
@@ -610,14 +622,16 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
-            if (!TowerDesignCurveData.Range1ColdWaterTemperatureDataValue6.UpdateValue(Range2ColdWaterTemperature1.Text))
+            TowerDesignCurveData.Range2ColdWaterTemperatureDataValue1.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue1.Current == 0.0);
+
+            if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue1.UpdateValue(Range2ColdWaterTemperature1.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 e.Cancel = true;
                 Range2ColdWaterTemperature1.Select(0, Range2ColdWaterTemperature1.Text.Length);
 
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range2ColdWaterTemperature1, TowerDesignCurveData.Range1ColdWaterTemperatureDataValue6.ErrorMessage);
+                this.errorProvider1.SetError(Range2ColdWaterTemperature1, TowerDesignCurveData.Range2ColdWaterTemperatureDataValue1.ErrorMessage);
             }
         }
 
@@ -632,6 +646,8 @@ namespace CTIToolkit
             {
                 IsChanged = true;
             }
+
+            TowerDesignCurveData.Range2ColdWaterTemperatureDataValue2.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue2.Current == 0.0);
 
             if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue2.UpdateValue(Range2ColdWaterTemperature2.Text))
             {
@@ -656,6 +672,8 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
+            TowerDesignCurveData.Range2ColdWaterTemperatureDataValue3.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue3.Current == 0.0);
+
             if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue3.UpdateValue(Range2ColdWaterTemperature3.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -678,6 +696,8 @@ namespace CTIToolkit
             {
                 IsChanged = true;
             }
+
+            TowerDesignCurveData.Range2ColdWaterTemperatureDataValue4.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue4.Current == 0.0);
 
             if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue4.UpdateValue(Range2ColdWaterTemperature4.Text))
             {
@@ -702,6 +722,8 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
+            TowerDesignCurveData.Range2ColdWaterTemperatureDataValue5.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue5.Current == 0.0);
+
             if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue5.UpdateValue(Range2ColdWaterTemperature5.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -724,6 +746,8 @@ namespace CTIToolkit
             {
                 IsChanged = true;
             }
+
+            TowerDesignCurveData.Range2ColdWaterTemperatureDataValue6.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue6.Current == 0.0);
 
             if (!TowerDesignCurveData.Range2ColdWaterTemperatureDataValue6.UpdateValue(Range2ColdWaterTemperature6.Text))
             {
@@ -748,6 +772,8 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
+            TowerDesignCurveData.Range3ColdWaterTemperatureDataValue1.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue1.Current == 0.0);
+
             if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue1.UpdateValue(Range3ColdWaterTemperature1.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -771,6 +797,8 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
+            TowerDesignCurveData.Range3ColdWaterTemperatureDataValue2.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue2.Current == 0.0);
+
             if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue2.UpdateValue(Range3ColdWaterTemperature2.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -789,10 +817,12 @@ namespace CTIToolkit
 
         private void Range3ColdWaterTemperature3_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-           if (Range3ColdWaterTemperature3.Text != TowerDesignCurveData.Range3ColdWaterTemperatureDataValue3.InputValue)
+            if (Range3ColdWaterTemperature3.Text != TowerDesignCurveData.Range3ColdWaterTemperatureDataValue3.InputValue)
             {
                 IsChanged = true;
             }
+
+            TowerDesignCurveData.Range3ColdWaterTemperatureDataValue3.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue3.Current == 0.0);
 
             if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue3.UpdateValue(Range3ColdWaterTemperature3.Text))
             {
@@ -817,6 +847,8 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
+            TowerDesignCurveData.Range3ColdWaterTemperatureDataValue4.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue4.Current == 0.0);
+
             if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue4.UpdateValue(Range3ColdWaterTemperature4.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -839,6 +871,8 @@ namespace CTIToolkit
             {
                 IsChanged = true;
             }
+
+            TowerDesignCurveData.Range3ColdWaterTemperatureDataValue5.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue5.Current == 0.0);
 
             if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue5.UpdateValue(Range3ColdWaterTemperature5.Text))
             {
@@ -863,6 +897,8 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
+            TowerDesignCurveData.Range3ColdWaterTemperatureDataValue6.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue6.Current == 0.0);
+
             if (!TowerDesignCurveData.Range3ColdWaterTemperatureDataValue6.UpdateValue(Range3ColdWaterTemperature6.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -885,6 +921,8 @@ namespace CTIToolkit
             {
                 IsChanged = true;
             }
+
+            TowerDesignCurveData.Range4ColdWaterTemperatureDataValue1.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue1.Current == 0.0);
 
             if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue1.UpdateValue(Range4ColdWaterTemperature1.Text))
             {
@@ -909,6 +947,8 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
+            TowerDesignCurveData.Range4ColdWaterTemperatureDataValue2.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue2.Current == 0.0);
+
             if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue2.UpdateValue(Range4ColdWaterTemperature2.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -931,6 +971,8 @@ namespace CTIToolkit
             {
                 IsChanged = true;
             }
+
+            TowerDesignCurveData.Range4ColdWaterTemperatureDataValue3.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue3.Current == 0.0);
 
             if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue3.UpdateValue(Range4ColdWaterTemperature3.Text))
             {
@@ -955,6 +997,8 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
+            TowerDesignCurveData.Range4ColdWaterTemperatureDataValue4.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue4.Current == 0.0);
+
             if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue4.UpdateValue(Range4ColdWaterTemperature4.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -977,6 +1021,8 @@ namespace CTIToolkit
             {
                 IsChanged = true;
             }
+
+            TowerDesignCurveData.Range4ColdWaterTemperatureDataValue5.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue5.Current == 0.0);
 
             if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue5.UpdateValue(Range4ColdWaterTemperature5.Text))
             {
@@ -1001,6 +1047,8 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
+            TowerDesignCurveData.Range4ColdWaterTemperatureDataValue6.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue6.Current == 0.0);
+
             if (!TowerDesignCurveData.Range4ColdWaterTemperatureDataValue6.UpdateValue(Range4ColdWaterTemperature6.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -1023,6 +1071,8 @@ namespace CTIToolkit
             {
                 IsChanged = true;
             }
+
+            TowerDesignCurveData.Range5ColdWaterTemperatureDataValue1.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue1.Current == 0.0);
 
             if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue1.UpdateValue(Range5ColdWaterTemperature1.Text))
             {
@@ -1047,6 +1097,8 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
+            TowerDesignCurveData.Range5ColdWaterTemperatureDataValue2.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue2.Current == 0.0);
+
             if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue2.UpdateValue(Range5ColdWaterTemperature2.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -1069,6 +1121,8 @@ namespace CTIToolkit
             {
                 IsChanged = true;
             }
+
+            TowerDesignCurveData.Range5ColdWaterTemperatureDataValue3.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue3.Current == 0.0);
 
             if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue3.UpdateValue(Range5ColdWaterTemperature3.Text))
             {
@@ -1093,6 +1147,8 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
+            TowerDesignCurveData.Range5ColdWaterTemperatureDataValue4.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue4.Current == 0.0);
+
             if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue4.UpdateValue(Range5ColdWaterTemperature4.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -1116,6 +1172,8 @@ namespace CTIToolkit
                 IsChanged = true;
             }
 
+            TowerDesignCurveData.Range5ColdWaterTemperatureDataValue5.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue5.Current == 0.0);
+
             if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue5.UpdateValue(Range5ColdWaterTemperature5.Text))
             {
                 // Cancel the event and select the text to be corrected by the user.
@@ -1138,6 +1196,8 @@ namespace CTIToolkit
             {
                 IsChanged = true;
             }
+
+            TowerDesignCurveData.Range5ColdWaterTemperatureDataValue6.IsZeroValid = (TowerDesignCurveData.WetBulbTemperatureDataValue6.Current == 0.0);
 
             if (!TowerDesignCurveData.Range5ColdWaterTemperatureDataValue6.UpdateValue(Range5ColdWaterTemperature6.Text))
             {
