@@ -29,7 +29,7 @@ namespace CTIToolkit
             InitializeComponent();
 
             // get full path to your startup EXE
-            string exeFile = (new System.Uri(Assembly.GetEntryAssembly().CodeBase)).AbsolutePath;
+            string exeFile = Assembly.GetEntryAssembly().CodeBase;
             // get directory of your EXE file
             string exeDir = Path.GetDirectoryName(exeFile);
             HelpFilename = Path.Combine(exeDir, "ctitoolkit.chm");
