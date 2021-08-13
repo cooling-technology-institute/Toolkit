@@ -461,7 +461,7 @@
             this.OutputGridView.Location = new System.Drawing.Point(6, 19);
             this.OutputGridView.Name = "OutputGridView";
             this.OutputGridView.ReadOnly = true;
-            this.OutputGridView.Size = new System.Drawing.Size(735, 72);
+            this.OutputGridView.Size = new System.Drawing.Size(290, 72);
             this.OutputGridView.TabIndex = 17;
             this.OutputGridView.TabStop = false;
             // 
@@ -470,7 +470,7 @@
             this.CalculatedValuesGroupBox.Controls.Add(this.OutputGridView);
             this.CalculatedValuesGroupBox.Location = new System.Drawing.Point(6, 163);
             this.CalculatedValuesGroupBox.Name = "CalculatedValuesGroupBox";
-            this.CalculatedValuesGroupBox.Size = new System.Drawing.Size(751, 97);
+            this.CalculatedValuesGroupBox.Size = new System.Drawing.Size(302, 97);
             this.CalculatedValuesGroupBox.TabIndex = 31;
             this.CalculatedValuesGroupBox.TabStop = false;
             this.CalculatedValuesGroupBox.Text = "Calculated Values:";

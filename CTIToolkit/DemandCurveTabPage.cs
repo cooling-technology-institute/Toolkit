@@ -369,7 +369,14 @@ namespace CTIToolkit
             //Secondary Y-Axis    Right vertical axis.
             if (DemandCurveViewModel.Approaches.Count > 0)
             {
-                InitializeChart(chart, isPrintPage);
+                chart.ChartAreas[0].AxisX.IsLogarithmic = false;
+                chart.ChartAreas[0].AxisY.IsLogarithmic = false;
+
+                chart.ChartAreas[0].CursorX.SelectionStart = chart.ChartAreas[0].CursorX.SelectionEnd = double.NaN;
+                chart.ChartAreas[0].CursorY.SelectionStart = chart.ChartAreas[0].CursorY.SelectionEnd = double.NaN;
+                chart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
+                chart.ChartAreas[0].AxisY.ScaleView.ZoomReset(0);
+
                 chart.ChartAreas[0].AxisX.IsLogarithmic = true;
                 chart.ChartAreas[0].AxisY.IsLogarithmic = true;
 
