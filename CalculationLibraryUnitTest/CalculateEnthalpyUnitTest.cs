@@ -20,7 +20,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = true,
                 DryBulbTemperature = 13,
                 WetBulbTemperature = 40,
-                BarometricPressure = 14.56
+                PressurePSI = 14.56
             };
 
             try
@@ -49,7 +49,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = false,
                 DryBulbTemperature = 70,
                 WetBulbTemperature = 90,
-                BarometricPressure = 29.145
+                PressurePSI = 29.145
             };
 
             try

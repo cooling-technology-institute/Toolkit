@@ -51,7 +51,7 @@ namespace ViewModels
                     return false;
                 }
 
-                if (!PsychrometricsCalculationLibrary.PsychrometricsCalculation(PsychrometricsInputData.CalculationType, PsychrometricsInputData.IsElevation, PsychrometricsData, out errorMessage))
+                if (!PsychrometricsCalculationLibrary.PsychrometricsCalculation(PsychrometricsInputData.CalculationType, PsychrometricsData, out errorMessage))
                 {
                     return false;
                 }

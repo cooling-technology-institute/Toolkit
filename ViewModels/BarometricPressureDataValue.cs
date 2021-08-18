@@ -92,12 +92,12 @@ namespace ViewModels
                 if (isInternationalSystemOfUnits_SI)
                 {
                     // convert to InternationalSystemOfUnits_IS
-                    Current = UnitConverter.CalculateInchesOfMercuryToKilopascal(Current);
+                    Current = UnitConverter.ConvertInchesOfMercuryToKilopascal(Current);
                 }
                 else
                 {
                     // convert to United States Customary Units (IP)
-                    Current = UnitConverter.CalculateKilopascalToInchesOfMercury(Current);
+                    Current = UnitConverter.ConvertKilopascalToInchesOfMercury(Current);
                 }
             }
 

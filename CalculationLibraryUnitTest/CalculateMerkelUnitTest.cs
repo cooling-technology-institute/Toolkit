@@ -20,7 +20,7 @@ namespace CalculationLibraryUnitTest
             {
                 IsElevation = true,
                 Elevation = 50.0,
-                BarometricPressure = 0.0,
+                PressurePSI = 0.0,
                 HotWaterTemperature = 40.0,
                 ColdWaterTemperature = 30.0,
                 WetBulbTemperature = 25.0,
@@ -52,7 +52,7 @@ namespace CalculationLibraryUnitTest
             {
                 IsElevation = true,
                 Elevation = 444.0,
-                BarometricPressure = 0.0,
+                PressurePSI = 0.0,
                 HotWaterTemperature = 40.0,
                 ColdWaterTemperature = 30.0,
                 WetBulbTemperature = 25.0,
@@ -84,7 +84,7 @@ namespace CalculationLibraryUnitTest
             {
                 IsElevation = true,
                 Elevation = 50.0,
-                BarometricPressure = 0.0,
+                PressurePSI = 0.0,
                 HotWaterTemperature = 100.0,
                 ColdWaterTemperature = 80.0,
                 WetBulbTemperature = 70.0,
@@ -116,7 +116,7 @@ namespace CalculationLibraryUnitTest
             {
                 IsElevation = false,
                 Elevation = 0.0,
-                BarometricPressure = 14.0,
+                PressurePSI = 14.0,
                 HotWaterTemperature = 40.0,
                 ColdWaterTemperature = 30.0,
                 WetBulbTemperature = 25.0,
@@ -148,7 +148,7 @@ namespace CalculationLibraryUnitTest
             {
                 IsElevation = false,
                 Elevation = 0.0,
-                BarometricPressure = 14.0,
+                PressurePSI = 14.0,
                 HotWaterTemperature = 100.0,
                 ColdWaterTemperature = 80.0,
                 WetBulbTemperature = 70.0,
@@ -179,7 +179,7 @@ namespace CalculationLibraryUnitTest
             {
                 IsElevation = true,
                 Elevation = 0.0,
-                BarometricPressure = 0.0,
+                PressurePSI = 0.0,
                 HotWaterTemperature = 40.0,
                 ColdWaterTemperature = 30.0,
                 WetBulbTemperature = 25.0,
@@ -211,7 +211,7 @@ namespace CalculationLibraryUnitTest
             {
                 IsElevation = true,
                 Elevation = 0.0,
-                BarometricPressure = 0.0,
+                PressurePSI = 0.0,
                 HotWaterTemperature = 100.0,
                 ColdWaterTemperature = 80.0,
                 WetBulbTemperature = 70.0,
@@ -242,7 +242,7 @@ namespace CalculationLibraryUnitTest
             {
                 IsElevation = true,
                 Elevation = 0.0,
-                BarometricPressure = 0.0,
+                PressurePSI = 0.0,
                 HotWaterTemperature = 100.0,
                 ColdWaterTemperature = 30.0,
                 WetBulbTemperature = 25.0,
@@ -273,7 +273,7 @@ namespace CalculationLibraryUnitTest
             {
                 IsElevation = true,
                 Elevation = 0.0,
-                BarometricPressure = 0.0,
+                PressurePSI = 0.0,
                 HotWaterTemperature = 212.0,
                 ColdWaterTemperature = 180.0,
                 WetBulbTemperature = 150.0,
@@ -302,7 +302,7 @@ namespace CalculationLibraryUnitTest
             MerkelCalculationData data = new MerkelCalculationData(true)
             {
                 Elevation = 0.0,
-                BarometricPressure = 0.0,
+                PressurePSI = 0.0,
                 HotWaterTemperature = 80.0,
                 ColdWaterTemperature = 75.0,
                 WetBulbTemperature = 74.69,
@@ -333,7 +333,7 @@ namespace CalculationLibraryUnitTest
             {
                 IsElevation = true,
                 Elevation = 0.0,
-                BarometricPressure = 0.0,
+                PressurePSI = 0.0,
                 HotWaterTemperature = 112.0,
                 ColdWaterTemperature = 80.0,
                 WetBulbTemperature = 9.0,
@@ -365,7 +365,7 @@ namespace CalculationLibraryUnitTest
                 IsElevation = true,
                 IsInternationalSystemOfUnits_SI = false,
                 Elevation = 0.0,
-                BarometricPressure = 14.0,
+                PressurePSI = 14.0,
                 HotWaterTemperature = 110.0,
                 ColdWaterTemperature = 84.0,
                 WetBulbTemperature = 80.0,
@@ -398,7 +398,7 @@ namespace CalculationLibraryUnitTest
                 IsElevation = true,
                 IsInternationalSystemOfUnits_SI = true,
                 Elevation = 0.0,
-                BarometricPressure = 14.0,
+                PressurePSI = 14.0,
                 HotWaterTemperature = 110.0,
                 ColdWaterTemperature = 84.0,
                 WetBulbTemperature = 80.0,

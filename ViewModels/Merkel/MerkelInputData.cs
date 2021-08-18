@@ -87,7 +87,7 @@ namespace ViewModels
             data.ColdWaterTemperature = ColdWaterTemperatureDataValue.Current;
             data.WetBulbTemperature = WetBulbTemperatureDataValue.Current;
             data.Elevation = ElevationDataValue.Current;
-            data.BarometricPressure = BarometricPressureDataValue.Current;
+            data.PressurePSI = BarometricPressureDataValue.Current;
             data.LiquidToGasRatio = LiquidToGasRatioDataValue .Current;
         }
 

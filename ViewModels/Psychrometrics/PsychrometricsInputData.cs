@@ -41,13 +41,15 @@ namespace ViewModels
             errorMessage = string.Empty;
 
             data.IsInternationalSystemOfUnits_SI = IsInternationalSystemOfUnits_SI;
+            data.IsElevation = IsElevation;
             data.BarometricPressure = BarometricPressureDataValue.Current;
             data.Elevation = ElevationDataValue.Current;
             data.RootEnthalpy = EnthalpyDataValue.Current;
+            data.Enthalpy = EnthalpyDataValue.Current;
             data.RelativeHumidity = RelativeHumidityDataValue.Current;
             data.WetBulbTemperature = WetBulbTemperatureDataValue.Current;
             data.DryBulbTemperature = DryBulbTemperatureDataValue.Current;
-            
+
             return true;
         }
 

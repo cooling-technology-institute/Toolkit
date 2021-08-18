@@ -329,7 +329,7 @@ namespace ViewModels
             }
             else
             {
-                MerkelInputData.BarometricPressureDataValue.UpdateCurrentValue(UnitConverter.CalculatePsiToInchesOfMercury(UnitConverter.ConvertElevationInFeetToPressurePSI(MerkelInputData.ElevationDataValue.Current)));
+                MerkelInputData.BarometricPressureDataValue.UpdateCurrentValue(UnitConverter.ConvertPsiToInchesOfMercury(UnitConverter.ConvertElevationInFeetToPressurePSI(MerkelInputData.ElevationDataValue.Current)));
             }
         }
 
@@ -341,7 +341,7 @@ namespace ViewModels
             }
             else
             {
-                MerkelInputData.ElevationDataValue.UpdateCurrentValue(UnitConverter.ConvertBarometricPressureToElevationInFeet(UnitConverter.CalculateInchesOfMercuryToPsi(MerkelInputData.BarometricPressureDataValue.Current)));
+                MerkelInputData.ElevationDataValue.UpdateCurrentValue(UnitConverter.ConvertPressurePSIToElevationInFeet(UnitConverter.ConvertInchesOfMercuryToPsi(MerkelInputData.BarometricPressureDataValue.Current)));
             }
         }
 

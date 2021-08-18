@@ -70,7 +70,7 @@ namespace CalculationLibrary
             MerkelCalculationData.WetBulbTemperature = data.DemandCurveData.WetBulbTemperature;
             MerkelCalculationData.Elevation = data.DemandCurveData.Elevation;
             MerkelCalculationData.WetBulbTemperature = data.DemandCurveData.WetBulbTemperature;
-            MerkelCalculationData.BarometricPressure = data.DemandCurveData.BarometricPressure;
+            MerkelCalculationData.PressurePSI = data.DemandCurveData.BarometricPressure;
             ConvertMerkelValues(MerkelCalculationData);
 
             MerkelCalculationData.Range = data.DemandCurveData.Range;

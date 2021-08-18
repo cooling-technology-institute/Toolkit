@@ -21,14 +21,14 @@ namespace CalculationLibrary
                 data.HotWaterTemperature = UnitConverter.ConvertCelsiusToFahrenheit(data.HotWaterTemperature);
                 if (!data.IsElevation)
                 {
-                    data.Elevation = UnitConverter.ConvertMetersToFeet(UnitConverter.ConvertKilopascalToElevationInMeters(data.BarometricPressure));
+                    data.Elevation = UnitConverter.ConvertMetersToFeet(UnitConverter.ConvertKilopascalToElevationInMeters(data.PressurePSI));
                 }
             }
             else
             {
                 if (!data.IsElevation)
                 {
-                    data.Elevation = UnitConverter.ConvertBarometricPressureToElevationInFeet(UnitConverter.CalculateInchesOfMercuryToPsi(data.BarometricPressure));
+                    data.Elevation = UnitConverter.ConvertPressurePSIToElevationInFeet(UnitConverter.ConvertInchesOfMercuryToPsi(data.PressurePSI));
                 }
             }
             data.Range = data.HotWaterTemperature - data.ColdWaterTemperature;

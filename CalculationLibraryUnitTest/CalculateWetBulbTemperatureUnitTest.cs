@@ -18,7 +18,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = true,
-                BarometricPressure = 14.56,
+                PressurePSI = 14.56,
                 DryBulbTemperature = 30.0,
                 RelativeHumidity = 0.24
             };
@@ -45,7 +45,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = true,
-                BarometricPressure = 14.56,
+                PressurePSI = 14.56,
                 DryBulbTemperature = -20.0,
                 RelativeHumidity = 0.24
             };
@@ -72,7 +72,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = true,
-                BarometricPressure = 14.56,
+                PressurePSI = 14.56,
                 DryBulbTemperature = 30.0,
                 RelativeHumidity = 100.0
             };
@@ -99,7 +99,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = true,
-                BarometricPressure = 14.56,
+                PressurePSI = 14.56,
                 DryBulbTemperature = 20.0,
                 RelativeHumidity = 0.18437558304645682
             };
@@ -127,9 +127,9 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = false,
-                BarometricPressure = 29.145,
-                DryBulbTemperature = 70.0,
-                RelativeHumidity = 0.24
+                PressurePSI = 14.696,
+                DryBulbTemperature = 100.0,
+                RelativeHumidity = 42.38
             };
 
             try
@@ -143,7 +143,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(56.616783142089844, WetBulbTemperature, "WetBulbTemperature value does not match");
+            Assert.AreEqual(79.998397827148438, WetBulbTemperature, "WetBulbTemperature value does not match");
         }
 
         [TestMethod]
@@ -154,7 +154,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = false,
-                BarometricPressure = 29.145,
+                PressurePSI = 29.145,
                 DryBulbTemperature = 0.0,
                 RelativeHumidity = 0.24
             };
@@ -181,7 +181,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = false,
-                BarometricPressure = 29.145,
+                PressurePSI = 29.145,
                 DryBulbTemperature = 70.0,
                 RelativeHumidity = 100
             };
@@ -208,7 +208,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = false,
-                BarometricPressure = 29.145,
+                PressurePSI = 29.145,
                 DryBulbTemperature = 70.0,
                 RelativeHumidity = -0.72221645050788952
             };

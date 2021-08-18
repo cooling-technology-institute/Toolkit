@@ -38,9 +38,9 @@ namespace CalculationLibrary
             return SeaLevelBasePressure * barometricPressure / BarometricPressure;
         }
 
-        public static double ConvertBarometricPressureToElevationInFeet(double barometricPressure)
+        public static double ConvertPressurePSIToElevationInFeet(double pressurePSI)
         {
-            double elevation = (Math.Exp (Math.Log(barometricPressure / SeaLevelBasePressure) / ElevationPowerFactor) - 1.0) / ElevationConversionFactor * -1.0;
+            double elevation = (Math.Exp (Math.Log(pressurePSI / SeaLevelBasePressure) / ElevationPowerFactor) - 1.0) / ElevationConversionFactor * -1.0;
             return elevation;
         }
 
@@ -64,27 +64,27 @@ namespace CalculationLibrary
         //    return OneAtmosphere * barometricPressure / SeaLevelBasePressure;
         //}
 
-        public static double ConvertKilopascalToBarometricPressure(double kilopascal)
+        public static double ConvertKilopascalToPressurePSI(double kilopascal)
         {
             return (kilopascal * SeaLevelBasePressure) / OneAtmosphere;
         }
 
-        public static double CalculateInchesOfMercuryToPsi(double inchesOfMercury)
+        public static double ConvertInchesOfMercuryToPsi(double inchesOfMercury)
         {
-            return (inchesOfMercury / BarometricPressure) * SeaLevelBasePressure;
+            return inchesOfMercury / BarometricPressure * SeaLevelBasePressure;
         }
 
-        public static double CalculatePsiToInchesOfMercury(double pressure)
+        public static double ConvertPsiToInchesOfMercury(double pressure)
         {
             return (pressure / SeaLevelBasePressure) * BarometricPressure;
         }
 
-        public static double CalculateInchesOfMercuryToKilopascal(double inchesOfMercury)
+        public static double ConvertInchesOfMercuryToKilopascal(double inchesOfMercury)
         {
             return (inchesOfMercury * 3.386);
         }
 
-        public static double CalculateKilopascalToInchesOfMercury(double kilopascal)
+        public static double ConvertKilopascalToInchesOfMercury(double kilopascal)
         {
             return (kilopascal / 3.386);
         }

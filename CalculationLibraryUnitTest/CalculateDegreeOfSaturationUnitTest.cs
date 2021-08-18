@@ -20,7 +20,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = true,
                 DryBulbTemperature = 13,
                 WetBulbTemperature = 40,
-                BarometricPressure = 14.56
+                PressurePSI = 14.56
             };
 
             try
@@ -36,7 +36,7 @@ namespace CalculationLibraryUnitTest
                 methodThrew = true;
             }
 
-            double expected = data.HumidityRatio / (0.62198 * data.SaturationVaporPressureDryBulb * data.FsDryBulb / (data.BarometricPressure - data.SaturationVaporPressureDryBulb * data.FsDryBulb));
+            double expected = data.HumidityRatio / (0.62198 * data.SaturationVaporPressureDryBulb * data.FsDryBulb / (data.PressurePSI - data.SaturationVaporPressureDryBulb * data.FsDryBulb));
 
             Assert.IsFalse(methodThrew, "Method threw");
             // 9.3371669670174899
@@ -53,7 +53,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = false,
                 DryBulbTemperature = 70,
                 WetBulbTemperature = 90,
-                BarometricPressure = 29.145
+                PressurePSI = 29.145
             };
 
             PsychrometricsData results = new PsychrometricsData()
@@ -61,7 +61,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = data.IsInternationalSystemOfUnits_SI,
                 DryBulbTemperature = data.DryBulbTemperature,
                 WetBulbTemperature = data.WetBulbTemperature,
-                BarometricPressure = data.BarometricPressure
+                PressurePSI = data.PressurePSI
             };
 
 
@@ -78,7 +78,7 @@ namespace CalculationLibraryUnitTest
                 methodThrew = true;
             }
 
-            double expected = data.HumidityRatio / (0.62198 * data.SaturationVaporPressureDryBulb * data.FsDryBulb / (data.BarometricPressure - data.SaturationVaporPressureDryBulb * data.FsDryBulb));
+            double expected = data.HumidityRatio / (0.62198 * data.SaturationVaporPressureDryBulb * data.FsDryBulb / (data.PressurePSI - data.SaturationVaporPressureDryBulb * data.FsDryBulb));
 
             Assert.IsFalse(methodThrew, "Method threw");
             //2.5527236876497503

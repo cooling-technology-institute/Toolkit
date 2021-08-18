@@ -7,8 +7,10 @@ namespace Models
     public class PsychrometricsData : ICloneable
     {
         public bool IsInternationalSystemOfUnits_SI { get; set; }
+        public bool IsElevation { get; set; }
 
-        public double Elevation { set; get; } 
+        public double PressurePSI { set; get; }
+        public double Elevation { set; get; }
         public double WetBulbTemperature { set; get; } // TWB
         public double DryBulbTemperature { set; get; } // TDB
         public double BarometricPressure { set; get; }
@@ -30,12 +32,14 @@ namespace Models
         public PsychrometricsData()
         {
             IsInternationalSystemOfUnits_SI = false;
+            IsElevation = false;
             Clear();
         }
 
         public PsychrometricsData(TowerSpecifications data)
         {
             IsInternationalSystemOfUnits_SI = data.IsInternationalSystemOfUnits_SI;
+            IsElevation = false;
             Clear();
             WetBulbTemperature = data.WetBulbTemperature;
             DryBulbTemperature = data.DryBulbTemperature;

@@ -8,7 +8,7 @@ namespace Models
 
         public bool IsElevation { set; get; }
         public double Elevation { set; get; }
-        public double BarometricPressure { set; get; }
+        public double PressurePSI { set; get; }
 
         public double HotWaterTemperature { set; get; }
         public double ColdWaterTemperature { set; get; }
@@ -28,7 +28,7 @@ namespace Models
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_IS;
             IsElevation = true;
             Elevation = 0.0;
-            BarometricPressure = 0.0;
+            PressurePSI = 0.0;
             HotWaterTemperature = 0.0;
             ColdWaterTemperature = 0.0;
             WetBulbTemperature = 0.0;

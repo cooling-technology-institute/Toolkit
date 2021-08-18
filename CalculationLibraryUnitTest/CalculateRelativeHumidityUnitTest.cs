@@ -20,7 +20,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = true,
                 DryBulbTemperature = 43,
                 WetBulbTemperature = 20,
-                BarometricPressure = 14
+                PressurePSI = 14
             };
 
             try
@@ -50,7 +50,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = false,
                 DryBulbTemperature = 70,
                 WetBulbTemperature = 90,
-                BarometricPressure = 29.145
+                PressurePSI = 29.145
             };
 
             try
@@ -72,7 +72,7 @@ namespace CalculationLibraryUnitTest
         }
 
         [TestMethod]
-        public void SI_CalculateRelativeHumidity_BarometricPressureZeroTest()
+        public void SI_CalculateRelativeHumidity_PressurePSIZeroTest()
         {
             bool methodThrew = false;
 
@@ -81,7 +81,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = true,
                 DryBulbTemperature = 50,
                 WetBulbTemperature = 55,
-                BarometricPressure = 0
+                PressurePSI = 0
             };
 
             try
@@ -103,7 +103,7 @@ namespace CalculationLibraryUnitTest
         }
 
         [TestMethod]
-        public void IP_CalculateRelativeHumidity_BarometricPressureZeroTest()
+        public void IP_CalculateRelativeHumidity_PressurePSIZeroTest()
         {
             bool methodThrew = false;
 
@@ -112,7 +112,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = false,
                 DryBulbTemperature = 50,
                 WetBulbTemperature = 80,
-                BarometricPressure = 0
+                PressurePSI = 0
             };
 
             try
@@ -144,7 +144,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = true,
                 DryBulbTemperature = 50,
                 WetBulbTemperature = 55,
-                BarometricPressure = 30
+                PressurePSI = 30
             };
 
             try
@@ -177,7 +177,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = false,
                 DryBulbTemperature = 50,
                 WetBulbTemperature = 80,
-                BarometricPressure = 20
+                PressurePSI = 20
             };
 
             try
@@ -210,13 +210,13 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = true,
                 DryBulbTemperature = 43,
                 WetBulbTemperature = 20,
-                BarometricPressure = 14
+                PressurePSI = 14
             };
 
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                data.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(true, data.BarometricPressure, data.DryBulbTemperature, data.WetBulbTemperature);
+                data.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(true, data.PressurePSI, data.DryBulbTemperature, data.WetBulbTemperature);
             }
             catch
             {
@@ -237,7 +237,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = false,
                 DryBulbTemperature = 70,
                 WetBulbTemperature = 90,
-                BarometricPressure = 29.145
+                PressurePSI = 29.145
             };
 
             try
@@ -245,7 +245,7 @@ namespace CalculationLibraryUnitTest
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
 
                 CalculationLibrary.CalculateVariables(data);
-                data.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(false, data.BarometricPressure, data.DryBulbTemperature, data.WetBulbTemperature);
+                data.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(false, data.PressurePSI, data.DryBulbTemperature, data.WetBulbTemperature);
             }
             catch
             {

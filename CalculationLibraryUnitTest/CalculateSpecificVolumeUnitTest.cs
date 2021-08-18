@@ -20,7 +20,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = true,
                 DryBulbTemperature = 13,
                 WetBulbTemperature = 40,
-                BarometricPressure = 14.56
+                PressurePSI = 14.56
             };
 
             try
@@ -51,7 +51,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = false,
                 DryBulbTemperature = 70,
                 WetBulbTemperature = 90,
-                BarometricPressure = 29.145
+                PressurePSI = 29.145
             };
 
             try
@@ -74,7 +74,7 @@ namespace CalculationLibraryUnitTest
         }
 
         [TestMethod]
-        public void SI_CalculateSpecificVolume_BarometricPressureZeroTest()
+        public void SI_CalculateSpecificVolume_PressurePSIZeroTest()
         {
             bool methodThrew = false;
 
@@ -83,7 +83,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = true,
                 DryBulbTemperature = 50,
                 WetBulbTemperature = 55,
-                BarometricPressure = 0
+                PressurePSI = 0
             };
 
             try
@@ -106,7 +106,7 @@ namespace CalculationLibraryUnitTest
         }
 
         [TestMethod]
-        public void IP_CalculateSpecificVolume_BarometricPressureZeroTest()
+        public void IP_CalculateSpecificVolume_PressurePSIZeroTest()
         {
             bool methodThrew = false;
 
@@ -115,7 +115,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = false,
                 DryBulbTemperature = 50,
                 WetBulbTemperature = 80,
-                BarometricPressure = 0
+                PressurePSI = 0
             };
 
             try

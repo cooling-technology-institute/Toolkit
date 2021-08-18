@@ -17,7 +17,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = true,
-                BarometricPressure = 98.8,
+                PressurePSI = 98.8,
                 RootEnthalpy = 169.660507
             };
 
@@ -50,7 +50,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = true,
-                BarometricPressure = 98.8,
+                PressurePSI = 98.8,
                 RootEnthalpy = 58.537578190586729
             };
 
@@ -83,7 +83,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = true,
-                BarometricPressure = 101.325,
+                PressurePSI = 101.325,
                 RootEnthalpy = -18.549065779718866
             };
 
@@ -116,7 +116,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = true,
-                BarometricPressure = 101.325,
+                PressurePSI = 101.325,
                 RootEnthalpy = 460.97747901630419
             };
 
@@ -149,7 +149,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = true,
-                BarometricPressure = 101.325,
+                PressurePSI = 101.325,
                 RootEnthalpy = -19.0
             };
 
@@ -182,7 +182,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = true,
-                BarometricPressure = 101.325,
+                PressurePSI = 101.325,
                 RootEnthalpy = 470.0
             };
 
@@ -215,7 +215,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = true,
-                BarometricPressure = 98.8,
+                PressurePSI = 98.8,
                 RootEnthalpy = 169.660507
             };
 
@@ -248,7 +248,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = false,
-                BarometricPressure = 29.921,
+                PressurePSI = 29.921,
                 RootEnthalpy = 69.0
             };
 
@@ -281,7 +281,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI  = false,
-                BarometricPressure = 29.921,
+                PressurePSI = 29.921,
                 RootEnthalpy = 25.210907558259713
             };
 
@@ -314,7 +314,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI  = false,
-                BarometricPressure = 29.921,
+                PressurePSI = 29.921,
                 RootEnthalpy = 0.411782
             };
 
@@ -347,7 +347,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI  = false,
-                BarometricPressure = 29.921,
+                PressurePSI = 29.921,
                 RootEnthalpy = 109.41813
             };
 
@@ -380,7 +380,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI  = false,
-                BarometricPressure = 29.921,
+                PressurePSI = 29.921,
                 RootEnthalpy = 0.4116
             };
 
@@ -413,7 +413,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI  = false,
-                BarometricPressure = 29.921,
+                PressurePSI = 29.921,
                 RootEnthalpy = 109.5
             };
 
@@ -446,7 +446,7 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI  = false,
-                BarometricPressure = 29.921,
+                PressurePSI = 29.921,
                 RootEnthalpy = 69.0
             };
 

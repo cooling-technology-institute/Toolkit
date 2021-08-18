@@ -7,120 +7,74 @@ namespace CalculationLibrary
 {
     public class PsychrometricsCalculationLibrary : CalculationLibrary
     {
-        public bool PsychrometricsCalculation(PsychrometricsCalculationType calculationType, bool isElevation, PsychrometricsData data, out string errorMessage)
+        public bool PsychrometricsCalculation(PsychrometricsCalculationType calculationType, PsychrometricsData data, out string errorMessage)
         {
+            CalculatePressurePSI(data);
+
             switch (calculationType)
             {
                 case PsychrometricsCalculationType.WetBulbTemperature_DryBulbTemperature:
-                    return Psychrometrics_WetBulbTemperature_DryBulbTemperature_Calculation(isElevation, data, out errorMessage);
+                    Psychrometrics_WetBulbTemperature_DryBulbTemperature_Calculation(data);
+                    break;
 
                 case PsychrometricsCalculationType.DryBulbTemperature_RelativeHumidity:
-                    return Psychrometrics_DryBulbTemperature_RelativeHumidity_Calculation(isElevation, data, out errorMessage);
+                    Psychrometrics_DryBulbTemperature_RelativeHumidity_Calculation(data);
+                    break;
 
                 case PsychrometricsCalculationType.Enthalpy:
-                    return Psychrometrics_Enthalpy_Calculation(isElevation, data, out errorMessage);
+                    Psychrometrics_Enthalpy_Calculation(data);
+                    break;
 
                 default:
                     errorMessage = "Calculation Type is invalid";
                     return false;
             }
+
+            return Psychrometrics_CheckCalculationValues(calculationType, data, out errorMessage);
         }
 
-        public bool Psychrometrics_WetBulbTemperature_DryBulbTemperature_Calculation(bool isElevation, PsychrometricsData data, out string errorMessage)
+        public void Psychrometrics_WetBulbTemperature_DryBulbTemperature_Calculation(PsychrometricsData data)
         {
-            if (data.IsInternationalSystemOfUnits_SI)
-            {
-                if (isElevation)
-                {
-                    data.BarometricPressure = UnitConverter.ConvertElevationInMetersToKilopascal(data.Elevation);
-                }
-                else
-                {
-                    data.Elevation = UnitConverter.ConvertKilopascalToElevationInMeters(data.BarometricPressure);
-                }
-
-                CalculateProperties(data);
-
-                if (data.Enthalpy > 6030)
-                {
-                    data.Enthalpy = -999.0;
-                }
-            }
-            else
-            {
-                if (isElevation)
-                {
-                    data.BarometricPressure = UnitConverter.CalculatePsiToInchesOfMercury(UnitConverter.ConvertElevationInFeetToPressurePSI(data.Elevation));
-                }
-                else
-                {
-                    data.Elevation = UnitConverter.ConvertBarometricPressureToElevationInFeet(data.BarometricPressure);
-                }
-
-                CalculateProperties(data);
-
-                if (data.Enthalpy > 2758)
-                {
-                    data.Enthalpy = -999.0;
-                }
-
-                data.BarometricPressure = UnitConverter.ConvertElevationInFeetToPressurePSI(data.Elevation);
-            }
-
-            return Psychrometrics_CheckCalculationValues(data, out errorMessage);
-        }
-
-        public bool Psychrometrics_DryBulbTemperature_RelativeHumidity_Calculation(bool isElevation, PsychrometricsData data, out string errorMessage)
-        {
-            if (isElevation)
-            {
-                data.BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertElevationInMetersToKilopascal(data.Elevation) : UnitConverter.ConvertElevationInFeetToPressurePSI(data.Elevation);
-            }
-
-            data.WetBulbTemperature = data.DryBulbTemperature;
-
             CalculateProperties(data);
+        }
 
+        public void Psychrometrics_DryBulbTemperature_RelativeHumidity_Calculation(PsychrometricsData data)
+        {
+            data.WetBulbTemperature = data.RelativeHumidity;
             data.WetBulbTemperature = CalculateWetBulbTemperature(data);
 
-            if(!data.IsInternationalSystemOfUnits_SI)
-            { 
-                data.BarometricPressure = UnitConverter.CalculatePsiToInchesOfMercury(data.BarometricPressure);
-            }
-
-            return Psychrometrics_CheckCalculationValues(data, out errorMessage);
+            CalculateProperties(data);
         }
 
-        public bool Psychrometrics_Enthalpy_Calculation(bool isElevation, PsychrometricsData data, out string errorMessage)
+        public void Psychrometrics_Enthalpy_Calculation(PsychrometricsData data)
         {
-            data.SpecificVolume = -999;
-            data.Density = -999;
-            data.DewPoint = -999;
-
-            if (isElevation)
-            {
-                data.BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertElevationInMetersToKilopascal(data.Elevation) : UnitConverter.ConvertElevationInFeetToPressurePSI(data.Elevation);
-            }
-
             EnthalpySearch(true, data);
             CalculateProperties(data);
-
-            if (!data.IsInternationalSystemOfUnits_SI)
-            {
-                data.BarometricPressure = UnitConverter.CalculatePsiToInchesOfMercury(data.BarometricPressure);
-            }
-
-            return Psychrometrics_CheckCalculationValues(data, out errorMessage);
         }
 
-        public bool Psychrometrics_CheckCalculationValues(PsychrometricsData data, out string errorMessage)
+        public bool Psychrometrics_CheckCalculationValues(PsychrometricsCalculationType calculationType, PsychrometricsData data, out string errorMessage)
         {
             errorMessage = string.Empty;
 
             if ((data.RelativeHumidity < 0) || (data.Enthalpy < 0) || (data.SpecificVolume < 0) || (data.HumidityRatio < 0))
             {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine("Calculation returned invalid data. Check the input values.");
+
+                switch (calculationType)
+                {
+                    case PsychrometricsCalculationType.WetBulbTemperature_DryBulbTemperature:
+                        sb.AppendLine("Thermodynamically impossible combination of Wet Bulb Temperature and Dry Bulb Temperature. Check the input values.");
+                        break;
+
+                    case PsychrometricsCalculationType.DryBulbTemperature_RelativeHumidity:
+                        sb.AppendLine("Thermodynamically impossible combination of Relative Humidity and Dry Bulb Temperature. Check the input values.");
+                        break;
+
+                    case PsychrometricsCalculationType.Enthalpy:
+                        sb.AppendLine("Thermodynamically impossible combination of Enthalpy and Barometric Pressure. Check the input values.");
+                        break;
+                }
+
                 if (data.RelativeHumidity < 0)
                 {
                     sb.AppendLine(string.Format("Relative Humidity is less than zero. Value: {0}", (data.RelativeHumidity * 100.00).ToString("F2")));
@@ -128,6 +82,12 @@ namespace CalculationLibrary
                 if (data.Enthalpy < 0)
                 {
                     sb.AppendLine(string.Format("Enthalpy is less than zero. Value: {0}", data.Enthalpy.ToString("F4")));
+                }
+                double maxEnthalpy = (data.IsInternationalSystemOfUnits_SI) ? 6030 : 2758;
+                if (data.Enthalpy > maxEnthalpy)
+                {
+                    sb.AppendLine(string.Format("Enthalpy is out of bounds. Value: {0} Maximum value is: {1}", data.Enthalpy.ToString("F4"), maxEnthalpy.ToString("F4")));
+                    data.Enthalpy = -999.0;
                 }
                 if (data.SpecificVolume < 0)
                 {

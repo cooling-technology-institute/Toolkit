@@ -62,7 +62,7 @@ namespace CalculationLibrary
 
             if (isInternationalSystemOfUnits_SI)
             {
-                pressure = UnitConverter.ConvertKilopascalToBarometricPressure(pressure);
+                pressure = UnitConverter.ConvertKilopascalToPressurePSI(pressure);
                 temperature = UnitConverter.ConvertCelsiusToFahrenheit(temperature);
             }
 
@@ -71,10 +71,10 @@ namespace CalculationLibrary
             return (C14 + C10 * Math.Pow(temperature, 2.0) * Math.Pow(pressure, 2.0) + C11 * Math.Pow(temperature, 2.0) * Math.Pow(pressure, 3.0) + C12 * Math.Pow(pressure, 2.0) * Math.Pow(temperature, 3.0));
         }
 
-        public double CalculateSaturatedHumidityRatio(double barometricPressure, double saturationVaporPressure, double fs)
+        public double CalculateSaturatedHumidityRatio(double pressurePSI, double saturationVaporPressure, double fs)
         {
             // Calculate saturated humidity ratio at using saturation pressure (saturationVaporPressure) at tdb and correction factor Fs at tdb
-            double denominator = (barometricPressure - saturationVaporPressure * fs);
+            double denominator = (pressurePSI - saturationVaporPressure * fs);
 
             return (denominator == 0.0) ? 0.0 : 0.62198 * saturationVaporPressure * fs / denominator; //ASHRAE Eq.(21a)
         }
@@ -134,11 +134,11 @@ namespace CalculationLibrary
             data.SaturationVaporPressureDryBulb = CalculateVaporPressure(data.IsInternationalSystemOfUnits_SI, data.DryBulbTemperature);
             data.SaturationVaporPressureWetBulb = CalculateVaporPressure(data.IsInternationalSystemOfUnits_SI, data.WetBulbTemperature);
 
-            data.FsDryBulb = CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.DryBulbTemperature);
-            data.FsWetBulb = CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.WetBulbTemperature);
+            data.FsDryBulb = CalculateFs(data.IsInternationalSystemOfUnits_SI, data.PressurePSI, data.DryBulbTemperature);
+            data.FsWetBulb = CalculateFs(data.IsInternationalSystemOfUnits_SI, data.PressurePSI, data.WetBulbTemperature);
 
-            data.WsWetBulb = CalculateSaturatedHumidityRatio(data.BarometricPressure, data.SaturationVaporPressureWetBulb, data.FsWetBulb);  // 'ASHRAE Eq.(21a)
-            data.WsDryBulb = CalculateSaturatedHumidityRatio(data.BarometricPressure, data.SaturationVaporPressureDryBulb, data.FsDryBulb);  // 'ASHRAE Eq.(21a)
+            data.WsWetBulb = CalculateSaturatedHumidityRatio(data.PressurePSI, data.SaturationVaporPressureWetBulb, data.FsWetBulb);  // 'ASHRAE Eq.(21a)
+            data.WsDryBulb = CalculateSaturatedHumidityRatio(data.PressurePSI, data.SaturationVaporPressureDryBulb, data.FsDryBulb);  // 'ASHRAE Eq.(21a)
         }
 
         // void IPWBsearch (double psi, double RelHumid, double TDB, double& TWB)
@@ -151,7 +151,7 @@ namespace CalculationLibrary
             double relativeHumdityDryBulbTolerance = .00005;
             double relativeHumdityMidpoint;
 
-            double relativeHumdityDryBulb = CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.DryBulbTemperature, data.DryBulbTemperature);
+            double relativeHumdityDryBulb = CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.PressurePSI, data.DryBulbTemperature, data.DryBulbTemperature);
 
             //Calculate saturation value and compare to program and tolerance limits
             if (Math.Abs(relativeHumdityDryBulb - (data.RelativeHumidity / 100)) <= relativeHumdityDryBulbTolerance)
@@ -164,24 +164,25 @@ namespace CalculationLibrary
             double t2 = data.DryBulbTemperature;
             double trtbis = t1;
             double DT = t2 - t1;
-            double tmid;
+            double temperatureMidPoint;
             double relativeHumidity;
-
+            int count = 0;
             do
             {
+                count++;
                 DT /= 2;
-                tmid = trtbis + DT;
-                relativeHumidity = CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, data.DryBulbTemperature, tmid);
-                relativeHumdityMidpoint = data.RelativeHumidity - relativeHumidity;
+                temperatureMidPoint = trtbis + DT;
+                relativeHumidity = CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.PressurePSI, data.DryBulbTemperature, temperatureMidPoint);
+                relativeHumdityMidpoint = (data.RelativeHumidity / 100) - relativeHumidity;
                 if (relativeHumdityMidpoint >= 0.0)
                 {
-                    trtbis = tmid;
+                    trtbis = temperatureMidPoint;
                 }
             }
             while ((Math.Abs(DT) >= temperatureTolerance) && (relativeHumdityMidpoint != 0.0));
 
             // found wet bulb
-            return tmid;
+            return temperatureMidPoint;
         }
 
         // streamlined Enthalpy function for demand curves
@@ -190,7 +191,7 @@ namespace CalculationLibrary
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = isSI,
-                BarometricPressure = pressure,
+                PressurePSI = pressure,
                 DryBulbTemperature = dryBulbTemperature,
                 WetBulbTemperature = wetBulbTemperature
             };
@@ -214,13 +215,13 @@ namespace CalculationLibrary
                 data.WetBulbTemperature = UnitConverter.ConvertCelsiusToFahrenheit(data.WetBulbTemperature);
                 if (!data.IsElevation)
                 {
-                    data.Elevation = UnitConverter.ConvertKilopascalToElevationInMeters(data.BarometricPressure);
+                    data.Elevation = UnitConverter.ConvertKilopascalToElevationInMeters(data.PressurePSI);
                 }
                 data.Elevation = UnitConverter.ConvertMetersToFeet(data.Elevation);
             }
             else if(!data.IsElevation)
             {
-                data.Elevation = UnitConverter.ConvertBarometricPressureToElevationInFeet(UnitConverter.CalculateInchesOfMercuryToPsi(data.BarometricPressure));
+                data.Elevation = UnitConverter.ConvertPressurePSIToElevationInFeet(UnitConverter.ConvertInchesOfMercuryToPsi(data.PressurePSI));
             }
 
             data.Range = data.HotWaterTemperature - data.ColdWaterTemperature;
@@ -300,7 +301,7 @@ namespace CalculationLibrary
             //'****** Uses bisection method to search for roots.  Limits -20 to 60 øC ****
             //'Establish tolerance on enthalpy search
 
-            double temperatureTolerance = (data.IsInternationalSystemOfUnits_SI) ? 0.00001 : 0.0001;
+            double temperatureTolerance = (data.IsInternationalSystemOfUnits_SI) ? 0.00001 : 0.001;
             double Htolerance = 0.00005;
             double temperatureCold = (data.IsInternationalSystemOfUnits_SI) ? -20.0 : 0.0; // cold
             double temperatureHot = (data.IsInternationalSystemOfUnits_SI) ? 60.0 : 140;  // hot
@@ -391,15 +392,29 @@ namespace CalculationLibrary
             }
         }
 
+        public void CalculatePressurePSI(PsychrometricsData data)
+        {
+            if (data.IsElevation)
+            {
+                //(data.IsInternationalSystemOfUnits_SI) ? Altitude2KP : A(m_dblAltitude)calcPressureF(Altitude2PSI(m_dblAltitude))
+                data.Elevation = System.Math.Round(data.Elevation, 4);
+                data.BarometricPressure = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertElevationInMetersToKilopascal(data.Elevation) : UnitConverter.ConvertPsiToInchesOfMercury(UnitConverter.ConvertElevationInFeetToPressurePSI(data.Elevation));
+                data.BarometricPressure = System.Math.Round(data.BarometricPressure, 5);
+            }
+            else
+            {
+                // PSI2Altitude(calcPressureC(dblPressure))
+                data.BarometricPressure = System.Math.Round(data.BarometricPressure, 5);
+                data.Elevation = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertKilopascalToElevationInMeters(data.BarometricPressure) : UnitConverter.ConvertPressurePSIToElevationInFeet(UnitConverter.ConvertInchesOfMercuryToPsi(data.BarometricPressure));
+                data.Elevation = System.Math.Round(data.Elevation, 4);
+            }
+
+            // calculate pressurePSI based on elevation
+            data.PressurePSI = (data.IsInternationalSystemOfUnits_SI) ? UnitConverter.ConvertElevationInMetersToKilopascal(data.Elevation) : UnitConverter.ConvertElevationInFeetToPressurePSI(data.Elevation);
+        }
+
         public void CalculateProperties(PsychrometricsData data)
         {
-            /*
-            if (!data.IsInternationalSystemOfUnits_SI)
-            {
-                data.BarometricPressure = UnitConverter.ConvertBarometricPressureToPsi(data.BarometricPressure);
-            }
-            */
-
             CalculateVariables(data);
 
             // Calculate humidity ratio of the mixture
@@ -441,10 +456,10 @@ namespace CalculationLibrary
             }
         }
 
-        public double CalculateHumidityRatio(bool isInternationalSystemOfUnits_SI, double barometricPressure, double saturationVaporPressure, double fs, double dryBulbTemperature, double wetBulbTemperature)
+        public double CalculateHumidityRatio(bool isInternationalSystemOfUnits_SI, double pressurePSI, double saturationVaporPressure, double fs, double dryBulbTemperature, double wetBulbTemperature)
         {
             // WsWB = humidity ratio of moist air at saturation at thermodynamic wet bulb temperature --- saturation humidity ratio Ws
-            double Ws = CalculateSaturatedHumidityRatio(barometricPressure, saturationVaporPressure, fs);
+            double Ws = CalculateSaturatedHumidityRatio(pressurePSI, saturationVaporPressure, fs);
 
             // Calculate humidity ratio of the mixture
             double c1 = (isInternationalSystemOfUnits_SI) ? 2501.0 : 1093.0;
@@ -487,9 +502,9 @@ namespace CalculationLibrary
         }
 
 
-        public double CalculateRelativeHumidity(bool isInternationalSystemOfUnits_SI, double barometricPressure, double DryBulbTemperature, double WetBulbTemperature)
+        public double CalculateRelativeHumidity(bool isInternationalSystemOfUnits_SI, double pressurePSI, double DryBulbTemperature, double WetBulbTemperature)
         {
-            if (barometricPressure == 0.0)
+            if (pressurePSI == 0.0)
             {
                 return 0.0;
             }
@@ -499,7 +514,7 @@ namespace CalculationLibrary
                 IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI,
                 WetBulbTemperature = WetBulbTemperature,
                 DryBulbTemperature = DryBulbTemperature,
-                BarometricPressure = barometricPressure
+                PressurePSI = pressurePSI
             };
 
             CalculateVariables(data);
@@ -513,7 +528,7 @@ namespace CalculationLibrary
 
         public double CalculateRelativeHumidity(PsychrometricsData data)
         {
-            double denominator = ((data.BarometricPressure == 0.0) ? 0.0 : (1.0 - (1.0 - data.DegreeOfSaturation) * (data.FsDryBulb * data.SaturationVaporPressureDryBulb / data.BarometricPressure)));
+            double denominator = ((data.PressurePSI == 0.0) ? 0.0 : (1.0 - (1.0 - data.DegreeOfSaturation) * (data.FsDryBulb * data.SaturationVaporPressureDryBulb / data.PressurePSI)));
             data.RelativeHumidity = (denominator == 0.0) ? 0.0 : data.DegreeOfSaturation / denominator;  //ASHRAE Eq.(23a)
 
             return data.RelativeHumidity;
@@ -524,7 +539,7 @@ namespace CalculationLibrary
             double Ra = (data.IsInternationalSystemOfUnits_SI) ? (287.055 / 1000) : (53.352 / 144.0);
             double c1 = (data.IsInternationalSystemOfUnits_SI) ? 273.15 : 459.67;
 
-            data.SpecificVolume = (data.BarometricPressure == 0.0) ? 0.0 : (Ra * (data.DryBulbTemperature + c1) * (1.0 + 1.6078 * data.HumidityRatio) / data.BarometricPressure);   //ASHRAE Eq.(26)
+            data.SpecificVolume = (data.PressurePSI == 0.0) ? 0.0 : (Ra * (data.DryBulbTemperature + c1) * (1.0 + 1.6078 * data.HumidityRatio) / data.PressurePSI);   //ASHRAE Eq.(26)
             
             return data.SpecificVolume;
         }
@@ -599,13 +614,13 @@ namespace CalculationLibrary
                 double c2 = (data.IsInternationalSystemOfUnits_SI) ? 0.4959 : 0.8927;
                 double c3 = (data.IsInternationalSystemOfUnits_SI) ? 12.608 : 26.142;
 
-                fsDewPoint = CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, dewPoint);
+                fsDewPoint = CalculateFs(data.IsInternationalSystemOfUnits_SI, data.PressurePSI, dewPoint);
 
                 for (iLoop = 1; iLoop <= 2; iLoop++)      // Makes exactly two passes to get best first estimate
                 {
                     // Calculate dew point pressure
                     denominator = (fsDewPoint * (0.62198 + data.HumidityRatio));
-                    dewPointPressure = (denominator == 0.0) ? 0.0 : (data.BarometricPressure * data.HumidityRatio / denominator);  //ASHRAE Eq.(34)
+                    dewPointPressure = (denominator == 0.0) ? 0.0 : (data.PressurePSI * data.HumidityRatio / denominator);  //ASHRAE Eq.(34)
 
                     if (dewPointPressure > 0)
                     {
@@ -626,11 +641,11 @@ namespace CalculationLibrary
                         dewPoint = 0;
                     }
 
-                    fsDewPoint = CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, dewPoint);
+                    fsDewPoint = CalculateFs(data.IsInternationalSystemOfUnits_SI, data.PressurePSI, dewPoint);
                 }
 
                 vaporPressureDewPoint = CalculateVaporPressure(data.IsInternationalSystemOfUnits_SI, dewPoint);
-                denominator = (data.BarometricPressure - vaporPressureDewPoint * fsDewPoint);
+                denominator = (data.PressurePSI - vaporPressureDewPoint * fsDewPoint);
                 wsDewPoint = (denominator == 0.0) ? 0.0 : (0.62198 * vaporPressureDewPoint * fsDewPoint / denominator);
                 deltaT = 1.0;
 
@@ -639,9 +654,9 @@ namespace CalculationLibrary
                 {
                     vaporPressureDewPoint = CalculateVaporPressure(data.IsInternationalSystemOfUnits_SI, dewPoint);
                     
-                    fsDewPoint = CalculateFs(data.IsInternationalSystemOfUnits_SI, data.BarometricPressure, dewPoint);
+                    fsDewPoint = CalculateFs(data.IsInternationalSystemOfUnits_SI, data.PressurePSI, dewPoint);
 
-                    denominator = (data.BarometricPressure - vaporPressureDewPoint * fsDewPoint);
+                    denominator = (data.PressurePSI - vaporPressureDewPoint * fsDewPoint);
                     wsDewPoint = (denominator == 0.0) ? 0.0 : (0.62198 * vaporPressureDewPoint * fsDewPoint / denominator);
 
                     //Calculate DERivative of Vapor Pressure
@@ -666,8 +681,8 @@ namespace CalculationLibrary
                     //*****************************************************************************
 
                     //Calculate DERivative of Humidity Ratio
-                    denominator = Math.Pow((data.BarometricPressure - fsDewPoint * vaporPressureDewPoint), 2.0);
-                    derivativeOfHumidityRatio = (denominator == 0.0) ? 0.0 : ((data.BarometricPressure - vaporPressureDewPoint * fsDewPoint) * 0.62198 * fsDewPoint * derivativeOfVaporPressure - (0.62198 * fsDewPoint * vaporPressureDewPoint) * (-fsDewPoint * derivativeOfVaporPressure)) / denominator;
+                    denominator = Math.Pow((data.PressurePSI - fsDewPoint * vaporPressureDewPoint), 2.0);
+                    derivativeOfHumidityRatio = (denominator == 0.0) ? 0.0 : ((data.PressurePSI - vaporPressureDewPoint * fsDewPoint) * 0.62198 * fsDewPoint * derivativeOfVaporPressure - (0.62198 * fsDewPoint * vaporPressureDewPoint) * (-fsDewPoint * derivativeOfVaporPressure)) / denominator;
 
                     //Converge to given humidityRatio using Newton-Raphson Method
                     //Yields abref one order of magnitude correction per iteration

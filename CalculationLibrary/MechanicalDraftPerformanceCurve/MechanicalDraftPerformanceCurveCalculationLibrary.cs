@@ -578,8 +578,8 @@ namespace CalculationLibrary
 
             if (!data.IsInternationalSystemOfUnits_SI)
             {
-                designPsychrometricsData.BarometricPressure = UnitConverter.ConvertBarometricPressureToPsi(designPsychrometricsData.BarometricPressure);
-                testPsychrometricsData.BarometricPressure = UnitConverter.ConvertBarometricPressureToPsi(testPsychrometricsData.BarometricPressure);
+                designPsychrometricsData.PressurePSI = UnitConverter.ConvertBarometricPressureToPsi(designPsychrometricsData.BarometricPressure);
+                testPsychrometricsData.PressurePSI = UnitConverter.ConvertBarometricPressureToPsi(testPsychrometricsData.BarometricPressure);
             }
 
             CalculateProperties(designPsychrometricsData);
