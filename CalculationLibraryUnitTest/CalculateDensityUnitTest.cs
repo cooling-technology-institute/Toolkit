@@ -50,20 +50,13 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = false,
-                DryBulbTemperature = 70,
-                WetBulbTemperature = 90,
-                PressurePSI = 29.145
+                HumidityRatio = 0.020187846371028835,
+                SpecificVolume = 6.9518746096697424,
             };
 
             try
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-
-                CalculationLibrary.CalculateVariables(data);
-                data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data);
-                data.DegreeOfSaturation = CalculationLibrary.CalculateDegreeOfSaturation(data);
-                data.RelativeHumidity = CalculationLibrary.CalculateRelativeHumidity(data);
-                CalculationLibrary.CalculateSpecificVolume(data);
                 CalculationLibrary.CalculateDensity(data);
             }
             catch

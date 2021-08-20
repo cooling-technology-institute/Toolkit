@@ -210,7 +210,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = false,
                 PressurePSI = 29.145,
                 DryBulbTemperature = 70.0,
-                RelativeHumidity = -0.72221645050788952
+                RelativeHumidity = -72.221645050788952
             };
 
             try

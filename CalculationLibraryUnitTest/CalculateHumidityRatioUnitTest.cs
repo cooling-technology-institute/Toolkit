@@ -86,7 +86,6 @@ namespace CalculationLibraryUnitTest
             {
                 CalculationLibrary = new CalculationLibrary.CalculationLibrary();
                 CalculationLibrary.CalculateVariables(data);
-
                 data.HumidityRatio = CalculationLibrary.CalculateHumidityRatio(data.IsInternationalSystemOfUnits_SI, data.PressurePSI, data.SaturationVaporPressureWetBulb, data.FsWetBulb, data.DryBulbTemperature, data.WetBulbTemperature);
             }
             catch

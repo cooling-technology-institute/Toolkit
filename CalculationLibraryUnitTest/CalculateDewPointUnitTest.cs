@@ -179,5 +179,121 @@ namespace CalculationLibraryUnitTest
             Assert.IsFalse(methodThrew, "Method threw");
             Assert.AreEqual(85.878779107265359, data.DewPoint, "DewPoint value does not match");
         }
+
+        [TestMethod]
+        public void IP_CalculateDewPointHumidityRatioLessThanZeroTest()
+        {
+            bool methodThrew = false;
+
+            PsychrometricsData data = new PsychrometricsData()
+            {
+                IsInternationalSystemOfUnits_SI = false,
+                PressurePSI = 40.637010145277713,
+                DryBulbTemperature = 93.000000000000000,
+                WetBulbTemperature = 93.000000000000000,
+                HumidityRatio = -1.3007678045265751,
+                IsElevation = false,
+            };
+
+            try
+            {
+                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                data.DewPoint = CalculationLibrary.CalculateDewPoint(data);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.AreEqual(0, data.DewPoint, "DewPoint value does not match");
+        }
+
+        [TestMethod]
+        public void SI_CalculateDewPointHumidityRatioLessThanZeroTest()
+        {
+            bool methodThrew = false;
+
+            PsychrometricsData data = new PsychrometricsData()
+            {
+                IsInternationalSystemOfUnits_SI = true,
+                PressurePSI = 40.637010145277713,
+                DryBulbTemperature = 93.000000000000000,
+                WetBulbTemperature = 93.000000000000000,
+                HumidityRatio = -1.3007678045265751,
+                IsElevation = false,
+            };
+
+            try
+            {
+                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                data.DewPoint = CalculationLibrary.CalculateDewPoint(data);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.AreEqual(0, data.DewPoint, "DewPoint value does not match");
+        }
+
+        [TestMethod]
+        public void IP_CalculateDewPointOutOfRangeTest()
+        {
+            bool methodThrew = false;
+
+            PsychrometricsData data = new PsychrometricsData()
+            {
+                IsInternationalSystemOfUnits_SI = false,
+                PressurePSI = 40.637010145277713,
+                DryBulbTemperature = 32,
+                WetBulbTemperature = 32,
+                HumidityRatio = 0.00005,
+            };
+
+            try
+            {
+                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                CalculationLibrary.CalculateVariables(data);
+                data.DewPoint = CalculationLibrary.CalculateDewPoint(data);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.AreEqual(0, data.DewPoint, "DewPoint value does not match");
+        }
+
+        //[TestMethod]
+        //public void SI_CalculateDewPointOutOfRangeTest()
+        //{
+        //    bool methodThrew = false;
+
+        //    PsychrometricsData data = new PsychrometricsData()
+        //    {
+        //        IsInternationalSystemOfUnits_SI = true,
+        //        PressurePSI = 40.637010145277713,
+        //        DryBulbTemperature = 0,
+        //        WetBulbTemperature = 0,
+        //        HumidityRatio = 0.0095160187775503845,
+        //        IsElevation = false,
+        //    };
+
+        //    try
+        //    {
+        //        CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+        //        data.DewPoint = CalculationLibrary.CalculateDewPoint(data);
+        //    }
+        //    catch
+        //    {
+        //        methodThrew = true;
+        //    }
+
+        //    Assert.IsFalse(methodThrew, "Method threw");
+        //    Assert.AreEqual(0, data.DewPoint, "DewPoint value does not match");
+        //}
     }
 }

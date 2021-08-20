@@ -150,7 +150,7 @@ namespace CalculationLibraryUnitTest
             {
                 IsInternationalSystemOfUnits_SI = true,
                 PressurePSI = 101.325,
-                RootEnthalpy = -19.0
+                RootEnthalpy = -18.54906
             };
 
             try
@@ -164,7 +164,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(-19.0, data.RootEnthalpy, "RootEnthalpy value does not match");
+            Assert.AreEqual(-18.54906, data.RootEnthalpy, "RootEnthalpy value does not match");
             Assert.AreEqual(0.0, data.Enthalpy, "Enthalpy value does not match");
             Assert.AreEqual(-20.0, data.WetBulbTemperature, "WetBulbTemperature value does not match");
             Assert.AreEqual(-20.0, data.DryBulbTemperature, "DryBulbTemperature value does not match");
@@ -381,7 +381,7 @@ namespace CalculationLibraryUnitTest
             {
                 IsInternationalSystemOfUnits_SI  = false,
                 PressurePSI = 29.921,
-                RootEnthalpy = 0.4116
+                RootEnthalpy = 0.41177
             };
 
             try
@@ -395,7 +395,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(0.4116, data.RootEnthalpy, "RootEnthalpy value does not match");
+            Assert.AreEqual(0.41177, data.RootEnthalpy, "RootEnthalpy value does not match");
             Assert.AreEqual(0.0, data.Enthalpy, "Enthalpy value does not match");
             Assert.AreEqual(0.0, data.WetBulbTemperature, "WetBulbTemperature value does not match");
             Assert.AreEqual(0.0, data.DryBulbTemperature, "DryBulbTemperature value does not match");

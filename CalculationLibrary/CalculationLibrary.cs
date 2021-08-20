@@ -65,7 +65,6 @@ namespace CalculationLibrary
                 pressure = UnitConverter.ConvertKilopascalToPressurePSI(pressure);
                 temperature = UnitConverter.ConvertCelsiusToFahrenheit(temperature);
             }
-
             double C13 = C1 + C2 * temperature + C3 * Math.Pow(temperature, 4.0) + C4 * Math.Pow(temperature, 5.0) + C5 * pressure + C6 * pressure * temperature;
             double C14 = C13 + C7 * pressure * Math.Pow(temperature, 2.0) + C8 * pressure * Math.Pow(temperature, 4.0) + C9 * temperature * Math.Pow(pressure, 4.0);
             return (C14 + C10 * Math.Pow(temperature, 2.0) * Math.Pow(pressure, 2.0) + C11 * Math.Pow(temperature, 2.0) * Math.Pow(pressure, 3.0) + C12 * Math.Pow(pressure, 2.0) * Math.Pow(temperature, 3.0));
@@ -93,6 +92,15 @@ namespace CalculationLibrary
             double freezingTemperature = (isInternationalSystemOfUnits_SI) ? 0.0 : 32.0;
 
             // Calculate saturation pressure at t!
+            // The coefficients of Equations(5) and(6) were derived from the Hyland-Wexler equations
+            // pws = C8/T + C9 + C10T + C11T2 + C12T3 + C13 ln T (ashrea 5 2017)
+            // IP                     SI
+            //C8 = –1.0440397E+04     C8 = –5.8002206E+03
+            //C9 = –1.1294650E+01     C9 = 1.3914993E+00
+            //C10 = –2.7022355E–02    C10 = –4.8640239E–02
+            //C11 = 1.2890360E–05     C11 = 4.1764768E–05
+            //C12 = –2.4780681E–09    C12 = –1.4452093E–08
+            //C13 = 6.5459673E+00     C13 = 6.5459673E+00
             if (airTemperature >= freezingTemperature)
             {
                 C8 = (isInternationalSystemOfUnits_SI) ? -5800.2206 : -10440.39708;
@@ -109,6 +117,15 @@ namespace CalculationLibrary
                     Pws = Math.Exp(LnPws);    //ASHRAE Eq.(6) in PSYCHROMETRICS_F01_06SI.pdf
                 }
             }
+            // pws = C1/T + C2 + C3T + C4T 2 + C5T 3 + C6T 4 + C7 ln T (ashrea 6 2017)
+            // IP                     SI
+            //C1 = –1.0214165E+04     C1 = –5.6745359E+03
+            //C2 = –4.8932428E+00     C2 = 6.3925247E+00
+            //C3 = –5.3765794E–03     C3 = –9.6778430E–03
+            //C4 = 1.9202377E–07      C4 = 6.2215701E–07
+            //C5 = 3.5575832E–10      C5 = 2.0747825E–09 
+            //C6 = –9.0344688E–14     C6 = –9.4840240E–13
+            //C7 = 4.1635019E+00      C7 = 4.1635019E+00
             else
             {
                 C1 = (isInternationalSystemOfUnits_SI) ? -5674.5359 : -10214.16462;
@@ -122,7 +139,7 @@ namespace CalculationLibrary
 
                 if (t > 0.0)
                 {
-                    LnPws = C1 / t + C2 + C3 * t + C4 * t * t + C5 * t * t * t + C6 * t * t * t * t + C7 * Math.Log(t);
+                    LnPws = C1 / t + C2 + C3 * t + C4 * Math.Pow(t, 2) + C5 * Math.Pow(t, 3) + C6 * Math.Pow(t, 4) + C7 * Math.Log(t);
                     Pws = Math.Exp(LnPws);   //ASHRAE Eq.(5) PSYCHROMETRICS_F01_06SI.pdf
                 }
             }
@@ -166,10 +183,8 @@ namespace CalculationLibrary
             double DT = t2 - t1;
             double temperatureMidPoint;
             double relativeHumidity;
-            int count = 0;
             do
             {
-                count++;
                 DT /= 2;
                 temperatureMidPoint = trtbis + DT;
                 relativeHumidity = CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.PressurePSI, data.DryBulbTemperature, temperatureMidPoint);
@@ -179,7 +194,7 @@ namespace CalculationLibrary
                     trtbis = temperatureMidPoint;
                 }
             }
-            while ((Math.Abs(DT) >= temperatureTolerance) && (relativeHumdityMidpoint != 0.0));
+            while ((Math.Abs(DT) >= temperatureTolerance) && (relativeHumdityMidpoint >= 0.0));
 
             // found wet bulb
             return temperatureMidPoint;
@@ -300,13 +315,13 @@ namespace CalculationLibrary
             //'****** Procedure finds SI WB, DB & properties given enthalpy & pressure **
             //'****** Uses bisection method to search for roots.  Limits -20 to 60 øC ****
             //'Establish tolerance on enthalpy search
-
-            double temperatureTolerance = (data.IsInternationalSystemOfUnits_SI) ? 0.00001 : 0.001;
+            double temperatureTolerance = (data.IsInternationalSystemOfUnits_SI) ? 0.00001 : 0.0001;
             double Htolerance = 0.00005;
             double temperatureCold = (data.IsInternationalSystemOfUnits_SI) ? -20.0 : 0.0; // cold
             double temperatureHot = (data.IsInternationalSystemOfUnits_SI) ? 60.0 : 140;  // hot
+            double rootEnthalpy = data.RootEnthalpy;
 
-             //First need to bracket region of WB/DB to created bisection region
+            //First need to bracket region of WB/DB to created bisection region
             //High and low values are -20ø and 60ø.
             //Calculate low value and compare to program and tolerance limits
             data.WetBulbTemperature = temperatureCold;
@@ -318,14 +333,14 @@ namespace CalculationLibrary
 
             CalculateProperties(data);
 
-            if (Math.Abs(data.Enthalpy - data.RootEnthalpy) <= Htolerance)
+            if (Math.Abs(data.Enthalpy - rootEnthalpy) <= Htolerance)
             {
                 // assert low temperature Enthalpy absolution difference lower than tolerance
                 data.Enthalpy = 0.0;
                 return;
             }
 
-            if (data.RootEnthalpy < data.Enthalpy)
+            if (data.RootEnthalpy < rootEnthalpy)
             {
                 // assert low temperature root Enthalpy less than calculated Enthalpy
                 ////todo ASSERT(0);
@@ -344,14 +359,14 @@ namespace CalculationLibrary
 
             CalculateProperties(data);
 
-            if (Math.Abs(data.Enthalpy - data.RootEnthalpy) <= Htolerance)
+            if (Math.Abs(data.Enthalpy - rootEnthalpy) <= Htolerance)
             {
                 // assert high temperature Enthalpy absolution difference lower than tolerance
                 data.Enthalpy = 0.0;
                 return;
             }
 
-            if (data.RootEnthalpy > data.Enthalpy)
+            if (rootEnthalpy > data.Enthalpy)
             {
                 ////todo ASSERT(0);
                 //LOCATE 17, 10: PRINT "Enthalpy ref of range of program"
@@ -364,6 +379,7 @@ namespace CalculationLibrary
             double trtbis = temperatureCold;
             double DT = temperatureHot - temperatureCold;
             double enthalpyMidPoint;
+            data.Enthalpy = 0.0;
 
             do
             {
@@ -375,16 +391,20 @@ namespace CalculationLibrary
                     data.DryBulbTemperature = data.WetBulbTemperature;
                 }
 
+                data.RootEnthalpy = data.Enthalpy;
+
                 CalculateProperties(data);
 
-                enthalpyMidPoint = data.RootEnthalpy - data.Enthalpy;
+                enthalpyMidPoint = rootEnthalpy - data.Enthalpy;
 
                 if (enthalpyMidPoint >= 0.0)
                 {
                     trtbis = data.WetBulbTemperature;
                 }
-            } 
+            }
             while ((Math.Abs(DT) >= temperatureTolerance) && (enthalpyMidPoint != 0.0));
+
+            data.RootEnthalpy = rootEnthalpy;
 
             if (saturation)
             {
@@ -444,11 +464,6 @@ namespace CalculationLibrary
 
             // Calculate dew point temperature
             data.DewPoint = CalculateDewPoint(data);
-
-            if (stringBuilder != null)
-            {
-                stringBuilder.AppendFormat("\nEnthalpy {0}, TDB {1}, HumidRatio {2}\n", data.Enthalpy.ToString("F6"), data.DryBulbTemperature.ToString("F6"), data.HumidityRatio.ToString("F6"));
-            }
 
             if ((data.HumidityRatio < 0.0) && (Math.Abs(data.HumidityRatio) < .000001))
             {
@@ -622,6 +637,13 @@ namespace CalculationLibrary
                     denominator = (fsDewPoint * (0.62198 + data.HumidityRatio));
                     dewPointPressure = (denominator == 0.0) ? 0.0 : (data.PressurePSI * data.HumidityRatio / denominator);  //ASHRAE Eq.(34)
 
+                    // Between dew points of 0 and 93°C,
+                    // Between dew points of 32 to 200°F,
+                    //   td = C14 + C15 * lnpw + C16 * lnpw**2 + C17 * lnpw**3 + C18 * (pw)**0.1984  (ashrea 37, 2017)
+                    // Below 0°C,
+                    //   td = 6.09  + 12.608 * lnpw + 0.4959 * lnpw**2 (ashrea 38, 2017)
+                    // Below 32°F,
+                    //   td = 90.12 + 26.142 * lnpw + 0.8927 * lnpw**2 (ashrea 38, 2017)
                     if (dewPointPressure > 0)
                     {
                         // Calculate dew point temperature - check above and below ice point
