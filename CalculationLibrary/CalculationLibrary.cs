@@ -194,7 +194,7 @@ namespace CalculationLibrary
                     trtbis = temperatureMidPoint;
                 }
             }
-            while ((Math.Abs(DT) >= temperatureTolerance) && (relativeHumdityMidpoint >= 0.0));
+            while ((Math.Abs(DT) >= temperatureTolerance) && (relativeHumdityMidpoint != 0.0));
 
             // found wet bulb
             return temperatureMidPoint;
@@ -315,10 +315,10 @@ namespace CalculationLibrary
             //'****** Procedure finds SI WB, DB & properties given enthalpy & pressure **
             //'****** Uses bisection method to search for roots.  Limits -20 to 60 øC ****
             //'Establish tolerance on enthalpy search
-            double temperatureTolerance = (data.IsInternationalSystemOfUnits_SI) ? 0.00001 : 0.0001;
+            double temperatureTolerance = 0.001;
             double Htolerance = 0.00005;
-            double temperatureCold = (data.IsInternationalSystemOfUnits_SI) ? -20.0 : 0.0; // cold
-            double temperatureHot = (data.IsInternationalSystemOfUnits_SI) ? 60.0 : 140;  // hot
+            double temperatureCold = (data.IsInternationalSystemOfUnits_SI) ? -18.0 : 0.0; // cold
+            double temperatureHot = (data.IsInternationalSystemOfUnits_SI) ? 93.0 : 140;  // hot
             double rootEnthalpy = data.RootEnthalpy;
 
             //First need to bracket region of WB/DB to created bisection region
@@ -584,7 +584,9 @@ namespace CalculationLibrary
         //*** saturated conditions (DB=WB)
         public double CalculateDewPoint(PsychrometricsData data)
         {
-            int iLoop;
+            int iLoop = 0;
+            int convergenceCount = 0;
+            int loopMaximum = 50;
             double dewPointPressure;
             double lnpw;
             double vaporPressureDewPoint;
@@ -672,7 +674,8 @@ namespace CalculationLibrary
                 deltaT = 1.0;
 
                 // DavidL, 04/26/2001: Fixed the loop conditions to mimic IPDEWPoint()
-                while ((wsDewPoint != 0.0) && ((Math.Abs(data.HumidityRatio / wsDewPoint - 1.0) >= 0.000001) || (Math.Abs(deltaT) >= 0.0001)))
+                // added conversionCount to keep code from locking up when inputs will not converge
+                while ((wsDewPoint != 0.0) && ((Math.Abs(data.HumidityRatio / wsDewPoint - 1.0) >= 0.000001) || (Math.Abs(deltaT) >= 0.0001)) && (convergenceCount < loopMaximum))
                 {
                     vaporPressureDewPoint = CalculateVaporPressure(data.IsInternationalSystemOfUnits_SI, dewPoint);
                     
@@ -710,10 +713,19 @@ namespace CalculationLibrary
                     //Yields abref one order of magnitude correction per iteration
                     deltaT = derivativeOfHumidityRatio != 0.0 ? ((data.HumidityRatio - wsDewPoint) / derivativeOfHumidityRatio) : 0.0;
                     dewPoint += deltaT;
+                    convergenceCount++;
                 }
             }
 
-            data.DewPoint = dewPoint;
+            if(convergenceCount >= loopMaximum)
+            {
+                data.DewPoint = 0;
+                ErrorMessage = "This set of inputs has led to nonconvergence.";
+            }
+            else
+            {
+                data.DewPoint = dewPoint;
+            }
 
             return data.DewPoint;
         }

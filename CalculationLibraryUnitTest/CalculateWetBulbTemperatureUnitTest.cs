@@ -20,7 +20,7 @@ namespace CalculationLibraryUnitTest
                 IsInternationalSystemOfUnits_SI = true,
                 PressurePSI = 14.56,
                 DryBulbTemperature = 30.0,
-                RelativeHumidity = 0.24
+                RelativeHumidity = 24.0
             };
 
             try
@@ -99,9 +99,9 @@ namespace CalculationLibraryUnitTest
             PsychrometricsData data = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = true,
-                PressurePSI = 14.56,
-                DryBulbTemperature = 20.0,
-                RelativeHumidity = 0.18437558304645682
+                PressurePSI = 0,
+                DryBulbTemperature = 0,
+                RelativeHumidity = 0
             };
 
             try

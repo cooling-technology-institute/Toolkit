@@ -576,19 +576,23 @@ namespace CalculationLibrary
             PsychrometricsData testPsychrometricsData = new PsychrometricsData(towerTestData);
             PsychrometricsData designPsychrometricsData = new PsychrometricsData(towerDesignData);
 
-            if (!data.IsInternationalSystemOfUnits_SI)
+            if (data.IsInternationalSystemOfUnits_SI)
+            {
+                designPsychrometricsData.PressurePSI = designPsychrometricsData.BarometricPressure;
+                testPsychrometricsData.PressurePSI = testPsychrometricsData.BarometricPressure;
+            }
+            else
             {
                 designPsychrometricsData.PressurePSI = UnitConverter.ConvertBarometricPressureToPsi(designPsychrometricsData.BarometricPressure);
                 testPsychrometricsData.PressurePSI = UnitConverter.ConvertBarometricPressureToPsi(testPsychrometricsData.BarometricPressure);
             }
-
             CalculateProperties(designPsychrometricsData);
             CalculateProperties(testPsychrometricsData);
 
             PsychrometricsData searchDesignPsychrometricsData = new PsychrometricsData()
             {
                 IsInternationalSystemOfUnits_SI = designPsychrometricsData.IsInternationalSystemOfUnits_SI,
-                BarometricPressure = designPsychrometricsData.BarometricPressure
+                PressurePSI = designPsychrometricsData.PressurePSI
             };
 
             if (data.TowerType == TOWER_TYPE.Induced)      //'compute AdjTestFlow on LEAVING air temperatures
@@ -619,7 +623,7 @@ namespace CalculationLibrary
                 PsychrometricsData testSearchPsychrometricsData = new PsychrometricsData()
                 {
                     IsInternationalSystemOfUnits_SI = designPsychrometricsData.IsInternationalSystemOfUnits_SI,
-                    BarometricPressure = testPsychrometricsData.BarometricPressure
+                    PressurePSI = testPsychrometricsData.PressurePSI
                 };
 
                 bool bGoto200 = true;

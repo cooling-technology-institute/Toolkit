@@ -393,18 +393,47 @@ namespace CalculationLibraryUnitTest
             Assert.AreEqual(101.32500000000000, data.PressurePSI, "PressurePSI value does not match");
             Assert.AreEqual(101.32500000000000, data.BarometricPressure, "BarometricPressure value does not match");
             Assert.AreEqual(0, data.Elevation, "Elevation value does not match");
-            Assert.AreEqual(37.78, data.DryBulbTemperature, "DryBulbTemperature value does not match");
-            Assert.AreEqual(26.67, data.WetBulbTemperature, "WetBulbTemperature value does not match");
-            Assert.AreEqual(0.017639664871541238, data.HumidityRatio, "HumidityRatio value does not match");
-            Assert.AreEqual(0.42445615618351601, data.RelativeHumidity, "RelativeHumidity value does not match");
-            Assert.AreEqual(83.326381746343174, data.Enthalpy, "Enthalpy value does not match");
-            Assert.AreEqual(0.90585096379762986, data.SpecificVolume, "SpecificVolume value does not match");
-            Assert.AreEqual(1.1234073876846760, data.Density, "Density value does not match");
-            Assert.AreEqual(22.837251296241423, data.DewPoint, "DewPoint value does not match");
+            Assert.AreEqual(15.475639343261719, data.DryBulbTemperature, "DryBulbTemperature value does not match");
+            Assert.AreEqual(15.475639343261719, data.WetBulbTemperature, "WetBulbTemperature value does not match");
+            Assert.AreEqual(0.011029306298183390, data.HumidityRatio, "HumidityRatio value does not match");
+            Assert.AreEqual(1.0, data.RelativeHumidity, "RelativeHumidity value does not match");
+            Assert.AreEqual(43.460875678569025, data.Enthalpy, "Enthalpy value does not match");
+            Assert.AreEqual(0.83217992225714477, data.SpecificVolume, "SpecificVolume value does not match");
+            Assert.AreEqual(1.2149167256474303, data.Density, "Density value does not match");
+            Assert.AreEqual(15.475639343262369, data.DewPoint, "DewPoint value does not match");
         }
 
         [TestMethod]
         public void SI_Pressure_Psychrometrics_Enthalpy_CalculationTest()
+        {
+            string errorMessage;
+            PsychrometricsData data = new PsychrometricsData()
+            {
+                IsInternationalSystemOfUnits_SI = true,
+                IsElevation = false,
+                RootEnthalpy = 43.46,
+                BarometricPressure = 100,
+            };
+
+            PsychrometricsCalculationLibrary psychrometricsCalculationLibrary = new PsychrometricsCalculationLibrary();
+            psychrometricsCalculationLibrary.PsychrometricsCalculation(PsychrometricsCalculationType.Enthalpy, data, out errorMessage);
+
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage), "errorMessage is not empty");
+            Assert.AreEqual(99.999999870085546, data.PressurePSI, "PressurePSI value does not match");
+            Assert.AreEqual(100, data.BarometricPressure, "BarometricPressure value does not match");
+            Assert.AreEqual(110.88360000000000, data.Elevation, "Elevation value does not match");
+            Assert.AreEqual(15.345222473144531, data.DryBulbTemperature, "DryBulbTemperature value does not match");
+            Assert.AreEqual(15.345222473144531, data.WetBulbTemperature, "WetBulbTemperature value does not match");
+            Assert.AreEqual(0.011082728793060619, data.HumidityRatio, "HumidityRatio value does not match");
+            Assert.AreEqual(1.0, data.RelativeHumidity, "RelativeHumidity value does not match");
+            Assert.AreEqual(43.462169344212974, data.Enthalpy, "Enthalpy value does not match");
+            Assert.AreEqual(0.84289643170235762, data.SpecificVolume, "SpecificVolume value does not match");
+            Assert.AreEqual(1.1995337633011747, data.Density, "Density value does not match");
+            Assert.AreEqual(15.345222473144966, data.DewPoint, "DewPoint value does not match");
+        }
+
+        [TestMethod]
+        public void SI_Pressure_Psychrometrics_Enthalpy_Calculation_ErrorTest()
         {
             string errorMessage;
             PsychrometricsData data = new PsychrometricsData()
@@ -418,47 +447,19 @@ namespace CalculationLibraryUnitTest
             PsychrometricsCalculationLibrary psychrometricsCalculationLibrary = new PsychrometricsCalculationLibrary();
             psychrometricsCalculationLibrary.PsychrometricsCalculation(PsychrometricsCalculationType.Enthalpy, data, out errorMessage);
 
-            Assert.IsTrue(string.IsNullOrEmpty(errorMessage), "errorMessage is not empty");
+            Assert.IsFalse(string.IsNullOrEmpty(errorMessage), "errorMessage is empty");
             Assert.AreEqual(49.999999760425993, data.PressurePSI, "PressurePSI value does not match");
             Assert.AreEqual(50, data.BarometricPressure, "BarometricPressure value does not match");
             Assert.AreEqual(5574.4067, data.Elevation, "Elevation value does not match");
-            Assert.AreEqual(37.78, data.DryBulbTemperature, "DryBulbTemperature value does not match");
-            Assert.AreEqual(26.67, data.WetBulbTemperature, "WetBulbTemperature value does not match");
-            Assert.AreEqual(0.042032914186369390, data.HumidityRatio, "HumidityRatio value does not match");
-            Assert.AreEqual(0.48145342050663797, data.RelativeHumidity, "RelativeHumidity value does not match");
-            Assert.AreEqual(145.99734469392951, data.Enthalpy, "Enthalpy value does not match");
-            Assert.AreEqual(1.9057168808237024, data.SpecificVolume, "SpecificVolume value does not match");
-            Assert.AreEqual(0.54679313840992716, data.Density, "Density value does not match");
-            Assert.AreEqual(24.932933473526944, data.DewPoint, "DewPoint value does not match");
+            Assert.AreEqual(93.000000000000000, data.DryBulbTemperature, "DryBulbTemperature value does not match");
+            Assert.AreEqual(93.000000000000000, data.WetBulbTemperature, "WetBulbTemperature value does not match");
+            Assert.AreEqual(-1.7288444818515576, data.HumidityRatio, "HumidityRatio value does not match");
+            Assert.AreEqual(1.0000000000000000, data.RelativeHumidity, "RelativeHumidity value does not match");
+            Assert.AreEqual(-4520.4945280567572, data.Enthalpy, "Enthalpy value does not match");
+            Assert.AreEqual(-3.7409798858205607, data.SpecificVolume, "SpecificVolume value does not match");
+            Assert.AreEqual(0.19482715868484016, data.Density, "Density value does not match");
+            //Assert.AreEqual(92.999999759362794, data.DewPoint, "DewPoint value does not match");
+            Assert.AreEqual(0, data.DewPoint, "DewPoint value does not match");
         }
-
-        //[TestMethod]
-        //public void SI_Pressure_Psychrometrics_Enthalpy_Calculation_ErrorTest()
-        //{
-        //    string errorMessage;
-        //    PsychrometricsData data = new PsychrometricsData()
-        //    {
-        //        IsInternationalSystemOfUnits_SI = true,
-        //        IsElevation = false,
-        //        RootEnthalpy = 43.46,
-        //        BarometricPressure = 40.63701,
-        //    };
-
-        //    PsychrometricsCalculationLibrary psychrometricsCalculationLibrary = new PsychrometricsCalculationLibrary();
-        //    psychrometricsCalculationLibrary.PsychrometricsCalculation(PsychrometricsCalculationType.Enthalpy, data, out errorMessage);
-
-        //    Assert.IsFalse(string.IsNullOrEmpty(errorMessage), "errorMessage is empty");
-        //    Assert.AreEqual(16.999999959027324, data.PressurePSI, "PressurePSI value does not match");
-        //    Assert.AreEqual(40.63701, data.BarometricPressure, "BarometricPressure value does not match");
-        //    Assert.AreEqual(7073.5710, data.Elevation, "Elevation value does not match");
-        //    Assert.AreEqual(93.000000000000000, data.DryBulbTemperature, "DryBulbTemperature value does not match");
-        //    Assert.AreEqual(93.000000000000000, data.WetBulbTemperature, "WetBulbTemperature value does not match");
-        //    Assert.AreEqual(-1.3007678045265751, data.HumidityRatio, "HumidityRatio value does not match");
-        //    Assert.AreEqual(1.0000000000000000, data.RelativeHumidity, "RelativeHumidity value does not match");
-        //    Assert.AreEqual(-3378.0156666278176, data.Enthalpy, "Enthalpy value does not match");
-        //    Assert.AreEqual(-2.8227745927548100, data.SpecificVolume, "SpecificVolume value does not match");
-        //    Assert.AreEqual(0.10655041507690807, data.Density, "Density value does not match");
-        //    Assert.AreEqual(92.999999640831646, data.DewPoint, "DewPoint value does not match");
-        //}
     }
 }

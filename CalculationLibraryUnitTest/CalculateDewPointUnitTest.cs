@@ -238,53 +238,24 @@ namespace CalculationLibraryUnitTest
             Assert.AreEqual(0, data.DewPoint, "DewPoint value does not match");
         }
 
-        [TestMethod]
-        public void IP_CalculateDewPointOutOfRangeTest()
-        {
-            bool methodThrew = false;
-
-            PsychrometricsData data = new PsychrometricsData()
-            {
-                IsInternationalSystemOfUnits_SI = false,
-                PressurePSI = 40.637010145277713,
-                DryBulbTemperature = 32,
-                WetBulbTemperature = 32,
-                HumidityRatio = 0.00005,
-            };
-
-            try
-            {
-                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
-                CalculationLibrary.CalculateVariables(data);
-                data.DewPoint = CalculationLibrary.CalculateDewPoint(data);
-            }
-            catch
-            {
-                methodThrew = true;
-            }
-
-            Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(0, data.DewPoint, "DewPoint value does not match");
-        }
-
         //[TestMethod]
-        //public void SI_CalculateDewPointOutOfRangeTest()
+        //public void IP_CalculateDewPointNoConvergenceTest()
         //{
         //    bool methodThrew = false;
 
         //    PsychrometricsData data = new PsychrometricsData()
         //    {
-        //        IsInternationalSystemOfUnits_SI = true,
+        //        IsInternationalSystemOfUnits_SI = false,
         //        PressurePSI = 40.637010145277713,
-        //        DryBulbTemperature = 0,
-        //        WetBulbTemperature = 0,
+        //        DryBulbTemperature = 32,
+        //        WetBulbTemperature = 32,
         //        HumidityRatio = 0.0095160187775503845,
-        //        IsElevation = false,
         //    };
 
         //    try
         //    {
         //        CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+        //        CalculationLibrary.CalculateVariables(data);
         //        data.DewPoint = CalculationLibrary.CalculateDewPoint(data);
         //    }
         //    catch
@@ -293,7 +264,38 @@ namespace CalculationLibraryUnitTest
         //    }
 
         //    Assert.IsFalse(methodThrew, "Method threw");
+        //    Assert.IsFalse(string.IsNullOrEmpty(CalculationLibrary.ErrorMessage), "ErrorMessage is empty");
         //    Assert.AreEqual(0, data.DewPoint, "DewPoint value does not match");
         //}
+
+        [TestMethod]
+        public void SI_CalculateDewPointNoConvergenceTest()
+        {
+            bool methodThrew = false;
+
+            PsychrometricsData data = new PsychrometricsData()
+            {
+                IsInternationalSystemOfUnits_SI = true,
+                PressurePSI = 40.637010145277713,
+                DryBulbTemperature = 0,
+                WetBulbTemperature = 0,
+                HumidityRatio = 0.0095160187775503845,
+                IsElevation = false,
+            };
+
+            try
+            {
+                CalculationLibrary = new CalculationLibrary.CalculationLibrary();
+                data.DewPoint = CalculationLibrary.CalculateDewPoint(data);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.IsFalse(string.IsNullOrEmpty(CalculationLibrary.ErrorMessage), "ErrorMessage is empty");
+            Assert.AreEqual(0, data.DewPoint, "DewPoint value does not match");
+        }
     }
 }
