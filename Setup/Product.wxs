@@ -273,6 +273,9 @@
       <Component Id='DocumentationTutorial' Guid='BA2041F7-E3BD-466D-A89D-A67638B18B09'>
         <File Id='ToolKitTutorial.pdf' Name='ToolKit Tutorial.pdf' DiskId='1' Source='$(var.SolutionDir)Documents\ToolKit Tutorial 4.0.pdf' KeyPath='yes' Checksum='yes'  />
       </Component>
+      <Component Id='Bluebook' Guid='{607E4E98-667F-402F-A676-95CD031B5359}'>
+        <File Id='CoolingTowerPerformanceCurves.pdf' Name='Cooling Tower Performance Curves.pdf' DiskId='1' Source='$(var.SolutionDir)Documents\Cooling Tower Performance Curves.pdf' KeyPath='yes' Checksum='yes'  />
+      </Component>
       <Component Id='Data_AppendixC' Guid='D9A852D2-4C81-4FD6-9669-FAA5D576D9BB' Permanent="yes">
         <File Id='AppendixC.mdpc' Name='Appendix C.mdpc' DiskId='1' Source='$(var.SolutionDir)Data\Appendix C.mdpc' />
       </Component>
