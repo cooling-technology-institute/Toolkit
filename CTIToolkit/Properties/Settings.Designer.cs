@@ -37,37 +37,13 @@ namespace CTIToolkit.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool Demo {
-            get {
-                return ((bool)(this["Demo"]));
-            }
-            set {
-                this["Demo"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Demo")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string SerialNumber {
             get {
                 return ((string)(this["SerialNumber"]));
             }
             set {
                 this["SerialNumber"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Test")]
-        public string Setting {
-            get {
-                return ((string)(this["Setting"]));
-            }
-            set {
-                this["Setting"] = value;
             }
         }
     }

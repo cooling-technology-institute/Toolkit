@@ -67,7 +67,7 @@ namespace CTIToolkit
         private void SetDisplayedUnits()
         {
             UnitsWaterFlowRate.Text = MechanicalDraftPerformanceCurveViewModel.WaterFlowRateDataValue.Units;
-            UnitsWaterFlowRate.Text = MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValue.Units;
+            UnitsHotWaterTemperature.Text = MechanicalDraftPerformanceCurveViewModel.HotWaterTemperatureDataValue.Units;
             UnitsColdWaterTemperature.Text = MechanicalDraftPerformanceCurveViewModel.ColdWaterTemperatureDataValue.Units;
             UnitsWetBulbTemperature.Text = MechanicalDraftPerformanceCurveViewModel.WetBulbTemperatureDataValue.Units;
             UnitsDryBulbTemperature.Text = MechanicalDraftPerformanceCurveViewModel.DryBulbTemperatureDataValue.Units;

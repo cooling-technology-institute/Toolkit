@@ -36,11 +36,13 @@ namespace CTIToolkit
             helpProvider1.HelpNamespace = HelpFilename;
 
             ApplicationSettings.Read();
+
             if(ApplicationSettings.IsDemo)
             {
                 this.Text = "Cooling Technology Institute Toolkit Demo";
-                MessageBox.Show(this, "The Toolkit is running in Demo mode.", "Demo Mode", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "The Toolkit is running in Demo mode. To enter your serial number click on to Help, About.", "Demo Mode", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
             UpdateUnits(ApplicationSettings.UnitsSelection);
 
             PsychrometricsUserControl = new PsychrometricsTabPage(ApplicationSettings);
@@ -106,6 +108,7 @@ namespace CTIToolkit
                     InputFilename = string.Empty;
                 }
             }
+
         }
 
         private void AboutToolStripMenuItem1_Click(object sender, EventArgs e)

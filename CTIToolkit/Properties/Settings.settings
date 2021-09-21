@@ -5,14 +5,8 @@
     <Setting Name="UnitsSelection" Type="System.String" Scope="User">
       <Value Profile="(Default)">United_States_Customary_Units_IP</Value>
     </Setting>
-    <Setting Name="Demo" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="SerialNumber" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Demo</Value>
-    </Setting>
-    <Setting Name="Setting" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Test</Value>
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

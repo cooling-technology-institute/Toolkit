@@ -13,7 +13,7 @@ namespace CTIToolkit
     {
         private UnitsSelection _UnitsSelection = UnitsSelection.United_States_Customary_Units_IP;
         private bool _IsDemo = true;
-        private string _SerialNumber = "Demo";
+        private string _SerialNumber = "";
         //private string _ActivationDate;
         //private bool _IsActivated = false;
 
@@ -58,7 +58,6 @@ namespace CTIToolkit
         {
             Properties.Settings.Default.UnitsSelection = UnitsSelection.ToString();
             Properties.Settings.Default.SerialNumber = _SerialNumber;
-            Properties.Settings.Default.Demo = _IsDemo;
             Properties.Settings.Default.Save();
         }
 
