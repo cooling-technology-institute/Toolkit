@@ -53,6 +53,48 @@ namespace CalculationLibraryUnitTest
         }
 
         [TestMethod]
+        public void CalculateTestLiquidToGasRatioMatchTest()
+        {
+            bool methodThrew = false;
+            double ratio = 0.0;
+            MechanicalDraftPerformanceCurveCalculationData data = new MechanicalDraftPerformanceCurveCalculationData()
+            {
+                IsInternationalSystemOfUnits_SI = false,
+                TowerType = TOWER_TYPE.Induced,
+                TowerDesignData = {
+                    WaterFlowRate = 3583.0,
+                    FanDriverPower = 107.0,
+                    LiquidToGasRatio = 1.3
+                },
+                TowerTestData = {
+                    WaterFlowRate = 3583.0,
+                    FanDriverPower = 107.0
+                }
+            };
+            PsychrometricsData designPsychrometricsData = new PsychrometricsData();
+            PsychrometricsData testPsychrometricsData = new PsychrometricsData();
+
+            designPsychrometricsData.Density = 1.15;
+            designPsychrometricsData.SpecificVolume = 0.88;
+
+            testPsychrometricsData.Density = 1.15;
+            testPsychrometricsData.SpecificVolume = 0.88;
+
+            try
+            {
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+                ratio = CalculationLibrary.CalculateTestLiquidToGasRatio(data.TowerDesignData, data.TowerTestData, designPsychrometricsData, testPsychrometricsData);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.AreEqual(1.3, ratio, "TestLiquidToGasRatio value does not match");
+        }
+
+        [TestMethod]
         public void CalculateTestLiquidToGasRatioDesignTest()
         {
             bool methodThrew = false;

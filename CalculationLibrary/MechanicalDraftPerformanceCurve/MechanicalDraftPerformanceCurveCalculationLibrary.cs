@@ -3,6 +3,7 @@
 using Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace CalculationLibrary
@@ -586,14 +587,10 @@ namespace CalculationLibrary
                 designPsychrometricsData.PressurePSI = UnitConverter.ConvertBarometricPressureToPsi(designPsychrometricsData.BarometricPressure);
                 testPsychrometricsData.PressurePSI = UnitConverter.ConvertBarometricPressureToPsi(testPsychrometricsData.BarometricPressure);
             }
-            CalculateProperties(designPsychrometricsData);
-            CalculateProperties(testPsychrometricsData);
 
-            PsychrometricsData searchDesignPsychrometricsData = new PsychrometricsData()
-            {
-                IsInternationalSystemOfUnits_SI = designPsychrometricsData.IsInternationalSystemOfUnits_SI,
-                PressurePSI = designPsychrometricsData.PressurePSI
-            };
+            CalculateProperties(designPsychrometricsData);
+
+            CalculateProperties(testPsychrometricsData);
 
             if (data.TowerType == TOWER_TYPE.Induced)      //'compute AdjTestFlow on LEAVING air temperatures
             {
@@ -601,19 +598,16 @@ namespace CalculationLibrary
 
                 //'First determine Design Leaving Air Density, designPsychrometricsData.Density  *****************************
                 //'first step is determine Leaving air Enthalpy Design, HOutD                
-                searchDesignPsychrometricsData.RootEnthalpy = designPsychrometricsData.Enthalpy
+                designPsychrometricsData.RootEnthalpy = designPsychrometricsData.Enthalpy
                                                         + towerDesignData.LiquidToGasRatio
                                                         * Cpw
                                                         * (towerDesignData.HotWaterTemperature - towerDesignData.ColdWaterTemperature);
 
-                //EnthalpysearchIP(int sat, double P,                                    double RootEnthalpy, ref double OutputEnthalpy, ref double temperatureWetBulb, ref double temperatureDryBulb, ref double humidityRatio, ref double relativeHumidity, ref double specificVolume, ref double Density, ref double DEWPoint)
-                //EnthalpysearchIP(1,       designPsychrometricsData.BarometricPressure, HOutD,               ref OutputEnthalpy,        ref LWBD,                      ref LDBD,                      ref humidityRatio,        ref relativeHumidity,        ref designPsychrometricsData.SpecificVolume,                ref designPsychrometricsData.Density,        ref DEWPoint);
-
                 //'Call Enthalpy Search subroutine with calculated HOutD value
-                EnthalpySearch(true, searchDesignPsychrometricsData);
+                EnthalpySearch(true, designPsychrometricsData);
 
                 //    //'Store Density Out as Density Design and SV Out as SV Design
-                output.Density = searchDesignPsychrometricsData.Density;
+                output.Density = designPsychrometricsData.Density;
 
                 // Next Iterate to find Test Leaving Wet bulb and testPsychrometricsData.Density
                 // Initial guess of Leaving Wet Bulb is average of Test Entering and Leaving temperature
@@ -627,7 +621,9 @@ namespace CalculationLibrary
                 };
 
                 bool bGoto200 = true;
-                while (bGoto200)
+                int count = 0;
+                
+                while (bGoto200 && (count++ < 50))
                 {
                     //200 'Top of iteration loop *****************************************************************
                     //' Determine conditions of air at guess Leaving Wet Bulb (assumed saturated LDB=LWB)
@@ -635,7 +631,7 @@ namespace CalculationLibrary
 
                     //'Calculate L/G Test
                     //'Equation 5.1, Liquid to Gas ratio Test
-                    output.LiquidToGasRatio = CalculateTestLiquidToGasRatio(towerDesignData, towerTestData, searchDesignPsychrometricsData, testPsychrometricsData);
+                    output.LiquidToGasRatio = CalculateTestLiquidToGasRatio(towerDesignData, towerTestData, designPsychrometricsData, testPsychrometricsData);
 
                     // HCalcT = HInT + LinGt * Cpw * (EWTt - LWTt);
                     testSearchPsychrometricsData.RootEnthalpy = enthalpy + output.LiquidToGasRatio * Cpw * (towerTestData.HotWaterTemperature - towerTestData.ColdWaterTemperature);
@@ -646,25 +642,25 @@ namespace CalculationLibrary
                     output.WetBulbTemperature = testSearchPsychrometricsData.WetBulbTemperature;
 
                     //'Check to see if Enthalpy  of Leaving Wet Bulb Test (testPsychrometricsData.Enthalpy) converged to calculated value (HCalcT)
-                    if (Math.Abs(testSearchPsychrometricsData.RootEnthalpy - testSearchPsychrometricsData.Enthalpy) > 0.0002)
+                    if ((Math.Abs(testSearchPsychrometricsData.RootEnthalpy - testPsychrometricsData.Enthalpy) > 0.00002) 
+                        && (testPsychrometricsData.WetBulbTemperature != testSearchPsychrometricsData.WetBulbTemperature))
                     {
-                        testPsychrometricsData.WetBulbTemperature = testPsychrometricsData.DryBulbTemperature = testPsychrometricsData.WetBulbTemperature;
+                        testPsychrometricsData.WetBulbTemperature = testPsychrometricsData.DryBulbTemperature = testSearchPsychrometricsData.WetBulbTemperature;
                         bGoto200 = true;
                     }
                     else
                     {
                         bGoto200 = false;
                     }
-                    bGoto200 = false;
                 }
 
                 //'Save convergered Density Out Test as Density Design
-                designPsychrometricsData.Density = testPsychrometricsData.Density;
+                //designPsychrometricsData.Density = testPsychrometricsData.Density;
             }
             else    //'Forced Draft NO ITERATION
             {
                 //'        ENTERING air conditions  Test and Design
-                searchDesignPsychrometricsData.Density = designPsychrometricsData.Density; // DenDesign = DenInD
+                designPsychrometricsData.Density = designPsychrometricsData.Density; // DenDesign = DenInD
                 output.WetBulbTemperature = towerTestData.WetBulbTemperature; // LWBTnew = EWBt;
             }
 
@@ -673,8 +669,8 @@ namespace CalculationLibrary
             output.Density = testPsychrometricsData.Density; // DenOutT = DenInT;
 
             //'Equation 6.1, Adjusted TestFlow
-            output.AdjustedFlow = ((towerTestData.FanDriverPower == 0.0) || (searchDesignPsychrometricsData.Density == 0.0)) ? 0.0 :
-                towerTestData.WaterFlowRate * Math.Pow(towerDesignData.FanDriverPower / towerTestData.FanDriverPower * testPsychrometricsData.Density / searchDesignPsychrometricsData.Density, (1.0 / 3.0));
+            output.AdjustedFlow = ((towerTestData.FanDriverPower == 0.0) || (designPsychrometricsData.Density == 0.0)) ? 0.0 :
+                towerTestData.WaterFlowRate * Math.Pow(towerDesignData.FanDriverPower / towerTestData.FanDriverPower * testPsychrometricsData.Density / designPsychrometricsData.Density, (1.0 / 3.0));
 
             return output.AdjustedFlow;
         }

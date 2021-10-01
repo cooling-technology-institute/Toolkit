@@ -50,6 +50,7 @@ namespace CalculationLibrary
         {
             EnthalpySearch(true, data);
             CalculateProperties(data);
+            data.Enthalpy = data.RootEnthalpy;
         }
 
         public bool Psychrometrics_CheckCalculationValues(PsychrometricsCalculationType calculationType, PsychrometricsData data, out string errorMessage)

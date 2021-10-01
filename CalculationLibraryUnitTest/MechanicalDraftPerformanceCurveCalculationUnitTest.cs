@@ -268,8 +268,8 @@ namespace CalculationLibraryUnitTest
 
 			Assert.IsFalse(methodThrew, "Method threw");
 			Assert.AreEqual(3393.1144762761005, data.TestOutput.PredictedFlow, "PredictedFlow value does not match"); // 
-			Assert.AreEqual(3549.8089648534847, data.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
-			Assert.AreEqual(104.61801361766474, data.TestOutput.TowerCapability, "TowerCapability value does not match");
+			Assert.AreEqual(3536.9789229732728, data.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
+			Assert.AreEqual(104.23989369362691, data.TestOutput.TowerCapability, "TowerCapability value does not match");
 		}
 
 		[TestMethod]
@@ -288,9 +288,9 @@ namespace CalculationLibraryUnitTest
 
 			Assert.IsFalse(methodThrew, "Method threw");
             Assert.AreEqual(3393.1144762761005, data.TestOutput.PredictedFlow, "PredictedFlow value does not match"); // 
-            Assert.AreEqual(3549.8089648534847, data.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
-            Assert.AreEqual(104.61801361766474, data.TestOutput.TowerCapability, "TowerCapability value does not match");
-            Assert.AreEqual(-0.29998321047046517, data.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
+            Assert.AreEqual(3536.9789229732728, data.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
+            Assert.AreEqual(104.23989369362691, data.TestOutput.TowerCapability, "TowerCapability value does not match");
+            Assert.AreEqual(-0.29903869175254272, data.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
         }
 
         [TestMethod]
@@ -368,9 +368,9 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
-                data.TestOutput.TowerCapability = 104.64646026826094;
-                data.TestOutput.AdjustedFlow = 3549.8089648534847;
-                data.TestOutput.PredictedFlow = 3392.1921064062349;
+                data.TestOutput.TowerCapability = 104.23989369362691;
+                data.TestOutput.AdjustedFlow = 3536.9789229732728;
+                data.TestOutput.PredictedFlow = 3393.1144762761005;
                 CalculationLibrary.CalculateColdWaterTemperatureDeviation(data);
             }
             catch
@@ -379,7 +379,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(-0.30185874617716379, data.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match"); // 
+            Assert.AreEqual(-0.29903869175254272, data.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match"); // 
         }
     }
 }

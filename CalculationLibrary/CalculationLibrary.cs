@@ -315,10 +315,10 @@ namespace CalculationLibrary
             //'****** Procedure finds SI WB, DB & properties given enthalpy & pressure **
             //'****** Uses bisection method to search for roots.  Limits -20 to 60 øC ****
             //'Establish tolerance on enthalpy search
-            double temperatureTolerance = 0.001;
+            double temperatureTolerance = (data.IsInternationalSystemOfUnits_SI) ? 0.00001 : 0.0001;
             double Htolerance = 0.00005;
-            double temperatureCold = (data.IsInternationalSystemOfUnits_SI) ? -18.0 : 0.0; // cold
-            double temperatureHot = (data.IsInternationalSystemOfUnits_SI) ? 93.0 : 140;  // hot
+            double temperatureCold = (data.IsInternationalSystemOfUnits_SI) ? -20.0 : 0.0; // cold
+            double temperatureHot = (data.IsInternationalSystemOfUnits_SI) ? 60.0 : 140;  // hot
             double rootEnthalpy = data.RootEnthalpy;
 
             //First need to bracket region of WB/DB to created bisection region
