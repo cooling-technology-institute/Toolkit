@@ -36,14 +36,14 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(0.11365004696355566, data.HumidityRatio, "HumidityRatio value does not match");
+            Assert.AreEqual(0.11354219293284637, data.HumidityRatio, "HumidityRatio value does not match");
         }
 
         [TestMethod]
         public void SI_CalculateHumidityRatio_ZeroTest()
         {
             bool methodThrew = false;
-            double wet = (2501.0 + 1.805 * 50) / 4.186;
+            double wet = (2501.0 + 1.86 * 50) / 4.186;
 
             PsychrometricsData data = new PsychrometricsData()
             {
@@ -144,9 +144,9 @@ namespace CalculationLibraryUnitTest
             };
 
             double c1 = (data.IsInternationalSystemOfUnits_SI) ? 2501.0 : 1093.0;
-            double c2 = (data.IsInternationalSystemOfUnits_SI) ? 1.805 : 0.444;
-            double c3 = (data.IsInternationalSystemOfUnits_SI) ? 2.381 : 0.556;
-            double c4 = (data.IsInternationalSystemOfUnits_SI) ? 1.0 : 0.24;
+            double c2 = (data.IsInternationalSystemOfUnits_SI) ? 1.86 : 0.444;
+            double c3 = (data.IsInternationalSystemOfUnits_SI) ? 2.326 : 0.556;
+            double c4 = (data.IsInternationalSystemOfUnits_SI) ? 1.006 : 0.24;
             double c5 = (data.IsInternationalSystemOfUnits_SI) ? 4.186 : 1.0;
 
             double humidityRatio = ((c1 - c3 * data.WetBulbTemperature) * 0.0 - (c4 * (data.DryBulbTemperature - data.WetBulbTemperature))) / (c1 + c2 * data.DryBulbTemperature - c5 * data.WetBulbTemperature);
@@ -184,9 +184,9 @@ namespace CalculationLibraryUnitTest
             };
 
             double c1 = (data.IsInternationalSystemOfUnits_SI) ? 2501.0 : 1093.0;
-            double c2 = (data.IsInternationalSystemOfUnits_SI) ? 1.805 : 0.444;
-            double c3 = (data.IsInternationalSystemOfUnits_SI) ? 2.381 : 0.556;
-            double c4 = (data.IsInternationalSystemOfUnits_SI) ? 1.0 : 0.24;
+            double c2 = (data.IsInternationalSystemOfUnits_SI) ? 1.86 : 0.444;
+            double c3 = (data.IsInternationalSystemOfUnits_SI) ? 2.326 : 0.556;
+            double c4 = (data.IsInternationalSystemOfUnits_SI) ? 1.006 : 0.24;
             double c5 = (data.IsInternationalSystemOfUnits_SI) ? 4.186 : 1.0;
 
             double humidityRatio = c1 + c2 * data.DryBulbTemperature - c5 * data.WetBulbTemperature;

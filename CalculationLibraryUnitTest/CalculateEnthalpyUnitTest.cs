@@ -36,7 +36,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(1696.4599865784990, data.Enthalpy, "Enthalpy value does not match");
+            Assert.AreEqual(1697.6354477126893, data.Enthalpy, "Enthalpy value does not match");
         }
 
         [TestMethod]

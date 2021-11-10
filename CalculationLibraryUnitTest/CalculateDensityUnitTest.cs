@@ -39,7 +39,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(0.14258609761478092, data.Density, "Density value does not match");
+            Assert.AreEqual(0.14257441840589735, data.Density, "Density value does not match");
         }
 
         [TestMethod]

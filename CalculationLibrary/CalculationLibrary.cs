@@ -94,13 +94,13 @@ namespace CalculationLibrary
             // Calculate saturation pressure at t!
             // The coefficients of Equations(5) and(6) were derived from the Hyland-Wexler equations
             // pws = C8/T + C9 + C10T + C11T2 + C12T3 + C13 ln T (ashrea 5 2017)
-            // IP                     SI
-            //C8 = –1.0440397E+04     C8 = –5.8002206E+03
-            //C9 = –1.1294650E+01     C9 = 1.3914993E+00
-            //C10 = –2.7022355E–02    C10 = –4.8640239E–02
-            //C11 = 1.2890360E–05     C11 = 4.1764768E–05
-            //C12 = –2.4780681E–09    C12 = –1.4452093E–08
-            //C13 = 6.5459673E+00     C13 = 6.5459673E+00
+            // SI                     IP
+            //C8 = –5.8002206E+03     C8 = –1.0440397E+04 
+            //C9 = 1.3914993E+00      C9 = –1.1294650E+01
+            //C10 = –4.8640239E–02    C10 = –2.7022355E–02    
+            //C11 = 4.1764768E–05     C11 = 1.2890360E–05     
+            //C12 = –1.4452093E–08    C12 = –2.4780681E–09    
+            //C13 = 6.5459673E+00     C13 = 6.5459673E+00     
             if (airTemperature >= freezingTemperature)
             {
                 C8 = (isInternationalSystemOfUnits_SI) ? -5800.2206 : -10440.39708;
@@ -118,14 +118,14 @@ namespace CalculationLibrary
                 }
             }
             // pws = C1/T + C2 + C3T + C4T 2 + C5T 3 + C6T 4 + C7 ln T (ashrea 6 2017)
-            // IP                     SI
-            //C1 = –1.0214165E+04     C1 = –5.6745359E+03
-            //C2 = –4.8932428E+00     C2 = 6.3925247E+00
-            //C3 = –5.3765794E–03     C3 = –9.6778430E–03
-            //C4 = 1.9202377E–07      C4 = 6.2215701E–07
-            //C5 = 3.5575832E–10      C5 = 2.0747825E–09 
-            //C6 = –9.0344688E–14     C6 = –9.4840240E–13
-            //C7 = 4.1635019E+00      C7 = 4.1635019E+00
+            // SI                     IP
+            //C1 = –5.6745359E+03     C1 = –1.0214165E+04     
+            //C2 = 6.3925247E+00      C2 = –4.8932428E+00     
+            //C3 = –9.6778430E–03     C3 = –5.3765794E–03     
+            //C4 = 6.2215701E–07      C4 = 1.9202377E–07      
+            //C5 = 2.0747825E–09      C5 = 3.5575832E–10      
+            //C6 = –9.4840240E–13     C6 = –9.0344688E–14     
+            //C7 = 4.1635019E+00      C7 = 4.1635019E+00      
             else
             {
                 C1 = (isInternationalSystemOfUnits_SI) ? -5674.5359 : -10214.16462;
@@ -164,8 +164,8 @@ namespace CalculationLibrary
         // (double pressure, double temperatureDryBulb, double temperatureWetBulb)
         public double CalculateWetBulbTemperature(PsychrometricsData data)
         {
-            double temperatureTolerance = .0005;
-            double relativeHumdityDryBulbTolerance = .00005;
+            double temperatureTolerance = 0.0005;
+            double relativeHumdityDryBulbTolerance = 0.00005;
             double relativeHumdityMidpoint;
 
             double relativeHumdityDryBulb = CalculateRelativeHumidity(data.IsInternationalSystemOfUnits_SI, data.PressurePSI, data.DryBulbTemperature, data.DryBulbTemperature);
@@ -446,7 +446,7 @@ namespace CalculationLibrary
             data.DegreeOfSaturation = CalculateDegreeOfSaturation(data);
 
             // Calculate relative humidity
-            // relativeHumidity = degreeOfSaturation / (1. - (1. - degreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23a)
+            // relativeHumidity = degreeOfSaturation / (1. - (1. - degreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23)
             data.RelativeHumidity = CalculateRelativeHumidity(data);
 
             // Calculate specific volume
@@ -478,9 +478,9 @@ namespace CalculationLibrary
 
             // Calculate humidity ratio of the mixture
             double c1 = (isInternationalSystemOfUnits_SI) ? 2501.0 : 1093.0;
-            double c2 = (isInternationalSystemOfUnits_SI) ? 1.805 : 0.444;
-            double c3 = (isInternationalSystemOfUnits_SI) ? 2.381 : 0.556;
-            double c4 = (isInternationalSystemOfUnits_SI) ? 1.0 : 0.24;
+            double c2 = (isInternationalSystemOfUnits_SI) ? 1.86 : 0.444;
+            double c3 = (isInternationalSystemOfUnits_SI) ? 2.326 : 0.556;
+            double c4 = (isInternationalSystemOfUnits_SI) ? 1.006 : 0.24;
             double c5 = (isInternationalSystemOfUnits_SI) ? 4.186 : 1.0;
 
             double denominator = c1 + c2 * dryBulbTemperature - c5 * wetBulbTemperature;
@@ -493,10 +493,10 @@ namespace CalculationLibrary
             // WsWB = humidity ratio of moist air at saturation at thermodynamic wet bulb temperature --- saturation humidity ratio Ws
             // Calculate humidity ratio of the mixture
             double c1 = (data.IsInternationalSystemOfUnits_SI) ? 2501.0 : 1093.0;
-            double c2 = (data.IsInternationalSystemOfUnits_SI) ? 1.805 : 0.444;
-            double c3 = (data.IsInternationalSystemOfUnits_SI) ? 2.381 : 0.556;
-            double c4 = (data.IsInternationalSystemOfUnits_SI) ? 1.0 : 0.24;
-            double c5 = (data.IsInternationalSystemOfUnits_SI) ? 4.186 : 1.0;
+            double c2 = (data.IsInternationalSystemOfUnits_SI) ? 1.86   : 0.444;
+            double c3 = (data.IsInternationalSystemOfUnits_SI) ? 2.326  : 0.556;
+            double c4 = (data.IsInternationalSystemOfUnits_SI) ? 1.006  : 0.24;
+            double c5 = (data.IsInternationalSystemOfUnits_SI) ? 4.186  : 1.0;
 
             double denominator = c1 + c2 * data.DryBulbTemperature - c5 * data.WetBulbTemperature;
 
@@ -543,8 +543,9 @@ namespace CalculationLibrary
 
         public double CalculateRelativeHumidity(PsychrometricsData data)
         {
+            // relativeHumidity = degreeOfSaturation / (1. - (1. - degreeOfSaturation) * (FsDB * PwsDB / p));  //ASHRAE Eq.(23)
             double denominator = ((data.PressurePSI == 0.0) ? 0.0 : (1.0 - (1.0 - data.DegreeOfSaturation) * (data.FsDryBulb * data.SaturationVaporPressureDryBulb / data.PressurePSI)));
-            data.RelativeHumidity = (denominator == 0.0) ? 0.0 : data.DegreeOfSaturation / denominator;  //ASHRAE Eq.(23a)
+            data.RelativeHumidity = (denominator == 0.0) ? 0.0 : data.DegreeOfSaturation / denominator;  //ASHRAE Eq.(23)
 
             return data.RelativeHumidity;
         }

@@ -34,7 +34,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(40.345922298440044, data.DewPoint, "DewPoint value does not match");
+            Assert.AreEqual(40.352256520736361, data.DewPoint, "DewPoint value does not match");
         }
 
         [TestMethod]
@@ -91,7 +91,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(1.2920507862745469, data.DewPoint, "DewPoint value does not match");
+            Assert.AreEqual(1.3084198462758034, data.DewPoint, "DewPoint value does not match");
         }
 
         [TestMethod]

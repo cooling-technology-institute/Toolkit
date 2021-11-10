@@ -37,7 +37,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(0.24967229746811828, data.RelativeHumidity, "RelativeHumidity value does not match");
+            Assert.AreEqual(0.24947193436138507, data.RelativeHumidity, "RelativeHumidity value does not match");
         }
 
         [TestMethod]
@@ -224,7 +224,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(0.24967229746811828, data.RelativeHumidity, "RelativeHumidity value does not match");
+            Assert.AreEqual(0.24947193436138507, data.RelativeHumidity, "RelativeHumidity value does not match");
         }
 
         [TestMethod]

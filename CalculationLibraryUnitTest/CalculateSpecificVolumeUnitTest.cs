@@ -38,7 +38,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(11.689970139488507, data.SpecificVolume, "SpecificVolume value does not match");
+            Assert.AreEqual(11.694193599977881, data.SpecificVolume, "SpecificVolume value does not match");
         }
 
         [TestMethod]
