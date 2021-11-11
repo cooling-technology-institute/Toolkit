@@ -13,7 +13,244 @@ namespace CalculationLibraryUnitTest
 	{
 		MechanicalDraftPerformanceCurveCalculationLibrary CalculationLibrary { get; set; }
 
-        MechanicalDraftPerformanceCurveCalculationData data = new MechanicalDraftPerformanceCurveCalculationData()
+        MechanicalDraftPerformanceCurveCalculationData dataIP = new MechanicalDraftPerformanceCurveCalculationData()
+        {
+            IsInternationalSystemOfUnits_SI = false,
+            TowerType = TOWER_TYPE.Induced,
+            TowerTestData = {
+                IsInternationalSystemOfUnits_SI = false,
+                WaterFlowRate = 57426.0,
+                ColdWaterTemperature = 84.27,
+                HotWaterTemperature = 115.7,
+                WetBulbTemperature = 76.18,
+                DryBulbTemperature = 77.94,
+                FanDriverPower = 151.5,
+                BarometricPressure = 29.18,
+                LiquidToGasRatio = 0.0
+            },
+            TowerDesignData = {
+                IsInternationalSystemOfUnits_SI = false,
+                WaterFlowRate = 56792.0,
+                ColdWaterTemperature = 87.075,
+                HotWaterTemperature = 120.924,
+                WetBulbTemperature = 78.804,
+                DryBulbTemperature = 86.36,
+                FanDriverPower = 143.4,
+                BarometricPressure = 29.921,
+                LiquidToGasRatio = 1.3
+            },
+            Ranges = new List<double>()
+            {
+                27.07,  33.84, 40.61
+            },
+            InterpolateRanges = new List<double>(),
+            WaterFlowRates = new List<WaterFlowRate>()
+            {
+                new WaterFlowRate()
+                {
+                    FlowRate = 51112.8,
+                    WetBulbTemperatures = new List<WetBulbTemperature>()
+                    {
+                        new WetBulbTemperature()
+                        {
+                            Temperature = 40.0001,
+                            ColdWaterTemperatures = new List<double>()
+                            {
+                                62.3601,
+                                64.9501,
+                                67.0699,
+                            },
+                        },
+                        new WetBulbTemperature()
+                        {
+                            Temperature = 50.0,
+                            ColdWaterTemperatures = new List<double>()
+                            {
+                                67.2201,
+                                69.3199,
+                                71.0901,
+                            },
+                        },
+                        new WetBulbTemperature()
+                        {
+                            Temperature = 60.0001,
+                            ColdWaterTemperatures = new List<double>()
+                            {
+                                  72.63,
+                                  74.2901,
+                                  75.72,
+                            },
+                        },
+                        new WetBulbTemperature()
+                        {
+                            Temperature = 70.0,
+                            ColdWaterTemperatures = new List<double>()
+                            {
+                                78.7201,
+                                79.9801,
+                                81.1099,
+                            },
+                        },
+                        new WetBulbTemperature()
+                        {
+                            Temperature = 80.0001,
+                            ColdWaterTemperatures = new List<double>()
+                            {
+                                85.66,
+                                86.5701,
+                                87.42,
+                            },
+                        },
+                        new WetBulbTemperature()
+                        {
+                            Temperature = 90.0,
+                            ColdWaterTemperatures = new List<double>()
+                            {
+                                  93.6801,
+                                  94.3,
+                                  94.9201,
+                            },
+                        },
+                    },
+                },
+                new WaterFlowRate()
+                {
+                    FlowRate = 56792.0,
+                    WetBulbTemperatures = new List<WetBulbTemperature>()
+                    {
+                        new WetBulbTemperature()
+                        {
+                            Temperature = 40.0001,
+                            ColdWaterTemperatures = new List<double>()
+                            {
+                                64.9099,
+                                64.9099,
+                                70.0601
+                            },
+                        },
+                        new WetBulbTemperature()
+                        {
+                            Temperature = 50.0,
+                            ColdWaterTemperatures = new List<double>()
+                            {
+                                69.4301,
+                                71.76,
+                                73.72,
+                            },
+                        },
+                        new WetBulbTemperature()
+                        {
+                            Temperature = 60.0001,
+                            ColdWaterTemperatures = new List<double>()
+                            {
+                                74.48,
+                                76.3601,
+                                77.9801,
+                            },
+                        },
+                        new WetBulbTemperature()
+                        {
+                            Temperature = 70.0,
+                            ColdWaterTemperatures = new List<double>()
+                            {
+                                80.2099,
+                                81.6701,
+                                82.98,
+                            },
+                        },
+                        new WetBulbTemperature()
+                        {
+                            Temperature = 80.0001,
+                            ColdWaterTemperatures = new List<double>()
+                            {
+                                86.7799,
+                                87.8801,
+                                88.8901,
+                            },
+                        },
+                        new WetBulbTemperature()
+                        {
+                            Temperature = 90.0,
+                            ColdWaterTemperatures = new List<double>()
+                            {
+                                94.4501,
+                                95.2101,
+                                95.9801,
+                            },
+                        },
+                    },
+                },
+                new WaterFlowRate()
+                {
+                    FlowRate = 62471.2,
+                    WetBulbTemperatures = new List<WetBulbTemperature>()
+                    {
+                        new WetBulbTemperature()
+                        {
+                            Temperature = 40.0001,
+                            ColdWaterTemperatures = new List<double>()
+                            {
+                                67.75,
+                                70.81,
+                                73.29,
+                            },
+                        },
+                        new WetBulbTemperature()
+                        {
+                            Temperature = 50.0,
+                            ColdWaterTemperatures = new List<double>()
+                            {
+                                71.9501,
+                                74.5101,
+                                76.6301,
+                            },
+                        },
+                        new WetBulbTemperature()
+                        {
+                            Temperature = 60.0001,
+                            ColdWaterTemperatures = new List<double>()
+                            {
+                                76.6999,
+                                78.78,
+                                80.5699,
+                            },
+                        },
+                        new WetBulbTemperature()
+                        {
+                            Temperature = 70.0,
+                            ColdWaterTemperatures = new List<double>()
+                            {
+                                82.08,
+                                83.7401,
+                                85.24,
+                            },
+                        },
+                        new WetBulbTemperature()
+                        {
+                            Temperature = 80.0001,
+                            ColdWaterTemperatures = new List<double>()
+                            {
+                                88.3301,
+                                89.6101,
+                                90.79,
+                            },
+                        },
+                        new WetBulbTemperature()
+                        {
+                            Temperature = 90.0,
+                            ColdWaterTemperatures = new List<double>()
+                            {
+                                95.67,
+                                96.6,
+                                97.52,
+                            },
+                        },
+                    }
+                }
+            }
+        };
+
+        MechanicalDraftPerformanceCurveCalculationData dataSI = new MechanicalDraftPerformanceCurveCalculationData()
         {
             IsInternationalSystemOfUnits_SI = true,
             TowerType = TOWER_TYPE.Induced,
@@ -42,7 +279,6 @@ namespace CalculationLibraryUnitTest
             Ranges = new List<double>()
             {
                 17.0, 18.8, 21.0
-
             },
             InterpolateRanges = new List<double>(),
             WaterFlowRates = new List<WaterFlowRate>()
@@ -259,7 +495,7 @@ namespace CalculationLibraryUnitTest
 			try
 			{
 				CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
-				CalculationLibrary.MechanicalDraftPerformanceCurveCalculation(data, false);
+				CalculationLibrary.MechanicalDraftPerformanceCurveCalculation(dataSI, false);
 			}
 			catch
 			{
@@ -267,19 +503,19 @@ namespace CalculationLibraryUnitTest
 			}
 
 			Assert.IsFalse(methodThrew, "Method threw");
-			Assert.AreEqual(3393.1144762761005, data.TestOutput.PredictedFlow, "PredictedFlow value does not match"); // 
-			Assert.AreEqual(3536.9789229732728, data.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
-			Assert.AreEqual(104.23989369362691, data.TestOutput.TowerCapability, "TowerCapability value does not match");
-		}
+            Assert.AreEqual(3393.1144762761005, dataSI.TestOutput.PredictedFlow, "PredictedFlow value does not match"); // 
+            Assert.AreEqual(3536.9646313759695, dataSI.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
+            Assert.AreEqual(104.23947249954686, dataSI.TestOutput.TowerCapability, "TowerCapability value does not match");
+        }
 
-		[TestMethod]
+        [TestMethod]
 		public void SI_MechanicalDraftPerformanceCurveCalculationWithDeviationTest()
 		{
 			bool methodThrew = false;
 			try
 			{
 				CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
-                CalculationLibrary.MechanicalDraftPerformanceCurveCalculation(data, true);
+                CalculationLibrary.MechanicalDraftPerformanceCurveCalculation(dataSI, true);
 			}
 			catch
 			{
@@ -287,10 +523,52 @@ namespace CalculationLibraryUnitTest
 			}
 
 			Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(3393.1144762761005, data.TestOutput.PredictedFlow, "PredictedFlow value does not match"); // 
-            Assert.AreEqual(3536.9789229732728, data.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
-            Assert.AreEqual(104.23989369362691, data.TestOutput.TowerCapability, "TowerCapability value does not match");
-            Assert.AreEqual(-0.29903869175254272, data.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
+            Assert.AreEqual(3393.1144762761005, dataSI.TestOutput.PredictedFlow, "PredictedFlow value does not match"); // 
+            Assert.AreEqual(3536.9646313759695, dataSI.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
+            Assert.AreEqual(104.23947249954686, dataSI.TestOutput.TowerCapability, "TowerCapability value does not match");
+            Assert.AreEqual(-0.29901049483711972, dataSI.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
+        }
+
+        [TestMethod]
+        public void IP_MechanicalDraftPerformanceCurveCalculationTest()
+        {
+            bool methodThrew = false;
+
+            try
+            {
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+                CalculationLibrary.MechanicalDraftPerformanceCurveCalculation(dataIP, false);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.AreEqual(56795.317905383359, dataIP.TestOutput.PredictedFlow, "PredictedFlow value does not match"); // 
+            Assert.AreEqual(56791.606412452042, dataIP.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
+            Assert.AreEqual(99.993465142782540, dataIP.TestOutput.TowerCapability, "TowerCapability value does not match");
+        }
+
+        [TestMethod]
+        public void IP_MechanicalDraftPerformanceCurveCalculationWithDeviationTest()
+        {
+            bool methodThrew = false;
+            try
+            {
+                CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
+                CalculationLibrary.MechanicalDraftPerformanceCurveCalculation(dataIP, true);
+            }
+            catch
+            {
+                methodThrew = true;
+            }
+
+            Assert.IsFalse(methodThrew, "Method threw");
+            Assert.AreEqual(56795.317905383359, dataIP.TestOutput.PredictedFlow, "PredictedFlow value does not match"); // 
+            Assert.AreEqual(56791.606412452042, dataIP.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
+            Assert.AreEqual(99.993465142782540, dataIP.TestOutput.TowerCapability, "TowerCapability value does not match");
+            Assert.AreEqual(-0.0090185334629495628, dataIP.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
         }
 
         [TestMethod]
@@ -301,16 +579,16 @@ namespace CalculationLibraryUnitTest
 			try
 			{
 				CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
-                data.WaterFlowRates[0].Yfit.Add(28.610197818305455);
-                data.WaterFlowRates[0].Yfit.Add(28.837822802290912);
-                data.WaterFlowRates[0].Yfit.Add(29.065447786276366);
-                data.WaterFlowRates[1].Yfit.Add(29.402326944181819);
-                data.WaterFlowRates[1].Yfit.Add(29.629951928167277);
-                data.WaterFlowRates[1].Yfit.Add(29.857576912152730);
-                data.WaterFlowRates[2].Yfit.Add(30.218820826800002);
-                data.WaterFlowRates[2].Yfit.Add(30.475899732996364);
-                data.WaterFlowRates[2].Yfit.Add(30.733892780305457);
-                CalculationLibrary.InterpolateRange(data);
+                dataSI.WaterFlowRates[0].Yfit.Add(28.610197818305455);
+                dataSI.WaterFlowRates[0].Yfit.Add(28.837822802290912);
+                dataSI.WaterFlowRates[0].Yfit.Add(29.065447786276366);
+                dataSI.WaterFlowRates[1].Yfit.Add(29.402326944181819);
+                dataSI.WaterFlowRates[1].Yfit.Add(29.629951928167277);
+                dataSI.WaterFlowRates[1].Yfit.Add(29.857576912152730);
+                dataSI.WaterFlowRates[2].Yfit.Add(30.218820826800002);
+                dataSI.WaterFlowRates[2].Yfit.Add(30.475899732996364);
+                dataSI.WaterFlowRates[2].Yfit.Add(30.733892780305457);
+                CalculationLibrary.InterpolateRange(dataSI);
 			}
 			catch
 			{
@@ -318,9 +596,9 @@ namespace CalculationLibraryUnitTest
 			}
 
 			Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(28.670592947284472, data.InterpolateRanges[0], "WetBulbTemperatureRange[0] value does not match"); // 
-            Assert.AreEqual(29.462722073160837, data.InterpolateRanges[1], "WetBulbTemperatureRange[1] value does not match");
-            Assert.AreEqual(30.286990688774534, data.InterpolateRanges[2], "WetBulbTemperatureRange[3] value does not match");
+            Assert.AreEqual(28.670592947284472, dataSI.InterpolateRanges[0], "WetBulbTemperatureRange[0] value does not match"); // 
+            Assert.AreEqual(29.462722073160837, dataSI.InterpolateRanges[1], "WetBulbTemperatureRange[1] value does not match");
+            Assert.AreEqual(30.286990688774534, dataSI.InterpolateRanges[2], "WetBulbTemperatureRange[3] value does not match");
         }
 
         [TestMethod]
@@ -343,7 +621,7 @@ namespace CalculationLibraryUnitTest
 			try
 			{
 				CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
-				CalculationLibrary.InterpolateWetBulbTemperature(data);
+				CalculationLibrary.InterpolateWetBulbTemperature(dataSI);
 			}
 			catch
 			{
@@ -352,7 +630,7 @@ namespace CalculationLibraryUnitTest
 
 			Assert.IsFalse(methodThrew, "Method threw");
 			int x = 0;
-			foreach(WaterFlowRate waterFlowRate in data.WaterFlowRates)
+			foreach(WaterFlowRate waterFlowRate in dataSI.WaterFlowRates)
             {
 				Assert.AreEqual(yfit[x++], waterFlowRate.Yfit[0], string.Format("WaterFlowRate {0} Yfit[0] value does not match", waterFlowRate.FlowRate)); // 
 				Assert.AreEqual(yfit[x++], waterFlowRate.Yfit[1], string.Format("WaterFlowRate {0} Yfit[1] value does not match", waterFlowRate.FlowRate)); // 
@@ -368,10 +646,10 @@ namespace CalculationLibraryUnitTest
             try
             {
                 CalculationLibrary = new MechanicalDraftPerformanceCurveCalculationLibrary();
-                data.TestOutput.TowerCapability = 104.23989369362691;
-                data.TestOutput.AdjustedFlow = 3536.9789229732728;
-                data.TestOutput.PredictedFlow = 3393.1144762761005;
-                CalculationLibrary.CalculateColdWaterTemperatureDeviation(data);
+                dataSI.TestOutput.TowerCapability = 104.23989369362691;
+                dataSI.TestOutput.AdjustedFlow = 3536.9789229732728;
+                dataSI.TestOutput.PredictedFlow = 3393.1144762761005;
+                CalculationLibrary.CalculateColdWaterTemperatureDeviation(dataSI);
             }
             catch
             {
@@ -379,7 +657,7 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(-0.29903869175254272, data.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match"); // 
+            Assert.AreEqual(-0.29903869175254272, dataSI.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match"); // 
         }
     }
 }
