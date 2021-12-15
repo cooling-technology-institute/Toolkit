@@ -69,11 +69,11 @@ namespace CalculationLibraryUnitTest
             Assert.AreEqual(58.537578190586729, data.Enthalpy, "Enthalpy value does not match");
             Assert.AreEqual(20.0, data.WetBulbTemperature, "WetBulbTemperature value does not match");
             Assert.AreEqual(20.0, data.DryBulbTemperature, "DryBulbTemperature value does not match");
-            Assert.AreEqual(0.015142319258439448, data.HumidityRatio, "HumidityRatio value does not match");
-            Assert.AreEqual(0.99999999999999989, data.RelativeHumidity, "RelativeHumidity value does not match");
+            Assert.AreEqual(0.015142319258439450, data.HumidityRatio, "HumidityRatio value does not match");
+            Assert.AreEqual(1.0, data.RelativeHumidity, "RelativeHumidity value does not match");
             Assert.AreEqual(0.87245828235790901, data.SpecificVolume, "SpecificVolume value does not match");
             Assert.AreEqual(1.1635425323889550, data.Density, "Density value does not match");
-            Assert.AreEqual(19.999999999534658, data.DewPoint, "DewPoint value does not match");
+            Assert.AreEqual(19.999999999534662, data.DewPoint, "DewPoint value does not match");
         }
 
         [TestMethod]
@@ -135,8 +135,8 @@ namespace CalculationLibraryUnitTest
             Assert.AreEqual(0.0, data.Enthalpy, "Enthalpy value does not match");
             Assert.AreEqual(60.0, data.WetBulbTemperature, "WetBulbTemperature value does not match");
             Assert.AreEqual(60.0, data.DryBulbTemperature, "DryBulbTemperature value does not match");
-            Assert.AreEqual(0.15353446480523672, data.HumidityRatio, "HumidityRatio value does not match");
-            Assert.AreEqual(0.99999999999999978, data.RelativeHumidity, "RelativeHumidity value does not match");
+            Assert.AreEqual(0.15353446480523675, data.HumidityRatio, "HumidityRatio value does not match");
+            Assert.AreEqual(1.0, data.RelativeHumidity, "RelativeHumidity value does not match");
             Assert.AreEqual(1.1768022106183109, data.SpecificVolume, "SpecificVolume value does not match");
             Assert.AreEqual(0.98022798937397571, data.Density, "Density value does not match");
             Assert.AreEqual(60.000000003612605, data.DewPoint, "DewPoint value does not match");
@@ -201,8 +201,8 @@ namespace CalculationLibraryUnitTest
             Assert.AreEqual(0.0, data.Enthalpy, "Enthalpy value does not match");
             Assert.AreEqual(60.0, data.WetBulbTemperature, "WetBulbTemperature value does not match");
             Assert.AreEqual(60.0, data.DryBulbTemperature, "DryBulbTemperature value does not match");
-            Assert.AreEqual(0.15353446480523672, data.HumidityRatio, "HumidityRatio value does not match");
-            Assert.AreEqual(0.99999999999999978, data.RelativeHumidity, "RelativeHumidity value does not match");
+            Assert.AreEqual(0.15353446480523675, data.HumidityRatio, "HumidityRatio value does not match");
+            Assert.AreEqual(1.0, data.RelativeHumidity, "RelativeHumidity value does not match");
             Assert.AreEqual(1.1768022106183109, data.SpecificVolume, "SpecificVolume value does not match");
             Assert.AreEqual(0.98022798937397571, data.Density, "Density value does not match");
             Assert.AreEqual(60.000000003612605, data.DewPoint, "DewPoint value does not match");
@@ -231,14 +231,14 @@ namespace CalculationLibraryUnitTest
 
             Assert.IsFalse(methodThrew, "Method threw");
             Assert.AreEqual(169.660507, data.RootEnthalpy, "RootEnthalpy value does not match");
-            Assert.AreEqual(169.66044916375441, data.Enthalpy, "Enthalpy value does not match");
-            Assert.AreEqual(39.609231948852539, data.WetBulbTemperature, "WetBulbTemperature value does not match");
+            Assert.AreEqual(169.66045772659595, data.Enthalpy, "Enthalpy value does not match");
+            Assert.AreEqual(39.566278457641602, data.WetBulbTemperature, "WetBulbTemperature value does not match");
             Assert.AreEqual(0.0, data.DryBulbTemperature, "DryBulbTemperature value does not match");
-            Assert.AreEqual(0.067837044847562741, data.HumidityRatio, "HumidityRatio value does not match");
-            Assert.AreEqual(15.834671752095273, data.RelativeHumidity, "RelativeHumidity value does not match");
-            Assert.AreEqual(0.88017232257297717, data.SpecificVolume, "SpecificVolume value does not match");
-            Assert.AreEqual(1.2132136144953884, data.Density, "Density value does not match");
-            Assert.AreEqual(45.151339804038024, data.DewPoint, "DewPoint value does not match");
+            Assert.AreEqual(0.067837048271329844, data.HumidityRatio, "HumidityRatio value does not match");
+            Assert.AreEqual(15.834672472686311, data.RelativeHumidity, "RelativeHumidity value does not match");
+            Assert.AreEqual(0.88017232694161085, data.SpecificVolume, "SpecificVolume value does not match");
+            Assert.AreEqual(1.2132136123636255, data.Density, "Density value does not match");
+            Assert.AreEqual(45.151340688988618, data.DewPoint, "DewPoint value does not match");
         }
 
         [TestMethod]

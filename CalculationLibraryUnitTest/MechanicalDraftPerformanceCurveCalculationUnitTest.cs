@@ -31,9 +31,9 @@ namespace CalculationLibraryUnitTest
             TowerDesignData = {
                 IsInternationalSystemOfUnits_SI = false,
                 WaterFlowRate = 56792.0,
-                ColdWaterTemperature = 87.075,
-                HotWaterTemperature = 120.924,
-                WetBulbTemperature = 78.804,
+                ColdWaterTemperature = 87.08,
+                HotWaterTemperature = 120.92,
+                WetBulbTemperature = 78.8,
                 DryBulbTemperature = 86.36,
                 FanDriverPower = 143.4,
                 BarometricPressure = 29.921,
@@ -124,7 +124,7 @@ namespace CalculationLibraryUnitTest
                             ColdWaterTemperatures = new List<double>()
                             {
                                 64.9099,
-                                64.9099,
+                                67.7401,
                                 70.0601
                             },
                         },
@@ -545,9 +545,9 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(56795.317905383359, dataIP.TestOutput.PredictedFlow, "PredictedFlow value does not match"); // 
-            Assert.AreEqual(56791.606412452042, dataIP.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
-            Assert.AreEqual(99.993465142782540, dataIP.TestOutput.TowerCapability, "TowerCapability value does not match");
+            Assert.AreEqual(54152.265653743343, dataIP.TestOutput.PredictedFlow, "PredictedFlow value does not match"); // 
+            Assert.AreEqual(56057.403948435858, dataIP.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
+            Assert.AreEqual(103.51811373299545, dataIP.TestOutput.TowerCapability, "TowerCapability value does not match");
         }
 
         [TestMethod]
@@ -565,10 +565,10 @@ namespace CalculationLibraryUnitTest
             }
 
             Assert.IsFalse(methodThrew, "Method threw");
-            Assert.AreEqual(56795.317905383359, dataIP.TestOutput.PredictedFlow, "PredictedFlow value does not match"); // 
-            Assert.AreEqual(56791.606412452042, dataIP.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
-            Assert.AreEqual(99.993465142782540, dataIP.TestOutput.TowerCapability, "TowerCapability value does not match");
-            Assert.AreEqual(-0.0090185334629495628, dataIP.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
+            Assert.AreEqual(54152.265653743343, dataIP.TestOutput.PredictedFlow, "PredictedFlow value does not match"); // 
+            Assert.AreEqual(56057.403948435858, dataIP.TestOutput.AdjustedFlow, "AdjustedFlow value does not match");
+            Assert.AreEqual(103.51811373299545, dataIP.TestOutput.TowerCapability, "TowerCapability value does not match");
+            Assert.AreEqual(-0.49673537057178407, dataIP.TestOutput.ColdWaterTemperatureDeviation, "ColdWaterTemperatureDeviation value does not match");
         }
 
         [TestMethod]
