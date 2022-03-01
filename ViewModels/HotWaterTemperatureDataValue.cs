@@ -27,7 +27,7 @@ namespace ViewModels
         {
             IsDemo = isDemo;
             InputMessage = "Hot Water Temperature";
-            Format = "F3";
+            Format = "F2";
             SetDefaultMinMax(isInternationalSystemOfUnits_SI);
             Current = Default;
             SetInputAndTooltip(isInternationalSystemOfUnits_SI);

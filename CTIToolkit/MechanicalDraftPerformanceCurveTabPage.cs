@@ -418,7 +418,7 @@ namespace CTIToolkit
                             reportLabel = "CTI Mechanical Draft Performance Curve Test Report";
                             PrintControl.DataTables.Add(BuildDesignTestDataTable(TestPointTabControl.SelectedIndex));
                             PrintControl.DataTables.Add(BuildColdVsRangeDataTable(TestPointTabControl.SelectedIndex));
-                            PrintControl.DataTables.Add(BuildColdVsWaterFLowDataTable(TestPointTabControl.SelectedIndex));
+                            PrintControl.DataTables.Add(BuildColdVsWaterFlowDataTable(TestPointTabControl.SelectedIndex));
                             PrintControl.DataTables.Add(BuildExitAirDataTable());
                             MechanicalDraftPerformanceCurveViewModel.DataTable.TableName = "Test Results";
                             if (MechanicalDraftPerformanceCurveViewModel.CalculationData.TestOutput.Extrapolated)
@@ -690,7 +690,7 @@ namespace CTIToolkit
             {
                 column = new DataColumn();
                 column.DataType = Type.GetType("System.String");
-                column.ColumnName = waterFlowRate.FlowRate.ToString("F2");
+                column.ColumnName = string.Format("{0} {1}", waterFlowRate.FlowRate.ToString("F2"), MechanicalDraftPerformanceCurveViewModel.DesignData.WaterFlowRateDataValue.Units);
                 dataTable.Columns.Add(column);
             }
 
@@ -712,13 +712,14 @@ namespace CTIToolkit
             row["range"] = range.ToString("F2");
             foreach (WaterFlowRate waterFlowRate in waterFlowRates)
             {
-                row[waterFlowRate.FlowRate.ToString("F2")] = waterFlowRate.Yfit[i].ToString("F2");
+                string columnName = string.Format("{0} {1}", waterFlowRate.FlowRate.ToString("F2"), MechanicalDraftPerformanceCurveViewModel.DesignData.WaterFlowRateDataValue.Units);
+                row[columnName] = waterFlowRate.Yfit[i].ToString("F2");
             }
             row["Units"] = units;
             dataTable.Rows.Add(row);
         }
 
-        private DataTable BuildColdVsWaterFLowDataTable(int index)
+        private DataTable BuildColdVsWaterFlowDataTable(int index)
         {
             DataTable dataTable = new DataTable();
 
@@ -778,7 +779,7 @@ namespace CTIToolkit
                 Units = new UnitsIP();
             }
 
-            AddRowExitAir(dataTable, "WetBulbTemperature", 
+            AddRowExitAir(dataTable, "Wet Bulb Temperature", 
                                       MechanicalDraftPerformanceCurveViewModel.CalculationData.DesignOutput.WetBulbTemperature, 
                                       MechanicalDraftPerformanceCurveViewModel.CalculationData.TestOutput.WetBulbTemperature,
                                       Units.Temperature,
@@ -788,7 +789,7 @@ namespace CTIToolkit
                                       MechanicalDraftPerformanceCurveViewModel.CalculationData.TestOutput.Density,
                                       Units.Density,
                                       "F5");
-            AddRowExitAir(dataTable, "SpecificVolume",
+            AddRowExitAir(dataTable, "Specific Volume",
                                       MechanicalDraftPerformanceCurveViewModel.CalculationData.DesignOutput.SpecificVolume,
                                       MechanicalDraftPerformanceCurveViewModel.CalculationData.TestOutput.SpecificVolume,
                                       Units.SpecificVolume,

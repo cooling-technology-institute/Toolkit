@@ -314,8 +314,8 @@ namespace ViewModels
             NameValueUnitsDataTable.DataTable.Clear();
             NameValueUnitsDataTable.AddRow("Adjusted Flow", CalculationData.TestOutput.AdjustedFlow.ToString("F1"), Units.FlowRate);
             NameValueUnitsDataTable.AddRow("Predicted Flow", CalculationData.TestOutput.PredictedFlow.ToString("F1") + ((CalculationData.TestOutput.Extrapolated) ? " *" : ""), Units.FlowRate);
-            NameValueUnitsDataTable.AddRow("Tower Capability", CalculationData.TestOutput.TowerCapability.ToString("F2"), ConstantUnits.Percentage);
-            NameValueUnitsDataTable.AddRow("Cold Water Temperature Deviation", CalculationData.TestOutput.ColdWaterTemperatureDeviation.ToString("F1"), Units.Temperature);
+            NameValueUnitsDataTable.AddRow("Tower Capability", CalculationData.TestOutput.TowerCapability.ToString("F1"), ConstantUnits.Percentage);
+            NameValueUnitsDataTable.AddRow("Cold Water Temperature Deviation", CalculationData.TestOutput.ColdWaterTemperatureDeviation.ToString("F2"), Units.Temperature);
         }
 
         public bool Calculate(int testIndex)
