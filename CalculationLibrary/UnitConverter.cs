@@ -25,6 +25,7 @@ namespace CalculationLibrary
         const double BrakeHorsepowerToKilowattsConversionFactor = 0.7457;
         const double BarometricPressure = 29.921;
         const double OneAtmosphere = 101.325;
+        const double KiloPascalToInchesOfMercuryConversionFactor = 3.386389; // 0.29529980164712 3.38653074866
 
         // Conversion Methods
         public static double ConvertElevationInFeetToPressurePSI(double elevation)
@@ -36,6 +37,11 @@ namespace CalculationLibrary
         public static double ConvertBarometricPressureToPsi(double barometricPressure)
         {
             return SeaLevelBasePressure * barometricPressure / BarometricPressure;
+        }
+
+        public static double ConvertPsiToBarometricPressure(double pressure)
+        {
+            return pressure / BarometricPressure * SeaLevelBasePressure;
         }
 
         public static double ConvertPressurePSIToElevationInFeet(double pressurePSI)
@@ -81,12 +87,12 @@ namespace CalculationLibrary
 
         public static double ConvertInchesOfMercuryToKilopascal(double inchesOfMercury)
         {
-            return (inchesOfMercury * 3.386);
+            return (inchesOfMercury * KiloPascalToInchesOfMercuryConversionFactor);
         }
 
         public static double ConvertKilopascalToInchesOfMercury(double kilopascal)
         {
-            return (kilopascal / 3.386);
+            return (kilopascal / KiloPascalToInchesOfMercuryConversionFactor); //3.386
         }
 
         public static double ConvertCelsiusToFahrenheit(double celsiusTemperature)
