@@ -51,13 +51,13 @@ namespace CTIToolkit
             if(IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_SI)
             {
                 IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
-                SetDisplayedUnits();
                 TowerDesignData.ConvertValues(IsInternationalSystemOfUnits_SI);
                 foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
                 {
                     tabPage.SetUnitsStandard(IsInternationalSystemOfUnits_SI);
                 }
                 SetDisplayedValues();
+                SetDisplayedUnits();
             }
         }
 

@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Cooling Technology Institute")]
 [assembly: AssemblyProduct("Toolkit")]
-[assembly: AssemblyCopyright("Copyright ©  2018 - 2021")]
+[assembly: AssemblyCopyright("Copyright ©  2018 - 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

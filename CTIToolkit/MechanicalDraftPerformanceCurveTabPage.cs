@@ -47,6 +47,15 @@ namespace CTIToolkit
             IsChanged = false;
         }
 
+        public void UpdateDemo(bool isDemo)
+        {
+            if (IsDemo != isDemo)
+            {
+                IsDemo = isDemo;
+                MechanicalDraftPerformanceCurveViewModel.UpdateDemo(isDemo);
+            }
+        }
+
         public void SetUnitsStandard(bool isInternationalSystemOfUnits_SI)
         {
             if (IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_SI)
@@ -129,6 +138,8 @@ namespace CTIToolkit
             else
             {
                 stringBuilder.AppendLine("Unable to load file. File contains invalid data.");
+                stringBuilder.AppendLine(MechanicalDraftPerformanceCurveViewModel.ErrorMessage);
+                returnValue = false;
             }
 
             if(!returnValue)

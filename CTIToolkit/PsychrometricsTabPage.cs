@@ -196,6 +196,15 @@ namespace CTIToolkit
             return true;
         }
 
+        public void UpdateDemo(bool isDemo)
+        {
+            if(IsDemo != isDemo)
+            {
+                IsDemo = isDemo;
+                PsychrometricsViewModel.UpdateDemo(isDemo);
+            }
+        }
+
         public void SetUnitsStandard(bool isInternationalSystemOfUnits_SI)
         {
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;

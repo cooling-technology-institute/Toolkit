@@ -55,6 +55,15 @@ namespace CTIToolkit
             SetDisplayedValues();
         }
 
+        public void UpdateDemo(bool isDemo)
+        {
+            if (IsDemo != isDemo)
+            {
+                IsDemo = isDemo;
+                DemandCurveViewModel.UpdateDemo(isDemo);
+            }
+        }
+
         public void SetUnitsStandard(bool isInternationalSystemOfUnits_SI)
         {
             if (IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_SI)

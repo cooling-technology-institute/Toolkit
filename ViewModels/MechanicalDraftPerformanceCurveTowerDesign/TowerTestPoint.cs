@@ -45,6 +45,24 @@ namespace ViewModels
             LiquidToGasRatioDataValue.UpdateCurrentValue(0.0);
         }
 
+        public void UpdateDemo(bool isDemo)
+        {
+            if (IsDemo != isDemo)
+            {
+                IsDemo = isDemo;
+
+                WaterFlowRateDataValue.SetDemo(isDemo);
+                HotWaterTemperatureDataValue.SetDemo(isDemo);
+                ColdWaterTemperatureDataValue.SetDemo(isDemo);
+                WetBulbTemperatureDataValue.SetDemo(isDemo);
+                DryBulbTemperatureDataValue.SetDemo(isDemo);
+                FanDriverPowerDataValue.SetDemo(isDemo);
+                BarometricPressureDataValue.SetDemo(isDemo);
+
+                LiquidToGasRatioDataValue.SetDemo(isDemo);
+            }
+        }
+
         public bool ConvertValues(bool isIS)
         {
             bool isChanged = false;
@@ -79,49 +97,50 @@ namespace ViewModels
                 {
                     TestName = testData.TestName;
                     string label = string.Format("Test Data {0} : ", TestName);
+                    stringBuilder.AppendLine(label);
 
                     ConvertValues(isInternationalSystemOfUnits_SI);
 
                     if (!WaterFlowRateDataValue.UpdateCurrentValue(testData.TowerSpecifications.WaterFlowRate))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine(label + WaterFlowRateDataValue.ErrorMessage);
+                        stringBuilder.AppendLine(WaterFlowRateDataValue.ErrorMessage);
                     }
 
                     if (!HotWaterTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.HotWaterTemperature))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine(label + HotWaterTemperatureDataValue.ErrorMessage);
+                        stringBuilder.AppendLine(HotWaterTemperatureDataValue.ErrorMessage);
                     }
 
                     if (!ColdWaterTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.ColdWaterTemperature))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine(label + ColdWaterTemperatureDataValue.ErrorMessage);
+                        stringBuilder.AppendLine(ColdWaterTemperatureDataValue.ErrorMessage);
                     }
 
                     if (!WetBulbTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.WetBulbTemperature))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine(label + WetBulbTemperatureDataValue.ErrorMessage);
+                        stringBuilder.AppendLine(WetBulbTemperatureDataValue.ErrorMessage);
                     }
 
                     if (!DryBulbTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.DryBulbTemperature))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine(label + DryBulbTemperatureDataValue.ErrorMessage);
+                        stringBuilder.AppendLine(DryBulbTemperatureDataValue.ErrorMessage);
                     }
 
                     if (!FanDriverPowerDataValue.UpdateCurrentValue(testData.TowerSpecifications.FanDriverPower))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine(label + FanDriverPowerDataValue.ErrorMessage);
+                        stringBuilder.AppendLine(FanDriverPowerDataValue.ErrorMessage);
                     }
 
                     if (!BarometricPressureDataValue.UpdateCurrentValue(testData.TowerSpecifications.BarometricPressure))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine(label + BarometricPressureDataValue.ErrorMessage);
+                        stringBuilder.AppendLine(BarometricPressureDataValue.ErrorMessage);
                     }
 
                     ConvertValues(isSI);
@@ -137,6 +156,7 @@ namespace ViewModels
             {
                 ErrorMessage = stringBuilder.ToString();
             }
+
             return returnValue;
         }
 

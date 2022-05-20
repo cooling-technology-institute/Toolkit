@@ -38,6 +38,17 @@ namespace ViewModels
         }
 
         public abstract void ConvertValue(bool isInternationalSystemOfUnits_SI);
+        
+        public abstract void SetDefaultMinMax(bool isInternationalSystemOfUnits_SI);
+
+        public void SetDemo(bool isDemo)
+        {
+            if (IsDemo != isDemo)
+            {
+                IsDemo = isDemo;
+            }
+            SetDefaultMinMax(IsInternationalSystemOfUnits_SI);
+        }
 
         public bool UpdateValue(string input)
         {

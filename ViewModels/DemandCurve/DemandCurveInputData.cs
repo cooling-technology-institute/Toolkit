@@ -48,6 +48,24 @@ namespace ViewModels
             UserApproachDataValue = new UserApproachDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
         }
 
+        public void UpdateDemo(bool isDemo)
+        {
+            if (IsDemo != isDemo)
+            {
+                IsDemo = isDemo;
+                WetBulbTemperatureDataValue.SetDemo(IsDemo);
+                RangeDataValue.SetDemo(IsDemo);
+                ElevationDataValue.SetDemo(IsDemo);
+                BarometricPressureDataValue.SetDemo(IsDemo);
+                C1DataValue.SetDemo(IsDemo);
+                SlopeDataValue.SetDemo(IsDemo);
+                MinimumDataValue.SetDemo(IsDemo);
+                MaximumDataValue.SetDemo(IsDemo);
+                LiquidToGasRatioDataValue.SetDemo(IsDemo);
+                UserApproachDataValue.SetDemo(IsDemo);
+            }
+        }
+
         public bool ConvertValues(bool isIS, bool isElevation)
         {
             bool isChanged = false;
@@ -60,6 +78,7 @@ namespace ViewModels
                 ElevationDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
                 WetBulbTemperatureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
                 BarometricPressureDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
+                UserApproachDataValue.ConvertValue(IsInternationalSystemOfUnits_SI);
                 isChanged = true;
             }
 

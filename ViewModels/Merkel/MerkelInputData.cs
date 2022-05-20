@@ -41,6 +41,20 @@ namespace ViewModels
             BarometricPressureDataValue = new BarometricPressureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
         }
 
+        public void UpdateDemo(bool isDemo)
+        {
+            if (IsDemo != isDemo)
+            {
+                IsDemo = isDemo;
+                HotWaterTemperatureDataValue.SetDemo(IsDemo);
+                ColdWaterTemperatureDataValue.SetDemo(IsDemo);
+                WetBulbTemperatureDataValue.SetDemo(IsDemo);
+                ElevationDataValue.SetDemo(IsDemo);
+                LiquidToGasRatioDataValue.SetDemo(IsDemo);
+                BarometricPressureDataValue.SetDemo(IsDemo);
+            }
+        }
+
         public void ConvertValues(bool isIS)
         {
             IsInternationalSystemOfUnits_SI = isIS;

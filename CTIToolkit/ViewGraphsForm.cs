@@ -46,7 +46,7 @@ namespace CTIToolkit
             chart.ChartAreas[0].IsSameFontSizeForAllAxes = true;
 
             chart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
-            chart.ChartAreas[0].AxisX.MajorGrid.Interval = 1;
+            chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightGray;
             chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 1.0;
             chart.ChartAreas[0].AxisX.MajorTickMark.IntervalOffset = 1.0;
             chart.ChartAreas[0].AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
@@ -60,6 +60,7 @@ namespace CTIToolkit
             chart.ChartAreas[0].AxisX.LabelStyle.Format = "0.00";
 
             chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
+            chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightGray;
             chart.ChartAreas[0].AxisY.MajorGrid.Interval = 1;
             chart.ChartAreas[0].AxisY.MajorTickMark.Interval = 1.0;
             chart.ChartAreas[0].AxisY.MajorTickMark.IntervalOffset = 1.0;
@@ -127,8 +128,7 @@ namespace CTIToolkit
             chart.ChartAreas.Add(new ChartArea());
 
             chart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
-            //chart.ChartAreas[0].AxisX.MinorGrid.Enabled = true;
-            //chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 1;
+            chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightGray;
             chart.ChartAreas[0].AxisX.MinorTickMark.Interval = 1;
             chart.ChartAreas[0].AxisX.Minimum = calculationData.CrossPlot1.RangeMinimum;
             chart.ChartAreas[0].AxisX.Maximum = calculationData.CrossPlot1.RangeMaximum;
@@ -139,8 +139,7 @@ namespace CTIToolkit
             chart.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
 
             chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
-            //chart.ChartAreas[0].AxisY.MinorGrid.Enabled = true;
-            //chart.ChartAreas[0].AxisY.MajorTickMark.Interval = 1;
+            chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightGray;
             chart.ChartAreas[0].AxisY.MinorTickMark.Interval = 1;
             chart.ChartAreas[0].AxisY.Minimum = calculationData.CrossPlot1.ColdWaterTemperatureMinimum;
             chart.ChartAreas[0].AxisY.Maximum = calculationData.CrossPlot1.ColdWaterTemperatureMaximum;
@@ -189,8 +188,10 @@ namespace CTIToolkit
             chart.ChartAreas.Add(new ChartArea());
 
             chart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
+            chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightGray;
             //chart.ChartAreas[0].AxisX.MinorGrid.Enabled = true;
             //chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 1;
+            chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightGray;
             chart.ChartAreas[0].AxisX.MinorTickMark.Interval = 1;
             chart.ChartAreas[0].AxisX.Minimum = calculationData.CrossPlot2.WaterFlowRateMinimum;
             chart.ChartAreas[0].AxisX.Maximum = calculationData.CrossPlot2.WaterFlowRateMaximum;
@@ -201,6 +202,7 @@ namespace CTIToolkit
             chart.ChartAreas[0].AxisX.LabelStyle.Format = "0.00";
 
             chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
+            chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightGray;
             //chart.ChartAreas[0].AxisY.MinorGrid.Enabled = true;
             //chart.ChartAreas[0].AxisY.MajorTickMark.Interval = 1;
             chart.ChartAreas[0].AxisY.MinorTickMark.Interval = 1;
@@ -284,13 +286,13 @@ namespace CTIToolkit
                             chart.ChartAreas[0].BackColor = Color.White;
                             //chart.ChartAreas[0] = Color.Black;
 
-                            chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Black;
+                            chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightGray;
                             chart.ChartAreas[0].AxisX.MajorTickMark.LineColor = Color.Black;
                             chart.ChartAreas[0].AxisX.TitleForeColor = Color.Black;
                             chart.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.Black;
                             chart.ChartAreas[0].AxisX.LineColor = Color.Black;
 
-                            chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Black;
+                            chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightGray;
                             chart.ChartAreas[0].AxisY.MajorTickMark.LineColor = Color.Black;
                             chart.ChartAreas[0].AxisY.TitleForeColor = Color.Black;
                             chart.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.Black;
@@ -317,13 +319,13 @@ namespace CTIToolkit
                         {
                             chart.ChartAreas[0].BackColor = Color.Black;
 
-                            chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.White;
+                            chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.DarkGray;
                             chart.ChartAreas[0].AxisX.MajorTickMark.LineColor = Color.White;
                             chart.ChartAreas[0].AxisX.TitleForeColor = Color.White;
                             chart.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.White;
                             chart.ChartAreas[0].AxisX.LineColor = Color.White;
 
-                            chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.White;
+                            chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.DarkGray;
                             chart.ChartAreas[0].AxisY.MajorTickMark.LineColor = Color.White;
                             chart.ChartAreas[0].AxisY.TitleForeColor = Color.White;
                             chart.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.White;

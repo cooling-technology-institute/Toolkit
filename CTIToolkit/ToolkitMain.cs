@@ -113,15 +113,20 @@ namespace CTIToolkit
 
         private void AboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            bool isDemo = ApplicationSettings.IsDemo;
+
             About about = new About(ApplicationSettings);
             about.ShowDialog();
+            
             if (ApplicationSettings.IsDemo)
             {
                 this.Text = "Cooling Technology Institute Toolkit Demo";
+                UpdateDemo(ApplicationSettings.IsDemo);
             }
             else
             {
                 this.Text = "Cooling Technology Institute Toolkit";
+                UpdateDemo(ApplicationSettings.IsDemo);
             }
         }
 
@@ -143,6 +148,26 @@ namespace CTIToolkit
         private void InternationalSystemOfUnitsSIButton_Click(object sender, EventArgs e)
         {
             InternationalSystemOfUnitsSIToolStripMenuItem_Click(sender, e);
+        }
+
+        private void UpdateDemo(bool isDemo)
+        {
+            if (PsychrometricsUserControl != null)
+            {
+                PsychrometricsUserControl.UpdateDemo(isDemo);
+            }
+            if (MerkelUserControl != null)
+            {
+                MerkelUserControl.UpdateDemo(isDemo);
+            }
+            if (DemandCurveUserControl != null)
+            {
+                DemandCurveUserControl.UpdateDemo(isDemo);
+            }
+            if (MechanicalDraftPerformanceCurveUserControl != null)
+            {
+                MechanicalDraftPerformanceCurveUserControl.UpdateDemo(isDemo);
+            }
         }
 
         public void UpdateUnits(UnitsSelection units)

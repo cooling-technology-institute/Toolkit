@@ -24,6 +24,15 @@ namespace ViewModels
         public bool IsDemo { get; set; }
         public bool IsInternationalSystemOfUnits_SI { get; set; }
 
+        public void UpdateDemo(bool isDemo)
+        {
+            if (IsDemo != isDemo)
+            {
+                IsDemo = isDemo;
+                DemandCurveInputData.UpdateDemo(isDemo);
+            }
+        }
+
         public List<Approach> Approaches
         {
             get

@@ -37,7 +37,7 @@ namespace ViewModels
             SetInputAndTooltip(isInternationalSystemOfUnits_SI);
         }
 
-        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_SI)
+        public override void SetDefaultMinMax(bool isInternationalSystemOfUnits_SI)
         {
             if (isInternationalSystemOfUnits_SI)
             {

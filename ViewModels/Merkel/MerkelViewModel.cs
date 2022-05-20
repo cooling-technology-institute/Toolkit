@@ -36,13 +36,21 @@ namespace ViewModels
             MerkelCalculationLibrary = new MerkelCalculationLibrary();
         }
 
+        public void UpdateDemo(bool isDemo)
+        {
+            if (IsDemo != isDemo)
+            {
+                IsDemo = isDemo;
+                MerkelInputData.UpdateDemo(isDemo);
+            }
+        }
+
         public void SwitchUnits(bool isIS)
         {
             IsInternationalSystemOfUnits_SI = isIS;
             MerkelInputData.ConvertValues(IsInternationalSystemOfUnits_SI);
             MerkelOutputData.SwitchUnits(IsInternationalSystemOfUnits_SI);
         }
-
 
         public bool CalculateMerkel()
         {

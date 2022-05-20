@@ -35,6 +35,15 @@ namespace ViewModels
             PsychrometricsData = new PsychrometricsData();
         }
 
+        public void UpdateDemo(bool isDemo)
+        {
+            if (IsDemo != isDemo)
+            {
+                IsDemo = isDemo;
+                PsychrometricsInputData.UpdateDemo(isDemo);
+            }
+        }
+
         public void SwitchUnits(bool isIS)
         {
             IsInternationalSystemOfUnits_SI = isIS;

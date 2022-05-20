@@ -13,6 +13,7 @@ namespace CTIToolkit
     {
         private UnitsSelection _UnitsSelection = UnitsSelection.United_States_Customary_Units_IP;
         private bool _IsDemo = true;
+        public bool IsValidSerialNumber = false;
         private string _SerialNumber = "";
         //private string _ActivationDate;
         //private bool _IsActivated = false;
@@ -38,11 +39,13 @@ namespace CTIToolkit
                 if(!string.IsNullOrWhiteSpace(value) && TestSerialNumber(value))
                 {
                     _SerialNumber = value;
+                    IsValidSerialNumber = true;
                     _IsDemo = false;
                 }
                 else
                 {
                     _IsDemo = true;
+                    IsValidSerialNumber = false;
                 }
                 UpdateSettings();
             }

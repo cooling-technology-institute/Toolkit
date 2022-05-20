@@ -36,11 +36,9 @@ namespace CTIToolkit
             }
             else
             {
-                if (ApplicationSettings.TestSerialNumber(SerialNumberInput.Text))
-                {
-                    ApplicationSettings.SerialNumber = SerialNumberInput.Text;
-                }
-                else
+                ApplicationSettings.SerialNumber = SerialNumberInput.Text;
+
+                if (!ApplicationSettings.IsValidSerialNumber)
                 {
                     MessageBox.Show("You must enter an invalid serial number.");
                 }
@@ -88,20 +86,21 @@ namespace CTIToolkit
 
         private void UpdateFormForSerialNumber()
         {
-            if (ApplicationSettings.TestSerialNumber(this.serialNumber.Text))
-            {
-                ApplicationSettings.SerialNumber = this.serialNumber.Text;
-                this.demoWarning.Visible = false;
-                this.SerialNumberInput.Visible = false;
-                this.setSerialNumberButton.Visible = false;
-                this.setSerialNumberInputLabel.Visible = false;
-            }
-            else
+            this.serialNumber.Text = ApplicationSettings.SerialNumber;
+
+            if (ApplicationSettings.IsDemo)
             {
                 this.demoWarning.Visible = true;
                 this.SerialNumberInput.Visible = true;
                 this.setSerialNumberButton.Visible = true;
                 this.setSerialNumberInputLabel.Visible = true;
+            }
+            else
+            {
+                this.demoWarning.Visible = false;
+                this.SerialNumberInput.Visible = false;
+                this.setSerialNumberButton.Visible = false;
+                this.setSerialNumberInputLabel.Visible = false;
             }
         }
 

@@ -36,6 +36,20 @@ namespace ViewModels
             DryBulbTemperatureDataValue = new DryBulbTemperatureDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
         }
 
+        public void UpdateDemo(bool isDemo)
+        {
+            if (IsDemo != isDemo)
+            {
+                IsDemo = isDemo;
+                EnthalpyDataValue.SetDemo(IsDemo);
+                ElevationDataValue.SetDemo(IsDemo);
+                BarometricPressureDataValue.SetDemo(IsDemo);
+                RelativeHumidityDataValue.SetDemo(IsDemo);
+                WetBulbTemperatureDataValue.SetDemo(IsDemo);
+                DryBulbTemperatureDataValue.SetDemo(IsDemo);
+            }
+        }
+
         public bool FillAndValidate(PsychrometricsData data, out string errorMessage)
         {
             errorMessage = string.Empty;

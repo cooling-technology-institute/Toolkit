@@ -27,7 +27,7 @@ namespace ViewModels
             IsZeroValid = true;
         }
 
-        public void SetDefaultMinMax(bool isInternationalSystemOfUnits_SI)
+        public override void SetDefaultMinMax(bool isInternationalSystemOfUnits_SI)
         {
             if (isInternationalSystemOfUnits_SI)
             {
@@ -51,7 +51,7 @@ namespace ViewModels
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
             if (IsInternationalSystemOfUnits_SI)
             {
-                Units = ConstantUnits.RangeK;
+                Units = ConstantUnits.TemperatureCelsius;
             }
             else
             {

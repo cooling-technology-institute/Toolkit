@@ -96,6 +96,31 @@ namespace ViewModels
             WaterFlowRateOrder = Order.Ascending;
         }
 
+        public void UpdateDemo(bool isDemo)
+        {
+            if (IsDemo != isDemo)
+            {
+                IsDemo = isDemo;
+
+                Range1Value.SetDemo(isDemo);
+                Range2Value.SetDemo(isDemo);
+                Range3Value.SetDemo(isDemo);
+                Range4Value.SetDemo(isDemo);
+                Range5Value.SetDemo(isDemo);
+
+                WaterFlowRateDataValue.SetDemo(isDemo);
+                HotWaterTemperatureDataValue.SetDemo(isDemo);
+                ColdWaterTemperatureDataValue.SetDemo(isDemo);
+                WetBulbTemperatureDataValue.SetDemo(isDemo);
+                DryBulbTemperatureDataValue.SetDemo(isDemo);
+                FanDriverPowerDataValue.SetDemo(isDemo);
+                BarometricPressureDataValue.SetDemo(isDemo);
+                LiquidToGasRatioDataValue.SetDemo(isDemo);
+
+                AddWaterFlowRateDataValue.SetDemo(isDemo);
+            }
+        }
+
         public bool ConvertValues(bool isIS)
         {
             if (IsInternationalSystemOfUnits_SI != isIS)
@@ -127,7 +152,9 @@ namespace ViewModels
         {
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
-            string label = "Design Data: ";
+
+            stringBuilder.AppendLine("Design Data: ");
+
             try
             {
                 OwnerNameValue = data.OwnerName;
@@ -139,79 +166,79 @@ namespace ViewModels
                 if (!WaterFlowRateDataValue.UpdateCurrentValue(data.TowerSpecifications.WaterFlowRate))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + WaterFlowRateDataValue.ErrorMessage);
+                    stringBuilder.AppendLine(WaterFlowRateDataValue.ErrorMessage);
                 }
 
                 if (!HotWaterTemperatureDataValue.UpdateCurrentValue(data.TowerSpecifications.HotWaterTemperature))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + HotWaterTemperatureDataValue.ErrorMessage);
+                    stringBuilder.AppendLine(HotWaterTemperatureDataValue.ErrorMessage);
                 }
 
                 if (!ColdWaterTemperatureDataValue.UpdateCurrentValue(data.TowerSpecifications.ColdWaterTemperature))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + ColdWaterTemperatureDataValue.ErrorMessage);
+                    stringBuilder.AppendLine(ColdWaterTemperatureDataValue.ErrorMessage);
                 }
 
                 if (!WetBulbTemperatureDataValue.UpdateCurrentValue(data.TowerSpecifications.WetBulbTemperature))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + WetBulbTemperatureDataValue.ErrorMessage);
+                    stringBuilder.AppendLine(WetBulbTemperatureDataValue.ErrorMessage);
                 }
 
                 if (!DryBulbTemperatureDataValue.UpdateCurrentValue(data.TowerSpecifications.DryBulbTemperature))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + DryBulbTemperatureDataValue.ErrorMessage);
+                    stringBuilder.AppendLine(DryBulbTemperatureDataValue.ErrorMessage);
                 }
 
                 if (!FanDriverPowerDataValue.UpdateCurrentValue(data.TowerSpecifications.FanDriverPower))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + FanDriverPowerDataValue.ErrorMessage);
+                    stringBuilder.AppendLine(FanDriverPowerDataValue.ErrorMessage);
                 }
 
                 if (!BarometricPressureDataValue.UpdateCurrentValue(data.TowerSpecifications.BarometricPressure))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + BarometricPressureDataValue.ErrorMessage);
+                    stringBuilder.AppendLine(BarometricPressureDataValue.ErrorMessage);
                 }
 
                 if (!LiquidToGasRatioDataValue.UpdateCurrentValue(data.TowerSpecifications.LiquidToGasRatio))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + LiquidToGasRatioDataValue.ErrorMessage);
+                    stringBuilder.AppendLine(LiquidToGasRatioDataValue.ErrorMessage);
                 }
 
                 if (!Range1Value.UpdateCurrentValue(data.Range1))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + Range1Value.ErrorMessage);
+                    stringBuilder.AppendLine(Range1Value.ErrorMessage);
                 }
 
                 if (!Range2Value.UpdateCurrentValue(data.Range2))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + Range2Value.ErrorMessage);
+                    stringBuilder.AppendLine(Range2Value.ErrorMessage);
                 }
 
                 if (!Range3Value.UpdateCurrentValue(data.Range3))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + Range3Value.ErrorMessage);
+                    stringBuilder.AppendLine(Range3Value.ErrorMessage);
                 }
 
                 if (!Range4Value.UpdateCurrentValue(data.Range4))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + Range4Value.ErrorMessage);
+                    stringBuilder.AppendLine(Range4Value.ErrorMessage);
                 }
 
                 if (!Range5Value.UpdateCurrentValue(data.Range5))
                 {
                     returnValue = false;
-                    stringBuilder.AppendLine(label + Range5Value.ErrorMessage);
+                    stringBuilder.AppendLine(Range5Value.ErrorMessage);
                 }
 
                 TowerDesignCurveData.Clear();
@@ -221,7 +248,7 @@ namespace ViewModels
                     if (!towerDesignCurveData.LoadData(rangedTemperaturesDesignData))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine(label + towerDesignCurveData.ErrorMessage);
+                        stringBuilder.AppendLine(towerDesignCurveData.ErrorMessage);
                     }
                     TowerDesignCurveData.Add(towerDesignCurveData);
                 }
@@ -232,8 +259,11 @@ namespace ViewModels
                 returnValue = false;
             }
             
-            ErrorMessage = stringBuilder.ToString();
-            
+            if(!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
+
             return returnValue;
         }
 

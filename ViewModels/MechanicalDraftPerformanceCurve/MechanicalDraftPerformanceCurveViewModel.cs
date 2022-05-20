@@ -43,6 +43,19 @@ namespace ViewModels
             MechanicalDraftPerformanceCurveFileData = new MechanicalDraftPerformanceCurveFileData(IsInternationalSystemOfUnits_SI);
         }
 
+        public void UpdateDemo(bool isDemo)
+        {
+            if (IsDemo != isDemo)
+            {
+                IsDemo = isDemo;
+                DesignData.UpdateDemo(isDemo);
+                foreach (TowerTestPoint towerTestPoint in TestPoints)
+                {
+                    towerTestPoint.UpdateDemo(isDemo);
+                }
+            }
+        }
+
         public bool SwitchUnits(bool isIS)
         {
             bool isChange = false;
@@ -207,6 +220,12 @@ namespace ViewModels
                 if (!DesignData.LoadData(MechanicalDraftPerformanceCurveFileData.DesignData))
                 {
                     returnValue = false;
+                    if (IsDemo)
+                    {
+                        stringBuilder.AppendLine();
+                        stringBuilder.AppendLine("You are in Demo mode that limits the input value ranges. This maybe causing the file not to load properly.");
+                    }
+                    stringBuilder.AppendLine();
                     stringBuilder.AppendLine(DesignData.ErrorMessage);
                 }
                 
@@ -217,7 +236,8 @@ namespace ViewModels
                     if (!towerTestPoint.LoadData(IsInternationalSystemOfUnits_SI, testData))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine(string.Format("Test {0}: {1}", towerTestPoint.TestName, towerTestPoint.ErrorMessage));
+                        stringBuilder.AppendLine();
+                        stringBuilder.AppendLine(towerTestPoint.ErrorMessage);
                     }
                     TestPoints.Add(towerTestPoint);
                 }
@@ -226,6 +246,7 @@ namespace ViewModels
 
                 if(!IsDesignDataValid)
                 {
+                    stringBuilder.AppendLine();
                     stringBuilder.AppendLine(DesignData.ErrorMessage);
                 }
             }
@@ -234,6 +255,7 @@ namespace ViewModels
             {
                 ErrorMessage = stringBuilder.ToString();
             }
+
             return returnValue;
         }
 
