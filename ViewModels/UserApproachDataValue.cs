@@ -51,7 +51,7 @@ namespace ViewModels
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
             if (IsInternationalSystemOfUnits_SI)
             {
-                Units = ConstantUnits.TemperatureCelsius;
+                Units = ConstantUnits.RangeK;
             }
             else
             {
