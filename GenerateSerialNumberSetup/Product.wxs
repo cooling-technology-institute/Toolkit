@@ -41,6 +41,10 @@
           -->
         </File>
       </Component>
+      <Component Id="File_Database" Guid='{C1937415-955A-4C66-9C9A-1FB7FEFB3BB4}' Directory="INSTALLFOLDER">
+        <File Id='Database' Name='ToolkitSerialNumbers.accdb' DiskId='1' Source='$(var.GenerateSerialNumber.TargetDir)ToolkitSerialNumbers.accdb' KeyPath='yes' Checksum='yes' >
+        </File>
+      </Component>
       <!-- Provide application and uninstall shortcuts in the start menu-->
       <Component Id="ApplicationShortcuts" Guid="{F531F601-5CA5-4760-BB1B-1982795181BE}" Directory="ApplicationProgramsFolder">
         <Shortcut Id="ApplicationShortcut" Name="!(bind.property.ProductName)" Description="Starts $(var.GenerateName)" Target="[INSTALLFOLDER]$(var.GenerateSerialNumber.TargetFileName)" WorkingDirectory="MAINFOLDER" Icon="GenerateSerialNumber.ico"/>

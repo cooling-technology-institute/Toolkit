@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{066FBF65-C1A0-4F94-B00C-18955ABAF629}</ProjectGuid>
+    <ProjectGuid>{F0CE61DE-9AC4-48FA-9949-3B90BAB609A1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>GenerateSerialNumber</RootNamespace>
     <AssemblyName>GenerateSerialNumber</AssemblyName>
@@ -33,7 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,6 +56,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ToolkitSerialNumbersDataSet.cs">
+      <DependentUpon>ToolkitSerialNumbersDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ToolkitSerialNumbersDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ToolkitSerialNumbersDataSet.xsd</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="GenerateSerialNumberForm.resx">
       <DependentUpon>GenerateSerialNumberForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -75,12 +85,25 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="ToolkitSerialNumbersDataSet.xsc">
+      <DependentUpon>ToolkitSerialNumbersDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ToolkitSerialNumbersDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ToolkitSerialNumbersDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ToolkitSerialNumbersDataSet.xss">
+      <DependentUpon>ToolkitSerialNumbersDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GenerateSerialNumber.ico" />
+    <Content Include="ToolkitSerialNumbers.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

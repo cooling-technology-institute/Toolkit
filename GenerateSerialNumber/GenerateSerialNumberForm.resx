@@ -117,4 +117,117 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="emailLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="first_NameLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="last_NameLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="companyLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="toolkit_4BindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>226, 17</value>
+  </metadata>
+  <metadata name="toolkitSerialNumbersDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="errorProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>746, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAMAICAQAAAABADoAgAANgAAADAwAAAAAAgAqA4AAB4DAAAQEBAAAAAEACgBAADGEQAAKAAAACAA
+        AABAAAAAAQAEAAAAAAAAAgAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAIAAAIAAAACAgACAAAAAgACAAICA
+        AADAwMAAgICAAAAA/wAA/wAAAP//AP8AAAD/AP8A//8AAP///wAAAAAAAAAAzMwAAAAAAAAAAAAAAADM
+        zMzMzMwAAAAAAAAAAADMzMzMzMzMzAAAAAAAAAAMzMzMzMzMzMzAAAAAAAAMzMzMzMzMzMzMzMAAAAAA
+        zMzMzMzMzMzMzMzMAAAAAMzMzMzMzMzMzMzMzAAAAAzMzMzMzMzMzMzMzMzAAADMzMzMzMzMzMzMzMzM
+        zAAAzMzMzMzMzMzMzMzMzMwADMzMzMzMzMzMzMzMzMzMwAzM///PzM///8zP/MzP/MAMz/zM/8z/zM/8
+        z/zM//zAzP/MzP/M/8zP/M/8z//8zMz/zMz/zMzMz/zP/M///MzM/8z//8zMz//Mz/z/z/zMzP/MzMzM
+        z//MzM/8/8/8zMz/zMzMzP/MzMzP//zP/MzM/8zMz8z/zM/8z//8z/zMDM/8zP/M/8zP/M//zM/8wAzM
+        ///8zM///8zP/MzP/MAMzMzMzMzMzMzMzMzMzMzAAMzMzMzMzMzMzMzMzMzMwADMzMzMzMzMzMzMzMzM
+        zAAADMzMzMzMzMzMzMzMzMAAAADMzMzMzMzMzMzMzMzAAAAAzMzMzMzMzMzMzMzMAAAAAAzMzMzMzMzM
+        zMzMwAAAAAAADMzMzMzMzMzMzAAAAAAAAADMzMzMzMzMzAAAAAAAAAAAAMzMzMzMzAAAAAAAAAAAAAAA
+        AMzMAAAAAAAAAP/8P///wAP//wAA//4AAH/4AAAf8AAAD/AAAA/gAAAHwAAAA8AAAAOAAAABgAAAAYAA
+        AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAABgAAAAYAAAAHAAAABwAAAA+AAAAfwAAAH8AAAD/gA
+        AB/+AAA//wAA///AA////D//KAAAADAAAABgAAAAAQAIAAAAAAAACQAAAAAAAAAAAAAAAQAAAAEAAAAA
+        AAAAAIAAAIAAAACAgACAAAAAgACAAICAAADAwMAAwNzAAPDKpgAEBAQACAgIAAwMDAAREREAFhYWABwc
+        HAAiIiIAKSkpAFVVVQBNTU0AQkJCADk5OQCAfP8AUFD/AJMA1gD/7MwAxtbvANbn5wCQqa0AAAAzAAAA
+        ZgAAAJkAAADMAAAzAAAAMzMAADNmAAAzmQAAM8wAADP/AABmAAAAZjMAAGZmAABmmQAAZswAAGb/AACZ
+        AAAAmTMAAJlmAACZmQAAmcwAAJn/AADMAAAAzDMAAMxmAADMmQAAzMwAAMz/AAD/ZgAA/5kAAP/MADMA
+        AAAzADMAMwBmADMAmQAzAMwAMwD/ADMzAAAzMzMAMzNmADMzmQAzM8wAMzP/ADNmAAAzZjMAM2ZmADNm
+        mQAzZswAM2b/ADOZAAAzmTMAM5lmADOZmQAzmcwAM5n/ADPMAAAzzDMAM8xmADPMmQAzzMwAM8z/ADP/
+        MwAz/2YAM/+ZADP/zAAz//8AZgAAAGYAMwBmAGYAZgCZAGYAzABmAP8AZjMAAGYzMwBmM2YAZjOZAGYz
+        zABmM/8AZmYAAGZmMwBmZmYAZmaZAGZmzABmmQAAZpkzAGaZZgBmmZkAZpnMAGaZ/wBmzAAAZswzAGbM
+        mQBmzMwAZsz/AGb/AABm/zMAZv+ZAGb/zADMAP8A/wDMAJmZAACZM5kAmQCZAJkAzACZAAAAmTMzAJkA
+        ZgCZM8wAmQD/AJlmAACZZjMAmTNmAJlmmQCZZswAmTP/AJmZMwCZmWYAmZmZAJmZzACZmf8AmcwAAJnM
+        MwBmzGYAmcyZAJnMzACZzP8Amf8AAJn/MwCZzGYAmf+ZAJn/zACZ//8AzAAAAJkAMwDMAGYAzACZAMwA
+        zACZMwAAzDMzAMwzZgDMM5kAzDPMAMwz/wDMZgAAzGYzAJlmZgDMZpkAzGbMAJlm/wDMmQAAzJkzAMyZ
+        ZgDMmZkAzJnMAMyZ/wDMzAAAzMwzAMzMZgDMzJkAzMzMAMzM/wDM/wAAzP8zAJn/ZgDM/5kAzP/MAMz/
+        /wDMADMA/wBmAP8AmQDMMwAA/zMzAP8zZgD/M5kA/zPMAP8z/wD/ZgAA/2YzAMxmZgD/ZpkA/2bMAMxm
+        /wD/mQAA/5kzAP+ZZgD/mZkA/5nMAP+Z/wD/zAAA/8wzAP/MZgD/zJkA/8zMAP/M/wD//zMAzP9mAP//
+        mQD//8wAZmb/AGb/ZgBm//8A/2ZmAP9m/wD//2YAIQClAF9fXwB3d3cAhoaGAJaWlgDLy8sAsrKyANfX
+        1wDd3d0A4+PjAOrq6gDx8fEA+Pj4APD7/wCkoKAAgICAAAAA/wAA/wAAAP//AP8AAAD/AP8A//8AAP//
+        /wAKCgoKCgoKCgoKCgoAAAAAAAAAAAAAoaGhoQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKCgoKCgoKCgoK
+        CgoAAAAAAKGhoaGhoaGhoaGhoaGhAAAAAAAAAAAAAAAAAAAAAAAKCgoAAAAAAAAAAAAAAKGhoaGhoaGh
+        oaGhoaGhoaGhoaGhAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAChoaGhoaGhoaGhoaGhoaGhoaGhoaGh
+        oaEAAAAAAAAAAAAAAAAKAAAAAAAAAAAAAKGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhAAAAAAAAAAAA
+        AAAKAAAAAAAAAAChoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaEAAAAAAAAAAAAKAAAAAAAAAKGh
+        oaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhAAAAAAAAAAAKAAAAAAAAoaGhoaGhoaGhoaGhoaGh
+        oaGhoaGhoaGhoaGhoaGhoaGhoQAAAAAAAAAKAAAAAAChoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGh
+        oaGhoaGhoaEAAAAAAAAKAAAAAKGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhAAAA
+        AAAAAAAAAKGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhAAAAAAAAAAAAoaGhoaGh
+        oaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoQAAAAAAAAChoaGhoaGhoaGhoaGhoaGhoaGh
+        oaGhoaGhoaGhoaGhoaGhoaGhoaGhoaEAAAAAAAChoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGh
+        oaGhoaGhoaGhoaEAAAAAAKGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGh
+        AAAAAKGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhAAAAAKGhoaGhoaGh
+        oaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoQAAoaGhoaGhoaGhoaGhoaGhoaGhoaGh
+        oaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoQAAoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGh
+        oaGhoaGhoaGhoaGhoQAAoaGhoaGhoaGhoaH/////of+hoaH//////6Ghof//oaGhof//oaGhoaGhoaGh
+        oQAAoaGhoaGhoaGhof//oaGh//+hof//oaGh//+hof//oaGh////oaGhoaGhoaGhoQAAoaGhoaGhoaGh
+        //+hoaGh//+hof//oaGh//+hof//oaH/////oaGhoaGhoaGhoaGhoaGhoaGhoaGh//+hoaGh//+hoaGh
+        oaGh//+hof//oaH/////oaGhoaGhoaGhoaGhoaGhoaGhoaGh//+hof////+hoaGhof///6Ghof//of//
+        of//oaGhoaGhoaGhoaGhoaGhoaGhoaGh//+hoaGhoaGhoaH///+hoaGhof//of//of//oaGhoaGhoaGh
+        oaGhoaGhoaGhoaGh//+hoaGhoaGhof//oaGhoaGhof////+hof//oaGhoaGhoaGhoaEAoaGhoaGhoaGh
+        //+hoaGhof+hof//oaGh//+hof////+hof//oaGhoaGhoaGhoaEAoaGhoaGhoaGhof//oaGh//+hof//
+        oaGh//+hof///6Ghof//oaGhoaGhoaGhoQAAoaGhoaGhoaGhoaH//////6GhoaH//////6Ghof//oaGh
+        of//oaGhoaGhoaGhoQAKoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGh
+        oQAAoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoQAAAKGhoaGhoaGh
+        oaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoQAAAKGhoaGhoaGhoaGhoaGhoaGhoaGh
+        oaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhAAAAAKGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGh
+        oaGhoaGhoaGhoaGhAAAAAAChoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaEA
+        AAAAAAChoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaEAAAAAAAAAoaGhoaGh
+        oaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoQAAAAAAAAAAAKGhoaGhoaGhoaGhoaGhoaGh
+        oaGhoaGhoaGhoaGhoaGhoaGhoaGhAAAAAAAAAAAAAKGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGh
+        oaGhoaGhoaGhAAAAAAAKCgAAAAChoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaEAAAAA
+        AAAKCgAAAAAAoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoQAAAAAAAAAKCgAAAAAAAKGh
+        oaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhAAAAAAAAAAAKCgAAAAAAAAChoaGhoaGhoaGhoaGh
+        oaGhoaGhoaGhoaGhoaGhoaEAAAAAAAAAAAAKCgAAAAAAAAAAAKGhoaGhoaGhoaGhoaGhoaGhoaGhoaGh
+        oaGhAAAAAAAAAAAAAAAKCgAAAAAAAAAAAAChoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaEAAAAAAAAAAAAA
+        AAAKCgAAAAAAAAAAAAAAAKGhoaGhoaGhoaGhoaGhoaGhoaGhAAAAAAAAAAAAAAAAAAAKCgAAAAAAAAAA
+        AAAAAAAAAKGhoaGhoaGhoaGhoaGhAAAAAAAAAAAAAAAAAAAAAAAKCgoAAAAAAAAAAAAAAAAAAAAAAAAA
+        oaGhoQAAAAAAAAAAAAAAAAAAAAAAAAAKCgr///w///8AAP//gAH//wAA//wAAD//AAD/8AAAD/8AAP/g
+        AAAH/wAA/4AAAAH/AAD/AAAAAP8AAP4AAAAAfwAA/AAAAAA/AAD4AAAAAB8AAPgAAAAAHwAA8AAAAAAP
+        AADgAAAAAAcAAOAAAAAABwAAwAAAAAADAADAAAAAAAMAAMAAAAAAAQAAgAAAAAABAACAAAAAAAEAAIAA
+        AAAAAQAAgAAAAAABAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA
+        AACAAAAAAAEAAIAAAAAAAQAAgAAAAAABAACAAAAAAAEAAMAAAAAAAQAAwAAAAAADAADAAAAAAAMAAOAA
+        AAAABwAA4AAAAAAHAADwAAAAAA8AAPgAAAAAHwAA+AAAAAAfAAD8AAAAAD8AAP4AAAAAfwAA/wAAAAD/
+        AAD/gAAAAf8AAP/gAAAH/wAA//AAAA//AAD//AAAP/8AAP//gAH//wAA///8P///AAAoAAAAEAAAACAA
+        AAABAAQAAAAAAIAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAMDA
+        wACAgIAAAAD/AAD/AAAA//8A/wAAAP8A/wD//wAA////AAAADMzMwAAAAADMzMzMAAAAzMzMzMzMAADM
+        zMzMzMwADMzMzMzMzMDM/8z//PzPzM/M/Mz8/P/Mz8z8zPz8/8zPz/zPzP/PzM/MzPzM/8/Mz8z8/Mz8
+        z8wM/8zP/PzPwADMzMzMzMwAAMzMzMzMzAAAAMzMzMwAAAAADMzMwAAA+B8AAPAPAADAAwAAwAMAAIAB
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAQAAwAMAAMADAADwDwAA+B8AAA==
+</value>
+  </data>
+  <metadata name="toolkit_4TableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>403, 17</value>
+  </metadata>
+  <metadata name="tableAdapterManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>575, 17</value>
+  </metadata>
 </root>
