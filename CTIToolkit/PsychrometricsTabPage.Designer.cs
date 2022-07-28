@@ -184,31 +184,31 @@
             this.EnthalpyValue.Validating += new System.ComponentModel.CancelEventHandler(this.EnthalpyValue_Validating);
             this.EnthalpyValue.Validated += new System.EventHandler(this.EnthalpyValue_Validated);
             // 
-            // BarometericPressureUnits
+            // BarometricPressureUnits
             // 
             this.BarometricPressureUnits.AutoSize = true;
             this.BarometricPressureUnits.Location = new System.Drawing.Point(245, 91);
-            this.BarometricPressureUnits.Name = "BarometericPressureUnits";
+            this.BarometricPressureUnits.Name = "BarometricPressureUnits";
             this.BarometricPressureUnits.Size = new System.Drawing.Size(13, 13);
             this.BarometricPressureUnits.TabIndex = 17;
             this.BarometricPressureUnits.Text = "ft";
             // 
-            // BarometericPressureLabel
+            // BarometricPressureLabel
             // 
             this.BarometricPressureLabel.Enabled = false;
             this.BarometricPressureLabel.Location = new System.Drawing.Point(22, 91);
-            this.BarometricPressureLabel.Name = "BarometericPressureLabel";
+            this.BarometricPressureLabel.Name = "BarometricPressureLabel";
             this.BarometricPressureLabel.Size = new System.Drawing.Size(110, 13);
             this.BarometricPressureLabel.TabIndex = 16;
             this.BarometricPressureLabel.Text = "Barometeric Pressure:";
             this.BarometricPressureLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BarometricPressureLabel.Visible = false;
             // 
-            // BarometericPressure_Value
+            // BarometricPressure_Value
             // 
             this.BarometricPressure_Value.Enabled = false;
             this.BarometricPressure_Value.Location = new System.Drawing.Point(152, 88);
-            this.BarometricPressure_Value.Name = "BarometericPressure_Value";
+            this.BarometricPressure_Value.Name = "BarometricPressure_Value";
             this.BarometricPressure_Value.Size = new System.Drawing.Size(70, 20);
             this.BarometricPressure_Value.TabIndex = 15;
             this.BarometricPressure_Value.Text = "0";
@@ -411,6 +411,7 @@
             this.CalculatedValuesGridView.Location = new System.Drawing.Point(7, 20);
             this.CalculatedValuesGridView.Name = "CalculatedValuesGridView";
             this.CalculatedValuesGridView.ReadOnly = true;
+            this.CalculatedValuesGridView.RowHeadersVisible = false;
             this.CalculatedValuesGridView.Size = new System.Drawing.Size(735, 262);
             this.CalculatedValuesGridView.TabIndex = 0;
             this.CalculatedValuesGridView.TabStop = false;

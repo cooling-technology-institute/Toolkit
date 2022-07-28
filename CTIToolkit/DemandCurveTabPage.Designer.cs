@@ -461,6 +461,7 @@
             this.OutputGridView.Location = new System.Drawing.Point(6, 19);
             this.OutputGridView.Name = "OutputGridView";
             this.OutputGridView.ReadOnly = true;
+            this.OutputGridView.RowHeadersVisible = false;
             this.OutputGridView.Size = new System.Drawing.Size(290, 72);
             this.OutputGridView.TabIndex = 17;
             this.OutputGridView.TabStop = false;

@@ -405,7 +405,29 @@ namespace CTIToolkit
 
         private void DryBulbTemperature_Validating(object sender, CancelEventArgs e)
         {
+            if (DryBulbTemperature.Text != TowerDesignData.DryBulbTemperatureDataValue.InputValue)
+            {
+                IsChanged = true;
+            }
 
+            if (!TowerDesignData.DryBulbTemperatureDataValue.UpdateValue(DryBulbTemperature.Text))
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                DryBulbTemperature.Select(0, DryBulbTemperature.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(DryBulbTemperature, TowerDesignData.DryBulbTemperatureDataValue.ErrorMessage);
+            }
+            else if (TowerDesignData.WetBulbTemperatureDataValue.Current >= TowerDesignData.DryBulbTemperatureDataValue.Current)
+            {
+                // Cancel the event and select the text to be corrected by the user.
+                e.Cancel = true;
+                DryBulbTemperature.Select(0, DryBulbTemperature.Text.Length);
+
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(DryBulbTemperature, "Dry Bulb Temperature must be greater than the Wet Bulb Temperature.");
+            }
         }
 
         private void FanDriverPower_Validated(object sender, EventArgs e)

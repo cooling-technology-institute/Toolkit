@@ -1,6 +1,5 @@
-﻿// Copyright Cooling Technology Institute 2019-2021
+﻿// Copyright Cooling Technology Institute 2019-2022
 
-using CTIToolkit.PrintableForms;
 using System;
 using System.Data;
 using System.Drawing;

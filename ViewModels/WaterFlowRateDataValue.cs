@@ -6,11 +6,11 @@ namespace ViewModels
 {
     public class WaterFlowRateDataValue : DataValue
     {
-        public const double WaterFlowRateDefault = 0.1;
+        public const double WaterFlowRateDefault = 1000.0;
         public const double WaterFlowRateMinimum = 0.1;
         public const double WaterFlowRateMaximum = double.MaxValue;
 
-        public const double WaterFlowRateDefaultDemo = 0.1;
+        public const double WaterFlowRateDefaultDemo = 1000.0;
         public const double WaterFlowRateMinimumDemo = 0.1;
         public const double WaterFlowRateMaximumDemo = 57500.0;
 
@@ -28,7 +28,7 @@ namespace ViewModels
         {
             IsDemo = isDemo;
             InputMessage = "Water Flow Rate";
-            Format = "F2";
+            Format = "F1";
             SetDefaultMinMax(isInternationalSystemOfUnits_SI);
             Current = Default;
             SetInputAndTooltip(isInternationalSystemOfUnits_SI);

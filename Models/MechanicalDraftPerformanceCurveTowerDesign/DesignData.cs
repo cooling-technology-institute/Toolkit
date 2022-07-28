@@ -30,7 +30,7 @@ namespace Models
             ProjectName = string.Empty;
             Location = string.Empty;
             TowerManufacturer = string.Empty;
-            TowerType = TOWER_TYPE.Forced;
+            TowerType = TOWER_TYPE.Induced;
 
             TowerSpecifications = new TowerSpecifications();
 

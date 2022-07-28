@@ -8,11 +8,11 @@ namespace ViewModels
     {
         //#define FAN_DRIVER_POWER_MIN_IP		   (0.0001)
         //#define FAN_DRIVER_POWER_MAX_IP		(1000.0)
-        public const double FanDriverPowerDefault = 0.01;
+        public const double FanDriverPowerDefault = 150.0;
         public const double FanDriverPowerMinimum = 0.0001;
         public const double FanDriverPowerMaximum = 1000.0;
 
-        public const double FanDriverPowerDefaultDemo = 0.01;
+        public const double FanDriverPowerDefaultDemo = 150.0;
         public const double FanDriverPowerMinimumDemo = 0.0001;
         public const double FanDriverPowerMaximumDemo = 1000.0;
 

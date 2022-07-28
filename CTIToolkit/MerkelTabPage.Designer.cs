@@ -220,6 +220,7 @@
             this.ColdWaterTemperature_Value.TabIndex = 4;
             this.ColdWaterTemperature_Value.Text = "90";
             this.ColdWaterTemperature_Value.Validating += new System.ComponentModel.CancelEventHandler(this.Merkel_ColdWaterTemperature_Value_Validating);
+            this.ColdWaterTemperature_Value.Validated += new System.EventHandler(this.Merkel_ColdWaterTemperature_Value_Validated);
             // 
             // HotWaterTemperature_Value
             // 
@@ -294,6 +295,7 @@
             this.CalculatedValuesGridView.Location = new System.Drawing.Point(7, 20);
             this.CalculatedValuesGridView.Name = "CalculatedValuesGridView";
             this.CalculatedValuesGridView.ReadOnly = true;
+            this.CalculatedValuesGridView.RowHeadersVisible = false;
             this.CalculatedValuesGridView.Size = new System.Drawing.Size(730, 63);
             this.CalculatedValuesGridView.TabIndex = 0;
             this.CalculatedValuesGridView.TabStop = false;

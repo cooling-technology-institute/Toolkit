@@ -61,7 +61,7 @@ namespace ViewModels
             ProjectNameValue = string.Empty;
             LocationValue = string.Empty;
             TowerManufacturerValue = string.Empty;
-            TowerTypeValue = TOWER_TYPE.Forced;
+            TowerTypeValue = TOWER_TYPE.Induced;
 
             Range1Value = new RangeDataValue(IsDemo, IsInternationalSystemOfUnits_SI);
             Range1Value.IsZeroValid = true;

@@ -1158,6 +1158,7 @@
             // 
             // CancelChangesButton
             // 
+            this.CancelChangesButton.CausesValidation = false;
             this.CancelChangesButton.Location = new System.Drawing.Point(464, 658);
             this.CancelChangesButton.Name = "CancelChangesButton";
             this.CancelChangesButton.Size = new System.Drawing.Size(75, 23);

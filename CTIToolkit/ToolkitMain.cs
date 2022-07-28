@@ -448,7 +448,18 @@ namespace CTIToolkit
 
         private void Calculate_Click(object sender, EventArgs e)
         {
-
+            foreach (Control control in CalculationTabControl.TabPages[CalculationTabControl.SelectedIndex].Controls)
+            {
+                if (control is CalculatePrintUserControl)
+                {
+                    CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
+                    if(calculatePrintUserControl.Validate())
+                    {
+                        calculatePrintUserControl.Calculate();
+                    }
+                }
+                break;
+            }
         }
 
         private void HelpContentMenuItem_Click(object sender, EventArgs e)
