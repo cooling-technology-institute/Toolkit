@@ -12,7 +12,7 @@ namespace ViewModels
 
         public const double HotWaterTemperatureDefaultDemo = 100.0;
         public const double HotWaterTemperatureMinimumDemo = 75.0;
-        public const double HotWaterTemperatureMaximumDemo = 80.0;
+        public const double HotWaterTemperatureMaximumDemo = 100.0;
 
         public const double HotWaterTemperatureDefault_InternationalSystemOfUnits_IS_ = 43.33;
         public const double HotWaterTemperatureMinimum_InternationalSystemOfUnits_IS_ = 0.0;

@@ -1,4 +1,4 @@
-﻿// Copyright Cooling Technology Institute 2019-2021
+﻿// Copyright Cooling Technology Institute 2019-2022
 
 using Models;
 using System;
@@ -134,7 +134,9 @@ namespace CTIToolkit
             {
                 data.TowerDesignCurveData = new List<TowerDesignCurveData>();
             }
+
             data.TowerDesignCurveData.Clear();
+            
             foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
             {
                 data.TowerDesignCurveData.Add(tabPage.UserControl.TowerDesignCurveData);

@@ -17,7 +17,7 @@ namespace CTIToolkit
         private bool IsDemo { get; set; }
         private bool IsInternationalSystemOfUnits_SI { get; set; }
 
-        public MerkelTabPage(ApplicationSettings applicationSettings)
+        public MerkelTabPage(ApplicationSettings applicationSettings, string documentPath)
         {
             InitializeComponent();
 
@@ -31,7 +31,7 @@ namespace CTIToolkit
             DefaultFileName = "Merkel";
 
             MerkelViewModel = new MerkelViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
-            MerkelViewModel.DataFileName = BuildDefaultFileName();
+            MerkelViewModel.DataFileName = BuildDefaultFileName(documentPath);
   
             SetUnitsStandard(IsInternationalSystemOfUnits_SI);
             Calculate();
@@ -321,6 +321,7 @@ namespace CTIToolkit
 
         public void MerkelCalculate_Click(object sender, EventArgs e)
         {
+            ValidatedForm();
             Calculate();
         }
 
@@ -347,6 +348,18 @@ namespace CTIToolkit
             {
                 Calculate();
             }
+        }
+
+        public override void ValidatedForm()
+        {
+            object sender = new object();
+            EventArgs e = new EventArgs();
+
+            Merkel_LiquidtoGasRatio_Value_Validated(sender, e);
+            Merkel_ColdWaterTemperature_Value_Validated(sender, e);
+            Merkel_HotWaterTemperature_Value_Validated(sender, e);
+            Merkel_WetBulbTemperature_Value_Validated(sender, e);
+            Merkel_Elevation_Value_Validated(sender, e);
         }
 
         private void Merkel_LiquidtoGasRatio_Value_Validated(object sender, System.EventArgs e)

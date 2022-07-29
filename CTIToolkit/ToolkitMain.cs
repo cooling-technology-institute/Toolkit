@@ -1,4 +1,4 @@
-﻿// Copyright Cooling Technology Institute 2019-2021
+﻿// Copyright Cooling Technology Institute 2019-2022
 
 using CTIToolkit.Properties;
 using System;
@@ -23,11 +23,15 @@ namespace CTIToolkit
         MerkelTabPage MerkelUserControl { get; set; }
         DemandCurveTabPage DemandCurveUserControl { get; set; }
         MechanicalDraftPerformanceCurveTabPage MechanicalDraftPerformanceCurveUserControl { get; set; }
+        
+        public string DocumentPath;
 
         public ToolkitMain()
         {
-            InitializeComponent();
+            DocumentPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Cooling Technology Institute", "CTI Toolkit 4.0");
 
+            InitializeComponent();
+            
             // get full path to your startup EXE
             string exeFile = Assembly.GetEntryAssembly().CodeBase;
             // get directory of your EXE file
@@ -45,24 +49,24 @@ namespace CTIToolkit
 
             UpdateUnits(ApplicationSettings.UnitsSelection);
 
-            PsychrometricsUserControl = new PsychrometricsTabPage(ApplicationSettings);
+            PsychrometricsUserControl = new PsychrometricsTabPage(ApplicationSettings, DocumentPath);
             TabPage psychrometricsTabPage = new TabPage("Psychrometrics");
             psychrometricsTabPage.Controls.Add(PsychrometricsUserControl);
             CalculationTabControl.TabPages.Add(psychrometricsTabPage);
 
-            MerkelUserControl = new MerkelTabPage(ApplicationSettings);
+            MerkelUserControl = new MerkelTabPage(ApplicationSettings, DocumentPath);
             TabPage merkelTabPage = new TabPage("Merkel");
             merkelTabPage.Controls.Add(MerkelUserControl);
             CalculationTabControl.TabPages.Add(merkelTabPage);
 
-            DemandCurveUserControl = new DemandCurveTabPage(ApplicationSettings);
+            DemandCurveUserControl = new DemandCurveTabPage(ApplicationSettings, DocumentPath);
             DemandCurveUserControl.Dock = DockStyle.Top | DockStyle.Right;
             //DemandCurveUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TabPage demandCurveTabPage = new TabPage("Demand Curve");
             demandCurveTabPage.Controls.Add(DemandCurveUserControl);
             CalculationTabControl.TabPages.Add(demandCurveTabPage);
 
-            MechanicalDraftPerformanceCurveUserControl = new MechanicalDraftPerformanceCurveTabPage(ApplicationSettings);
+            MechanicalDraftPerformanceCurveUserControl = new MechanicalDraftPerformanceCurveTabPage(ApplicationSettings, DocumentPath);
             TabPage mechanicalDraftPerformanceCurveTabPage = new TabPage("Mechanical Draft Performance Curve");
             mechanicalDraftPerformanceCurveTabPage.Controls.Add(MechanicalDraftPerformanceCurveUserControl);
             CalculationTabControl.TabPages.Add(mechanicalDraftPerformanceCurveTabPage);
@@ -223,7 +227,7 @@ namespace CTIToolkit
 
                     using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                     {
-                        saveFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Cooling Technology Institute", "CTI Toolkit 4.0");
+                        saveFileDialog.InitialDirectory = DocumentPath;
                         saveFileDialog.Filter = calculatePrintUserControl.Filter;
                         saveFileDialog.FilterIndex = 1;
                         saveFileDialog.DefaultExt = calculatePrintUserControl.DefaultExt;
@@ -254,7 +258,7 @@ namespace CTIToolkit
 
                     using (OpenFileDialog openFileDialog = new OpenFileDialog())
                     {
-                        openFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Cooling Technology Institute", "CTI Toolkit 4.0");
+                        openFileDialog.InitialDirectory = DocumentPath;
                         openFileDialog.Filter = calculatePrintUserControl.Filter;
                         openFileDialog.FilterIndex = 1;
                         openFileDialog.AddExtension = true;
@@ -301,7 +305,7 @@ namespace CTIToolkit
 
                     using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                     {
-                        saveFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Cooling Technology Institute", "CTI Toolkit 4.0");
+                        saveFileDialog.InitialDirectory = DocumentPath;
 
                         saveFileDialog.Filter = calculatePrintUserControl.Filter;
                         saveFileDialog.FilterIndex = 1;
@@ -455,6 +459,7 @@ namespace CTIToolkit
                     CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
                     if(calculatePrintUserControl.Validate())
                     {
+                        calculatePrintUserControl.ValidatedForm();
                         calculatePrintUserControl.Calculate();
                     }
                 }
@@ -514,7 +519,7 @@ namespace CTIToolkit
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Cooling Technology Institute", "CTI Toolkit 4.0");
+                openFileDialog.InitialDirectory = DocumentPath;
                 openFileDialog.Filter = "PDF files (*.pdf)|*.pdf|All files (*.*)|*.*";
                 openFileDialog.FilterIndex = 1;
                 openFileDialog.AddExtension = true;

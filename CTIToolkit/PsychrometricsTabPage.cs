@@ -17,7 +17,7 @@ namespace CTIToolkit
         private bool IsInternationalSystemOfUnits_SI { get; set; }
         public bool IsChanged { get; set; }
 
-        public PsychrometricsTabPage(ApplicationSettings applicationSettings)
+        public PsychrometricsTabPage(ApplicationSettings applicationSettings, string documentPath )
         {
             InitializeComponent();
 
@@ -31,7 +31,7 @@ namespace CTIToolkit
             DefaultFileName = "Psychrometrics";
 
             PsychrometricsViewModel = new PsychrometricsViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
-            PsychrometricsViewModel.DataFileName = BuildDefaultFileName();
+            PsychrometricsViewModel.DataFileName = BuildDefaultFileName(documentPath);
             
             SetDisplayedValues();
 
@@ -529,7 +529,21 @@ namespace CTIToolkit
 
         public void PsychrometricsCalculate_Click(object sender, EventArgs e)
         {
+            ValidatedForm();
             Calculate();
+        }
+
+        public override void ValidatedForm()
+        {
+            object sender = new object();
+            EventArgs e = new EventArgs();
+
+            Elevation_Value_Validated(sender, e);
+            BarometricPressure_Value_Validated(sender, e);
+            DryBulbTemperature_Value_Validated(sender, e);
+            WetBulbTemperature_Value_Validated(sender, e);
+            RelativeHumidity_Value_Validated(sender, e);
+            EnthalpyValue_Validated(sender, e);
         }
 
         private void Elevation_Value_Validated(object sender, EventArgs e)

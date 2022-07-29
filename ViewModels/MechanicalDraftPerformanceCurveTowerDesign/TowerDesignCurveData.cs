@@ -388,5 +388,130 @@ namespace ViewModels
             }
             return count;
         }
+
+        public double FindMinimumColdWaterTempurature()
+        {
+            double minimum = 0.0;
+
+            for (int i = 0; i < 6; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        if (WetBulbTemperatureDataValue1.Current != 0.0)
+                        {
+                            if (Range1ColdWaterTemperatureDataValue1.Current < minimum)
+                            {
+                                minimum = Range1ColdWaterTemperatureDataValue1.Current;
+                            }
+                            if (Range1ColdWaterTemperatureDataValue2.Current < minimum)
+                            {
+                                minimum = Range1ColdWaterTemperatureDataValue2.Current;
+                            }
+                            if (Range1ColdWaterTemperatureDataValue3.Current < minimum)
+                            {
+                                minimum = Range1ColdWaterTemperatureDataValue3.Current;
+                            }
+                            if (Range1ColdWaterTemperatureDataValue4.Current < minimum)
+                            {
+                                minimum = Range1ColdWaterTemperatureDataValue4.Current;
+                            }
+                            if (Range1ColdWaterTemperatureDataValue5.Current < minimum)
+                            {
+                                minimum = Range1ColdWaterTemperatureDataValue5.Current;
+                            }
+                            if (Range1ColdWaterTemperatureDataValue6.Current < minimum)
+                            {
+                                minimum = Range1ColdWaterTemperatureDataValue6.Current;
+                            }
+                        }
+                        break;
+                    case 1:
+                        if ((WetBulbTemperatureDataValue2.Current != 0.0) && (WetBulbTemperatureDataValue2.Current < minimum))
+                        {
+                            minimum = WetBulbTemperatureDataValue2.Current;
+                        }
+                        break;
+                    case 2:
+                        if ((WetBulbTemperatureDataValue3.Current != 0.0) && (WetBulbTemperatureDataValue3.Current < minimum))
+                        {
+                            minimum = WetBulbTemperatureDataValue3.Current;
+                        }
+                        break;
+                    case 3:
+                        if ((WetBulbTemperatureDataValue4.Current != 0.0) && (WetBulbTemperatureDataValue4.Current < minimum))
+                        {
+                            minimum = WetBulbTemperatureDataValue4.Current;
+                        }
+                        break;
+                    case 4:
+                        if ((WetBulbTemperatureDataValue5.Current != 0.0) && (WetBulbTemperatureDataValue5.Current < minimum))
+                        {
+                            minimum = WetBulbTemperatureDataValue5.Current;
+                        }
+                        break;
+                    case 5:
+                        if ((WetBulbTemperatureDataValue6.Current != 0.0) && (WetBulbTemperatureDataValue6.Current < minimum))
+                        {
+                            minimum = WetBulbTemperatureDataValue6.Current;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return minimum;
+        }
+
+        public double FindMaximumColdWaterTempurature()
+        {
+            double maximum = 0.0;
+
+            for (int i = 0; i < 6; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        if ((WetBulbTemperatureDataValue1.Current != 0.0) && (WetBulbTemperatureDataValue1.Current > maximum))
+                        {
+                            maximum = WetBulbTemperatureDataValue1.Current;
+                        }
+                        break;
+                    case 1:
+                        if ((WetBulbTemperatureDataValue2.Current != 0.0) && (WetBulbTemperatureDataValue2.Current > maximum))
+                        {
+                            maximum = WetBulbTemperatureDataValue2.Current;
+                        }
+                        break;
+                    case 2:
+                        if ((WetBulbTemperatureDataValue3.Current != 0.0) && (WetBulbTemperatureDataValue3.Current > maximum))
+                        {
+                            maximum = WetBulbTemperatureDataValue3.Current;
+                        }
+                        break;
+                    case 3:
+                        if ((WetBulbTemperatureDataValue4.Current != 0.0) && (WetBulbTemperatureDataValue4.Current > maximum))
+                        {
+                            maximum = WetBulbTemperatureDataValue4.Current;
+                        }
+                        break;
+                    case 4:
+                        if ((WetBulbTemperatureDataValue5.Current != 0.0) && (WetBulbTemperatureDataValue5.Current > maximum))
+                        {
+                            maximum = WetBulbTemperatureDataValue5.Current;
+                        }
+                        break;
+                    case 5:
+                        if ((WetBulbTemperatureDataValue6.Current != 0.0) && (WetBulbTemperatureDataValue6.Current > maximum))
+                        {
+                            maximum = WetBulbTemperatureDataValue6.Current;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return maximum;
+        }
     }
 }

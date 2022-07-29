@@ -543,6 +543,8 @@
             this.DesignDataButton.Text = "Design Data...";
             this.DesignDataButton.UseVisualStyleBackColor = true;
             this.DesignDataButton.Click += new System.EventHandler(this.DesignDataButton_Click);
+            this.DesignDataButton.Validating += new System.ComponentModel.CancelEventHandler(this.DesignDataButton_Validating);
+            this.DesignDataButton.Validated += new System.EventHandler(this.DesignDataButton_Validated);
             // 
             // errorProvider1
             // 
@@ -633,6 +635,7 @@
             this.DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridView.Location = new System.Drawing.Point(6, 19);
             this.DataGridView.Name = "DataGridView";
+            this.DataGridView.RowHeadersVisible = false;
             this.DataGridView.Size = new System.Drawing.Size(760, 111);
             this.DataGridView.TabIndex = 26;
             // 

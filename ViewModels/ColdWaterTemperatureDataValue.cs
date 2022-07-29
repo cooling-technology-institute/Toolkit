@@ -10,7 +10,7 @@ namespace ViewModels
         public const double ColdWaterTemperatureMinimum = 32.0;
         public const double ColdWaterTemperatureMaximum = 200.0;
 
-        public const double ColdWaterTemperatureDefaultDemo = 80.0;
+        public const double ColdWaterTemperatureDefaultDemo = 79.0;
         public const double ColdWaterTemperatureMinimumDemo = 75.0;
         public const double ColdWaterTemperatureMaximumDemo = 80.0;
 

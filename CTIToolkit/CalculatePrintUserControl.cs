@@ -1,4 +1,4 @@
-﻿// Copyright Cooling Technology Institute 2019-2021
+﻿// Copyright Cooling Technology Institute 2019-2022
 
 using System;
 using System.Collections.Generic;
@@ -21,6 +21,7 @@ namespace CTIToolkit
         public string ErrorMessage { get; set; }
         public virtual void PrintPage(object sender, PrintPageEventArgs e) { }
         public virtual void Calculate() { }
+        public virtual void ValidatedForm() { }
         public virtual bool OpenDataFile(string fileName) { return false; }
         public virtual bool OpenNewDataFile(string fileName) { return false; }
         public virtual bool SaveDataFile() { return false; }
@@ -31,10 +32,10 @@ namespace CTIToolkit
             PrintControl = new PrintControl();
         }
         
-        public string BuildDefaultFileName()
+        public string BuildDefaultFileName(string path)
         {
             string dataFileName;
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CTI Toolkit");
+
             int i = 1;
 
             do

@@ -1,4 +1,4 @@
-﻿// Copyright Cooling Technology Institute 2019-2021
+﻿// Copyright Cooling Technology Institute 2019-2022
 
 using Models;
 using System;
@@ -35,7 +35,7 @@ namespace CTIToolkit
         private bool IsInternationalSystemOfUnits_SI { get; set; }
         private bool IsChanged { get; set; }
 
-        public DemandCurveTabPage(ApplicationSettings applicationSettings)
+        public DemandCurveTabPage(ApplicationSettings applicationSettings, string documentPath)
         {
             InitializeComponent();
 
@@ -48,7 +48,7 @@ namespace CTIToolkit
             IsDemo = applicationSettings.IsDemo;
 
             DemandCurveViewModel = new DemandCurveViewModel(IsDemo, IsInternationalSystemOfUnits_SI);
-            DemandCurveViewModel.DataFileName = BuildDefaultFileName();
+            DemandCurveViewModel.DataFileName = BuildDefaultFileName(documentPath);
 
             IsChanged = false;
 
@@ -422,6 +422,7 @@ namespace CTIToolkit
 
         public void DemandCurveCalculate_Click(object sender, EventArgs e)
         {
+            ValidatedForm();
             Calculate();
         }
 
@@ -438,6 +439,22 @@ namespace CTIToolkit
             {
                 errorProvider1.SetError(LiquidToGasRatioValue, DemandCurveViewModel.LiquidToGasRatioDataValue.ErrorMessage);
             }
+        }
+        
+        public override void ValidatedForm()
+        {
+            object sender = new object();
+            EventArgs e = new EventArgs();
+
+            LiquidToGasRatioValue_Validated(sender, e);
+            WetBulbTemperature_Value_Validated(sender, e);
+            RangeValue_Validated(sender, e);
+            ElevationValue_Validated(sender, e);
+            C_C1_Value_Validated(sender, e);
+            Slope_C2_Value_Validated(sender, e);
+            MaximumValue_Validated(sender, e);
+            MinimumValue_Validated(sender, e);
+            UserApproachValue_Validated(sender, e);
         }
 
         private void LiquidToGasRatioValue_Validated(object sender, EventArgs e)

@@ -854,10 +854,15 @@ namespace ViewModels
                     stringBuilder.AppendLine(string.Format("You must specify a minimum of {0} Wet Bulb Temperatures for flow rate {1}.", count, towerDesignCurveData.WaterFlowRateDataValue.Current));
                     returnValue = false;
                 }
-                // verify ascending order of Wet Bulb Temperatures
+                else  // verify ascending order of Wet Bulb Temperatures
+                {
+                    double minimum = towerDesignCurveData.FindMinimumColdWaterTempurature();
+                    double maximum = towerDesignCurveData.FindMaximumColdWaterTempurature();
+                    if(minimum == )
+                }
             }
 
-            if(!returnValue)
+            if (!returnValue)
             {
                 ErrorMessage = stringBuilder.ToString();
             }

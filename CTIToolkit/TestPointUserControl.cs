@@ -94,6 +94,21 @@ namespace CTIToolkit
             { }
         }
 
+        public void ValidatedForm()
+        {
+            object sender = new object();
+            EventArgs e = new EventArgs();
+            
+            WaterFlowRate_Validated(sender, e);
+            HotWaterTemperature_Validated(sender, e);
+            ColdWaterTemperature_Validated(sender, e);
+            WetBulbTemperature_Validated(sender, e);
+            DryBulbTemperature_Validated(sender, e);
+            FanDriverPower_Validated(sender, e);
+            BarometricPressure_Validated(sender, e);
+            LiquidToGasRatio_Validated(sender, e);
+        }
+
         private void WaterFlowRate_Validated(object sender, EventArgs e)
         {
             NotifyParentDataHasChanged();

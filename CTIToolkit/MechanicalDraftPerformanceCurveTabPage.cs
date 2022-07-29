@@ -1,4 +1,4 @@
-﻿// Copyright Cooling Technology Institute 2019-2021
+﻿// Copyright Cooling Technology Institute 2019-2022
 
 using Models;
 using System;
@@ -22,7 +22,7 @@ namespace CTIToolkit
         private bool IsInternationalSystemOfUnits_SI { get; set; }
         private bool IsChanged { get; set; }
 
-        public MechanicalDraftPerformanceCurveTabPage(ApplicationSettings applicationSettings)
+        public MechanicalDraftPerformanceCurveTabPage(ApplicationSettings applicationSettings, string documentPath)
         {
             InitializeComponent();
 
@@ -39,7 +39,7 @@ namespace CTIToolkit
             TowerDesignDataForm = new TowerDesignDataForm(IsDemo, IsInternationalSystemOfUnits_SI, MechanicalDraftPerformanceCurveViewModel.DesignData);
             TestPointTabControl.TabPages.Clear();
 
-            MechanicalDraftPerformanceCurveViewModel.DataFileName = BuildDefaultFileName();
+            MechanicalDraftPerformanceCurveViewModel.DataFileName = BuildDefaultFileName(documentPath);
 
             LoadTestPoints();
             SetDisplayedUnits();
@@ -106,26 +106,14 @@ namespace CTIToolkit
                     returnValue = false;
                 }
 
-                // enable controls
-                AddTestPointButton.Enabled = true;
-                AddTestPointName.Enabled = true;
-
-                if (MechanicalDraftPerformanceCurveViewModel.TestPoints.Count > 0)
-                {
-                    CalculateButton.Enabled = true;
-                }
-
-                if (MechanicalDraftPerformanceCurveViewModel.IsDesignDataValid)
-                {
-                    ViewGraph.Enabled = true;
-                }
-
                 if (!LoadTestPoints())
                 {
                     stringBuilder.AppendLine(ErrorMessage);
                     returnValue = false;
                     ErrorMessage = string.Empty;
                 }
+
+                TestButtonEnable();
 
                 if (!SetDisplayedValues())
                 {
@@ -165,21 +153,14 @@ namespace CTIToolkit
                     returnValue = false;
                 }
 
-                // enable controls
-                AddTestPointButton.Enabled = true;
-                AddTestPointName.Enabled = true;
-
-                if (MechanicalDraftPerformanceCurveViewModel.TestPoints.Count > 0)
-                {
-                    CalculateButton.Enabled = true;
-                    ViewGraph.Enabled = true;
-                }
-
                 if (!LoadTestPoints())
                 {
                     stringBuilder.AppendLine(ErrorMessage);
                     returnValue = false;
                 }
+
+                // enable controls
+                TestButtonEnable();
 
                 if (!SetDisplayedValues())
                 {
@@ -343,9 +324,7 @@ namespace CTIToolkit
                     // save design data
                     TowerDesignDataForm.SaveDesignData(MechanicalDraftPerformanceCurveViewModel.DesignData);
 
-                    // enable controls
-                    AddTestPointButton.Enabled = true;
-                    AddTestPointName.Enabled = true;
+                    TestButtonEnable();
 
                     // update data on this page
                     if (SetDisplayedValues())
@@ -391,6 +370,7 @@ namespace CTIToolkit
                 }
             }
         }
+
         public override void PrintPage(object sender, PrintPageEventArgs e)
         {
             string reportLabel = string.Empty;
@@ -826,13 +806,13 @@ namespace CTIToolkit
 
         private void Calculate_Click(object sender, EventArgs e)
         {
+            ValidatedForm();
             Calculate();
         }
 
         private void ViewGraph_Click(object sender, EventArgs e)
         {
-//            MechanicalDraftPerformanceCurveViewModel.CalculateViewGraphs(TestPointTabControl.SelectedIndex);
-
+            Calculate();
             ViewGraphsForm viewGraphsForm = new ViewGraphsForm(MechanicalDraftPerformanceCurveViewModel.CalculationData);
             if (viewGraphsForm.ShowDialog(this) == DialogResult.OK)
             {
@@ -876,6 +856,7 @@ namespace CTIToolkit
                     tabPage.Controls.Add(testPointUserControl);
                     TestPointTabControl.TabPages.Add(tabPage);
                     TestPointTabControl.SelectedIndex = TestPointTabControl.TabPages.Count - 1;
+                    TestButtonEnable();
                 }
                 else
                 {
@@ -895,10 +876,34 @@ namespace CTIToolkit
 
             return returnValue;
         }
+
+        private void TestButtonEnable()
+        {
+            if (MechanicalDraftPerformanceCurveViewModel.IsDesignDataValid)
+            {
+                DesignDataButton_Validated(null, null);
+
+                // enable controls
+                AddTestPointButton.Enabled = true;
+                AddTestPointName.Enabled = true;
+
+                if (MechanicalDraftPerformanceCurveViewModel.TestPoints.Count > 0)
+                {
+                    CalculateButton.Enabled = true;
+                    ViewGraph.Enabled = true;
+                }
+            }
+            else
+            {
+                DesignDataButton_Validating(null, null);
+            }
+        }
+
         private void TestPointDelete_Click(object sender, EventArgs e)
         {
             CustomMenuItem customMenuItem = sender as CustomMenuItem;
             TestPointTabControl.TabPages.Remove(TestPointTabControl.TabPages[customMenuItem.TabIndex]);
+            TestButtonEnable();
         }
 
         private void TestPointUpdate_Click(object sender, EventArgs e)
@@ -1005,6 +1010,39 @@ namespace CTIToolkit
             // Clear output data and calculate values
             DataGridView.DataSource = null;
             Calculate();
+        }
+
+        public override void ValidatedForm()
+        {
+            DesignDataButton_Validated(null, null);
+
+            foreach (TabPage tabPage in TestPointTabControl.TabPages)
+            {
+                try
+                {
+                    TestPointUserControl testPointUserControl = tabPage.Controls[0] as TestPointUserControl;
+                    if (testPointUserControl != null)
+                    {
+                        testPointUserControl.ValidatedForm();
+                    }
+                }
+                catch
+                { }
+            }
+        }
+
+        private void DesignDataButton_Validated(object sender, EventArgs e)
+        {
+            this.errorProvider1.SetError(DesignDataButton, "");
+        }
+
+        private void DesignDataButton_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!MechanicalDraftPerformanceCurveViewModel.DesignData.IsValid())
+            {
+                // Set the ErrorProvider error with the text to display. 
+                this.errorProvider1.SetError(DesignDataButton, MechanicalDraftPerformanceCurveViewModel.DesignData.ErrorMessage + " Calculate and View Graph buttons will not be active until the design data is correct.");
+            }
         }
     }
 }
