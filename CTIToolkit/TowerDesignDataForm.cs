@@ -527,15 +527,15 @@ namespace CTIToolkit
                 // Set the ErrorProvider error with the text to display. 
                 this.errorProvider1.SetError(Range1, TowerDesignData.Range1Value.ErrorMessage);
             }
-            else if (!TowerDesignData.CheckRangeOrder())
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                Range1.Select(0, Range1.Text.Length);
+            //else if (!TowerDesignData.CheckRangeOrder())
+            //{
+            //    // Cancel the event and select the text to be corrected by the user.
+            //    e.Cancel = true;
+            //    Range1.Select(0, Range1.Text.Length);
 
-                // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range1, "This range is out of order, it must be ascending or descending");
-            }
+            //    // Set the ErrorProvider error with the text to display. 
+            //    this.errorProvider1.SetError(Range1, "This range is out of order, it must be ascending or descending");
+            //}
             else
             {
 
@@ -567,15 +567,15 @@ namespace CTIToolkit
                 // Set the ErrorProvider error with the text to display. 
                 this.errorProvider1.SetError(Range2, TowerDesignData.Range2Value.ErrorMessage);
             }
-            else if (!TowerDesignData.CheckRangeOrder())
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                Range2.Select(0, Range2.Text.Length);
+            //else if (!TowerDesignData.CheckRangeOrder())
+            //{
+            //    // Cancel the event and select the text to be corrected by the user.
+            //    e.Cancel = true;
+            //    Range2.Select(0, Range2.Text.Length);
 
-                // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range2, "This range is out of order, it must be ascending or descending");
-            }
+            //    // Set the ErrorProvider error with the text to display. 
+            //    this.errorProvider1.SetError(Range2, "This range is out of order, it must be ascending or descending");
+            //}
             else
             {
 
@@ -607,15 +607,15 @@ namespace CTIToolkit
                 // Set the ErrorProvider error with the text to display. 
                 this.errorProvider1.SetError(Range3, TowerDesignData.Range3Value.ErrorMessage);
             }
-            else if (!TowerDesignData.CheckRangeOrder())
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                Range3.Select(0, Range3.Text.Length);
+            //else if (!TowerDesignData.CheckRangeOrder())
+            //{
+            //    // Cancel the event and select the text to be corrected by the user.
+            //    e.Cancel = true;
+            //    Range3.Select(0, Range3.Text.Length);
 
-                // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range3, "This range is out of order, it must be ascending or descending");
-            }
+            //    // Set the ErrorProvider error with the text to display. 
+            //    this.errorProvider1.SetError(Range3, "This range is out of order, it must be ascending or descending");
+            //}
         }
 
         private void Range4_Validated(object sender, EventArgs e)
@@ -643,15 +643,15 @@ namespace CTIToolkit
                 // Set the ErrorProvider error with the text to display. 
                 this.errorProvider1.SetError(Range4, TowerDesignData.Range4Value.ErrorMessage);
             }
-            else if (!TowerDesignData.CheckRangeOrder())
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                Range4.Select(0, Range4.Text.Length);
+            //else if (!TowerDesignData.CheckRangeOrder())
+            //{
+            //    // Cancel the event and select the text to be corrected by the user.
+            //    e.Cancel = true;
+            //    Range4.Select(0, Range4.Text.Length);
 
-                // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range4, "This range is out of order, it must be ascending or descending");
-            }
+            //    // Set the ErrorProvider error with the text to display. 
+            //    this.errorProvider1.SetError(Range4, "This range is out of order, it must be ascending or descending");
+            //}
         }
 
         private void Range5_Validated(object sender, EventArgs e)
@@ -679,15 +679,15 @@ namespace CTIToolkit
                 // Set the ErrorProvider error with the text to display. 
                 this.errorProvider1.SetError(Range5, TowerDesignData.Range5Value.ErrorMessage);
             }
-            else if (!TowerDesignData.CheckRangeOrder())
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                Range5.Select(0, Range5.Text.Length);
+            //else if (!TowerDesignData.CheckRangeOrder())
+            //{
+            //    // Cancel the event and select the text to be corrected by the user.
+            //    e.Cancel = true;
+            //    Range5.Select(0, Range5.Text.Length);
 
-                // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(Range5, "This range is out of order, it must be ascending or descending");
-            }
+            //    // Set the ErrorProvider error with the text to display. 
+            //    this.errorProvider1.SetError(Range5, "This range is out of order, it must be ascending or descending");
+            //}
         }
 
         private void AddNewWaterFlowRate_Validated(object sender, EventArgs e)

@@ -267,183 +267,132 @@ namespace ViewModels
             return returnValue;
         }
 
-        public bool CheckRangeOrder()
+        public bool CheckRangeOrder(List<double> values)
         {
-            return ValidRangeAscendingOrder() || ValidRangeDescendingOrder();
+            return IsAscendingOrder(values) || IsDescendingOrder(values);
         }
 
-        public bool ValidRangeAscendingOrder()
+        public List<double> FillRangeList()
         {
-            bool inOrder = true;
+            List<double> values = new List<double>();
 
-            double testValue = 0.0;
-
-            if(Range1Value.Current > testValue)
+            if (Range1Value.Current != 0.0)
             {
-                testValue = Range1Value.Current;
-            }
-            if(Range2Value.Current != 0.0)
-            {
-                if(Range2Value.Current <= testValue)
-                {
-                    inOrder = false;
-                }
-                else
-                {
-                    testValue = Range2Value.Current;
-                }
-            }
-            if (Range3Value.Current != 0.0)
-            {
-                if (Range3Value.Current <= testValue)
-                {
-                    inOrder = false;
-                }
-                else
-                {
-                    testValue = Range3Value.Current;
-                }
-            }
-            if (Range4Value.Current != 0.0)
-            {
-                if (Range4Value.Current <= testValue)
-                {
-                    inOrder = false;
-                }
-                else
-                {
-                    testValue = Range4Value.Current;
-                }
-            }
-            if (Range5Value.Current != 0.0)
-            {
-                if (Range5Value.Current <= testValue)
-                {
-                    inOrder = false;
-                }
-                else
-                {
-                    testValue = Range5Value.Current;
-                }
-            }
-            if(inOrder)
-            {
-                RangeOrder = Order.Ascending;
-            }
-            return inOrder;
-        }
-
-        public bool ValidRangeDescendingOrder()
-        {
-            bool inOrder = true;
-    
-            double testValue = 0.0;
-
-            if (Range1Value.Current != testValue)
-            {
-                testValue = Range1Value.Current;
+                values.Add(Range1Value.Current);
             }
             if (Range2Value.Current != 0.0)
             {
-                if (Range2Value.Current <= testValue)
-                {
-                    inOrder = false;
-                }
-                else
-                {
-                    testValue = Range2Value.Current;
-                }
+                values.Add(Range2Value.Current);
             }
             if (Range3Value.Current != 0.0)
             {
-                if (Range3Value.Current <= testValue)
-                {
-                    inOrder = false;
-                }
-                else
-                {
-                    testValue = Range3Value.Current;
-                }
+                values.Add(Range3Value.Current);
             }
             if (Range4Value.Current != 0.0)
             {
-                if (Range4Value.Current <= testValue)
-                {
-                    inOrder = false;
-                }
-                else
-                {
-                    testValue = Range4Value.Current;
-                }
+                values.Add(Range4Value.Current);
             }
             if (Range5Value.Current != 0.0)
             {
-                if (Range5Value.Current <= testValue)
-                {
-                    inOrder = false;
-                }
-                else
-                {
-                    testValue = Range5Value.Current;
-                }
+                values.Add(Range5Value.Current);
             }
-            if (inOrder)
+            return values;
+        }
+
+        public bool IsAscendingOrder(List<double> values)
+        {
+            bool inOrder = true;
+
+            double testValue = 0.0;
+
+            foreach(double value in values)
             {
-                RangeOrder = Order.Descending;
+                if (value != 0.0)
+                {
+                    if (value <= testValue)
+                    {
+                        inOrder = false;
+                    }
+                    else
+                    {
+                        testValue = value;
+                    }
+                }
             }
             return inOrder;
         }
 
-        public int CountRanges()
+        public bool IsDescendingOrder(List<double> values)
         {
-            bool zeroDetected = false;
+            bool inOrder = true;
 
-            int rangeCount = 0;
+            double testValue = 0.0;
 
-            for (int i = 0; i < 5; i++)
+            foreach (double value in values)
+            {
+                if (value >= testValue)
+                {
+                    inOrder = false;
+                }
+                else
+                {
+                    testValue = value;
+                }
+            }
+            return inOrder;
+        }
+
+        public List<double> BuildWetBulbTemperatureList(TowerDesignCurveData towerDesignCurveData)
+        {
+            List<double> values = new List<double>();
+
+            for (int i = 0; i < 6; i++)
             {
                 switch (i)
                 {
                     case 0:
-                        if (Range1Value.Current == 0.0)
+                        if (towerDesignCurveData.WetBulbTemperatureDataValue1.Current != 0.0)
                         {
-                            zeroDetected = true;
+                            values.Add(towerDesignCurveData.WetBulbTemperatureDataValue1.Current);
                         }
                         break;
                     case 1:
-                        if (Range2Value.Current == 0.0)
+                        if (towerDesignCurveData.WetBulbTemperatureDataValue2.Current != 0.0)
                         {
-                            zeroDetected = true;
+                            values.Add(towerDesignCurveData.WetBulbTemperatureDataValue1.Current);
                         }
                         break;
                     case 2:
-                        if (Range3Value.Current == 0.0)
+                        if (towerDesignCurveData.WetBulbTemperatureDataValue3.Current != 0.0)
                         {
-                            zeroDetected = true;
+                            values.Add(towerDesignCurveData.WetBulbTemperatureDataValue3.Current);
                         }
                         break;
                     case 3:
-                        if (Range4Value.Current == 0.0)
+                        if (towerDesignCurveData.WetBulbTemperatureDataValue4.Current != 0.0)
                         {
-                            zeroDetected = true;
+                            values.Add(towerDesignCurveData.WetBulbTemperatureDataValue4.Current);
                         }
                         break;
                     case 4:
-                        if (Range5Value.Current == 0.0)
+                        if (towerDesignCurveData.WetBulbTemperatureDataValue5.Current != 0.0)
                         {
-                            zeroDetected = true;
+                            values.Add(towerDesignCurveData.WetBulbTemperatureDataValue5.Current);
+                        }
+                        break;
+                    case 5:
+                        if (towerDesignCurveData.WetBulbTemperatureDataValue6.Current != 0.0)
+                        {
+                            values.Add(towerDesignCurveData.WetBulbTemperatureDataValue6.Current);
                         }
                         break;
                     default:
                         break;
                 }
-                if (!zeroDetected)
-                {
-                    rangeCount++;
-                }
             }
-            return rangeCount;
+            return values;
         }
+
 
         public int CountWetBulbTemperatures(TowerDesignCurveData towerDesignCurveData)
         {
@@ -816,18 +765,48 @@ namespace ViewModels
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
+
+            List<double> ranges = FillRangeList();
+
+            //int rangeCount = CountRanges();
             
-            int rangeCount = CountRanges();
-            
-            if (rangeCount < count)
+            if (ranges.Count < count)
             {
                 stringBuilder.AppendLine(string.Format("You must specify a minimum of {0} ranges in the Tower Design Data to calculate Tower Capability.", count));
                 returnValue = false;
             }
-
-            if(!CheckRangeOrder())
+            // are ranges in order
+            if (!CheckRangeOrder(ranges))
             {
                 stringBuilder.AppendLine("The ranges must be in acsending or descending order to calculate Tower Capability.");
+                returnValue = false;
+            }
+
+            if (!returnValue)
+            {
+                ErrorMessage = stringBuilder.ToString();
+            }
+
+            return returnValue;
+        }
+
+        public bool ValidateWaterFlowRates(int count)
+        {
+            ErrorMessage = string.Empty;
+            StringBuilder stringBuilder = new StringBuilder();
+            bool returnValue = true;
+
+            // verify number of water flow rate
+            if (TowerDesignCurveData.Count < count)
+            {
+                stringBuilder.AppendLine(string.Format("You must specify a minimum of {0} water flow rates.", count));
+                returnValue = false;
+            }
+
+            // verify ascending / decending order of water flow rate
+            if (!CheckWaterFlowRateOrder())
+            {
+                stringBuilder.AppendLine(string.Format("The water flow rates must be in acsending to calculate Tower Capability.", count));
                 returnValue = false;
             }
 
@@ -848,17 +827,25 @@ namespace ViewModels
             // verify number of wet bulb temperature for each water flow rates
             foreach(TowerDesignCurveData towerDesignCurveData in TowerDesignCurveData)
             {
-                int wetBulbTemperatures = CountWetBulbTemperatures(towerDesignCurveData);
-                if (wetBulbTemperatures < count)
+                List<double> values = BuildWetBulbTemperatureList(towerDesignCurveData);
+                //int wetBulbTemperatures = CountWetBulbTemperatures(towerDesignCurveData);
+                if (values.Count < count)
                 {
                     stringBuilder.AppendLine(string.Format("You must specify a minimum of {0} Wet Bulb Temperatures for flow rate {1}.", count, towerDesignCurveData.WaterFlowRateDataValue.Current));
                     returnValue = false;
                 }
-                else  // verify ascending order of Wet Bulb Temperatures
+                // are wet bulb temperature in order - Wet bulb temperature design data must be entered in ascending order only
+                else if (IsAscendingOrder(values))
                 {
+                    // check the cold water temperature count and order
                     double minimum = towerDesignCurveData.FindMinimumColdWaterTempurature();
                     double maximum = towerDesignCurveData.FindMaximumColdWaterTempurature();
-                    if(minimum == )
+                    //if (minimum == )
+                }
+                else
+                {
+                    stringBuilder.AppendLine(string.Format("The Wet Bulb Temperatures must be in ascending order, check Water Flow Rate: {0}.", towerDesignCurveData.WaterFlowRateDataValue.Current));
+                    returnValue = false;
                 }
             }
 
@@ -868,6 +855,74 @@ namespace ViewModels
             }
 
             return returnValue;
+        }
+
+        public bool ValidWetBulbTemperatureAscendingOrder(TowerDesignCurveData towerDesignCurveData)
+        {
+            bool inOrder = true;
+
+            double testValue = 0.0;
+
+            if (towerDesignCurveData.WetBulbTemperatureDataValue1.Current > testValue)
+            {
+                testValue = towerDesignCurveData.WetBulbTemperatureDataValue1.Current;
+            }
+            if (towerDesignCurveData.WetBulbTemperatureDataValue2.Current != 0.0)
+            {
+                if (towerDesignCurveData.WetBulbTemperatureDataValue2.Current <= testValue)
+                {
+                    inOrder = false;
+                }
+                else
+                {
+                    testValue = towerDesignCurveData.WetBulbTemperatureDataValue2.Current;
+                }
+            }
+            if (towerDesignCurveData.WetBulbTemperatureDataValue3.Current != 0.0)
+            {
+                if (towerDesignCurveData.WetBulbTemperatureDataValue3.Current <= testValue)
+                {
+                    inOrder = false;
+                }
+                else
+                {
+                    testValue = towerDesignCurveData.WetBulbTemperatureDataValue3.Current;
+                }
+            }
+            if (towerDesignCurveData.WetBulbTemperatureDataValue4.Current != 0.0)
+            {
+                if (towerDesignCurveData.WetBulbTemperatureDataValue4.Current <= testValue)
+                {
+                    inOrder = false;
+                }
+                else
+                {
+                    testValue = towerDesignCurveData.WetBulbTemperatureDataValue4.Current;
+                }
+            }
+            if (towerDesignCurveData.WetBulbTemperatureDataValue5.Current != 0.0)
+            {
+                if (towerDesignCurveData.WetBulbTemperatureDataValue5.Current <= testValue)
+                {
+                    inOrder = false;
+                }
+                else
+                {
+                    testValue = towerDesignCurveData.WetBulbTemperatureDataValue5.Current;
+                }
+            }
+            if (towerDesignCurveData.WetBulbTemperatureDataValue6.Current != 0.0)
+            {
+                if (towerDesignCurveData.WetBulbTemperatureDataValue6.Current <= testValue)
+                {
+                    inOrder = false;
+                }
+                else
+                {
+                    testValue = towerDesignCurveData.WetBulbTemperatureDataValue6.Current;
+                }
+            }
+            return inOrder;
         }
 
         public bool IsValid()
@@ -891,34 +946,6 @@ namespace ViewModels
                 ErrorMessage = string.Format("There has been some problem validating the design data. Exception: {0}", e.Message);
             }
             return isValid;
-        }
-
-        public bool ValidateWaterFlowRates(int count)
-        {
-            ErrorMessage = string.Empty;
-            StringBuilder stringBuilder = new StringBuilder();
-            bool returnValue = true;
-
-            // verify number of water flow rate
-            if (TowerDesignCurveData.Count < count)
-            {
-                stringBuilder.AppendLine(string.Format("You must specify a minimum of {0} water flow rates.", count));
-                returnValue = false;
-            }
-
-            // verify ascending / decending order of water flow rate
-            if(!CheckWaterFlowRateOrder())
-            {
-                stringBuilder.AppendLine(string.Format("The water flow rates must be in acsending to calculate Tower Capability.", count));
-                returnValue = false;
-            }
-
-            if (!returnValue)
-            {
-                ErrorMessage = stringBuilder.ToString();
-            }
-
-            return returnValue;
         }
     }
 }

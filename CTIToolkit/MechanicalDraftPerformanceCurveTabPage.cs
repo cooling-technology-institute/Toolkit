@@ -324,6 +324,8 @@ namespace CTIToolkit
                     // save design data
                     TowerDesignDataForm.SaveDesignData(MechanicalDraftPerformanceCurveViewModel.DesignData);
 
+                    DesignDataButton_Validating(null, null);
+
                     TestButtonEnable();
 
                     // update data on this page
@@ -1038,7 +1040,8 @@ namespace CTIToolkit
 
         private void DesignDataButton_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!MechanicalDraftPerformanceCurveViewModel.DesignData.IsValid())
+            MechanicalDraftPerformanceCurveViewModel.IsDesignDataValid = MechanicalDraftPerformanceCurveViewModel.DesignData.IsValid();
+            if (!MechanicalDraftPerformanceCurveViewModel.IsDesignDataValid)
             {
                 // Set the ErrorProvider error with the text to display. 
                 this.errorProvider1.SetError(DesignDataButton, MechanicalDraftPerformanceCurveViewModel.DesignData.ErrorMessage + " Calculate and View Graph buttons will not be active until the design data is correct.");
