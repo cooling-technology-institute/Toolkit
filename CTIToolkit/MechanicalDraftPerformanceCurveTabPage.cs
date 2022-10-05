@@ -319,12 +319,12 @@ namespace CTIToolkit
             // set data
             if (TowerDesignDataForm.ShowDialog(this) == DialogResult.OK)
             {
-                if(TowerDesignDataForm.HasDataChanged)
+                DesignDataButton_Validating(null, null);
+
+                if (TowerDesignDataForm.HasDataChanged)
                 {
                     // save design data
                     TowerDesignDataForm.SaveDesignData(MechanicalDraftPerformanceCurveViewModel.DesignData);
-
-                    DesignDataButton_Validating(null, null);
 
                     TestButtonEnable();
 

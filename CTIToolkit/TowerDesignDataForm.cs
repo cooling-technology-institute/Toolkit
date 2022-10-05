@@ -697,15 +697,15 @@ namespace CTIToolkit
 
         private void AddNewWaterFlowRate_Validating(object sender, CancelEventArgs e)
         {
-            if (!TowerDesignData.AddWaterFlowRateDataValue.UpdateValue(AddNewWaterFlowRate.Text))
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                AddNewWaterFlowRate.Select(0, AddNewWaterFlowRate.Text.Length);
+            //if (!TowerDesignData.AddWaterFlowRateDataValue.UpdateValue(AddNewWaterFlowRate.Text))
+            //{
+            //    // Cancel the event and select the text to be corrected by the user.
+            //    e.Cancel = true;
+            //    AddNewWaterFlowRate.Select(0, AddNewWaterFlowRate.Text.Length);
 
-                // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(AddNewWaterFlowRate, TowerDesignData.AddWaterFlowRateDataValue.ErrorMessage);
-            }
+            //    // Set the ErrorProvider error with the text to display. 
+            //    this.errorProvider1.SetError(AddNewWaterFlowRate, TowerDesignData.AddWaterFlowRateDataValue.ErrorMessage);
+            //}
         }
 
         #endregion Validating
@@ -801,6 +801,13 @@ namespace CTIToolkit
         private void OkButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
+            if (this.ValidateChildren())
+            {
+                foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
+                {
+                    tabPage.UserControl.ValidateChildren();
+                }
+            }
             this.Close();
         }
 
@@ -905,6 +912,7 @@ namespace CTIToolkit
             TowerDesignDataTabControl.TabPages[customMenuItem.TabIndex] = TowerDesignDataTabControl.TabPages[customMenuItem.TabIndex - 1];
             TowerDesignDataTabControl.TabPages[customMenuItem.TabIndex - 1] = tabPage;
             TowerDesignDataTabControl.SelectedIndex = customMenuItem.TabIndex - 1;
+            IsChanged = true;
         }
 
         private void WaterFlowRateMoveRight_Click(object sender, EventArgs e)
@@ -914,12 +922,14 @@ namespace CTIToolkit
             TowerDesignDataTabControl.TabPages[customMenuItem.TabIndex + 1] = TowerDesignDataTabControl.TabPages[customMenuItem.TabIndex];
             TowerDesignDataTabControl.TabPages[customMenuItem.TabIndex] = tabPage;
             TowerDesignDataTabControl.SelectedIndex = customMenuItem.TabIndex + 1;
+            IsChanged = true;
         }
 
         private void WaterFlowRateDelete_Click(object sender, EventArgs e)
         {
             CustomMenuItem customMenuItem = sender as CustomMenuItem;
             TowerDesignDataTabControl.TabPages.Remove(TowerDesignDataTabControl.TabPages[customMenuItem.TabIndex]);
+            IsChanged = true;
         }
 
         private void OwnerName_TextChanged(object sender, EventArgs e)
