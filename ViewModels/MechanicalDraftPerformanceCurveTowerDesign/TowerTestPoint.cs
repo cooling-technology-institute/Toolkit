@@ -84,6 +84,17 @@ namespace ViewModels
             return isChanged;
         }
 
+        public bool LoadDataValue(DataValue dataValue, double value, StringBuilder stringBuilder)
+        {
+            bool returnValue = true;
+            if (!dataValue.UpdateCurrentValue(value))
+            {
+                returnValue = false;
+                stringBuilder.AppendLine(string.Format("{0}. Current Value: {1}", dataValue.ErrorMessage, value));
+            }
+            return returnValue;
+        }
+
         public bool LoadData(bool isInternationalSystemOfUnits_SI, TowerTestData testData)
         {
             bool returnValue = true;
@@ -101,47 +112,13 @@ namespace ViewModels
 
                     ConvertValues(isInternationalSystemOfUnits_SI);
 
-                    if (!WaterFlowRateDataValue.UpdateCurrentValue(testData.TowerSpecifications.WaterFlowRate))
-                    {
-                        returnValue = false;
-                        stringBuilder.AppendLine(WaterFlowRateDataValue.ErrorMessage);
-                    }
-
-                    if (!HotWaterTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.HotWaterTemperature))
-                    {
-                        returnValue = false;
-                        stringBuilder.AppendLine(HotWaterTemperatureDataValue.ErrorMessage);
-                    }
-
-                    if (!ColdWaterTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.ColdWaterTemperature))
-                    {
-                        returnValue = false;
-                        stringBuilder.AppendLine(ColdWaterTemperatureDataValue.ErrorMessage);
-                    }
-
-                    if (!WetBulbTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.WetBulbTemperature))
-                    {
-                        returnValue = false;
-                        stringBuilder.AppendLine(WetBulbTemperatureDataValue.ErrorMessage);
-                    }
-
-                    if (!DryBulbTemperatureDataValue.UpdateCurrentValue(testData.TowerSpecifications.DryBulbTemperature))
-                    {
-                        returnValue = false;
-                        stringBuilder.AppendLine(DryBulbTemperatureDataValue.ErrorMessage);
-                    }
-
-                    if (!FanDriverPowerDataValue.UpdateCurrentValue(testData.TowerSpecifications.FanDriverPower))
-                    {
-                        returnValue = false;
-                        stringBuilder.AppendLine(FanDriverPowerDataValue.ErrorMessage);
-                    }
-
-                    if (!BarometricPressureDataValue.UpdateCurrentValue(testData.TowerSpecifications.BarometricPressure))
-                    {
-                        returnValue = false;
-                        stringBuilder.AppendLine(BarometricPressureDataValue.ErrorMessage);
-                    }
+                    returnValue = LoadDataValue(WaterFlowRateDataValue, testData.TowerSpecifications.WaterFlowRate, stringBuilder)
+                    & LoadDataValue(HotWaterTemperatureDataValue, testData.TowerSpecifications.HotWaterTemperature, stringBuilder)
+                    & LoadDataValue(ColdWaterTemperatureDataValue, testData.TowerSpecifications.ColdWaterTemperature, stringBuilder)
+                    & LoadDataValue(WetBulbTemperatureDataValue, testData.TowerSpecifications.WetBulbTemperature, stringBuilder)
+                    & LoadDataValue(DryBulbTemperatureDataValue, testData.TowerSpecifications.DryBulbTemperature, stringBuilder)
+                    & LoadDataValue(FanDriverPowerDataValue, testData.TowerSpecifications.FanDriverPower, stringBuilder)
+                    & LoadDataValue(BarometricPressureDataValue, testData.TowerSpecifications.BarometricPressure, stringBuilder);
 
                     ConvertValues(isSI);
                 }

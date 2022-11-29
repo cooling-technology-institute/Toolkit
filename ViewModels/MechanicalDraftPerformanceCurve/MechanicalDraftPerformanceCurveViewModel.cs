@@ -236,7 +236,6 @@ namespace ViewModels
                     if (!towerTestPoint.LoadData(IsInternationalSystemOfUnits_SI, testData))
                     {
                         returnValue = false;
-                        stringBuilder.AppendLine();
                         stringBuilder.AppendLine(towerTestPoint.ErrorMessage);
                     }
                     TestPoints.Add(towerTestPoint);

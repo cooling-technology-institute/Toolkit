@@ -239,7 +239,9 @@ namespace CTIToolkit
                         {
                             if (!calculatePrintUserControl.OpenNewDataFile(saveFileDialog.FileName))
                             {
-                                MessageBox.Show(calculatePrintUserControl.ErrorMessage, "File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                FileError fileError = new FileError(calculatePrintUserControl.ErrorMessage);
+                                fileError.ShowDialog();
+                                //MessageBox.Show(calculatePrintUserControl.ErrorMessage, "File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }
@@ -271,7 +273,10 @@ namespace CTIToolkit
                         {
                             if (!calculatePrintUserControl.OpenDataFile(openFileDialog.FileName))
                             {
-                                MessageBox.Show(calculatePrintUserControl.ErrorMessage, "File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                FileError fileError = new FileError(calculatePrintUserControl.ErrorMessage);
+                                fileError.ShowDialog();
+//                                MessageBox.Show(calculatePrintUserControl.ErrorMessage, "File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                //MessageBox.Show(new Form { TopMost = true, Width = 500, Text="File Error" }, calculatePrintUserControl.ErrorMessage);
                             }
                         }
                     }
@@ -289,7 +294,9 @@ namespace CTIToolkit
                     CalculatePrintUserControl calculatePrintUserControl = control as CalculatePrintUserControl;
                     if (!calculatePrintUserControl.SaveDataFile())
                     {
-                        MessageBox.Show(calculatePrintUserControl.ErrorMessage, "File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        FileError fileError = new FileError(calculatePrintUserControl.ErrorMessage);
+                        fileError.ShowDialog();
+//                        MessageBox.Show(calculatePrintUserControl.ErrorMessage, "File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -318,7 +325,9 @@ namespace CTIToolkit
                         {
                             if (!calculatePrintUserControl.SaveAsDataFile(saveFileDialog.FileName))
                             {
-                                MessageBox.Show(calculatePrintUserControl.ErrorMessage, "File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                FileError fileError = new FileError(calculatePrintUserControl.ErrorMessage);
+                                fileError.ShowDialog();
+//                                MessageBox.Show(calculatePrintUserControl.ErrorMessage, "File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }

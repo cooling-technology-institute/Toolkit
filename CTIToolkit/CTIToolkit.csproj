@@ -90,6 +90,12 @@
     <Compile Include="CustomMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="FileError.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FileError.Designer.cs">
+      <DependentUpon>FileError.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrintableForms\DemandCurverPrinterOutput.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -156,6 +162,9 @@
     <Compile Include="ViewGraphsForm.Designer.cs">
       <DependentUpon>ViewGraphsForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FileError.resx">
+      <DependentUpon>FileError.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PrintableForms\DemandCurverPrinterOutput.resx">
       <DependentUpon>DemandCurverPrinterOutput.cs</DependentUpon>
     </EmbeddedResource>

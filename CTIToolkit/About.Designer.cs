@@ -128,8 +128,10 @@
             this.demoWarning.ForeColor = System.Drawing.Color.Red;
             this.demoWarning.Location = new System.Drawing.Point(230, 14);
             this.demoWarning.Name = "demoWarning";
+            this.demoWarning.ReadOnly = true;
             this.demoWarning.Size = new System.Drawing.Size(282, 83);
             this.demoWarning.TabIndex = 9;
+            this.demoWarning.TabStop = false;
             this.demoWarning.Text = resources.GetString("demoWarning.Text");
             // 
             // setSerialNumberButton
@@ -147,7 +149,7 @@
             this.SerialNumberInput.Location = new System.Drawing.Point(312, 103);
             this.SerialNumberInput.Name = "SerialNumberInput";
             this.SerialNumberInput.Size = new System.Drawing.Size(200, 20);
-            this.SerialNumberInput.TabIndex = 11;
+            this.SerialNumberInput.TabIndex = 0;
             // 
             // setSerialNumberInputLabel
             // 
@@ -165,7 +167,6 @@
             this.ctiLinkLabel.Name = "ctiLinkLabel";
             this.ctiLinkLabel.Size = new System.Drawing.Size(94, 13);
             this.ctiLinkLabel.TabIndex = 13;
-            this.ctiLinkLabel.TabStop = true;
             this.ctiLinkLabel.Text = "http://www.cti.org";
             this.ctiLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.CtiLinkLabel_LinkClicked);
             // 

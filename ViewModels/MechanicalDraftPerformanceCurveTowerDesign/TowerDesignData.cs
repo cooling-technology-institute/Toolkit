@@ -148,6 +148,17 @@ namespace ViewModels
             return false;
         }
 
+        public bool LoadDataValue(DataValue dataValue, double value, StringBuilder stringBuilder)
+        {
+            bool returnValue = true;
+            if (!dataValue.UpdateCurrentValue(value))
+            {
+                returnValue = false;
+                stringBuilder.AppendLine(string.Format("{0}. Current Value: {1}", dataValue.ErrorMessage, value));
+            }
+            return returnValue;
+        }
+
         public bool LoadData(DesignData data)
         {
             bool returnValue = true;
@@ -163,83 +174,19 @@ namespace ViewModels
                 TowerManufacturerValue = data.TowerManufacturer;
                 TowerTypeValue = data.TowerType;
 
-                if (!WaterFlowRateDataValue.UpdateCurrentValue(data.TowerSpecifications.WaterFlowRate))
-                {
-                    returnValue = false;
-                    stringBuilder.AppendLine(WaterFlowRateDataValue.ErrorMessage);
-                }
-
-                if (!HotWaterTemperatureDataValue.UpdateCurrentValue(data.TowerSpecifications.HotWaterTemperature))
-                {
-                    returnValue = false;
-                    stringBuilder.AppendLine(HotWaterTemperatureDataValue.ErrorMessage);
-                }
-
-                if (!ColdWaterTemperatureDataValue.UpdateCurrentValue(data.TowerSpecifications.ColdWaterTemperature))
-                {
-                    returnValue = false;
-                    stringBuilder.AppendLine(ColdWaterTemperatureDataValue.ErrorMessage);
-                }
-
-                if (!WetBulbTemperatureDataValue.UpdateCurrentValue(data.TowerSpecifications.WetBulbTemperature))
-                {
-                    returnValue = false;
-                    stringBuilder.AppendLine(WetBulbTemperatureDataValue.ErrorMessage);
-                }
-
-                if (!DryBulbTemperatureDataValue.UpdateCurrentValue(data.TowerSpecifications.DryBulbTemperature))
-                {
-                    returnValue = false;
-                    stringBuilder.AppendLine(DryBulbTemperatureDataValue.ErrorMessage);
-                }
-
-                if (!FanDriverPowerDataValue.UpdateCurrentValue(data.TowerSpecifications.FanDriverPower))
-                {
-                    returnValue = false;
-                    stringBuilder.AppendLine(FanDriverPowerDataValue.ErrorMessage);
-                }
-
-                if (!BarometricPressureDataValue.UpdateCurrentValue(data.TowerSpecifications.BarometricPressure))
-                {
-                    returnValue = false;
-                    stringBuilder.AppendLine(BarometricPressureDataValue.ErrorMessage);
-                }
-
-                if (!LiquidToGasRatioDataValue.UpdateCurrentValue(data.TowerSpecifications.LiquidToGasRatio))
-                {
-                    returnValue = false;
-                    stringBuilder.AppendLine(LiquidToGasRatioDataValue.ErrorMessage);
-                }
-
-                if (!Range1Value.UpdateCurrentValue(data.Range1))
-                {
-                    returnValue = false;
-                    stringBuilder.AppendLine(Range1Value.ErrorMessage);
-                }
-
-                if (!Range2Value.UpdateCurrentValue(data.Range2))
-                {
-                    returnValue = false;
-                    stringBuilder.AppendLine(Range2Value.ErrorMessage);
-                }
-
-                if (!Range3Value.UpdateCurrentValue(data.Range3))
-                {
-                    returnValue = false;
-                    stringBuilder.AppendLine(Range3Value.ErrorMessage);
-                }
-
-                if (!Range4Value.UpdateCurrentValue(data.Range4))
-                {
-                    returnValue = false;
-                    stringBuilder.AppendLine(Range4Value.ErrorMessage);
-                }
-
-                if (!Range5Value.UpdateCurrentValue(data.Range5))
-                {
-                    returnValue = false;
-                    stringBuilder.AppendLine(Range5Value.ErrorMessage);
-                }
+                returnValue = LoadDataValue(WaterFlowRateDataValue, data.TowerSpecifications.WaterFlowRate, stringBuilder)
+                & LoadDataValue(HotWaterTemperatureDataValue, data.TowerSpecifications.HotWaterTemperature, stringBuilder)
+                & LoadDataValue(ColdWaterTemperatureDataValue, data.TowerSpecifications.ColdWaterTemperature, stringBuilder)
+                & LoadDataValue(WetBulbTemperatureDataValue, data.TowerSpecifications.WetBulbTemperature, stringBuilder)
+                & LoadDataValue(DryBulbTemperatureDataValue, data.TowerSpecifications.DryBulbTemperature, stringBuilder)
+                & LoadDataValue(FanDriverPowerDataValue, data.TowerSpecifications.FanDriverPower, stringBuilder)
+                & LoadDataValue(BarometricPressureDataValue, data.TowerSpecifications.BarometricPressure, stringBuilder)
+                & LoadDataValue(LiquidToGasRatioDataValue, data.TowerSpecifications.LiquidToGasRatio, stringBuilder)
+                & LoadDataValue(Range1Value, data.Range1, stringBuilder)
+                & LoadDataValue(Range2Value, data.Range2, stringBuilder)
+                & LoadDataValue(Range3Value, data.Range3, stringBuilder)
+                & LoadDataValue(Range4Value, data.Range4, stringBuilder)
+                & LoadDataValue(Range5Value, data.Range5, stringBuilder);
 
                 TowerDesignCurveData.Clear();
                 foreach (RangedTemperaturesDesignData rangedTemperaturesDesignData in data.RangedTemperaturesDesignData)
@@ -248,6 +195,7 @@ namespace ViewModels
                     if (!towerDesignCurveData.LoadData(rangedTemperaturesDesignData))
                     {
                         returnValue = false;
+                        stringBuilder.AppendLine(string.Format("Flow Rate {0}:", rangedTemperaturesDesignData.WaterFlowRate));
                         stringBuilder.AppendLine(towerDesignCurveData.ErrorMessage);
                     }
                     TowerDesignCurveData.Add(towerDesignCurveData);

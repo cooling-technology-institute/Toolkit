@@ -1,4 +1,4 @@
-﻿// Copyright Cooling Technology Institute 2019-2021
+﻿// Copyright Cooling Technology Institute 2019-2022
 
 using Models;
 using System;
@@ -47,37 +47,38 @@ namespace CTIToolkit
 
             chart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
             chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightGray;
-            chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 1.0;
-            chart.ChartAreas[0].AxisX.MajorTickMark.IntervalOffset = 1.0;
-            chart.ChartAreas[0].AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
-            chart.ChartAreas[0].AxisX.MinorTickMark.Interval = 0.1;
+            chart.ChartAreas[0].AxisX.MajorGrid.Interval = 2;
             chart.ChartAreas[0].AxisX.Minimum = calculationData.FindMinimumWetBulbTempurature(waterFlowRate);
             chart.ChartAreas[0].AxisX.Maximum = calculationData.FindMaximumWetBulbTempurature(waterFlowRate);
+            chart.ChartAreas[0].AxisX.IntervalOffset = 1.0 - (chart.ChartAreas[0].AxisX.Minimum % 1.0);
+            chart.ChartAreas[0].AxisX.Interval = 2.0;
+            chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 2;
             chart.ChartAreas[0].AxisX.Title = "Wet Bulb Temperature";
             chart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+            chart.ChartAreas[0].AxisX.LabelStyle.Format = "0";
+            chart.ChartAreas[0].AxisX.LabelStyle.Angle = -90;
             chart.ChartAreas[0].CursorX.AutoScroll = true;
             chart.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
-            chart.ChartAreas[0].AxisX.LabelStyle.Format = "0.00";
 
             chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
             chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightGray;
-            chart.ChartAreas[0].AxisY.MajorGrid.Interval = 1;
-            chart.ChartAreas[0].AxisY.MajorTickMark.Interval = 1.0;
-            chart.ChartAreas[0].AxisY.MajorTickMark.IntervalOffset = 1.0;
-            chart.ChartAreas[0].AxisY.IntervalAutoMode = IntervalAutoMode.VariableCount;
-            chart.ChartAreas[0].AxisY.MinorTickMark.Interval = 0.1;
+            chart.ChartAreas[0].AxisY.MinorTickMark.Interval = 1;
             chart.ChartAreas[0].AxisY.Minimum = calculationData.FindMinimumColdWaterTempurature(waterFlowRate);
             chart.ChartAreas[0].AxisY.Maximum = calculationData.FindMaximumColdWaterTempurature(waterFlowRate);
+            chart.ChartAreas[0].AxisY.IntervalOffset = 1.0 - (chart.ChartAreas[0].AxisY.Minimum % 1.0);
             chart.ChartAreas[0].AxisY.Title = "Cold Water Temperature";
             chart.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
             chart.ChartAreas[0].CursorY.AutoScroll = true;
             chart.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
-            chart.ChartAreas[0].AxisY.LabelStyle.Format = "0.00";
+            chart.ChartAreas[0].AxisY.LabelStyle.Format = "0";
+            //chart.ChartAreas[0].AxisY.MajorTickMark.IntervalOffset = 1.0;
+            //chart.ChartAreas[0].AxisY.MinorTickMark.Interval = 0.1;
+
             Legend legend = new Legend();
             chart.Legends.Add(legend);
             //chart.Legends[0].Title = "Ranges";
 
-            if(calculationData.Ranges != null && calculationData.Ranges.Count > 0)
+            if (calculationData.Ranges != null && calculationData.Ranges.Count > 0)
             {
                 for (int rangeIndex = 0; rangeIndex < calculationData.Ranges.Count; rangeIndex++)
                 {
@@ -86,7 +87,7 @@ namespace CTIToolkit
                         Series series = new Series();
                         series.ChartArea = "ChartArea1";
                         series.ChartType = SeriesChartType.Line;
-                        series.Name = string.Format("Range {0} ({1})", rangeIndex + 1, calculationData.Ranges[rangeIndex].ToString("F2"));
+                        series.Name = string.Format("Range {0} ({1} {2})", rangeIndex + 1, calculationData.Ranges[rangeIndex].ToString("F2"), calculationData.IsInternationalSystemOfUnits_SI ? ConstantUnits.TemperatureCelsius : ConstantUnits.TemperatureFahrenheit);
 
                         foreach (Models.Point point in waterFlowRate.RangePoints[rangeIndex].Points)
                         {
@@ -106,7 +107,7 @@ namespace CTIToolkit
                 Series series = new Series();
                 series.ChartArea = "ChartArea1";
                 series.ChartType = SeriesChartType.Line;
-                series.Name = string.Format("Test WBT ({0})", calculationData.TowerTestData.WetBulbTemperature.ToString("F2"));
+                series.Name = string.Format("Test WBT ({0} {1})", calculationData.TowerTestData.WetBulbTemperature.ToString("F2"), calculationData.IsInternationalSystemOfUnits_SI ? ConstantUnits.TemperatureCelsius : ConstantUnits.TemperatureFahrenheit);
                 series.Points.AddXY(calculationData.TowerTestData.WetBulbTemperature, chart.ChartAreas[0].AxisY.Minimum);
                 series.Points.AddXY(calculationData.TowerTestData.WetBulbTemperature, chart.ChartAreas[0].AxisY.Maximum);
                 chart.Series.Add(series);
@@ -132,23 +133,32 @@ namespace CTIToolkit
             chart.ChartAreas[0].AxisX.MinorTickMark.Interval = 1;
             chart.ChartAreas[0].AxisX.Minimum = calculationData.CrossPlot1.RangeMinimum;
             chart.ChartAreas[0].AxisX.Maximum = calculationData.CrossPlot1.RangeMaximum;
+            chart.ChartAreas[0].AxisX.IntervalOffset = 1.0 - (chart.ChartAreas[0].AxisX.Minimum % 1.0);
+            chart.ChartAreas[0].AxisX.Interval = 1.0;
+            //chart.ChartAreas[0].AxisX.Minimum = Math.Floor(calculationData.CrossPlot1.RangeMinimum);
+            //chart.ChartAreas[0].AxisX.Maximum = Math.Ceiling(calculationData.CrossPlot1.RangeMaximum);
             chart.ChartAreas[0].AxisX.Title = "Cooling Range";
             chart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
-            chart.ChartAreas[0].AxisX.LabelStyle.Format = "0.00";
+            chart.ChartAreas[0].AxisX.LabelStyle.Format = "0";
             chart.ChartAreas[0].CursorX.AutoScroll = true;
             chart.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
+            chart.ChartAreas[0].AxisX.LabelStyle.Angle = -90;
+            //chart.ChartAreas[0].AxisX.RoundAxisValues();
 
             chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
             chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightGray;
             chart.ChartAreas[0].AxisY.MinorTickMark.Interval = 1;
             chart.ChartAreas[0].AxisY.Minimum = calculationData.CrossPlot1.ColdWaterTemperatureMinimum;
             chart.ChartAreas[0].AxisY.Maximum = calculationData.CrossPlot1.ColdWaterTemperatureMaximum;
+            chart.ChartAreas[0].AxisY.IntervalOffset = 1.0 - (chart.ChartAreas[0].AxisY.Minimum % 1.0);
+            chart.ChartAreas[0].AxisY.Interval = 1.0;
             chart.ChartAreas[0].AxisY.Title = "Cold Water Temperature";
             chart.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
-            chart.ChartAreas[0].AxisY.LabelStyle.Format = "0.00";
+            chart.ChartAreas[0].AxisY.LabelStyle.Format = "0";
             chart.ChartAreas[0].CursorY.AutoScroll = true;
             chart.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
- 
+            //chart.ChartAreas[0].AxisY.RoundAxisValues();
+
             Legend legend = new Legend();
             chart.Legends.Add(legend);
             //chart.Legends[0].Title = "Ranges";
@@ -195,11 +205,19 @@ namespace CTIToolkit
             chart.ChartAreas[0].AxisX.MinorTickMark.Interval = 1;
             chart.ChartAreas[0].AxisX.Minimum = calculationData.CrossPlot2.WaterFlowRateMinimum;
             chart.ChartAreas[0].AxisX.Maximum = calculationData.CrossPlot2.WaterFlowRateMaximum;
+            //double offset = chart.ChartAreas[0].AxisX.Minimum % 100.0;
+            //if (offset > 50.0)
+            //{
+            //    offset -= 50.0;
+            //}
+            //chart.ChartAreas[0].AxisX.IntervalOffset = offset;
+            //chart.ChartAreas[0].AxisX.Interval = 50.0;
             chart.ChartAreas[0].AxisX.Title = "Water Flow Rate";
             chart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
             chart.ChartAreas[0].CursorX.AutoScroll = true;
             chart.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
-            chart.ChartAreas[0].AxisX.LabelStyle.Format = "0.00";
+            chart.ChartAreas[0].AxisX.LabelStyle.Format = "0";
+            chart.ChartAreas[0].AxisX.LabelStyle.Angle = -90;
 
             chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
             chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightGray;
@@ -208,11 +226,13 @@ namespace CTIToolkit
             chart.ChartAreas[0].AxisY.MinorTickMark.Interval = 1;
             chart.ChartAreas[0].AxisY.Minimum = calculationData.CrossPlot2.ColdWaterTemperatureMinimum;
             chart.ChartAreas[0].AxisY.Maximum = calculationData.CrossPlot2.ColdWaterTemperatureMaximum;
+            chart.ChartAreas[0].AxisY.IntervalOffset = 1.0 - (chart.ChartAreas[0].AxisY.Minimum % 1.0);
+            chart.ChartAreas[0].AxisY.Interval = 1.0;
             chart.ChartAreas[0].AxisY.Title = "Cold Water Temperature";
             chart.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
             chart.ChartAreas[0].CursorY.AutoScroll = true;
             chart.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
-            chart.ChartAreas[0].AxisY.LabelStyle.Format = "0.00";
+            chart.ChartAreas[0].AxisY.LabelStyle.Format = "0";
 
             Legend legend = new Legend();
             chart.Legends.Add(legend);
