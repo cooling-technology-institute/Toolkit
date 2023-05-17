@@ -317,8 +317,8 @@ namespace CTIToolkit
             }
             nameValueUnitsDataTable.AddRow(DemandCurveViewModel.C1DataValue.InputMessage, C_C1_Value.Text, string.Empty);
             nameValueUnitsDataTable.AddRow(DemandCurveViewModel.SlopeDataValue.InputMessage, Slope_C2_Value.Text, string.Empty);
-            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.MaximumDataValue.InputMessage, MaximumValue.Text, string.Empty);
-            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.MinimumDataValue.InputMessage, MinimumValue.Text, string.Empty);
+            //nameValueUnitsDataTable.AddRow(DemandCurveViewModel.MaximumDataValue.InputMessage, MaximumValue.Text, string.Empty);
+            //nameValueUnitsDataTable.AddRow(DemandCurveViewModel.MinimumDataValue.InputMessage, MinimumValue.Text, string.Empty);
             nameValueUnitsDataTable.AddRow(DemandCurveViewModel.LiquidToGasRatioDataValue.InputMessage, LiquidToGasRatioValue.Text, string.Empty);
             nameValueUnitsDataTable.AddRow(DemandCurveViewModel.UserApproachDataValue.InputMessage, UserApproachValue.Text, UserApproachUnits.Text);
 
@@ -336,23 +336,20 @@ namespace CTIToolkit
             float y = 145;
             y += DrawText(e, 12, FontStyle.Regular, "Input Properties:", 3, y, false);
             y += DrawDataTable(e, nameValueUnitsDataTable.DataTable, 7, y);
-            y += DrawText(e, 12, FontStyle.Regular, "Output:", 3, y, false);
-            y += DrawDataTable(e, DemandCurveViewModel.DataTable, 7, y);
-            y += 30;
+            float y1 = 145;
+            y1 += DrawText(e, 12, FontStyle.Regular, "Output:", e.PageSettings.Bounds.Width / 2 + 3, y1, false);
+            y1 += DrawDataTable(e, DemandCurveViewModel.DataTable, e.PageSettings.Bounds.Width / 2 + 7, y1);
 
-            int width = 0;
-            if (Chart.Size.Width > e.PageSettings.Bounds.Width - MARGIN)
-            {
-                width = Chart.Size.Width;
-                Chart.Size = new Size(e.PageSettings.Bounds.Width - (int) MARGIN, Chart.Size.Height);
-            }
+            y += DrawText(e, 12, FontStyle.Regular, "KaV/L = C * (L/G) ^ Slope", 3, y, false);
+            y += 50;
+
+            int width = Chart.Size.Width;
+            int height = Chart.Size.Height;
+            Chart.Size = new Size(e.PageSettings.Bounds.Width - (int) MARGIN, e.PageSettings.Bounds.Height / 2 - (int)MARGIN);
             PrintControl.Bitmap = new Bitmap(Chart.Width, Chart.Height);
             Chart.DrawToBitmap(PrintControl.Bitmap, new Rectangle(0, 0, PrintControl.Bitmap.Width, PrintControl.Bitmap.Height));
             e.Graphics.DrawImage(PrintControl.Bitmap, new PointF(3, y));
-            if (width != 0)
-            {
-                Chart.Size = new Size(width, Chart.Size.Height);
-            }
+            Chart.Size = new Size(width, height);
 
             e.Graphics.DrawString("CTI Toolkit 4.0 Beta Version",
                                 new Font("Times New Roman", 16),
@@ -857,6 +854,9 @@ namespace CTIToolkit
                                     {
                                         TurnSeriesOffOn(series, TurnOffOn.TurnOn);
                                     }
+                                    // turn off and on check on All On and All Off
+                                    legendItem.Cells[0].Text = CheckedString;
+                                    ToggleOnOff(TurnOffOn.TurnOn);
                                 }
                                 else if (legendItem.Name == AllOffString)
                                 {
@@ -866,6 +866,9 @@ namespace CTIToolkit
                                     {
                                         TurnSeriesOffOn(series, TurnOffOn.TurnOff);
                                     }
+                                    // turn off and on check on All On and All Off
+                                    legendItem.Cells[0].Text = CheckedString;
+                                    ToggleOnOff(TurnOffOn.TurnOff);
                                 }
                                 else if (legendItem.Name == GridString)
                                 {
@@ -891,6 +894,7 @@ namespace CTIToolkit
                             {
                                 Series series = Chart.Series[legendItem.SeriesName];
                                 TurnSeriesOffOn(series, TurnOffOn.Toggle);
+                                ToggleOnOff(TurnOffOn.Toggle);
                             }
                         }
                     }
@@ -899,6 +903,30 @@ namespace CTIToolkit
             } catch
             {
 
+            }
+        }
+
+        private void ToggleOnOff(TurnOffOn turnOffOn)
+        {
+            // find legend item with All On and All Off
+            foreach(LegendItem legend in Chart.Legends[0].CustomItems)
+            {
+                if (legend.Name == AllOnString)
+                {
+                    if(turnOffOn != TurnOffOn.TurnOn)
+                    {
+                        legend.Cells[0].Text = UncheckedString;
+                    }
+                }
+
+                // find legend item with All Off
+                if (legend.Name == AllOffString)
+                {
+                    if (turnOffOn != TurnOffOn.TurnOff)
+                    {
+                        legend.Cells[0].Text = UncheckedString;
+                    }
+                }
             }
         }
 

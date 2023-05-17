@@ -174,11 +174,12 @@ namespace ViewModels
             if (DemandCurveFileData == null)
             {
                 DemandCurveFileData = new DemandCurveFileData(IsInternationalSystemOfUnits_SI);
-                DemandCurveInputData.SetDefaults(DemandCurveFileData);
             }
             
             if (DemandCurveFileData != null)
             {
+                DemandCurveInputData.SetDefaults(DemandCurveFileData);
+
                 if (DemandCurveFileData.IsInternationalSystemOfUnits_SI != IsInternationalSystemOfUnits_SI)
                 {
                     SwitchUnits(DemandCurveFileData.IsInternationalSystemOfUnits_SI);
