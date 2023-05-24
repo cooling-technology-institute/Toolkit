@@ -80,9 +80,6 @@
             this.WebBulbTemperatureUnits = new System.Windows.Forms.Label();
             this.InputPropertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.DesignPointGroupBox = new System.Windows.Forms.GroupBox();
-            this.UserApproachUnits = new System.Windows.Forms.Label();
-            this.UserApproachValue = new System.Windows.Forms.TextBox();
-            this.UserApproachLabel = new System.Windows.Forms.Label();
             this.LiquidToGasRatioValue = new System.Windows.Forms.TextBox();
             this.LiquidToGasRatioLabel = new System.Windows.Forms.Label();
             this.TowerOrFillCharacteristicsGroupBox = new System.Windows.Forms.GroupBox();
@@ -105,6 +102,10 @@
             this.CalculatedValuesGroupBox = new System.Windows.Forms.GroupBox();
             this.Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.DataFilename = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.UserApproachUnits = new System.Windows.Forms.Label();
+            this.UserApproachValue = new System.Windows.Forms.TextBox();
+            this.UserApproachLabel = new System.Windows.Forms.Label();
             this.InputPropertiesGroupBox.SuspendLayout();
             this.DesignPointGroupBox.SuspendLayout();
             this.TowerOrFillCharacteristicsGroupBox.SuspendLayout();
@@ -116,6 +117,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.OutputGridView)).BeginInit();
             this.CalculatedValuesGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Chart)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolTip1
@@ -220,6 +222,7 @@
             // 
             // InputPropertiesGroupBox
             // 
+            this.InputPropertiesGroupBox.Controls.Add(this.groupBox1);
             this.InputPropertiesGroupBox.Controls.Add(this.DesignPointGroupBox);
             this.InputPropertiesGroupBox.Controls.Add(this.TowerOrFillCharacteristicsGroupBox);
             this.InputPropertiesGroupBox.Controls.Add(this.ThermalDesignConditionsGroupBox);
@@ -232,44 +235,14 @@
             // 
             // DesignPointGroupBox
             // 
-            this.DesignPointGroupBox.Controls.Add(this.UserApproachUnits);
-            this.DesignPointGroupBox.Controls.Add(this.UserApproachValue);
-            this.DesignPointGroupBox.Controls.Add(this.UserApproachLabel);
             this.DesignPointGroupBox.Controls.Add(this.LiquidToGasRatioValue);
             this.DesignPointGroupBox.Controls.Add(this.LiquidToGasRatioLabel);
             this.DesignPointGroupBox.Location = new System.Drawing.Point(543, 17);
             this.DesignPointGroupBox.Name = "DesignPointGroupBox";
-            this.DesignPointGroupBox.Size = new System.Drawing.Size(205, 106);
+            this.DesignPointGroupBox.Size = new System.Drawing.Size(205, 55);
             this.DesignPointGroupBox.TabIndex = 22;
             this.DesignPointGroupBox.TabStop = false;
             this.DesignPointGroupBox.Text = "Design Point";
-            // 
-            // UserApproachUnits
-            // 
-            this.UserApproachUnits.AutoSize = true;
-            this.UserApproachUnits.Location = new System.Drawing.Point(182, 51);
-            this.UserApproachUnits.Name = "UserApproachUnits";
-            this.UserApproachUnits.Size = new System.Drawing.Size(17, 13);
-            this.UserApproachUnits.TabIndex = 23;
-            this.UserApproachUnits.Text = "°F";
-            // 
-            // UserApproachValue
-            // 
-            this.UserApproachValue.Location = new System.Drawing.Point(122, 48);
-            this.UserApproachValue.Name = "UserApproachValue";
-            this.UserApproachValue.Size = new System.Drawing.Size(45, 20);
-            this.UserApproachValue.TabIndex = 11;
-            this.UserApproachValue.Validating += new System.ComponentModel.CancelEventHandler(this.UserApproachValue_Validating);
-            this.UserApproachValue.Validated += new System.EventHandler(this.UserApproachValue_Validated);
-            // 
-            // UserApproachLabel
-            // 
-            this.UserApproachLabel.AutoSize = true;
-            this.UserApproachLabel.Location = new System.Drawing.Point(12, 51);
-            this.UserApproachLabel.Name = "UserApproachLabel";
-            this.UserApproachLabel.Size = new System.Drawing.Size(81, 13);
-            this.UserApproachLabel.TabIndex = 10;
-            this.UserApproachLabel.Text = "User Approach:";
             // 
             // LiquidToGasRatioValue
             // 
@@ -557,6 +530,44 @@
             this.DataFilename.Size = new System.Drawing.Size(541, 20);
             this.DataFilename.TabIndex = 32;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.UserApproachUnits);
+            this.groupBox1.Controls.Add(this.UserApproachLabel);
+            this.groupBox1.Controls.Add(this.UserApproachValue);
+            this.groupBox1.Location = new System.Drawing.Point(544, 75);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(204, 46);
+            this.groupBox1.TabIndex = 24;
+            this.groupBox1.TabStop = false;
+            // 
+            // UserApproachUnits
+            // 
+            this.UserApproachUnits.AutoSize = true;
+            this.UserApproachUnits.Location = new System.Drawing.Point(181, 19);
+            this.UserApproachUnits.Name = "UserApproachUnits";
+            this.UserApproachUnits.Size = new System.Drawing.Size(17, 13);
+            this.UserApproachUnits.TabIndex = 23;
+            this.UserApproachUnits.Text = "°F";
+            // 
+            // UserApproachValue
+            // 
+            this.UserApproachValue.Location = new System.Drawing.Point(121, 16);
+            this.UserApproachValue.Name = "UserApproachValue";
+            this.UserApproachValue.Size = new System.Drawing.Size(45, 20);
+            this.UserApproachValue.TabIndex = 11;
+            this.UserApproachValue.Validating += new System.ComponentModel.CancelEventHandler(this.UserApproachValue_Validating);
+            this.UserApproachValue.Validated += new System.EventHandler(this.UserApproachValue_Validated);
+            // 
+            // UserApproachLabel
+            // 
+            this.UserApproachLabel.AutoSize = true;
+            this.UserApproachLabel.Location = new System.Drawing.Point(11, 19);
+            this.UserApproachLabel.Name = "UserApproachLabel";
+            this.UserApproachLabel.Size = new System.Drawing.Size(81, 13);
+            this.UserApproachLabel.TabIndex = 10;
+            this.UserApproachLabel.Text = "User Approach:";
+            // 
             // DemandCurveTabPage
             // 
             this.AutoSize = true;
@@ -584,6 +595,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.OutputGridView)).EndInit();
             this.CalculatedValuesGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Chart)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -621,12 +634,13 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.HelpProvider helpProvider1;
         private System.Windows.Forms.Label RangeUnits;
-        private System.Windows.Forms.TextBox UserApproachValue;
-        private System.Windows.Forms.Label UserApproachLabel;
         private System.Windows.Forms.DataGridView OutputGridView;
-        private System.Windows.Forms.Label UserApproachUnits;
         private System.Windows.Forms.GroupBox CalculatedValuesGroupBox;
         private System.Windows.Forms.DataVisualization.Charting.Chart Chart;
         private System.Windows.Forms.TextBox DataFilename;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label UserApproachUnits;
+        private System.Windows.Forms.Label UserApproachLabel;
+        private System.Windows.Forms.TextBox UserApproachValue;
     }
 }

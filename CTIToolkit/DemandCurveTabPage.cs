@@ -70,6 +70,7 @@ namespace CTIToolkit
             {
                 IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
                 SetDisplayedValues();
+                Calculate();
             }
         }
 
@@ -320,7 +321,21 @@ namespace CTIToolkit
             //nameValueUnitsDataTable.AddRow(DemandCurveViewModel.MaximumDataValue.InputMessage, MaximumValue.Text, string.Empty);
             //nameValueUnitsDataTable.AddRow(DemandCurveViewModel.MinimumDataValue.InputMessage, MinimumValue.Text, string.Empty);
             nameValueUnitsDataTable.AddRow(DemandCurveViewModel.LiquidToGasRatioDataValue.InputMessage, LiquidToGasRatioValue.Text, string.Empty);
-            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.UserApproachDataValue.InputMessage, UserApproachValue.Text, UserApproachUnits.Text);
+
+            bool shouldDisplayUserApproach = (DemandCurveViewModel.UserApproachDataValue.Current != 0.0);
+            if(shouldDisplayUserApproach)
+            {
+                foreach (Series series in Chart.Series)
+                {
+                    if (series.Name == "User")
+                    {
+                        shouldDisplayUserApproach = series.GetCustomProperty("CHECK").Equals(CheckedString);
+                    }
+                }
+            }
+
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.UserApproachDataValue.InputMessage,
+                    (shouldDisplayUserApproach) ? UserApproachValue.Text : "N/A", UserApproachUnits.Text);
 
             e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias; // so footer is anti-aliased
