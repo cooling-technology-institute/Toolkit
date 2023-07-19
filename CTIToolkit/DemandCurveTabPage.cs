@@ -307,15 +307,8 @@ namespace CTIToolkit
 
             nameValueUnitsDataTable.AddRow(DemandCurveViewModel.WetBulbTemperatureDataValue.InputMessage, WetBulbTemperatureValue.Text, WebBulbTemperatureUnits.Text);
             nameValueUnitsDataTable.AddRow(DemandCurveViewModel.RangeDataValue.InputMessage, RangeValue.Text, RangeUnits.Text);
-
-            if (ElevationRadio.Checked)
-            {
-                nameValueUnitsDataTable.AddRow(DemandCurveViewModel.ElevationDataValue.InputMessage, DemandCurveViewModel.ElevationDataValue.InputValue, ElevationPressureUnits.Text);
-            }
-            else
-            {
-                nameValueUnitsDataTable.AddRow(DemandCurveViewModel.BarometricPressureDataValue.InputMessage, DemandCurveViewModel.BarometricPressureDataValue.InputValue, ElevationPressureUnits.Text);
-            }
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.ElevationDataValue.InputMessage, DemandCurveViewModel.ElevationDataValue.InputValue, DemandCurveViewModel.ElevationDataValue.Units);
+            nameValueUnitsDataTable.AddRow(DemandCurveViewModel.BarometricPressureDataValue.InputMessage, DemandCurveViewModel.BarometricPressureDataValue.InputValue, DemandCurveViewModel.BarometricPressureDataValue.Units);
             nameValueUnitsDataTable.AddRow(DemandCurveViewModel.C1DataValue.InputMessage, C_C1_Value.Text, string.Empty);
             nameValueUnitsDataTable.AddRow(DemandCurveViewModel.SlopeDataValue.InputMessage, Slope_C2_Value.Text, string.Empty);
             //nameValueUnitsDataTable.AddRow(DemandCurveViewModel.MaximumDataValue.InputMessage, MaximumValue.Text, string.Empty);

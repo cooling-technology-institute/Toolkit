@@ -9,7 +9,6 @@ namespace Models
     {
         public DemandCurveData DemandCurveData { get; set; }
         public bool IsInternationalSystemOfUnits_SI { get; set; }
-        public bool IsElevation { get; set; }
         public bool ShowUserApproach { get; set; }
         public DataTable DataTable { get; set; }
         public List<Approach> Approaches { get; set; }

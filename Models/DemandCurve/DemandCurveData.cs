@@ -21,6 +21,7 @@ namespace Models
         public double KaV_L { set; get; }
         public double TargetApproach { set; get; }
         public double UserApproach { get; set; }
+        public double Pressure { set; get; }
 
         public DemandCurveData()
         {
@@ -38,6 +39,7 @@ namespace Models
             CurveMaximum = 0;
             WetBulbTemperature = 0.0;
             Range = 0.0;
+            Pressure = 0.0;
 
             IsElevation = true;
             IsWaterAirRatio = false;

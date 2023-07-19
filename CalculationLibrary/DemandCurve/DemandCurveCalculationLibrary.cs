@@ -40,6 +40,20 @@ namespace CalculationLibrary
             GenerateKaVLLine(data);
             GenerateTargetApproach(data);
             GenerateUserApproach(data);
+            data.DemandCurveData.Elevation = MerkelCalculationData.Elevation;
+
+            if (data.DemandCurveData.IsElevation)
+            {
+                PsychrometricsData psychrometricsData = new PsychrometricsData();
+                psychrometricsData.Elevation = data.DemandCurveData.Elevation;
+                psychrometricsData.IsElevation = true;
+                CalculatePressurePSI(psychrometricsData);
+                data.DemandCurveData.Pressure = psychrometricsData.BarometricPressure;
+            }
+            else
+            {
+                data.DemandCurveData.Elevation = data.DemandCurveData.Elevation;
+            }
 
             return true;
         }
@@ -71,6 +85,7 @@ namespace CalculationLibrary
             MerkelCalculationData.Elevation = data.DemandCurveData.Elevation;
             MerkelCalculationData.WetBulbTemperature = data.DemandCurveData.WetBulbTemperature;
             MerkelCalculationData.PressurePSI = data.DemandCurveData.BarometricPressure;
+
             ConvertMerkelValues(MerkelCalculationData);
 
             MerkelCalculationData.Range = data.DemandCurveData.Range;

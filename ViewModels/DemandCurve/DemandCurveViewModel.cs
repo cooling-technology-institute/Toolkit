@@ -64,6 +64,19 @@ namespace ViewModels
             } 
         }
 
+        //public double CalculatedPressure
+        //{
+        //    get
+        //    {
+        //        return DemandCurveData.IsElevation;
+        //    }
+        //    set
+        //    {
+        //        DemandCurveInputData.IsElevation = value;
+        //    }
+        //}
+
+
         public bool IsCoef
         {
             get
@@ -337,6 +350,15 @@ namespace ViewModels
                     return false;
                 }
 
+                if(DemandCurveCalculationData.DemandCurveData.IsElevation)
+                {
+                    DemandCurveInputData.BarometricPressureDataValue.UpdateCurrentValue(DemandCurveCalculationData.DemandCurveData.Pressure);
+                }
+                else
+                {
+                    DemandCurveInputData.ElevationDataValue.UpdateCurrentValue(DemandCurveCalculationData.DemandCurveData.Elevation);
+                }
+
                 // output data in DemandCurveOutputData
                 NameValueUnitsDataTable.DataTable.Clear();
 
@@ -346,6 +368,9 @@ namespace ViewModels
                 NameValueUnitsDataTable.AddRow("KaV/L", 
                     (DemandCurveCalculationData.DemandCurveData.KaV_L > 0.001) ? DemandCurveCalculationData.DemandCurveData.KaV_L.ToString("F5") : string.Empty, 
                     string.Empty);
+                //NameValueUnitsDataTable.AddRow("Pressure",
+                //    DemandCurveCalculationData.DemandCurveData.Pressure.ToString("F3"),
+                //    (DemandCurveCalculationData.IsInternationalSystemOfUnits_SI) ? ConstantUnits.BarometricPressureKiloPascal : ConstantUnits.BarometricPressureInchOfMercury);
 
                 return true;
             }
