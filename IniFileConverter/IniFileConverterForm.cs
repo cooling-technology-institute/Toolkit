@@ -91,7 +91,7 @@ namespace IniFileConverter
 
         private void Convert_Click(object sender, EventArgs e)
         {
-            ConvertListBox.Items.Clear();
+            OutputTextBox.ResetText();
             foreach (PathLabel pathLabel in SearchPaths)
             {
                 if (pathLabel.label == InputFolder)
@@ -106,320 +106,424 @@ namespace IniFileConverter
 
         private void ProcessMechanicalDraftPerformanceCurveFiles()
         {
-            try
+            string[] fileEntries = Directory.GetFiles(InputFolder, "*.bbp");
+
+            foreach (string fileName in fileEntries)
             {
-                string[] fileEntries = Directory.GetFiles(InputFolder, "*.bbp");
-
-                foreach (string fileName in fileEntries)
+                if((Path.GetFileNameWithoutExtension(fileName) != "Appendix C") && (Path.GetFileNameWithoutExtension(fileName) != "Appendix D"))
                 {
-                    if((Path.GetFileNameWithoutExtension(fileName) != "Appendix C") && (Path.GetFileNameWithoutExtension(fileName) != "Appendix D"))
+                    var parser = new FileIniDataParser();
+                    parser.Parser.Configuration.CaseInsensitive = true;
+                    parser.Parser.Configuration.SkipInvalidLines = true;
+
+                    OutputTextBox.AppendText(string.Format("Processing file: {0}", Path.GetFileName(fileName)) + Environment.NewLine);
+                    IniData data = null;
+
+                    try
                     {
-                        var parser = new FileIniDataParser();
-                        IniData data = parser.ReadFile(fileName);
-
-                        string units = data["Tower Design Point"]["Units"];
-                        MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData = new MechanicalDraftPerformanceCurveFileData(units == "SI");
-
-                        //[Tower Info]
-                        //Owner=New Era Power Company
-                        //ProjectName=Big Megawatt Station
-                        //Location=Off the Highway
-                        //Manufacturer=Cooling Technology Institute
-                        //ManufacturerData=0
-                        //InducedFlow=1
-                        mechanicalDraftPerformanceCurveFileData.DesignData.OwnerName = data["Tower Info"]["Owner"];
-                        mechanicalDraftPerformanceCurveFileData.DesignData.ProjectName = data["Tower Info"]["ProjectName"];
-                        mechanicalDraftPerformanceCurveFileData.DesignData.Location = data["Tower Info"]["Location"];
-                        mechanicalDraftPerformanceCurveFileData.DesignData.TowerManufacturer = data["Tower Info"]["Manufacturer"];
-                        if (int.Parse(data["Tower Info"]["InducedFlow"]) == 1)
+                        data = parser.ReadFile(fileName);
+                    }
+                    catch(Exception exception)
+                    {
+                        string message = exception.Message;
+                        if(message.Contains("while parsing line number 0 with value '' - IniParser version: 2.5.2.0"))
                         {
-                            mechanicalDraftPerformanceCurveFileData.DesignData.TowerType = TOWER_TYPE.Induced;
+                            message = message.Replace("while parsing line number 0 with value '' - IniParser version: 2.5.2.0", "");
                         }
-                        else
+                        if (message.Contains(" - IniParser version: 2.5.2.0"))
                         {
-                            mechanicalDraftPerformanceCurveFileData.DesignData.TowerType = TOWER_TYPE.Forced;
+                            message = message.Replace(" - IniParser version: 2.5.2.0", "");
                         }
-                        mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.IsInternationalSystemOfUnits_SI = mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI;
-                        mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.WaterFlowRate = double.Parse(data["Tower Design Point"]["WaterFlowRate"]);
-                        mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.HotWaterTemperature = double.Parse(data["Tower Design Point"]["HWT"]);
-                        mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.ColdWaterTemperature = double.Parse(data["Tower Design Point"]["CWT"]);
-                        mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.WetBulbTemperature = double.Parse(data["Tower Design Point"]["WBT"]);
-                        mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.DryBulbTemperature = double.Parse(data["Tower Design Point"]["DBT"]);
-                        mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.FanDriverPower = double.Parse(data["Tower Design Point"]["FanDriverPower"]);
-                        mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.BarometricPressure = double.Parse(data["Tower Design Point"]["BarometricPressure"]);
-                        mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.LiquidToGasRatio = double.Parse(data["Tower Design Point"]["LG"]);
+                        
+                        OutputTextBox.AppendText(string.Format("Error: {0}", message) + Environment.NewLine);
+                    }
 
-                        int numberOfRanges = int.Parse(data["Curve Data"]["NumRanges"]);
-                        for (int i = 0; i < numberOfRanges; i++)
+                    if (data != null)
+                    {
+                        try
                         {
-                            switch (i)
+                            
+                            string units = GetIniString(data, "Tower Design Point", "Units");
+                            MechanicalDraftPerformanceCurveFileData mechanicalDraftPerformanceCurveFileData = new MechanicalDraftPerformanceCurveFileData(units == "SI");
+
+                            //[Tower Info]
+                            //Owner=New Era Power Company
+                            //ProjectName=Big Megawatt Station
+                            //Location=Off the Highway
+                            //Manufacturer=Cooling Technology Institute
+                            //ManufacturerData=0
+                            //InducedFlow=1
+                            mechanicalDraftPerformanceCurveFileData.DesignData.OwnerName = GetIniString(data, "Tower Info", "Owner");
+                            mechanicalDraftPerformanceCurveFileData.DesignData.ProjectName = GetIniString(data, "Tower Info", "ProjectName");
+                            mechanicalDraftPerformanceCurveFileData.DesignData.Location = GetIniString(data, "Tower Info", "Location");
+                            mechanicalDraftPerformanceCurveFileData.DesignData.TowerManufacturer = GetIniString(data, "Tower Info", "Manufacturer");
+                            if (GetInt(data, "Tower Info", "InducedFlow") == 1)
                             {
-                                case 0:
-                                    mechanicalDraftPerformanceCurveFileData.DesignData.Range1 = double.Parse(data["Curve Data"]["Range1"]);
-                                    break;
-                                case 1:
-                                    mechanicalDraftPerformanceCurveFileData.DesignData.Range2 = double.Parse(data["Curve Data"]["Range2"]);
-                                    break;
-                                case 2:
-                                    mechanicalDraftPerformanceCurveFileData.DesignData.Range3 = double.Parse(data["Curve Data"]["Range3"]);
-                                    break;
-                                case 3:
-                                    mechanicalDraftPerformanceCurveFileData.DesignData.Range4 = double.Parse(data["Curve Data"]["Range4"]);
-                                    break;
-                                case 4:
-                                    mechanicalDraftPerformanceCurveFileData.DesignData.Range5 = double.Parse(data["Curve Data"]["Range5"]);
-                                    break;
+                                mechanicalDraftPerformanceCurveFileData.DesignData.TowerType = TOWER_TYPE.Induced;
                             }
-                        }
-
-                        int numberOfFlows = int.Parse(data["Curve Data"]["NumFlows"]);
-                        for (int flowNumber = 0; flowNumber < numberOfFlows; flowNumber++)
-                        {
-                            string flowName = string.Format("Flow{0}", flowNumber + 1);
-
-                            RangedTemperaturesDesignData rangedTemperaturesDesignData = new RangedTemperaturesDesignData();
-
-                            rangedTemperaturesDesignData.WaterFlowRate = double.Parse(data[flowName]["FlowRate"]);
-
-                            string[] temperaturesStrings = data[flowName]["WBTs"].Split(',');
-                            int wetBlubNumber = 0;
-                            foreach (string temperatureString in temperaturesStrings)
+                            else
                             {
-                                double temperature = double.Parse(temperatureString);
-                                switch (wetBlubNumber)
+                                mechanicalDraftPerformanceCurveFileData.DesignData.TowerType = TOWER_TYPE.Forced;
+                            }
+                            mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.IsInternationalSystemOfUnits_SI = mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI;
+
+                            mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.WaterFlowRate = GetDouble(data, "Tower Design Point", "WaterFlowRate");
+                            mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.HotWaterTemperature = GetDouble(data, "Tower Design Point", "HWT");
+                            mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.ColdWaterTemperature = GetDouble(data, "Tower Design Point", "CWT");
+                            mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.WetBulbTemperature = GetDouble(data, "Tower Design Point", "WBT");
+                            mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.DryBulbTemperature = GetDouble(data, "Tower Design Point", "DBT");
+                            mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.FanDriverPower = GetDouble(data, "Tower Design Point", "FanDriverPower");
+                            mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.BarometricPressure = GetDouble(data, "Tower Design Point", "BarometricPressure");
+                            mechanicalDraftPerformanceCurveFileData.DesignData.TowerSpecifications.LiquidToGasRatio = GetDouble(data, "Tower Design Point", "LG");
+
+                            int numberOfRanges = GetInt(data, "Curve Data", "NumRanges");
+                            for (int i = 0; i < numberOfRanges; i++)
+                            {
+                                switch (i)
                                 {
                                     case 0:
-                                        rangedTemperaturesDesignData.WetBulbTemperatures.Temperature1 = temperature;
+                                        mechanicalDraftPerformanceCurveFileData.DesignData.Range1 = GetDouble(data, "Curve Data", "Range1");
                                         break;
                                     case 1:
-                                        rangedTemperaturesDesignData.WetBulbTemperatures.Temperature2 = temperature;
+                                        mechanicalDraftPerformanceCurveFileData.DesignData.Range2 = GetDouble(data, "Curve Data", "Range2");
                                         break;
                                     case 2:
-                                        rangedTemperaturesDesignData.WetBulbTemperatures.Temperature3 = temperature;
+                                        mechanicalDraftPerformanceCurveFileData.DesignData.Range3 = GetDouble(data, "Curve Data", "Range3");
                                         break;
                                     case 3:
-                                        rangedTemperaturesDesignData.WetBulbTemperatures.Temperature4 = temperature;
+                                        mechanicalDraftPerformanceCurveFileData.DesignData.Range4 = GetDouble(data, "Curve Data", "Range4");
                                         break;
                                     case 4:
-                                        rangedTemperaturesDesignData.WetBulbTemperatures.Temperature5 = temperature;
-                                        break;
-                                    case 5:
-                                        rangedTemperaturesDesignData.WetBulbTemperatures.Temperature6 = temperature;
+                                        mechanicalDraftPerformanceCurveFileData.DesignData.Range5 = GetDouble(data, "Curve Data", "Range5");
                                         break;
                                 }
+                            }
 
-                                string[] coldTemperaturesStrings = data[flowName][temperatureString].Split(',');
+                            int numberOfFlows = GetInt(data, "Curve Data", "NumFlows");
+                            for (int flowNumber = 0; flowNumber < numberOfFlows; flowNumber++)
+                            {
+                                string flowName = string.Format("Flow{0}", flowNumber + 1);
 
-                                int coldRange = 0;
-                                foreach (string coldTemperatureString in coldTemperaturesStrings)
+                                RangedTemperaturesDesignData rangedTemperaturesDesignData = new RangedTemperaturesDesignData();
+
+                                rangedTemperaturesDesignData.WaterFlowRate = GetDouble(data, flowName, "FlowRate");
+
+                                string wetblubtemperatures = GetIniString(data, flowName, "WBTs");
+
+                                string[] temperaturesStrings = wetblubtemperatures.Split(',');
+                                int wetBlubNumber = 0;
+                                foreach (string temperatureString in temperaturesStrings)
                                 {
-                                    double coldTemperature = double.Parse(coldTemperatureString);
-                                    switch (coldRange)
+                                    double temperature = double.Parse(temperatureString);
+                                    switch (wetBlubNumber)
                                     {
                                         case 0:
-                                            switch (wetBlubNumber)
-                                            {
-                                                case 0:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature1 = coldTemperature;
-                                                    break;
-                                                case 1:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature2 = coldTemperature;
-                                                    break;
-                                                case 2:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature3 = coldTemperature;
-                                                    break;
-                                                case 3:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature4 = coldTemperature;
-                                                    break;
-                                                case 4:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature5 = coldTemperature;
-                                                    break;
-                                                case 5:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature6 = coldTemperature;
-                                                    break;
-                                            }
+                                            rangedTemperaturesDesignData.WetBulbTemperatures.Temperature1 = temperature;
                                             break;
                                         case 1:
-                                            switch (wetBlubNumber)
-                                            {
-                                                case 0:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature1 = coldTemperature;
-                                                    break;
-                                                case 1:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature2 = coldTemperature;
-                                                    break;
-                                                case 2:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature3 = coldTemperature;
-                                                    break;
-                                                case 3:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature4 = coldTemperature;
-                                                    break;
-                                                case 4:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature5 = coldTemperature;
-                                                    break;
-                                                case 5:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature6 = coldTemperature;
-                                                    break;
-                                            }
+                                            rangedTemperaturesDesignData.WetBulbTemperatures.Temperature2 = temperature;
                                             break;
                                         case 2:
-                                            switch (wetBlubNumber)
-                                            {
-                                                case 0:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature1 = coldTemperature;
-                                                    break;
-                                                case 1:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature2 = coldTemperature;
-                                                    break;
-                                                case 2:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature3 = coldTemperature;
-                                                    break;
-                                                case 3:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature4 = coldTemperature;
-                                                    break;
-                                                case 4:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature5 = coldTemperature;
-                                                    break;
-                                                case 5:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature6 = coldTemperature;
-                                                    break;
-                                            }
+                                            rangedTemperaturesDesignData.WetBulbTemperatures.Temperature3 = temperature;
                                             break;
                                         case 3:
-                                            switch (wetBlubNumber)
-                                            {
-                                                case 0:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature1 = coldTemperature;
-                                                    break;
-                                                case 1:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature2 = coldTemperature;
-                                                    break;
-                                                case 2:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature3 = coldTemperature;
-                                                    break;
-                                                case 3:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature4 = coldTemperature;
-                                                    break;
-                                                case 4:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature5 = coldTemperature;
-                                                    break;
-                                                case 5:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature6 = coldTemperature;
-                                                    break;
-                                            }
+                                            rangedTemperaturesDesignData.WetBulbTemperatures.Temperature4 = temperature;
                                             break;
                                         case 4:
-                                            switch (wetBlubNumber)
-                                            {
-                                                case 0:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature1 = coldTemperature;
-                                                    break;
-                                                case 1:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature2 = coldTemperature;
-                                                    break;
-                                                case 2:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature3 = coldTemperature;
-                                                    break;
-                                                case 3:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature4 = coldTemperature;
-                                                    break;
-                                                case 4:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature5 = coldTemperature;
-                                                    break;
-                                                case 5:
-                                                    rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature6 = coldTemperature;
-                                                    break;
-                                            }
+                                            rangedTemperaturesDesignData.WetBulbTemperatures.Temperature5 = temperature;
+                                            break;
+                                        case 5:
+                                            rangedTemperaturesDesignData.WetBulbTemperatures.Temperature6 = temperature;
                                             break;
                                     }
-                                    coldRange++;
+
+                                    string[] coldTemperaturesStrings = GetIniString(data, flowName, temperatureString).Split(',');
+
+                                    int coldRange = 0;
+                                    foreach (string coldTemperatureString in coldTemperaturesStrings)
+                                    {
+                                        double coldTemperature = double.Parse(coldTemperatureString);
+                                        switch (coldRange)
+                                        {
+                                            case 0:
+                                                switch (wetBlubNumber)
+                                                {
+                                                    case 0:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature1 = coldTemperature;
+                                                        break;
+                                                    case 1:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature2 = coldTemperature;
+                                                        break;
+                                                    case 2:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature3 = coldTemperature;
+                                                        break;
+                                                    case 3:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature4 = coldTemperature;
+                                                        break;
+                                                    case 4:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature5 = coldTemperature;
+                                                        break;
+                                                    case 5:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange1.Temperature6 = coldTemperature;
+                                                        break;
+                                                }
+                                                break;
+                                            case 1:
+                                                switch (wetBlubNumber)
+                                                {
+                                                    case 0:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature1 = coldTemperature;
+                                                        break;
+                                                    case 1:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature2 = coldTemperature;
+                                                        break;
+                                                    case 2:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature3 = coldTemperature;
+                                                        break;
+                                                    case 3:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature4 = coldTemperature;
+                                                        break;
+                                                    case 4:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature5 = coldTemperature;
+                                                        break;
+                                                    case 5:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange2.Temperature6 = coldTemperature;
+                                                        break;
+                                                }
+                                                break;
+                                            case 2:
+                                                switch (wetBlubNumber)
+                                                {
+                                                    case 0:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature1 = coldTemperature;
+                                                        break;
+                                                    case 1:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature2 = coldTemperature;
+                                                        break;
+                                                    case 2:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature3 = coldTemperature;
+                                                        break;
+                                                    case 3:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature4 = coldTemperature;
+                                                        break;
+                                                    case 4:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature5 = coldTemperature;
+                                                        break;
+                                                    case 5:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange3.Temperature6 = coldTemperature;
+                                                        break;
+                                                }
+                                                break;
+                                            case 3:
+                                                switch (wetBlubNumber)
+                                                {
+                                                    case 0:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature1 = coldTemperature;
+                                                        break;
+                                                    case 1:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature2 = coldTemperature;
+                                                        break;
+                                                    case 2:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature3 = coldTemperature;
+                                                        break;
+                                                    case 3:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature4 = coldTemperature;
+                                                        break;
+                                                    case 4:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature5 = coldTemperature;
+                                                        break;
+                                                    case 5:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange4.Temperature6 = coldTemperature;
+                                                        break;
+                                                }
+                                                break;
+                                            case 4:
+                                                switch (wetBlubNumber)
+                                                {
+                                                    case 0:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature1 = coldTemperature;
+                                                        break;
+                                                    case 1:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature2 = coldTemperature;
+                                                        break;
+                                                    case 2:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature3 = coldTemperature;
+                                                        break;
+                                                    case 3:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature4 = coldTemperature;
+                                                        break;
+                                                    case 4:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature5 = coldTemperature;
+                                                        break;
+                                                    case 5:
+                                                        rangedTemperaturesDesignData.ColdWaterTemperaturesRange5.Temperature6 = coldTemperature;
+                                                        break;
+                                                }
+                                                break;
+                                        }
+                                        coldRange++;
+                                    }
+                                    wetBlubNumber++;
                                 }
-                                wetBlubNumber++;
+                                mechanicalDraftPerformanceCurveFileData.DesignData.RangedTemperaturesDesignData.Add(rangedTemperaturesDesignData);
                             }
-                            mechanicalDraftPerformanceCurveFileData.DesignData.RangedTemperaturesDesignData.Add(rangedTemperaturesDesignData);
-                        }
 
-                        int numberOfTests = int.Parse(data["Tests"]["NumTests"]);
-                        for (int testNumber = 0; testNumber < numberOfTests; testNumber++)
+                            int numberOfTests = GetInt(data, "Tests", "NumTests");
+                            for (int testNumber = 0; testNumber < numberOfTests; testNumber++)
+                            {
+                                string testName = string.Format("TestPoint{0}", testNumber + 1);
+                                TowerTestData towerTestData = new TowerTestData(mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI);
+                                towerTestData.TestName = GetIniString(data, testName, "Date");
+                                towerTestData.TowerSpecifications.WaterFlowRate = GetDouble(data, testName, "WaterFlowRate");
+                                towerTestData.TowerSpecifications.HotWaterTemperature = GetDouble(data, testName, "HWT");
+                                towerTestData.TowerSpecifications.ColdWaterTemperature = GetDouble(data, testName, "CWT");
+                                towerTestData.TowerSpecifications.WetBulbTemperature = GetDouble(data, testName, "WBT");
+                                towerTestData.TowerSpecifications.DryBulbTemperature = GetDouble(data, testName, "DBT");
+                                towerTestData.TowerSpecifications.FanDriverPower = GetDouble(data, testName, "FanDriverPower");
+                                towerTestData.TowerSpecifications.BarometricPressure = GetDouble(data, testName, "BarometricPressure");
+                                mechanicalDraftPerformanceCurveFileData.TestData.Add(towerTestData);
+                            }
+
+                            string convertedFileName = Path.Combine(OutputFolder, Path.GetFileNameWithoutExtension(fileName) + ".mdpc");
+                            int index = 1;
+                            while (File.Exists(convertedFileName))
+                            {
+                                convertedFileName = Path.Combine(OutputFolder, Path.GetFileNameWithoutExtension(fileName) + string.Format("({0})", index++) + ".mdpc");
+                            }
+                            File.WriteAllText(convertedFileName, JsonConvert.SerializeObject(mechanicalDraftPerformanceCurveFileData, Formatting.Indented));
+
+                            OutputTextBox.AppendText(string.Format("Saved as {0}", Path.GetFileName(convertedFileName) + Environment.NewLine));
+                        }
+                        catch (Exception exception)
                         {
-                            string testName = string.Format("TestPoint{0}", testNumber + 1);
-                            TowerTestData towerTestData = new TowerTestData(mechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI);
-                            towerTestData.TestName = data[testName]["Date"];
-                            towerTestData.TowerSpecifications.WaterFlowRate = double.Parse(data[testName]["WaterFlowRate"]);
-                            towerTestData.TowerSpecifications.HotWaterTemperature = double.Parse(data[testName]["HWT"]);
-                            towerTestData.TowerSpecifications.ColdWaterTemperature = double.Parse(data[testName]["CWT"]);
-                            towerTestData.TowerSpecifications.WetBulbTemperature = double.Parse(data[testName]["WBT"]);
-                            towerTestData.TowerSpecifications.DryBulbTemperature = double.Parse(data[testName]["DBT"]);
-                            towerTestData.TowerSpecifications.FanDriverPower = double.Parse(data[testName]["FanDriverPower"]);
-                            towerTestData.TowerSpecifications.BarometricPressure = double.Parse(data[testName]["BarometricPressure"]);
-                            mechanicalDraftPerformanceCurveFileData.TestData.Add(towerTestData);
+                            OutputTextBox.AppendText(string.Format("Error process file: {0}", exception.ToString() + Environment.NewLine));
                         }
-
-                        string convertedFileName = Path.Combine(OutputFolder, Path.GetFileNameWithoutExtension(fileName) + ".mdpc");
-                        int index = 1;
-                        while(File.Exists(convertedFileName))
-                        {
-                            convertedFileName = Path.Combine(OutputFolder, Path.GetFileNameWithoutExtension(fileName) + string.Format("({0})", index++) + ".mdpc");
-                        }
-                        File.WriteAllText(convertedFileName, JsonConvert.SerializeObject(mechanicalDraftPerformanceCurveFileData, Formatting.Indented));
-
-                        ConvertListBox.Items.Add(string.Format("Converted file: {0} saved as {1}", Path.GetFileName(fileName), Path.GetFileName(convertedFileName)));
                     }
+                    OutputTextBox.AppendText(Environment.NewLine);
                 }
-            }
-            catch (Exception exception)
-            {
-                ConvertListBox.Items.Add(string.Format("Error process file: {0}", exception.ToString()));
             }
         }
 
-        private void ProcessDemandCurveFiles()
+        private string GetIniString(IniData data, string section, string key)
         {
+            string returnValue = string.Empty;
+
             try
             {
-                string[] fileEntries = Directory.GetFiles(InputFolder, "*.bbd");
-
-                foreach (string fileName in fileEntries)
+                returnValue = data[section][key];
+                if (returnValue == null)
                 {
-                    var parser = new FileIniDataParser();
-                    IniData data = parser.ReadFile(fileName);
-
-                    string unitsWBT = data["Demand Curve Data"]["WBTUnits"];
-                    string CurveC1 = data["Demand Curve Data"]["CurveC1"];
-                    string CurveC2 = data["Demand Curve Data"]["CurveC2"];
-                    string Altitude = data["Demand Curve Data"]["Altitude"];
-                    string Kavl = data["Demand Curve Data"]["Kavl"];
-                    string Lg = data["Demand Curve Data"]["Lg"];
-                    string CurveMin = data["Demand Curve Data"]["CurveMin"];
-                    string CurveMax = data["Demand Curve Data"]["CurveMax"];
-                    string CurveWBT = data["Demand Curve Data"]["CurveWBT"];
-                    string CurveRange = data["Demand Curve Data"]["CurveRange"];
-
-                    DemandCurveFileData demandCurveFileData = new DemandCurveFileData(unitsWBT == "°C");
-
-                    demandCurveFileData.CurveC1 = double.Parse(CurveC1);
-                    demandCurveFileData.CurveC2 = double.Parse(CurveC2);
-                    demandCurveFileData.Elevation = double.Parse(Altitude);
-                    demandCurveFileData.WetBulbTemperature = double.Parse(CurveWBT);
-                    demandCurveFileData.Range = double.Parse(CurveRange);
-                    demandCurveFileData.LiquidToGasRatio = double.Parse(Lg);
-                    demandCurveFileData.CurveMaximum = double.Parse(CurveMax);
-                    demandCurveFileData.CurveMinimum = double.Parse(CurveMin);
-
-                    string convertedFileName = Path.Combine(OutputFolder, Path.GetFileNameWithoutExtension(fileName) + ".dc");
-                    int index = 1;
-                    while (File.Exists(convertedFileName))
-                    {
-                        convertedFileName = Path.Combine(OutputFolder, Path.GetFileNameWithoutExtension(fileName) + string.Format("({0})", index++) + ".dc");
-                    }
-                    File.WriteAllText(convertedFileName, JsonConvert.SerializeObject(demandCurveFileData, Formatting.Indented));
-
-                    ConvertListBox.Items.Add(string.Format("Converted file: {0} saved as {1}", Path.GetFileName(fileName), Path.GetFileName(convertedFileName)));
+                    OutputTextBox.AppendText(string.Format("Error: Section='{0}' Key='{1}' was not found", section, key) + Environment.NewLine);
+                    returnValue = string.Empty;
                 }
             }
-            catch (Exception exception)
+            catch
             {
-                ConvertListBox.Items.Add(string.Format("Error process file: {0}", exception.ToString()));
+                OutputTextBox.AppendText(string.Format("Error: Section='{0}' Key='{1}' was not found", section, key) + Environment.NewLine);
+            }
+
+            return returnValue;
+        }
+
+        private int GetInt(IniData data, string section, string key)
+        {
+            int returnValue = 0;
+            string value = string.Empty;
+
+            try
+            {
+                value = GetIniString(data, section, key);
+                if(!string.IsNullOrEmpty(value))
+                {
+                    returnValue = int.Parse(value);
+                }
+            }
+            catch
+            {
+                OutputTextBox.AppendText(string.Format("Error: Section='{0}' Key='{1}' is not a valid integer, Value '{2}'", section, key, value) + Environment.NewLine);
+            }
+
+            return returnValue;
+        }
+
+        private double GetDouble(IniData data, string section, string key)
+        {
+            double returnValue = 0;
+            string value = string.Empty;
+
+            try
+            {
+                value = GetIniString(data, section, key);
+                if (!string.IsNullOrEmpty(value))
+                {
+                    returnValue = double.Parse(value);
+                }
+            }
+            catch
+            {
+                OutputTextBox.AppendText(string.Format("Error: Section='{0}' Key='{1}' is not a valid floating point, Value '{2}'", section, key, value) + Environment.NewLine);
+            }
+
+            return returnValue;
+        }
+
+
+        private void ProcessDemandCurveFiles()
+        {
+            string[] fileEntries = Directory.GetFiles(InputFolder, "*.bbd");
+
+            foreach (string fileName in fileEntries)
+            {
+                var parser = new FileIniDataParser();
+                parser.Parser.Configuration.CaseInsensitive = true;
+                parser.Parser.Configuration.SkipInvalidLines = true;
+
+                OutputTextBox.AppendText(string.Format("Processing file: {0}", Path.GetFileName(fileName)) + Environment.NewLine);
+
+                IniData data = null;
+                try
+                {
+                    data = parser.ReadFile(fileName);
+                }
+                catch (Exception exception)
+                {
+                    OutputTextBox.AppendText(string.Format("Error: {0}", exception.Message) + Environment.NewLine);
+                }
+
+                if (data != null)
+                {
+                    try
+                    {
+                        string unitsWBT = GetIniString(data, "Demand Curve Data", "WBTUnits");
+
+                        DemandCurveFileData demandCurveFileData = new DemandCurveFileData(unitsWBT == "°C");
+
+                        demandCurveFileData.CurveC1 = GetDouble(data, "Demand Curve Data", "CurveC1");
+                        demandCurveFileData.CurveC2 = GetDouble(data, "Demand Curve Data", "CurveC2");
+                        demandCurveFileData.Elevation = GetDouble(data, "Demand Curve Data", "Altitude");
+                        demandCurveFileData.WetBulbTemperature = GetDouble(data, "Demand Curve Data", "CurveWBT");
+                        demandCurveFileData.Range = GetDouble(data, "Demand Curve Data", "CurveRange");
+                        demandCurveFileData.LiquidToGasRatio = GetDouble(data, "Demand Curve Data", "Lg");
+                        demandCurveFileData.CurveMaximum = GetDouble(data, "Demand Curve Data", "CurveMax");
+                        demandCurveFileData.CurveMinimum = GetDouble(data, "Demand Curve Data", "CurveMin");
+
+                        string convertedFileName = Path.Combine(OutputFolder, Path.GetFileNameWithoutExtension(fileName) + ".dc");
+                        int index = 1;
+                        while (File.Exists(convertedFileName))
+                        {
+                            convertedFileName = Path.Combine(OutputFolder, Path.GetFileNameWithoutExtension(fileName) + string.Format("({0})", index++) + ".dc");
+                        }
+                        File.WriteAllText(convertedFileName, JsonConvert.SerializeObject(demandCurveFileData, Formatting.Indented));
+
+                        OutputTextBox.AppendText(string.Format("Saved as: {0}", Path.GetFileName(convertedFileName) + Environment.NewLine));
+                    }
+                    catch (Exception exception)
+                    {
+                        OutputTextBox.AppendText(string.Format("Error: {0}", exception.ToString() + Environment.NewLine));
+                    }
+                }
+
+                OutputTextBox.AppendText(Environment.NewLine);
             }
         }
 
