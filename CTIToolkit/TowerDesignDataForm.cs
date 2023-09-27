@@ -113,7 +113,7 @@ namespace CTIToolkit
 
         public bool LoadData(TowerDesignData data)
         {
-            TowerDesignData = data;
+            TowerDesignData = (TowerDesignData) data.Clone();
             bool returnValue = true;
             IsChanged = false;
 
@@ -125,24 +125,25 @@ namespace CTIToolkit
             return returnValue;
         }
 
-        public void SaveDesignData(TowerDesignData data)
+        public TowerDesignData SaveDesignData()
         {
-            data = TowerDesignData;
-            //data.Range1Value = TowerDesignData.Range1Value;
+            TowerDesignData towerDesignData = (TowerDesignData) TowerDesignData.Clone();
 
-            if(data.TowerDesignCurveData == null)
-            {
-                data.TowerDesignCurveData = new List<TowerDesignCurveData>();
-            }
+            //if(data.TowerDesignCurveData == null)
+            //{
+            //    data.TowerDesignCurveData = new List<TowerDesignCurveData>();
+            //}
 
-            data.TowerDesignCurveData.Clear();
+            //data.TowerDesignCurveData.Clear();
             
-            foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
-            {
-                data.TowerDesignCurveData.Add(tabPage.UserControl.TowerDesignCurveData);
-            }
+            //foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
+            //{
+            //    data.TowerDesignCurveData.Add(tabPage.UserControl.TowerDesignCurveData);
+            //}
 
             IsChanged = false;
+
+            return towerDesignData;
         }
 
         private bool SetDisplayedValues()

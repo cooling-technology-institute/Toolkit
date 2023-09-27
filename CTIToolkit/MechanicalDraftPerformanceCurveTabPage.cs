@@ -317,6 +317,8 @@ namespace CTIToolkit
         private void DesignDataButton_Click(object sender, EventArgs e)
         {
             // set data
+            TowerDesignDataForm.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData);
+
             if (TowerDesignDataForm.ShowDialog(this) == DialogResult.OK)
             {
                 DesignDataButton_Validating(null, null);
@@ -324,7 +326,7 @@ namespace CTIToolkit
                 if (TowerDesignDataForm.HasDataChanged)
                 {
                     // save design data
-                    TowerDesignDataForm.SaveDesignData(MechanicalDraftPerformanceCurveViewModel.DesignData);
+                    MechanicalDraftPerformanceCurveViewModel.DesignData = TowerDesignDataForm.SaveDesignData();
 
                     TestButtonEnable();
 
@@ -333,6 +335,8 @@ namespace CTIToolkit
                     {
 
                     }
+                    
+                    Calculate();
                 }
             }
             else
@@ -733,15 +737,15 @@ namespace CTIToolkit
             }
 
             DataRow row = dataTable.NewRow();
-            for (int i = 0; i < MechanicalDraftPerformanceCurveViewModel.CalculationData.Ranges.Count; i++)
+            for (int i = 0; i < MechanicalDraftPerformanceCurveViewModel.CalculationData.InterpolateRanges.Count; i++)
             {
-                AddRowColdVsWaterFLow(row, i, MechanicalDraftPerformanceCurveViewModel.CalculationData.Ranges[i], MechanicalDraftPerformanceCurveViewModel.CalculationData.InterpolateRanges[i], MechanicalDraftPerformanceCurveViewModel.DesignData.ColdWaterTemperatureDataValue.Units);
+                AddRowColdVsWaterFLow(row, i, MechanicalDraftPerformanceCurveViewModel.CalculationData.InterpolateRanges[i], MechanicalDraftPerformanceCurveViewModel.DesignData.ColdWaterTemperatureDataValue.Units);
             }
             dataTable.Rows.Add(row);
             return dataTable;
         }
 
-        private void AddRowColdVsWaterFLow(DataRow row, int i, double range, double interpolateRange, string units)
+        private void AddRowColdVsWaterFLow(DataRow row, int i, double interpolateRange, string units)
         {
             row[i] = string.Format("{0} {1}", interpolateRange.ToString("F2"), units);
         }

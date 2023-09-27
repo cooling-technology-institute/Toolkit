@@ -13,7 +13,7 @@ namespace ViewModels
         Descending
     };
 
-    public class TowerDesignData
+    public class TowerDesignData : ICloneable
     {
         const int MINIMUM_WATER_FLOW_RATES_COUNT = 3;
         const int MINIMUM_RANGE_COUNT = 3;
@@ -777,6 +777,41 @@ namespace ViewModels
                 ErrorMessage = string.Format("There has been some problem validating the design data. Exception: {0}", e.Message);
             }
             return isValid;
+        }
+
+        public object Clone()
+        {
+            TowerDesignData towerDesignData = new TowerDesignData(IsDemo, IsInternationalSystemOfUnits_SI);
+            towerDesignData.OwnerNameValue = OwnerNameValue;
+            towerDesignData.ProjectNameValue = ProjectNameValue;
+            towerDesignData.LocationValue = LocationValue;
+            towerDesignData.TowerManufacturerValue = TowerManufacturerValue;
+            towerDesignData.TowerTypeValue = TowerTypeValue;
+
+            towerDesignData.Range1Value.UpdateCurrentValue(Range1Value.Current);
+            towerDesignData.Range2Value.UpdateCurrentValue(Range2Value.Current);
+            towerDesignData.Range3Value.UpdateCurrentValue(Range3Value.Current);
+            towerDesignData.Range4Value.UpdateCurrentValue(Range4Value.Current);
+            towerDesignData.Range5Value.UpdateCurrentValue(Range5Value.Current);
+
+            towerDesignData.WaterFlowRateDataValue.UpdateCurrentValue(WaterFlowRateDataValue.Current);
+            towerDesignData.HotWaterTemperatureDataValue.UpdateCurrentValue(HotWaterTemperatureDataValue.Current);
+            towerDesignData.ColdWaterTemperatureDataValue.UpdateCurrentValue(ColdWaterTemperatureDataValue.Current);
+            towerDesignData.WetBulbTemperatureDataValue.UpdateCurrentValue(WetBulbTemperatureDataValue.Current);
+            towerDesignData.DryBulbTemperatureDataValue.UpdateCurrentValue(DryBulbTemperatureDataValue.Current);
+            towerDesignData.FanDriverPowerDataValue.UpdateCurrentValue(FanDriverPowerDataValue.Current);
+            towerDesignData.BarometricPressureDataValue.UpdateCurrentValue(BarometricPressureDataValue.Current);
+            towerDesignData.LiquidToGasRatioDataValue.UpdateCurrentValue(LiquidToGasRatioDataValue.Current);
+            towerDesignData.AddWaterFlowRateDataValue.UpdateCurrentValue(AddWaterFlowRateDataValue.Current);
+            foreach (TowerDesignCurveData curveData in TowerDesignCurveData)
+            {
+                towerDesignData.TowerDesignCurveData.Add((TowerDesignCurveData)curveData.Clone());
+            }
+
+            towerDesignData.RangeOrder = RangeOrder;
+            towerDesignData.WaterFlowRateOrder = WaterFlowRateOrder;
+
+            return towerDesignData;
         }
     }
 }

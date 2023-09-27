@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ViewModels
 {
-    public class TowerDesignCurveData
+    public class TowerDesignCurveData : ICloneable
     {
         public WaterFlowRateDataValue WaterFlowRateDataValue { set; get; }
 
@@ -526,6 +526,57 @@ namespace ViewModels
                 }
             }
             return maximum;
+        }
+
+        public object Clone()
+        {
+            TowerDesignCurveData towerDesignCurveData = new TowerDesignCurveData(IsDemo, IsInternationalSystemOfUnits_SI);
+
+            towerDesignCurveData.WaterFlowRateDataValue.UpdateCurrentValue(WaterFlowRateDataValue.Current);
+
+            towerDesignCurveData.WetBulbTemperatureDataValue1.UpdateCurrentValue(WetBulbTemperatureDataValue1.Current);
+            towerDesignCurveData.WetBulbTemperatureDataValue2.UpdateCurrentValue(WetBulbTemperatureDataValue2.Current);
+            towerDesignCurveData.WetBulbTemperatureDataValue3.UpdateCurrentValue(WetBulbTemperatureDataValue3.Current);
+            towerDesignCurveData.WetBulbTemperatureDataValue4.UpdateCurrentValue(WetBulbTemperatureDataValue4.Current);
+            towerDesignCurveData.WetBulbTemperatureDataValue5.UpdateCurrentValue(WetBulbTemperatureDataValue5.Current);
+            towerDesignCurveData.WetBulbTemperatureDataValue6.UpdateCurrentValue(WetBulbTemperatureDataValue6.Current);
+
+            towerDesignCurveData.Range1ColdWaterTemperatureDataValue1.UpdateCurrentValue(Range1ColdWaterTemperatureDataValue1.Current);
+            towerDesignCurveData.Range1ColdWaterTemperatureDataValue2.UpdateCurrentValue(Range1ColdWaterTemperatureDataValue2.Current);
+            towerDesignCurveData.Range1ColdWaterTemperatureDataValue3.UpdateCurrentValue(Range1ColdWaterTemperatureDataValue3.Current);
+            towerDesignCurveData.Range1ColdWaterTemperatureDataValue4.UpdateCurrentValue(Range1ColdWaterTemperatureDataValue4.Current);
+            towerDesignCurveData.Range1ColdWaterTemperatureDataValue5.UpdateCurrentValue(Range1ColdWaterTemperatureDataValue5.Current);
+            towerDesignCurveData.Range1ColdWaterTemperatureDataValue6.UpdateCurrentValue(Range1ColdWaterTemperatureDataValue6.Current);
+
+            towerDesignCurveData.Range2ColdWaterTemperatureDataValue1.UpdateCurrentValue(Range2ColdWaterTemperatureDataValue1.Current);
+            towerDesignCurveData.Range2ColdWaterTemperatureDataValue2.UpdateCurrentValue(Range2ColdWaterTemperatureDataValue2.Current);
+            towerDesignCurveData.Range2ColdWaterTemperatureDataValue3.UpdateCurrentValue(Range2ColdWaterTemperatureDataValue3.Current);
+            towerDesignCurveData.Range2ColdWaterTemperatureDataValue4.UpdateCurrentValue(Range2ColdWaterTemperatureDataValue4.Current);
+            towerDesignCurveData.Range2ColdWaterTemperatureDataValue5.UpdateCurrentValue(Range2ColdWaterTemperatureDataValue5.Current);
+            towerDesignCurveData.Range2ColdWaterTemperatureDataValue6.UpdateCurrentValue(Range2ColdWaterTemperatureDataValue6.Current);
+
+            towerDesignCurveData.Range3ColdWaterTemperatureDataValue1.UpdateCurrentValue(Range3ColdWaterTemperatureDataValue1.Current);
+            towerDesignCurveData.Range3ColdWaterTemperatureDataValue2.UpdateCurrentValue(Range3ColdWaterTemperatureDataValue2.Current);
+            towerDesignCurveData.Range3ColdWaterTemperatureDataValue3.UpdateCurrentValue(Range3ColdWaterTemperatureDataValue3.Current);
+            towerDesignCurveData.Range3ColdWaterTemperatureDataValue4.UpdateCurrentValue(Range3ColdWaterTemperatureDataValue4.Current);
+            towerDesignCurveData.Range3ColdWaterTemperatureDataValue5.UpdateCurrentValue(Range3ColdWaterTemperatureDataValue5.Current);
+            towerDesignCurveData.Range3ColdWaterTemperatureDataValue6.UpdateCurrentValue(Range3ColdWaterTemperatureDataValue6.Current);
+
+            towerDesignCurveData.Range4ColdWaterTemperatureDataValue1.UpdateCurrentValue(Range4ColdWaterTemperatureDataValue1.Current);
+            towerDesignCurveData.Range4ColdWaterTemperatureDataValue2.UpdateCurrentValue(Range4ColdWaterTemperatureDataValue2.Current);
+            towerDesignCurveData.Range4ColdWaterTemperatureDataValue3.UpdateCurrentValue(Range4ColdWaterTemperatureDataValue3.Current);
+            towerDesignCurveData.Range4ColdWaterTemperatureDataValue4.UpdateCurrentValue(Range4ColdWaterTemperatureDataValue4.Current);
+            towerDesignCurveData.Range4ColdWaterTemperatureDataValue5.UpdateCurrentValue(Range4ColdWaterTemperatureDataValue5.Current);
+            towerDesignCurveData.Range4ColdWaterTemperatureDataValue6.UpdateCurrentValue(Range4ColdWaterTemperatureDataValue6.Current);
+
+            towerDesignCurveData.Range5ColdWaterTemperatureDataValue1.UpdateCurrentValue(Range5ColdWaterTemperatureDataValue1.Current);
+            towerDesignCurveData.Range5ColdWaterTemperatureDataValue2.UpdateCurrentValue(Range5ColdWaterTemperatureDataValue2.Current);
+            towerDesignCurveData.Range5ColdWaterTemperatureDataValue3.UpdateCurrentValue(Range5ColdWaterTemperatureDataValue3.Current);
+            towerDesignCurveData.Range5ColdWaterTemperatureDataValue4.UpdateCurrentValue(Range5ColdWaterTemperatureDataValue4.Current);
+            towerDesignCurveData.Range5ColdWaterTemperatureDataValue5.UpdateCurrentValue(Range5ColdWaterTemperatureDataValue5.Current);
+            towerDesignCurveData.Range5ColdWaterTemperatureDataValue6.UpdateCurrentValue(Range5ColdWaterTemperatureDataValue6.Current);
+
+            return towerDesignCurveData;
         }
     }
 }
