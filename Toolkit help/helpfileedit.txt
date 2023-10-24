@@ -1,0 +1,11 @@
+install robohelp 9 from zip file RoboHelp_9.zip as trial. 
+
+if already installed and trial if over uninstall first.
+then this did not get rid of trial timer delete Computer\HKEY_CURRENT_USER\SOFTWARE\Adobe\CommonFiles\Usage\RoboHelp9
+
+RO900-PDZOOXDA
+
+Adobe:
+1316-1306-3687-7181-8738-7347
+
+open ctitoolkit.xpj under C:\CTI\CTI_Toolkit\Toolkit help\HTMLHelp

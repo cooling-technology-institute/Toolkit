@@ -42,7 +42,6 @@
             this.SerialNumberInput = new System.Windows.Forms.TextBox();
             this.setSerialNumberInputLabel = new System.Windows.Forms.Label();
             this.ctiLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,9 +60,9 @@
             this.versionNumber.ForeColor = System.Drawing.Color.Red;
             this.versionNumber.Location = new System.Drawing.Point(73, 257);
             this.versionNumber.Name = "versionNumber";
-            this.versionNumber.Size = new System.Drawing.Size(47, 13);
+            this.versionNumber.Size = new System.Drawing.Size(22, 13);
             this.versionNumber.TabIndex = 1;
-            this.versionNumber.Text = "4.0 Beta";
+            this.versionNumber.Text = "4.0";
             // 
             // logo
             // 
@@ -167,18 +166,9 @@
             this.ctiLinkLabel.Name = "ctiLinkLabel";
             this.ctiLinkLabel.Size = new System.Drawing.Size(94, 13);
             this.ctiLinkLabel.TabIndex = 13;
+            this.ctiLinkLabel.TabStop = true;
             this.ctiLinkLabel.Text = "http://www.cti.org";
             this.ctiLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.CtiLinkLabel_LinkClicked);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(145, 257);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 13);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Beta Version";
             // 
             // About
             // 
@@ -186,7 +176,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(550, 334);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.ctiLinkLabel);
             this.Controls.Add(this.setSerialNumberInputLabel);
             this.Controls.Add(this.SerialNumberInput);
@@ -224,6 +213,5 @@
         private System.Windows.Forms.TextBox SerialNumberInput;
         private System.Windows.Forms.Label setSerialNumberInputLabel;
         private System.Windows.Forms.LinkLabel ctiLinkLabel;
-        private System.Windows.Forms.Label label2;
     }
 }

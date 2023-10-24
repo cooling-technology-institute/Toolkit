@@ -189,7 +189,7 @@ namespace CTIToolkit
                 y += DrawText(e, 12, FontStyle.Regular, "Output:", 3, y, false);
                 DrawDataTable(e, MerkelViewModel.GetDataTable(), 7, y);
 
-                e.Graphics.DrawString("CTI Toolkit 4.0 Beta Version",
+                e.Graphics.DrawString("CTI Toolkit 4.0",
                                       new Font("Times New Roman", 16),
                                       new SolidBrush(Color.Red),
                                       MARGIN, e.PageSettings.Bounds.Height - MARGIN);

@@ -359,7 +359,7 @@ namespace CTIToolkit
             e.Graphics.DrawImage(PrintControl.Bitmap, new PointF(3, y));
             Chart.Size = new Size(width, height);
 
-            e.Graphics.DrawString("CTI Toolkit 4.0 Beta Version",
+            e.Graphics.DrawString("CTI Toolkit 4.0",
                                 new Font("Times New Roman", 16),
                                 new SolidBrush(Color.Red),
                                 MARGIN, e.PageSettings.Bounds.Height - MARGIN);
