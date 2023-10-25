@@ -127,7 +127,7 @@ namespace CTIToolkit
         // BB00-B000-B0BB beta serial number
         public static bool TestSerialNumber(string serialNumber)
         {
-            bool isGood = ((serialNumber.Length == 14)); // && (serialNumber.ToUpper() != "BB00-B000-B0BB"));
+            bool isGood = ((serialNumber.Length == 14) && (serialNumber.ToUpper() != "BB00-B000-B0BB"));
             
             // check the serial number 
             for (int x = 0; x < serialNumber.Length && isGood; x++)

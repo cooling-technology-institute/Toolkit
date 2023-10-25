@@ -434,7 +434,7 @@ namespace CTIToolkit
                 DrawDataTable(e, PsychrometricsViewModel.GetDataTable(), 7, y);
 
                 e.Graphics.DrawString("CTI Toolkit 4.0",
-                                      new Font("Times New Roman", 16),
+                                      new Font("Times New Roman", 8),
                                       new SolidBrush(Color.Black),
                                       MARGIN, e.PageSettings.Bounds.Height - MARGIN);
 

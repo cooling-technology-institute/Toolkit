@@ -17,10 +17,6 @@ namespace GenerateSerialNumber
             InitializeComponent();
         }
 
-        private void GenerateSerialNumberForm_Load(object sender, EventArgs e)
-        {
-        }
-
         private void generateSerialNumber_Click(object sender, EventArgs e)
         {
             if (this.ValidateChildren())
