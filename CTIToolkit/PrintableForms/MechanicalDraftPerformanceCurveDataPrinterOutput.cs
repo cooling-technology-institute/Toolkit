@@ -26,26 +26,6 @@ namespace CTIToolkit
             this.Height = bottomOfPage + 10;
         }
 
-        public void AddBeta(int pageSize)
-        {
-            // 
-            // Beta
-            // 
-            TextBox beta = new TextBox();
-            beta.BackColor = System.Drawing.Color.White;
-            beta.BorderStyle = BorderStyle.None;
-            beta.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            beta.ForeColor = System.Drawing.Color.DarkRed;
-            //beta.Location = new System.Drawing.Point(0, ((pageSize - Beta.Size.Height) - 20));
-            beta.Name = string.Format("Beta{0}", pageSize);
-            beta.ReadOnly = true;
-            beta.Size = new System.Drawing.Size(462, 37);
-            beta.Text = "CTI Toolkit 4.0 Beta Version";
-            Controls.Add(beta);
-
-            this.Height = pageSize;
-        }
-
         public int AddWaterFlowRate(int pageSize, int bottom, string flowRate, DataTable dataTable)
         {
             int controlSize = (dataTable.Rows.Count * 25) + 35;

@@ -191,7 +191,7 @@ namespace CTIToolkit
 
                 e.Graphics.DrawString("CTI Toolkit 4.0",
                                       new Font("Times New Roman", 16),
-                                      new SolidBrush(Color.Red),
+                                      new SolidBrush(Color.Black),
                                       MARGIN, e.PageSettings.Bounds.Height - MARGIN);
                 Font font = new Font("Times New Roman", 8);
                 SizeF size = e.Graphics.MeasureString(MerkelViewModel.DataFilenameInputValue, font);
