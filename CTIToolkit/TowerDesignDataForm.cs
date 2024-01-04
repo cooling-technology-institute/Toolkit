@@ -127,19 +127,19 @@ namespace CTIToolkit
 
         public TowerDesignData SaveDesignData()
         {
-            TowerDesignData towerDesignData = (TowerDesignData) TowerDesignData.Clone();
+            TowerDesignData.TowerDesignCurveData.Clear();
 
-            //if(data.TowerDesignCurveData == null)
-            //{
-            //    data.TowerDesignCurveData = new List<TowerDesignCurveData>();
-            //}
+            foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
+            {
+                TowerDesignData.TowerDesignCurveData.Add(tabPage.UserControl.TowerDesignCurveData);
+            }
 
-            //data.TowerDesignCurveData.Clear();
-            
-            //foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
-            //{
-            //    data.TowerDesignCurveData.Add(tabPage.UserControl.TowerDesignCurveData);
-            //}
+            if(TowerDesignData.TowerDesignCurveData == null)
+            {
+                TowerDesignData.TowerDesignCurveData = new List<TowerDesignCurveData>();
+            }
+
+            TowerDesignData towerDesignData = (TowerDesignData)TowerDesignData.Clone();
 
             IsChanged = false;
 
@@ -236,6 +236,8 @@ namespace CTIToolkit
 
                 TowerDesignDataGroupBox.Text = string.Format("Tower Design Specifications ({0})", (IsInternationalSystemOfUnits_SI) ? "SI" : "IP");
                 TowerDesignDataCurveDataGroupBox.Text = string.Format("Tower Design Curve Data ({0})", (IsInternationalSystemOfUnits_SI) ? "SI" : "IP");
+
+                toolTip1.SetToolTip(AddNewWaterFlowRate, TowerDesignData.AddWaterFlowRateDataValue.ToolTip);
 
                 // verify values and set error provider
             }
@@ -698,15 +700,18 @@ namespace CTIToolkit
 
         private void AddNewWaterFlowRate_Validating(object sender, CancelEventArgs e)
         {
-            //if (!TowerDesignData.AddWaterFlowRateDataValue.UpdateValue(AddNewWaterFlowRate.Text))
-            //{
-            //    // Cancel the event and select the text to be corrected by the user.
-            //    e.Cancel = true;
-            //    AddNewWaterFlowRate.Select(0, AddNewWaterFlowRate.Text.Length);
+            if (!string.IsNullOrWhiteSpace(AddNewWaterFlowRate.Text))
+            {
+                if (!TowerDesignData.AddWaterFlowRateDataValue.UpdateValue(AddNewWaterFlowRate.Text))
+                {
+                    // Cancel the event and select the text to be corrected by the user.
+                    e.Cancel = true;
+                    AddNewWaterFlowRate.Select(0, AddNewWaterFlowRate.Text.Length);
 
-            //    // Set the ErrorProvider error with the text to display. 
-            //    this.errorProvider1.SetError(AddNewWaterFlowRate, TowerDesignData.AddWaterFlowRateDataValue.ErrorMessage);
-            //}
+                    // Set the ErrorProvider error with the text to display. 
+                    this.errorProvider1.SetError(AddNewWaterFlowRate, TowerDesignData.AddWaterFlowRateDataValue.ErrorMessage);
+                }
+            }
         }
 
         #endregion Validating
@@ -736,6 +741,8 @@ namespace CTIToolkit
                         TowerDesignDataTabControl.SelectedIndex = TowerDesignDataTabControl.TabPages.Count - 1;
                     }
                 }
+                
+                AddNewWaterFlowRate.Text = string.Empty;
             }
             else
             {

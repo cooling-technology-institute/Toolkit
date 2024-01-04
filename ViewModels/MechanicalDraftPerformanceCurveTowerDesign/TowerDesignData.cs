@@ -278,6 +278,7 @@ namespace ViewModels
                 data.Range4 = Range4Value.Current;
                 data.Range5 = Range5Value.Current;
 
+                data.TowerSpecifications.IsInternationalSystemOfUnits_SI = IsInternationalSystemOfUnits_SI;
                 data.TowerSpecifications.WaterFlowRate = WaterFlowRateDataValue.Current;
                 data.TowerSpecifications.HotWaterTemperature = HotWaterTemperatureDataValue.Current;
                 data.TowerSpecifications.ColdWaterTemperature = ColdWaterTemperatureDataValue.Current;

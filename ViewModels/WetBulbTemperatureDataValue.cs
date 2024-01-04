@@ -88,15 +88,18 @@ namespace ViewModels
             SetDefaultMinMax(isInternationalSystemOfUnits_SI);
             if (IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_SI)
             {
-                if (isInternationalSystemOfUnits_SI)
+                if(Current != 0.0)
                 {
-                    // convert to InternationalSystemOfUnits_IS
-                    Current = UnitConverter.ConvertFahrenheitToCelsius(Current);
-                }
-                else
-                {
-                    // convert to United States Customary Units (IP)
-                    Current = UnitConverter.ConvertCelsiusToFahrenheit(Current);
+                    if (isInternationalSystemOfUnits_SI)
+                    {
+                        // convert to InternationalSystemOfUnits_IS
+                        Current = UnitConverter.ConvertFahrenheitToCelsius(Current);
+                    }
+                    else
+                    {
+                        // convert to United States Customary Units (IP)
+                        Current = UnitConverter.ConvertCelsiusToFahrenheit(Current);
+                    }
                 }
             }
             SetInputAndTooltip(isInternationalSystemOfUnits_SI);

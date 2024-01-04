@@ -202,6 +202,7 @@ namespace CTIToolkit
             {
                 IsDemo = isDemo;
                 PsychrometricsViewModel.UpdateDemo(isDemo);
+                SetDisplayedValues();
             }
         }
 

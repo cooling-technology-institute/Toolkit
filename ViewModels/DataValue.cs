@@ -47,7 +47,7 @@ namespace ViewModels
             {
                 IsDemo = isDemo;
             }
-            SetDefaultMinMax(IsInternationalSystemOfUnits_SI);
+            ConvertValue(IsInternationalSystemOfUnits_SI);
         }
 
         public bool UpdateValue(string input)

@@ -54,12 +54,13 @@ namespace ViewModels
         public ColdWaterTemperatureDataValue Range5ColdWaterTemperatureDataValue6 { set; get; }
 
         private bool IsDemo { get; set; }
-        private bool IsInternationalSystemOfUnits_SI { get; set; }
+        public bool IsInternationalSystemOfUnits_SI { get; private set; }
         public string ErrorMessage { get; set; }
 
         public TowerDesignCurveData(bool isDemo, bool isInternationalSystemOfUnits_SI)
         {
             IsDemo = isDemo;
+            IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
             ErrorMessage = string.Empty;
 
             WaterFlowRateDataValue = new WaterFlowRateDataValue(IsDemo, isInternationalSystemOfUnits_SI);

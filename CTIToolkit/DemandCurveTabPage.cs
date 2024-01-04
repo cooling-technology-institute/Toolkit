@@ -61,6 +61,7 @@ namespace CTIToolkit
             {
                 IsDemo = isDemo;
                 DemandCurveViewModel.UpdateDemo(isDemo);
+                SetDisplayedValues();
             }
         }
 

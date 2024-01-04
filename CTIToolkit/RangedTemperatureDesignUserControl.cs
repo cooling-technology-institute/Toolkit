@@ -28,15 +28,21 @@ namespace CTIToolkit
             SetDisplayedValues();
         }
 
-        public void SetUnitsStandard(bool isInternationalSystemOfUnits_SI)
+        public bool SetUnitsStandard(bool isInternationalSystemOfUnits_SI, StringBuilder stringBuilder = null)
         {
+            bool returnValue = true;
             if (IsInternationalSystemOfUnits_SI != isInternationalSystemOfUnits_SI)
             {
                 IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
                 TowerDesignCurveData.ConvertValues(IsInternationalSystemOfUnits_SI);
                 SetDisplayedUnits();
-                SetDisplayedValues();
+                if (!SetDisplayedValues() && stringBuilder != null)
+                {
+                    stringBuilder.AppendLine(ErrorMessage);
+                    returnValue = false;
+                }
             }
+            return returnValue;
         }
 
         private void SetDisplayedUnits()
@@ -64,15 +70,10 @@ namespace CTIToolkit
         public bool LoadData(TowerDesignCurveData towerDesignCurveData)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            bool returnValue = true;
             ErrorMessage = string.Empty;
 
             TowerDesignCurveData = towerDesignCurveData;
-            if (!SetDisplayedValues())
-            {
-                stringBuilder.AppendLine(ErrorMessage);
-                returnValue = false;
-            }
+            bool returnValue = SetUnitsStandard(TowerDesignCurveData.IsInternationalSystemOfUnits_SI, stringBuilder);
             
             ErrorMessage = stringBuilder.ToString();
             IsChanged = false;

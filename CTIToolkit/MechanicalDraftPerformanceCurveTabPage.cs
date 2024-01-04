@@ -53,6 +53,7 @@ namespace CTIToolkit
             {
                 IsDemo = isDemo;
                 MechanicalDraftPerformanceCurveViewModel.UpdateDemo(isDemo);
+                SetDisplayedValues();
             }
         }
 

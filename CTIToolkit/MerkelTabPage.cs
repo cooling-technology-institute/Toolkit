@@ -97,6 +97,7 @@ namespace CTIToolkit
             {
                 IsDemo = isDemo;
                 MerkelViewModel.UpdateDemo(isDemo);
+                SetDisplayedValues();
             }
         }
 
