@@ -54,6 +54,8 @@ namespace CTIToolkit
                 IsDemo = isDemo;
                 MechanicalDraftPerformanceCurveViewModel.UpdateDemo(isDemo);
                 SetDisplayedValues();
+                //MechanicalDraftPerformanceCurveViewModel.DesignData.IsValid();
+                //ValidatedForm();
             }
         }
 
@@ -88,53 +90,51 @@ namespace CTIToolkit
         public override bool OpenDataFile(string fileName)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            bool returnValue = true;
+            
+            bool returnValue = MechanicalDraftPerformanceCurveViewModel.OpenDataFile(fileName);
 
-            if(MechanicalDraftPerformanceCurveViewModel.OpenDataFile(fileName))
+            if(MechanicalDraftPerformanceCurveViewModel.IsInternationalSystemOfUnits_SI != IsInternationalSystemOfUnits_SI)
             {
-                if(MechanicalDraftPerformanceCurveViewModel.IsInternationalSystemOfUnits_SI != IsInternationalSystemOfUnits_SI)
+                ToolkitMain main = this.Parent.Parent.Parent as ToolkitMain;
+                if(main != null)
                 {
-                    ToolkitMain main = this.Parent.Parent.Parent as ToolkitMain;
-                    if(main != null)
-                    {
-                        main.UpdateUnits(MechanicalDraftPerformanceCurveViewModel.IsInternationalSystemOfUnits_SI ? UnitsSelection.International_System_Of_Units_SI : UnitsSelection.United_States_Customary_Units_IP);
-                    }
+                    main.UpdateUnits(MechanicalDraftPerformanceCurveViewModel.IsInternationalSystemOfUnits_SI ? UnitsSelection.International_System_Of_Units_SI : UnitsSelection.United_States_Customary_Units_IP);
                 }
+            }
 
-                if (!TowerDesignDataForm.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData))
-                {
-                    stringBuilder.AppendLine(TowerDesignDataForm.ErrorMessage);
-                    returnValue = false;
-                }
+            if (!TowerDesignDataForm.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData))
+            {
+                stringBuilder.AppendLine(TowerDesignDataForm.ErrorMessage);
+                returnValue = false;
+            }
 
-                if (!LoadTestPoints())
-                {
-                    stringBuilder.AppendLine(ErrorMessage);
-                    returnValue = false;
-                    ErrorMessage = string.Empty;
-                }
+            if (!LoadTestPoints())
+            {
+                stringBuilder.AppendLine(ErrorMessage);
+                returnValue = false;
+                ErrorMessage = string.Empty;
+            }
 
-                TestButtonEnable();
+            TestButtonEnable();
 
-                if (!SetDisplayedValues())
-                {
-                    stringBuilder.AppendLine(ErrorMessage);
-                    returnValue = false;
-                    ErrorMessage = string.Empty;
-                }
+            if (!SetDisplayedValues())
+            {
+                //stringBuilder.AppendLine(ErrorMessage);
+                returnValue = false;
+                ErrorMessage = string.Empty;
+            }
+
+            if(returnValue)
+            {
                 Calculate();
             }
             else
             {
-                stringBuilder.AppendLine("Unable to load file. File contains invalid data.");
+                stringBuilder.AppendLine("File contains invalid data.");
                 stringBuilder.AppendLine(MechanicalDraftPerformanceCurveViewModel.ErrorMessage);
-                returnValue = false;
-            }
-
-            if(!returnValue)
-            {
                 ErrorMessage = stringBuilder.ToString();
             }
+
             IsChanged = false;
 
             return returnValue;
@@ -171,7 +171,7 @@ namespace CTIToolkit
             }
             else
             {
-                stringBuilder.AppendLine("Unable to load file. File contains invalid data");
+                stringBuilder.AppendLine("File contains invalid data");
                 returnValue = false;
             }
 
@@ -218,7 +218,9 @@ namespace CTIToolkit
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
             ErrorMessage = string.Empty;
-
+            
+            ValidatedForm();
+            
             if (!MechanicalDraftPerformanceCurveViewModel.SaveDataFile())
             {
                 stringBuilder.AppendLine(MechanicalDraftPerformanceCurveViewModel.ErrorMessage);
@@ -250,6 +252,8 @@ namespace CTIToolkit
 
             MechanicalDraftPerformanceCurveViewModel.DataFileName = fileName;
             DataFilename.Text = MechanicalDraftPerformanceCurveViewModel.DataFilenameInputValue;
+
+            ValidatedForm();
 
             if (!MechanicalDraftPerformanceCurveViewModel.SaveAsDataFile(fileName))
             {
@@ -345,16 +349,22 @@ namespace CTIToolkit
                 if (TowerDesignDataForm.HasDataChanged)
                 {
                     TowerDesignDataForm.LoadData(MechanicalDraftPerformanceCurveViewModel.DesignData);
+                    DesignDataButton_Validating(null, null);
                 }
             }
         }
 
         public override void Calculate()
         {
-            if (TestPointTabControl.SelectedIndex >= 0)
+            if ((TestPointTabControl.SelectedIndex >= 0) && MechanicalDraftPerformanceCurveViewModel.IsDesignDataValid)
             {
                 if (MechanicalDraftPerformanceCurveViewModel.Calculate(TestPointTabControl.SelectedIndex))
                 {
+                    if (!string.IsNullOrWhiteSpace(MechanicalDraftPerformanceCurveViewModel.CalculationData.TestOutput.ErrorMessage) && MechanicalDraftPerformanceCurveViewModel.CalculationData.TestOutput.Extrapolated)
+                    {
+                        MessageBox.Show(MechanicalDraftPerformanceCurveViewModel.CalculationData.TestOutput.ErrorMessage, "Extrapolation Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
                     if (MechanicalDraftPerformanceCurveViewModel.DataTable != null)
                     {
                         DataGridView.DataSource = null;
@@ -384,6 +394,8 @@ namespace CTIToolkit
 
             if (!e.Cancel)
             {
+                ValidatedForm();
+
                 if (PrintControl.PageIndex == 0)
                 {
                     PrintControl.PageIndex = 0;
@@ -1021,7 +1033,11 @@ namespace CTIToolkit
 
         public override void ValidatedForm()
         {
-            DesignDataButton_Validated(null, null);
+            ValidateChildren();
+
+            TowerDesignDataForm.ValidatingForm();
+
+            //DesignDataButton_Validated(null, null);
 
             foreach (TabPage tabPage in TestPointTabControl.TabPages)
             {
@@ -1030,7 +1046,7 @@ namespace CTIToolkit
                     TestPointUserControl testPointUserControl = tabPage.Controls[0] as TestPointUserControl;
                     if (testPointUserControl != null)
                     {
-                        testPointUserControl.ValidatedForm();
+                        testPointUserControl.ValidatingForm();
                     }
                 }
                 catch
@@ -1040,16 +1056,23 @@ namespace CTIToolkit
 
         private void DesignDataButton_Validated(object sender, EventArgs e)
         {
-            this.errorProvider1.SetError(DesignDataButton, "");
+            if(MechanicalDraftPerformanceCurveViewModel.IsDesignDataValid)
+            {
+                errorProvider1.SetError(DesignDataButton, "");
+            }
         }
 
         private void DesignDataButton_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             MechanicalDraftPerformanceCurveViewModel.IsDesignDataValid = MechanicalDraftPerformanceCurveViewModel.DesignData.IsValid();
-            if (!MechanicalDraftPerformanceCurveViewModel.IsDesignDataValid)
+            if (MechanicalDraftPerformanceCurveViewModel.IsDesignDataValid)
+            {
+                errorProvider1.SetError(DesignDataButton, "");
+            }
+            else
             {
                 // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(DesignDataButton, MechanicalDraftPerformanceCurveViewModel.DesignData.ErrorMessage + " Calculate and View Graph buttons will not be active until the design data is correct.");
+                errorProvider1.SetError(DesignDataButton, MechanicalDraftPerformanceCurveViewModel.DesignData.ErrorMessage + " Calculate and View Graph buttons will not be active until the design data is correct.");
             }
         }
     }

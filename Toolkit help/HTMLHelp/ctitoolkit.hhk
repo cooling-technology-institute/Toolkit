@@ -337,8 +337,6 @@
 		</section>
 	</item>
 	<item name="Page Layout">
-		<section name="PageLayout" link="html\PageLayout.htm">
-		</section>
 		<item name="Page Layout Overview">
 			<section name="Page Layout Overiew" link="Page_Layout_Overiew.htm">
 			</section>

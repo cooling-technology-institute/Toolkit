@@ -21,7 +21,7 @@
   </Chain>
   </Bundle>
   -->
-  <Product Id="*" Name="CTI Toolkit 4.1" Language="1033" Version="4.1.0.0" Manufacturer="Cooling Technology Institute" UpgradeCode="555501F8-744F-4400-B406-AD28A89EDF38">
+  <Product Id="*" Name="CTI Toolkit 4.2" Language="1033" Version="4.2.0.0" Manufacturer="Cooling Technology Institute" UpgradeCode="555501F8-744F-4400-B406-AD28A89EDF38">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
@@ -30,7 +30,7 @@
 
     <PropertyRef Id="WIX_DIR_COMMON_DOCUMENTS" />
     <?define CTIToolkit = "CTI Toolkit" ?>
-    <?define Version = "4.1" ?>
+    <?define Version = "4.2" ?>
 
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
@@ -44,7 +44,7 @@
       <!--<Directory Id="WIX_DIR_COMMON_DOCUMENTS">-->
       <Directory Id="WIX_DIR_PERSONAL">
         <Directory Id="UsersDocumentsFolder" Name='!(bind.property.Manufacturer)'>
-          <Directory Id="CTIUsersDocumentsFolder" Name='!(bind.property.ProductName)'>
+          <Directory Id="CTIUsersDocumentsFolder" Name="CTI Toolkit 4.0">
           </Directory>
         </Directory>
       </Directory>

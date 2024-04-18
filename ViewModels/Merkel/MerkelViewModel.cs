@@ -224,6 +224,12 @@ namespace ViewModels
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
 
+            if (MerkelDataFile == null)
+            {
+                MerkelDataFile = new MerkelDataFile(IsInternationalSystemOfUnits_SI);
+                MerkelInputData.SetDefaults(MerkelDataFile);
+            }
+
             if (MerkelDataFile != null)
             {
                 if (!MerkelInputData.LoadData(MerkelDataFile))
@@ -231,6 +237,11 @@ namespace ViewModels
                     returnValue = false;
                     stringBuilder.AppendLine(MerkelInputData.ErrorMessage);
                 }
+            }
+            else
+            {
+                returnValue = false;
+                stringBuilder.AppendLine("Merkel data file is invalid.");
             }
 
             if (!returnValue)

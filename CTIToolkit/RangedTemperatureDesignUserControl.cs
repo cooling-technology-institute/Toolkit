@@ -318,6 +318,13 @@ namespace CTIToolkit
 
         #region DataValidation
 
+        public void ValidatingForm()
+        {
+            ValidateChildren();
+            //object sender = new object();
+            //System.ComponentModel.CancelEventArgs e = new System.ComponentModel.CancelEventArgs();
+        }
+
         private void WetBulbTemperature1_Validated(object sender, EventArgs e)
         {
             errorProvider1.SetError(WetBulbTemperature1, "");

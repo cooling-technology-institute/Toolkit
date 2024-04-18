@@ -247,9 +247,6 @@ namespace CalculationLibrary
                     data.CrossPlot1.ColdWaterTemperatureMaximum = yfit;
                 }
 
-                data.CrossPlot2.ColdWaterTemperatureMinimum = data.CrossPlot1.ColdWaterTemperatureMinimum;
-                data.CrossPlot2.ColdWaterTemperatureMaximum = data.CrossPlot1.ColdWaterTemperatureMaximum;
-
                 seriesPoints = new SeriesPoints();
                 seriesPoints.Name = string.Format("Flow Rate ({0})", waterFlowRate.FlowRate.ToString("F2"));
                 increment = (data.CrossPlot1.RangeMaximum - data.CrossPlot1.RangeMinimum) / 50.0;
@@ -279,6 +276,8 @@ namespace CalculationLibrary
             // cross plot 2 points
             data.CrossPlot2.WaterFlowRateMinimum = data.FindMinimumWaterFlowRate();
             data.CrossPlot2.WaterFlowRateMaximum = data.FindMaximumWaterFlowRate();
+            data.CrossPlot2.ColdWaterTemperatureMinimum = 200; // data.CrossPlot1.ColdWaterTemperatureMinimum;
+            data.CrossPlot2.ColdWaterTemperatureMaximum = 0; // data.CrossPlot1.ColdWaterTemperatureMaximum;
 
             if ((data.TestOutput.PredictedFlow < data.CrossPlot2.WaterFlowRateMinimum) || (data.TestOutput.PredictedFlow > data.CrossPlot2.WaterFlowRateMinimum))
             {
@@ -308,12 +307,12 @@ namespace CalculationLibrary
             {
                 data.CrossPlot2.ColdWaterTemperatureMinimum = data.TowerTestData.ColdWaterTemperature - (data.TowerTestData.ColdWaterTemperature * .05);
             }
-            else if (data.CrossPlot2.ColdWaterTemperatureMaximum < data.TowerTestData.ColdWaterTemperature)
+            if (data.CrossPlot2.ColdWaterTemperatureMaximum < data.TowerTestData.ColdWaterTemperature)
             {
                 data.CrossPlot2.ColdWaterTemperatureMaximum = data.TowerTestData.ColdWaterTemperature + (data.TowerTestData.ColdWaterTemperature * .05);
             }
             seriesPoints = new SeriesPoints();
-            seriesPoints.Name = string.Format("Predicte Flow ({0})", data.TestOutput.PredictedFlow.ToString("F2"));
+            seriesPoints.Name = string.Format("Predicted Flow ({0})", data.TestOutput.PredictedFlow.ToString("F2") + ((data.TestOutput.Extrapolated) ? "*" : ""));
             seriesPoints.Points.Add(new Point(data.TestOutput.PredictedFlow, data.TowerTestData.ColdWaterTemperature));
             seriesPoints.Points.Add(new Point(data.TestOutput.PredictedFlow, data.CrossPlot2.ColdWaterTemperatureMinimum));
             data.CrossPlot2.SeriesPoints.Add(seriesPoints);
@@ -339,6 +338,8 @@ namespace CalculationLibrary
             }
 
             increment = (data.CrossPlot2.ColdWaterTemperatureMaximum - data.CrossPlot2.ColdWaterTemperatureMinimum) / 50.0;
+            double max = 0;
+            double min = 200;
             if (increment > 0.0)
             {
                 for (double coldWaterTemperatureValue = data.CrossPlot2.ColdWaterTemperatureMinimum; coldWaterTemperatureValue <= data.CrossPlot2.ColdWaterTemperatureMaximum; coldWaterTemperatureValue += increment)
@@ -346,6 +347,16 @@ namespace CalculationLibrary
                     y2.Clear();
                     CalculatePerformanceData(yFit, x, coldWaterTemperatureValue, ref yfit, y2, stringBuilder);
                     seriesPoints.Points.Add(new Point(yfit, coldWaterTemperatureValue));
+                    
+                    if(max < coldWaterTemperatureValue)
+                    {
+                        max = coldWaterTemperatureValue;
+                    }
+                    
+                    if(min > coldWaterTemperatureValue)
+                    {
+                        min = coldWaterTemperatureValue;
+                    }
                 }
             }
             data.CrossPlot2.SeriesPoints.Add(seriesPoints);

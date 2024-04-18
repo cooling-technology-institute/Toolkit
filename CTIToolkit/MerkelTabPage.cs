@@ -157,6 +157,8 @@ namespace CTIToolkit
         {
             NameValueUnitsDataTable nameValueUnitsDataTable = new NameValueUnitsDataTable();
 
+            ValidatedForm();
+
             if (MerkelViewModel.GetDataTable() != null)
             {
                 nameValueUnitsDataTable.AddRow(HotWaterTemperatureLabel.Text, HotWaterTemperature_Value.Text, HotWaterTemperatureUnits.Text);
@@ -279,6 +281,8 @@ namespace CTIToolkit
             bool returnValue = true;
             ErrorMessage = string.Empty;
 
+            ValidatedForm();
+
             if (!MerkelViewModel.SaveDataFile())
             {
                 stringBuilder.AppendLine(MerkelViewModel.ErrorMessage);
@@ -304,6 +308,8 @@ namespace CTIToolkit
 
             MerkelViewModel.DataFileName = fileName;
             DataFilename.Text = MerkelViewModel.DataFilenameInputValue;
+
+            ValidatedForm();
 
             if (!MerkelViewModel.SaveAsDataFile(fileName))
             {
@@ -353,14 +359,7 @@ namespace CTIToolkit
 
         public override void ValidatedForm()
         {
-            object sender = new object();
-            EventArgs e = new EventArgs();
-
-            Merkel_LiquidtoGasRatio_Value_Validated(sender, e);
-            Merkel_ColdWaterTemperature_Value_Validated(sender, e);
-            Merkel_HotWaterTemperature_Value_Validated(sender, e);
-            Merkel_WetBulbTemperature_Value_Validated(sender, e);
-            Merkel_Elevation_Value_Validated(sender, e);
+            ValidateChildren();
         }
 
         private void Merkel_LiquidtoGasRatio_Value_Validated(object sender, System.EventArgs e)

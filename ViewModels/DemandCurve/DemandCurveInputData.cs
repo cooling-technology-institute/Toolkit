@@ -188,7 +188,7 @@ namespace ViewModels
             data.Range = RangeDataValue.Current;
             data.IsElevation = IsElevation;
             data.UserApproach = UserApproachDataValue.Current;
-            return true;
+            return IsValid();
         }
 
         public void SetDefaults(DemandCurveFileData demandCurveFileData)
@@ -215,10 +215,56 @@ namespace ViewModels
             }
         }
 
+        protected bool IsValid(DataValue dataValue, StringBuilder stringBuilder)
+        {
+            if (!dataValue.IsValid)
+            {
+                stringBuilder.AppendLine(dataValue.ErrorMessage);
+                return false;
+            }
+            return true;
+        }
+
+        public bool IsValid()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            ErrorMessage = string.Empty;
+            bool returnValue = true;
+
+            try
+            {
+                returnValue &= IsValid(C1DataValue, stringBuilder);
+                returnValue &= IsValid(SlopeDataValue, stringBuilder);
+                returnValue &= IsValid(LiquidToGasRatioDataValue, stringBuilder);
+                if (IsElevation)
+                {
+                    returnValue &= IsValid(ElevationDataValue, stringBuilder);
+                }
+                else
+                {
+                    returnValue &= IsValid(BarometricPressureDataValue, stringBuilder);
+                }
+                returnValue &= IsValid(MinimumDataValue, stringBuilder);
+                returnValue &= IsValid(MaximumDataValue, stringBuilder);
+                returnValue &= IsValid(WetBulbTemperatureDataValue, stringBuilder);
+                returnValue &= IsValid(RangeDataValue, stringBuilder);
+                if (!returnValue)
+                {
+                    ErrorMessage = stringBuilder.ToString();
+                }
+            }
+            catch (Exception exception)
+            {
+                ErrorMessage = string.Format("Unable to validate data. Exception {0}.", exception.ToString());
+            }
+
+            return returnValue;
+        }
+
         public bool FillFileData(DemandCurveFileData demandCurveFileData)
         {
             ErrorMessage = string.Empty;
-            bool returnValue = true;
+            bool returnValue;
 
             try
             {
@@ -233,10 +279,12 @@ namespace ViewModels
                 demandCurveFileData.CurveMaximum = MaximumDataValue.Current;
                 demandCurveFileData.WetBulbTemperature = WetBulbTemperatureDataValue.Current;
                 demandCurveFileData.Range = RangeDataValue.Current;
+                returnValue = IsValid();
             }
             catch (Exception exception)
             {
                 ErrorMessage = string.Format("Failure to fill and validate data file. Exception {0}.", exception.ToString());
+                returnValue = false;
             }
             return returnValue;
         }

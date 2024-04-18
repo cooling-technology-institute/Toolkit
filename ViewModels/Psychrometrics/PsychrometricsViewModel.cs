@@ -147,7 +147,7 @@ namespace ViewModels
             }
             else
             {
-                stringBuilder.AppendLine("Unable to load file. File contains invalid data");
+                stringBuilder.AppendLine("Unable to load file. File contains invalid data.");
             }
 
             if (!returnValue)
@@ -236,6 +236,12 @@ namespace ViewModels
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
 
+            if (PsychrometricsDataFile == null)
+            {
+                PsychrometricsDataFile = new PsychrometricsDataFile(IsInternationalSystemOfUnits_SI);
+                PsychrometricsInputData.SetDefaults(PsychrometricsDataFile);
+            }
+
             if (PsychrometricsDataFile != null)
             {
                 if(!PsychrometricsInputData.LoadData(PsychrometricsDataFile))
@@ -243,6 +249,11 @@ namespace ViewModels
                     returnValue = false;
                     stringBuilder.AppendLine(PsychrometricsInputData.ErrorMessage);
                 }
+            }
+            else
+            {
+                returnValue = false;
+                stringBuilder.AppendLine("Psychrometrics data file is invalid.");
             }
 
             if (!returnValue)

@@ -18,40 +18,86 @@ namespace CTIToolkit
 
         public bool SetDisplayedValues()
         {
+            StringBuilder stringBuilder = new StringBuilder();
             ErrorMessage = string.Empty;
+            bool returnValue = true;
             
             try
             {
                 WaterFlowRate.Text = TowerTestPoint.WaterFlowRateDataValue.InputValue;
                 toolTip1.SetToolTip(WaterFlowRate, TowerTestPoint.WaterFlowRateDataValue.ToolTip);
+                if(!TowerTestPoint.WaterFlowRateDataValue.IsValid)
+                {
+                    stringBuilder.AppendLine(TowerTestPoint.WaterFlowRateDataValue.ErrorMessage);
+                    returnValue = false;
+                }
 
                 HotWaterTemperature.Text = TowerTestPoint.HotWaterTemperatureDataValue.InputValue;
                 toolTip1.SetToolTip(HotWaterTemperature, TowerTestPoint.HotWaterTemperatureDataValue.ToolTip);
+                if (!TowerTestPoint.HotWaterTemperatureDataValue.IsValid)
+                {
+                    stringBuilder.AppendLine(TowerTestPoint.HotWaterTemperatureDataValue.ErrorMessage);
+                    returnValue = false;
+                }
 
                 ColdWaterTemperature.Text = TowerTestPoint.ColdWaterTemperatureDataValue.InputValue;
                 toolTip1.SetToolTip(ColdWaterTemperature, TowerTestPoint.ColdWaterTemperatureDataValue.ToolTip);
+                if (!TowerTestPoint.ColdWaterTemperatureDataValue.IsValid)
+                {
+                    stringBuilder.AppendLine(TowerTestPoint.ColdWaterTemperatureDataValue.ErrorMessage);
+                    returnValue = false;
+                }
 
                 WetBulbTemperature.Text = TowerTestPoint.WetBulbTemperatureDataValue.InputValue;
                 toolTip1.SetToolTip(WetBulbTemperature, TowerTestPoint.WetBulbTemperatureDataValue.ToolTip);
+                if (!TowerTestPoint.WetBulbTemperatureDataValue.IsValid)
+                {
+                    stringBuilder.AppendLine(TowerTestPoint.WetBulbTemperatureDataValue.ErrorMessage);
+                    returnValue = false;
+                }
 
                 DryBulbTemperature.Text = TowerTestPoint.DryBulbTemperatureDataValue.InputValue;
                 toolTip1.SetToolTip(DryBulbTemperature, TowerTestPoint.DryBulbTemperatureDataValue.ToolTip);
+                if (!TowerTestPoint.DryBulbTemperatureDataValue.IsValid)
+                {
+                    stringBuilder.AppendLine(TowerTestPoint.DryBulbTemperatureDataValue.ErrorMessage);
+                    returnValue = false;
+                }
 
                 FanDriverPower.Text = TowerTestPoint.FanDriverPowerDataValue.InputValue;
                 toolTip1.SetToolTip(FanDriverPower, TowerTestPoint.FanDriverPowerDataValue.ToolTip);
+                if (!TowerTestPoint.FanDriverPowerDataValue.IsValid)
+                {
+                    stringBuilder.AppendLine(TowerTestPoint.FanDriverPowerDataValue.ErrorMessage);
+                    returnValue = false;
+                }
 
                 BarometricPressure.Text = TowerTestPoint.BarometricPressureDataValue.InputValue;
                 toolTip1.SetToolTip(BarometricPressure, TowerTestPoint.BarometricPressureDataValue.ToolTip);
+                if (!TowerTestPoint.BarometricPressureDataValue.IsValid)
+                {
+                    stringBuilder.AppendLine(TowerTestPoint.BarometricPressureDataValue.ErrorMessage);
+                    returnValue = false;
+                }
 
                 LiquidToGasRatio.Text = TowerTestPoint.LiquidToGasRatioDataValue.InputValue;
                 toolTip1.SetToolTip(LiquidToGasRatio, TowerTestPoint.LiquidToGasRatioDataValue.ToolTip);
+                if (!TowerTestPoint.LiquidToGasRatioDataValue.IsValid)
+                {
+                    stringBuilder.AppendLine(TowerTestPoint.LiquidToGasRatioDataValue.ErrorMessage);
+                    returnValue = false;
+                }
+                if(!returnValue)
+                {
+                    ErrorMessage = stringBuilder.ToString();
+                }
             }
             catch (Exception e)
             {
                 ErrorMessage = string.Format("Failure to load page. Exception: {0}", e.ToString());
-                return false;
+                returnValue = false;
             }
-            return true;
+            return returnValue;
         }
 
         public bool LoadData(TowerTestPoint towerTestPoint)
@@ -94,19 +140,20 @@ namespace CTIToolkit
             { }
         }
 
-        public void ValidatedForm()
+        public void ValidatingForm()
         {
-            object sender = new object();
-            EventArgs e = new EventArgs();
-            
-            WaterFlowRate_Validated(sender, e);
-            HotWaterTemperature_Validated(sender, e);
-            ColdWaterTemperature_Validated(sender, e);
-            WetBulbTemperature_Validated(sender, e);
-            DryBulbTemperature_Validated(sender, e);
-            FanDriverPower_Validated(sender, e);
-            BarometricPressure_Validated(sender, e);
-            LiquidToGasRatio_Validated(sender, e);
+            ValidateChildren();
+            //object sender = new object();
+            //System.ComponentModel.CancelEventArgs e = new System.ComponentModel.CancelEventArgs();
+
+            //WaterFlowRate_Validating(sender, e);
+            //HotWaterTemperature_Validating(sender, e);
+            //ColdWaterTemperature_Validating(sender, e);
+            //WetBulbTemperature_Validating(sender, e);
+            //DryBulbTemperature_Validating(sender, e);
+            //FanDriverPower_Validating(sender, e);
+            //BarometricPressure_Validating(sender, e);
+            //LiquidToGasRatio_Validating(sender, e);
         }
 
         private void WaterFlowRate_Validated(object sender, EventArgs e)

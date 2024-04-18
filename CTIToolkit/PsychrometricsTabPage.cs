@@ -227,6 +227,9 @@ namespace CTIToolkit
         public override void Calculate()
         {
             string errorMessage = string.Empty;
+
+            ValidatedForm();
+
             ClearDataSource();
             try
             {
@@ -336,6 +339,8 @@ namespace CTIToolkit
             bool returnValue = true;
             ErrorMessage = string.Empty;
 
+            ValidatedForm();
+
             if (!PsychrometricsViewModel.SaveDataFile())
             {
                 stringBuilder.AppendLine(PsychrometricsViewModel.ErrorMessage);
@@ -362,6 +367,8 @@ namespace CTIToolkit
             PsychrometricsViewModel.DataFileName = fileName;
             DataFilename.Text = PsychrometricsViewModel.DataFilenameInputValue;
 
+            ValidatedForm();
+
             if (!PsychrometricsViewModel.SaveAsDataFile(fileName))
             {
                 stringBuilder.AppendLine(PsychrometricsViewModel.ErrorMessage);
@@ -384,7 +391,9 @@ namespace CTIToolkit
         public override void PrintPage(object sender, PrintPageEventArgs e)
         {
             NameValueUnitsDataTable nameValueUnitsDataTable = new NameValueUnitsDataTable();
-        
+
+            ValidatedForm();
+
             if (PsychrometricsViewModel.GetDataTable() != null)
             {
                 string calculationProperty = string.Empty;
@@ -536,15 +545,7 @@ namespace CTIToolkit
 
         public override void ValidatedForm()
         {
-            object sender = new object();
-            EventArgs e = new EventArgs();
-
-            Elevation_Value_Validated(sender, e);
-            BarometricPressure_Value_Validated(sender, e);
-            DryBulbTemperature_Value_Validated(sender, e);
-            WetBulbTemperature_Value_Validated(sender, e);
-            RelativeHumidity_Value_Validated(sender, e);
-            EnthalpyValue_Validated(sender, e);
+            ValidateChildren();
         }
 
         private void Elevation_Value_Validated(object sender, EventArgs e)

@@ -142,6 +142,45 @@ namespace ViewModels
             IsDemo = value;
         }
 
+        protected bool IsValid(DataValue dataValue, StringBuilder stringBuilder)
+        {
+            if (!dataValue.IsValid)
+            {
+                stringBuilder.AppendLine(dataValue.ErrorMessage);
+                return false;
+            }
+            return true;
+        }
+
+        public bool IsValid()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            ErrorMessage = string.Empty;
+            bool returnValue = true;
+
+            try
+            {
+                returnValue &= IsValid(WaterFlowRateDataValue, stringBuilder);
+                returnValue &= IsValid(HotWaterTemperatureDataValue, stringBuilder);
+                returnValue &= IsValid(ColdWaterTemperatureDataValue, stringBuilder);
+                returnValue &= IsValid(WetBulbTemperatureDataValue, stringBuilder);
+                returnValue &= IsValid(DryBulbTemperatureDataValue, stringBuilder);
+                returnValue &= IsValid(FanDriverPowerDataValue, stringBuilder);
+                returnValue &= IsValid(BarometricPressureDataValue, stringBuilder);
+                returnValue &= IsValid(LiquidToGasRatioDataValue, stringBuilder);
+                if (!returnValue)
+                {
+                    ErrorMessage = stringBuilder.ToString();
+                }
+            }
+            catch (Exception exception)
+            {
+                ErrorMessage = string.Format("Unable to validate data '{0}'. Exception {1}.", TestName, exception.ToString());
+            }
+
+            return returnValue;
+        }
+
         public bool FillFileData(TowerTestData towerTestData)
         {
             ErrorMessage = string.Empty;
@@ -158,6 +197,7 @@ namespace ViewModels
                 towerTestData.TowerSpecifications.FanDriverPower = FanDriverPowerDataValue.Current;
                 towerTestData.TowerSpecifications.BarometricPressure = BarometricPressureDataValue.Current;
                 towerTestData.TowerSpecifications.LiquidToGasRatio = LiquidToGasRatioDataValue.Current;
+                returnValue = IsValid();
             }
             catch (Exception exception)
             {
@@ -170,12 +210,11 @@ namespace ViewModels
         public bool FillCalculationData(MechanicalDraftPerformanceCurveCalculationData calculationData)
         {
             ErrorMessage = string.Empty;
-            bool returnValue = true;
+            bool returnValue;
 
             try
             {
                 calculationData.TowerTestData.IsInternationalSystemOfUnits_SI = IsInternationalSystemOfUnits_SI;
-
                 calculationData.TowerTestData.WaterFlowRate = WaterFlowRateDataValue.Current;
                 calculationData.TowerTestData.HotWaterTemperature = HotWaterTemperatureDataValue.Current;
                 calculationData.TowerTestData.ColdWaterTemperature = ColdWaterTemperatureDataValue.Current;
@@ -184,10 +223,12 @@ namespace ViewModels
                 calculationData.TowerTestData.FanDriverPower = FanDriverPowerDataValue.Current;
                 calculationData.TowerTestData.BarometricPressure = BarometricPressureDataValue.Current;
                 calculationData.TowerTestData.LiquidToGasRatio = LiquidToGasRatioDataValue.Current;
+                returnValue = IsValid();
             }
             catch (Exception exception)
             {
                 ErrorMessage = string.Format("Failure to fill and validate Test Data '{0}'. Exception {1}.", TestName, exception.ToString());
+                returnValue = false;
             }
 
             return returnValue;

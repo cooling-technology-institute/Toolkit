@@ -88,17 +88,6 @@ namespace CTIToolkit
             }
         }
 
-        //public void AddControlEvents()
-        //{
-        //    foreach(Control control in Controls)
-        //    {
-        //        if(control is TowerDesignDataUserControl)
-        //        {
-        //            ((TowerDesignDataUserControl)control).CloseFormEvent += new FormClosingEventHandler(CloseformCallback);
-        //        }
-        //    }
-        //}
-
         public void FillNameValueUnitsDataTable(NameValueUnitsDataTable nameValueUnitsDataTable)
         {
             nameValueUnitsDataTable.AddRow(TowerDesignData.WaterFlowRateDataValue.InputMessage, TowerDesignData.WaterFlowRateDataValue.InputValue, WaterFlowRateUnits.Text);
@@ -127,6 +116,8 @@ namespace CTIToolkit
 
         public TowerDesignData SaveDesignData()
         {
+            ValidatingForm();
+
             TowerDesignData.TowerDesignCurveData.Clear();
 
             foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
@@ -281,6 +272,16 @@ namespace CTIToolkit
         }
 
         #region Validating
+        public void ValidatingForm()
+        {
+            ValidateChildren();
+
+            foreach (RangedTemperatureDesignUserControlTabPage tabPage in TowerDesignDataTabControl.TabPages)
+            {
+                tabPage.UserControl.ValidatingForm();
+            }
+
+        }
 
         private void WaterFlowRate_Validated(object sender, EventArgs e)
         {

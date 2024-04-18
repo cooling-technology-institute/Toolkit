@@ -401,6 +401,49 @@ namespace ViewModels
             return returnValue;
         }
 
+        protected bool IsValid(DataValue dataValue, StringBuilder stringBuilder)
+        {
+            if (!dataValue.IsValid)
+            {
+                stringBuilder.AppendLine(dataValue.ErrorMessage);
+                return false;
+            }
+            return true;
+        }
+
+        public bool IsDataValid()
+        {
+            bool returnValue = true;
+            StringBuilder stringBuilder = new StringBuilder();
+
+            try
+            {
+                returnValue &= IsValid(WaterFlowRateDataValue, stringBuilder);
+                returnValue &= IsValid(HotWaterTemperatureDataValue, stringBuilder);
+                returnValue &= IsValid(ColdWaterTemperatureDataValue, stringBuilder);
+                returnValue &= IsValid(WetBulbTemperatureDataValue, stringBuilder);
+                returnValue &= IsValid(DryBulbTemperatureDataValue, stringBuilder);
+                returnValue &= IsValid(FanDriverPowerDataValue, stringBuilder);
+                returnValue &= IsValid(BarometricPressureDataValue, stringBuilder);
+                returnValue &= IsValid(LiquidToGasRatioDataValue, stringBuilder);
+                returnValue &= IsValid(Range1Value, stringBuilder);
+                returnValue &= IsValid(Range2Value, stringBuilder);
+                returnValue &= IsValid(Range3Value, stringBuilder);
+                returnValue &= IsValid(Range4Value, stringBuilder);
+                returnValue &= IsValid(Range5Value, stringBuilder);
+                foreach (TowerDesignCurveData towerDesignCurveData in TowerDesignCurveData)
+                {
+                    returnValue &= towerDesignCurveData.IsValid();
+                }
+            }
+            catch (Exception exception)
+            {
+                ErrorMessage = string.Format("Fail to validate Mechanical Draft Performance Curve Design Data. Exception {0}.", exception.ToString());
+            }
+
+            return returnValue;
+        }
+
         public bool FillCalculationData(MechanicalDraftPerformanceCurveCalculationData calculationData)
         {
             ErrorMessage = string.Empty;
@@ -412,113 +455,40 @@ namespace ViewModels
             {
                 calculationData.TowerType = TowerTypeValue;
                 calculationData.TowerDesignData.IsInternationalSystemOfUnits_SI = IsInternationalSystemOfUnits_SI;
-
-                if (!WaterFlowRateDataValue.IsValid)
-                {
-                    stringBuilder.AppendLine(WaterFlowRateDataValue.ErrorMessage);
-                    returnValue = false;
-                }
                 calculationData.TowerDesignData.WaterFlowRate = WaterFlowRateDataValue.Current;
-
-                if (!HotWaterTemperatureDataValue.IsValid)
-                {
-                    stringBuilder.AppendLine(HotWaterTemperatureDataValue.ErrorMessage);
-                    returnValue = false;
-                }
                 calculationData.TowerDesignData.HotWaterTemperature = HotWaterTemperatureDataValue.Current;
-
-                if (!ColdWaterTemperatureDataValue.IsValid)
-                {
-                    stringBuilder.AppendLine(ColdWaterTemperatureDataValue.ErrorMessage);
-                    returnValue = false;
-                }
                 calculationData.TowerDesignData.ColdWaterTemperature = ColdWaterTemperatureDataValue.Current;
-
-                if (!WetBulbTemperatureDataValue.IsValid)
-                {
-                    stringBuilder.AppendLine(WetBulbTemperatureDataValue.ErrorMessage);
-                    returnValue = false;
-                }
                 calculationData.TowerDesignData.WetBulbTemperature = WetBulbTemperatureDataValue.Current;
-
-                if (!DryBulbTemperatureDataValue.IsValid)
-                {
-                    stringBuilder.AppendLine(DryBulbTemperatureDataValue.ErrorMessage);
-                    returnValue = false;
-                }
                 calculationData.TowerDesignData.DryBulbTemperature = DryBulbTemperatureDataValue.Current;
-
-                if (!FanDriverPowerDataValue.IsValid)
-                {
-                    stringBuilder.AppendLine(FanDriverPowerDataValue.ErrorMessage);
-                    returnValue = false;
-                }
                 calculationData.TowerDesignData.FanDriverPower = FanDriverPowerDataValue.Current;
-
-                if (!BarometricPressureDataValue.IsValid)
-                {
-                    stringBuilder.AppendLine(BarometricPressureDataValue.ErrorMessage);
-                    returnValue = false;
-                }
                 calculationData.TowerDesignData.BarometricPressure = BarometricPressureDataValue.Current;
-
-                if (!LiquidToGasRatioDataValue.IsValid)
-                {
-                    stringBuilder.AppendLine(LiquidToGasRatioDataValue.ErrorMessage);
-                    returnValue = false;
-                }
                 calculationData.TowerDesignData.LiquidToGasRatio = LiquidToGasRatioDataValue.Current;
-
                 if (Range1Value.Current != 0.0)
                 {
-                    if (!Range1Value.IsValid)
-                    {
-                        stringBuilder.AppendLine(Range1Value.ErrorMessage);
-                        returnValue = false;
-                    }
                     isValidRange[0] = true;
                     calculationData.Ranges.Add(Range1Value.Current);
                 }
                 if (Range2Value.Current != 0.0)
                 {
-                    if (!Range2Value.IsValid)
-                    {
-                        stringBuilder.AppendLine(Range2Value.ErrorMessage);
-                        returnValue = false;
-                    }
                     isValidRange[1] = true;
                     calculationData.Ranges.Add(Range2Value.Current);
                 }
                 if (Range3Value.Current != 0.0)
                 {
-                    if (!Range3Value.IsValid)
-                    {
-                        stringBuilder.AppendLine(Range3Value.ErrorMessage);
-                        returnValue = false;
-                    }
                     isValidRange[2] = true;
                     calculationData.Ranges.Add(Range3Value.Current);
                 }
                 if (Range4Value.Current != 0.0)
                 {
-                    if (!Range4Value.IsValid)
-                    {
-                        stringBuilder.AppendLine(Range4Value.ErrorMessage);
-                        returnValue = false;
-                    }
                     isValidRange[3] = true;
                     calculationData.Ranges.Add(Range4Value.Current);
                 }
                 if (Range5Value.Current != 0.0)
                 {
-                    if (!Range5Value.IsValid)
-                    {
-                        stringBuilder.AppendLine(Range5Value.ErrorMessage);
-                    }
                     isValidRange[4] = true;
                     calculationData.Ranges.Add(Range5Value.Current);
                 }
-
+                
                 string flowRateMessage = string.Empty;
                 foreach (TowerDesignCurveData towerDesignCurveData in TowerDesignCurveData)
                 {
@@ -631,6 +601,7 @@ namespace ViewModels
                     }
                     calculationData.WaterFlowRates.Add(flowRate);
                 }
+                returnValue &= IsDataValid();
             }
             catch (Exception exception)
             {

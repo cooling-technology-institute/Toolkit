@@ -228,6 +228,76 @@ namespace ViewModels
             return isChanged;
         }
 
+        protected bool IsValid(DataValue dataValue, StringBuilder stringBuilder)
+        {
+            if (!dataValue.IsValid)
+            {
+                stringBuilder.AppendLine(dataValue.ErrorMessage);
+                return false;
+            }
+            return true;
+        }
+
+        public bool IsValid()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            ErrorMessage = string.Empty;
+            bool returnValue = true;
+
+            try
+            {
+                returnValue &= IsValid(WaterFlowRateDataValue, stringBuilder);
+                returnValue &= IsValid(WetBulbTemperatureDataValue1, stringBuilder);
+                returnValue &= IsValid(WetBulbTemperatureDataValue2, stringBuilder);
+                returnValue &= IsValid(WetBulbTemperatureDataValue3, stringBuilder);
+                returnValue &= IsValid(WetBulbTemperatureDataValue4, stringBuilder);
+                returnValue &= IsValid(WetBulbTemperatureDataValue5, stringBuilder);
+                returnValue &= IsValid(WetBulbTemperatureDataValue6, stringBuilder);
+
+                returnValue &= IsValid(Range1ColdWaterTemperatureDataValue1, stringBuilder);
+                returnValue &= IsValid(Range1ColdWaterTemperatureDataValue2, stringBuilder);
+                returnValue &= IsValid(Range1ColdWaterTemperatureDataValue3, stringBuilder);
+                returnValue &= IsValid(Range1ColdWaterTemperatureDataValue4, stringBuilder);
+                returnValue &= IsValid(Range1ColdWaterTemperatureDataValue5, stringBuilder);
+                returnValue &= IsValid(Range1ColdWaterTemperatureDataValue6, stringBuilder);
+
+                returnValue &= IsValid(Range2ColdWaterTemperatureDataValue1, stringBuilder);
+                returnValue &= IsValid(Range2ColdWaterTemperatureDataValue2, stringBuilder);
+                returnValue &= IsValid(Range2ColdWaterTemperatureDataValue3, stringBuilder);
+                returnValue &= IsValid(Range2ColdWaterTemperatureDataValue4, stringBuilder);
+                returnValue &= IsValid(Range2ColdWaterTemperatureDataValue5, stringBuilder);
+                returnValue &= IsValid(Range2ColdWaterTemperatureDataValue6, stringBuilder);
+
+                returnValue &= IsValid(Range3ColdWaterTemperatureDataValue1, stringBuilder);
+                returnValue &= IsValid(Range3ColdWaterTemperatureDataValue2, stringBuilder);
+                returnValue &= IsValid(Range3ColdWaterTemperatureDataValue3, stringBuilder);
+                returnValue &= IsValid(Range3ColdWaterTemperatureDataValue4, stringBuilder);
+                returnValue &= IsValid(Range3ColdWaterTemperatureDataValue5, stringBuilder);
+                returnValue &= IsValid(Range3ColdWaterTemperatureDataValue6, stringBuilder);
+
+                returnValue &= IsValid(Range4ColdWaterTemperatureDataValue1, stringBuilder);
+                returnValue &= IsValid(Range4ColdWaterTemperatureDataValue2, stringBuilder);
+                returnValue &= IsValid(Range4ColdWaterTemperatureDataValue3, stringBuilder);
+                returnValue &= IsValid(Range4ColdWaterTemperatureDataValue4, stringBuilder);
+                returnValue &= IsValid(Range4ColdWaterTemperatureDataValue5, stringBuilder);
+                returnValue &= IsValid(Range4ColdWaterTemperatureDataValue6, stringBuilder);
+
+                returnValue &= IsValid(Range5ColdWaterTemperatureDataValue1, stringBuilder);
+                returnValue &= IsValid(Range5ColdWaterTemperatureDataValue2, stringBuilder);
+                returnValue &= IsValid(Range5ColdWaterTemperatureDataValue3, stringBuilder);
+                returnValue &= IsValid(Range5ColdWaterTemperatureDataValue4, stringBuilder);
+                returnValue &= IsValid(Range5ColdWaterTemperatureDataValue5, stringBuilder);
+                returnValue &= IsValid(Range5ColdWaterTemperatureDataValue6, stringBuilder);
+            }
+            catch (Exception exception)
+            {
+                ErrorMessage = string.Format("Unable to validate data. Exception {0}.", exception.ToString());
+            }
+
+            return returnValue;
+        }
+
+
         public bool LoadDataValue(DataValue dataValue, double value, StringBuilder stringBuilder)
         {
             bool returnValue = true;

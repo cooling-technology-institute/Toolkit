@@ -51,7 +51,6 @@ namespace CTIToolkit
             DemandCurveViewModel.DataFileName = BuildDefaultFileName(documentPath);
 
             IsChanged = false;
-
             SetDisplayedValues();
         }
 
@@ -173,6 +172,7 @@ namespace CTIToolkit
             try
             {
                 Chart.Series.Clear();
+                Chart.PaletteCustomColors = Globals.CTI_Palette;
                 if (DemandCurveViewModel.Calculate())
                 {
                     DrawSeries(Chart, false);
@@ -260,6 +260,8 @@ namespace CTIToolkit
             bool returnValue = true;
             ErrorMessage = string.Empty;
 
+            ValidatedForm();
+            
             if (!DemandCurveViewModel.SaveDataFile())
             {
                 stringBuilder.AppendLine(DemandCurveViewModel.ErrorMessage);
@@ -284,9 +286,11 @@ namespace CTIToolkit
         {
             StringBuilder stringBuilder = new StringBuilder();
             bool returnValue = true;
-            
+
             DemandCurveViewModel.DataFileName = fileName;
             DataFilename.Text = DemandCurveViewModel.DataFilenameInputValue;
+
+            ValidatedForm();
 
             if (!DemandCurveViewModel.SaveAsDataFile(fileName))
             {
@@ -305,6 +309,8 @@ namespace CTIToolkit
         public override void PrintPage(object sender, PrintPageEventArgs e)
         {
             NameValueUnitsDataTable nameValueUnitsDataTable = new NameValueUnitsDataTable();
+
+            ValidatedForm();
 
             nameValueUnitsDataTable.AddRow(DemandCurveViewModel.WetBulbTemperatureDataValue.InputMessage, WetBulbTemperatureValue.Text, WebBulbTemperatureUnits.Text);
             nameValueUnitsDataTable.AddRow(DemandCurveViewModel.RangeDataValue.InputMessage, RangeValue.Text, RangeUnits.Text);
@@ -387,6 +393,14 @@ namespace CTIToolkit
                 chart.ChartAreas[0].AxisX.IsLogarithmic = false;
                 chart.ChartAreas[0].AxisY.IsLogarithmic = false;
 
+                chart.ChartAreas[0].CursorX.AutoScroll = true;
+                chart.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
+                chart.ChartAreas[0].CursorX.Interval = 0.001;
+
+                chart.ChartAreas[0].CursorY.AutoScroll = true;
+                chart.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
+                chart.ChartAreas[0].CursorY.Interval = 0.001;
+
                 chart.ChartAreas[0].CursorX.SelectionStart = chart.ChartAreas[0].CursorX.SelectionEnd = double.NaN;
                 chart.ChartAreas[0].CursorY.SelectionStart = chart.ChartAreas[0].CursorY.SelectionEnd = double.NaN;
                 chart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
@@ -439,28 +453,9 @@ namespace CTIToolkit
             // update page
         }
 
-        private void ValidatedValues()
-        {
-            if (!DemandCurveViewModel.LiquidToGasRatioDataValue.IsValid)
-            {
-                errorProvider1.SetError(LiquidToGasRatioValue, DemandCurveViewModel.LiquidToGasRatioDataValue.ErrorMessage);
-            }
-        }
-        
         public override void ValidatedForm()
         {
-            object sender = new object();
-            EventArgs e = new EventArgs();
-
-            LiquidToGasRatioValue_Validated(sender, e);
-            WetBulbTemperature_Value_Validated(sender, e);
-            RangeValue_Validated(sender, e);
-            ElevationValue_Validated(sender, e);
-            C_C1_Value_Validated(sender, e);
-            Slope_C2_Value_Validated(sender, e);
-            MaximumValue_Validated(sender, e);
-            MinimumValue_Validated(sender, e);
-            UserApproachValue_Validated(sender, e);
+            ValidateChildren();
         }
 
         private void LiquidToGasRatioValue_Validated(object sender, EventArgs e)

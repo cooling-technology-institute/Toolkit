@@ -245,6 +245,7 @@ namespace ViewModels
 
                 if(!IsDesignDataValid)
                 {
+                    // set validation error to design data error message
                     stringBuilder.AppendLine();
                     stringBuilder.AppendLine(DesignData.ErrorMessage);
                 }

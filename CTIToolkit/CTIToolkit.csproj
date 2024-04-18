@@ -96,6 +96,7 @@
     <Compile Include="FileError.Designer.cs">
       <DependentUpon>FileError.cs</DependentUpon>
     </Compile>
+    <Compile Include="Globals.cs" />
     <Compile Include="PrintableForms\DemandCurverPrinterOutput.cs">
       <SubType>UserControl</SubType>
     </Compile>

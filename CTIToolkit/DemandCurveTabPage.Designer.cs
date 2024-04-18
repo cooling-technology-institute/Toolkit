@@ -79,6 +79,10 @@
             this.ElevationPressureLabel = new System.Windows.Forms.Label();
             this.WebBulbTemperatureUnits = new System.Windows.Forms.Label();
             this.InputPropertiesGroupBox = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.UserApproachUnits = new System.Windows.Forms.Label();
+            this.UserApproachLabel = new System.Windows.Forms.Label();
+            this.UserApproachValue = new System.Windows.Forms.TextBox();
             this.DesignPointGroupBox = new System.Windows.Forms.GroupBox();
             this.LiquidToGasRatioValue = new System.Windows.Forms.TextBox();
             this.LiquidToGasRatioLabel = new System.Windows.Forms.Label();
@@ -102,11 +106,9 @@
             this.CalculatedValuesGroupBox = new System.Windows.Forms.GroupBox();
             this.Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.DataFilename = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.UserApproachUnits = new System.Windows.Forms.Label();
-            this.UserApproachValue = new System.Windows.Forms.TextBox();
-            this.UserApproachLabel = new System.Windows.Forms.Label();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.InputPropertiesGroupBox.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.DesignPointGroupBox.SuspendLayout();
             this.TowerOrFillCharacteristicsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaximumValue)).BeginInit();
@@ -117,7 +119,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.OutputGridView)).BeginInit();
             this.CalculatedValuesGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Chart)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolTip1
@@ -232,6 +233,44 @@
             this.InputPropertiesGroupBox.TabIndex = 11;
             this.InputPropertiesGroupBox.TabStop = false;
             this.InputPropertiesGroupBox.Text = "Input Properties";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.UserApproachUnits);
+            this.groupBox1.Controls.Add(this.UserApproachLabel);
+            this.groupBox1.Controls.Add(this.UserApproachValue);
+            this.groupBox1.Location = new System.Drawing.Point(544, 75);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(204, 46);
+            this.groupBox1.TabIndex = 24;
+            this.groupBox1.TabStop = false;
+            // 
+            // UserApproachUnits
+            // 
+            this.UserApproachUnits.AutoSize = true;
+            this.UserApproachUnits.Location = new System.Drawing.Point(181, 19);
+            this.UserApproachUnits.Name = "UserApproachUnits";
+            this.UserApproachUnits.Size = new System.Drawing.Size(17, 13);
+            this.UserApproachUnits.TabIndex = 23;
+            this.UserApproachUnits.Text = "°F";
+            // 
+            // UserApproachLabel
+            // 
+            this.UserApproachLabel.AutoSize = true;
+            this.UserApproachLabel.Location = new System.Drawing.Point(11, 19);
+            this.UserApproachLabel.Name = "UserApproachLabel";
+            this.UserApproachLabel.Size = new System.Drawing.Size(81, 13);
+            this.UserApproachLabel.TabIndex = 10;
+            this.UserApproachLabel.Text = "User Approach:";
+            // 
+            // UserApproachValue
+            // 
+            this.UserApproachValue.Location = new System.Drawing.Point(121, 16);
+            this.UserApproachValue.Name = "UserApproachValue";
+            this.UserApproachValue.Size = new System.Drawing.Size(45, 20);
+            this.UserApproachValue.TabIndex = 11;
+            this.UserApproachValue.Validating += new System.ComponentModel.CancelEventHandler(this.UserApproachValue_Validating);
+            this.UserApproachValue.Validated += new System.EventHandler(this.UserApproachValue_Validated);
             // 
             // DesignPointGroupBox
             // 
@@ -477,11 +516,13 @@
             this.Chart.Location = new System.Drawing.Point(6, 266);
             this.Chart.MinimumSize = new System.Drawing.Size(751, 460);
             this.Chart.Name = "Chart";
+            this.Chart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
             series1.MarkerBorderColor = System.Drawing.Color.White;
             series1.Name = "Series1";
+            series1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
             series1.Points.Add(dataPoint1);
             series1.Points.Add(dataPoint2);
             series1.Points.Add(dataPoint3);
@@ -530,44 +571,6 @@
             this.DataFilename.Size = new System.Drawing.Size(541, 20);
             this.DataFilename.TabIndex = 32;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.UserApproachUnits);
-            this.groupBox1.Controls.Add(this.UserApproachLabel);
-            this.groupBox1.Controls.Add(this.UserApproachValue);
-            this.groupBox1.Location = new System.Drawing.Point(544, 75);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(204, 46);
-            this.groupBox1.TabIndex = 24;
-            this.groupBox1.TabStop = false;
-            // 
-            // UserApproachUnits
-            // 
-            this.UserApproachUnits.AutoSize = true;
-            this.UserApproachUnits.Location = new System.Drawing.Point(181, 19);
-            this.UserApproachUnits.Name = "UserApproachUnits";
-            this.UserApproachUnits.Size = new System.Drawing.Size(17, 13);
-            this.UserApproachUnits.TabIndex = 23;
-            this.UserApproachUnits.Text = "°F";
-            // 
-            // UserApproachValue
-            // 
-            this.UserApproachValue.Location = new System.Drawing.Point(121, 16);
-            this.UserApproachValue.Name = "UserApproachValue";
-            this.UserApproachValue.Size = new System.Drawing.Size(45, 20);
-            this.UserApproachValue.TabIndex = 11;
-            this.UserApproachValue.Validating += new System.ComponentModel.CancelEventHandler(this.UserApproachValue_Validating);
-            this.UserApproachValue.Validated += new System.EventHandler(this.UserApproachValue_Validated);
-            // 
-            // UserApproachLabel
-            // 
-            this.UserApproachLabel.AutoSize = true;
-            this.UserApproachLabel.Location = new System.Drawing.Point(11, 19);
-            this.UserApproachLabel.Name = "UserApproachLabel";
-            this.UserApproachLabel.Size = new System.Drawing.Size(81, 13);
-            this.UserApproachLabel.TabIndex = 10;
-            this.UserApproachLabel.Text = "User Approach:";
-            // 
             // DemandCurveTabPage
             // 
             this.AutoSize = true;
@@ -582,6 +585,8 @@
             this.Load += new System.EventHandler(this.DemandCurveTabPage_Load);
             this.Resize += new System.EventHandler(this.DemandCurveTabPage_Resize);
             this.InputPropertiesGroupBox.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.DesignPointGroupBox.ResumeLayout(false);
             this.DesignPointGroupBox.PerformLayout();
             this.TowerOrFillCharacteristicsGroupBox.ResumeLayout(false);
@@ -595,8 +600,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.OutputGridView)).EndInit();
             this.CalculatedValuesGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Chart)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -642,5 +645,6 @@
         private System.Windows.Forms.Label UserApproachUnits;
         private System.Windows.Forms.Label UserApproachLabel;
         private System.Windows.Forms.TextBox UserApproachValue;
+        private System.Windows.Forms.ColorDialog colorDialog1;
     }
 }
