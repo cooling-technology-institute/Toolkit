@@ -6,7 +6,7 @@
     <ProductVersion>3.10</ProductVersion>
     <ProjectGuid>bedd8edd-6ac7-4290-b8e0-3105fb52fdce</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>CTIToolkitSetup4.2</OutputName>
+    <OutputName>CTIToolkitSetup4.3</OutputName>
     <OutputType>Package</OutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -84,7 +84,7 @@
     <Error Text="The WiX Toolset v3.11 (or newer) build tools must be installed to build this project. To download the WiX Toolset, see http://wixtoolset.org/releases/" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>"C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x86\signtool.exe" sign  /debug  /f "C:\CTI\CodeSign\cti.pfx" /p cti /d "CTI Toolkit 4.1" /v /sha1 FD7CB828158A57E60EE4867D41C5C12E09AF8425 CTIToolkitSetup4.2.msi</PostBuildEvent>
+    <PostBuildEvent>"C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x86\signtool.exe" sign  /debug  /f "C:\CTI\CodeSign\cti.pfx" /p ctipass /d "CTI Toolkit 4.3" /v /sha1 a1ee15eba707b6d8a45ec983fd7173f3ca573d98 CTIToolkitSetup4.3.msi</PostBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

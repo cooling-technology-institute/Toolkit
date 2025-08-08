@@ -167,7 +167,7 @@ namespace ViewModels
                 returnValue &= IsValid(DryBulbTemperatureDataValue, stringBuilder);
                 returnValue &= IsValid(FanDriverPowerDataValue, stringBuilder);
                 returnValue &= IsValid(BarometricPressureDataValue, stringBuilder);
-                returnValue &= IsValid(LiquidToGasRatioDataValue, stringBuilder);
+                //returnValue &= IsValid(LiquidToGasRatioDataValue, stringBuilder);
                 if (!returnValue)
                 {
                     ErrorMessage = stringBuilder.ToString();

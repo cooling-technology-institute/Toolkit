@@ -49,8 +49,6 @@
             this.LiquidToGasRatio.Name = "LiquidToGasRatio";
             this.LiquidToGasRatio.Size = new System.Drawing.Size(70, 20);
             this.LiquidToGasRatio.TabIndex = 7;
-            this.LiquidToGasRatio.Validating += new System.ComponentModel.CancelEventHandler(this.LiquidToGasRatio_Validating);
-            this.LiquidToGasRatio.Validated += new System.EventHandler(this.LiquidToGasRatio_Validated);
             // 
             // WaterFlowRate
             // 

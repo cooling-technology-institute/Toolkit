@@ -63,8 +63,10 @@
             this.PrintButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.CalculateButton = new System.Windows.Forms.ToolStripButton();
+            this.TabPanel = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.TabPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -76,7 +78,7 @@
             this.HelpMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(824, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -225,13 +227,11 @@
             // 
             // CalculationTabControl
             // 
-            this.CalculationTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.CalculationTabControl.Location = new System.Drawing.Point(0, 50);
+            this.CalculationTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CalculationTabControl.Location = new System.Drawing.Point(0, 0);
             this.CalculationTabControl.Name = "CalculationTabControl";
             this.CalculationTabControl.SelectedIndex = 0;
-            this.CalculationTabControl.Size = new System.Drawing.Size(824, 913);
+            this.CalculationTabControl.Size = new System.Drawing.Size(800, 801);
             this.CalculationTabControl.TabIndex = 1;
             // 
             // toolStrip1
@@ -250,7 +250,7 @@
             this.CalculateButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(824, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(800, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -349,14 +349,23 @@
             this.CalculateButton.Text = "Calculate";
             this.CalculateButton.Click += new System.EventHandler(this.Calculate_Click);
             // 
+            // TabPanel
+            // 
+            this.TabPanel.Controls.Add(this.CalculationTabControl);
+            this.TabPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TabPanel.Location = new System.Drawing.Point(0, 49);
+            this.TabPanel.Name = "TabPanel";
+            this.TabPanel.Size = new System.Drawing.Size(800, 801);
+            this.TabPanel.TabIndex = 3;
+            // 
             // ToolkitMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(824, 850);
+            this.ClientSize = new System.Drawing.Size(800, 850);
+            this.Controls.Add(this.TabPanel);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.CalculationTabControl);
             this.Controls.Add(this.menuStrip1);
             this.HelpButton = true;
             this.helpProvider1.SetHelpKeyword(this, "Page Layout");
@@ -372,6 +381,7 @@
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.TabPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -412,5 +422,6 @@
         private System.Windows.Forms.ToolStripButton InternationalSystemOfUnitsSIButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem UnitedStatesCustomaryUnitsIPMenuItem;
+        private System.Windows.Forms.Panel TabPanel;
     }
 }

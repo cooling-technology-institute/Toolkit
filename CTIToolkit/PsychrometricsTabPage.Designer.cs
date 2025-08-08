@@ -426,7 +426,7 @@
             this.Controls.Add(this.InputPropertiesGroupBox);
             this.Controls.Add(this.PsychrometricsCalculate);
             this.Name = "PsychrometricsTabPage";
-            this.Size = new System.Drawing.Size(781, 674);
+            this.Size = new System.Drawing.Size(765, 674);
             this.PsychrometricPropertiesGroupBox.ResumeLayout(false);
             this.PsychrometricPropertiesGroupBox.PerformLayout();
             this.InputPropertiesGroupBox.ResumeLayout(false);

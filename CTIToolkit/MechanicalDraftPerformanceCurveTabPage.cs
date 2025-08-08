@@ -95,7 +95,19 @@ namespace CTIToolkit
 
             if(MechanicalDraftPerformanceCurveViewModel.IsInternationalSystemOfUnits_SI != IsInternationalSystemOfUnits_SI)
             {
-                ToolkitMain main = this.Parent.Parent.Parent as ToolkitMain;
+                Control control = this.Parent;
+                ToolkitMain main = null;
+                while ((control != null) && (main == null))
+                {
+                    if(control is ToolkitMain)
+                    {
+                        main = control as ToolkitMain;
+                    }
+                    else
+                    {
+                        control = control.Parent;
+                    }
+                }
                 if(main != null)
                 {
                     main.UpdateUnits(MechanicalDraftPerformanceCurveViewModel.IsInternationalSystemOfUnits_SI ? UnitsSelection.International_System_Of_Units_SI : UnitsSelection.United_States_Customary_Units_IP);
@@ -172,6 +184,7 @@ namespace CTIToolkit
             else
             {
                 stringBuilder.AppendLine("File contains invalid data");
+                stringBuilder.AppendLine(MechanicalDraftPerformanceCurveViewModel.ErrorMessage);
                 returnValue = false;
             }
 
@@ -394,7 +407,7 @@ namespace CTIToolkit
 
             if (!e.Cancel)
             {
-                ValidatedForm();
+                //ValidatedForm();
 
                 if (PrintControl.PageIndex == 0)
                 {

@@ -106,7 +106,7 @@ namespace ViewModels
                     SwitchUnits(MechanicalDraftPerformanceCurveFileData.IsInternationalSystemOfUnits_SI);
                 }
 
-                if (!LoadData())
+                if (!LoadData(false))
                 {
                     stringBuilder.AppendLine(ErrorMessage);
                     returnValue = false;
@@ -138,7 +138,7 @@ namespace ViewModels
 
             if (MechanicalDraftPerformanceCurveFileData != null)
             {
-                if (!LoadData())
+                if (!LoadData(true))
                 {
                     stringBuilder.AppendLine(ErrorMessage);
                     returnValue = false;
@@ -210,14 +210,14 @@ namespace ViewModels
         
         #endregion DataValue
 
-        public bool LoadData()
+        public bool LoadData(bool loadDefaults)
         {
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
 
             if(MechanicalDraftPerformanceCurveFileData != null)
             {
-                if (!DesignData.LoadData(MechanicalDraftPerformanceCurveFileData.DesignData))
+                if (!DesignData.LoadData(MechanicalDraftPerformanceCurveFileData.DesignData, loadDefaults))
                 {
                     returnValue = false;
                     if (IsDemo)
@@ -358,6 +358,7 @@ namespace ViewModels
                         calculationLibrary.MechanicalDraftPerformanceCurveCalculation(CalculationData, true);
                         FillTable();
                         TestPoints[testIndex].LiquidToGasRatioDataValue.UpdateCurrentValue(CalculationData.TestOutput.LiquidToGasRatio);
+                        //TestPoints[testIndex].LiquidToGasRatioDataValue.InputValue;
                         calculationLibrary.GenerateGraphPoints(CalculationData);
                     }
                     else

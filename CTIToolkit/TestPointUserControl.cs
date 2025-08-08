@@ -307,23 +307,15 @@ namespace CTIToolkit
             }
         }
 
-        private void LiquidToGasRatio_Validated(object sender, EventArgs e)
-        {
-            NotifyParentDataHasChanged();
-            errorProvider1.SetError(LiquidToGasRatio, "");
-        }
+        //private void LiquidToGasRatio_Validated(object sender, EventArgs e)
+        //{
+        //    NotifyParentDataHasChanged();
+        //    errorProvider1.SetError(LiquidToGasRatio, "");
+        //}
 
-        private void LiquidToGasRatio_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (!TowerTestPoint.LiquidToGasRatioDataValue.UpdateValue(LiquidToGasRatio.Text))
-            {
-                // Cancel the event and select the text to be corrected by the user.
-                e.Cancel = true;
-                LiquidToGasRatio.Select(0, LiquidToGasRatio.Text.Length);
+        //private void LiquidToGasRatio_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        //{
 
-                // Set the ErrorProvider error with the text to display. 
-                this.errorProvider1.SetError(LiquidToGasRatio, TowerTestPoint.LiquidToGasRatioDataValue.ErrorMessage);
-            }
-        }
+        //}
     }
 }

@@ -159,7 +159,7 @@ namespace ViewModels
             return returnValue;
         }
 
-        public bool LoadData(DesignData data)
+        public bool LoadData(DesignData data, bool loadDefaults)
         {
             bool returnValue = true;
             StringBuilder stringBuilder = new StringBuilder();
@@ -173,6 +173,18 @@ namespace ViewModels
                 LocationValue = data.Location;
                 TowerManufacturerValue = data.TowerManufacturer;
                 TowerTypeValue = data.TowerType;
+
+                if(loadDefaults)
+                {
+                    data.TowerSpecifications.WaterFlowRate = WaterFlowRateDataValue.Default;
+                    data.TowerSpecifications.HotWaterTemperature = HotWaterTemperatureDataValue.Default;
+                    data.TowerSpecifications.ColdWaterTemperature = ColdWaterTemperatureDataValue.Default;
+                    data.TowerSpecifications.WetBulbTemperature = WetBulbTemperatureDataValue.Default;
+                    data.TowerSpecifications.DryBulbTemperature = DryBulbTemperatureDataValue.Default;
+                    data.TowerSpecifications.FanDriverPower = FanDriverPowerDataValue.Default;
+                    data.TowerSpecifications.BarometricPressure = BarometricPressureDataValue.Default;
+                    data.TowerSpecifications.LiquidToGasRatio = LiquidToGasRatioDataValue.Default;
+                }
 
                 returnValue = LoadDataValue(WaterFlowRateDataValue, data.TowerSpecifications.WaterFlowRate, stringBuilder)
                 & LoadDataValue(HotWaterTemperatureDataValue, data.TowerSpecifications.HotWaterTemperature, stringBuilder)

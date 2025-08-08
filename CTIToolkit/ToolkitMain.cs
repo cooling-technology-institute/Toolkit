@@ -52,23 +52,36 @@ namespace CTIToolkit
             PsychrometricsUserControl = new PsychrometricsTabPage(ApplicationSettings, DocumentPath);
             TabPage psychrometricsTabPage = new TabPage("Psychrometrics");
             psychrometricsTabPage.Controls.Add(PsychrometricsUserControl);
+            psychrometricsTabPage.AutoScroll = true;
+            psychrometricsTabPage.AutoScrollMargin = new System.Drawing.Size(20, 20);
+            psychrometricsTabPage.AutoScrollMinSize = new System.Drawing.Size(psychrometricsTabPage.Width, psychrometricsTabPage.Height);
             CalculationTabControl.TabPages.Add(psychrometricsTabPage);
 
             MerkelUserControl = new MerkelTabPage(ApplicationSettings, DocumentPath);
             TabPage merkelTabPage = new TabPage("Merkel");
             merkelTabPage.Controls.Add(MerkelUserControl);
+            merkelTabPage.AutoScroll = true;
+            merkelTabPage.AutoScrollMargin = new System.Drawing.Size(20, 20);
+            merkelTabPage.AutoScrollMinSize = new System.Drawing.Size(merkelTabPage.Width, merkelTabPage.Height);
             CalculationTabControl.TabPages.Add(merkelTabPage);
 
             DemandCurveUserControl = new DemandCurveTabPage(ApplicationSettings, DocumentPath);
-            DemandCurveUserControl.Dock = DockStyle.Top | DockStyle.Right;
+            //DemandCurveUserControl.Dock = DockStyle.Top | DockStyle.Right;
             //DemandCurveUserControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TabPage demandCurveTabPage = new TabPage("Demand Curve");
             demandCurveTabPage.Controls.Add(DemandCurveUserControl);
+            demandCurveTabPage.AutoScroll = true;
+            demandCurveTabPage.AutoScrollMargin = new System.Drawing.Size(20, 20);
+            demandCurveTabPage.AutoScrollMinSize = new System.Drawing.Size(demandCurveTabPage.Width, demandCurveTabPage.Height);
             CalculationTabControl.TabPages.Add(demandCurveTabPage);
 
             MechanicalDraftPerformanceCurveUserControl = new MechanicalDraftPerformanceCurveTabPage(ApplicationSettings, DocumentPath);
+            //MechanicalDraftPerformanceCurveUserControl.Dock = DockStyle.Top | DockStyle.Right;
             TabPage mechanicalDraftPerformanceCurveTabPage = new TabPage("Mechanical Draft Performance Curve");
             mechanicalDraftPerformanceCurveTabPage.Controls.Add(MechanicalDraftPerformanceCurveUserControl);
+            mechanicalDraftPerformanceCurveTabPage.AutoScroll = true;
+            mechanicalDraftPerformanceCurveTabPage.AutoScrollMargin = new System.Drawing.Size(20, 20);
+            mechanicalDraftPerformanceCurveTabPage.AutoScrollMinSize = new System.Drawing.Size(mechanicalDraftPerformanceCurveTabPage.Width, mechanicalDraftPerformanceCurveTabPage.Height);
             CalculationTabControl.TabPages.Add(mechanicalDraftPerformanceCurveTabPage);
 
             string[] args = Environment.GetCommandLineArgs();
