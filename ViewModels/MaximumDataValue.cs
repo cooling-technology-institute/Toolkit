@@ -1,4 +1,4 @@
-﻿// Copyright Cooling Technology Institute 2019-2021
+﻿// Copyright Cooling Technology Institute 2019-2025
 
 using System;
 using System.Data;
@@ -33,7 +33,7 @@ namespace ViewModels
 
         public void SetInputAndTooltip(bool isInternationalSystemOfUnits_SI)
         {
-            InputValue = Current.ToString(Format);
+            UpdateCurrentValue(Current);
             ToolTip = string.Format(MaximumToolTipFormat, Minimum, Maximum);
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
         }

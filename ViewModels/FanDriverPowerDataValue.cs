@@ -1,4 +1,4 @@
-﻿// Copyright Cooling Technology Institute 2019-2021
+﻿// Copyright Cooling Technology Institute 2019-2025
 
 using CalculationLibrary;
 
@@ -18,11 +18,11 @@ namespace ViewModels
 
         //#define FAN_DRIVER_POWER_MIN_SI		   (0.0001)  
         //#define FAN_DRIVER_POWER_MAX_SI		 (745.7)
-        public const double FanDriverPowerDefault_InternationalSystemOfUnits_IS_ = 0.0;
+        public const double FanDriverPowerDefault_InternationalSystemOfUnits_IS_ = 100.0;
         public const double FanDriverPowerMinimum_InternationalSystemOfUnits_IS_ = 0.0001;
         public const double FanDriverPowerMaximum_InternationalSystemOfUnits_IS_ = 745.7;
 
-        public const double FanDriverPowerDefault_InternationalSystemOfUnits_IS_Demo = 0.0;
+        public const double FanDriverPowerDefault_InternationalSystemOfUnits_IS_Demo = 100.0;
         public const double FanDriverPowerMinimum_InternationalSystemOfUnits_IS_Demo = 0.0001;
         public const double FanDriverPowerMaximum_InternationalSystemOfUnits_IS_Demo = 745.7;
         public const string FanDriverPowerToolTipFormat = "Fan Driver Power.\nValue should be between {0} and {1}.";
@@ -73,7 +73,7 @@ namespace ViewModels
 
         public void SetInputAndTooltip(bool isInternationalSystemOfUnits_SI)
         {
-            InputValue = Current.ToString(Format);
+            UpdateCurrentValue(Current);
             ToolTip = string.Format(FanDriverPowerToolTipFormat, Minimum, Maximum);
             IsInternationalSystemOfUnits_SI = isInternationalSystemOfUnits_SI;
             if (IsInternationalSystemOfUnits_SI)

@@ -1,4 +1,4 @@
-﻿// Copyright Cooling Technology Institute 2019-2022
+﻿// Copyright Cooling Technology Institute 2019-2025
 
 using Models;
 using System;
